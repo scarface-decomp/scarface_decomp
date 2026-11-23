@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (3399 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (3983 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3,399 of 10,782 functions matched (31.52%). NOT COMPLETE YET.
-// The 7,383 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3,983 of 10,782 functions matched (36.94%). NOT COMPLETE YET.
+// The 6,799 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -207,6 +207,32 @@ L_0F:
 }
 
 // ============================================================================
+// [VERIFIED] sub_00011CE0 (0x00011CE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00011CE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00011CE0 (Proto 0x00011CE0, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00011CE0
+{
+public:
+    int sub_00011CE0();
+    char m_pad00[0x20];
+    unsigned short m_Field20; // +0x20
+};
+
+int Class_00011CE0::sub_00011CE0()
+{
+    return m_Field20 != 65535;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00011CF0 (0x00011CF0, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -315,6 +341,95 @@ void __cdecl sub_00011D70(int a1, int a2)
         ((Object*)t2)->vfunc_01();
     }
     *(int*)r_esi = a2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00011DA0 (0x00011DA0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00011DA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00011DA0 (Proto 0x00011DA0, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00011DA0
+{
+public:
+    int sub_00011DA0(int a1, int a2);
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+int Class_00011DA0::sub_00011DA0(int a1, int a2)
+{
+    m_Field00 = *(float*)a1 + *(float*)a2;
+    m_Field04 = *(float*)(a1 + 4) + *(float*)(a2 + 4);
+    m_Field08 = *(float*)(a1 + 8) + *(float*)(a2 + 8);
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00011DE0 (0x00011DE0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00011DE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00011DE0 (Proto 0x00011DE0, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00011DE0
+{
+public:
+    int sub_00011DE0(int a1, int a2);
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+int Class_00011DE0::sub_00011DE0(int a1, int a2)
+{
+    m_Field00 = *(float*)a1 - *(float*)a2;
+    m_Field04 = *(float*)(a1 + 4) - *(float*)(a2 + 4);
+    m_Field08 = *(float*)(a1 + 8) - *(float*)(a2 + 8);
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00011E20 (0x00011E20, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00011E20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00011E20 (Proto 0x00011E20, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00011E20
+{
+public:
+    void sub_00011E20(float a1);
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+void Class_00011E20::sub_00011E20(float a1)
+{
+    m_Field00 = m_Field00 * a1;
+    m_Field04 = m_Field04 * a1;
+    m_Field08 = m_Field08 * a1;
 }
 
 // ============================================================================
@@ -880,6 +995,66 @@ inline bool operator<(const Class_000128F0 &left, const Class_000128F0 &right)
 
 // std::_Rotate for random-access iterators, instantiated for Class_000128F0.
 template void std::_Rotate<Class_000128F0 *, int, Class_000128F0>(Class_000128F0 *, Class_000128F0 *, Class_000128F0 *, int *, Class_000128F0 *);
+
+// ============================================================================
+// [VERIFIED] sub_000129F0 (0x000129F0, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000129F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000129F0 (Proto 0x000129F0, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000129F0
+{
+public:
+    int sub_000129F0(int a1);
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+int Class_000129F0::sub_000129F0(int a1)
+{
+    m_Field00 = *(float*)a1 + m_Field00;
+    m_Field04 = *(float*)(a1 + 4) + m_Field04;
+    m_Field08 = *(float*)(a1 + 8) + m_Field08;
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00012A30 (0x00012A30, 71 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00012A30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00012A30 (Proto 0x00012A30, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00012A30
+{
+public:
+    int sub_00012A30(int a1, float a2, int a3);
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+int Class_00012A30::sub_00012A30(int a1, float a2, int a3)
+{
+    m_Field00 = (*(float*)a3 * a2) + *(float*)a1;
+    m_Field04 = (*(float*)(a3 + 4) * a2) + *(float*)(a1 + 4);
+    m_Field08 = (*(float*)(a3 + 8) * a2) + *(float*)(a1 + 8);
+    return a3;
+}
 
 // ============================================================================
 // [VERIFIED] sub_00014050 (0x00014050, 66 B)
@@ -1455,6 +1630,60 @@ int Class_00018310::sub_00018310()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00018470 (0x00018470, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00018470
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00018470 (Proto 0x00018470, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00018470
+{
+public:
+    float sub_00018470();
+    int m_Field00; // +0x00
+};
+
+float Class_00018470::sub_00018470()
+{
+    return *(float*)(m_Field00 + 64);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00018480 (0x00018480, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00018480
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00018480 (Proto 0x00018480, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00018480
+{
+public:
+    int sub_00018480(float a1);
+    int m_Field00; // +0x00
+};
+
+int Class_00018480::sub_00018480(float a1)
+{
+    int t1;
+
+    t1 = m_Field00;
+    *(float*)(m_Field00 + 64) = a1;
+    return t1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00018570 (0x00018570, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -1507,6 +1736,70 @@ int Class_000185F0::sub_000185F0()
     }
     r_ecx = *(int*)r_ecx;
     return *(unsigned short*)(r_ecx + 48);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00018750 (0x00018750, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00018750
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00018750 (Proto 0x00018750, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00018750
+{
+public:
+    int sub_00018750();
+};
+
+int Class_00018750::sub_00018750()
+{
+    int r_eax, r_ecx;
+
+    r_ecx = (int)this;
+    r_eax = 0;
+    if (*(bool*)(r_ecx + 8)) {
+        r_ecx = *(int*)r_ecx;
+        r_ecx = *(int*)(r_ecx + 4);
+    } else {
+        r_ecx = *(int*)(*(int*)r_ecx + 32);
+    }
+    if (r_ecx) {
+        if (*(unsigned short*)r_ecx != 5) goto L_21;
+        r_eax = r_ecx;
+    }
+L_21:
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00018780 (0x00018780, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00018780
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00018780 (Proto 0x00018780, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00018780
+{
+public:
+    unsigned short sub_00018780();
+    int m_Field00; // +0x00
+};
+
+unsigned short Class_00018780::sub_00018780()
+{
+    return *(unsigned short*)(m_Field00 + 68);
 }
 
 // ============================================================================
@@ -1989,6 +2282,37 @@ int __cdecl sub_0001D590(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0001D600 (0x0001D600, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0001D600
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001D600 (Proto 0x0001D600, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_004467F0;
+extern "C" float DAT_004467F4;
+extern "C" float DAT_004467F8;
+extern "C" float DAT_004467FC;
+extern "C" int DAT_0044680C;
+extern "C" bool DAT_00446811;
+
+int __cdecl sub_0001D600(void)
+{
+    DAT_0044680C = 0;
+    DAT_00446811 = false;
+    DAT_004467F0 = 0.0f;
+    DAT_004467F8 = 0.0f;
+    DAT_004467F4 = 0.0f;
+    DAT_004467FC = 0.0f;
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0001D630 (0x0001D630, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -2097,6 +2421,126 @@ bool __cdecl sub_0001DC90(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0001DF00 (0x0001DF00, 69 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0001DF00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001DF00 (Proto 0x0001DF00, 69 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00025160(int);
+
+class Class_0001DF00
+{
+public:
+    int sub_0001DF00(int a1);
+    char m_pad00[0x1B];
+    unsigned char m_Field1B; // +0x1B
+    int m_Field1C; // +0x1C
+};
+
+int Class_0001DF00::sub_0001DF00(int a1)
+{
+    int t2;
+
+    if (m_Field1B == 2) {
+        sub_00025160(m_Field1C);
+    }
+    if (m_Field1B == 3) {
+        t2 = sub_00025160(m_Field1C);
+        m_Field1C = a1;
+        m_Field1B = 1;
+        return t2;
+    }
+    m_Field1C = a1;
+    m_Field1B = 1;
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0001DF50 (0x0001DF50, 69 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0001DF50
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001DF50 (Proto 0x0001DF50, 69 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00025160(int);
+extern "C" int __cdecl sub_0008E670(int, int, int, int);
+
+class Class_0001DF50
+{
+public:
+    void sub_0001DF50(int a1);
+    char m_pad00[0x1B];
+    unsigned char m_Field1B; // +0x1B
+    int m_Field1C; // +0x1C
+};
+
+void Class_0001DF50::sub_0001DF50(int a1)
+{
+    if (m_Field1B == 2) {
+        sub_00025160(m_Field1C);
+    }
+    if (m_Field1B == 3) {
+        sub_00025160(m_Field1C);
+    }
+    m_Field1C = sub_0008E670(2, a1, 0, 0);
+    m_Field1B = 2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0001DFA0 (0x0001DFA0, 76 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0001DFA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001DFA0 (Proto 0x0001DFA0, 76 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00025160(int);
+extern "C" int __cdecl sub_0008E670(int, int, int, int);
+
+class Class_0001DFA0
+{
+public:
+    bool sub_0001DFA0(int a1, bool a2);
+    char m_pad00[0x18];
+    bool m_Field18; // +0x18
+    char m_pad19[0x2];
+    unsigned char m_Field1B; // +0x1B
+    int m_Field1C; // +0x1C
+};
+
+bool Class_0001DFA0::sub_0001DFA0(int a1, bool a2)
+{
+    if (m_Field1B == 2) {
+        sub_00025160(m_Field1C);
+    }
+    if (m_Field1B == 3) {
+        sub_00025160(m_Field1C);
+    }
+    m_Field1C = sub_0008E670(2, a1, 0, 0);
+    m_Field18 = a2;
+    m_Field1B = 3;
+    return a2;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0001E010 (0x0001E010, 84 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -2140,6 +2584,43 @@ Class_0001E010* Class_0001E010::sub_0001E010(bool a1, int a2)
     m_Field12 = 0;
     m_Field10 = 63536;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0001E070 (0x0001E070, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0001E070
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001E070 (Proto 0x0001E070, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00025160(int);
+
+class Class_0001E070
+{
+public:
+    void sub_0001E070();
+    void sub_00031F20();
+    char m_pad00[0x1B];
+    unsigned char m_Field1B; // +0x1B
+    int m_Field1C; // +0x1C
+};
+
+void Class_0001E070::sub_0001E070()
+{
+    if (m_Field1B == 2) {
+        sub_00025160(m_Field1C);
+    }
+    if (m_Field1B == 3) {
+        sub_00025160(m_Field1C);
+    }
+    sub_00031F20();
+    sub_00031F20();
 }
 
 // ============================================================================
@@ -2207,6 +2688,51 @@ L_56:
     r_eax = *(int*)(r_edx + (r_ecx * 4));
     r_eax = *(int*)(r_eax + 28);
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0001E390 (0x0001E390, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0001E390
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001E390 (Proto 0x0001E390, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0001E390
+{
+public:
+    Class_0001E390* sub_0001E390();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    bool m_Field18; // +0x18
+    char m_pad19[0x3];
+    int m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    bool m_Field24; // +0x24
+};
+
+Class_0001E390* Class_0001E390::sub_0001E390()
+{
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field0C = 0;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    m_Field08 = 0;
+    m_Field18 = false;
+    m_Field1C = 0;
+    m_Field20 = 0.0f;
+    m_Field24 = false;
+    return this;
 }
 
 // ============================================================================
@@ -2291,6 +2817,95 @@ bool __cdecl sub_0001EA60(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0001EA70 (0x0001EA70, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0001EA70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001EA70 (Proto 0x0001EA70, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0001EA70
+{
+public:
+    int sub_0001EA70(float a1, int a2);
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+int Class_0001EA70::sub_0001EA70(float a1, int a2)
+{
+    m_Field00 = *(float*)a2 * a1;
+    m_Field04 = *(float*)(a2 + 4) * a1;
+    m_Field08 = *(float*)(a2 + 8) * a1;
+    return a2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0001EAB0 (0x0001EAB0, 83 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0001EAB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001EAB0 (Proto 0x0001EAB0, 83 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00015590(int);
+extern "C" void __cdecl sub_00041390(int);
+
+class Class_0001EAB0
+{
+public:
+    void sub_0001EAB0();
+    bool m_Field00; // +0x00
+    unsigned char m_Field01; // +0x01
+    char m_pad02[0x42];
+    int m_Field44; // +0x44
+    int m_Field48; // +0x48
+    int m_Field4C; // +0x4C
+    char m_pad50[0xC];
+    int m_Field5C; // +0x5C
+    char m_pad60[0x4];
+    int m_Field64; // +0x64
+    char m_pad68[0x10];
+    int m_Field78; // +0x78
+};
+
+void Class_0001EAB0::sub_0001EAB0()
+{
+    int t2;
+
+    if (m_Field00) {
+        if (m_Field01) {
+            m_Field01 = 0;
+            m_Field64 = 0;
+        }
+        m_Field78 = -1;
+        if (m_Field44) {
+            sub_00041390((int)(&m_Field44));
+            m_Field44 = 0;
+        }
+        t2 = m_Field48;
+        if (m_Field48) {
+            sub_00015590(t2);
+            m_Field48 = 0;
+        }
+        m_Field4C = 0;
+        m_Field5C = 0;
+        m_Field00 = false;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_0001EB10 (0x0001EB10, 41 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -2370,6 +2985,171 @@ int Class_0001EC30::sub_0001EC30()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0001EEF0 (0x0001EEF0, 91 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0001EEF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001EEF0 (Proto 0x0001EEF0, 91 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00012600(int, int);
+extern "C" int __cdecl sub_00015590(int);
+
+class Class_0001EEF0
+{
+public:
+    void sub_0001EEF0();
+    void sub_0001EAB0();
+    int sub_0001EC70();
+    unsigned char m_Field00; // +0x00
+    unsigned char m_Field01; // +0x01
+    unsigned char m_Field02; // +0x02
+    bool m_Field03; // +0x03
+    char m_pad04[0x44];
+    int m_Field48; // +0x48
+    char m_pad4C[0x18];
+    int m_Field64; // +0x64
+};
+
+void Class_0001EEF0::sub_0001EEF0()
+{
+    int r_eax;
+
+    r_eax = m_Field03;
+    if ((unsigned char)r_eax) {
+        r_eax = m_Field48;
+        if (r_eax) {
+            sub_00012600(r_eax, 0);
+        }
+        r_eax = m_Field48;
+        if (r_eax) {
+            r_eax = sub_00015590(r_eax);
+            m_Field48 = 0;
+        }
+        m_Field03 = false;
+    }
+    if (m_Field02) {
+        r_eax = sub_0001EC70();
+    }
+    if (m_Field01) {
+        m_Field01 = 0;
+        m_Field64 = 0;
+    }
+    if (m_Field00) {
+        sub_0001EAB0();
+        return;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0001F390 (0x0001F390, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0001F390
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001F390 (Proto 0x0001F390, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __stdcall sub_0001F1F0(int, int);
+
+int __stdcall sub_0001F390(int a1, int a2)
+{
+    int r_eax;
+
+    r_eax = a1;
+    if (!a1) {
+        r_eax = a2;
+        *(float*)(r_eax + 8) = 0.0f;
+        *(float*)(r_eax + 4) = 0.0f;
+        *(float*)r_eax = 0.0f;
+        return r_eax;
+    }
+    r_eax += 96;
+    a1 = r_eax;
+    return sub_0001F1F0(a1, a2);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0001F3C0 (0x0001F3C0, 99 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0001F3C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001F3C0 (Proto 0x0001F3C0, 99 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field30
+{
+    void sub_0007CE40();
+};
+
+struct Field60
+{
+    void sub_0007CEF0();
+};
+
+extern "C" float DAT_0037CE50;
+
+class Class_0001F3C0
+{
+public:
+    Class_0001F3C0* sub_0001F3C0();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    Field30 m_Field30; // +0x30
+    char m_pad31[0x2F];
+    Field60 m_Field60; // +0x60
+    char m_pad61[0xF];
+    bool m_Field70; // +0x70
+};
+
+Class_0001F3C0* Class_0001F3C0::sub_0001F3C0()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = 0;
+    m_Field04 = 0.0f;
+    m_Field08 = t1;
+    m_Field0C = t1;
+    m_Field10 = t1;
+    m_Field14 = t1;
+    m_Field18 = 0.0f;
+    m_Field1C = t1;
+    m_Field20 = 0.0f;
+    m_Field24 = 0.0f;
+    m_Field28 = 0.0f;
+    m_Field2C = t1;
+    m_Field30.sub_0007CE40();
+    m_Field60.sub_0007CEF0();
+    m_Field70 = false;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0001F430 (0x0001F430, 20 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -2401,6 +3181,62 @@ void Class_0001F430::sub_0001F430()
 {
     m_Field60.sub_001B7A10();
     m_Field30.sub_0007D540();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0001F480 (0x0001F480, 55 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0001F480
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001F480 (Proto 0x0001F480, 55 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field30
+{
+    void sub_0007D850(int);
+};
+
+struct Field60
+{
+    int sub_0007CF10(int);
+};
+
+class Class_0001F480
+{
+public:
+    int sub_0001F480(int a1, int a2);
+    char m_pad00[0x30];
+    Field30 m_Field30; // +0x30
+    char m_pad31[0xF];
+    int m_Field40; // +0x40
+    char m_pad44[0x1C];
+    Field60 m_Field60; // +0x60
+    char m_pad61[0x3];
+    int m_Field64; // +0x64
+};
+
+int Class_0001F480::sub_0001F480(int a1, int a2)
+{
+    int r_eax;
+
+    r_eax = m_Field40;
+    if (r_eax) {
+        if (!*(unsigned char*)r_eax) goto L_1D;
+        m_Field30.sub_0007D850(a1);
+    }
+L_1D:
+    r_eax = m_Field64;
+    if (r_eax) {
+        if (!*(unsigned char*)r_eax) goto L_32;
+        r_eax = m_Field60.sub_0007CF10(a1);
+    }
+L_32:
+    return r_eax;
 }
 
 // ============================================================================
@@ -2626,6 +3462,46 @@ Class_0001F900* Class_0001F900::sub_0001F900()
     m_Field14 = 0;
     m_Field18 = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0001F9E0 (0x0001F9E0, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0001F9E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0001F9E0 (Proto 0x0001F9E0, 40 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_0008D490(int);
+};
+
+struct Object
+{
+    void sub_001B7A10();
+};
+
+class Class_0001F9E0
+{
+public:
+    void sub_0001F9E0(int a1, float a2);
+    char m_pad00[0x10];
+    Field10 m_Field10; // +0x10
+    char m_pad11[0x3];
+    float m_Field14; // +0x14
+};
+
+void Class_0001F9E0::sub_0001F9E0(int a1, float a2)
+{
+    m_Field10.sub_0008D490((int)(&a1));
+    m_Field14 = a2;
+    ((Object*)(int)(&a1))->sub_001B7A10();
 }
 
 // ============================================================================
@@ -2913,6 +3789,45 @@ void Class_00020600::sub_00020600()
 {
     m_Field00 = (int)DAT_0037DA84;
     sub_001FBF40();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00020610 (0x00020610, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00020610
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00020610 (Proto 0x00020610, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" char DAT_0037DB0C[];
+extern "C" void __cdecl sub_001FBFB0(void);
+
+class Class_00020610
+{
+public:
+    Class_00020610* sub_00020610();
+    int m_Field00; // +0x00
+    char m_pad04[0x10];
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+};
+
+Class_00020610* Class_00020610::sub_00020610()
+{
+    float t2;
+
+    sub_001FBFB0();
+    m_Field14 = 0.0f;
+    t2 = DAT_0037CE60;
+    m_Field00 = (int)DAT_0037DB0C;
+    m_Field18 = t2;
+    return this;
 }
 
 // ============================================================================
@@ -3443,6 +4358,34 @@ Class_00021960* Class_00021960::sub_00021960(int a1, int a2, int a3, int a4)
     m_Field00 = (int)DAT_0037E2BC;
     m_Field40 = a2;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00021A00 (0x00021A00, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00021A00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00021A00 (Proto 0x00021A00, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_003F56B8;
+extern "C" bool DAT_003F56B9;
+extern "C" int DAT_003F56BC;
+
+void __cdecl sub_00021A00(bool a1, bool a2)
+{
+    DAT_003F56BC = 1;
+    if ((unsigned int)a2 < (unsigned int)255) {
+        DAT_003F56B8 = a2;
+        DAT_003F56B9 = a1;
+        return;
+    }
+    DAT_003F56B9 = a1;
 }
 
 // ============================================================================
@@ -4009,6 +4952,73 @@ bool Class_00023870::sub_00023870()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00023880 (0x00023880, 103 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00023880
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00023880 (Proto 0x00023880, 103 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18(int);
+};
+
+extern "C" bool DAT_003F6057;
+extern "C" bool DAT_00446EE8;
+
+class Class_00023880
+{
+public:
+    void sub_00023880();
+    char m_pad00[0x21C];
+    int m_Field21C; // +0x21C
+    char m_pad220[0x8];
+    int m_Field228; // +0x228
+    char m_pad22C[0x4];
+    int m_Field230; // +0x230
+    char m_pad234[0x8];
+    int m_Field23C; // +0x23C
+};
+
+void Class_00023880::sub_00023880()
+{
+    int t1, t3;
+
+    t1 = m_Field21C;
+    m_Field228 = (!DAT_00446EE8) + 1;
+    ((Object*)t1)->vfunc_18(1);
+    t3 = m_Field230;
+    m_Field23C = (!DAT_003F6057) + 1;
+    ((Object*)t3)->vfunc_18(1);
+    DAT_00446EE8 = !DAT_00446EE8;
+    DAT_003F6057 = !DAT_003F6057;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000238F0 (0x000238F0, 11 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -4057,6 +5067,80 @@ int Class_00024320::sub_00024320()
     m_Field04 = r_eax;
     if (r_eax) {
         r_eax = sub_00201990(7, r_eax);
+    }
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00024340 (0x00024340, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00024340
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00024340 (Proto 0x00024340, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0037E654[];
+extern "C" float DAT_0037E6C0;
+
+class Class_00024340
+{
+public:
+    Class_00024340* sub_00024340(int a1, int a2);
+    void sub_000276B0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x34];
+    int m_Field38; // +0x38
+    float m_Field3C; // +0x3C
+};
+
+Class_00024340* Class_00024340::sub_00024340(int a1, int a2)
+{
+    float t2;
+
+    sub_000276B0(a1, a2);
+    t2 = DAT_0037E6C0;
+    m_Field00 = (int)DAT_0037E654;
+    m_Field38 = 0;
+    m_Field3C = t2;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00024390 (0x00024390, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00024390
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00024390 (Proto 0x00024390, 28 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00024390
+{
+public:
+    int sub_00024390(float a1);
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    int m_Field38; // +0x38
+};
+
+int Class_00024390::sub_00024390(float a1)
+{
+    int r_eax;
+
+    r_eax = m_Field30;
+    if (r_eax < m_Field34) {
+        *(float*)(m_Field38 + (r_eax * 4)) = a1;
+        m_Field30 += 1;
     }
     return r_eax;
 }
@@ -5614,6 +6698,44 @@ L_42:
 }
 
 // ============================================================================
+// [VERIFIED] sub_00029420 (0x00029420, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00029420
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00029420 (Proto 0x00029420, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_0006C370(int, int);
+
+class Class_00029420
+{
+public:
+    void sub_00029420(int a1);
+    void sub_00028C40(int);
+    char m_pad00[0x8];
+    int m_Field08; // +0x08
+    char m_pad0C[0x12];
+    unsigned char m_Field1E; // +0x1E
+};
+
+void Class_00029420::sub_00029420(int a1)
+{
+    if (a1) {
+        if (!*(unsigned char*)a1) goto L_1E;
+        m_Field08 = sub_0006C370(a1, 0);
+    }
+L_1E:
+    if (m_Field1E & 2) {
+        sub_00028C40(0);
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_00029AC0 (0x00029AC0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -5881,6 +7003,51 @@ void __cdecl sub_0002AC30(int a1, int a2, int a3, int a4, int a5, int a6, int a7
 }
 
 // ============================================================================
+// [VERIFIED] sub_0002AE00 (0x0002AE00, 97 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0002AE00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0002AE00 (Proto 0x0002AE00, 97 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044AF40;
+extern "C" int DAT_0044AF44;
+extern "C" int DAT_0044AF48;
+extern "C" bool __cdecl sub_0008E600(int);
+
+bool __cdecl sub_0002AE00(void)
+{
+    int r_ebx, r_edi, r_esi, t1, t2;
+
+    r_ebx = DAT_0044AF48;
+    r_edi = DAT_0044AF44;
+    r_esi = DAT_0044AF40;
+    t1 = DAT_0044AF40;
+    t2 = DAT_0044AF44 + 4;
+    DAT_0044AF48 = DAT_0044AF48 - 1;
+    DAT_0044AF44 = t2;
+    if (DAT_0044AF40) {
+        DAT_0044AF40 = t1 + 4;
+    }
+    if (r_ebx >= 3) {
+        r_edi = *(int*)(r_edi + 8);
+        return sub_0008E600(r_edi);
+    }
+    if (r_esi) {
+        r_esi = *(int*)r_esi;
+        if (!r_esi) goto L_5B;
+        return *(bool*)r_esi;
+    }
+L_5B:
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0002AF00 (0x0002AF00, 114 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -6110,6 +7277,52 @@ void __cdecl sub_0002B8D0(int a1, int a2, int a3, int a4, int a5, int a6, int a7
         object = 0;
     }
     sub_00065E70(a1, a2, a3, object, a7, a5, a6);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0002BB80 (0x0002BB80, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0002BB80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0002BB80 (Proto 0x0002BB80, 63 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0037F31C[];
+
+class Class_0002BB80
+{
+public:
+    Class_0002BB80* sub_0002BB80(int a1, int a2);
+    void sub_00028470(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x1C];
+    unsigned short m_Field20; // +0x20
+    char m_pad22[0x2];
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    bool m_Field30; // +0x30
+    bool m_Field31; // +0x31
+    bool m_Field32; // +0x32
+};
+
+Class_0002BB80* Class_0002BB80::sub_0002BB80(int a1, int a2)
+{
+    sub_00028470(a1, a2);
+    m_Field24 = 0;
+    m_Field28 = 0;
+    m_Field30 = false;
+    m_Field31 = false;
+    m_Field32 = false;
+    m_Field00 = (int)DAT_0037F31C;
+    m_Field20 = 65535;
+    m_Field2C = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -6662,6 +7875,58 @@ void Class_0002C3B0::sub_0002C3B0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0002C470 (0x0002C470, 98 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0002C470
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0002C470 (Proto 0x0002C470, 98 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00449EB0;
+extern "C" int __cdecl sub_00025140(int, int);
+
+class Class_0002C470
+{
+public:
+    int sub_0002C470(int a1);
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+    int m_Field38; // +0x38
+};
+
+int Class_0002C470::sub_0002C470(int a1)
+{
+    int r_eax, t2;
+
+    r_eax = sub_00025140(24, 11);
+    if (r_eax) {
+        *(int*)r_eax = 0;
+        *(int*)(r_eax + 4) = 0;
+        *(float*)(r_eax + 8) = 0.0f;
+        *(float*)(r_eax + 12) = 0.0f;
+        *(float*)(r_eax + 16) = 0.0f;
+        *(int*)(r_eax + 20) = -1;
+        DAT_00449EB0 += 1;
+    } else {
+        r_eax = 0;
+    }
+    *(int*)(r_eax + 20) = a1;
+    t2 = m_Field34;
+    if ((unsigned int)m_Field34 < (unsigned int)m_Field38) {
+        m_Field34 = t2 + 4;
+        if (!t2) goto L_5E;
+        *(int*)t2 = r_eax;
+    }
+L_5E:
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0002C540 (0x0002C540, 37 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -6717,6 +7982,37 @@ public:
 bool Class_0002C960::sub_0002C960(int a1)
 {
     return ((unsigned char)(*(bool*)(m_Field1C + (*(unsigned short*)((*(int*)a1 << 4) + m_Field20 + 4) * 4) + 3) & 127)) != 127;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0002CA00 (0x0002CA00, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0002CA00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0002CA00 (Proto 0x0002CA00, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0002CA00
+{
+public:
+    int sub_0002CA00(bool a1);
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+    char m_pad24[0x6];
+    unsigned short m_Field2A; // +0x2A
+};
+
+int Class_0002CA00::sub_0002CA00(bool a1)
+{
+    if ((unsigned int)((unsigned short)((unsigned char)a1)) < (unsigned int)m_Field2A) {
+        return *(int*)((((unsigned char)a1) << 4) + m_Field20);
+    }
+    return 0;
 }
 
 // ============================================================================
@@ -6952,6 +8248,162 @@ int __cdecl sub_0002FF10(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00030320 (0x00030320, 86 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00030320
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00030320 (Proto 0x00030320, 86 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00025140(int, int);
+
+class Class_00030320
+{
+public:
+    int sub_00030320(int a1, int a2);
+    char m_pad00[0xC];
+    short m_Field0C; // +0x0C
+    char m_pad0E[0x3A];
+    int m_Field48; // +0x48
+    int m_Field4C; // +0x4C
+};
+
+int Class_00030320::sub_00030320(int a1, int a2)
+{
+    int r_eax, t2, t3;
+
+    r_eax = m_Field4C;
+    if (!r_eax) {
+        r_eax = m_Field0C;
+        m_Field48 = r_eax;
+        r_eax <<= 2;
+        r_eax = sub_00025140(r_eax, 11);
+        t2 = m_Field48;
+        m_Field4C = r_eax;
+        r_eax = 0;
+        if (t2 <= 0) goto L_40;
+        do {
+            *(float*)(m_Field4C + (r_eax * 4)) = 0.0f;
+            t3 = m_Field48;
+            r_eax += 1;
+        } while (r_eax < t3);
+    }
+L_40:
+    r_eax = *(int*)a1;
+    *(int*)(m_Field4C + (r_eax * 4)) = *(int*)a2;
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00030590 (0x00030590, 81 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00030590
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00030590 (Proto 0x00030590, 81 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00030590
+{
+public:
+    bool sub_00030590();
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    char m_pad08[0x4];
+    short m_Field0C; // +0x0C
+    char m_pad0E[0xA];
+    int m_Field18; // +0x18
+    char m_pad1C[0x8];
+    int m_Field24; // +0x24
+    char m_pad28[0x8];
+    int m_Field30; // +0x30
+    char m_pad34[0x10];
+    int m_Field44; // +0x44
+};
+
+bool Class_00030590::sub_00030590()
+{
+    int t1, t3, t4;
+    short t2;
+
+    t1 = m_Field18;
+    if (m_Field18) {
+        if (t1 == 3) goto L_4E;
+        t2 = m_Field0C;
+        if (m_Field0C < 2) goto L_4E;
+        t3 = m_Field24;
+        if (m_Field24 >= 255) goto L_4E;
+        if (t3 < 0) goto L_4E;
+        t4 = m_Field30;
+        if (m_Field30 >= 255) goto L_4E;
+        if (t4 < 0) goto L_4E;
+        if (!m_Field44) goto L_4E;
+        if (!*(int*)(m_Field04 + ((((short)((unsigned short)(t2 - 1))) + (((short)((unsigned short)(t2 - 1))) * 4)) * 4) + 12)) goto L_4E;
+        return true;
+    }
+L_4E:
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000309A0 (0x000309A0, 69 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000309A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000309A0 (Proto 0x000309A0, 69 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00025160(int);
+extern "C" int __stdcall sub_00030530(int);
+
+class Class_000309A0
+{
+public:
+    void sub_000309A0(int a1);
+    char m_pad00[0x24];
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+    int m_Field2C; // +0x2C
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    char m_pad38[0x10];
+    int m_Field48; // +0x48
+    int m_Field4C; // +0x4C
+};
+
+void Class_000309A0::sub_000309A0(int a1)
+{
+    int t1, t2;
+
+    t1 = sub_00030530(a1);
+    m_Field28 = t1 | -1;
+    m_Field2C = t1 | -1;
+    m_Field30 = t1 | -1;
+    m_Field34 = t1 | -1;
+    t2 = m_Field4C;
+    m_Field24 = 0;
+    if (m_Field4C) {
+        sub_00025160(t2);
+        m_Field4C = 0;
+        m_Field48 = 0;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_00030C30 (0x00030C30, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -7162,6 +8614,36 @@ int Class_000312A0::sub_000312A0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000318B0 (0x000318B0, 87 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000318B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000318B0 (Proto 0x000318B0, 87 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_0002FB80(int, int, int, int, int, int, int, int);
+};
+
+extern "C" bool __cdecl sub_00031810(int, int, int, int, int);
+
+bool __cdecl sub_000318B0(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
+{
+    int local_4;
+
+    if (sub_00031810(a1, (int)(&local_4), a2, a6, -1)) {
+        return ((Object*)local_4)->sub_0002FB80(a1, a2, a3, a4, a5, a6, a7, a8);
+    }
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00031CE0 (0x00031CE0, 51 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -7290,6 +8772,116 @@ int __cdecl sub_000340F0(int a1, int a2, int a3, int a4, int a5, int a6)
         return 0;
     }
     return 2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00036BD0 (0x00036BD0, 97 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00036BD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00036BD0 (Proto 0x00036BD0, 97 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual void vfunc_48();
+    void sub_000D99E0();
+};
+
+extern "C" float DAT_0037F5A8;
+extern "C" float DAT_0037F5AC;
+extern "C" int __stdcall sub_000D8FA0(int, int, int);
+
+class Class_00036BD0
+{
+public:
+    void sub_00036BD0();
+    char m_pad00[0x18];
+    bool m_Field18; // +0x18
+    char m_pad19[0x13];
+    bool m_Field2C; // +0x2C
+    char m_pad2D[0x23];
+    float m_Field50; // +0x50
+    float m_Field54; // +0x54
+    int m_Field58; // +0x58
+    int m_Field5C; // +0x5C
+    char m_pad60[0x204];
+    bool m_Field264; // +0x264
+};
+
+void Class_00036BD0::sub_00036BD0()
+{
+    int t4;
+    float t7;
+
+    if (m_Field264) {
+        ((Object*)sub_000D8FA0(140, 0, 0))->sub_000D99E0();
+        m_Field264 = false;
+    }
+    t4 = m_Field58;
+    if (m_Field58) {
+        ((Object*)t4)->vfunc_48();
+        m_Field58 = 0;
+    }
+    m_Field50 = DAT_0037F5AC;
+    t7 = DAT_0037F5A8;
+    m_Field5C = 0;
+    m_Field2C = false;
+    m_Field18 = false;
+    m_Field54 = t7;
 }
 
 // ============================================================================
@@ -8251,6 +9843,174 @@ Class_0003AA30* Class_0003AA30::sub_0003AA30(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0003ACD0 (0x0003ACD0, 95 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0003ACD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0003ACD0 (Proto 0x0003ACD0, 95 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001FEEF0(int);
+};
+
+extern "C" char sub_0003AB40[];
+
+class Class_0003ACD0
+{
+public:
+    void sub_0003ACD0();
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    char m_pad34[0x16];
+    bool m_Field4A; // +0x4A
+    char m_pad4B[0x3];
+    bool m_Field4E; // +0x4E
+    char m_pad4F[0x2];
+    bool m_Field51; // +0x51
+};
+
+void Class_0003ACD0::sub_0003ACD0()
+{
+    if (m_Field4A) {
+        ((Object*)m_Field30 + 168)->sub_001FEEF0((int)sub_0003AB40);
+        m_Field4A = false;
+    }
+    if (m_Field4E) {
+        ((Object*)m_Field30 + 216)->sub_001FEEF0((int)sub_0003AB40);
+        m_Field4E = false;
+    }
+    if (m_Field51) {
+        ((Object*)m_Field30 + 252)->sub_001FEEF0((int)sub_0003AB40);
+        m_Field51 = false;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0003BE40 (0x0003BE40, 69 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0003BE40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0003BE40 (Proto 0x0003BE40, 69 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field78
+{
+    void sub_001FEE40(int);
+};
+
+struct Object
+{
+    void sub_001FEEB0(int);
+};
+
+class Class_0003BE40
+{
+public:
+    void sub_0003BE40();
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    char m_pad34[0x44];
+    Field78 m_Field78; // +0x78
+};
+
+void Class_0003BE40::sub_0003BE40()
+{
+    int r_ebx, r_edi, r_esi;
+
+    r_ebx = 0;
+    do {
+        r_esi = *(int*)(r_ebx + m_Field30);
+        if (r_esi) {
+            do {
+                r_edi = *(int*)r_esi;
+                if (!*(int*)(r_esi + 92)) {
+                    ((Object*)m_Field30 + r_ebx)->sub_001FEEB0(r_esi);
+                    m_Field78.sub_001FEE40(r_esi);
+                }
+                r_esi = r_edi;
+            } while (r_edi);
+        }
+        r_ebx += 12;
+    } while (r_ebx < 684);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0003BEF0 (0x0003BEF0, 79 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0003BEF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0003BEF0 (Proto 0x0003BEF0, 79 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_0003BE90(int);
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_0037D85C[];
+extern "C" char DAT_0037F6BC[];
+
+class Class_0003BEF0
+{
+public:
+    void sub_0003BEF0();
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+    Field10* m_Field10; // +0x10
+    char m_pad14[0x1];
+    bool m_Field15; // +0x15
+};
+
+void Class_0003BEF0::sub_0003BEF0()
+{
+    int t2;
+    Field10* t4;
+
+    m_Field00 = (int)DAT_0037F6BC;
+    if (m_Field10) {
+        if (!m_Field15) goto L_21;
+        m_Field10->sub_0003BE90((int)this);
+        m_Field15 = false;
+    }
+L_21:
+    t2 = m_Field0C;
+    if (m_Field0C) {
+        ((Object*)t2)->vfunc_01();
+        m_Field0C = 0;
+    }
+    t4 = m_Field10;
+    if (m_Field10) {
+        ((Object*)(int)t4)->vfunc_01();
+        m_Field10 = 0;
+    }
+    m_Field00 = (int)DAT_0037D85C;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0003BF40 (0x0003BF40, 115 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -8319,6 +10079,320 @@ L_1D:
 }
 
 // ============================================================================
+// [VERIFIED] sub_0003BFC0 (0x0003BFC0, 69 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0003BFC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0003BFC0 (Proto 0x0003BFC0, 69 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_0003BE90(int);
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_0003BFC0
+{
+public:
+    void sub_0003BFC0(int a1, bool a2);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    Field10* m_Field10; // +0x10
+    char m_pad14[0x1];
+    bool m_Field15; // +0x15
+    bool m_Field16; // +0x16
+};
+
+void Class_0003BFC0::sub_0003BFC0(int a1, bool a2)
+{
+    int r_edi, t3;
+
+    if (m_Field10) {
+        if (!m_Field15) goto L_1C;
+        m_Field10->sub_0003BE90((int)this);
+        m_Field15 = false;
+    }
+L_1C:
+    r_edi = a1;
+    m_Field16 = a2;
+    if (a1) {
+        ((Object*)r_edi)->vfunc_00();
+    }
+    t3 = m_Field0C;
+    if (m_Field0C) {
+        ((Object*)t3)->vfunc_01();
+    }
+    m_Field0C = r_edi;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0003C010 (0x0003C010, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0003C010
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0003C010 (Proto 0x0003C010, 62 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_0003BE90(int);
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_0003C010
+{
+public:
+    void sub_0003C010(int a1);
+    char m_pad00[0x10];
+    Field10* m_Field10; // +0x10
+    char m_pad14[0x1];
+    bool m_Field15; // +0x15
+};
+
+void Class_0003C010::sub_0003C010(int a1)
+{
+    int r_edi;
+    Field10* t3;
+
+    if (m_Field10) {
+        if (!m_Field15) goto L_1C;
+        m_Field10->sub_0003BE90((int)this);
+        m_Field15 = false;
+    }
+L_1C:
+    r_edi = a1;
+    if (a1) {
+        ((Object*)r_edi)->vfunc_00();
+    }
+    t3 = m_Field10;
+    if (m_Field10) {
+        ((Object*)(int)t3)->vfunc_01();
+    }
+    m_Field10 = (Field10*)r_edi;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0003C050 (0x0003C050, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0003C050
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0003C050 (Proto 0x0003C050, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_0003BE90(int);
+};
+
+class Class_0003C050
+{
+public:
+    void sub_0003C050();
+    char m_pad00[0x10];
+    Field10* m_Field10; // +0x10
+    char m_pad14[0x1];
+    bool m_Field15; // +0x15
+};
+
+void Class_0003C050::sub_0003C050()
+{
+    if (m_Field10) {
+        if (!m_Field15) goto L_1B;
+        m_Field10->sub_0003BE90((int)this);
+        m_Field15 = false;
+    }
+L_1B:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0003C070 (0x0003C070, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0003C070
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0003C070 (Proto 0x0003C070, 42 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_0003BE90(int);
+};
+
+class Class_0003C070
+{
+public:
+    void sub_0003C070(bool a1);
+    char m_pad00[0x10];
+    Field10* m_Field10; // +0x10
+    bool m_Field14; // +0x14
+    bool m_Field15; // +0x15
+};
+
+void Class_0003C070::sub_0003C070(bool a1)
+{
+    m_Field14 = a1;
+    if (m_Field10) {
+        if (!m_Field15) goto L_26;
+        if (a1) goto L_26;
+        m_Field10->sub_0003BE90((int)this);
+        m_Field15 = false;
+    }
+L_26:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0003C0A0 (0x0003C0A0, 112 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0003C0A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0003C0A0 (Proto 0x0003C0A0, 112 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual bool vfunc_09();
+    virtual void vfunc_10(int, int);
+};
+
+struct Field10
+{
+    void sub_0003BE90(int);
+};
+
+class Class_0003C0A0
+{
+public:
+    void sub_0003C0A0(bool a1);
+    char m_pad00[0xC];
+    Field0C* m_Field0C; // +0x0C
+    Field10* m_Field10; // +0x10
+    bool m_Field14; // +0x14
+    bool m_Field15; // +0x15
+    bool m_Field16; // +0x16
+};
+
+void Class_0003C0A0::sub_0003C0A0(bool a1)
+{
+    m_Field14 = a1;
+    if (!m_Field10) goto L_6C;
+    if (m_Field15) {
+        if (a1) goto L_26;
+        m_Field10->sub_0003BE90((int)this);
+        m_Field15 = false;
+    }
+L_26:
+    if (m_Field16) {
+        if (!m_Field15) goto L_4D;
+        if (m_Field0C->vfunc_09()) goto L_4D;
+        m_Field10->sub_0003BE90((int)this);
+        m_Field15 = false;
+    }
+L_4D:
+    if (m_Field14) {
+        if (m_Field15) goto L_6C;
+        m_Field0C->vfunc_10((int)m_Field10, (int)this);
+        m_Field15 = true;
+    }
+L_6C:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0003C200 (0x0003C200, 95 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0003C200
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0003C200 (Proto 0x0003C200, 95 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001FEEF0(int);
+};
+
+extern "C" char sub_0003AB40[];
+extern "C" char sub_0003C170[];
+
+class Class_0003C200
+{
+public:
+    void sub_0003C200();
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    char m_pad34[0x38];
+    bool m_Field6C; // +0x6C
+    bool m_Field6D; // +0x6D
+    bool m_Field6E; // +0x6E
+};
+
+void Class_0003C200::sub_0003C200()
+{
+    if (m_Field6C) {
+        ((Object*)m_Field30 + 576)->sub_001FEEF0((int)sub_0003C170);
+        m_Field6C = false;
+    }
+    if (m_Field6D) {
+        ((Object*)m_Field30 + 588)->sub_001FEEF0((int)sub_0003C170);
+        m_Field6D = false;
+    }
+    if (m_Field6E) {
+        ((Object*)m_Field30 + 600)->sub_001FEEF0((int)sub_0003AB40);
+        m_Field6E = false;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_0003F870 (0x0003F870, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -8381,6 +10455,66 @@ void Class_0003F890::sub_0003F890(int a1)
         ((Object*)t1)->sub_00219B10(a1);
         return;
     }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0003FE50 (0x0003FE50, 94 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0003FE50
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0003FE50 (Proto 0x0003FE50, 94 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00219B50();
+};
+
+class Class_0003FE50
+{
+public:
+    void sub_0003FE50(int a1);
+};
+
+void Class_0003FE50::sub_0003FE50(int a1)
+{
+    int r_ecx, r_edi, r_esi, t1, t3;
+
+    r_ecx = (int)this;
+    r_edi = (int)this;
+    r_ecx = a1;
+    t1 = *(int*)(r_edi + 108);
+    if (*(int*)(r_edi + 108)) {
+        if (*(int*)t1 != a1) goto L_25;
+        r_ecx = *(int*)(t1 + 8);
+        ((Object*)r_ecx)->sub_00219B50();
+        *(bool*)(*(int*)(r_edi + 108) + 12) = false;
+        return;
+    }
+L_25:
+    r_esi = *(int*)(r_edi + 40);
+    r_edi = *(int*)(r_edi + 44);
+    if ((unsigned int)r_esi >= (unsigned int)r_edi) goto L_59;
+    do {
+        t3 = *(int*)r_esi;
+        if (*(bool*)(*(int*)r_esi + 12)) {
+            if (r_ecx == *(int*)t3) goto L_49;
+        }
+        r_esi += 4;
+    } while ((unsigned int)r_esi < (unsigned int)r_edi);
+    return;
+L_49:
+    r_ecx = *(int*)r_esi;
+    r_ecx = *(int*)(r_ecx + 8);
+    ((Object*)r_ecx)->sub_00219B50();
+    *(bool*)(*(int*)r_esi + 12) = false;
+L_59:
+    ;
 }
 
 // ============================================================================
@@ -9000,6 +11134,130 @@ int __cdecl sub_00040F20(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00040F80 (0x00040F80, 57 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00040F80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00040F80 (Proto 0x00040F80, 57 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037F750;
+
+class Class_00040F80
+{
+public:
+    Class_00040F80* sub_00040F80();
+    bool m_Field00; // +0x00
+    char m_pad01[0x3];
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+};
+
+Class_00040F80* Class_00040F80::sub_00040F80()
+{
+    m_Field14 = DAT_0037CE50;
+    m_Field18 = DAT_0037F750;
+    m_Field04 = 128;
+    m_Field08 = 128;
+    m_Field0C = 128;
+    m_Field10 = 128;
+    m_Field00 = false;
+    m_Field1C = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00041060 (0x00041060, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00041060
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00041060 (Proto 0x00041060, 38 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_00041060
+{
+public:
+    Class_00041060* sub_00041060();
+    bool m_Field00; // +0x00
+    char m_pad01[0x3];
+    float m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+Class_00041060* Class_00041060::sub_00041060()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = false;
+    m_Field04 = t1;
+    m_Field14 = t1;
+    m_Field08 = 128;
+    m_Field0C = 128;
+    m_Field10 = 128;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00041140 (0x00041140, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00041140
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00041140 (Proto 0x00041140, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00041140
+{
+public:
+    Class_00041140* sub_00041140();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+};
+
+Class_00041140* Class_00041140::sub_00041140()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 128;
+    m_Field10 = 255;
+    m_Field14 = 255;
+    m_Field18 = 255;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00041170 (0x00041170, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -9060,6 +11318,46 @@ extern "C" int DAT_0044A368;
 void __cdecl sub_00041250(int a1)
 {
     ((Object*)*(int*)(DAT_0044A368 + 16))->sub_00039E80(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000412A0 (0x000412A0, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000412A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000412A0 (Proto 0x000412A0, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08(int);
+};
+
+void __cdecl sub_000412A0(int a1, int a2)
+{
+    int t1;
+
+    if (a1) {
+        t1 = *(int*)(a1 + 4);
+        if (!*(int*)(a1 + 4)) goto L_21;
+        if (*(int*)(t1 + 100) != *(int*)(a1 + 8)) goto L_21;
+        ((Object*)t1)->vfunc_08(a2);
+    }
+L_21:
+    ;
 }
 
 // ============================================================================
@@ -9183,6 +11481,51 @@ int __cdecl sub_00041390(int a1)
     }
 L_2E:
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000413C0 (0x000413C0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000413C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000413C0 (Proto 0x000413C0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12(int);
+};
+
+void __cdecl sub_000413C0(int a1, int a2)
+{
+    int t1;
+
+    if (a1) {
+        t1 = *(int*)(a1 + 4);
+        if (!*(int*)(a1 + 4)) goto L_2A;
+        if (*(int*)(t1 + 100) != *(int*)(a1 + 8)) goto L_2A;
+        if (*(int*)(t1 + 84) == 8192) goto L_2A;
+        ((Object*)t1)->vfunc_12(a2);
+    }
+L_2A:
+    ;
 }
 
 // ============================================================================
@@ -10605,6 +12948,105 @@ void __cdecl sub_000436E0(Target* target, const char* name)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00043A90 (0x00043A90, 108 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00043A90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00043A90 (Proto 0x00043A90, 108 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual int vfunc_04(int, int);
+    void sub_00024AB0(int);
+    void sub_00024AD0();
+    int sub_00044D10(int);
+};
+
+extern "C" char DAT_0037F78C[];
+extern "C" int DAT_0044A368;
+extern "C" int __cdecl sub_002014E0(int, int);
+
+int __cdecl sub_00043A90(int a1, int a2)
+{
+    int local_4, t3, t5;
+
+    ((Object*)(int)(&local_4))->sub_00024AB0(((Object*)DAT_0044A368)->sub_00044D10(12));
+    if (a1) {
+        if (!*(unsigned char*)a1) goto L_5E;
+        if (!a2) goto L_5E;
+        t3 = sub_002014E0(a1, 0);
+        a1 = (int)DAT_0037F78C;
+        t5 = ((Object*)a2)->vfunc_04((int)(&a1), t3);
+        ((Object*)(int)(&local_4))->sub_00024AD0();
+        return t5;
+    }
+L_5E:
+    ((Object*)(int)(&local_4))->sub_00024AD0();
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00043E30 (0x00043E30, 119 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00043E30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00043E30 (Proto 0x00043E30, 119 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual int vfunc_04(int, int);
+    void sub_00024AB0(int);
+    void sub_00024AD0();
+    int sub_00044D10(int);
+    int sub_00053780();
+};
+
+extern "C" char DAT_0037F7A4[];
+extern "C" int DAT_0044A368;
+extern "C" int __cdecl sub_002014E0(int, int);
+
+int __cdecl sub_00043E30(int a1, int a2)
+{
+    int local_4, t3, t5, t6;
+
+    ((Object*)(int)(&local_4))->sub_00024AB0(((Object*)DAT_0044A368)->sub_00044D10(12));
+    if (a1) {
+        if (!*(unsigned char*)a1) goto L_69;
+        if (!a2) goto L_69;
+        t3 = sub_002014E0(a1, 0);
+        a1 = (int)DAT_0037F7A4;
+        t5 = ((Object*)a2)->vfunc_04((int)(&a1), t3);
+        if (!t5) goto L_69;
+        t6 = ((Object*)t5)->sub_00053780();
+        ((Object*)(int)(&local_4))->sub_00024AD0();
+        return t6;
+    }
+L_69:
+    ((Object*)(int)(&local_4))->sub_00024AD0();
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00044D10 (0x00044D10, 14 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -10621,6 +13063,170 @@ public:
 int Class_00044D10::sub_00044D10(int a1)
 {
     return *(int*)((a1 << 4) + (int)this + 92);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00044D80 (0x00044D80, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00044D80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00044D80 (Proto 0x00044D80, 33 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21(int);
+};
+
+extern "C" int DAT_00464C94;
+
+class Class_00044D80
+{
+public:
+    void sub_00044D80(int a1);
+    char m_pad00[0x50];
+    unsigned char m_Field50; // +0x50
+};
+
+void Class_00044D80::sub_00044D80(int a1)
+{
+    if (m_Field50 != ((unsigned char)a1)) {
+        ((Object*)DAT_00464C94)->vfunc_21(a1);
+        m_Field50 = (unsigned char)a1;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_00044E00 (0x00044E00, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00044E00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00044E00 (Proto 0x00044E00, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_002862E0(int);
+
+class Class_00044E00
+{
+public:
+    int sub_00044E00(int a1);
+};
+
+int Class_00044E00::sub_00044E00(int a1)
+{
+    return sub_002862E0(*(int*)((a1 << 4) + (int)this + 92));
+}
+
+// ============================================================================
+// [VERIFIED] sub_00044E20 (0x00044E20, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00044E00 (Proto 0x00044E00), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x00044E20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00044E20 (Proto 0x00044E20, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_000EF610(int);
+
+class Class_00044E20
+{
+public:
+    int sub_00044E20(int a1);
+};
+
+int Class_00044E20::sub_00044E20(int a1)
+{
+    return sub_000EF610(*(int*)((a1 << 4) + (int)this + 92));
+}
+
+// ============================================================================
+// [VERIFIED] sub_000450B0 (0x000450B0, 76 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000450B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000450B0 (Proto 0x000450B0, 76 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_000450B0
+{
+public:
+    void sub_000450B0(int a1, bool a2);
+    char m_pad00[0x38];
+    int m_Field38; // +0x38
+    int m_Field3C; // +0x3C
+};
+
+void Class_000450B0::sub_000450B0(int a1, bool a2)
+{
+    int t2, t5;
+
+    if (a2) {
+        if (a1) {
+            ((Object*)a1)->vfunc_00();
+        }
+        t2 = m_Field3C;
+        if (m_Field3C) {
+            ((Object*)t2)->vfunc_01();
+        }
+        m_Field3C = a1;
+        return;
+    }
+    if (a1) {
+        ((Object*)a1)->vfunc_00();
+    }
+    t5 = m_Field38;
+    if (m_Field38) {
+        ((Object*)t5)->vfunc_01();
+    }
+    m_Field38 = a1;
 }
 
 // ============================================================================
@@ -10735,6 +13341,66 @@ public:
 void Class_00045F10::sub_00045F10()
 {
     m_Field20->sub_0003EF00();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00045FD0 (0x00045FD0, 78 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00045FD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00045FD0 (Proto 0x00045FD0, 78 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual int vfunc_07();
+};
+
+extern "C" char DAT_0037F9CC[];
+extern "C" void __cdecl sub_002C9907(int, int);
+
+class Class_00045FD0
+{
+public:
+    void sub_00045FD0(int a1);
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void Class_00045FD0::sub_00045FD0(int a1)
+{
+    int r_ebp, r_edi, r_esi, t1;
+
+    r_esi = m_Field08;
+    r_esi -= m_Field04;
+    r_esi >>= 2;
+    r_edi = 0;
+    if (r_esi <= 0) goto L_48;
+    r_ebp = a1;
+L_20:
+    t1 = *(int*)(m_Field04 + (r_edi * 4));
+    if (*(int*)(m_Field04 + (r_edi * 4))) {
+        if (*(int*)(t1 + 84) != r_ebp) goto L_42;
+        sub_002C9907((int)DAT_0037F9CC, ((Object*)t1)->vfunc_07());
+    }
+L_42:
+    r_edi += 1;
+    if (r_edi < r_esi) goto L_20;
+L_48:
+    ;
 }
 
 // ============================================================================
@@ -10947,6 +13613,37 @@ void Class_00046F90::sub_00046F90(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000470D0 (0x000470D0, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000470D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000470D0 (Proto 0x000470D0, 28 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000470D0
+{
+public:
+    int sub_000470D0(float a1, int a2, int a3);
+    char m_pad00[0x48];
+    float m_Field48; // +0x48
+    int m_Field4C; // +0x4C
+    int m_Field50; // +0x50
+};
+
+int Class_000470D0::sub_000470D0(float a1, int a2, int a3)
+{
+    m_Field48 = a1;
+    m_Field4C = a2;
+    m_Field50 = a3;
+    return a2;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00047E70 (0x00047E70, 38 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -11060,6 +13757,73 @@ void Class_00048210::sub_00048210(int a1, int a2, int a3)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000485A0 (0x000485A0, 110 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000485A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000485A0 (Proto 0x000485A0, 110 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00219920(int);
+};
+
+class Class_000485A0
+{
+public:
+    void sub_000485A0(int a1, int a2);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    char m_pad0C[0x38];
+    bool m_Field44; // +0x44
+    bool m_Field45; // +0x45
+};
+
+void Class_000485A0::sub_000485A0(int a1, int a2)
+{
+    int r_eax, r_ebx, r_edi, r_esi, t2;
+
+    r_eax = m_Field44;
+    if ((unsigned char)r_eax) {
+        r_edi = m_Field04;
+        if (r_edi) goto L_19;
+    }
+    r_edi = m_Field00;
+    if (!r_edi) goto L_69;
+L_19:
+    r_eax = *(int*)(r_edi + 128);
+    r_ebx = a1;
+    r_esi = 0;
+    if (*(int*)(r_eax + 16) > 0) {
+        do {
+            if (r_esi < *(int*)(r_eax + 12)) {
+                r_eax = *(int*)(r_eax + 20);
+                r_eax = *(int*)(r_eax + (r_esi * 4));
+            } else {
+                r_eax = 0;
+            }
+            ((Object*)r_ebx)->sub_00219920(r_eax);
+            r_eax = *(int*)(r_edi + 128);
+            t2 = *(int*)(r_eax + 16);
+            r_esi += 1;
+        } while (r_esi < t2);
+    }
+    r_eax = m_Field45;
+    if ((unsigned char)r_eax) {
+        ((Object*)r_ebx)->sub_00219920(m_Field08);
+    }
+L_69:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00048B90 (0x00048B90, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -11169,6 +13933,74 @@ void Class_00049030::sub_00049030()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000493E0 (0x000493E0, 108 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000493E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000493E0 (Proto 0x000493E0, 108 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12(int);
+};
+
+class Class_000493E0
+{
+public:
+    void sub_000493E0(int a1);
+    int sub_0004EEB0(int);
+    int sub_0004EED0();
+    char m_pad00[0x80];
+    int m_Field80; // +0x80
+};
+
+void Class_000493E0::sub_000493E0(int a1)
+{
+    int r_ebp, r_esi, t2, t5;
+
+    if (a1) {
+        ((Object*)a1)->vfunc_00();
+    }
+    t2 = m_Field80;
+    if (m_Field80) {
+        ((Object*)t2)->vfunc_01();
+    }
+    m_Field80 = a1;
+    r_ebp = sub_0004EED0();
+    r_esi = 0;
+    if (r_ebp <= 0) goto L_65;
+L_38:
+    if (a1) {
+        t5 = sub_0004EEB0(r_esi);
+        if (*(unsigned char*)(a1 + 28) != *(int*)(*(int*)(t5 + 92) + 12)) goto L_60;
+        ((Object*)sub_0004EEB0(r_esi))->vfunc_12(a1);
+    }
+L_60:
+    r_esi += 1;
+    if (r_esi < r_ebp) goto L_38;
+L_65:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00049490 (0x00049490, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -11199,6 +14031,65 @@ Class_00049490* Class_00049490::sub_00049490()
     m_Field10 = 0;
     m_Field00 = (int)DAT_0037FAC8;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00049990 (0x00049990, 108 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00049990
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00049990 (Proto 0x00049990, 108 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037FAE4;
+
+class Class_00049990
+{
+public:
+    void sub_00049990(int a1, bool a2);
+};
+
+void Class_00049990::sub_00049990(int a1, bool a2)
+{
+    int r_eax, r_ebx, r_ecx, r_edi, r_edx, r_esi;
+    float t1;
+
+    r_ecx = (int)this;
+    r_esi = *(int*)(r_ecx + 56);
+    r_eax = 0;
+    if (r_esi <= 0) goto L_68;
+    r_ebx = a1;
+    r_edi = *(int*)(r_ecx + 60);
+    r_edx = r_edi + 32;
+    do {
+        if (*(int*)(r_edx + -28) == r_ebx) {
+            if (*(int*)r_edx) goto L_2E;
+        }
+        r_eax += 1;
+        r_edx += 36;
+    } while (r_eax < r_esi);
+    return;
+L_2E:
+    r_edx = a2;
+    if (a2) {
+        r_edx = *(int*)(r_ecx + 60);
+        t1 = DAT_0037FAE4;
+        r_eax = r_eax + (r_eax * 8);
+        r_eax <<= 2;
+        *(float*)(r_edx + r_eax + 28) = t1;
+        r_ecx = *(int*)(r_ecx + 60);
+        *(bool*)(r_ecx + r_eax + 24) = true;
+        return;
+    }
+    r_edx = r_eax + (r_eax * 8);
+    *(int*)(r_edi + (r_edx * 4) + 20) = 2;
+L_68:
+    ;
 }
 
 // ============================================================================
@@ -11324,6 +14215,132 @@ Class_00049CC0* Class_00049CC0::sub_00049CC0(int a1, int a2)
     }
     m_Field08 = r_edi;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0004B680 (0x0004B680, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0004B680
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0004B680 (Proto 0x0004B680, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+};
+
+extern "C" int DAT_0044A528;
+
+class Class_0004B680
+{
+public:
+    void sub_0004B680();
+    char m_pad00[0x60];
+    int m_Field60; // +0x60
+    int m_Field64; // +0x64
+};
+
+void Class_0004B680::sub_0004B680()
+{
+    if (m_Field60) {
+        if (m_Field64 <= 0) goto L_19;
+        ((Object*)DAT_0044A528)->vfunc_05();
+        return;
+    }
+L_19:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0004BB80 (0x0004BB80, 95 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0004BB80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0004BB80 (Proto 0x0004BB80, 95 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0004B6C0(int, int, int, int, int);
+};
+
+extern "C" float DAT_0037F70C;
+extern "C" char DAT_0037FC2C[];
+extern "C" int __cdecl sub_001FCF20(int);
+extern "C" void __stdcall sub_00217060(int);
+
+class Class_0004BB80
+{
+public:
+    int sub_0004BB80(int a1, int a2, int a3, int a4, int a5);
+    void sub_00216BB0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x38];
+    float m_Field3C; // +0x3C
+};
+
+int Class_0004BB80::sub_0004BB80(int a1, int a2, int a3, int a4, int a5)
+{
+    int r_eax;
+
+    sub_00217060(1);
+    m_Field00 = (int)DAT_0037FC2C;
+    r_eax = sub_001FCF20(108);
+    if (r_eax) {
+        r_eax = ((Object*)r_eax)->sub_0004B6C0(a1, a2, a3, a4, a5);
+    } else {
+        r_eax = 0;
+    }
+    sub_00216BB0(0, r_eax);
+    m_Field3C = DAT_0037F70C;
+    r_eax = (int)this;
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0004BCE0 (0x0004BCE0, 81 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0004BCE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0004BCE0 (Proto 0x0004BCE0, 81 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __stdcall sub_0004EEB0(int);
+
+int __stdcall sub_0004BCE0(float a1, float a2, float a3, float a4, float a5, float a6)
+{
+    int t1, t2;
+
+    t1 = sub_0004EEB0(0);
+    t2 = *(int*)*(int*)(t1 + 68);
+    *(float*)(*(int*)*(int*)(t1 + 68) + 64) = a2;
+    *(float*)(t2 + 68) = a1;
+    *(float*)(t2 + 72) = a3;
+    *(float*)(t2 + 76) = a4;
+    *(float*)(t2 + 80) = a5;
+    *(float*)(t2 + 84) = a6;
+    return t2;
 }
 
 // ============================================================================
@@ -11696,6 +14713,57 @@ Class_0004C650* Class_0004C650::sub_0004C650(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0004C990 (0x0004C990, 85 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0004C990
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0004C990 (Proto 0x0004C990, 85 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0004C830(int, int, int);
+};
+
+extern "C" float DAT_0037CD90;
+extern "C" char DAT_0037FEB4[];
+extern "C" int __cdecl sub_001FCF20(int);
+extern "C" void __stdcall sub_00217060(int);
+
+class Class_0004C990
+{
+public:
+    int sub_0004C990(int a1, int a2, int a3);
+    void sub_00216BB0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x38];
+    float m_Field3C; // +0x3C
+};
+
+int Class_0004C990::sub_0004C990(int a1, int a2, int a3)
+{
+    int r_eax;
+
+    sub_00217060(1);
+    m_Field00 = (int)DAT_0037FEB4;
+    r_eax = sub_001FCF20(76);
+    if (r_eax) {
+        r_eax = ((Object*)r_eax)->sub_0004C830(a1, a2, a3);
+    } else {
+        r_eax = 0;
+    }
+    sub_00216BB0(0, r_eax);
+    m_Field3C = DAT_0037CD90;
+    r_eax = (int)this;
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0004CAC0 (0x0004CAC0, 26 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -11821,6 +14889,62 @@ Class_0004D690* Class_0004D690::sub_0004D690()
     m_Field10 = 0;
     m_Field00 = (int)DAT_003800F8;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0004DE90 (0x0004DE90, 102 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0004DE90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0004DE90 (Proto 0x0004DE90, 102 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00210AA0(int, float);
+};
+
+extern "C" float DAT_0037CD94;
+
+class Class_0004DE90
+{
+public:
+    void sub_0004DE90(float a1);
+    char m_pad00[0x88];
+    float m_Field88; // +0x88
+    char m_pad8C[0xC];
+    float m_Field98; // +0x98
+    char m_pad9C[0x3C];
+    bool m_FieldD8; // +0xD8
+    bool m_FieldD9; // +0xD9
+    char m_padDA[0x2A];
+    int m_Field104; // +0x104
+};
+
+void Class_0004DE90::sub_0004DE90(float a1)
+{
+    int r_ecx;
+    float t1;
+
+    r_ecx = (int)this;
+    if (a1 > DAT_0037CD94) {
+        m_FieldD8 = true;
+    } else {
+        m_FieldD8 = false;
+    }
+    t1 = m_Field88;
+    r_ecx = m_Field104;
+    ((Object*)r_ecx)->sub_00210AA0(0, t1 * a1);
+    if (a1 >= m_Field98) {
+        m_FieldD9 = true;
+        return;
+    }
+    m_FieldD9 = false;
 }
 
 // ============================================================================
@@ -11971,6 +15095,67 @@ void Class_0004E240::sub_0004E240(int a1, int a2, int a3, int a4, int a5, int a6
 }
 
 // ============================================================================
+// [VERIFIED] sub_0004E9F0 (0x0004E9F0, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0004E9F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0004E9F0 (Proto 0x0004E9F0, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0004E9F0
+{
+public:
+    int sub_0004E9F0(int a1);
+    char m_pad00[0x74];
+    float m_Field74; // +0x74
+};
+
+int Class_0004E9F0::sub_0004E9F0(int a1)
+{
+    m_Field74 = *(float*)(a1 + 8) + m_Field74;
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0004EA40 (0x0004EA40, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0004EA40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0004EA40 (Proto 0x0004EA40, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0004EA40
+{
+public:
+    void sub_0004EA40(float a1);
+    char m_pad00[0x68];
+    float m_Field68; // +0x68
+    float m_Field6C; // +0x6C
+    char m_pad70[0xC];
+    unsigned char m_Field7C; // +0x7C
+};
+
+void Class_0004EA40::sub_0004EA40(float a1)
+{
+    unsigned char t1;
+
+    t1 = m_Field7C;
+    m_Field6C = 0.0f;
+    m_Field68 = a1;
+    m_Field7C = (unsigned char)(t1 | 4);
+}
+
+// ============================================================================
 // [VERIFIED] sub_0004EEB0 (0x0004EEB0, 22 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -12114,6 +15299,141 @@ Class_0004FD20* Class_0004FD20::sub_0004FD20()
     m_Field0C = 0;
     m_Field10 = 0;
     m_Field00 = (int)DAT_00380230;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000502C0 (0x000502C0, 55 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000502C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000502C0 (Proto 0x000502C0, 55 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044A59C[];
+
+int __cdecl sub_000502C0(int a1)
+{
+    int r_eax, r_ecx;
+
+    r_ecx = a1;
+    r_eax = 0;
+L_06:
+    if (DAT_0044A59C[r_eax] != r_ecx) {
+        r_eax += 1;
+        if ((unsigned int)r_eax < (unsigned int)8) goto L_06;
+        return r_eax;
+    }
+    r_ecx = DAT_0044A59C[r_eax];
+    *(bool*)(r_ecx + 1664) = false;
+    *(float*)(DAT_0044A59C[r_eax] + 1660) = 0.0f;
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000504C0 (0x000504C0, 92 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000504C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000504C0 (Proto 0x000504C0, 92 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044A59C[];
+
+class Class_000504C0
+{
+public:
+    void sub_000504C0();
+};
+
+void Class_000504C0::sub_000504C0()
+{
+    int r_eax, r_ecx, r_edx, r_esi;
+
+    r_ecx = (int)this;
+    r_edx = r_ecx + 4;
+    r_esi = 8;
+L_10:
+    r_ecx = *(int*)r_edx;
+    if (!r_ecx) goto L_4E;
+    r_eax = 0;
+L_20:
+    if (DAT_0044A59C[r_eax] != r_ecx) {
+        r_eax += 1;
+        if ((unsigned int)r_eax < (unsigned int)8) goto L_20;
+        goto L_4E;
+    }
+    r_ecx = DAT_0044A59C[r_eax];
+    *(bool*)(r_ecx + 1664) = false;
+    r_eax = DAT_0044A59C[r_eax];
+    *(float*)(r_eax + 1660) = 0.0f;
+L_4E:
+    *(int*)r_edx = 0;
+    r_edx += 32;
+    r_esi -= 1;
+    if (r_esi) goto L_10;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00050F70 (0x00050F70, 84 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00050F70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00050F70 (Proto 0x00050F70, 84 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_002173C0();
+};
+
+extern "C" char DAT_003802AC[];
+extern "C" char DAT_003802F4[];
+extern "C" int __cdecl sub_001FCF20(int);
+extern "C" void __stdcall sub_00217060(int);
+
+class Class_00050F70
+{
+public:
+    Class_00050F70* sub_00050F70();
+    void sub_00216BB0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x38];
+    float m_Field3C; // +0x3C
+};
+
+Class_00050F70* Class_00050F70::sub_00050F70()
+{
+    int r_esi;
+
+    sub_00217060(1);
+    m_Field00 = (int)DAT_003802F4;
+    r_esi = sub_001FCF20(60);
+    if (r_esi) {
+        ((Object*)r_esi)->sub_002173C0();
+        *(int*)r_esi = (int)DAT_003802AC;
+        *(bool*)(r_esi + 56) = true;
+        *(int*)(r_esi + 12) = 1;
+    } else {
+        r_esi = 0;
+    }
+    sub_00216BB0(0, r_esi);
+    m_Field3C = 0.0f;
     return this;
 }
 
@@ -12458,6 +15778,114 @@ int Class_00053780::sub_00053780()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00053A30 (0x00053A30, 64 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00053A30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00053A30 (Proto 0x00053A30, 64 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10(int);
+};
+
+class Class_00053A30
+{
+public:
+    void sub_00053A30(int a1);
+    char m_pad00[0x44];
+    int m_Field44; // +0x44
+    int m_Field48; // +0x48
+};
+
+void Class_00053A30::sub_00053A30(int a1)
+{
+    int r_ebp, r_ebx, r_esi, t1, t2;
+
+    t1 = (m_Field48 - m_Field44) >> 4;
+    if (((m_Field48 - m_Field44) >> 4) > 0) {
+        r_ebp = a1;
+        r_esi = 0;
+        r_ebx = t1;
+        do {
+            t2 = *(int*)(r_esi + m_Field44);
+            if (*(bool*)(*(int*)(r_esi + m_Field44) + 64)) {
+                ((Object*)t2)->vfunc_10(r_ebp);
+            }
+            r_esi += 16;
+            r_ebx -= 1;
+        } while (r_ebx);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_00053AC0 (0x00053AC0, 82 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00053AC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00053AC0 (Proto 0x00053AC0, 82 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00053AC0
+{
+public:
+    int sub_00053AC0(float a1, int a2);
+};
+
+int Class_00053AC0::sub_00053AC0(float a1, int a2)
+{
+    int r_eax, r_ebx, r_ecx, r_edi, r_edx, r_esi, t1;
+
+    r_ecx = (int)this;
+    r_eax = *(int*)(r_ecx + 72);
+    r_eax -= *(int*)(r_ecx + 68);
+    r_eax >>= 4;
+    if (r_eax > 0) {
+        r_edi = 0;
+        r_ebx = r_eax;
+        do {
+            r_eax = *(int*)(r_ecx + 68);
+            r_eax = *(int*)(r_edi + r_eax);
+            r_esi = *(int*)(r_eax + 60);
+            r_edx = 0;
+            if (r_esi > 0) {
+                r_esi = 0;
+                do {
+                    *(float*)(r_esi + *(int*)(r_eax + 56) + 8) = a1;
+                    t1 = *(int*)(r_eax + 60);
+                    r_edx += 1;
+                    r_esi += 16;
+                } while (r_edx < t1);
+            }
+            r_edi += 16;
+            r_ebx -= 1;
+        } while (r_ebx);
+    }
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00053C80 (0x00053C80, 24 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -12481,6 +15909,60 @@ public:
 void Class_00053C80::sub_00053C80(int a1, int a2)
 {
     m_FieldAC->sub_00053B20(a2, a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00053ED0 (0x00053ED0, 79 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00053ED0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00053ED0 (Proto 0x00053ED0, 79 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldAC
+{
+    void sub_00053A30(int);
+};
+
+struct Object
+{
+    void sub_00053A30(int);
+};
+
+class Class_00053ED0
+{
+public:
+    void sub_00053ED0(int a1);
+    char m_pad00[0xA0];
+    int m_FieldA0; // +0xA0
+    char m_padA4[0x8];
+    FieldAC* m_FieldAC; // +0xAC
+    int m_FieldB0; // +0xB0
+};
+
+void Class_00053ED0::sub_00053ED0(int a1)
+{
+    int t1, t4;
+
+    t1 = m_FieldA0;
+    if (m_FieldA0 <= 1) goto L_4B;
+    if (a1 >= 0) {
+        if (a1 >= t1) goto L_4A;
+        m_FieldAC->sub_00053A30(*(int*)((int)this + (a1 * 4) + 128));
+        t4 = m_FieldB0;
+        if (!m_FieldB0) goto L_4A;
+        a1 = *(int*)((int)this + (a1 * 4) + 128);
+        ((Object*)t4)->sub_00053A30(a1);
+        return;
+    }
+L_4A:
+L_4B:
+    ;
 }
 
 // ============================================================================
@@ -12517,6 +15999,85 @@ Class_00054390* Class_00054390::sub_00054390()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000550D0 (0x000550D0, 58 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000550D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000550D0 (Proto 0x000550D0, 58 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD94;
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_003AB1D0;
+
+float __cdecl sub_000550D0(float a1)
+{
+    if (0.0f >= a1) {
+        return DAT_0037CD94;
+    }
+    if (a1 >= DAT_0037CE50) {
+        return DAT_0037CE50;
+    }
+    return (DAT_003AB1D0 - (a1 + a1)) * a1 * a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00055A00 (0x00055A00, 78 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00055A00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00055A00 (Proto 0x00055A00, 78 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00055500(int);
+};
+
+extern "C" char DAT_00380874[];
+extern "C" float DAT_0038097C;
+extern "C" int __cdecl sub_001FCF20(int);
+extern "C" void __stdcall sub_00217060(int);
+
+class Class_00055A00
+{
+public:
+    int sub_00055A00(int a1);
+    void sub_00216BB0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x38];
+    float m_Field3C; // +0x3C
+};
+
+int Class_00055A00::sub_00055A00(int a1)
+{
+    int r_eax;
+
+    sub_00217060(1);
+    m_Field00 = (int)DAT_00380874;
+    r_eax = sub_001FCF20(3732);
+    if (r_eax) {
+        r_eax = ((Object*)r_eax)->sub_00055500(a1);
+    } else {
+        r_eax = 0;
+    }
+    sub_00216BB0(0, r_eax);
+    m_Field3C = DAT_0038097C;
+    r_eax = (int)this;
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00055B20 (0x00055B20, 27 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -12549,6 +16110,78 @@ int Class_00055B20::sub_00055B20(int a1, int a2, int a3)
         return ((Object*)t1)->sub_00055450(a1, a2, a3);
     }
 L_18:
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00055B40 (0x00055B40, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00055B40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00055B40 (Proto 0x00055B40, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00055B40
+{
+public:
+    int sub_00055B40(float a1);
+    char m_pad00[0x80];
+    int m_Field80; // +0x80
+};
+
+int Class_00055B40::sub_00055B40(float a1)
+{
+    int r_eax;
+
+    r_eax = m_Field80;
+    if (r_eax) {
+        r_eax = *(int*)(r_eax + 68);
+        r_eax = *(int*)r_eax;
+        if (!r_eax) goto L_21;
+        *(float*)(r_eax + 3720) = a1;
+    }
+L_21:
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00055B70 (0x00055B70, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00055B70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00055B70 (Proto 0x00055B70, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00055B70
+{
+public:
+    int sub_00055B70(float a1);
+    char m_pad00[0x80];
+    int m_Field80; // +0x80
+};
+
+int Class_00055B70::sub_00055B70(float a1)
+{
+    int r_eax;
+
+    r_eax = m_Field80;
+    if (r_eax) {
+        r_eax = *(int*)(r_eax + 68);
+        r_eax = *(int*)r_eax;
+        if (!r_eax) goto L_21;
+        *(float*)(r_eax + 3716) = a1;
+    }
+L_21:
     return r_eax;
 }
 
@@ -13309,6 +16942,43 @@ Class_0005A570* Class_0005A570::sub_0005A570()
     m_Field04 = 65535;
     m_Field06 = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0005A590 (0x0005A590, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0005A590
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0005A590 (Proto 0x0005A590, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044AE70;
+
+int __cdecl sub_0005A590(void)
+{
+    int r_eax, r_ecx, r_edx;
+
+    r_edx = DAT_0044AE70;
+    r_eax = 0;
+    r_ecx = r_edx;
+    do {
+        if (*(unsigned short*)r_ecx == 65535) {
+            if (!*(int*)(r_ecx + 4)) goto L_2D;
+        }
+        r_eax += 1;
+        r_ecx += 24;
+    } while (r_eax < 128);
+    r_eax = 0;
+    return r_eax;
+L_2D:
+    r_eax = r_eax + (r_eax * 2);
+    r_eax = r_edx + (r_eax * 8);
+    return r_eax;
 }
 
 // ============================================================================
@@ -15629,6 +19299,46 @@ int __cdecl sub_00064D10(int a1, int a2, int a3)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00064D70 (0x00064D70, 70 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00064D70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00064D70 (Proto 0x00064D70, 70 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00069F60(int);
+};
+
+extern "C" char DAT_003819DC[];
+extern "C" char DAT_00381B90[];
+extern "C" int DAT_0044E08C;
+extern "C" int __cdecl sub_0006B230(void);
+extern "C" int __cdecl sub_0006B240(void);
+
+int __cdecl sub_00064D70(float a1)
+{
+    int r_esi;
+
+    r_esi = ((Object*)DAT_0044E08C)->sub_00069F60(24);
+    if (r_esi) {
+        *(int*)r_esi = (int)DAT_003819DC;
+        *(int*)(r_esi + 4) = 0;
+        *(int*)(r_esi + 8) = sub_0006B230();
+        *(int*)(r_esi + 12) = sub_0006B240();
+        *(int*)r_esi = (int)DAT_00381B90;
+    }
+    *(float*)(r_esi + 16) = a1;
+    return r_esi;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00064E40 (0x00064E40, 77 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // What it does: Takes a 28-byte object from a memory pool and sets it up, or returns nothing if there was no room.
@@ -16036,6 +19746,49 @@ int __cdecl sub_00065350(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00065410 (0x00065410, 70 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00065410
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00065410 (Proto 0x00065410, 70 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_000653A0(int, int, int);
+};
+
+extern "C" int __stdcall sub_000653A0(int, int, int);
+
+class Class_00065410
+{
+public:
+    void sub_00065410(int a1, int a2);
+};
+
+void Class_00065410::sub_00065410(int a1, int a2)
+{
+    int r_esi;
+
+    r_esi = (int)this;
+    *(int*)(r_esi + 16) = ::sub_000653A0(a1, *(int*)(r_esi + 16), a2);
+    if (!*(bool*)(r_esi + 37)) goto L_40;
+L_22:
+    r_esi = *(int*)(r_esi + 24);
+    if (r_esi) {
+        *(int*)(r_esi + 16) = ((Object*)r_esi)->sub_000653A0(a1, *(int*)(r_esi + 16), a2);
+        if (*(bool*)(r_esi + 37)) goto L_22;
+    }
+L_40:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000655F0 (0x000655F0, 60 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -16213,6 +19966,26 @@ int __cdecl sub_000658A0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00065A30 (0x00065A30, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00065A30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00065A30 (Proto 0x00065A30, 20 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00061810(int);
+
+int __cdecl sub_00065A30(int a1)
+{
+    return sub_00061810(a1) != 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00065A80 (0x00065A80, 40 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -16297,6 +20070,27 @@ int __cdecl sub_00065CF0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00066090 (0x00066090, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00066090
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00066090 (Proto 0x00066090, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044F59C;
+extern "C" int __cdecl sub_00028120(int);
+
+int __cdecl sub_00066090(void)
+{
+    return sub_00028120(DAT_0044F59C);
+}
+
+// ============================================================================
 // [VERIFIED] sub_000660A0 (0x000660A0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -16316,6 +20110,29 @@ extern "C" Object DAT_0044F59C;
 void __cdecl sub_000660A0(int a1)
 {
     DAT_0044F59C.sub_0008D4C0(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000660B0 (0x000660B0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00066090 (Proto 0x00066090), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x000660B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000660B0 (Proto 0x000660B0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0044F5A0;
+extern "C" int __cdecl sub_00028120(int);
+
+int __cdecl sub_000660B0(void)
+{
+    return sub_00028120(DAT_0044F5A0);
 }
 
 // ============================================================================
@@ -16356,6 +20173,61 @@ int __cdecl sub_00067880(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00067980 (0x00067980, 81 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00067980
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00067980 (Proto 0x00067980, 81 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int);
+    void sub_00024B30(int);
+    void sub_00024B50();
+};
+
+extern "C" int DAT_003F9DB4;
+extern "C" int DAT_003F9DB8;
+extern "C" int DAT_0044FE6C;
+extern "C" void __cdecl sub_00025160(int);
+
+class Class_00067980
+{
+public:
+    void sub_00067980();
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    char m_pad08[0x4];
+    unsigned char m_Field0C; // +0x0C
+};
+
+void Class_00067980::sub_00067980()
+{
+    int local_4;
+
+    if (m_Field0C == 255) {
+        if (m_Field04 == DAT_003F9DB8) goto L_42;
+        ((Object*)(int)(&local_4))->sub_00024B30(DAT_003F9DB4);
+        sub_00025160(m_Field04);
+        m_Field04 = DAT_003F9DB8;
+        ((Object*)(int)(&local_4))->sub_00024B50();
+    }
+L_42:
+    ((Object*)DAT_0044FE6C)->vfunc_05((int)this);
+}
+
+// ============================================================================
 // [VERIFIED] sub_00067A80 (0x00067A80, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -16376,6 +20248,54 @@ public:
 void Class_00067A80::sub_00067A80()
 {
     m_Field24 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00067A90 (0x00067A90, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00067A90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00067A90 (Proto 0x00067A90, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int);
+};
+
+extern "C" int DAT_0044FE5C;
+extern "C" void __cdecl sub_00067A30(void);
+
+class Class_00067A90
+{
+public:
+    void sub_00067A90();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+    char m_pad1C[0x8];
+    unsigned short m_Field24; // +0x24
+};
+
+void Class_00067A90::sub_00067A90()
+{
+    m_Field24 -= 1;
+    if (!m_Field24) {
+        if (m_Field18) goto L_25;
+        sub_00067A30();
+        ((Object*)DAT_0044FE5C)->vfunc_05((int)this);
+    }
+L_25:
+    ;
 }
 
 // ============================================================================
@@ -16629,6 +20549,44 @@ int __cdecl sub_00068E40(int a1)
     *(int*)(a1 + 32) = DAT_0044FEE8;
     DAT_0044FEE8 = a1;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00068EE0 (0x00068EE0, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00068EE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00068EE0 (Proto 0x00068EE0, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0008E500(int);
+};
+
+extern "C" void __cdecl sub_00068EE0(int, int);
+
+void __cdecl sub_00068EE0(int a1, int a2)
+{
+    int r_edi, r_esi, t1;
+
+    t1 = *(int*)(a1 + 40);
+    if (*(int*)(a1 + 40)) {
+        sub_00068EE0(t1, a2);
+    }
+    r_edi = *(short*)(a1 + 12);
+    r_esi = 0;
+    if (r_edi > 0) {
+        do {
+            ((Object*)a2)->sub_0008E500((((short)((unsigned short)r_esi)) << 4) + *(int*)(a1 + 4));
+            r_esi += 1;
+        } while (r_esi < r_edi);
+    }
 }
 
 // ============================================================================
@@ -17192,6 +21150,37 @@ struct Object
 void __cdecl sub_0006D430(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, int a9, int a10, int a11, int a12, int a13, int a14)
 {
     ((Object*)a1)->sub_00075A60(a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0006D480 (0x0006D480, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0006D480
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0006D480 (Proto 0x0006D480, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00(int);
+};
+
+extern "C" int DAT_00453744;
+
+void __cdecl sub_0006D480(void)
+{
+    int t1;
+
+    t1 = *(int*)(DAT_00453744 + 292);
+    if (*(int*)(DAT_00453744 + 292)) {
+        ((Object*)t1)->vfunc_00(1);
+        *(int*)(DAT_00453744 + 292) = 0;
+    }
 }
 
 // ============================================================================
@@ -18509,6 +22498,50 @@ void Class_000743A0::sub_000743A0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00074790 (0x00074790, 90 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00074790
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00074790 (Proto 0x00074790, 90 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field8C
+{
+    void sub_00076610(int, int, int);
+    void sub_00076AE0(int);
+};
+
+extern "C" int DAT_003FD5D0;
+extern "C" int __cdecl sub_0006E550(int, int, int);
+extern "C" int __cdecl sub_0006EF70(int, int);
+
+class Class_00074790
+{
+public:
+    int sub_00074790(int a1, int a2);
+    char m_pad00[0x8C];
+    Field8C* m_Field8C; // +0x8C
+};
+
+int Class_00074790::sub_00074790(int a1, int a2)
+{
+    int r_esi;
+
+    r_esi = sub_0006EF70(a1, 0);
+    if (r_esi) {
+        *(int*)(r_esi + 52) = DAT_003FD5D0;
+    }
+    m_Field8C->sub_00076610(r_esi, 0, 0);
+    m_Field8C->sub_00076AE0(sub_0006E550(r_esi, a2, 0));
+    return r_esi != 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000747F0 (0x000747F0, 83 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -18778,6 +22811,34 @@ bool __cdecl sub_00074B10(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00074B30 (0x00074B30, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00074B30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00074B30 (Proto 0x00074B30, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_00074850(int, int, int, int);
+};
+
+extern "C" int DAT_00453900;
+
+bool __cdecl sub_00074B30(int a1, int a2, int a3, int a4)
+{
+    if (DAT_00453900) {
+        return ((Object*)DAT_00453900)->sub_00074850(a1, a2, a3, a4);
+    }
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00074BB0 (0x00074BB0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -18971,6 +23032,27 @@ int __cdecl sub_00075490(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000754A0 (0x000754A0, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000754A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000754A0 (Proto 0x000754A0, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_000754A0(int a1)
+{
+    *(bool*)(a1 + 69) = false;
+    *(bool*)(a1 + 68) = false;
+    *(float*)(a1 + 52) = 0.0f;
+    return a1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000757C0 (0x000757C0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -19098,6 +23180,58 @@ L_52:
     r_eax = ((Object*)r_eax)->sub_00297E60();
     r_eax = sub_002C92F8(r_eax, 0, (int)DAT_003FD6F0, (int)DAT_003FD710, 0);
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000763E0 (0x000763E0, 96 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000763E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000763E0 (Proto 0x000763E0, 96 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0026DAC0();
+    void sub_00297770(int, int, int, int);
+    int sub_00297960();
+};
+
+extern "C" int __cdecl sub_00297980(int, int);
+
+class Class_000763E0
+{
+public:
+    void sub_000763E0(int a1);
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+    char m_pad20[0xC];
+    int m_Field2C; // +0x2C
+};
+
+void Class_000763E0::sub_000763E0(int a1)
+{
+    int r_esi, t4;
+
+    if (!m_Field1C) goto L_5C;
+    m_Field2C = (m_Field2C & -15) | 1;
+    r_esi = ((Object*)a1)->sub_0026DAC0();
+    if (!r_esi) {
+        r_esi = sub_00297980(*(int*)(m_Field1C + 12), a1);
+        if (!r_esi) goto L_5A;
+    }
+    t4 = ((Object*)r_esi)->sub_00297960();
+    if (!t4) {
+        ((Object*)r_esi)->sub_00297770(t4, 1, t4, -0x39E3C000);
+    }
+L_5A:
+L_5C:
+    ;
 }
 
 // ============================================================================
@@ -19273,6 +23407,24 @@ struct Object
 void __cdecl sub_00076CE0(int a1, int a2)
 {
     ((Object*)a1)->sub_00076BF0(a2);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00076CF0 (0x00076CF0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00076CF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00076CF0 (Proto 0x00076CF0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_00076CF0(int a1)
+{
+    return *(int*)(a1 + 20) != 0;
 }
 
 // ============================================================================
@@ -20874,6 +25026,54 @@ int Class_0007CD00::sub_0007CD00(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0007CD10 (0x0007CD10, 91 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007CD10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007CD10 (Proto 0x0007CD10, 91 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0007CD10
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01(int, int);
+    void sub_0007CD10(int a1);
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+};
+
+void Class_0007CD10::sub_0007CD10(int a1)
+{
+    int r_edi, t3;
+
+    if (!m_Field0C) {
+        vfunc_01(a1, m_Field04);
+    }
+    r_edi = 10;
+    if (!m_Field0C) goto L_56;
+L_27:
+    r_edi -= 1;
+    if (r_edi >= 0) {
+        if (r_edi <= 0) goto L_56;
+        vfunc_01(2, m_Field04);
+        t3 = m_Field08;
+        m_Field0C = false;
+        m_Field04 = t3;
+        vfunc_01(1, m_Field08);
+        if (m_Field0C) goto L_27;
+    }
+L_56:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0007CD70 (0x0007CD70, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -20953,6 +25153,64 @@ Class_0007CE20* Class_0007CE20::sub_0007CE20()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0007CE40 (0x0007CE40, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0007CE40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007CE40 (Proto 0x0007CE40, 75 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003834D4;
+extern "C" float DAT_003834D8;
+
+class Class_0007CE40
+{
+public:
+    Class_0007CE40* sub_0007CE40();
+    bool m_Field00; // +0x00
+    char m_pad01[0x3];
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+    bool m_Field2C; // +0x2C
+    bool m_Field2D; // +0x2D
+    bool m_Field2E; // +0x2E
+    bool m_Field2F; // +0x2F
+};
+
+Class_0007CE40* Class_0007CE40::sub_0007CE40()
+{
+    m_Field18 = 0.0f;
+    m_Field00 = false;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 0;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    m_Field1C = DAT_003834D4;
+    m_Field20 = DAT_003834D8;
+    m_Field24 = 0;
+    m_Field28 = 0;
+    m_Field2C = true;
+    m_Field2D = false;
+    m_Field2E = false;
+    m_Field2F = false;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0007CEC0 (0x0007CEC0, 10 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -21018,6 +25276,43 @@ bool Class_0007CEE0::sub_0007CEE0(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0007CEF0 (0x0007CEF0, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0007CEF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007CEF0 (Proto 0x0007CEF0, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_0007CEF0
+{
+public:
+    Class_0007CEF0* sub_0007CEF0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+Class_0007CEF0* Class_0007CEF0::sub_0007CEF0()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = t1;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0007CF50 (0x0007CF50, 28 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -21047,6 +25342,92 @@ int Class_0007CF50::sub_0007CF50()
         m_Field04 = 0;
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007CF70 (0x0007CF70, 69 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0007CF70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007CF70 (Proto 0x0007CF70, 69 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003834D4;
+extern "C" float DAT_003850D4;
+
+class Class_0007CF70
+{
+public:
+    Class_0007CF70* sub_0007CF70();
+    bool m_Field00; // +0x00
+    char m_pad01[0x3];
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    bool m_Field28; // +0x28
+    char m_pad29[0x1];
+    unsigned short m_Field2A; // +0x2A
+};
+
+Class_0007CF70* Class_0007CF70::sub_0007CF70()
+{
+    m_Field1C = 0.0f;
+    m_Field00 = false;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 0;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field20 = DAT_003834D4;
+    m_Field24 = DAT_003850D4;
+    m_Field28 = true;
+    m_Field2A = 65535;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007D010 (0x0007D010, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0007D010
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007D010 (Proto 0x0007D010, 20 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_0007D010
+{
+public:
+    Class_0007D010* sub_0007D010();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+};
+
+Class_0007D010* Class_0007D010::sub_0007D010()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = t1;
+    m_Field04 = t1;
+    return this;
 }
 
 // ============================================================================
@@ -21108,6 +25489,131 @@ void Class_0007D060::sub_0007D060(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0007D0F0 (0x0007D0F0, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0007D0F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007D0F0 (Proto 0x0007D0F0, 42 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_003850D4;
+
+class Class_0007D0F0
+{
+public:
+    Class_0007D0F0* sub_0007D0F0();
+    float m_Field00; // +0x00
+    bool m_Field04; // +0x04
+    char m_pad05[0x3];
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_0007D0F0* Class_0007D0F0::sub_0007D0F0()
+{
+    float t2;
+
+    m_Field00 = DAT_003850D4;
+    t2 = DAT_0037CE50;
+    m_Field04 = false;
+    m_Field08 = t2;
+    m_Field0C = t2;
+    m_Field10 = t2;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007D1B0 (0x0007D1B0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007D1B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007D1B0 (Proto 0x0007D1B0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00015510(int);
+
+class Class_0007D1B0
+{
+public:
+    void sub_0007D1B0();
+    int m_Field00; // +0x00
+    bool m_Field04; // +0x04
+};
+
+void Class_0007D1B0::sub_0007D1B0()
+{
+    int t1;
+
+    if (!m_Field04) goto L_22;
+    t1 = m_Field00;
+    if (m_Field00) {
+        if (!*(unsigned char*)t1) goto L_1E;
+        sub_00015510(t1);
+    }
+L_1E:
+    m_Field04 = false;
+L_22:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007D1E0 (0x0007D1E0, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007D1E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007D1E0 (Proto 0x0007D1E0, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_0007D1E0
+{
+public:
+    void sub_0007D1E0();
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    char m_pad10[0x6];
+    bool m_Field16; // +0x16
+    bool m_Field17; // +0x17
+};
+
+void Class_0007D1E0::sub_0007D1E0()
+{
+    int t1;
+
+    if (m_Field17) {
+        t1 = m_Field0C;
+        if (m_Field0C) {
+            ((Object*)t1)->vfunc_01();
+            m_Field0C = 0;
+        }
+        m_Field16 = false;
+        m_Field17 = false;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_0007D390 (0x0007D390, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -21139,6 +25645,50 @@ Class_0007D390* Class_0007D390::sub_0007D390()
     m_Field44 = 0;
     m_Field04.sub_002003C0();
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007D400 (0x0007D400, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007D400
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007D400 (Proto 0x0007D400, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0007D400
+{
+public:
+    void sub_0007D400();
+    bool m_Field00; // +0x00
+    char m_pad01[0xB];
+    int m_Field0C; // +0x0C
+    char m_pad10[0x8];
+    int m_Field18; // +0x18
+    char m_pad1C[0xE];
+    unsigned short m_Field2A; // +0x2A
+};
+
+void Class_0007D400::sub_0007D400()
+{
+    int t1;
+
+    if (!m_Field00) goto L_21;
+    t1 = m_Field0C;
+    if (m_Field0C) {
+        if (!*(unsigned char*)t1) goto L_19;
+        m_Field18 = 0;
+        m_Field0C = 0;
+    }
+L_19:
+    m_Field2A = 65535;
+    m_Field00 = false;
+L_21:
+    ;
 }
 
 // ============================================================================
@@ -21325,6 +25875,219 @@ Class_0007DA60* Class_0007DA60::sub_0007DA60()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0007DA90 (0x0007DA90, 47 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007DA90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007DA90 (Proto 0x0007DA90, 47 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00(int);
+};
+
+class Class_0007DA90
+{
+public:
+    void sub_0007DA90();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+    bool m_Field14; // +0x14
+};
+
+void Class_0007DA90::sub_0007DA90()
+{
+    int r_edi, t1, t3;
+
+    r_edi = 0;
+    if (m_Field10 > 0) {
+        do {
+            t1 = *(int*)((int)this + (r_edi * 4));
+            if (*(int*)((int)this + (r_edi * 4))) {
+                ((Object*)t1)->vfunc_00(1);
+            }
+            t3 = m_Field10;
+            r_edi += 1;
+        } while (r_edi < t3);
+    }
+    m_Field10 = 0;
+    m_Field14 = false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007DAC0 (0x0007DAC0, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007DAC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007DAC0 (Proto 0x0007DAC0, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual bool vfunc_03();
+};
+
+class Class_0007DAC0
+{
+public:
+    void sub_0007DAC0();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+    bool m_Field14; // +0x14
+};
+
+void Class_0007DAC0::sub_0007DAC0()
+{
+    int r_edi, t4;
+
+    r_edi = 0;
+    m_Field14 = false;
+    if (m_Field10 > 0) {
+        do {
+            if (((Object*)*(int*)((int)this + (r_edi * 4)))->vfunc_03()) {
+                m_Field14 = true;
+            }
+            ((Object*)*(int*)((int)this + (r_edi * 4)))->vfunc_01();
+            t4 = m_Field10;
+            r_edi += 1;
+        } while (r_edi < t4);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007DB00 (0x0007DB00, 35 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007DB00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007DB00 (Proto 0x0007DB00, 35 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+};
+
+class Class_0007DB00
+{
+public:
+    void sub_0007DB00();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+void Class_0007DB00::sub_0007DB00()
+{
+    int r_esi, t2;
+
+    r_esi = 0;
+    if (m_Field10 > 0) {
+        do {
+            ((Object*)*(int*)((int)this + (r_esi * 4)))->vfunc_02();
+            t2 = m_Field10;
+            r_esi += 1;
+        } while (r_esi < t2);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007DB30 (0x0007DB30, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007DB30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007DB30 (Proto 0x0007DB30, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int);
+};
+
+class Class_0007DB30
+{
+public:
+    void sub_0007DB30(int a1);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+void Class_0007DB30::sub_0007DB30(int a1)
+{
+    int r_ebx, r_esi, t2;
+
+    r_esi = 0;
+    if (m_Field10 > 0) {
+        r_ebx = a1;
+        do {
+            ((Object*)*(int*)((int)this + (r_esi * 4)))->vfunc_04(r_ebx);
+            t2 = m_Field10;
+            r_esi += 1;
+        } while (r_esi < t2);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007DC00 (0x0007DC00, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0007DC00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007DC00 (Proto 0x0007DC00, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003834FC;
+
+class Class_0007DC00
+{
+public:
+    Class_0007DC00* sub_0007DC00();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+Class_0007DC00* Class_0007DC00::sub_0007DC00()
+{
+    m_Field04 = DAT_003834FC;
+    m_Field00 = 0;
+    m_Field08 = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0007DC60 (0x0007DC60, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -21428,6 +26191,42 @@ extern "C" int DAT_004539D8;
 void __cdecl sub_0007DCD0(int a1)
 {
     ((Object*)DAT_004539D8)->vfunc_05(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007DCF0 (0x0007DCF0, 35 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007DCF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007DCF0 (Proto 0x0007DCF0, 35 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_000ABE20(int);
+};
+
+class Class_0007DCF0
+{
+public:
+    void sub_0007DCF0(int a1);
+    char m_pad00[0xB0];
+    int m_FieldB0; // +0xB0
+};
+
+void Class_0007DCF0::sub_0007DCF0(int a1)
+{
+    m_FieldB0 = a1;
+    if (a1) {
+        a1 = a1 + 84;
+        ((Object*)(int)this + 256)->sub_000ABE20(a1);
+        return;
+    }
 }
 
 // ============================================================================
@@ -21724,6 +26523,104 @@ void Class_0007E250::sub_0007E250(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0007E280 (0x0007E280, 98 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0007E280
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007E280 (Proto 0x0007E280, 98 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00011CC0();
+};
+
+class Class_0007E280
+{
+public:
+    int sub_0007E280(int a1, int a2);
+    char m_pad00[0x94];
+    int m_Field94; // +0x94
+    int m_Field98; // +0x98
+    int m_Field9C; // +0x9C
+};
+
+int Class_0007E280::sub_0007E280(int a1, int a2)
+{
+    int r_eax;
+
+    r_eax = m_Field94;
+    *(int*)a2 = r_eax;
+    *(int*)(a2 + 4) = m_Field98;
+    r_eax = m_Field9C;
+    *(int*)(a2 + 8) = r_eax;
+    if (a1) {
+        r_eax = ((Object*)a1)->sub_00011CC0();
+        r_eax = *(int*)(r_eax + 44);
+        if (!r_eax) goto L_5E;
+        *(float*)a2 = *(float*)a2 - *(float*)(r_eax + 76);
+        *(float*)(a2 + 4) = *(float*)(a2 + 4) - *(float*)(r_eax + 80);
+        *(float*)(a2 + 8) = *(float*)(a2 + 8) - *(float*)(r_eax + 84);
+    }
+L_5E:
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007E380 (0x0007E380, 118 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007E380
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007E380 (Proto 0x0007E380, 118 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_0015E220();
+    void sub_002BACF0(int);
+    void sub_002BAD30(int);
+};
+
+class Class_0007E380
+{
+public:
+    void sub_0007E380(int a1, int a2, bool a3);
+};
+
+void Class_0007E380::sub_0007E380(int a1, int a2, bool a3)
+{
+    int r_esi;
+
+    r_esi = (int)this;
+    if (a3) {
+        if (((Object*)r_esi + 200)->sub_0015E220()) goto L_72;
+    }
+    *(int*)(r_esi + 148) = *(int*)a1;
+    *(int*)(r_esi + 152) = *(int*)(a1 + 4);
+    *(int*)(r_esi + 156) = *(int*)(a1 + 8);
+    *(int*)(r_esi + 160) = *(int*)a2;
+    *(int*)(r_esi + 164) = *(int*)(a2 + 4);
+    *(int*)(r_esi + 168) = *(int*)(a2 + 8);
+    r_esi = *(int*)(r_esi + 208);
+    if (r_esi) {
+        ((Object*)r_esi)->sub_002BACF0(a1);
+        ((Object*)r_esi)->sub_002BAD30(a2);
+    }
+L_72:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0007E400 (0x0007E400, 31 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -21919,6 +26816,41 @@ L_AC:
 }
 
 // ============================================================================
+// [VERIFIED] sub_0007F0D0 (0x0007F0D0, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007F0D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007F0D0 (Proto 0x0007F0D0, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_002014E0(int, int);
+
+class Class_0007F0D0
+{
+public:
+    Class_0007F0D0* sub_0007F0D0(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+Class_0007F0D0* Class_0007F0D0::sub_0007F0D0(int a1)
+{
+    m_Field00 = 0;
+    m_Field04 = 0;
+    if (a1) {
+        if (!*(unsigned char*)a1) goto L_2B;
+        m_Field04 = sub_002014E0(a1, 0);
+    }
+L_2B:
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0007F350 (0x0007F350, 34 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -21977,6 +26909,39 @@ void Class_0007F5F0::sub_0007F5F0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0007F710 (0x0007F710, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007F710
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007F710 (Proto 0x0007F710, 62 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0007F710
+{
+public:
+    void sub_0007F710(bool a1);
+    void sub_0007F490();
+    char m_pad00[0x149];
+    unsigned char m_Field149; // +0x149
+};
+
+void Class_0007F710::sub_0007F710(bool a1)
+{
+    unsigned char t1;
+
+    t1 = m_Field149;
+    if ((m_Field149 & 1) != (!a1)) {
+        m_Field149 = (unsigned char)(((unsigned char)(((unsigned char)((!a1) ^ t1)) & 1)) ^ t1);
+        sub_0007F490();
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_0007F9C0 (0x0007F9C0, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -22014,6 +26979,46 @@ extern "C" int DAT_00453B1C;
 void __cdecl sub_0007FA10(void)
 {
     DAT_00453B1C -= 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007FDD0 (0x0007FDD0, 102 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0007FDD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007FDD0 (Proto 0x0007FDD0, 102 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000422C0(int, int, int);
+
+class Class_0007FDD0
+{
+public:
+    void sub_0007FDD0(int a1);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+    char m_pad14[0x235C];
+    int m_Field2370; // +0x2370
+};
+
+void Class_0007FDD0::sub_0007FDD0(int a1)
+{
+    int r_esi, t1;
+
+    r_esi = m_Field2370 + ((*(short*)((int)this + ((*(int*)a1 + (*(int*)a1 * 4)) * 4) + 1964) + *(int*)(a1 + 4) + ((*(short*)((int)this + ((*(int*)a1 + (*(int*)a1 * 4)) * 4) + 1964) + *(int*)(a1 + 4)) * 2)) * 8);
+    *(int*)(r_esi + 8) = *(int*)(r_esi + 8) & -0x8000001;
+    if (*(int*)(r_esi + 8) & -0x8000001 & 0x20000000) {
+        t1 = *(int*)(m_Field10 + ((*(unsigned char*)(r_esi + 13) + (*(unsigned char*)(r_esi + 13) * 2)) * 4));
+        if (!*(int*)(m_Field10 + ((*(unsigned char*)(r_esi + 13) + (*(unsigned char*)(r_esi + 13) * 2)) * 4))) goto L_5B;
+        sub_000422C0(t1, *(bool*)(r_esi + 14) & 63, 0);
+    }
+L_5B:
+    *(int*)(r_esi + 16) &= -0x4000001;
 }
 
 // ============================================================================
@@ -22092,6 +27097,126 @@ int __cdecl sub_0007FF20(void)
         } while (r_esi < r_eax);
     }
     DAT_00453B0C = 0;
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0007FF80 (0x0007FF80, 64 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0007FF80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0007FF80 (Proto 0x0007FF80, 64 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_003835FC;
+
+class Class_0007FF80
+{
+public:
+    int sub_0007FF80();
+    char m_pad00[0x1B9C];
+    unsigned char m_Field1B9C; // +0x1B9C
+    char m_pad1B9D[0x7CF];
+    int m_Field236C; // +0x236C
+    char m_pad2370[0x8];
+    int m_Field2378; // +0x2378
+    float m_Field237C; // +0x237C
+    char m_pad2380[0xB0];
+    float m_Field2430; // +0x2430
+    char m_pad2434[0x4];
+    int m_Field2438; // +0x2438
+};
+
+int Class_0007FF80::sub_0007FF80()
+{
+    m_Field237C = DAT_003835FC;
+    m_Field2430 = DAT_0037CE50;
+    m_Field2438 = 4181;
+    m_Field2378 = 0;
+    m_Field236C = 0;
+    m_Field1B9C = 255;
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000800F0 (0x000800F0, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000800F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000800F0 (Proto 0x000800F0, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003FDE64;
+
+float __cdecl sub_000800F0(int a1)
+{
+    a1 = a1 & 63;
+    return ((float)a1) * DAT_003FDE64;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000801D0 (0x000801D0, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000801D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000801D0 (Proto 0x000801D0, 80 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0008D4C0(int);
+};
+
+extern "C" bool DAT_00453B10;
+extern "C" float DAT_00453B14;
+extern "C" float DAT_00453B18;
+extern "C" char DAT_00453B44[];
+
+class Class_000801D0
+{
+public:
+    int sub_000801D0();
+    char m_pad00[0x2370];
+    int m_Field2370; // +0x2370
+    int m_Field2374; // +0x2374
+};
+
+int Class_000801D0::sub_000801D0()
+{
+    int r_eax, r_ecx, r_edx;
+
+    r_ecx = (int)this;
+    r_ecx = (int)DAT_00453B44;
+    ((Object*)r_ecx)->sub_0008D4C0(0);
+    r_eax = m_Field2370;
+    r_ecx = m_Field2374 + (m_Field2374 * 2);
+    r_ecx = r_eax + (r_ecx * 8);
+    DAT_00453B10 = false;
+    DAT_00453B18 = 0.0f;
+    DAT_00453B14 = 0.0f;
+    if ((unsigned int)r_eax < (unsigned int)r_ecx) {
+        r_edx = 0x3FFFFFFF;
+        do {
+            *(int*)(r_eax + 12) &= r_edx;
+            r_eax += 24;
+        } while ((unsigned int)r_eax < (unsigned int)r_ecx);
+    }
     return r_eax;
 }
 
@@ -22230,6 +27355,48 @@ int Class_00084D80::sub_00084D80(int a1)
         m_Field04 = a1;
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00085050 (0x00085050, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00085050
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00085050 (Proto 0x00085050, 72 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00025120(int);
+
+class Class_00085050
+{
+public:
+    void sub_00085050(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void Class_00085050::sub_00085050(int a1)
+{
+    int t1;
+
+    if (a1) {
+        t1 = sub_00025120(a1 * 4);
+        m_Field00 = t1;
+        if (!t1) goto L_35;
+        m_Field08 = (a1 * 4) + t1;
+        m_Field04 = t1;
+        return;
+    }
+    m_Field00 = 0;
+L_35:
+    m_Field04 = 0;
+    m_Field08 = 0;
 }
 
 // ============================================================================
@@ -22524,6 +27691,76 @@ int __cdecl sub_000865C0(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00086780 (0x00086780, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00086780
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00086780 (Proto 0x00086780, 33 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00025160(int);
+
+class Class_00086780
+{
+public:
+    int sub_00086780();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+    unsigned short m_Field18; // +0x18
+};
+
+int Class_00086780::sub_00086780()
+{
+    if ((unsigned int)m_Field18 > (unsigned int)1) {
+        sub_00025160(m_Field14);
+    }
+    m_Field14 = 0;
+    m_Field18 = 0;
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00086990 (0x00086990, 24 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00086990
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00086990 (Proto 0x00086990, 24 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00086990
+{
+public:
+    void sub_00086990();
+    int m_Field00; // +0x00
+    char m_pad04[0x20];
+    unsigned char m_Field24; // +0x24
+};
+
+void Class_00086990::sub_00086990()
+{
+    unsigned char t1;
+
+    if (m_Field00) {
+        t1 = m_Field24;
+        if (!(m_Field24 & 2)) goto L_17;
+        m_Field00 = 0;
+        m_Field24 = (unsigned char)(t1 & 253);
+    }
+L_17:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00086E60 (0x00086E60, 77 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -22712,6 +27949,41 @@ Class_00088F40* Class_00088F40::sub_00088F40()
     m_Field0C = 0;
     m_Field10 = 0;
     m_Field00 = (int)DAT_00383950;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000893B0 (0x000893B0, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000893B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000893B0 (Proto 0x000893B0, 42 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00383978[];
+extern "C" int __cdecl sub_002014E0(int, int);
+
+class Class_000893B0
+{
+public:
+    Class_000893B0* sub_000893B0(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+Class_000893B0* Class_000893B0::sub_000893B0(int a1)
+{
+    m_Field00 = (int)DAT_00383978;
+    if (a1) {
+        if (!*(unsigned char*)a1) goto L_24;
+        m_Field04 = sub_002014E0(a1, 0);
+    }
+L_24:
     return this;
 }
 
@@ -23460,6 +28732,73 @@ L_5C:
 }
 
 // ============================================================================
+// [VERIFIED] sub_0008C320 (0x0008C320, 107 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0008C320
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008C320 (Proto 0x0008C320, 107 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0008C320
+{
+public:
+    void sub_0008C320(int a1);
+    int m_Field00; // +0x00
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+};
+
+void Class_0008C320::sub_0008C320(int a1)
+{
+    int r_eax, r_ebp, r_ebx, r_edi, r_edx, t1;
+
+    r_ebx = 0;
+    r_edx = 0;
+    if (m_Field00 == 4) goto L_68;
+    r_ebp = a1;
+    r_ebx |= -1;
+    r_edx |= -1;
+    r_eax = 0;
+    r_edi = (int)(&m_Field10);
+L_18:
+    t1 = *(int*)r_edi;
+    if (r_ebp == *(int*)r_edi) goto L_33;
+    if (r_edx < 0) {
+        if (t1) goto L_28;
+        r_edx = r_eax;
+    }
+L_28:
+    r_eax += 1;
+    r_edi += 4;
+    if (r_eax < 4) goto L_18;
+    goto L_39;
+L_33:
+    r_ebx = r_eax;
+    if (r_eax >= 0) goto L_43;
+L_39:
+    if (r_edx >= 0) {
+        r_ebx = r_edx;
+        *(int*)((int)this + (r_edx * 4) + 16) = r_ebp;
+    }
+L_43:
+    r_eax = *(int*)((int)this + (r_ebx * 4));
+    if (r_eax == 3) {
+        *(int*)((int)this + (r_ebx * 4)) = 2;
+        return;
+    }
+    if (r_eax != 2) {
+        *(int*)((int)this + (r_ebx * 4)) = 1;
+    }
+L_68:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0008C390 (0x0008C390, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -23664,6 +29003,116 @@ void Class_0008C590::sub_0008C590()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0008C740 (0x0008C740, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008C740
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008C740 (Proto 0x0008C740, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F550;
+
+class Class_0008C740
+{
+public:
+    Class_0008C740* sub_0008C740();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    bool m_Field14; // +0x14
+    char m_pad15[0x3];
+    int m_Field18; // +0x18
+    bool m_Field1C; // +0x1C
+    char m_pad1D[0x3];
+    int m_Field20; // +0x20
+    bool m_Field24; // +0x24
+};
+
+Class_0008C740* Class_0008C740::sub_0008C740()
+{
+    m_Field04 = DAT_0037F550;
+    m_Field00 = 0;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+    m_Field14 = false;
+    m_Field18 = 0;
+    m_Field1C = false;
+    m_Field20 = 0;
+    m_Field24 = false;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008C960 (0x0008C960, 121 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008C960
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008C960 (Proto 0x0008C960, 121 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_0008C6C0(int);
+
+class Class_0008C960
+{
+public:
+    void sub_0008C960(int a1);
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+    int m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+    float m_Field34; // +0x34
+    float m_Field38; // +0x38
+    float m_Field3C; // +0x3C
+    float m_Field40; // +0x40
+    float m_Field44; // +0x44
+    float m_Field48; // +0x48
+    float m_Field4C; // +0x4C
+};
+
+void Class_0008C960::sub_0008C960(int a1)
+{
+    float t1, t2, t3, t4, t5, t6, t7, t8;
+
+    m_Field20 = *(int*)(a1 + 48);
+    m_Field24 = *(int*)(a1 + 52);
+    m_Field28 = *(int*)(a1 + 56);
+    t1 = *(float*)(a1 + 40);
+    t2 = *(float*)(a1 + 36);
+    t3 = *(float*)(a1 + 32);
+    t4 = *(float*)(a1 + 24);
+    t5 = *(float*)(a1 + 20);
+    t6 = *(float*)(a1 + 16);
+    t7 = *(float*)(a1 + 8);
+    t8 = *(float*)(a1 + 4);
+    m_Field2C = *(int*)a1;
+    m_Field30 = t8;
+    m_Field34 = t7;
+    m_Field38 = t6;
+    m_Field3C = t5;
+    m_Field40 = t4;
+    m_Field44 = t3;
+    m_Field48 = t2;
+    m_Field4C = t1;
+    a1 = (int)(&m_Field20);
+    sub_0008C6C0(a1);
+}
+
+// ============================================================================
 // [VERIFIED] sub_0008CBB0 (0x0008CBB0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -23686,6 +29135,34 @@ void __cdecl sub_0008CBB0(void)
         r_eax = sub_0020E7E0((int)&DAT_004541E0, 12, 4540, 0, 3, (int)DAT_00383D98, 4, 0);
     }
     return;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008CEF0 (0x0008CEF0, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008CEF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008CEF0 (Proto 0x0008CEF0, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0008CEF0
+{
+public:
+    Class_0008CEF0* sub_0008CEF0(float a1, float a2);
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+};
+
+Class_0008CEF0* Class_0008CEF0::sub_0008CEF0(float a1, float a2)
+{
+    m_Field00 = a1;
+    m_Field04 = a2;
+    return this;
 }
 
 // ============================================================================
@@ -24064,6 +29541,32 @@ unsigned short Class_0008E270::sub_0008E270()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0008E380 (0x0008E380, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0008E380
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008E380 (Proto 0x0008E380, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0008E380
+{
+public:
+    unsigned short sub_0008E380();
+    char m_pad00[0x8];
+    unsigned short m_Field08; // +0x08
+};
+
+unsigned short Class_0008E380::sub_0008E380()
+{
+    return m_Field08;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0008E3B0 (0x0008E3B0, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -24087,6 +29590,47 @@ void Class_0008E3B0::sub_0008E3B0(int a1)
 {
     sub_0008E2E0(a1);
     m_Field0C = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008E3D0 (0x0008E3D0, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0008E3D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008E3D0 (Proto 0x0008E3D0, 40 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0008E3D0
+{
+public:
+    int sub_0008E3D0();
+    int m_Field00; // +0x00
+    char m_pad04[0x4];
+    short m_Field08; // +0x08
+    char m_pad0A[0x4];
+    short m_Field0E; // +0x0E
+};
+
+int Class_0008E3D0::sub_0008E3D0()
+{
+    short t1;
+    int t2;
+
+    t1 = m_Field0E;
+    if (m_Field0E >= 0) {
+        if (t1 >= m_Field08) goto L_25;
+        t2 = m_Field00;
+        if (!m_Field00) goto L_25;
+        m_Field0E = (unsigned short)(t1 + 1);
+        return t2 + (((short)t1) * 4);
+    }
+L_25:
+    return 0;
 }
 
 // ============================================================================
@@ -24118,6 +29662,76 @@ int Class_0008E400::sub_0008E400()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0008E4E0 (0x0008E4E0, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0008E4E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008E4E0 (Proto 0x0008E4E0, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0008E4E0
+{
+public:
+    int sub_0008E4E0();
+    int m_Field00; // +0x00
+    char m_pad04[0x4];
+    short m_Field08; // +0x08
+    char m_pad0A[0x4];
+    unsigned short m_Field0E; // +0x0E
+};
+
+int Class_0008E4E0::sub_0008E4E0()
+{
+    int t1;
+
+    m_Field0E = 0;
+    if (m_Field08 > 0) {
+        t1 = m_Field00;
+        if (!m_Field00) goto L_1A;
+        m_Field0E = 1;
+        return t1;
+    }
+L_1A:
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008E600 (0x0008E600, 76 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0008E600
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008E600 (Proto 0x0008E600, 76 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0037CFE0[];
+extern "C" char DAT_0037D8E8[];
+extern "C" char DAT_00383E04[];
+extern "C" int __cdecl sub_002CB041(int, int);
+
+bool __cdecl sub_0008E600(int a1)
+{
+    if (a1) {
+        if (!*(unsigned char*)a1) goto L_48;
+        if (!sub_002CB041(a1, (int)DAT_0037D8E8)) goto L_48;
+        if (!sub_002CB041(a1, (int)DAT_0037CFE0)) goto L_48;
+        if (!sub_002CB041(a1, (int)DAT_00383E04)) goto L_48;
+        return true;
+    }
+L_48:
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0008EEF0 (0x0008EEF0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -24132,6 +29746,98 @@ extern "C" void __cdecl sub_0008EAE0(int, int);
 void __cdecl sub_0008EEF0(int a1)
 {
     sub_0008EAE0(0, a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008F3A0 (0x0008F3A0, 96 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008F3A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008F3A0 (Proto 0x0008F3A0, 96 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_002BC2C0();
+};
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_003836C4;
+extern "C" float DAT_003850D4;
+extern "C" int DAT_003BB940;
+extern "C" int __stdcall sub_002BBEC0(int);
+
+class Class_0008F3A0
+{
+public:
+    Class_0008F3A0* sub_0008F3A0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    int m_Field24; // +0x24
+};
+
+Class_0008F3A0* Class_0008F3A0::sub_0008F3A0()
+{
+    float t1, t2, t3;
+
+    t1 = DAT_003850D4;
+    t2 = DAT_003836C4;
+    m_Field00 = t1;
+    t3 = DAT_0037CE50;
+    m_Field04 = t3;
+    m_Field08 = t3;
+    m_Field0C = t3;
+    m_Field10 = t3;
+    m_Field14 = t3;
+    m_Field18 = t3;
+    m_Field1C = t2;
+    m_Field20 = t3;
+    m_Field24 = ((Object*)sub_002BBEC0(DAT_003BB940))->sub_002BC2C0();
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008F480 (0x0008F480, 27 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008F480
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008F480 (Proto 0x0008F480, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0008F480
+{
+public:
+    Class_0008F480* sub_0008F480();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+Class_0008F480* Class_0008F480::sub_0008F480()
+{
+    m_Field00 = 0;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -24205,6 +29911,343 @@ Class_0008F4D0 *Class_0008F4D0::sub_0008F4D0()
     m_Field04 = 0.0f;
     m_Field08 = 0.0f;
     m_Field0C = 1.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008F500 (0x0008F500, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008F500
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008F500 (Proto 0x0008F500, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F534;
+
+class Class_0008F500
+{
+public:
+    void sub_0008F500();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+};
+
+void Class_0008F500::sub_0008F500()
+{
+    m_Field00 = m_Field04 * DAT_0037F534;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008F520 (0x0008F520, 83 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008F520
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008F520 (Proto 0x0008F520, 83 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" void __cdecl sub_0009D020(void);
+
+class Class_0008F520
+{
+public:
+    Class_0008F520* sub_0008F520();
+    char m_pad00[0x14];
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+    float m_Field34; // +0x34
+    float m_Field38; // +0x38
+    float m_Field3C; // +0x3C
+    float m_Field40; // +0x40
+};
+
+Class_0008F520* Class_0008F520::sub_0008F520()
+{
+    float t2;
+
+    sub_0009D020();
+    t2 = DAT_0037CE50;
+    m_Field14 = t2;
+    m_Field18 = t2;
+    m_Field1C = t2;
+    m_Field20 = t2;
+    m_Field24 = t2;
+    m_Field28 = t2;
+    m_Field2C = 0.0f;
+    m_Field30 = 0.0f;
+    m_Field34 = 0.0f;
+    m_Field38 = 0.0f;
+    m_Field3C = 0.0f;
+    m_Field40 = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008F630 (0x0008F630, 73 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008F630
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008F630 (Proto 0x0008F630, 73 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_0008F630
+{
+public:
+    Class_0008F630* sub_0008F630();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+};
+
+Class_0008F630* Class_0008F630::sub_0008F630()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = t1;
+    m_Field04 = t1;
+    m_Field08 = t1;
+    m_Field0C = t1;
+    m_Field10 = t1;
+    m_Field14 = t1;
+    m_Field18 = 0.0f;
+    m_Field1C = 0.0f;
+    m_Field20 = 0.0f;
+    m_Field24 = 0.0f;
+    m_Field28 = 0.0f;
+    m_Field2C = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008F710 (0x0008F710, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008F710
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008F710 (Proto 0x0008F710, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F534;
+extern "C" float DAT_00384640;
+
+class Class_0008F710
+{
+public:
+    void sub_0008F710();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+};
+
+void Class_0008F710::sub_0008F710()
+{
+    float t1, t2, t3;
+
+    t1 = m_Field00;
+    t2 = m_Field08;
+    m_Field04 = t1 * DAT_00384640;
+    t3 = DAT_0037F534;
+    m_Field0C = t2 * t3;
+    m_Field14 = m_Field10 * t3;
+    m_Field1C = m_Field18 * t3;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008F760 (0x0008F760, 90 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008F760
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008F760 (Proto 0x0008F760, 90 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037D4D0;
+extern "C" float DAT_0037F688;
+extern "C" float DAT_00383E54;
+extern "C" float DAT_003850E8;
+extern "C" float DAT_003915CC;
+
+class Class_0008F760
+{
+public:
+    Class_0008F760* sub_0008F760();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+};
+
+Class_0008F760* Class_0008F760::sub_0008F760()
+{
+    m_Field04 = DAT_003850E8;
+    m_Field08 = DAT_0037F688;
+    m_Field0C = DAT_003915CC;
+    m_Field10 = DAT_0037D4D0;
+    m_Field14 = 0.0f;
+    m_Field18 = 0.0f;
+    m_Field1C = 0.0f;
+    m_Field20 = 0.0f;
+    m_Field00 = DAT_00383E54;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008F7C0 (0x0008F7C0, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008F7C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008F7C0 (Proto 0x0008F7C0, 72 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003850E8;
+extern "C" void __cdecl sub_0008F580(void);
+
+class Class_0008F7C0
+{
+public:
+    Class_0008F7C0* sub_0008F7C0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+    char m_pad2C[0xC];
+    float m_Field38; // +0x38
+    float m_Field3C; // +0x3C
+    float m_Field40; // +0x40
+};
+
+Class_0008F7C0* Class_0008F7C0::sub_0008F7C0()
+{
+    float t1;
+
+    t1 = DAT_003850E8;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 0;
+    m_Field10 = 0;
+    m_Field28 = 0;
+    m_Field38 = t1;
+    m_Field3C = t1;
+    m_Field40 = t1;
+    m_Field14 = 0 | -1;
+    m_Field18 = 0 | -1;
+    m_Field1C = 0 | -1;
+    m_Field20 = 0 | -1;
+    m_Field24 = 0 | -1;
+    sub_0008F580();
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0008F820 (0x0008F820, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0008F820
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0008F820 (Proto 0x0008F820, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037E6C0;
+extern "C" float DAT_00383E58;
+extern "C" float DAT_00383E5C;
+extern "C" float DAT_00383E60;
+
+class Class_0008F820
+{
+public:
+    Class_0008F820* sub_0008F820();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+};
+
+Class_0008F820* Class_0008F820::sub_0008F820()
+{
+    float t2, t4;
+
+    m_Field00 = DAT_00383E60;
+    t2 = DAT_0037E6C0;
+    m_Field08 = t2;
+    m_Field10 = t2;
+    m_Field18 = t2;
+    m_Field04 = DAT_00383E5C;
+    t4 = DAT_00383E58;
+    m_Field0C = t4;
+    m_Field14 = t4;
+    m_Field1C = t4;
     return this;
 }
 
@@ -24530,6 +30573,187 @@ void Class_0008FE90::sub_0008FE90()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00091360 (0x00091360, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00091360
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00091360 (Proto 0x00091360, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00091360
+{
+public:
+    void sub_00091360();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    bool m_Field24; // +0x24
+};
+
+void Class_00091360::sub_00091360()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+    m_Field14 = 0.0f;
+    m_Field18 = 0.0f;
+    m_Field1C = 0.0f;
+    m_Field20 = 0.0f;
+    m_Field24 = false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000913A0 (0x000913A0, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000913A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000913A0 (Proto 0x000913A0, 28 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000913A0
+{
+public:
+    void sub_000913A0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+void Class_000913A0::sub_000913A0()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000913C0 (0x000913C0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000913C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000913C0 (Proto 0x000913C0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000913C0
+{
+public:
+    void sub_000913C0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+};
+
+void Class_000913C0::sub_000913C0()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000913D0 (0x000913D0, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000913D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000913D0 (Proto 0x000913D0, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000913D0
+{
+public:
+    Class_000913D0* sub_000913D0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    bool m_Field24; // +0x24
+};
+
+Class_000913D0* Class_000913D0::sub_000913D0()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+    m_Field14 = 0.0f;
+    m_Field18 = 0.0f;
+    m_Field1C = 0.0f;
+    m_Field20 = 0.0f;
+    m_Field24 = false;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00091410 (0x00091410, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00091410
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00091410 (Proto 0x00091410, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00091410
+{
+public:
+    Class_00091410* sub_00091410();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_00091410* Class_00091410::sub_00091410()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00091430 (0x00091430, 15 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -24555,6 +30779,38 @@ Class_00091430* Class_00091430::sub_00091430()
     m_Field04 = (int)this | -1;
     m_Field08 = (int)this | -1;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00091440 (0x00091440, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00091440
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00091440 (Proto 0x00091440, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00091440
+{
+public:
+    int sub_00091440();
+    char m_pad00[0xE4];
+    bool m_FieldE4; // +0xE4
+    bool m_FieldE5; // +0xE5
+};
+
+int Class_00091440::sub_00091440()
+{
+    if (!m_FieldE4) {
+        if (m_FieldE5) goto L_17;
+        return 0;
+    }
+L_17:
+    return 1;
 }
 
 // ============================================================================
@@ -24597,6 +30853,185 @@ int Class_00091770::sub_00091770()
         } while (r_edi);
     }
     return r_ebp;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00091910 (0x00091910, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00091910
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00091910 (Proto 0x00091910, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00091910
+{
+public:
+    int sub_00091910();
+};
+
+int Class_00091910::sub_00091910()
+{
+    int r_eax, r_ecx, r_edx;
+
+    r_ecx = (int)this;
+    r_edx = *(int*)(r_ecx + 12);
+    r_eax = 0;
+    if (r_edx > 0) {
+        r_ecx = *(int*)(r_ecx + 16);
+        r_ecx += 588;
+        do {
+            if (*(unsigned char*)r_ecx) {
+                r_eax += 1;
+            }
+            r_ecx += 592;
+            r_edx -= 1;
+        } while (r_edx);
+    }
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00091980 (0x00091980, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00091980
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00091980 (Proto 0x00091980, 67 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00091980
+{
+public:
+    int sub_00091980(float a1, int a2);
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+int Class_00091980::sub_00091980(float a1, int a2)
+{
+    m_Field00 = (*(float*)a2 * a1) + m_Field00;
+    m_Field04 = (*(float*)(a2 + 4) * a1) + m_Field04;
+    m_Field08 = (*(float*)(a2 + 8) * a1) + m_Field08;
+    return a2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00092620 (0x00092620, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00092620
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00092620 (Proto 0x00092620, 25 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0009D020(void);
+
+class Class_00092620
+{
+public:
+    Class_00092620* sub_00092620();
+    char m_pad00[0x14];
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+};
+
+Class_00092620* Class_00092620::sub_00092620()
+{
+    sub_0009D020();
+    m_Field14 = 0.0f;
+    m_Field18 = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00092640 (0x00092640, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00092640
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00092640 (Proto 0x00092640, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0038ADF0;
+
+class Class_00092640
+{
+public:
+    Class_00092640* sub_00092640();
+    float m_Field00; // +0x00
+};
+
+Class_00092640* Class_00092640::sub_00092640()
+{
+    m_Field00 = DAT_0038ADF0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00092680 (0x00092680, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00092680
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00092680 (Proto 0x00092680, 66 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037CE60;
+extern "C" float DAT_00383F40;
+
+class Class_00092680
+{
+public:
+    Class_00092680* sub_00092680();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+};
+
+Class_00092680* Class_00092680::sub_00092680()
+{
+    float t1, t2, t3;
+
+    t1 = DAT_00383F40;
+    t2 = DAT_0037CE60;
+    m_Field00 = t1;
+    m_Field08 = t1;
+    t3 = DAT_0037CE50;
+    m_Field04 = t2;
+    m_Field0C = t2;
+    m_Field10 = t3;
+    m_Field14 = t3;
+    m_Field18 = t3;
+    m_Field1C = t3;
+    return this;
 }
 
 // ============================================================================
@@ -24878,6 +31313,183 @@ int Class_00092A70::sub_00092A70()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00092AA0 (0x00092AA0, 65 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00092AA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00092AA0 (Proto 0x00092AA0, 65 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F534;
+
+class Class_00092AA0
+{
+public:
+    void sub_00092AA0();
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+    float m_Field34; // +0x34
+};
+
+void Class_00092AA0::sub_00092AA0()
+{
+    float t1;
+
+    t1 = DAT_0037F534;
+    m_Field18 = m_Field1C * t1;
+    m_Field20 = m_Field24 * t1;
+    m_Field2C = m_Field28 * t1;
+    m_Field34 = m_Field30 * t1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00092BE0 (0x00092BE0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00092BE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00092BE0 (Proto 0x00092BE0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F534;
+
+class Class_00092BE0
+{
+public:
+    void sub_00092BE0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    char m_pad08[0x4];
+    float m_Field0C; // +0x0C
+};
+
+void Class_00092BE0::sub_00092BE0()
+{
+    float t1;
+
+    t1 = DAT_0037F534;
+    m_Field04 = m_Field00 * t1;
+    m_Field0C = m_Field0C * t1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000936A0 (0x000936A0, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000936A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000936A0 (Proto 0x000936A0, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F534;
+
+class Class_000936A0
+{
+public:
+    void sub_000936A0();
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+};
+
+void Class_000936A0::sub_000936A0()
+{
+    float t1;
+
+    t1 = DAT_0037F534;
+    m_Field20 = m_Field1C * t1;
+    m_Field28 = m_Field24 * t1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00093730 (0x00093730, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00093730
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00093730 (Proto 0x00093730, 116 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_00382F64;
+extern "C" float DAT_00383F58;
+extern "C" float DAT_003850E8;
+
+class Class_00093730
+{
+public:
+    Class_00093730* sub_00093730();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+    float m_Field34; // +0x34
+    float m_Field38; // +0x38
+    bool m_Field3C; // +0x3C
+};
+
+Class_00093730* Class_00093730::sub_00093730()
+{
+    float t1, t2, t3, t4;
+
+    t1 = DAT_0037CE50;
+    t2 = DAT_00382F64;
+    m_Field00 = t1;
+    m_Field04 = t1;
+    m_Field08 = t1;
+    m_Field0C = t1;
+    m_Field10 = t1;
+    m_Field14 = t1;
+    m_Field1C = 0.0f;
+    m_Field24 = 0.0f;
+    m_Field28 = 0.0f;
+    m_Field30 = t2;
+    t3 = DAT_003850E8;
+    m_Field18 = 0.0f;
+    m_Field20 = 0.0f;
+    m_Field2C = 0.0f;
+    t4 = DAT_00383F58;
+    m_Field38 = t3;
+    m_Field3C = false;
+    m_Field34 = t4;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00094E50 (0x00094E50, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -24911,6 +31523,99 @@ void Class_00094E50::sub_00094E50()
 {
     m_FieldB4.sub_000AC6A0();
     m_Field5C.sub_000ACB70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00094E70 (0x00094E70, 97 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00094E70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00094E70 (Proto 0x00094E70, 97 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    void sub_000AA7F0();
+};
+
+struct Field18
+{
+    void sub_000913C0();
+};
+
+struct Field20
+{
+    void sub_00097410();
+};
+
+struct Field2C
+{
+    void sub_00097560();
+};
+
+struct Field54
+{
+    void sub_00097480();
+};
+
+struct Field5C
+{
+    void sub_000AB5A0();
+};
+
+struct FieldB4
+{
+    void sub_000AAE40();
+};
+
+struct FieldBC
+{
+    void sub_000A9840();
+};
+
+class Class_00094E70
+{
+public:
+    void sub_00094E70();
+    char m_pad00[0x8];
+    Field08 m_Field08; // +0x08
+    char m_pad09[0xF];
+    Field18 m_Field18; // +0x18
+    char m_pad19[0x7];
+    Field20 m_Field20; // +0x20
+    char m_pad21[0xB];
+    Field2C m_Field2C; // +0x2C
+    char m_pad2D[0x27];
+    Field54 m_Field54; // +0x54
+    char m_pad55[0x7];
+    Field5C m_Field5C; // +0x5C
+    char m_pad5D[0x57];
+    FieldB4 m_FieldB4; // +0xB4
+    char m_padB5[0x7];
+    FieldBC m_FieldBC; // +0xBC
+    char m_padBD[0x33];
+    FieldBC m_FieldF0; // +0xF0
+    char m_padF1[0x33];
+    float m_Field124; // +0x124
+};
+
+void Class_00094E70::sub_00094E70()
+{
+    m_Field08.sub_000AA7F0();
+    m_Field18.sub_000913C0();
+    m_Field20.sub_00097410();
+    m_Field2C.sub_00097560();
+    m_Field54.sub_00097480();
+    m_Field5C.sub_000AB5A0();
+    m_FieldB4.sub_000AAE40();
+    m_FieldBC.sub_000A9840();
+    m_FieldF0.sub_000A9840();
+    m_Field124 = 0.0f;
 }
 
 // ============================================================================
@@ -25131,6 +31836,38 @@ Class_00095530* Class_00095530::sub_00095530(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00097410 (0x00097410, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00097410
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00097410 (Proto 0x00097410, 25 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_00097410
+{
+public:
+    void sub_00097410();
+    float m_Field00; // +0x00
+    bool m_Field04; // +0x04
+    char m_pad05[0x3];
+    float m_Field08; // +0x08
+};
+
+void Class_00097410::sub_00097410()
+{
+    m_Field00 = DAT_0037CE50;
+    m_Field04 = false;
+    m_Field08 = 0.0f;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00097430 (0x00097430, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
 // ============================================================================
@@ -25181,6 +31918,70 @@ bool Class_00097450::sub_00097450(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00097460 (0x00097460, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00097460
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00097460 (Proto 0x00097460, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+
+class Class_00097460
+{
+public:
+    Class_00097460* sub_00097460();
+    bool m_Field00; // +0x00
+    bool m_Field01; // +0x01
+    char m_pad02[0x2];
+    float m_Field04; // +0x04
+};
+
+Class_00097460* Class_00097460::sub_00097460()
+{
+    float t1;
+
+    t1 = DAT_0037CE60;
+    m_Field00 = true;
+    m_Field01 = true;
+    m_Field04 = t1;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00097480 (0x00097480, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00097480
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00097480 (Proto 0x00097480, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+
+class Class_00097480
+{
+public:
+    void sub_00097480();
+    char m_pad00[0x4];
+    float m_Field04; // +0x04
+};
+
+void Class_00097480::sub_00097480()
+{
+    m_Field04 = DAT_0037CE60;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00097490 (0x00097490, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
 // ============================================================================
@@ -25227,6 +32028,39 @@ public:
 bool Class_000974D0::sub_000974D0() const
 {
     return m_Field04 > 0.0f;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000974F0 (0x000974F0, 27 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000974F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000974F0 (Proto 0x000974F0, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_000974F0
+{
+public:
+    Class_000974F0* sub_000974F0();
+    float m_Field00; // +0x00
+    bool m_Field04; // +0x04
+    char m_pad05[0x3];
+    float m_Field08; // +0x08
+};
+
+Class_000974F0* Class_000974F0::sub_000974F0()
+{
+    m_Field00 = DAT_0037CE50;
+    m_Field04 = false;
+    m_Field08 = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -25292,6 +32126,79 @@ void __cdecl sub_00097CD0(int a1, int a2, int a3, int a4)
     if (((bool (__cdecl*)(int, int))a4)(a2, a1)) {
         sub_00097930(a2, a1);
     }
+}
+
+// ============================================================================
+// [VERIFIED] sub_00098990 (0x00098990, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00098990
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00098990 (Proto 0x00098990, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F534;
+
+class Class_00098990
+{
+public:
+    void sub_00098990();
+    char m_pad00[0xC];
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+void Class_00098990::sub_00098990()
+{
+    m_Field10 = m_Field0C * DAT_0037F534;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00098AF0 (0x00098AF0, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00098AF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00098AF0 (Proto 0x00098AF0, 59 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_00383E54;
+extern "C" float DAT_003850E8;
+extern "C" float DAT_003895FC;
+extern "C" float DAT_003AB1D0;
+
+class Class_00098AF0
+{
+public:
+    Class_00098AF0* sub_00098AF0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_00098AF0* Class_00098AF0::sub_00098AF0()
+{
+    float t1, t2, t4;
+
+    t1 = DAT_003895FC;
+    t2 = DAT_003AB1D0;
+    m_Field00 = t1;
+    m_Field08 = t1;
+    m_Field0C = DAT_003850E8;
+    t4 = DAT_00383E54;
+    m_Field04 = t2;
+    m_Field10 = t4;
+    return this;
 }
 
 // ============================================================================
@@ -25424,6 +32331,175 @@ void Class_00098D40::sub_00098D40()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00098D70 (0x00098D70, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00098D70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00098D70 (Proto 0x00098D70, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_000AE210(int, int);
+};
+
+class Class_00098D70
+{
+public:
+    void sub_00098D70(int a1);
+    int m_Field00; // +0x00
+};
+
+void Class_00098D70::sub_00098D70(int a1)
+{
+    int t1;
+
+    t1 = m_Field00;
+    if (m_Field00) {
+        ((Object*)(int)this + 32)->sub_000AE210(a1, t1);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_00098D90 (0x00098D90, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00098D90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00098D90 (Proto 0x00098D90, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field00
+{
+    int sub_00084DA0();
+};
+
+struct Field20
+{
+    void sub_000AB1D0(int);
+    void sub_000AB260(int);
+};
+
+class Class_00098D90
+{
+public:
+    void sub_00098D90();
+    Field00* m_Field00; // +0x00
+    char m_pad04[0x1C];
+    Field20 m_Field20; // +0x20
+};
+
+void Class_00098D90::sub_00098D90()
+{
+    if (m_Field00) {
+        m_Field20.sub_000AB1D0(m_Field00->sub_00084DA0());
+        m_Field20.sub_000AB260(1);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_00099830 (0x00099830, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00099830
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00099830 (Proto 0x00099830, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00099830
+{
+public:
+    Class_00099830* sub_00099830();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+};
+
+Class_00099830* Class_00099830::sub_00099830()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00099840 (0x00099840, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00099840
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00099840 (Proto 0x00099840, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD94;
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037D4D0;
+
+float __cdecl sub_00099840(float a1)
+{
+    if (a1 > DAT_0037D4D0) {
+        return DAT_0037CE50;
+    }
+    return DAT_0037CD94;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00099A40 (0x00099A40, 31 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00099A40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00099A40 (Proto 0x00099A40, 31 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00384028[];
+
+class Class_00099A40
+{
+public:
+    Class_00099A40* sub_00099A40();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    bool m_Field08; // +0x08
+    char m_pad09[0x3];
+    bool m_Field0C; // +0x0C
+    char m_pad0D[0x3];
+    int m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+Class_00099A40* Class_00099A40::sub_00099A40()
+{
+    m_Field04 = 0;
+    m_Field08 = false;
+    m_Field0C = false;
+    m_Field00 = (int)DAT_00384028;
+    m_Field10 = 0;
+    m_Field14 = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00099A60 (0x00099A60, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -25450,6 +32526,54 @@ int Class_00099A60::sub_00099A60(int a1, int a2)
     m_Field08 = false;
     m_Field10 = a1;
     return a2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00099A80 (0x00099A80, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00099A80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00099A80 (Proto 0x00099A80, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" char DAT_00384034[];
+
+class Class_00099A80
+{
+public:
+    Class_00099A80* sub_00099A80();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    bool m_Field08; // +0x08
+    char m_pad09[0x3];
+    int m_Field0C; // +0x0C
+    bool m_Field10; // +0x10
+    bool m_Field11; // +0x11
+    char m_pad12[0x2];
+    float m_Field14; // +0x14
+    bool m_Field18; // +0x18
+};
+
+Class_00099A80* Class_00099A80::sub_00099A80()
+{
+    float t1;
+
+    t1 = DAT_0037CE60;
+    m_Field04 = 0;
+    m_Field08 = false;
+    m_Field00 = (int)DAT_00384034;
+    m_Field0C = 0;
+    m_Field10 = false;
+    m_Field11 = false;
+    m_Field14 = t1;
+    m_Field18 = true;
+    return this;
 }
 
 // ============================================================================
@@ -25538,6 +32662,59 @@ int Class_00099AE0::sub_00099AE0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00099B00 (0x00099B00, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00099B00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00099B00 (Proto 0x00099B00, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" char DAT_0038404C[];
+
+class Class_00099B00
+{
+public:
+    Class_00099B00* sub_00099B00();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    bool m_Field08; // +0x08
+    char m_pad09[0x3];
+    bool m_Field0C; // +0x0C
+    char m_pad0D[0x3];
+    int m_Field10; // +0x10
+    bool m_Field14; // +0x14
+    bool m_Field15; // +0x15
+    char m_pad16[0x2];
+    float m_Field18; // +0x18
+    bool m_Field1C; // +0x1C
+    bool m_Field1D; // +0x1D
+};
+
+Class_00099B00* Class_00099B00::sub_00099B00()
+{
+    float t1;
+
+    t1 = DAT_0037CE60;
+    m_Field04 = 0;
+    m_Field08 = false;
+    m_Field0C = false;
+    m_Field00 = (int)DAT_0038404C;
+    m_Field10 = 0;
+    m_Field14 = false;
+    m_Field15 = false;
+    m_Field18 = t1;
+    m_Field1C = false;
+    m_Field1D = false;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0009AC50 (0x0009AC50, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -25567,6 +32744,86 @@ Class_0009AC50* Class_0009AC50::sub_0009AC50()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0009AC60 (0x0009AC60, 47 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0009AC60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009AC60 (Proto 0x0009AC60, 47 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00043DB0(int, int, int);
+
+class Class_0009AC60
+{
+public:
+    int sub_0009AC60(int a1);
+    char m_pad00[0x80];
+    int m_Field80; // +0x80
+    int m_Field84; // +0x84
+};
+
+int Class_0009AC60::sub_0009AC60(int a1)
+{
+    int r_eax, t1;
+
+    r_eax = m_Field80;
+    if (r_eax) {
+        if (!*(unsigned char*)r_eax) goto L_2C;
+        t1 = m_Field84;
+        if (!m_Field84) goto L_2C;
+        if (!a1) goto L_2C;
+        r_eax = sub_00043DB0(r_eax, t1, a1);
+    }
+L_2C:
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009AC90 (0x0009AC90, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0009AC90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009AC90 (Proto 0x0009AC90, 38 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00043E30(int, int);
+
+class Class_0009AC90
+{
+public:
+    int sub_0009AC90();
+    char m_pad00[0x80];
+    int m_Field80; // +0x80
+    int m_Field84; // +0x84
+};
+
+int Class_0009AC90::sub_0009AC90()
+{
+    int r_eax, t1, t2;
+
+    r_eax = 0;
+    t1 = m_Field80;
+    if (m_Field80) {
+        if (!*(unsigned char*)t1) goto L_25;
+        t2 = m_Field84;
+        if (!m_Field84) goto L_25;
+        r_eax = sub_00043E30(t1, t2);
+    }
+L_25:
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0009ACC0 (0x0009ACC0, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -25587,6 +32844,294 @@ public:
 void* Class_0009ACC0::sub_0009ACC0()
 {
     return &m_Field80;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009ACD0 (0x0009ACD0, 84 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009ACD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009ACD0 (Proto 0x0009ACD0, 84 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_002BC2C0();
+};
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037CE6C;
+extern "C" float DAT_00384198;
+extern "C" float DAT_0038419C;
+extern "C" int DAT_003BB940;
+extern "C" int __stdcall sub_002BBEC0(int);
+
+class Class_0009ACD0
+{
+public:
+    Class_0009ACD0* sub_0009ACD0();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+Class_0009ACD0* Class_0009ACD0::sub_0009ACD0()
+{
+    float t4;
+
+    m_Field04 = DAT_0037CE6C;
+    m_Field08 = DAT_0038419C;
+    m_Field0C = DAT_00384198;
+    t4 = DAT_0037CE50;
+    m_Field10 = t4;
+    m_Field14 = t4;
+    m_Field00 = ((Object*)sub_002BBEC0(DAT_003BB940))->sub_002BC2C0();
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009AD30 (0x0009AD30, 58 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009AD30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009AD30 (Proto 0x0009AD30, 58 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037E6C0;
+extern "C" float DAT_00382B18;
+extern "C" float DAT_00384180;
+
+class Class_0009AD30
+{
+public:
+    Class_0009AD30* sub_0009AD30();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+Class_0009AD30* Class_0009AD30::sub_0009AD30()
+{
+    m_Field00 = DAT_00384180;
+    m_Field04 = DAT_00382B18;
+    m_Field08 = DAT_0037E6C0;
+    m_Field0C = 0;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field1C = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009AD70 (0x0009AD70, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009AD70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009AD70 (Proto 0x0009AD70, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_00384640;
+
+class Class_0009AD70
+{
+public:
+    void sub_0009AD70();
+    char m_pad00[0x4];
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+void Class_0009AD70::sub_0009AD70()
+{
+    m_Field08 = m_Field04 * DAT_00384640;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009AD90 (0x0009AD90, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009AD90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009AD90 (Proto 0x0009AD90, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_003850D4;
+
+class Class_0009AD90
+{
+public:
+    Class_0009AD90* sub_0009AD90();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+Class_0009AD90* Class_0009AD90::sub_0009AD90()
+{
+    float t1, t2;
+
+    t1 = DAT_003850D4;
+    m_Field00 = t1;
+    m_Field04 = t1;
+    t2 = DAT_0037CE50;
+    m_Field08 = t2;
+    m_Field0C = t2;
+    m_Field10 = t2;
+    m_Field14 = t2;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009ADC0 (0x0009ADC0, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009ADC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009ADC0 (Proto 0x0009ADC0, 42 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037D4B8;
+extern "C" float DAT_00390144;
+
+class Class_0009ADC0
+{
+public:
+    Class_0009ADC0* sub_0009ADC0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+Class_0009ADC0* Class_0009ADC0::sub_0009ADC0()
+{
+    float t2;
+
+    m_Field08 = DAT_0037D4B8;
+    t2 = DAT_00390144;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field0C = t2;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009ADF0 (0x0009ADF0, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009ADF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009ADF0 (Proto 0x0009ADF0, 75 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037CE60;
+
+class Class_0009ADF0
+{
+public:
+    Class_0009ADF0* sub_0009ADF0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    int m_Field28; // +0x28
+};
+
+Class_0009ADF0* Class_0009ADF0::sub_0009ADF0()
+{
+    float t1, t2;
+
+    t1 = DAT_0037CE50;
+    t2 = DAT_0037CE60;
+    m_Field00 = t1;
+    m_Field04 = t1;
+    m_Field08 = t1;
+    m_Field0C = t1;
+    m_Field10 = t1;
+    m_Field14 = t1;
+    m_Field18 = t1;
+    m_Field1C = t1;
+    m_Field20 = t2;
+    m_Field24 = t1;
+    m_Field28 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009AE40 (0x0009AE40, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0009AE40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009AE40 (Proto 0x0009AE40, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_00393980;
+
+class Class_0009AE40
+{
+public:
+    float sub_0009AE40(int a1, int a2);
+};
+
+float Class_0009AE40::sub_0009AE40(int a1, int a2)
+{
+    unsigned char t1;
+
+    t1 = *(unsigned char*)((a1 << 4) + a2 + a1 + (int)this + 360);
+    a1 = *(unsigned char*)((a1 << 4) + a2 + a1 + (int)this + 360);
+    return ((float)a1) * DAT_00393980;
 }
 
 // ============================================================================
@@ -25736,6 +33281,45 @@ Class_0009AF40* Class_0009AF40::sub_0009AF40()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0009AF60 (0x0009AF60, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009AF60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009AF60 (Proto 0x0009AF60, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" void __cdecl sub_0007D0F0(void);
+
+class Class_0009AF60
+{
+public:
+    Class_0009AF60* sub_0009AF60();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+};
+
+Class_0009AF60* Class_0009AF60::sub_0009AF60()
+{
+    sub_0007D0F0();
+    m_Field18 = DAT_0037CE60;
+    m_Field14 = 0;
+    m_Field1C = 0.0f;
+    m_Field20 = 0.0f;
+    m_Field24 = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0009AFA0 (0x0009AFA0, 42 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -25797,6 +33381,49 @@ void Class_0009AFD0::sub_0009AFD0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0009AFE0 (0x0009AFE0, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009AFE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009AFE0 (Proto 0x0009AFE0, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field38
+{
+    void sub_0007D390();
+};
+
+extern "C" float DAT_0037CE60;
+extern "C" void __cdecl sub_0007CE40(void);
+
+class Class_0009AFE0
+{
+public:
+    Class_0009AFE0* sub_0009AFE0();
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    Field38 m_Field38; // +0x38
+    char m_pad39[0x47];
+    float m_Field80; // +0x80
+};
+
+Class_0009AFE0* Class_0009AFE0::sub_0009AFE0()
+{
+    sub_0007CE40();
+    m_Field30 = -1;
+    m_Field34 = 0;
+    m_Field38.sub_0007D390();
+    m_Field80 = DAT_0037CE60;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0009B020 (0x0009B020, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -25842,6 +33469,301 @@ Class_0009B030* Class_0009B030::sub_0009B030()
 {
     m_Field00 = 65535;
     m_Field04 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009B040 (0x0009B040, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009B040
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009B040 (Proto 0x0009B040, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037CE60;
+
+class Class_0009B040
+{
+public:
+    Class_0009B040* sub_0009B040();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+};
+
+Class_0009B040* Class_0009B040::sub_0009B040()
+{
+    m_Field00 = DAT_0037CE60;
+    m_Field04 = DAT_0037CE50;
+    m_Field08 = 0.0f;
+    m_Field0C = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009B070 (0x0009B070, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009B070
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009B070 (Proto 0x0009B070, 46 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" float DAT_00383ED4;
+
+class Class_0009B070
+{
+public:
+    Class_0009B070* sub_0009B070();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_0009B070* Class_0009B070::sub_0009B070()
+{
+    float t2;
+
+    m_Field00 = DAT_00383ED4;
+    t2 = DAT_0037CE60;
+    m_Field04 = t2;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    m_Field10 = t2;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009B0A0 (0x0009B0A0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009B0A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009B0A0 (Proto 0x0009B0A0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_00384640;
+
+class Class_0009B0A0
+{
+public:
+    void sub_0009B0A0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+void Class_0009B0A0::sub_0009B0A0()
+{
+    float t1;
+
+    t1 = DAT_00384640;
+    m_Field04 = m_Field00 * t1;
+    m_Field0C = m_Field08 * t1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009B140 (0x0009B140, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009B140
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009B140 (Proto 0x0009B140, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_0009B140
+{
+public:
+    Class_0009B140* sub_0009B140();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+};
+
+Class_0009B140* Class_0009B140::sub_0009B140()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = t1;
+    m_Field04 = t1;
+    m_Field08 = t1;
+    m_Field0C = t1;
+    m_Field10 = t1;
+    m_Field14 = t1;
+    m_Field18 = t1;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009B170 (0x0009B170, 110 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009B170
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009B170 (Proto 0x0009B170, 110 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037F5E4;
+extern "C" float DAT_003841A0;
+extern "C" float DAT_0038ADF0;
+extern "C" float DAT_003915CC;
+
+class Class_0009B170
+{
+public:
+    Class_0009B170* sub_0009B170();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+};
+
+Class_0009B170* Class_0009B170::sub_0009B170()
+{
+    float t1, t2, t4, t5;
+
+    t1 = DAT_003915CC;
+    t2 = DAT_003841A0;
+    m_Field00 = t1;
+    m_Field04 = 0.0f;
+    m_Field08 = DAT_0038ADF0;
+    t4 = DAT_0037F5E4;
+    m_Field0C = t4;
+    m_Field10 = t4;
+    m_Field18 = t4;
+    t5 = DAT_0037CE50;
+    m_Field14 = t2;
+    m_Field1C = t5;
+    m_Field20 = t5;
+    m_Field24 = t5;
+    m_Field28 = t5;
+    m_Field2C = t5;
+    m_Field30 = t5;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009B1E0 (0x0009B1E0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009B1E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009B1E0 (Proto 0x0009B1E0, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+
+class Class_0009B1E0
+{
+public:
+    Class_0009B1E0* sub_0009B1E0();
+    char m_pad00[0x8];
+    int m_Field08; // +0x08
+};
+
+Class_0009B1E0* Class_0009B1E0::sub_0009B1E0()
+{
+    int r_edx, r_esi;
+    float t1;
+
+    t1 = DAT_0037CE60;
+    r_edx = (int)(&m_Field08);
+    r_esi = 30;
+    do {
+        *(int*)(r_edx + -8) = 0;
+        *(int*)(r_edx + -4) = 0;
+        *(float*)r_edx = t1;
+        r_edx += 12;
+        r_esi -= 1;
+    } while (r_esi);
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009B210 (0x0009B210, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009B210
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009B210 (Proto 0x0009B210, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0009B210
+{
+public:
+    Class_0009B210* sub_0009B210();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+};
+
+Class_0009B210* Class_0009B210::sub_0009B210()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+    m_Field14 = 0.0f;
+    m_Field18 = 0.0f;
+    m_Field1C = 0.0f;
     return this;
 }
 
@@ -25935,6 +33857,86 @@ Class_0009B2D0* Class_0009B2D0::sub_0009B2D0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0009B2E0 (0x0009B2E0, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009B2E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009B2E0 (Proto 0x0009B2E0, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_00390DF4;
+
+class Class_0009B2E0
+{
+public:
+    Class_0009B2E0* sub_0009B2E0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+};
+
+Class_0009B2E0* Class_0009B2E0::sub_0009B2E0()
+{
+    float t2;
+
+    m_Field10 = DAT_00390DF4;
+    t2 = DAT_0037CE50;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 0;
+    m_Field14 = t2;
+    m_Field18 = t2;
+    m_Field1C = t2;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009B320 (0x0009B320, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009B320
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009B320 (Proto 0x0009B320, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003841AC;
+extern "C" float DAT_003915CC;
+extern "C" float DAT_003A1754;
+
+class Class_0009B320
+{
+public:
+    Class_0009B320* sub_0009B320();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+Class_0009B320* Class_0009B320::sub_0009B320()
+{
+    m_Field00 = DAT_003915CC;
+    m_Field04 = DAT_003A1754;
+    m_Field08 = DAT_003841AC;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0009B350 (0x0009B350, 15 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -25956,6 +33958,45 @@ Class_0009B350* Class_0009B350::sub_0009B350()
 {
     m_Field00 = 0;
     m_Field04 = 65535;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009B360 (0x0009B360, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009B360
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009B360 (Proto 0x0009B360, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003AB1D0;
+
+class Class_0009B360
+{
+public:
+    Class_0009B360* sub_0009B360();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_0009B360* Class_0009B360::sub_0009B360()
+{
+    float t1;
+
+    t1 = DAT_003AB1D0;
+    m_Field0C = 0;
+    m_Field10 = t1;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = 0;
     return this;
 }
 
@@ -25997,6 +34038,415 @@ Class_0009BE30* Class_0009BE30::sub_0009BE30()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0009BE60 (0x0009BE60, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0009BE60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009BE60 (Proto 0x0009BE60, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0009B410(int, int);
+};
+
+class Class_0009BE60
+{
+public:
+    int sub_0009BE60(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+int Class_0009BE60::sub_0009BE60(int a1)
+{
+    int r_eax;
+
+    r_eax = m_Field04;
+    if (r_eax) {
+        if (!*(unsigned char*)r_eax) goto L_21;
+        r_eax = ((Object*)a1)->sub_0009B410(r_eax, 1);
+        m_Field00 = r_eax;
+        return r_eax;
+    }
+L_21:
+    m_Field00 = -1;
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009BEE0 (0x0009BEE0, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009BEE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009BEE0 (Proto 0x0009BEE0, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F534;
+
+class Class_0009BEE0
+{
+public:
+    void sub_0009BEE0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+void Class_0009BEE0::sub_0009BEE0()
+{
+    float t1;
+
+    t1 = DAT_0037F534;
+    m_Field00 = m_Field04 * t1;
+    m_Field08 = m_Field0C * t1;
+    m_Field10 = m_Field14 * t1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009BF60 (0x0009BF60, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0009BF60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009BF60 (Proto 0x0009BF60, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0009B410(int, int);
+};
+
+class Class_0009BF60
+{
+public:
+    void sub_0009BF60(int a1);
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void Class_0009BF60::sub_0009BF60(int a1)
+{
+    int t1;
+
+    if (a1) {
+        t1 = m_Field08;
+        if (!m_Field08) goto L_26;
+        if (!*(unsigned char*)t1) goto L_26;
+        m_Field04 = ((Object*)a1)->sub_0009B410(t1, 1);
+        return;
+    }
+L_26:
+    m_Field04 = -1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009BFA0 (0x0009BFA0, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0009BFA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009BFA0 (Proto 0x0009BFA0, 63 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field38
+{
+    int sub_0007D3B0(int);
+};
+
+struct Object
+{
+    int sub_0009B410(int, int);
+};
+
+extern "C" void __cdecl sub_0007CE90(void);
+
+class Class_0009BFA0
+{
+public:
+    int sub_0009BFA0(int a1);
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    Field38 m_Field38; // +0x38
+};
+
+int Class_0009BFA0::sub_0009BFA0(int a1)
+{
+    int r_eax;
+
+    sub_0007CE90();
+    r_eax = m_Field34;
+    if (r_eax) {
+        if (!*(unsigned char*)r_eax) goto L_27;
+        r_eax = ((Object*)a1)->sub_0009B410(r_eax, 1);
+        m_Field30 = r_eax;
+        return r_eax;
+    }
+L_27:
+    r_eax = a1;
+    r_eax = *(int*)(r_eax + 4);
+    if (r_eax) {
+        r_eax = m_Field38.sub_0007D3B0(r_eax);
+    }
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009BFE0 (0x0009BFE0, 119 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009BFE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009BFE0 (Proto 0x0009BFE0, 119 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field38
+{
+    int sub_0007D3B0(int);
+};
+
+struct Object
+{
+    int sub_0009B410(int, int);
+};
+
+extern "C" float DAT_0038ADF0;
+extern "C" void __stdcall sub_0007D850(int);
+
+class Class_0009BFE0
+{
+public:
+    int sub_0009BFE0(int a1, int a2);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    char m_pad24[0xC];
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    Field38 m_Field38; // +0x38
+};
+
+int Class_0009BFE0::sub_0009BFE0(int a1, int a2)
+{
+    int r_eax, r_edi;
+    float t1;
+
+    t1 = DAT_0038ADF0;
+    r_eax = a1;
+    r_edi = a2;
+    m_Field18 = *(float*)(r_edi + 12) + t1;
+    m_Field1C = *(float*)(r_edi + 16) + t1;
+    m_Field20 = *(float*)(r_edi + 20) + t1;
+    sub_0007D850(a1);
+    r_eax = m_Field34;
+    if (r_eax) {
+        if (!*(unsigned char*)r_eax) goto L_62;
+        r_eax = ((Object*)a2)->sub_0009B410(r_eax, 1);
+        m_Field30 = r_eax;
+        return r_eax;
+    }
+L_62:
+    r_edi = *(int*)(r_edi + 4);
+    if (r_edi) {
+        r_eax = m_Field38.sub_0007D3B0(r_edi);
+    }
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009C060 (0x0009C060, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009C060
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009C060 (Proto 0x0009C060, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F534;
+extern "C" float DAT_00384640;
+
+class Class_0009C060
+{
+public:
+    void sub_0009C060();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+void Class_0009C060::sub_0009C060()
+{
+    m_Field00 = m_Field04 * DAT_00384640;
+    m_Field08 = m_Field0C * DAT_0037F534;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009C110 (0x0009C110, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009C110
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009C110 (Proto 0x0009C110, 40 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+
+class Class_0009C110
+{
+public:
+    Class_0009C110* sub_0009C110();
+    float m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+Class_0009C110* Class_0009C110::sub_0009C110()
+{
+    float t1;
+
+    t1 = DAT_0037CE60;
+    m_Field00 = t1;
+    m_Field04 = 0;
+    m_Field08 = t1;
+    m_Field0C = 0;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field1C = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009CD80 (0x0009CD80, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0009CD80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009CD80 (Proto 0x0009CD80, 80 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0009B480(int, int);
+};
+
+class Class_0009CD80
+{
+public:
+    int sub_0009CD80(int a1, int a2);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+int Class_0009CD80::sub_0009CD80(int a1, int a2)
+{
+    int r_eax;
+
+    m_Field00 = -1;
+    m_Field04 = -1;
+    r_eax = *(int*)a1;
+    if (r_eax) {
+        if (!*(unsigned char*)r_eax) goto L_31;
+        r_eax = ((Object*)a2)->sub_0009B480(r_eax, 0);
+        m_Field00 = r_eax;
+    }
+L_31:
+    r_eax = *(int*)(a1 + 4);
+    if (r_eax) {
+        if (!*(unsigned char*)r_eax) goto L_4A;
+        r_eax = ((Object*)a2)->sub_0009B480(r_eax, 0);
+        m_Field04 = r_eax;
+    }
+L_4A:
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009D020 (0x0009D020, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009D020
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009D020 (Proto 0x0009D020, 62 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD90;
+extern "C" float DAT_0037CE60;
+extern "C" float DAT_00384014;
+extern "C" float DAT_003841BC;
+
+class Class_0009D020
+{
+public:
+    Class_0009D020* sub_0009D020();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_0009D020* Class_0009D020::sub_0009D020()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = DAT_0037CE60;
+    m_Field08 = DAT_00384014;
+    m_Field0C = DAT_0037CD90;
+    m_Field10 = DAT_003841BC;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0009D1E0 (0x0009D1E0, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -26030,6 +34480,148 @@ void Class_0009D1E0::sub_0009D1E0()
     }
     m_Field08 = 0;
     m_Field84 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009DA50 (0x0009DA50, 89 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0009DA50
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009DA50 (Proto 0x0009DA50, 89 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_0009D460(int, int);
+};
+
+extern "C" char DAT_0037D2DC[];
+extern "C" int __cdecl sub_00015450(int);
+extern "C" void __stdcall sub_0007D870(int, int);
+
+class Class_0009DA50
+{
+public:
+    void sub_0009DA50(int a1, int a2);
+    int m_Field00; // +0x00
+    bool m_Field04; // +0x04
+    char m_pad05[0xB];
+    Field10 m_Field10; // +0x10
+};
+
+void Class_0009DA50::sub_0009DA50(int a1, int a2)
+{
+    int r_edi, t2, t3, t4;
+
+    sub_0007D870(a1, (int)DAT_0037D2DC);
+    r_edi = 0;
+    t2 = m_Field00;
+    if (m_Field04) {
+        if (!t2) goto L_46;
+        if (!*(unsigned char*)t2) goto L_46;
+        t3 = sub_00015450(t2);
+        if (!t3) goto L_46;
+        if (*(unsigned short*)(t3 + 48) != 1) goto L_46;
+        t4 = *(int*)*(int*)(t3 + 36);
+        if (!*(int*)*(int*)(t3 + 36)) goto L_46;
+        r_edi = t4;
+    }
+L_46:
+    m_Field10.sub_0009D460(r_edi, a2);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009DAB0 (0x0009DAB0, 90 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009DAB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009DAB0 (Proto 0x0009DAB0, 90 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037E6C0;
+extern "C" float DAT_00383E58;
+extern "C" float DAT_003841D8;
+extern "C" float DAT_003A1754;
+
+class Class_0009DAB0
+{
+public:
+    Class_0009DAB0* sub_0009DAB0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+};
+
+Class_0009DAB0* Class_0009DAB0::sub_0009DAB0()
+{
+    float t3, t5;
+
+    m_Field04 = DAT_0037E6C0;
+    m_Field14 = DAT_003A1754;
+    t3 = DAT_0037CE50;
+    m_Field18 = t3;
+    m_Field1C = t3;
+    m_Field20 = t3;
+    m_Field00 = DAT_00383E58;
+    t5 = DAT_003841D8;
+    m_Field0C = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field10 = t5;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009DB50 (0x0009DB50, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0009DB50
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009DB50 (Proto 0x0009DB50, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_00382B18;
+extern "C" float DAT_00383F68;
+extern "C" float DAT_003841CC;
+extern "C" float DAT_003850D4;
+
+class Class_0009DB50
+{
+public:
+    Class_0009DB50* sub_0009DB50();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+Class_0009DB50* Class_0009DB50::sub_0009DB50()
+{
+    m_Field04 = DAT_003850D4;
+    m_Field0C = DAT_00382B18;
+    m_Field00 = DAT_00383F68;
+    m_Field08 = DAT_003841CC;
+    return this;
 }
 
 // ============================================================================
@@ -26738,6 +35330,48 @@ L_12:
 }
 
 // ============================================================================
+// [VERIFIED] sub_0009F210 (0x0009F210, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0009F210
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009F210 (Proto 0x0009F210, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0009F210
+{
+public:
+    int sub_0009F210();
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    char m_pad10[0x220];
+    bool m_Field230; // +0x230
+    char m_pad231[0xB];
+    bool m_Field23C; // +0x23C
+};
+
+int Class_0009F210::sub_0009F210()
+{
+    int t1, t2;
+
+    t1 = m_Field0C;
+    if (m_Field0C) {
+        t2 = *(int*)(t1 + 4);
+        if (!*(int*)(t1 + 4)) goto L_2F;
+        if (!*(int*)(t2 + 28)) goto L_2F;
+        if (!m_Field230) goto L_2F;
+        if (!m_Field23C) goto L_2F;
+        return 1;
+    }
+L_2F:
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0009F250 (0x0009F250, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -27011,6 +35645,57 @@ int Class_0009F3E0::sub_0009F3E0(int a1)
 {
     m_Field464 = a1;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0009F5D0 (0x0009F5D0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0009F5D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0009F5D0 (Proto 0x0009F5D0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(int);
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09(int);
+};
+
+extern "C" int __cdecl sub_00041830(int);
+
+class Class_0009F5D0
+{
+public:
+    void sub_0009F5D0();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+void Class_0009F5D0::sub_0009F5D0()
+{
+    int t1, t2;
+
+    t1 = m_Field14;
+    if (m_Field14) {
+        t2 = sub_00041830(t1);
+        if (t2) {
+            ((Object*)t2)->vfunc_09(1);
+            ((Object*)t2)->vfunc_06(0);
+        }
+    }
 }
 
 // ============================================================================
@@ -27415,6 +36100,144 @@ int Class_0009FE50::sub_0009FE50()
     }
 L_38:
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000A0290 (0x000A0290, 82 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000A0290
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000A0290 (Proto 0x000A0290, 82 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0009B800(int);
+};
+
+extern "C" int DAT_00462DD4;
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_000A0290
+{
+public:
+    void sub_000A0290(int a1);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    char m_pad10[0x174];
+    int m_Field184; // +0x184
+};
+
+void Class_000A0290::sub_000A0290(int a1)
+{
+    int t4, t5, t6;
+
+    if (sub_00028120(m_Field184)) {
+        if (*(int*)(sub_00028120(m_Field184) + 16) != DAT_00462DD4) goto L_4E;
+        t4 = m_Field0C;
+        if (!m_Field0C) goto L_4E;
+        t5 = *(int*)(t4 + 4);
+        if (!*(int*)(t4 + 4)) goto L_4E;
+        t6 = *(int*)(t5 + 20);
+        if (!*(int*)(t5 + 20)) goto L_4E;
+        ((Object*)t6)->sub_0009B800(a1);
+        return;
+    }
+L_4E:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000A02F0 (0x000A02F0, 84 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000A02F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000A02F0 (Proto 0x000A02F0, 84 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00(int);
+};
+
+extern "C" char DAT_00384428[];
+extern "C" int __cdecl sub_00028120(int);
+extern "C" void __cdecl sub_00066030(int, int, int);
+
+class Class_000A02F0
+{
+public:
+    void sub_000A02F0(int a1);
+    char m_pad00[0x8];
+    int m_Field08; // +0x08
+    char m_pad0C[0x454];
+    unsigned char m_Field460; // +0x460
+    char m_pad461[0x3];
+    int m_Field464; // +0x464
+};
+
+void Class_000A02F0::sub_000A02F0(int a1)
+{
+    int t1;
+
+    if (m_Field460 != ((unsigned char)a1)) {
+        t1 = m_Field464;
+        m_Field460 = (unsigned char)a1;
+        if (m_Field464) {
+            ((Object*)t1)->vfunc_00(a1);
+        }
+        if (!sub_00028120(m_Field08)) goto L_50;
+        sub_00066030(sub_00028120(m_Field08), 1, (int)DAT_00384428);
+    }
+L_50:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000A0DE0 (0x000A0DE0, 101 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000A0DE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000A0DE0 (Proto 0x000A0DE0, 101 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000412A0(int, int);
+extern "C" void __cdecl sub_00041390(int);
+extern "C" int __cdecl sub_00044190(int, int, int, int, int, int);
+extern "C" int __cdecl sub_00058B90(int);
+
+void __stdcall sub_000A0DE0(int a1, int a2, int a3, int a4, int a5, int a6)
+{
+    int t3;
+
+    if (*(int*)a1) {
+        sub_00041390(a1);
+        *(int*)a1 = 0;
+    }
+    if (a2) {
+        if (!*(unsigned char*)a2) goto L_60;
+        t3 = sub_00044190(a2, a4, a5, a6, sub_00058B90(a3), 0);
+        *(int*)a1 = t3;
+        if (!t3) goto L_60;
+        sub_000412A0(t3, 0);
+    }
+L_60:
+    ;
 }
 
 // ============================================================================
@@ -27850,6 +36673,38 @@ Class_000A4C90* Class_000A4C90::sub_000A4C90()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000A83E0 (0x000A83E0, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000A83E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000A83E0 (Proto 0x000A83E0, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000A83E0
+{
+public:
+    int sub_000A83E0();
+    char m_pad00[0x40];
+    bool m_Field40; // +0x40
+    bool m_Field41; // +0x41
+};
+
+int Class_000A83E0::sub_000A83E0()
+{
+    if (!m_Field40) {
+        if (m_Field41) goto L_11;
+        return 0;
+    }
+L_11:
+    return 1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000A8400 (0x000A8400, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -27985,6 +36840,88 @@ void Class_000A84A0::sub_000A84A0(int a1, int a2)
 {
     a2 = 0;
     ((Object*)(int)this + 16)->sub_000ABB30(a1, a2);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000A8670 (0x000A8670, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000A8670
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000A8670 (Proto 0x000A8670, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_000A8670
+{
+public:
+    int sub_000A8670();
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+int Class_000A8670::sub_000A8670()
+{
+    if (DAT_0037CE50 > m_Field10) {
+        return 1;
+    }
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000A8910 (0x000A8910, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000A8910
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000A8910 (Proto 0x000A8910, 75 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000A8910
+{
+public:
+    Class_000A8910* sub_000A8910();
+    int m_Field00; // +0x00
+    bool m_Field04; // +0x04
+    char m_pad05[0x3];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+};
+
+Class_000A8910* Class_000A8910::sub_000A8910()
+{
+    m_Field00 = 0;
+    m_Field04 = true;
+    m_Field08 = 0;
+    m_Field0C = -1;
+    m_Field18 = 0.0f;
+    m_Field14 = 0.0f;
+    m_Field10 = 0.0f;
+    m_Field24 = 0.0f;
+    m_Field20 = 0.0f;
+    m_Field1C = 0.0f;
+    m_Field28 = 0.0f;
+    m_Field2C = 0.0f;
+    m_Field30 = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -28146,6 +37083,103 @@ void Class_000A9670::sub_000A9670()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000AA790 (0x000AA790, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AA790
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AA790 (Proto 0x000AA790, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000AA790
+{
+public:
+    void sub_000AA790();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    bool m_Field08; // +0x08
+};
+
+void Class_000AA790::sub_000AA790()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AA7B0 (0x000AA7B0, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AA7B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AA7B0 (Proto 0x000AA7B0, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+
+class Class_000AA7B0
+{
+public:
+    void sub_000AA7B0();
+    bool m_Field00; // +0x00
+    char m_pad01[0x3];
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+};
+
+void Class_000AA7B0::sub_000AA7B0()
+{
+    float t1;
+
+    m_Field04 = 0.0f;
+    t1 = DAT_0037CE60;
+    m_Field00 = false;
+    m_Field08 = t1;
+    m_Field0C = false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AA7D0 (0x000AA7D0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AA7D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AA7D0 (Proto 0x000AA7D0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000AA7D0
+{
+public:
+    Class_000AA7D0* sub_000AA7D0();
+    float m_Field00; // +0x00
+    char m_pad04[0x4];
+    float m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+};
+
+Class_000AA7D0* Class_000AA7D0::sub_000AA7D0()
+{
+    m_Field00 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = false;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000AA7F0 (0x000AA7F0, 23 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
 // ============================================================================
@@ -28178,6 +37212,36 @@ void Class_000AA7F0::sub_000AA7F0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000AA810 (0x000AA810, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AA810
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AA810 (Proto 0x000AA810, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000AA810
+{
+public:
+    Class_000AA810* sub_000AA810();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    bool m_Field08; // +0x08
+};
+
+Class_000AA810* Class_000AA810::sub_000AA810()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = false;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000AA830 (0x000AA830, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -28207,6 +37271,191 @@ Class_000AA830* Class_000AA830::sub_000AA830(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000AA930 (0x000AA930, 76 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000AA930
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AA930 (Proto 0x000AA930, 76 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000AA930
+{
+public:
+    virtual int vfunc_00(int);
+    bool sub_000AA930(int a1);
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+bool Class_000AA930::sub_000AA930(int a1)
+{
+    int r_ecx, r_edi, t3;
+
+    r_ecx = (int)this;
+    if (!a1) {
+        return false;
+    }
+    r_edi = 0;
+    if (m_Field08 > 0) {
+        do {
+            r_ecx = (int)this;
+            if (a1 == vfunc_00(r_edi)) {
+                r_ecx = m_Field04;
+                if (!*(unsigned char*)(r_edi + r_ecx)) goto L_44;
+            }
+            t3 = m_Field08;
+            r_edi += 1;
+        } while (r_edi < t3);
+    }
+    return false;
+L_44:
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AAA00 (0x000AAA00, 58 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AAA00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AAA00 (Proto 0x000AAA00, 58 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_003845A4;
+
+class Class_000AAA00
+{
+public:
+    Class_000AAA00* sub_000AAA00();
+    float m_Field00; // +0x00
+    bool m_Field04; // +0x04
+    char m_pad05[0x3];
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+};
+
+Class_000AAA00* Class_000AAA00::sub_000AAA00()
+{
+    float t2;
+
+    m_Field00 = DAT_003845A4;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    t2 = DAT_0037CE50;
+    m_Field04 = false;
+    m_Field10 = t2;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field1C = 0;
+    m_Field20 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AAA40 (0x000AAA40, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AAA40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AAA40 (Proto 0x000AAA40, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_003845A4;
+
+class Class_000AAA40
+{
+public:
+    void sub_000AAA40();
+    float m_Field00; // +0x00
+    bool m_Field04; // +0x04
+    char m_pad05[0x3];
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+void Class_000AAA40::sub_000AAA40()
+{
+    float t2;
+
+    m_Field00 = DAT_003845A4;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    t2 = DAT_0037CE50;
+    m_Field04 = false;
+    m_Field10 = t2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AAAF0 (0x000AAAF0, 58 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AAAF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AAAF0 (Proto 0x000AAAF0, 58 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003845A4;
+
+class Class_000AAAF0
+{
+public:
+    Class_000AAAF0* sub_000AAAF0();
+    float m_Field00; // +0x00
+    int m_Field04; // +0x04
+    bool m_Field08; // +0x08
+    char m_pad09[0x3];
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+};
+
+Class_000AAAF0* Class_000AAAF0::sub_000AAAF0()
+{
+    m_Field00 = DAT_003845A4;
+    m_Field04 = -1;
+    m_Field08 = false;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field1C = 0;
+    m_Field20 = 0;
+    m_Field24 = 0;
+    m_Field28 = 0;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000AABF0 (0x000AABF0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -28229,6 +37478,44 @@ Class_000AABF0* Class_000AABF0::sub_000AABF0()
     m_Field00 = 0;
     m_Field04 = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AACA0 (0x000AACA0, 51 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000AACA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AACA0 (Proto 0x000AACA0, 51 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000126D0(int, int);
+extern "C" int __cdecl sub_00015680(int, int);
+
+class Class_000AACA0
+{
+public:
+    void sub_000AACA0(int a1, int a2);
+    int m_Field00; // +0x00
+};
+
+void Class_000AACA0::sub_000AACA0(int a1, int a2)
+{
+    int t1;
+
+    if (a1) {
+        if (!*(unsigned char*)a1) goto L_2F;
+        t1 = sub_00015680(a1, 0);
+        m_Field00 = t1;
+        if (!t1) goto L_2F;
+        sub_000126D0(t1, a2);
+    }
+L_2F:
+    ;
 }
 
 // ============================================================================
@@ -28493,6 +37780,43 @@ int Class_000AAE70::sub_000AAE70(int a1)
         r_eax = sub_00041490(r_eax, 1, a1);
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AAE90 (0x000AAE90, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AAE90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AAE90 (Proto 0x000AAE90, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00041490(int, int, float);
+
+class Class_000AAE90
+{
+public:
+    void sub_000AAE90(float a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+void Class_000AAE90::sub_000AAE90(float a1)
+{
+    int t1, t2;
+
+    t1 = m_Field04;
+    if (m_Field04) {
+        t2 = m_Field00;
+        if (!m_Field00) goto L_29;
+        sub_00041490(t1, 0, *(float*)(t2 + 12) * a1);
+    }
+L_29:
+    ;
 }
 
 // ============================================================================
@@ -28888,6 +38212,305 @@ int Class_000AB670::sub_000AB670(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000AB6D0 (0x000AB6D0, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AB6D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AB6D0 (Proto 0x000AB6D0, 9 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000AB6D0
+{
+public:
+    void sub_000AB6D0();
+    char m_pad00[0x8];
+    float m_Field08; // +0x08
+};
+
+void Class_000AB6D0::sub_000AB6D0()
+{
+    m_Field08 = 0.0f;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AB870 (0x000AB870, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AB870
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AB870 (Proto 0x000AB870, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000AB870
+{
+public:
+    Class_000AB870* sub_000AB870();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    bool m_Field08; // +0x08
+};
+
+Class_000AB870* Class_000AB870::sub_000AB870()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = true;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AB9E0 (0x000AB9E0, 31 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AB9E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AB9E0 (Proto 0x000AB9E0, 31 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+
+class Class_000AB9E0
+{
+public:
+    Class_000AB9E0* sub_000AB9E0();
+    bool m_Field00; // +0x00
+    char m_pad01[0x3];
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+};
+
+Class_000AB9E0* Class_000AB9E0::sub_000AB9E0()
+{
+    float t1;
+
+    m_Field04 = 0.0f;
+    t1 = DAT_0037CE60;
+    m_Field00 = false;
+    m_Field08 = t1;
+    m_Field0C = false;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000ABA00 (0x000ABA00, 93 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000ABA00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000ABA00 (Proto 0x000ABA00, 93 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_000ABA00
+{
+public:
+    Class_000ABA00* sub_000ABA00();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+    float m_Field34; // +0x34
+    float m_Field38; // +0x38
+    float m_Field3C; // +0x3C
+};
+
+Class_000ABA00* Class_000ABA00::sub_000ABA00()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = t1;
+    m_Field04 = t1;
+    m_Field08 = t1;
+    m_Field0C = t1;
+    m_Field10 = t1;
+    m_Field14 = t1;
+    m_Field18 = 0.0f;
+    m_Field1C = 0.0f;
+    m_Field20 = 0.0f;
+    m_Field24 = 0.0f;
+    m_Field28 = 0.0f;
+    m_Field2C = 0.0f;
+    m_Field30 = t1;
+    m_Field34 = 0.0f;
+    m_Field38 = 0.0f;
+    m_Field3C = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000ABA60 (0x000ABA60, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000ABA60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000ABA60 (Proto 0x000ABA60, 25 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000ABA60
+{
+public:
+    Class_000ABA60* sub_000ABA60();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+Class_000ABA60* Class_000ABA60::sub_000ABA60()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000ABC70 (0x000ABC70, 89 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000ABC70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000ABC70 (Proto 0x000ABC70, 89 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    int sub_00097830(int);
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+};
+
+extern "C" float DAT_003845A4;
+
+class Class_000ABC70
+{
+public:
+    void sub_000ABC70();
+    float m_Field00; // +0x00
+    int m_Field04; // +0x04
+    bool m_Field08; // +0x08
+    char m_pad09[0x3];
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    Field14* m_Field14; // +0x14
+    char m_pad18[0x4];
+    int m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+};
+
+void Class_000ABC70::sub_000ABC70()
+{
+    int t2, t3, t4, t6;
+
+    m_Field00 = DAT_003845A4;
+    if (!m_Field14) goto L_46;
+    t2 = m_Field04;
+    t3 = m_Field14->sub_00097830(0x42C80000);
+    m_Field04 = t3;
+    if (t3 >= 0) {
+        if (t3 == t2) goto L_45;
+        t4 = m_Field1C;
+        if (m_Field1C) {
+            ((Object*)t4)->vfunc_00();
+        }
+        t6 = m_Field20;
+        if (!m_Field20) goto L_45;
+        ((Object*)t6)->vfunc_00();
+    }
+L_45:
+L_46:
+    m_Field08 = false;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000ABE60 (0x000ABE60, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000ABE60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000ABE60 (Proto 0x000ABE60, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_000ABE60
+{
+public:
+    Class_000ABE60* sub_000ABE60();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+};
+
+Class_000ABE60* Class_000ABE60::sub_000ABE60()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = 0;
+    m_Field04 = t1;
+    m_Field08 = t1;
+    m_Field0C = t1;
+    m_Field10 = t1;
+    m_Field14 = t1;
+    m_Field18 = t1;
+    m_Field1C = t1;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000ABEA0 (0x000ABEA0, 26 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -28953,6 +38576,64 @@ int Class_000ABF00::sub_000ABF00(int a1)
     }
 L_22:
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000ABF90 (0x000ABF90, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000ABF90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000ABF90 (Proto 0x000ABF90, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_000ABF90
+{
+public:
+    Class_000ABF90* sub_000ABF90();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+    char m_pad0D[0x3];
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+    bool m_Field34; // +0x34
+};
+
+Class_000ABF90* Class_000ABF90::sub_000ABF90()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = false;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    m_Field18 = t1;
+    m_Field1C = t1;
+    m_Field20 = t1;
+    m_Field24 = t1;
+    m_Field28 = t1;
+    m_Field2C = t1;
+    m_Field30 = t1;
+    m_Field34 = false;
+    return this;
 }
 
 // ============================================================================
@@ -29032,6 +38713,169 @@ int Class_000AC240::sub_000AC240()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000AC260 (0x000AC260, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AC260
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AC260 (Proto 0x000AC260, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+
+class Class_000AC260
+{
+public:
+    Class_000AC260* sub_000AC260();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+};
+
+Class_000AC260* Class_000AC260::sub_000AC260()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = DAT_0037CE60;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AC6E0 (0x000AC6E0, 128 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000AC6E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AC6E0 (Proto 0x000AC6E0, 128 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00042090(int);
+extern "C" void __cdecl sub_000420F0(int, int);
+extern "C" void __cdecl sub_000421B0(int, int);
+
+class Class_000AC6E0
+{
+public:
+    void sub_000AC6E0(bool a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+void Class_000AC6E0::sub_000AC6E0(bool a1)
+{
+    int r_eax, r_ecx;
+
+    r_ecx = (int)this;
+    r_eax = m_Field00;
+    if (r_eax) {
+        r_ecx = *(int*)(r_eax + 4);
+        if (!r_ecx) goto L_1E;
+        r_ecx = m_Field04;
+        if (r_ecx < 0) goto L_1E;
+        r_ecx = 1;
+        goto L_20;
+    }
+L_1E:
+    r_ecx = 0;
+L_20:
+    if (a1 == ((unsigned char)r_ecx)) goto L_7C;
+    if (a1) {
+        if (!r_eax) goto L_7C;
+        r_eax = *(int*)(r_eax + 4);
+        if (!r_eax) goto L_7C;
+        r_eax = sub_00042090(r_eax);
+        m_Field04 = r_eax;
+        return;
+    }
+    if (r_eax) {
+        r_eax = *(int*)(r_eax + 4);
+        if (!r_eax) goto L_63;
+        r_ecx = m_Field04;
+        if (r_ecx < 0) goto L_63;
+        sub_000421B0(r_eax, r_ecx);
+    }
+L_63:
+    r_eax = m_Field04;
+    r_ecx = m_Field00;
+    sub_000420F0(*(int*)(r_ecx + 4), r_eax);
+    m_Field04 = -1;
+L_7C:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AC840 (0x000AC840, 88 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000AC840
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AC840 (Proto 0x000AC840, 88 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01(int);
+};
+
+extern "C" void __cdecl sub_00015590(int);
+
+class Class_000AC840
+{
+public:
+    void sub_000AC840();
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    char m_pad08[0x4];
+    int m_Field0C; // +0x0C
+};
+
+void Class_000AC840::sub_000AC840()
+{
+    int r_ebx, r_esi, t1, t3, t5;
+
+    t1 = m_Field04;
+    if (m_Field04) {
+        sub_00015590(t1);
+        m_Field04 = 0;
+    }
+    r_esi = (int)(&m_Field0C);
+    r_ebx = 30;
+    do {
+        t3 = *(int*)r_esi;
+        if (*(int*)r_esi) {
+            ((Object*)t3)->vfunc_01(1);
+            *(int*)r_esi = 0;
+        }
+        r_esi += 4;
+        r_ebx -= 1;
+    } while (r_ebx);
+    t5 = m_Field04;
+    if (m_Field04) {
+        sub_00015590(t5);
+        m_Field04 = 0;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_000AC9B0 (0x000AC9B0, 38 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -29092,6 +38936,98 @@ void Class_000ACD60::sub_000ACD60()
         sub_00041390((int)this);
         m_Field00 = 0;
     }
+}
+
+// ============================================================================
+// [VERIFIED] sub_000ACDE0 (0x000ACDE0, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000ACDE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000ACDE0 (Proto 0x000ACDE0, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+
+class Class_000ACDE0
+{
+public:
+    Class_000ACDE0* sub_000ACDE0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+Class_000ACDE0* Class_000ACDE0::sub_000ACDE0()
+{
+    float t1;
+
+    t1 = DAT_0037CE60;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = t1;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AD630 (0x000AD630, 71 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000AD630
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AD630 (Proto 0x000AD630, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    void sub_002BA820();
+};
+
+struct Object
+{
+    void sub_00012020(int);
+};
+
+class Class_000AD630
+{
+public:
+    void sub_000AD630();
+    void sub_000ABF30(int);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    Field08* m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+    char m_pad0D[0x27];
+    bool m_Field34; // +0x34
+};
+
+void Class_000AD630::sub_000AD630()
+{
+    int t2, t3;
+
+    if (m_Field0C) {
+        if (m_Field34) goto L_45;
+        if (*(unsigned char*)m_Field08 & 1) {
+            m_Field08->sub_002BA820();
+        }
+        t2 = m_Field00;
+        if (!m_Field00) goto L_45;
+        if (!m_Field04) goto L_45;
+        t3 = *(int*)t2;
+        m_Field34 = true;
+        sub_000ABF30(0);
+        ((Object*)t3)->sub_00012020(1);
+    }
+L_45:
+    ;
 }
 
 // ============================================================================
@@ -29172,6 +39108,88 @@ bool Class_000ADE70::sub_000ADE70(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000AECE0 (0x000AECE0, 73 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000AECE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AECE0 (Proto 0x000AECE0, 73 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00011CC0();
+};
+
+class Class_000AECE0
+{
+public:
+    void sub_000AECE0(int a1, int a2);
+    void sub_000AAC00(int, int);
+    void sub_000AE040(int);
+    int m_Field00; // +0x00
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    char m_pad0C[0x4];
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+};
+
+void Class_000AECE0::sub_000AECE0(int a1, int a2)
+{
+    int t2;
+
+    if (a1) {
+        m_Field14 = *(int*)(a1 + 16);
+        sub_000AAC00(a1, a2);
+        t2 = m_Field00;
+        if (!m_Field00) goto L_44;
+        if (!*(bool*)(a1 + 20)) goto L_44;
+        m_Field08 = *(int*)(((Object*)*(int*)t2)->sub_00011CC0() + 44);
+        sub_000AE040(m_Field10);
+    }
+L_44:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AED30 (0x000AED30, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000AED30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AED30 (Proto 0x000AED30, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045930C;
+extern "C" void __cdecl sub_00025160(int);
+
+void __cdecl sub_000AED30(void)
+{
+    int r_esi, t1, t2;
+
+    r_esi = DAT_0045930C;
+    t1 = DAT_0045930C;
+    if (DAT_0045930C) {
+        *(int*)(t1 + 4) = *(int*)t1;
+        t2 = *(int*)r_esi;
+        if (*(int*)r_esi) {
+            sub_00025160(t2);
+        }
+        sub_00025160(r_esi);
+    }
+    DAT_0045930C = 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000AEFA0 (0x000AEFA0, 32 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -29212,6 +39230,119 @@ void Class_000AF240::sub_000AF240(float value)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000AF280 (0x000AF280, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AF280
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AF280 (Proto 0x000AF280, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_00393980;
+
+class Class_000AF280
+{
+public:
+    int sub_000AF280();
+    char m_pad00[0x1B4];
+    float m_Field1B4; // +0x1B4
+    char m_pad1B8[0x40];
+    bool m_Field1F8; // +0x1F8
+};
+
+int Class_000AF280::sub_000AF280()
+{
+    if (!m_Field1F8) {
+        if (DAT_00393980 > m_Field1B4) goto L_1E;
+        return 0;
+    }
+L_1E:
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AF2B0 (0x000AF2B0, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000AF2B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AF2B0 (Proto 0x000AF2B0, 63 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field208
+{
+    void sub_000AC2F0(int);
+};
+
+struct Field230
+{
+    void sub_000AC6E0(int);
+};
+
+struct Field238
+{
+    void sub_000AADD0(int);
+};
+
+class Class_000AF2B0
+{
+public:
+    void sub_000AF2B0(int a1);
+    char m_pad00[0x204];
+    unsigned char m_Field204; // +0x204
+    char m_pad205[0x3];
+    Field208 m_Field208; // +0x208
+    char m_pad209[0x27];
+    Field230 m_Field230; // +0x230
+    char m_pad231[0x7];
+    Field238 m_Field238; // +0x238
+};
+
+void Class_000AF2B0::sub_000AF2B0(int a1)
+{
+    if (m_Field204 != ((unsigned char)a1)) {
+        m_Field204 = (unsigned char)a1;
+        m_Field208.sub_000AC2F0(a1);
+        m_Field230.sub_000AC6E0(a1);
+        m_Field238.sub_000AADD0(a1);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AF2F0 (0x000AF2F0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000AF2F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AF2F0 (Proto 0x000AF2F0, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000AF2F0
+{
+public:
+    void sub_000AF2F0(int a1);
+    char m_pad00[0x64];
+    float m_Field64; // +0x64
+};
+
+void Class_000AF2F0::sub_000AF2F0(int a1)
+{
+    m_Field64 = 0.0f;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000AF300 (0x000AF300, 39 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -29247,6 +39378,56 @@ int Class_000AF300::sub_000AF300(int a1)
     }
 L_24:
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000AF330 (0x000AF330, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000AF330
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AF330 (Proto 0x000AF330, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field04
+{
+    int sub_0009F190();
+};
+
+struct Field240
+{
+    void sub_000ADCF0(int, int, int);
+};
+
+class Class_000AF330
+{
+public:
+    void sub_000AF330(int a1);
+    char m_pad00[0x4];
+    Field04* m_Field04; // +0x04
+    char m_pad08[0x1B0];
+    int m_Field1B8; // +0x1B8
+    char m_pad1BC[0x3C];
+    bool m_Field1F8; // +0x1F8
+    char m_pad1F9[0x47];
+    Field240 m_Field240; // +0x240
+};
+
+void Class_000AF330::sub_000AF330(int a1)
+{
+    int t2;
+
+    if (m_Field1F8) {
+        t2 = m_Field04->sub_0009F190();
+        if (!t2) goto L_31;
+        m_Field240.sub_000ADCF0(a1, t2, (int)(&m_Field1B8));
+    }
+L_31:
+    ;
 }
 
 // ============================================================================
@@ -29323,6 +39504,61 @@ float Class_000AF3F0::sub_000AF3F0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000AF400 (0x000AF400, 83 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000AF400
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000AF400 (Proto 0x000AF400, 83 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0009F0A0();
+};
+
+class Class_000AF400
+{
+public:
+    void sub_000AF400(int a1, int a2, int a3);
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    char m_pad0C[0x4];
+    int m_Field10; // +0x10
+    char m_pad14[0x58];
+    int m_Field6C; // +0x6C
+    int m_Field70; // +0x70
+    int m_Field74; // +0x74
+};
+
+void Class_000AF400::sub_000AF400(int a1, int a2, int a3)
+{
+    int t1, t2, t3;
+
+    m_Field04 = a1;
+    m_Field08 = a2;
+    m_Field10 = a3;
+    if (a1) {
+        t1 = ((Object*)a1)->sub_0009F0A0();
+        if (!t1) goto L_4E;
+        t2 = *(int*)(t1 + 8);
+        if (!*(int*)(t1 + 8)) goto L_4E;
+        if (a3 < 0) goto L_4E;
+        t3 = *(int*)(t2 + 24) + (a3 << 6) + 48;
+        m_Field6C = *(int*)(*(int*)(t2 + 24) + (a3 << 6) + 48);
+        m_Field70 = *(int*)(t3 + 4);
+        m_Field74 = *(int*)(t3 + 8);
+    }
+L_4E:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000AFE40 (0x000AFE40, 58 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // What it does: Releases the object held at +0x1FC, if there is one, and clears the slot.
@@ -29394,6 +39630,54 @@ int Class_000AFF00::sub_000AFF00()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000B1FA0 (0x000B1FA0, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B1FA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B1FA0 (Proto 0x000B1FA0, 75 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    int sub_000B4990();
+};
+
+extern "C" float DAT_00393980;
+
+class Class_000B1FA0
+{
+public:
+    void sub_000B1FA0(float a1);
+    void sub_000B0EE0(float, int);
+    char m_pad00[0x8];
+    Field08* m_Field08; // +0x08
+    char m_pad0C[0x1A8];
+    float m_Field1B4; // +0x1B4
+    char m_pad1B8[0x40];
+    bool m_Field1F8; // +0x1F8
+};
+
+void Class_000B1FA0::sub_000B1FA0(float a1)
+{
+    int t4;
+
+    if (m_Field08) {
+        if (m_Field1F8) goto L_47;
+        if (DAT_00393980 > m_Field1B4) goto L_47;
+        t4 = m_Field08->sub_000B4990();
+        if (!t4) goto L_47;
+        sub_000B0EE0(*(float*)(t4 + 8) * a1, t4);
+    }
+L_47:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000B2630 (0x000B2630, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -29415,6 +39699,45 @@ Class_000B2630* Class_000B2630::sub_000B2630()
 {
     m_Field00 = false;
     m_Field01 = false;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B26C0 (0x000B26C0, 35 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B26C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B26C0 (Proto 0x000B26C0, 35 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_000B26C0
+{
+public:
+    Class_000B26C0* sub_000B26C0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_000B26C0* Class_000B26C0::sub_000B26C0()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = t1;
+    m_Field04 = t1;
+    m_Field08 = t1;
+    m_Field0C = t1;
+    m_Field10 = t1;
     return this;
 }
 
@@ -29507,6 +39830,40 @@ void Class_000B2920::sub_000B2920()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000B2A00 (0x000B2A00, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B2A00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B2A00 (Proto 0x000B2A00, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037D4D0;
+extern "C" float DAT_003850D4;
+
+class Class_000B2A00
+{
+public:
+    void sub_000B2A00();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+};
+
+void Class_000B2A00::sub_000B2A00()
+{
+    if (m_Field00 > DAT_0037D4D0) {
+        m_Field04 = DAT_003850D4 / m_Field00;
+        return;
+    }
+    m_Field04 = DAT_0037CE50;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000B2AF0 (0x000B2AF0, 28 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -29538,6 +39895,40 @@ Class_000B2AF0* Class_000B2AF0::sub_000B2AF0()
     m_Field10 = 0 | -1;
     m_Field14 = 0 | -1;
     m_Field18 = 0 | -1;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B2B10 (0x000B2B10, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B2B10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B2B10 (Proto 0x000B2B10, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003A968C;
+
+class Class_000B2B10
+{
+public:
+    Class_000B2B10* sub_000B2B10();
+    float m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+};
+
+Class_000B2B10* Class_000B2B10::sub_000B2B10()
+{
+    m_Field00 = DAT_003A968C;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 0;
     return this;
 }
 
@@ -29663,6 +40054,78 @@ void Class_000B4850::sub_000B4850()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000B48B0 (0x000B48B0, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B48B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B48B0 (Proto 0x000B48B0, 66 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    void sub_000B5200();
+};
+
+struct Field54
+{
+    void sub_000B5240();
+};
+
+struct Field60
+{
+    void sub_000ABA80();
+};
+
+struct Field9C
+{
+    void sub_000AB5A0();
+};
+
+struct FieldF4
+{
+    void sub_000B52F0();
+};
+
+class Class_000B48B0
+{
+public:
+    void sub_000B48B0();
+    char m_pad00[0x8];
+    Field08 m_Field08; // +0x08
+    char m_pad09[0x1B];
+    bool m_Field24; // +0x24
+    char m_pad25[0x1];
+    bool m_Field26; // +0x26
+    char m_pad27[0x1];
+    float m_Field28; // +0x28
+    char m_pad2C[0x28];
+    Field54 m_Field54; // +0x54
+    char m_pad55[0xB];
+    Field60 m_Field60; // +0x60
+    char m_pad61[0x3B];
+    Field9C m_Field9C; // +0x9C
+    char m_pad9D[0x57];
+    FieldF4 m_FieldF4; // +0xF4
+};
+
+void Class_000B48B0::sub_000B48B0()
+{
+    m_Field08.sub_000B5200();
+    m_Field24 = false;
+    m_Field26 = false;
+    m_Field28 = 0.0f;
+    m_Field54.sub_000B5240();
+    m_Field60.sub_000ABA80();
+    m_Field9C.sub_000AB5A0();
+    m_FieldF4.sub_000B52F0();
+}
+
+// ============================================================================
 // [VERIFIED] sub_000B4900 (0x000B4900, 11 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -29754,6 +40217,38 @@ L_12:
 }
 
 // ============================================================================
+// [VERIFIED] sub_000B4950 (0x000B4950, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B4950
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B4950 (Proto 0x000B4950, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000B4950
+{
+public:
+    bool sub_000B4950(bool a1);
+    char m_pad00[0x26];
+    unsigned char m_Field26; // +0x26
+    char m_pad27[0x1];
+    float m_Field28; // +0x28
+};
+
+bool Class_000B4950::sub_000B4950(bool a1)
+{
+    if (a1 != m_Field26) {
+        m_Field28 = 0.0f;
+        m_Field26 = a1;
+    }
+    return a1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000B4970 (0x000B4970, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -29817,6 +40312,190 @@ void Class_000B4A80::sub_000B4A80(int a1)
 {
     m_Field9C.sub_000AB260(a1);
     m_FieldF4.sub_000B5320(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B51D0 (0x000B51D0, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B51D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B51D0 (Proto 0x000B51D0, 33 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000B51D0
+{
+public:
+    Class_000B51D0* sub_000B51D0();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+    bool m_Field0D; // +0x0D
+    char m_pad0E[0x6];
+    float m_Field14; // +0x14
+};
+
+Class_000B51D0* Class_000B51D0::sub_000B51D0()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = false;
+    m_Field0D = false;
+    m_Field14 = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B5200 (0x000B5200, 31 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B5200
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B5200 (Proto 0x000B5200, 31 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000B5200
+{
+public:
+    bool sub_000B5200();
+    float m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+    bool m_Field0D; // +0x0D
+    char m_pad0E[0x6];
+    float m_Field14; // +0x14
+};
+
+bool Class_000B5200::sub_000B5200()
+{
+    m_Field00 = 0.0f;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = false;
+    m_Field0D = false;
+    m_Field14 = 0.0f;
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B5220 (0x000B5220, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B5220
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B5220 (Proto 0x000B5220, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000B5220
+{
+public:
+    Class_000B5220* sub_000B5220();
+    bool m_Field00; // +0x00
+    bool m_Field01; // +0x01
+    bool m_Field02; // +0x02
+    bool m_Field03; // +0x03
+    float m_Field04; // +0x04
+    bool m_Field08; // +0x08
+    bool m_Field09; // +0x09
+};
+
+Class_000B5220* Class_000B5220::sub_000B5220()
+{
+    m_Field00 = false;
+    m_Field01 = false;
+    m_Field02 = false;
+    m_Field03 = false;
+    m_Field04 = 0.0f;
+    m_Field08 = false;
+    m_Field09 = false;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B5240 (0x000B5240, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B5240
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B5240 (Proto 0x000B5240, 25 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000B5240
+{
+public:
+    bool sub_000B5240();
+    bool m_Field00; // +0x00
+    bool m_Field01; // +0x01
+    bool m_Field02; // +0x02
+    bool m_Field03; // +0x03
+    float m_Field04; // +0x04
+    char m_pad08[0x1];
+    bool m_Field09; // +0x09
+};
+
+bool Class_000B5240::sub_000B5240()
+{
+    m_Field00 = false;
+    m_Field01 = false;
+    m_Field02 = false;
+    m_Field03 = false;
+    m_Field04 = 0.0f;
+    m_Field09 = false;
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B5260 (0x000B5260, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B5260
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B5260 (Proto 0x000B5260, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000B5260
+{
+public:
+    bool sub_000B5260();
+    bool m_Field00; // +0x00
+    bool m_Field01; // +0x01
+    bool m_Field02; // +0x02
+    bool m_Field03; // +0x03
+    char m_pad04[0x5];
+    bool m_Field09; // +0x09
+};
+
+bool Class_000B5260::sub_000B5260()
+{
+    m_Field00 = false;
+    m_Field01 = false;
+    m_Field02 = false;
+    m_Field03 = false;
+    m_Field09 = false;
+    return false;
 }
 
 // ============================================================================
@@ -29925,6 +40604,37 @@ bool Class_000B5320::sub_000B5320(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000B56E0 (0x000B56E0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_0009AD70 (Proto 0x0009AD70), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x000B56E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B56E0 (Proto 0x000B56E0, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_00384640;
+
+class Class_000B56E0
+{
+public:
+    void sub_000B56E0();
+    char m_pad00[0x4];
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+void Class_000B56E0::sub_000B56E0()
+{
+    m_Field08 = m_Field04 * DAT_00384640;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000B5700 (0x000B5700, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -29955,6 +40665,162 @@ Class_000B5700* Class_000B5700::sub_000B5700()
     m_Field10 = 0;
     m_Field14 = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B57A0 (0x000B57A0, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B57A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B57A0 (Proto 0x000B57A0, 66 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD90;
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037F4BC;
+extern "C" float DAT_003850E8;
+
+class Class_000B57A0
+{
+public:
+    Class_000B57A0* sub_000B57A0();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+Class_000B57A0* Class_000B57A0::sub_000B57A0()
+{
+    float t2, t4;
+
+    m_Field04 = DAT_0037CE50;
+    t2 = DAT_0037CD90;
+    m_Field08 = t2;
+    m_Field0C = t2;
+    m_Field10 = DAT_0037F4BC;
+    t4 = DAT_003850E8;
+    m_Field00 = 0;
+    m_Field14 = t4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B5830 (0x000B5830, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B5830
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B5830 (Proto 0x000B5830, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F534;
+extern "C" float DAT_00384640;
+
+class Class_000B5830
+{
+public:
+    void sub_000B5830();
+    char m_pad00[0x4];
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+void Class_000B5830::sub_000B5830()
+{
+    m_Field08 = m_Field04 * DAT_0037F534;
+    m_Field10 = m_Field0C * DAT_00384640;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B59E0 (0x000B59E0, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B59E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B59E0 (Proto 0x000B59E0, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037E6C0;
+extern "C" float DAT_003841D0;
+extern "C" float DAT_003841EC;
+extern "C" float DAT_003850E8;
+extern "C" float DAT_003AA7B8;
+
+class Class_000B59E0
+{
+public:
+    Class_000B59E0* sub_000B59E0();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+Class_000B59E0* Class_000B59E0::sub_000B59E0()
+{
+    float t5;
+
+    m_Field04 = DAT_003AA7B8;
+    m_Field0C = DAT_0037E6C0;
+    m_Field14 = DAT_003850E8;
+    m_Field08 = DAT_003841EC;
+    t5 = DAT_003841D0;
+    m_Field00 = 0;
+    m_Field10 = t5;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B5AE0 (0x000B5AE0, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B5AE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B5AE0 (Proto 0x000B5AE0, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+
+class Class_000B5AE0
+{
+public:
+    void sub_000B5AE0();
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+void Class_000B5AE0::sub_000B5AE0()
+{
+    float t1;
+
+    t1 = DAT_0037CE60;
+    m_Field0C = 0;
+    m_Field10 = t1;
 }
 
 // ============================================================================
@@ -29990,6 +40856,89 @@ int Class_000B5B80::sub_000B5B80(int a1)
     }
 L_16:
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B5BA0 (0x000B5BA0, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B5BA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B5BA0 (Proto 0x000B5BA0, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000B5BA0
+{
+public:
+    void sub_000B5BA0(int a1, int a2);
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void Class_000B5BA0::sub_000B5BA0(int a1, int a2)
+{
+    int t1;
+
+    t1 = m_Field04;
+    if (m_Field04) {
+        *(int*)(t1 + 8) = a1;
+        *(int*)(t1 + 28) = a1;
+        m_Field08 = a2;
+        return;
+    }
+    m_Field08 = a2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B5BD0 (0x000B5BD0, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B5BD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B5BD0 (Proto 0x000B5BD0, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+
+class Class_000B5BD0
+{
+public:
+    Class_000B5BD0* sub_000B5BD0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    int m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+};
+
+Class_000B5BD0* Class_000B5BD0::sub_000B5BD0()
+{
+    float t1;
+
+    t1 = DAT_0037CE60;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 0;
+    m_Field10 = t1;
+    m_Field14 = 0.0f;
+    m_Field18 = 0;
+    m_Field1C = t1;
+    m_Field20 = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -30055,6 +41004,194 @@ public:
 void Class_000B6120::sub_000B6120()
 {
     ((Object*)(int)this + 4)->sub_0008D4C0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B67C0 (0x000B67C0, 87 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B67C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B67C0 (Proto 0x000B67C0, 87 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field40
+{
+    void sub_000B63E0(int, int);
+};
+
+struct Field54
+{
+    void sub_000B6540(int, int);
+};
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_000B67C0
+{
+public:
+    void sub_000B67C0();
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    char m_pad0C[0x34];
+    Field40 m_Field40; // +0x40
+    char m_pad41[0x13];
+    Field54 m_Field54; // +0x54
+    char m_pad55[0x17];
+    Field54 m_Field6C; // +0x6C
+};
+
+void Class_000B67C0::sub_000B67C0()
+{
+    if (m_Field08) {
+        m_Field40.sub_000B63E0(m_Field08, sub_00028120(m_Field04));
+        m_Field54.sub_000B6540(m_Field08, sub_00028120(m_Field04));
+        m_Field6C.sub_000B6540(m_Field08, sub_00028120(m_Field04));
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B69D0 (0x000B69D0, 97 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B69D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B69D0 (Proto 0x000B69D0, 97 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field04
+{
+    void sub_000B6130(int);
+    void sub_000B67C0();
+};
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_000B69D0
+{
+public:
+    void sub_000B69D0(int a1);
+    void sub_000B61C0(int, int);
+    void sub_000B6820(int, int, int);
+    int m_Field00; // +0x00
+    Field04* m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void Class_000B69D0::sub_000B69D0(int a1)
+{
+    Field04* t1;
+    int t3, t4;
+
+    t1 = m_Field04;
+    if (!m_Field04) goto L_5D;
+    if (!m_Field08) goto L_5D;
+    if (!m_Field00) goto L_5D;
+    t3 = *(int*)((int)t1 + 8);
+    t4 = sub_00028120(*(int*)((int)t1 + 4));
+    if (t3) {
+        if (!t4) goto L_5B;
+        m_Field04->sub_000B6130(a1);
+        sub_000B6820(a1, t3, t4);
+        sub_000B61C0(a1, t3);
+        m_Field04->sub_000B67C0();
+    }
+L_5B:
+L_5D:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B6A40 (0x000B6A40, 112 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B6A40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B6A40 (Proto 0x000B6A40, 112 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field04
+{
+    void sub_000B6130(int);
+    void sub_000B67C0();
+};
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_000B6A40
+{
+public:
+    void sub_000B6A40(int a1);
+    void sub_000B6240(int, int, int, int);
+    void sub_000B62B0(int, int, int);
+    void sub_000B68F0(int, int, int);
+    int m_Field00; // +0x00
+    Field04* m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void Class_000B6A40::sub_000B6A40(int a1)
+{
+    Field04* t1;
+    int t3, t4;
+
+    t1 = m_Field04;
+    if (!m_Field04) goto L_6C;
+    if (!m_Field08) goto L_6C;
+    if (!m_Field00) goto L_6C;
+    t3 = *(int*)((int)t1 + 8);
+    t4 = sub_00028120(*(int*)((int)t1 + 4));
+    if (t3) {
+        if (!t4) goto L_6A;
+        m_Field04->sub_000B6130(a1);
+        sub_000B68F0(a1, t3, t4);
+        sub_000B6240(a1, t3, m_Field08, t4);
+        sub_000B62B0(a1, t3, t4);
+        m_Field04->sub_000B67C0();
+    }
+L_6A:
+L_6C:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B6D20 (0x000B6D20, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B6D20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B6D20 (Proto 0x000B6D20, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_000B6D20
+{
+public:
+    int sub_000B6D20();
+    int m_Field00; // +0x00
+};
+
+int Class_000B6D20::sub_000B6D20()
+{
+    return sub_00028120(m_Field00) != 0;
 }
 
 // ============================================================================
@@ -30258,6 +41395,212 @@ void Class_000B7820::sub_000B7820()
         r_eax = sub_000B7730();
     }
     m_Field08.sub_000ABEA0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B79B0 (0x000B79B0, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B79B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B79B0 (Proto 0x000B79B0, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00015510(int);
+
+class Class_000B79B0
+{
+public:
+    void sub_000B79B0();
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    char m_pad10[0x18];
+    bool m_Field28; // +0x28
+};
+
+void Class_000B79B0::sub_000B79B0()
+{
+    int t1;
+
+    if (!m_Field28) goto L_2A;
+    t1 = m_Field0C;
+    if (m_Field0C) {
+        if (!*(unsigned char*)t1) goto L_1F;
+        sub_00015510(t1);
+    }
+L_1F:
+    m_Field0C = 0;
+    m_Field28 = false;
+L_2A:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B79E0 (0x000B79E0, 56 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000B79E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B79E0 (Proto 0x000B79E0, 56 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_0007CEF0();
+};
+
+extern "C" float DAT_0037CE60;
+
+class Class_000B79E0
+{
+public:
+    Class_000B79E0* sub_000B79E0();
+    float m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    Field10 m_Field10; // +0x10
+    char m_pad11[0xF];
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    bool m_Field28; // +0x28
+};
+
+Class_000B79E0* Class_000B79E0::sub_000B79E0()
+{
+    m_Field00 = DAT_0037CE60;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = 0;
+    m_Field10.sub_0007CEF0();
+    m_Field28 = false;
+    m_Field20 = 0.0f;
+    m_Field24 = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B7A20 (0x000B7A20, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B7A20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B7A20 (Proto 0x000B7A20, 80 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_001B7A10();
+};
+
+extern "C" int __cdecl sub_00015510(int);
+
+class Class_000B7A20
+{
+public:
+    int sub_000B7A20();
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    Field10 m_Field10; // +0x10
+    char m_pad11[0x17];
+    bool m_Field28; // +0x28
+};
+
+int Class_000B7A20::sub_000B7A20()
+{
+    int r_eax;
+
+    r_eax = m_Field28;
+    if (!((unsigned char)r_eax)) goto L_2A;
+    r_eax = m_Field0C;
+    if (r_eax) {
+        if (!*(unsigned char*)r_eax) goto L_1F;
+        sub_00015510(r_eax);
+    }
+L_1F:
+    m_Field0C = 0;
+    m_Field28 = false;
+L_2A:
+    m_Field10.sub_001B7A10();
+    r_eax = m_Field0C;
+    if (r_eax) {
+        if (*(unsigned char*)r_eax) {
+            r_eax = sub_00015510(r_eax);
+        }
+        m_Field0C = 0;
+    }
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000B7C00 (0x000B7C00, 95 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B7C00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B7C00 (Proto 0x000B7C00, 95 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_0007CF10(int);
+};
+
+struct Object
+{
+    void sub_00024AB0(int);
+    void sub_00024AD0();
+};
+
+extern "C" void __cdecl sub_00015510(int);
+
+class Class_000B7C00
+{
+public:
+    void sub_000B7C00(int a1);
+    void sub_000B7A70(int);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    Field10 m_Field10; // +0x10
+    char m_pad11[0x17];
+    bool m_Field28; // +0x28
+};
+
+void Class_000B7C00::sub_000B7C00(int a1)
+{
+    int local_4, t1;
+
+    if (!m_Field28) goto L_2C;
+    t1 = m_Field0C;
+    if (m_Field0C) {
+        if (!*(unsigned char*)t1) goto L_21;
+        sub_00015510(t1);
+    }
+L_21:
+    m_Field0C = 0;
+    m_Field28 = false;
+L_2C:
+    ((Object*)(int)(&local_4))->sub_00024AB0(14);
+    sub_000B7A70(a1);
+    m_Field10.sub_0007CF10(a1);
+    ((Object*)(int)(&local_4))->sub_00024AD0();
+    m_Field28 = true;
 }
 
 // ============================================================================
@@ -30793,6 +42136,50 @@ L_1D:
 }
 
 // ============================================================================
+// [VERIFIED] sub_000B8E90 (0x000B8E90, 73 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B8E90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B8E90 (Proto 0x000B8E90, 73 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field5C
+{
+    void sub_000B83E0(int);
+    void sub_000B84A0(int, int, int, int);
+};
+
+class Class_000B8E90
+{
+public:
+    void sub_000B8E90(bool a1, bool a2);
+    int sub_000B8BB0();
+    char m_pad00[0x5C];
+    Field5C* m_Field5C; // +0x5C
+    int m_Field60; // +0x60
+    int m_Field64; // +0x64
+    char m_pad68[0x8];
+    char m_Field70; // +0x70
+    char m_Field71; // +0x71
+};
+
+void Class_000B8E90::sub_000B8E90(bool a1, bool a2)
+{
+    m_Field70 = a1;
+    if (!a2) {
+        m_Field5C->sub_000B83E0(0);
+        m_Field60 = 2;
+        m_Field71 = 0;
+        m_Field5C->sub_000B84A0(m_Field70, m_Field71, m_Field64, sub_000B8BB0());
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_000B8EE0 (0x000B8EE0, 69 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -31013,6 +42400,60 @@ L_56:
 }
 
 // ============================================================================
+// [VERIFIED] sub_000B9880 (0x000B9880, 93 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B9880
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B9880 (Proto 0x000B9880, 93 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field34
+{
+    int sub_000B8830();
+    int sub_000B8870(int);
+};
+
+struct Object
+{
+    void sub_0018F470();
+};
+
+extern "C" char DAT_00384A4C[];
+extern "C" int __stdcall sub_0018ED90(int, int, int, int, int, int, int);
+
+class Class_000B9880
+{
+public:
+    void sub_000B9880(int a1);
+    void sub_000B9670(int, int, int);
+    char m_pad00[0x34];
+    Field34* m_Field34; // +0x34
+    char m_pad38[0x24];
+    int m_Field5C; // +0x5C
+    char m_pad60[0xA];
+    bool m_Field6A; // +0x6A
+};
+
+void Class_000B9880::sub_000B9880(int a1)
+{
+    if (!m_Field34->sub_000B8830()) {
+        if (m_Field34->sub_000B8870(m_Field5C)) goto L_4A;
+        if (!m_Field6A) goto L_59;
+        ((Object*)sub_0018ED90(a1, 1, 16, 0, 0, 0, (int)DAT_00384A4C))->sub_0018F470();
+        return;
+    }
+L_4A:
+    sub_000B9670(m_Field5C, 0, 1);
+L_59:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000B98F0 (0x000B98F0, 28 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -31100,6 +42541,57 @@ L_39:
 }
 
 // ============================================================================
+// [VERIFIED] sub_000B9E20 (0x000B9E20, 78 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000B9E20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000B9E20 (Proto 0x000B9E20, 78 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field34
+{
+    void sub_000B8750(int);
+    bool sub_000B8820();
+    bool sub_000B8AE0(int);
+    void sub_0021AF00(int);
+};
+
+extern "C" char DAT_00384B2C[];
+
+class Class_000B9E20
+{
+public:
+    void sub_000B9E20();
+    void sub_000B9880(int);
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    Field34* m_Field34; // +0x34
+    char m_pad38[0x24];
+    int m_Field5C; // +0x5C
+    char m_pad60[0x9];
+    unsigned char m_Field69; // +0x69
+};
+
+void Class_000B9E20::sub_000B9E20()
+{
+    m_Field69 = m_Field34->sub_000B8AE0(m_Field5C);
+    if (!m_Field34->sub_000B8820()) {
+        if (m_Field69) goto L_4C;
+    }
+    sub_000B9880((int)DAT_00384B2C);
+    m_Field34->sub_000B8750(1);
+    m_Field34->sub_0021AF00(0);
+    m_Field30 = 19;
+L_4C:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000B9F80 (0x000B9F80, 67 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -31173,6 +42665,104 @@ void Class_000B9FD0::sub_000B9FD0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000BA000 (0x000BA000, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000BA000
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000BA000 (Proto 0x000BA000, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field34
+{
+    void sub_000B8750(int);
+    bool sub_000B8820();
+    bool sub_000B8AE0(int);
+};
+
+extern "C" char DAT_00384B80[];
+
+class Class_000BA000
+{
+public:
+    void sub_000BA000();
+    void sub_000B9880(int);
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    Field34* m_Field34; // +0x34
+    char m_pad38[0x24];
+    int m_Field5C; // +0x5C
+    char m_pad60[0x9];
+    unsigned char m_Field69; // +0x69
+};
+
+void Class_000BA000::sub_000BA000()
+{
+    m_Field69 = m_Field34->sub_000B8AE0(m_Field5C);
+    if (!m_Field34->sub_000B8820()) {
+        if (m_Field69) goto L_42;
+    }
+    sub_000B9880((int)DAT_00384B80);
+    m_Field34->sub_000B8750(1);
+    m_Field30 = 0;
+L_42:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000BA050 (0x000BA050, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000BA050
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000BA050 (Proto 0x000BA050, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field34
+{
+    void sub_000B8750(int);
+    bool sub_000B8820();
+    bool sub_000B8AE0(int);
+};
+
+extern "C" char DAT_00384B90[];
+
+class Class_000BA050
+{
+public:
+    void sub_000BA050();
+    void sub_000B9880(int);
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    Field34* m_Field34; // +0x34
+    char m_pad38[0x24];
+    int m_Field5C; // +0x5C
+    char m_pad60[0x9];
+    unsigned char m_Field69; // +0x69
+};
+
+void Class_000BA050::sub_000BA050()
+{
+    m_Field69 = m_Field34->sub_000B8AE0(m_Field5C);
+    if (!m_Field34->sub_000B8820()) {
+        if (m_Field69) goto L_42;
+    }
+    sub_000B9880((int)DAT_00384B90);
+    m_Field34->sub_000B8750(1);
+    m_Field30 = 19;
+L_42:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000BA150 (0x000BA150, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -31193,6 +42783,51 @@ public:
 void Class_000BA150::sub_000BA150()
 {
     sub_000BA0A0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_000BA160 (0x000BA160, 58 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000BA160
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000BA160 (Proto 0x000BA160, 58 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field34
+{
+    int sub_000B8850();
+};
+
+class Class_000BA160
+{
+public:
+    void sub_000BA160(int a1);
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    Field34* m_Field34; // +0x34
+    int m_Field38; // +0x38
+    char m_pad3C[0x20];
+    int m_Field5C; // +0x5C
+    int m_Field60; // +0x60
+};
+
+void Class_000BA160::sub_000BA160(int a1)
+{
+    if (a1 < m_Field34->sub_000B8850()) {
+        if (a1 < 0) goto L_36;
+        if (m_Field30) goto L_36;
+        if (m_Field38) goto L_36;
+        m_Field5C = a1;
+        m_Field60 = 0;
+        m_Field30 = 10;
+    }
+L_36:
+    ;
 }
 
 // ============================================================================
@@ -31405,6 +43040,81 @@ void Class_000BA560::sub_000BA560()
         m_Field34->sub_000B8E30();
         m_Field30 = 11;
     }
+}
+
+// ============================================================================
+// [VERIFIED] sub_000BA590 (0x000BA590, 111 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000BA590
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000BA590 (Proto 0x000BA590, 111 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field34
+{
+    int sub_000B8820();
+    void sub_000B8E30();
+};
+
+struct Object
+{
+    int sub_0018F060();
+};
+
+extern "C" int __cdecl sub_0018ED90(void);
+
+class Class_000BA590
+{
+public:
+    void sub_000BA590();
+    void sub_000B9B70();
+    void sub_000BA1A0(int);
+    int sub_000BA450(int);
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    Field34* m_Field34; // +0x34
+    int m_Field38; // +0x38
+    char m_pad3C[0x20];
+    int m_Field5C; // +0x5C
+    char m_pad60[0xA];
+    bool m_Field6A; // +0x6A
+};
+
+void Class_000BA590::sub_000BA590()
+{
+    int r_eax;
+
+    r_eax = sub_0018ED90();
+    if (!(*(unsigned char*)(r_eax + 60) & 4)) {
+        r_eax = sub_0018ED90();
+        r_eax = ((Object*)r_eax)->sub_0018F060();
+        if (r_eax == 4) {
+            r_eax = 0;
+            m_Field6A = false;
+            m_Field30 = 0;
+            return;
+        }
+        if (r_eax == 2) {
+            m_Field6A = true;
+            sub_000B9B70();
+            r_eax = m_Field5C;
+            sub_000BA1A0(r_eax);
+            return;
+        }
+        r_eax = m_Field34->sub_000B8820();
+        if (!((unsigned char)r_eax)) goto L_6D;
+        r_eax = sub_000BA450(0);
+        m_Field38 = r_eax;
+        m_Field34->sub_000B8E30();
+        m_Field30 = 14;
+    }
+L_6D:
+    ;
 }
 
 // ============================================================================
@@ -31672,6 +43382,45 @@ int Class_000BBD90::sub_000BBD90(bool a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000BBDB0 (0x000BBDB0, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000BBDB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000BBDB0 (Proto 0x000BBDB0, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_000BD360();
+};
+
+class Class_000BBDB0
+{
+public:
+    unsigned short sub_000BBDB0();
+    char m_pad00[0x8];
+    int m_Field08; // +0x08
+};
+
+unsigned short Class_000BBDB0::sub_000BBDB0()
+{
+    int r_eax, t1;
+
+    r_eax = 0;
+    t1 = m_Field08;
+    if (m_Field08) {
+        return ((Object*)t1)->sub_000BD360();
+    }
+    r_eax |= 65535;
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000BBDD0 (0x000BBDD0, 68 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -31767,6 +43516,46 @@ public:
 int Class_000BBEA0::sub_000BBEA0()
 {
     return m_Field08 + 4;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000BBEB0 (0x000BBEB0, 64 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000BBEB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000BBEB0 (Proto 0x000BBEB0, 64 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    void sub_000BDBD0();
+};
+
+extern "C" void __cdecl sub_00021A00(int, int);
+
+class Class_000BBEB0
+{
+public:
+    void sub_000BBEB0();
+    char m_pad00[0x8];
+    Field08* m_Field08; // +0x08
+    char m_pad0C[0xD4];
+    int m_FieldE0; // +0xE0
+};
+
+void Class_000BBEB0::sub_000BBEB0()
+{
+    m_Field08->sub_000BDBD0();
+    m_FieldE0 = m_FieldE0 | 2;
+    if (!(((unsigned char)(m_FieldE0 | 2)) & 1)) {
+        sub_00021A00(5, 255);
+        m_FieldE0 = m_FieldE0 | 8;
+    }
 }
 
 // ============================================================================
@@ -33206,6 +44995,34 @@ void Class_000BF0D0::sub_000BF0D0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000BF140 (0x000BF140, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000BF140
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000BF140 (Proto 0x000BF140, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+
+class Class_000BF140
+{
+public:
+    void sub_000BF140();
+    char m_pad00[0x4C];
+    float m_Field4C; // +0x4C
+};
+
+void Class_000BF140::sub_000BF140()
+{
+    m_Field4C = DAT_0037CE50;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000BF250 (0x000BF250, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -33411,6 +45228,43 @@ void Class_000BF460::sub_000BF460(bool value)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000BF480 (0x000BF480, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000BF480
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000BF480 (Proto 0x000BF480, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD90;
+
+class Class_000BF480
+{
+public:
+    Class_000BF480* sub_000BF480();
+    bool m_Field00; // +0x00
+    char m_pad01[0x3];
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_000BF480* Class_000BF480::sub_000BF480()
+{
+    m_Field04 = DAT_0037CD90;
+    m_Field00 = false;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000BF4B0 (0x000BF4B0, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -33545,6 +45399,51 @@ int Class_000BF5C0::sub_000BF5C0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000BF5E0 (0x000BF5E0, 77 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000BF5E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000BF5E0 (Proto 0x000BF5E0, 77 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000BF5E0
+{
+public:
+    void sub_000BF5E0(int a1);
+    char m_pad00[0x84];
+    int m_Field84; // +0x84
+    int m_Field88; // +0x88
+    int m_Field8C; // +0x8C
+    char m_pad90[0x4];
+    int m_Field94; // +0x94
+    int m_Field98; // +0x98
+    int m_Field9C; // +0x9C
+    char m_padA0[0xFC];
+    unsigned char m_Field19C; // +0x19C
+};
+
+void Class_000BF5E0::sub_000BF5E0(int a1)
+{
+    unsigned char t1;
+
+    m_Field94 = *(int*)a1;
+    m_Field98 = *(int*)(a1 + 4);
+    m_Field9C = *(int*)(a1 + 8);
+    m_Field84 = *(int*)a1;
+    m_Field88 = *(int*)(a1 + 4);
+    m_Field8C = *(int*)(a1 + 8);
+    t1 = m_Field19C;
+    if (!(m_Field19C & 2)) {
+        m_Field19C = (unsigned char)(t1 & 254);
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_000BF760 (0x000BF760, 33 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -33676,6 +45575,129 @@ Class_000BF9D0* Class_000BF9D0::sub_000BF9D0(int a1)
     m_Field28 = *(int*)(a1 + 40);
     m_Field2C = *(bool*)(a1 + 44);
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000C04C0 (0x000C04C0, 71 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000C04C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000C04C0 (Proto 0x000C04C0, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0009F970();
+    bool sub_00148260();
+    int sub_0014A290();
+};
+
+extern "C" bool __cdecl sub_000BF250(int, int);
+
+bool __cdecl sub_000C04C0(int a1, int a2)
+{
+    int r_esi;
+
+    r_esi = 0;
+    if (a2) {
+        r_esi = ((Object*)a2)->sub_0009F970();
+    }
+    if (a1) {
+        if (!r_esi) goto L_42;
+        if (((Object*)a1)->sub_00148260()) goto L_42;
+        if (((Object*)a1)->sub_0014A290() == r_esi) goto L_42;
+        return sub_000BF250(a1, r_esi);
+    }
+L_42:
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000C0510 (0x000C0510, 87 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000C0510
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000C0510 (Proto 0x000C0510, 87 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00026D50();
+    int sub_00056450();
+    int sub_0009F970();
+    bool sub_00148260();
+    int sub_0014A290();
+};
+
+extern "C" bool __cdecl sub_000BF250(int, int);
+
+bool __cdecl sub_000C0510(int a1)
+{
+    int r_edi, r_esi, t2;
+
+    r_esi = a1;
+    r_edi = *(int*)(((Object*)a1)->sub_00056450() + 20);
+    t2 = ((Object*)a1)->sub_00026D50();
+    r_esi = 0;
+    if (*(int*)(t2 + 20)) {
+        r_esi = ((Object*)*(int*)(t2 + 20))->sub_0009F970();
+    }
+    if (r_edi) {
+        if (!r_esi) goto L_52;
+        if (((Object*)r_edi)->sub_00148260()) goto L_52;
+        if (((Object*)r_edi)->sub_0014A290() == r_esi) goto L_52;
+        return sub_000BF250(r_edi, r_esi);
+    }
+L_52:
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000C0570 (0x000C0570, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000C0570
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000C0570 (Proto 0x000C0570, 63 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00026D50();
+    int sub_00056450();
+    int sub_00084DA0();
+};
+
+extern "C" bool __cdecl sub_000C04C0(int, int);
+
+bool __cdecl sub_000C0570(int a1)
+{
+    int t2, t4, t5;
+
+    t2 = *(int*)(((Object*)a1)->sub_00056450() + 20);
+    t4 = *(int*)(((Object*)a1)->sub_00026D50() + 20);
+    if (t2) {
+        if (!t4) goto L_3A;
+        t5 = ((Object*)t4)->sub_00084DA0();
+        if (!t5) goto L_3A;
+        return sub_000C04C0(t2, t5);
+    }
+L_3A:
+    return false;
 }
 
 // ============================================================================
@@ -34303,6 +46325,56 @@ int __cdecl sub_000C6540(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000C6600 (0x000C6600, 103 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000C6600
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000C6600 (Proto 0x000C6600, 103 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00027240(int);
+    int sub_0008E380();
+    int sub_00147AF0();
+};
+
+extern "C" int DAT_00462ED0;
+
+int __stdcall sub_000C6600(int a1)
+{
+    int r_eax, r_ebx, r_edi, r_esi, t3, t4;
+
+    r_eax = DAT_00462ED0;
+    r_eax = *(int*)(r_eax + 52);
+    r_eax = ((Object*)r_eax + 48)->sub_0008E380();
+    r_edi = (short)((unsigned short)r_eax);
+    r_esi = 0;
+    if (r_edi <= 0) goto L_62;
+    r_ebx = a1;
+L_20:
+    r_eax = ((Object*)*(int*)(DAT_00462ED0 + 52))->sub_00027240(r_esi);
+    if (r_eax) {
+        t3 = *(int*)(r_eax + 392);
+        if (!*(int*)(r_eax + 392)) goto L_5C;
+        t4 = *(int*)(t3 + 384);
+        if (!*(int*)(t3 + 384)) goto L_5C;
+        if ((*(unsigned char*)(t4 + 564) & 3) != r_ebx) goto L_5C;
+        r_eax = ((Object*)r_eax)->sub_00147AF0();
+    }
+L_5C:
+    r_esi += 1;
+    if (r_esi < r_edi) goto L_20;
+L_62:
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000C6700 (0x000C6700, 78 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -34333,6 +46405,26 @@ void __cdecl sub_000C6700(void)
     }
     DAT_00459CE0 = 0;
     DAT_003FFAA0 = (unsigned short)sub_00058AA0((int)DAT_0038540C);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000C6750 (0x000C6750, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000C6750
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000C6750 (Proto 0x000C6750, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" unsigned short DAT_003FFAA0;
+
+unsigned short __cdecl sub_000C6750(void)
+{
+    return DAT_003FFAA0;
 }
 
 // ============================================================================
@@ -34663,6 +46755,68 @@ bool Class_000C6A20::sub_000C6A20()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000C6A50 (0x000C6A50, 91 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000C6A50
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000C6A50 (Proto 0x000C6A50, 91 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field154
+{
+    void sub_00200290(int);
+};
+
+struct Object
+{
+    bool sub_00148210();
+};
+
+extern "C" int DAT_003FFA88;
+
+class Class_000C6A50
+{
+public:
+    void sub_000C6A50(bool a1);
+    char m_pad00[0x8];
+    int m_Field08; // +0x08
+    char m_pad0C[0x148];
+    Field154 m_Field154; // +0x154
+    char m_pad155[0xB];
+    int m_Field160; // +0x160
+    char m_pad164[0x4];
+    int m_Field168; // +0x168
+    char m_pad16C[0xCA];
+    unsigned char m_Field236; // +0x236
+};
+
+void Class_000C6A50::sub_000C6A50(bool a1)
+{
+    int t1, t2, t5;
+
+    t1 = m_Field08;
+    if (m_Field08) {
+        t2 = *(int*)(t1 + 80);
+        if (!*(int*)(t1 + 80)) goto L_24;
+        if (!((Object*)t2)->sub_00148210()) goto L_24;
+        if (!a1) goto L_57;
+    }
+L_24:
+    m_Field154.sub_00200290(DAT_003FFA88);
+    t5 = m_Field236 & 247;
+    m_Field160 = 100;
+    m_Field236 = (unsigned char)t5;
+    m_Field168 = 0;
+L_57:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000C6AE0 (0x000C6AE0, 70 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -34793,6 +46947,64 @@ int Class_000C6BD0::sub_000C6BD0(int a1)
 {
     m_Field174 = a1;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000C6BE0 (0x000C6BE0, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000C6BE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000C6BE0 (Proto 0x000C6BE0, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000C6BE0
+{
+public:
+    void sub_000C6BE0(bool a1);
+    char m_pad00[0x236];
+    unsigned char m_Field236; // +0x236
+};
+
+void Class_000C6BE0::sub_000C6BE0(bool a1)
+{
+    unsigned char t1;
+
+    t1 = m_Field236;
+    if (((unsigned char)(m_Field236 >> 7)) != a1) {
+        m_Field236 = (unsigned char)(((unsigned char)(t1 & 127)) | ((unsigned char)(a1 << 7)));
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_000C6D20 (0x000C6D20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000C6D20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000C6D20 (Proto 0x000C6D20, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000C6D20
+{
+public:
+    bool sub_000C6D20();
+    char m_pad00[0x237];
+    unsigned char : 6;
+    unsigned char m_Field237_bit6 : 1; // +0x237, bit 6
+};
+
+bool Class_000C6D20::sub_000C6D20()
+{
+    return m_Field237_bit6;
 }
 
 // ============================================================================
@@ -35216,6 +47428,47 @@ void Class_000C7C40::sub_000C7C40(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000CA1E0 (0x000CA1E0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000CA1E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000CA1E0 (Proto 0x000CA1E0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field0C
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08(int, int);
+};
+
+class Class_000CA1E0
+{
+public:
+    void sub_000CA1E0(int a1, int a2);
+    char m_pad00[0xC];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void Class_000CA1E0::sub_000CA1E0(int a1, int a2)
+{
+    *(int*)a1 = 0;
+    *(float*)a2 = 0.0f;
+    m_Field0C->vfunc_08(a1, a2);
+}
+
+// ============================================================================
 // [VERIFIED] sub_000CA210 (0x000CA210, 37 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -35379,6 +47632,53 @@ void Class_000CA550::sub_000CA550()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000CA5D0 (0x000CA5D0, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000CA5D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000CA5D0 (Proto 0x000CA5D0, 46 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" char DAT_003852A4[];
+extern "C" char DAT_00385304[];
+
+class Class_000CA5D0
+{
+public:
+    Class_000CA5D0* sub_000CA5D0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+Class_000CA5D0* Class_000CA5D0::sub_000CA5D0()
+{
+    float t1;
+
+    t1 = DAT_0037CE50;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = t1;
+    m_Field0C = (int)DAT_00385304;
+    m_Field10 = (int)DAT_003852A4;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field1C = 0;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000CA6D0 (0x000CA6D0, 56 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -35442,6 +47742,32 @@ public:
 int Class_000CA710::sub_000CA710()
 {
     return m_Field20 != 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000CA720 (0x000CA720, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000CA720
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000CA720 (Proto 0x000CA720, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000CA720
+{
+public:
+    float sub_000CA720();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+float Class_000CA720::sub_000CA720()
+{
+    return *(float*)((int)this + ((m_Field20 + 3 + ((m_Field20 + 3) * 2)) * 4));
 }
 
 // ============================================================================
@@ -35647,6 +47973,41 @@ void __cdecl sub_000CB500(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000CB530 (0x000CB530, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000CB530
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000CB530 (Proto 0x000CB530, 33 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038583C[];
+extern "C" void __cdecl sub_0001F660(void);
+
+class Class_000CB530
+{
+public:
+    Class_000CB530* sub_000CB530();
+    int m_Field00; // +0x00
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+Class_000CB530* Class_000CB530::sub_000CB530()
+{
+    sub_0001F660();
+    m_Field00 = (int)DAT_0038583C;
+    m_Field10 = 5;
+    m_Field14 = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000CB560 (0x000CB560, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -35663,6 +48024,41 @@ extern "C" void __cdecl sub_001FC310(int, int);
 void __cdecl sub_000CB560(void)
 {
     sub_001FC310((int)DAT_00459E5C, (int)DAT_00459E60);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000CB590 (0x000CB590, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000CB590
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000CB590 (Proto 0x000CB590, 33 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00385884[];
+extern "C" void __cdecl sub_0001F660(void);
+
+class Class_000CB590
+{
+public:
+    Class_000CB590* sub_000CB590();
+    int m_Field00; // +0x00
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+Class_000CB590* Class_000CB590::sub_000CB590()
+{
+    sub_0001F660();
+    m_Field00 = (int)DAT_00385884;
+    m_Field10 = 5;
+    m_Field14 = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -36216,6 +48612,116 @@ int Class_000CE550::sub_000CE550()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000CE560 (0x000CE560, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000CE560
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000CE560 (Proto 0x000CE560, 9 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000CE560
+{
+public:
+    float sub_000CE560();
+    char m_pad00[0xE0];
+    int m_FieldE0; // +0xE0
+};
+
+float Class_000CE560::sub_000CE560()
+{
+    return *(float*)m_FieldE0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000CE650 (0x000CE650, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000CE650
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000CE650 (Proto 0x000CE650, 28 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+float __cdecl sub_000CE650(int a1, float a2, int a3)
+{
+    if (a1 == a3) {
+        return a2;
+    }
+    return (a2 * *(float*)(a3 + 12)) / *(float*)(a1 + 12);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000CE670 (0x000CE670, 89 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000CE670
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000CE670 (Proto 0x000CE670, 89 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_000CE570();
+    void sub_001B2090();
+};
+
+extern "C" char DAT_00386658[];
+extern "C" void __cdecl sub_002002C0(void);
+
+class Class_000CE670
+{
+public:
+    int sub_000CE670(int a1);
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    char m_pad14[0xCC];
+    int m_FieldE0; // +0xE0
+    int m_FieldE4; // +0xE4
+};
+
+int Class_000CE670::sub_000CE670(int a1)
+{
+    int r_eax, r_ecx;
+
+    r_ecx = (int)this;
+    sub_002002C0();
+    m_Field00 = (int)DAT_00386658;
+    r_eax = (int)(&m_Field10);
+    r_ecx = 13;
+    do {
+        *(float*)r_eax = 0.0f;
+        *(int*)(r_eax + 4) = 0;
+        *(int*)(r_eax + 8) = 0;
+        *(int*)(r_eax + 12) = 0;
+        r_eax += 16;
+        r_ecx -= 1;
+    } while (r_ecx);
+    r_ecx = (int)(&m_FieldE4);
+    ((Object*)r_ecx)->sub_001B2090();
+    r_eax = a1;
+    r_ecx = (int)this;
+    m_Field0C = a1;
+    m_FieldE0 = 0;
+    ((Object*)r_ecx)->sub_000CE570();
+    r_eax = (int)this;
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000CF210 (0x000CF210, 120 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -36283,6 +48789,103 @@ Class_000CF210* Class_000CF210::sub_000CF210(int a1, int a2)
     }
     m_Field08 = r_edi;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000CF440 (0x000CF440, 99 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000CF440
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000CF440 (Proto 0x000CF440, 99 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field1C
+{
+    int sub_00226DB0(int);
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual int vfunc_04(int, int);
+    int sub_00226D50(int, int);
+};
+
+class Class_000CF440
+{
+public:
+    int sub_000CF440(int a1, int a2, int a3);
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+    Field1C* m_Field1C; // +0x1C
+};
+
+int Class_000CF440::sub_000CF440(int a1, int a2, int a3)
+{
+    int t2, t3;
+
+    t2 = m_Field1C->sub_00226DB0(*(int*)(*(int*)(*(int*)(*(int*)*(int*)(m_Field18 + 12) + 8) + 32) + (a1 * 4)));
+    if (t2) {
+        t3 = ((Object*)t2)->sub_00226D50(0x4E415254, 0x54434556);
+        if (!t3) goto L_4B;
+        return ((Object*)t3)->vfunc_04(a2, a3);
+    }
+L_4B:
+    *(float*)(a3 + 8) = 0.0f;
+    *(float*)(a3 + 4) = 0.0f;
+    *(float*)a3 = 0.0f;
+    return a3;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000CF5A0 (0x000CF5A0, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000CF5A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000CF5A0 (Proto 0x000CF5A0, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00243D90(int, int, int);
+};
+
+extern "C" float DAT_0037CE50;
+
+class Class_000CF5A0
+{
+public:
+    int sub_000CF5A0(int a1, int a2, int a3);
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+};
+
+int Class_000CF5A0::sub_000CF5A0(int a1, int a2, int a3)
+{
+    int t1;
+
+    t1 = m_Field30;
+    if (m_Field30) {
+        return ((Object*)t1)->sub_00243D90(a1, a2, a3);
+    }
+    *(float*)(a3 + 8) = 0.0f;
+    *(float*)(a3 + 4) = 0.0f;
+    *(float*)a3 = 0.0f;
+    *(float*)(a3 + 12) = DAT_0037CE50;
+    return a3;
 }
 
 // ============================================================================
@@ -36559,6 +49162,67 @@ void* Class_000D2CC0::sub_000D2CC0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000D2D40 (0x000D2D40, 97 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D2D40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D2D40 (Proto 0x000D2D40, 97 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" float DAT_0037CE60;
+extern "C" char DAT_003868E4[];
+extern "C" void __cdecl sub_0001F5E0(void);
+
+class Class_000D2D40
+{
+public:
+    Class_000D2D40* sub_000D2D40(int a1, int a2);
+    int m_Field00; // +0x00
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    int m_Field18; // +0x18
+};
+
+Class_000D2D40* Class_000D2D40::sub_000D2D40(int a1, int a2)
+{
+    float t2;
+    int t5;
+
+    sub_0001F5E0();
+    m_Field10 = 0.0f;
+    t2 = DAT_0037CE60;
+    m_Field00 = (int)DAT_003868E4;
+    m_Field0C = 0;
+    m_Field14 = t2;
+    m_Field18 = 0;
+    m_Field08 = a1;
+    ((Object*)a1)->vfunc_00();
+    if (a2) {
+        ((Object*)a2)->vfunc_00();
+    }
+    t5 = m_Field0C;
+    if (m_Field0C) {
+        ((Object*)t5)->vfunc_01();
+    }
+    m_Field0C = a2;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000D30F0 (0x000D30F0, 77 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -36713,6 +49377,56 @@ Class_000D3ED0* Class_000D3ED0::sub_000D3ED0(int a1, int a2)
     m_Field00 = (int)DAT_00386A18;
     m_Field08 = 0;
     m_Field0C = 0;
+    if (a1) {
+        m_Field08 = a1;
+        ((Object*)a1)->vfunc_00();
+    }
+    if (a2) {
+        m_Field0C = a2;
+        ((Object*)a2)->vfunc_00();
+    }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000D3F10 (0x000D3F10, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D3F10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D3F10 (Proto 0x000D3F10, 72 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+};
+
+extern "C" char DAT_00386A54[];
+extern "C" void __cdecl sub_0001F5E0(void);
+
+class Class_000D3F10
+{
+public:
+    Class_000D3F10* sub_000D3F10(int a1, int a2);
+    int m_Field00; // +0x00
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_000D3F10* Class_000D3F10::sub_000D3F10(int a1, int a2)
+{
+    sub_0001F5E0();
+    m_Field00 = (int)DAT_00386A54;
+    m_Field08 = 0;
+    m_Field0C = 0;
+    m_Field10 = 0.0f;
     if (a1) {
         m_Field08 = a1;
         ((Object*)a1)->vfunc_00();
@@ -36922,6 +49636,70 @@ int __cdecl sub_000D4DB0(void)
     }
     DAT_00459F60 += 1;
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000D4E10 (0x000D4E10, 90 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D4E10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D4E10 (Proto 0x000D4E10, 90 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field1C
+{
+    void sub_00200310(int);
+};
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0037CE60;
+extern "C" char DAT_00386C74[];
+extern "C" int DAT_003ADB60;
+extern "C" void __cdecl sub_00020610(void);
+
+class Class_000D4E10
+{
+public:
+    Class_000D4E10* sub_000D4E10();
+    int m_Field00; // +0x00
+    char m_pad04[0x18];
+    Field1C m_Field1C; // +0x1C
+    char m_pad1D[0x3];
+    int m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    bool m_Field30; // +0x30
+    bool m_Field31; // +0x31
+    bool m_Field32; // +0x32
+    unsigned char m_Field33; // +0x33
+};
+
+Class_000D4E10* Class_000D4E10::sub_000D4E10()
+{
+    float t3, t5;
+    unsigned char t4;
+
+    sub_00020610();
+    m_Field00 = (int)DAT_00386C74;
+    m_Field1C.sub_00200310(DAT_003ADB60);
+    t3 = DAT_0037CE50;
+    t4 = m_Field33;
+    m_Field20 = 0;
+    m_Field30 = false;
+    m_Field31 = false;
+    m_Field24 = t3;
+    m_Field28 = 0.0f;
+    t5 = DAT_0037CE60;
+    m_Field32 = true;
+    m_Field2C = t5;
+    m_Field33 = (unsigned char)(t4 | 1);
+    return this;
 }
 
 // ============================================================================
@@ -37294,6 +50072,55 @@ void* Class_000D53A0::sub_000D53A0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000D5850 (0x000D5850, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D5850
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D5850 (Proto 0x000D5850, 75 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037FCE4;
+extern "C" float DAT_00382FC8;
+extern "C" float DAT_003850E8;
+extern "C" char DAT_003870E4[];
+extern "C" float DAT_003A968C;
+extern "C" void __cdecl sub_00020610(void);
+
+class Class_000D5850
+{
+public:
+    Class_000D5850* sub_000D5850();
+    int m_Field00; // +0x00
+    char m_pad04[0x18];
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+};
+
+Class_000D5850* Class_000D5850::sub_000D5850()
+{
+    float t2, t5;
+
+    sub_00020610();
+    t2 = DAT_0037FCE4;
+    m_Field1C = t2;
+    m_Field20 = t2;
+    m_Field24 = DAT_003850E8;
+    m_Field28 = DAT_00382FC8;
+    t5 = DAT_003A968C;
+    m_Field00 = (int)DAT_003870E4;
+    m_Field2C = t5;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000D58A0 (0x000D58A0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -37334,6 +50161,45 @@ float Class_000D58D0::sub_000D58D0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000D5A90 (0x000D5A90, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D5A90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D5A90 (Proto 0x000D5A90, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" char DAT_003871DC[];
+extern "C" void __cdecl sub_00020610(void);
+
+class Class_000D5A90
+{
+public:
+    Class_000D5A90* sub_000D5A90();
+    int m_Field00; // +0x00
+    char m_pad04[0x18];
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+};
+
+Class_000D5A90* Class_000D5A90::sub_000D5A90()
+{
+    float t2;
+
+    sub_00020610();
+    t2 = DAT_0037CE60;
+    m_Field00 = (int)DAT_003871DC;
+    m_Field1C = t2;
+    m_Field20 = t2;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000D5AD0 (0x000D5AD0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -37350,6 +50216,45 @@ extern "C" void __cdecl sub_001FC310(int, int);
 void __cdecl sub_000D5AD0(void)
 {
     sub_001FC310((int)DAT_00459F88, (int)DAT_00459F8C);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000D5C20 (0x000D5C20, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D5C20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D5C20 (Proto 0x000D5C20, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038730C[];
+extern "C" void __cdecl sub_00020610(void);
+
+class Class_000D5C20
+{
+public:
+    Class_000D5C20* sub_000D5C20();
+    int m_Field00; // +0x00
+    char m_pad04[0x18];
+    int m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+};
+
+Class_000D5C20* Class_000D5C20::sub_000D5C20()
+{
+    sub_00020610();
+    m_Field00 = (int)DAT_0038730C;
+    m_Field1C = 0;
+    m_Field20 = 0.0f;
+    m_Field24 = 0.0f;
+    m_Field28 = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -37461,6 +50366,59 @@ Struct_000D6000 Class_000D6000::sub_000D6000() const
 }
 
 // ============================================================================
+// [VERIFIED] sub_000D6020 (0x000D6020, 61 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D6020
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D6020 (Proto 0x000D6020, 61 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field24
+{
+    void sub_00200310(int);
+};
+
+extern "C" char DAT_0037CD30[];
+extern "C" char DAT_00387514[];
+extern "C" void __cdecl sub_00020610(void);
+
+class Class_000D6020
+{
+public:
+    Class_000D6020* sub_000D6020();
+    int m_Field00; // +0x00
+    char m_pad04[0x18];
+    bool m_Field1C; // +0x1C
+    bool m_Field1D; // +0x1D
+    char m_pad1E[0x2];
+    int m_Field20; // +0x20
+    Field24 m_Field24; // +0x24
+    char m_pad25[0x3];
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+};
+
+Class_000D6020* Class_000D6020::sub_000D6020()
+{
+    sub_00020610();
+    m_Field00 = (int)DAT_00387514;
+    m_Field1C = false;
+    m_Field1D = true;
+    m_Field20 = 0;
+    m_Field24.sub_00200310((int)DAT_0037CD30);
+    m_Field28 = 0.0f;
+    m_Field2C = 0.0f;
+    m_Field30 = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000D62C0 (0x000D62C0, 4 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -37517,6 +50475,69 @@ extern "C" void __cdecl sub_001FC310(int, int);
 void __cdecl sub_000D6B60(void)
 {
     sub_001FC310((int)DAT_00459FC0, (int)DAT_00459FC4);
+}
+
+// ============================================================================
+// [VERIFIED] sub_000D6B90 (0x000D6B90, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D6B90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D6B90 (Proto 0x000D6B90, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field30
+{
+    void sub_000AABF0();
+};
+
+struct Field3C
+{
+    void sub_001FCAB0();
+};
+
+extern "C" float DAT_0037CE60;
+extern "C" char DAT_003878DC[];
+extern "C" void __cdecl sub_00020610(void);
+
+class Class_000D6B90
+{
+public:
+    Class_000D6B90* sub_000D6B90();
+    int m_Field00; // +0x00
+    char m_pad04[0x18];
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    Field30 m_Field30; // +0x30
+    char m_pad31[0x7];
+    bool m_Field38; // +0x38
+    char m_pad39[0x3];
+    Field3C m_Field3C; // +0x3C
+};
+
+Class_000D6B90* Class_000D6B90::sub_000D6B90()
+{
+    float t2;
+
+    sub_00020610();
+    m_Field1C = 0.0f;
+    t2 = DAT_0037CE60;
+    m_Field00 = (int)DAT_003878DC;
+    m_Field20 = t2;
+    m_Field24 = t2;
+    m_Field28 = t2;
+    m_Field2C = t2;
+    m_Field30.sub_000AABF0();
+    m_Field38 = false;
+    m_Field3C.sub_001FCAB0();
+    return this;
 }
 
 // ============================================================================
@@ -37697,6 +50718,56 @@ Class_000D73C0* Class_000D73C0::sub_000D73C0(int a1)
 {
     m_Field00 = sub_00200280(a1);
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000D7460 (0x000D7460, 81 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000D7460
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D7460 (Proto 0x000D7460, 81 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00387DEC[];
+extern "C" char DAT_00387E00[];
+extern "C" char DAT_0045A044[];
+extern "C" bool DAT_0045A068;
+extern "C" char DAT_0045A06C[];
+extern "C" unsigned char DAT_0045A090;
+
+void __cdecl sub_000D7460(void)
+{
+    int r_eax, r_edx;
+    bool t1, t2;
+
+    r_eax = DAT_0045A068;
+    if (!(1 & ((unsigned char)r_eax))) {
+        *(int*)&DAT_0045A068 |= 1;
+        r_eax = (int)DAT_00387DEC;
+        r_edx = (int)DAT_0045A044;
+        r_edx -= (int)DAT_00387DEC;
+        do {
+            t1 = *(bool*)r_eax;
+            *(bool*)(r_edx + r_eax) = *(bool*)r_eax;
+            r_eax += 1;
+        } while (t1);
+    }
+    if (!(DAT_0045A090 & 1)) {
+        *(int*)&DAT_0045A090 |= 1;
+        r_eax = (int)DAT_00387E00;
+        r_edx = (int)DAT_0045A06C;
+        r_edx -= (int)DAT_00387E00;
+        do {
+            t2 = *(bool*)r_eax;
+            *(bool*)(r_edx + r_eax) = *(bool*)r_eax;
+            r_eax += 1;
+        } while (t2);
+    }
 }
 
 // ============================================================================
@@ -37904,6 +50975,51 @@ void* Class_000D77D0::sub_000D77D0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000D7C40 (0x000D7C40, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D7C40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D7C40 (Proto 0x000D7C40, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003881B4[];
+extern "C" float DAT_003915CC;
+extern "C" void __cdecl sub_000205E0(void);
+
+class Class_000D7C40
+{
+public:
+    Class_000D7C40* sub_000D7C40();
+    int m_Field00; // +0x00
+    char m_pad04[0x10];
+    bool m_Field14; // +0x14
+    char m_pad15[0x3];
+    float m_Field18; // +0x18
+    bool m_Field1C; // +0x1C
+    char m_pad1D[0x3];
+    int m_Field20; // +0x20
+};
+
+Class_000D7C40* Class_000D7C40::sub_000D7C40()
+{
+    float t2;
+
+    sub_000205E0();
+    t2 = DAT_003915CC;
+    m_Field14 = false;
+    m_Field20 = 0;
+    m_Field00 = (int)DAT_003881B4;
+    m_Field18 = t2;
+    m_Field1C = true;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000D7D00 (0x000D7D00, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -37928,6 +51044,73 @@ void Class_000D7D00::sub_000D7D00()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000D7D10 (0x000D7D10, 98 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D7D10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D7D10 (Proto 0x000D7D10, 98 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" void __stdcall sub_000D8E50(int, int);
+
+class Class_000D7D10
+{
+public:
+    Class_000D7D10* sub_000D7D10();
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+    int m_Field2C; // +0x2C
+    char m_pad30[0x4];
+    int m_Field34; // +0x34
+    char m_pad38[0x8];
+    int m_Field40; // +0x40
+    int m_Field44; // +0x44
+    char m_pad48[0xC];
+    int m_Field54; // +0x54
+    int m_Field58; // +0x58
+    int m_Field5C; // +0x5C
+    char m_pad60[0x4];
+    float m_Field64; // +0x64
+    char m_pad68[0x10];
+    int m_Field78; // +0x78
+    int m_Field7C; // +0x7C
+    int m_Field80; // +0x80
+    bool m_Field84; // +0x84
+    bool m_Field85; // +0x85
+    bool m_Field86; // +0x86
+};
+
+Class_000D7D10* Class_000D7D10::sub_000D7D10()
+{
+    float t2;
+
+    sub_000D8E50(0, 0x3F800000);
+    t2 = DAT_0037CE50;
+    m_Field34 = 1;
+    m_Field54 = 1;
+    m_Field58 = 1;
+    m_Field5C = 1;
+    m_Field28 = 0;
+    m_Field2C = 0;
+    m_Field44 = 0;
+    m_Field78 = 0;
+    m_Field7C = 0;
+    m_Field80 = 0;
+    m_Field84 = false;
+    m_Field85 = false;
+    m_Field86 = false;
+    m_Field40 = -1;
+    m_Field64 = t2;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000D7D80 (0x000D7D80, 10 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -37947,6 +51130,37 @@ int Class_000D7D80::sub_000D7D80(int a1)
 {
     m_Field58 = a1;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000D7D90 (0x000D7D90, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D7D90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D7D90 (Proto 0x000D7D90, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000D7D90
+{
+public:
+    int sub_000D7D90(float a1);
+    char m_pad00[0x78];
+    int m_Field78; // +0x78
+};
+
+int Class_000D7D90::sub_000D7D90(float a1)
+{
+    int t1;
+
+    t1 = m_Field78 + 1;
+    m_Field78 = m_Field78 + 1;
+    *(float*)((int)this + (t1 * 4) + 100) = a1;
+    return t1;
 }
 
 // ============================================================================
@@ -38063,6 +51277,54 @@ public:
 Class_000D8D30* Class_000D8D30::sub_000D8D30(int a1, int a2, int a3)
 {
     sub_000D8060(a1, a2, a3);
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000D8E50 (0x000D8E50, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D8E50
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D8E50 (Proto 0x000D8E50, 72 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000D8E50
+{
+public:
+    Class_000D8E50* sub_000D8E50(int a1, int a2);
+    void sub_000D8D50(int, int);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+};
+
+Class_000D8E50* Class_000D8E50::sub_000D8E50(int a1, int a2)
+{
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    m_Field18 = 0.0f;
+    m_Field1C = 0.0f;
+    m_Field20 = 0;
+    m_Field24 = 0;
+    if (a1) {
+        sub_000D8D50(a1, a2);
+    }
     return this;
 }
 
@@ -38373,6 +51635,35 @@ int Class_000D9C70::sub_000D9C70(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000D9C80 (0x000D9C80, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000D9C80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D9C80 (Proto 0x000D9C80, 20 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000D9C80
+{
+public:
+    int sub_000D9C80(float a1, int a2);
+    int m_Field00; // +0x00
+};
+
+int Class_000D9C80::sub_000D9C80(float a1, int a2)
+{
+    int t1;
+
+    t1 = m_Field00;
+    *(float*)(m_Field00 + (a2 * 4)) = a1;
+    return t1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000D9CA0 (0x000D9CA0, 12 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -38390,6 +51681,31 @@ public:
 int Class_000D9CA0::sub_000D9CA0(int a1)
 {
     return *(int*)(m_Field00 + (a1 * 4));
+}
+
+// ============================================================================
+// [VERIFIED] sub_000D9CB0 (0x000D9CB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000D9CB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000D9CB0 (Proto 0x000D9CB0, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000D9CB0
+{
+public:
+    float sub_000D9CB0(int a1);
+    int m_Field00; // +0x00
+};
+
+float Class_000D9CB0::sub_000D9CB0(int a1)
+{
+    return *(float*)(m_Field00 + (a1 * 4));
 }
 
 // ============================================================================
@@ -39443,6 +52759,26 @@ int __cdecl sub_000DD4A0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000DD4C0 (0x000DD4C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000DD4C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000DD4C0 (Proto 0x000DD4C0, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_0014A290(void);
+
+int __cdecl sub_000DD4C0(void)
+{
+    return sub_0014A290() != 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000DD600 (0x000DD600, 30 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -39532,6 +52868,64 @@ public:
 void Class_000DD7D0::sub_000DD7D0()
 {
     m_Field5E8 = false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000DD7E0 (0x000DD7E0, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000DD7E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000DD7E0 (Proto 0x000DD7E0, 59 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000DD7E0
+{
+public:
+    void sub_000DD7E0(float a1, float a2, float a3, float a4);
+    char m_pad00[0x3E8];
+    float m_Field3E8; // +0x3E8
+    float m_Field3EC; // +0x3EC
+    float m_Field3F0; // +0x3F0
+    float m_Field3F4; // +0x3F4
+};
+
+void Class_000DD7E0::sub_000DD7E0(float a1, float a2, float a3, float a4)
+{
+    m_Field3E8 = a1;
+    m_Field3EC = a2;
+    m_Field3F0 = a3;
+    m_Field3F4 = a4;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000DD820 (0x000DD820, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000DD820
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000DD820 (Proto 0x000DD820, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000DD820
+{
+public:
+    void sub_000DD820();
+    char m_pad00[0x3F4];
+    float m_Field3F4; // +0x3F4
+};
+
+void Class_000DD820::sub_000DD820()
+{
+    m_Field3F4 = 0.0f;
 }
 
 // ============================================================================
@@ -39691,6 +53085,65 @@ void Class_000DD880::sub_000DD880(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000DD8B0 (0x000DD8B0, 108 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000DD8B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000DD8B0 (Proto 0x000DD8B0, 108 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field358
+{
+    int sub_00056450();
+};
+
+struct Object
+{
+    int sub_00147B00();
+    bool sub_00148020();
+};
+
+extern "C" int DAT_0040AA24;
+
+class Class_000DD8B0
+{
+public:
+    int sub_000DD8B0(int a1, int a2);
+    char m_pad00[0x358];
+    Field358 m_Field358; // +0x358
+    char m_pad359[0x283];
+    bool m_Field5DC; // +0x5DC
+    bool m_Field5DD; // +0x5DD
+    char m_pad5DE[0x1];
+    bool m_Field5DF; // +0x5DF
+};
+
+int Class_000DD8B0::sub_000DD8B0(int a1, int a2)
+{
+    int r_edi;
+
+    r_edi = *(int*)a1;
+    if (*(bool*)(a1 + 240)) goto L_65;
+    if (m_Field358.sub_00056450()) goto L_65;
+    if (!m_Field5DC) {
+        if (!m_Field5DD) goto L_41;
+    }
+    if (m_Field5DF) goto L_65;
+L_41:
+    if (!((Object*)r_edi)->sub_00148020()) {
+        if (((Object*)r_edi)->sub_00147B00() <= DAT_0040AA24) goto L_65;
+        return 1;
+    }
+L_65:
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000DDAB0 (0x000DDAB0, 65 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -39803,6 +53256,49 @@ int Class_000DDC00::sub_000DDC00()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000DDCB0 (0x000DDCB0, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000DDCB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000DDCB0 (Proto 0x000DDCB0, 67 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field238
+{
+    int sub_00056450();
+    void sub_0007CD00(int);
+    void sub_0007CD70();
+};
+
+class Class_000DDCB0
+{
+public:
+    void sub_000DDCB0();
+    char m_pad00[0x104];
+    float m_Field104; // +0x104
+    float m_Field108; // +0x108
+    float m_Field10C; // +0x10C
+    char m_pad110[0x128];
+    Field238 m_Field238; // +0x238
+};
+
+void Class_000DDCB0::sub_000DDCB0()
+{
+    if (m_Field238.sub_00056450()) {
+        m_Field238.sub_0007CD00(0);
+        m_Field238.sub_0007CD70();
+    }
+    m_Field10C = 0.0f;
+    m_Field108 = 0.0f;
+    m_Field104 = 0.0f;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000DDD00 (0x000DDD00, 18 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -39862,6 +53358,42 @@ public:
 int Class_000DDDC0::sub_000DDDC0()
 {
     return *(int*)(DAT_0045A0EC + 44) - m_Field2E4;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000DDDD0 (0x000DDDD0, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000DDDD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000DDDD0 (Proto 0x000DDDD0, 80 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000DDDD0
+{
+public:
+    void sub_000DDDD0(float a1, float a2, float a3, float a4, float a5);
+    char m_pad00[0x3AC];
+    float m_Field3AC; // +0x3AC
+    float m_Field3B0; // +0x3B0
+    float m_Field3B4; // +0x3B4
+    float m_Field3B8; // +0x3B8
+    float m_Field3BC; // +0x3BC
+    bool m_Field3C0; // +0x3C0
+};
+
+void Class_000DDDD0::sub_000DDDD0(float a1, float a2, float a3, float a4, float a5)
+{
+    m_Field3AC = a1;
+    m_Field3B0 = a2;
+    m_Field3B4 = a3;
+    m_Field3B8 = a4;
+    m_Field3BC = a5;
+    m_Field3C0 = true;
 }
 
 // ============================================================================
@@ -39993,6 +53525,46 @@ public:
 int Class_000DDE70::sub_000DDE70()
 {
     return m_Field5B1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000DDE90 (0x000DDE90, 61 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000DDE90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000DDE90 (Proto 0x000DDE90, 61 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field440
+{
+    int sub_00056450();
+    bool sub_000ED6E0();
+};
+
+class Class_000DDE90
+{
+public:
+    int sub_000DDE90(int a1);
+    char m_pad00[0x440];
+    Field440 m_Field440; // +0x440
+    char m_pad441[0x1C0];
+    bool m_Field601; // +0x601
+};
+
+int Class_000DDE90::sub_000DDE90(int a1)
+{
+    if (!m_Field440.sub_000ED6E0()) {
+        if (m_Field601) goto L_36;
+        if (m_Field440.sub_00056450() != a1) goto L_36;
+        return 1;
+    }
+L_36:
+    return 0;
 }
 
 // ============================================================================
@@ -40293,6 +53865,73 @@ L_57:
     r_eax = ((Object*)r_edi)->sub_0008E3D0();
     if (r_eax) goto L_13;
 L_63:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000DE380 (0x000DE380, 69 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000DE380
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000DE380 (Proto 0x000DE380, 69 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27(int);
+};
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_000DE380
+{
+public:
+    void sub_000DE380(int a1);
+    char m_pad00[0x98];
+    int m_Field98; // +0x98
+};
+
+void Class_000DE380::sub_000DE380(int a1)
+{
+    if (!sub_00028120(m_Field98)) goto L_41;
+    if (a1) {
+        if (*(int*)(a1 + 160)) goto L_40;
+        ((Object*)sub_00028120(m_Field98))->vfunc_27(a1);
+    }
+L_40:
+L_41:
     ;
 }
 
@@ -40721,6 +54360,62 @@ bool Class_000DF230::sub_000DF230()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000DF2E0 (0x000DF2E0, 103 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000DF2E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000DF2E0 (Proto 0x000DF2E0, 103 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field358
+{
+    int sub_00056450();
+};
+
+struct Object
+{
+    bool sub_00148020();
+};
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_000DF2E0
+{
+public:
+    int sub_000DF2E0(int a1, int a2);
+    char m_pad00[0x84];
+    int m_Field84; // +0x84
+    char m_pad88[0x2D0];
+    Field358 m_Field358; // +0x358
+    char m_pad359[0x283];
+    bool m_Field5DC; // +0x5DC
+    bool m_Field5DD; // +0x5DD
+    char m_pad5DE[0x1];
+    bool m_Field5DF; // +0x5DF
+};
+
+int Class_000DF2E0::sub_000DF2E0(int a1, int a2)
+{
+    if (*(bool*)(a1 + 240)) goto L_61;
+    if (m_Field358.sub_00056450()) goto L_61;
+    if (!m_Field5DC) {
+        if (!m_Field5DD) goto L_3E;
+    }
+    if (m_Field5DF) goto L_61;
+L_3E:
+    if (!((Object*)sub_00028120(m_Field84))->sub_00148020()) {
+        return 1;
+    }
+L_61:
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000DF4A0 (0x000DF4A0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // What it does: Passes a value stored in the object to another function and returns its result.
@@ -40809,6 +54504,77 @@ int Class_000DF4E0::sub_000DF4E0()
         return *(int*)(sub_00028120(m_Field2F4) + 16);
     }
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000E1100 (0x000E1100, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000E1100
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000E1100 (Proto 0x000E1100, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00147EB0(int);
+};
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_000E1100
+{
+public:
+    void sub_000E1100(bool a1);
+    char m_pad00[0x84];
+    int m_Field84; // +0x84
+    char m_pad88[0x56A];
+    bool m_Field5F2; // +0x5F2
+};
+
+void Class_000E1100::sub_000E1100(bool a1)
+{
+    m_Field5F2 = a1;
+    if (!a1) {
+        ((Object*)sub_00028120(m_Field84))->sub_00147EB0(0);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_000E1430 (0x000E1430, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000E1430
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000E1430 (Proto 0x000E1430, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0014A290();
+};
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_000E1430
+{
+public:
+    int sub_000E1430();
+    char m_pad00[0x84];
+    int m_Field84; // +0x84
+};
+
+int Class_000E1430::sub_000E1430()
+{
+    return ((Object*)sub_00028120(m_Field84))->sub_0014A290() != 0;
 }
 
 // ============================================================================
@@ -41117,6 +54883,56 @@ void Class_000EB4D0::sub_000EB4D0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_000EB610 (0x000EB610, 93 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000EB610
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000EB610 (Proto 0x000EB610, 93 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0045BA00;
+extern "C" float DAT_0045BA04;
+extern "C" float DAT_0045BA08;
+extern "C" bool DAT_0045BA0C;
+extern "C" int __cdecl sub_00056450(void);
+
+class Class_000EB610
+{
+public:
+    void* sub_000EB610();
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+    char m_pad20[0x20];
+    bool m_Field40; // +0x40
+};
+
+void* Class_000EB610::sub_000EB610()
+{
+    int t1;
+
+    t1 = sub_00056450();
+    if (t1 != 3) {
+        if (t1 == 4) {
+            if (!m_Field40) goto L_58;
+        }
+        if (!(1 & DAT_0045BA0C)) {
+            *(int*)&DAT_0045BA0C = *(int*)&DAT_0045BA0C | 1;
+            DAT_0045BA00 = 0.0f;
+            DAT_0045BA04 = 0.0f;
+            DAT_0045BA08 = 0.0f;
+        }
+        return &DAT_0045BA00;
+    }
+L_58:
+    return &m_Field1C;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000EB670 (0x000EB670, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -41282,6 +55098,46 @@ float Class_000ECF00::sub_000ECF00()
         return DAT_0037CD94;
     }
     return m_Field48;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000ECF20 (0x000ECF20, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000ECF20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000ECF20 (Proto 0x000ECF20, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00056450(void);
+
+int __cdecl sub_000ECF20(void)
+{
+    return sub_00056450() == 2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000ECF30 (0x000ECF30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000ECF30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000ECF30 (Proto 0x000ECF30, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00056450(void);
+
+int __cdecl sub_000ECF30(void)
+{
+    return sub_00056450() == 1;
 }
 
 // ============================================================================
@@ -41811,6 +55667,27 @@ int __cdecl sub_000EFCB0(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000EFD00 (0x000EFD00, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000EFD00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000EFD00 (Proto 0x000EFD00, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD90;
+
+int __cdecl sub_000EFD00(int a1)
+{
+    *(float*)a1 = DAT_0037CD90;
+    return a1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000F0340 (0x000F0340, 27 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -41842,6 +55719,27 @@ L_18:
 }
 
 // ============================================================================
+// [VERIFIED] sub_000F1D90 (0x000F1D90, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000F1D90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000F1D90 (Proto 0x000F1D90, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_00402BF0;
+
+void __cdecl sub_000F1D90(void)
+{
+    DAT_00402BF0 = DAT_0037CE50;
+}
+
+// ============================================================================
 // [VERIFIED] sub_000F1DB0 (0x000F1DB0, 17 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -41862,6 +55760,38 @@ int Class_000F1DB0::sub_000F1DB0(int a1)
 {
     vfunc_02(a1);
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000F2040 (0x000F2040, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000F2040
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000F2040 (Proto 0x000F2040, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001050F0(int);
+};
+
+extern "C" Object DAT_0045BAD8;
+extern "C" bool DAT_0045BADC;
+extern "C" char sub_002F17C0[];
+extern "C" void __cdecl sub_002C8EB3(int);
+
+void __cdecl sub_000F2040(void)
+{
+    if (!(1 & DAT_0045BADC)) {
+        *(int*)&DAT_0045BADC |= 1;
+        DAT_0045BAD8.sub_001050F0(0);
+        sub_002C8EB3((int)sub_002F17C0);
+    }
 }
 
 // ============================================================================
@@ -41993,6 +55923,106 @@ Class_000F2FC0* Class_000F2FC0::sub_000F2FC0(int a1, int a2)
     sub_000F0360(a1, a2);
     m_Field37 |= 1;
     m_Field00 = (int)DAT_0038A424;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000F3810 (0x000F3810, 70 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000F3810
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000F3810 (Proto 0x000F3810, 70 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038A554[];
+extern "C" char DAT_0038A584[];
+extern "C" float DAT_003A968C;
+extern "C" char sub_000F3050[];
+
+class Class_000F3810
+{
+public:
+    Class_000F3810* sub_000F3810(int a1, int a2);
+    void sub_000F0360(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x48];
+    int m_Field4C; // +0x4C
+    float m_Field50; // +0x50
+    int m_Field54; // +0x54
+    int m_Field58; // +0x58
+    int m_Field5C; // +0x5C
+    int m_Field60; // +0x60
+};
+
+Class_000F3810* Class_000F3810::sub_000F3810(int a1, int a2)
+{
+    float t2;
+
+    sub_000F0360(a1, a2);
+    t2 = DAT_003A968C;
+    m_Field4C = 0;
+    m_Field54 = 0;
+    m_Field58 = 0;
+    m_Field50 = t2;
+    m_Field00 = (int)DAT_0038A584;
+    m_Field5C = (int)DAT_0038A554;
+    m_Field60 = (int)sub_000F3050;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000F3890 (0x000F3890, 70 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_000F3810 (Proto 0x000F3810), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x000F3890
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000F3890 (Proto 0x000F3890, 70 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038A55C[];
+extern "C" char DAT_0038A644[];
+extern "C" float DAT_003A968C;
+extern "C" char sub_000F30E0[];
+
+class Class_000F3890
+{
+public:
+    Class_000F3890* sub_000F3890(int a1, int a2);
+    void sub_000F0360(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x48];
+    int m_Field4C; // +0x4C
+    float m_Field50; // +0x50
+    int m_Field54; // +0x54
+    int m_Field58; // +0x58
+    int m_Field5C; // +0x5C
+    int m_Field60; // +0x60
+};
+
+Class_000F3890* Class_000F3890::sub_000F3890(int a1, int a2)
+{
+    float t2;
+
+    sub_000F0360(a1, a2);
+    t2 = DAT_003A968C;
+    m_Field4C = 0;
+    m_Field54 = 0;
+    m_Field58 = 0;
+    m_Field50 = t2;
+    m_Field00 = (int)DAT_0038A644;
+    m_Field5C = (int)DAT_0038A55C;
+    m_Field60 = (int)sub_000F30E0;
     return this;
 }
 
@@ -42226,6 +56256,47 @@ struct Class_000F5280
 
 // std::_Rotate for random-access iterators, instantiated for Class_000F5280.
 template void std::_Rotate<Class_000F5280 *, int, Class_000F5280>(Class_000F5280 *, Class_000F5280 *, Class_000F5280 *, int *, Class_000F5280 *);
+
+// ============================================================================
+// [VERIFIED] sub_000F54D0 (0x000F54D0, 97 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000F54D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000F54D0 (Proto 0x000F54D0, 97 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037D77C;
+extern "C" float DAT_003836C4;
+extern "C" int DAT_0045BB50;
+extern "C" int __cdecl sub_00025140(int, int);
+extern "C" void __cdecl sub_00025160(int);
+
+void __cdecl sub_000F54D0(int a1)
+{
+    int r_esi, t1, t4;
+    float t3;
+
+    t1 = sub_00025140(332, a1);
+    if (t1) {
+        *(float*)(t1 + 324) = DAT_003836C4;
+        t3 = DAT_0037D77C;
+        *(int*)(t1 + 320) = 0;
+        *(float*)(t1 + 328) = t3;
+        r_esi = t1;
+    } else {
+        r_esi = 0;
+    }
+    t4 = DAT_0045BB50;
+    if (DAT_0045BB50) {
+        sub_00025160(t4);
+    }
+    DAT_0045BB50 = r_esi;
+}
 
 // ============================================================================
 // [VERIFIED] sub_000F61F0 (0x000F61F0, 61 B)
@@ -43120,6 +57191,32 @@ void Class_000F9400::sub_000F9400(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000F9B60 (0x000F9B60, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000F9B60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000F9B60 (Proto 0x000F9B60, 38 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000F9B60
+{
+public:
+    int sub_000F9B60(int a1, int a2);
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Class_000F9B60::sub_000F9B60(int a1, int a2)
+{
+    return *(int*)(m_Field14 + ((((((unsigned int)*(int*)(a1 + 120)) >> 4) & 127) + (((((unsigned int)*(int*)(a1 + 120)) >> 4) & 127) * 2)) * 4) + 4) == *(int*)(a2 + 16);
+}
+
+// ============================================================================
 // [VERIFIED] sub_000F9C60 (0x000F9C60, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // What it does: Stores a yes/no value in a table entry picked by a 7-bit index read from another object.
@@ -43146,6 +57243,44 @@ void Class_000F9C60::sub_000F9C60(int a1, bool a2)
 
     t1 = m_Field14;
     *(bool*)(m_Field14 + ((((((unsigned int)*(int*)(a1 + 120)) >> 4) & 127) + (((((unsigned int)*(int*)(a1 + 120)) >> 4) & 127) * 2)) * 4) + 9) = a2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000F9D10 (0x000F9D10, 58 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000F9D10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000F9D10 (Proto 0x000F9D10, 58 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_000F9D10
+{
+public:
+    void sub_000F9D10(int a1, int a2);
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+    char m_pad18[0xC];
+    bool m_Field24; // +0x24
+};
+
+void Class_000F9D10::sub_000F9D10(int a1, int a2)
+{
+    int t1;
+
+    t1 = m_Field14 + ((((((unsigned int)*(int*)(a1 + 120)) >> 4) & 127) + (((((unsigned int)*(int*)(a1 + 120)) >> 4) & 127) * 2)) * 4);
+    if (*(int*)(m_Field14 + ((((((unsigned int)*(int*)(a1 + 120)) >> 4) & 127) + (((((unsigned int)*(int*)(a1 + 120)) >> 4) & 127) * 2)) * 4) + 4) == *(int*)(a2 + 16)) {
+        if (!*(int*)(t1 + 4)) goto L_36;
+        *(int*)(t1 + 4) = 0;
+        *(bool*)(t1 + 8) = false;
+        m_Field24 = true;
+    }
+L_36:
+    ;
 }
 
 // ============================================================================
@@ -43521,6 +57656,37 @@ Class_000FABB0* Class_000FABB0::sub_000FABB0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_000FB060 (0x000FB060, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x000FB060
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000FB060 (Proto 0x000FB060, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_000F9C10(int, float);
+};
+
+extern "C" int DAT_0045BC80;
+
+class Class_000FB060
+{
+public:
+    void sub_000FB060(float a1);
+};
+
+void Class_000FB060::sub_000FB060(float a1)
+{
+    ((Object*)DAT_0045BC80)->sub_000F9C10((int)this, a1 * a1);
+}
+
+// ============================================================================
 // [VERIFIED] sub_000FB0A0 (0x000FB0A0, 34 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -43721,6 +57887,48 @@ L_38:
     m_Field04 = 0;
     m_Field08 = 0;
     return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000FB7D0 (0x000FB7D0, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000FB7D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000FB7D0 (Proto 0x000FB7D0, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_002018F0(int, int);
+
+class Class_000FB7D0
+{
+public:
+    void sub_000FB7D0(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void Class_000FB7D0::sub_000FB7D0(int a1)
+{
+    int t1;
+
+    if (a1) {
+        t1 = sub_002018F0(10, a1 * 4);
+        m_Field00 = t1;
+        if (!t1) goto L_37;
+        m_Field08 = (a1 * 4) + t1;
+        m_Field04 = t1;
+        return;
+    }
+    m_Field00 = 0;
+L_37:
+    m_Field04 = 0;
+    m_Field08 = 0;
 }
 
 // ============================================================================
@@ -43929,6 +58137,38 @@ int Class_000FD4A0::sub_000FD4A0()
     }
     r_eax += -2;
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000FE4B0 (0x000FE4B0, 35 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000FE4B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_000FE4B0 (Proto 0x000FE4B0, 35 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_000FE010(int, int, int);
+
+class Class_000FE4B0
+{
+public:
+    void sub_000FE4B0(int a1);
+    char m_pad00[0x4C];
+    unsigned char m_Field4C; // +0x4C
+    char m_pad4D[0x3];
+    int m_Field50; // +0x50
+};
+
+void Class_000FE4B0::sub_000FE4B0(int a1)
+{
+    if (!m_Field4C) {
+        m_Field4C = sub_000FE010(a1, (int)this, (int)(&m_Field50));
+    }
 }
 
 // ============================================================================
@@ -45145,6 +59385,40 @@ L_2F:
 }
 
 // ============================================================================
+// [VERIFIED] sub_00102E80 (0x00102E80, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00102E80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00102E80 (Proto 0x00102E80, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045A0EC;
+
+class Class_00102E80
+{
+public:
+    int sub_00102E80(int a1);
+    char m_pad00[0x8];
+    int m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+};
+
+int Class_00102E80::sub_00102E80(int a1)
+{
+    if (m_Field0C) {
+        if ((*(int*)(DAT_0045A0EC + 44) - m_Field08) > a1) goto L_20;
+        return 1;
+    }
+L_20:
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00102F80 (0x00102F80, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -45167,6 +59441,41 @@ Class_00102F80* Class_00102F80::sub_00102F80()
     m_Field00 = (int)DAT_0038C664;
     m_Field04 = false;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00102F90 (0x00102F90, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00102F90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00102F90 (Proto 0x00102F90, 28 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00102F90
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    void sub_00102F90();
+    bool m_Field04; // +0x04
+};
+
+void Class_00102F90::sub_00102F90()
+{
+    if (m_Field04) {
+        vfunc_04();
+        vfunc_05();
+        m_Field04 = false;
+    }
 }
 
 // ============================================================================
@@ -46400,6 +60709,41 @@ Class_00105FD0* Class_00105FD0::sub_00105FD0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00105FF0 (0x00105FF0, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00105FF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00105FF0 (Proto 0x00105FF0, 38 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038CACC[];
+extern "C" void __cdecl sub_00102F80(void);
+
+class Class_00105FF0
+{
+public:
+    Class_00105FF0* sub_00105FF0(int a1, float a2);
+    int m_Field00; // +0x00
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+Class_00105FF0* Class_00105FF0::sub_00105FF0(int a1, float a2)
+{
+    sub_00102F80();
+    m_Field08 = a1;
+    m_Field00 = (int)DAT_0038CACC;
+    m_Field0C = a2;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00106020 (0x00106020, 40 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -46881,6 +61225,60 @@ L_46:
 }
 
 // ============================================================================
+// [VERIFIED] sub_00106CB0 (0x00106CB0, 124 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00106CB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00106CB0 (Proto 0x00106CB0, 124 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_0038CDAC[];
+extern "C" int __cdecl sub_00025120(int);
+
+int __cdecl sub_00106CB0(int a1, int a2, int a3, float a4)
+{
+    int r_edi, r_esi, t1, t3;
+
+    t1 = sub_00025120(36);
+    if (t1) {
+        *(int*)(t1 + 8) = a2;
+        *(int*)(t1 + 4) = 0;
+        *(int*)t1 = (int)DAT_0038CDAC;
+        *(int*)(t1 + 12) = *(int*)a3;
+        *(int*)(t1 + 16) = *(int*)(a3 + 4);
+        *(int*)(t1 + 20) = *(int*)(a3 + 8);
+        *(int*)(t1 + 24) = *(int*)(a3 + 12);
+        *(int*)(t1 + 28) = *(int*)(a3 + 16);
+        *(float*)(t1 + 32) = a4;
+        r_esi = t1;
+    } else {
+        r_esi = 0;
+    }
+    r_edi = a1;
+    *(int*)r_edi = 0;
+    if (r_esi) {
+        ((Object*)r_esi)->vfunc_00();
+        t3 = *(int*)r_edi;
+        if (!*(int*)r_edi) goto L_75;
+        ((Object*)t3)->vfunc_01();
+    }
+L_75:
+    *(int*)r_edi = r_esi;
+    return r_edi;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00106D30 (0x00106D30, 82 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -47008,6 +61406,47 @@ L_4C:
 }
 
 // ============================================================================
+// [VERIFIED] sub_00107030 (0x00107030, 60 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00107030
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00107030 (Proto 0x00107030, 60 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" char DAT_0038CDCC[];
+
+class Class_00107030
+{
+public:
+    Class_00107030* sub_00107030(int a1, int a2);
+    void sub_0010DC20(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x50];
+    int m_Field54; // +0x54
+    float m_Field58; // +0x58
+    float m_Field5C; // +0x5C
+};
+
+Class_00107030* Class_00107030::sub_00107030(int a1, int a2)
+{
+    float t2;
+
+    sub_0010DC20(a1, a2);
+    m_Field58 = 0.0f;
+    t2 = DAT_0037CE50;
+    m_Field00 = (int)DAT_0038CDCC;
+    m_Field54 = 0;
+    m_Field5C = t2;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00107F70 (0x00107F70, 80 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -47056,6 +61495,46 @@ Class_00107F70* Class_00107F70::sub_00107F70(int a1, int a2)
     m_FieldC0.sub_001B2090();
     m_FieldC0.sub_000BAEA0();
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001089C0 (0x001089C0, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001089C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001089C0 (Proto 0x001089C0, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045A0EC;
+
+class Class_001089C0
+{
+public:
+    int sub_001089C0();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    bool m_Field28; // +0x28
+    char m_pad29[0x3];
+    int m_Field2C; // +0x2C
+    int m_Field30; // +0x30
+};
+
+int Class_001089C0::sub_001089C0()
+{
+    if ((unsigned int)((m_Field30 - m_Field2C) >> 2) < (unsigned int)m_Field20) {
+        if (m_Field28) {
+            if ((unsigned int)*(int*)(DAT_0045A0EC + 40) >= (unsigned int)m_Field24) goto L_2D;
+        }
+        return 1;
+    }
+L_2D:
+    return 0;
 }
 
 // ============================================================================
@@ -47142,6 +61621,111 @@ Object* __cdecl sub_00109A50(void)
         sub_002C8EB3((int)sub_002F27C0);
     }
     return &DAT_0045BFF0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00109BC0 (0x00109BC0, 51 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00109BC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00109BC0 (Proto 0x00109BC0, 51 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00109980();
+};
+
+extern "C" Object DAT_0045BFF0;
+extern "C" bool DAT_0045C000;
+extern "C" char sub_002F27C0[];
+extern "C" void __cdecl sub_002C8EB3(int);
+
+void __cdecl sub_00109BC0(void)
+{
+    if (!(1 & DAT_0045C000)) {
+        *(int*)&DAT_0045C000 = *(int*)&DAT_0045C000 | 1;
+        DAT_0045BFF0.sub_00109980();
+        sub_002C8EB3((int)sub_002F27C0);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0010A150 (0x0010A150, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0010A150
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0010A150 (Proto 0x0010A150, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0010A150
+{
+public:
+    int sub_0010A150(int a1, float a2, float a3);
+    char m_pad00[0x54];
+    int m_Field54; // +0x54
+    float m_Field58; // +0x58
+    float m_Field5C; // +0x5C
+};
+
+int Class_0010A150::sub_0010A150(int a1, float a2, float a3)
+{
+    m_Field5C = a2;
+    m_Field54 = a1;
+    m_Field58 = a3;
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0010A2F0 (0x0010A2F0, 65 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0010A2F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0010A2F0 (Proto 0x0010A2F0, 65 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0038ADF0;
+extern "C" char DAT_0038D8A4[];
+
+class Class_0010A2F0
+{
+public:
+    Class_0010A2F0* sub_0010A2F0(int a1, int a2);
+    void sub_0010DC20(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x50];
+    int m_Field54; // +0x54
+    float m_Field58; // +0x58
+    float m_Field5C; // +0x5C
+};
+
+Class_0010A2F0* Class_0010A2F0::sub_0010A2F0(int a1, int a2)
+{
+    float t3;
+
+    sub_0010DC20(a1, a2);
+    m_Field58 = DAT_0038ADF0;
+    t3 = DAT_0037CE50;
+    m_Field00 = (int)DAT_0038D8A4;
+    m_Field54 = 0;
+    m_Field5C = t3;
+    return this;
 }
 
 // ============================================================================
@@ -47349,6 +61933,40 @@ Object* __cdecl sub_0010CBC0(void)
         sub_002C8EB3((int)sub_002F2800);
     }
     return &DAT_0045C0D8;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0010CC10 (0x0010CC10, 61 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0010CC10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0010CC10 (Proto 0x0010CC10, 61 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001FF300();
+};
+
+extern "C" Object DAT_0045C0D8;
+extern "C" int DAT_0045C0F4;
+extern "C" bool DAT_0045C0F8;
+extern "C" char sub_002F2800[];
+extern "C" void __cdecl sub_002C8EB3(int);
+
+void __cdecl sub_0010CC10(void)
+{
+    if (!(1 & DAT_0045C0F8)) {
+        *(int*)&DAT_0045C0F8 = *(int*)&DAT_0045C0F8 | 1;
+        DAT_0045C0D8.sub_001FF300();
+        DAT_0045C0F4 = 32;
+        sub_002C8EB3((int)sub_002F2800);
+    }
 }
 
 // ============================================================================
@@ -47613,6 +62231,44 @@ void Class_0010E960::sub_0010E960(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00111250 (0x00111250, 105 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00111250
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00111250 (Proto 0x00111250, 105 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00111250
+{
+public:
+    void sub_00111250(int a1, int a2, int a3, int a4, int a5);
+    void sub_0010EA40(int, int, int, int, int, int);
+    char m_pad00[0x8];
+    int m_Field08; // +0x08
+};
+
+void Class_00111250::sub_00111250(int a1, int a2, int a3, int a4, int a5)
+{
+    unsigned short t1, t3;
+
+    t1 = *(unsigned short*)a2;
+    if (*(unsigned short*)a2 != 65535) {
+        if (t1 == ((unsigned short)a4)) goto L_43;
+        sub_00111250(a1, *(int*)(m_Field08 + 12) + ((((unsigned short)t1) + (((unsigned short)t1) * 4)) * 4), a3, a4, a5);
+    }
+L_43:
+    t3 = *(unsigned short*)(a2 + 6);
+    if (*(unsigned short*)(a2 + 6) != 65535) {
+        sub_0010EA40(a1, (unsigned short)t3, 0, a5, a2, a3);
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_001114B0 (0x001114B0, 95 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -47818,6 +62474,34 @@ int __stdcall sub_00112080(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001120B0 (0x001120B0, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001120B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001120B0 (Proto 0x001120B0, 40 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045C1E8;
+extern "C" int DAT_0045C1F0;
+extern "C" float DAT_0045C1F4;
+
+int __stdcall sub_001120B0(float a1)
+{
+    int t1;
+
+    t1 = DAT_0045C1E8;
+    *(int*)(((int)&DAT_0045C1F0) + (DAT_0045C1E8 * 8)) = 2;
+    *(float*)(((int)&DAT_0045C1F4) + (t1 * 8)) = a1;
+    DAT_0045C1E8 = t1 + 1;
+    return t1 + 1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001120E0 (0x001120E0, 36 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -47838,6 +62522,43 @@ int __stdcall sub_001120E0(bool a1)
     *(bool*)(((int)&DAT_0045C1F4) + (t1 * 8)) = a1;
     DAT_0045C1E8 = t1 + 1;
     return t1 + 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00112230 (0x00112230, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00112230
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00112230 (Proto 0x00112230, 62 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD94;
+extern "C" int DAT_0045C1E8;
+extern "C" int DAT_0045C1F0;
+extern "C" float DAT_0045C1F4;
+
+float __stdcall sub_00112230(int a1)
+{
+    int r_eax, r_ecx;
+
+    r_eax = a1;
+    if (a1 < 0) {
+        r_ecx = DAT_0045C1E8;
+        r_eax += r_ecx;
+    }
+    r_ecx = *(int*)(((int)&DAT_0045C1F0) + (r_eax * 8));
+    if (r_ecx == 2) {
+        return *(float*)(((int)&DAT_0045C1F4) + (r_eax * 8));
+    }
+    if (r_ecx == 1) {
+        return (float)*(int*)(((int)&DAT_0045C1F4) + (r_eax * 8));
+    }
+    return DAT_0037CD94;
 }
 
 // ============================================================================
@@ -47919,6 +62640,118 @@ Class_00112790* Class_00112790::sub_00112790(int a1)
 {
     m_Field04 = 4;
     m_Field00 = (int)DAT_0038F280;
+    m_Field08 = a1;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001128C0 (0x001128C0, 71 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001128C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001128C0 (Proto 0x001128C0, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F2D0[];
+
+class Class_001128C0
+{
+public:
+    Class_001128C0* sub_001128C0(int a1, float a2, bool a3, bool a4, bool a5, bool a6);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    bool m_Field14; // +0x14
+    bool m_Field15; // +0x15
+    bool m_Field16; // +0x16
+    bool m_Field17; // +0x17
+};
+
+Class_001128C0* Class_001128C0::sub_001128C0(int a1, float a2, bool a3, bool a4, bool a5, bool a6)
+{
+    m_Field08 = a1;
+    m_Field14 = a3;
+    m_Field15 = a4;
+    m_Field04 = 7;
+    m_Field00 = (int)DAT_0038F2D0;
+    m_Field0C = 0;
+    m_Field10 = a2;
+    m_Field16 = a5;
+    m_Field17 = a6;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00112A20 (0x00112A20, 47 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00112A20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00112A20 (Proto 0x00112A20, 47 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F2F8[];
+
+class Class_00112A20
+{
+public:
+    Class_00112A20* sub_00112A20(int a1, float a2, float a3);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_00112A20* Class_00112A20::sub_00112A20(int a1, float a2, float a3)
+{
+    m_Field0C = a2;
+    m_Field04 = 6;
+    m_Field00 = (int)DAT_0038F2F8;
+    m_Field08 = a1;
+    m_Field10 = a3;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00112B10 (0x00112B10, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00112B10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00112B10 (Proto 0x00112B10, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F320[];
+
+class Class_00112B10
+{
+public:
+    Class_00112B10* sub_00112B10(float a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+Class_00112B10* Class_00112B10::sub_00112B10(float a1)
+{
+    m_Field04 = 8;
+    m_Field00 = (int)DAT_0038F320;
     m_Field08 = a1;
     return this;
 }
@@ -48037,6 +62870,48 @@ Class_00112CE0* Class_00112CE0::sub_00112CE0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00113120 (0x00113120, 65 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00113120
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00113120 (Proto 0x00113120, 65 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F2A8[];
+
+class Class_00113120
+{
+public:
+    Class_00113120* sub_00113120(int a1, float a2, float a3);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+};
+
+Class_00113120* Class_00113120::sub_00113120(int a1, float a2, float a3)
+{
+    m_Field18 = a2;
+    m_Field1C = a3;
+    m_Field04 = 5;
+    m_Field00 = (int)DAT_0038F2A8;
+    m_Field08 = a1;
+    m_Field14 = 0.0f;
+    m_Field10 = 0.0f;
+    m_Field0C = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00113820 (0x00113820, 40 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -48059,6 +62934,34 @@ int __cdecl sub_00113820(void)
         DAT_0045C270 = r_eax;
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00113850 (0x00113850, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00113850
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00113850 (Proto 0x00113850, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00113850
+{
+public:
+    void sub_00113850();
+    char m_pad00[0x5C5];
+    bool m_Field5C5; // +0x5C5
+};
+
+void Class_00113850::sub_00113850()
+{
+    if (m_Field5C5) {
+        m_Field5C5 = false;
+    }
 }
 
 // ============================================================================
@@ -48233,6 +63136,39 @@ int __cdecl sub_00117970(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001179D0 (0x001179D0, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001179D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001179D0 (Proto 0x001179D0, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037D4CC;
+extern "C" int DAT_0045A0EC;
+
+class Class_001179D0
+{
+public:
+    float sub_001179D0();
+    char m_pad00[0x5B4];
+    int m_Field5B4; // +0x5B4
+};
+
+float Class_001179D0::sub_001179D0()
+{
+    int local_4, t1;
+
+    t1 = DAT_0045A0EC;
+    local_4 = *(int*)(DAT_0045A0EC + 44) - m_Field5B4;
+    return ((float)local_4) * DAT_0037D4CC;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00117FB0 (0x00117FB0, 12 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -48276,6 +63212,33 @@ void __cdecl sub_00118940(int a1, bool a2)
 {
     ((Object*)a1)->sub_0014A570(2, DAT_0045C278);
     *(bool*)(((Object*)a1)->sub_0014A630(2, 1) + 96) = !a2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001189A0 (0x001189A0, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001189A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001189A0 (Proto 0x001189A0, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0014A570(int, int);
+    int sub_0014A630(int, int);
+};
+
+extern "C" int DAT_0045C278;
+
+void __cdecl sub_001189A0(int a1, float a2)
+{
+    ((Object*)a1)->sub_0014A570(2, DAT_0045C278);
+    *(float*)(((Object*)a1)->sub_0014A630(2, 1) + 88) = a2;
 }
 
 // ============================================================================
@@ -48510,6 +63473,40 @@ Class_00118F80* Class_00118F80::sub_00118F80()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00118F90 (0x00118F90, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as sub_00112B10 (Proto 0x00112B10), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x00118F90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00118F90 (Proto 0x00118F90, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F6F8[];
+
+class Class_00118F90
+{
+public:
+    Class_00118F90* sub_00118F90(float a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+Class_00118F90* Class_00118F90::sub_00118F90(float a1)
+{
+    m_Field04 = 8;
+    m_Field00 = (int)DAT_0038F6F8;
+    m_Field08 = a1;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00118FD0 (0x00118FD0, 16 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -48585,6 +63582,44 @@ Class_00119030* Class_00119030::sub_00119030()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00119080 (0x00119080, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119080
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119080 (Proto 0x00119080, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F788[];
+
+class Class_00119080
+{
+public:
+    Class_00119080* sub_00119080(int a1, float a2, bool a3);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    bool m_Field14; // +0x14
+};
+
+Class_00119080* Class_00119080::sub_00119080(int a1, float a2, bool a3)
+{
+    m_Field04 = 10;
+    m_Field00 = (int)DAT_0038F788;
+    m_Field08 = a1;
+    m_Field0C = a2;
+    m_Field10 = 0;
+    m_Field14 = a3;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001190C0 (0x001190C0, 47 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -48615,6 +63650,80 @@ Class_001190C0* Class_001190C0::sub_001190C0(int a1, bool a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00119130 (0x00119130, 73 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119130
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119130 (Proto 0x00119130, 73 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F7F4[];
+
+class Class_00119130
+{
+public:
+    Class_00119130* sub_00119130(float a1, float a2, float a3, float a4, float a5);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+};
+
+Class_00119130* Class_00119130::sub_00119130(float a1, float a2, float a3, float a4, float a5)
+{
+    m_Field08 = a1;
+    m_Field0C = a2;
+    m_Field10 = a3;
+    m_Field14 = a4;
+    m_Field04 = 13;
+    m_Field00 = (int)DAT_0038F7F4;
+    m_Field18 = a5;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00119220 (0x00119220, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119220
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119220 (Proto 0x00119220, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F83C[];
+
+class Class_00119220
+{
+public:
+    Class_00119220* sub_00119220(float a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+Class_00119220* Class_00119220::sub_00119220(float a1)
+{
+    m_Field08 = a1;
+    m_Field04 = 15;
+    m_Field00 = (int)DAT_0038F83C;
+    m_Field0C = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00119270 (0x00119270, 32 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -48640,6 +63749,76 @@ Class_00119270* Class_00119270::sub_00119270(bool a1, bool a2)
     m_Field00 = (int)DAT_0038F860;
     m_Field08 = a1;
     m_Field09 = a2;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00119300 (0x00119300, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119300
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119300 (Proto 0x00119300, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F884[];
+
+class Class_00119300
+{
+public:
+    Class_00119300* sub_00119300(float a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+Class_00119300* Class_00119300::sub_00119300(float a1)
+{
+    m_Field08 = a1;
+    m_Field04 = 17;
+    m_Field00 = (int)DAT_0038F884;
+    m_Field0C = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00119350 (0x00119350, 47 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119350
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119350 (Proto 0x00119350, 47 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F8A8[];
+
+class Class_00119350
+{
+public:
+    Class_00119350* sub_00119350(int a1, float a2, float a3);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_00119350* Class_00119350::sub_00119350(int a1, float a2, float a3)
+{
+    m_Field0C = a2;
+    m_Field04 = 18;
+    m_Field00 = (int)DAT_0038F8A8;
+    m_Field08 = a1;
+    m_Field10 = a3;
     return this;
 }
 
@@ -48692,6 +63871,45 @@ Class_001193B0* Class_001193B0::sub_001193B0()
 {
     m_Field04 = 20;
     m_Field00 = (int)DAT_0038F8F0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001193C0 (0x001193C0, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001193C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001193C0 (Proto 0x001193C0, 62 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F914[];
+extern "C" int __cdecl sub_0006C370(int, int);
+
+class Class_001193C0
+{
+public:
+    Class_001193C0* sub_001193C0(int a1, float a2, bool a3);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    bool m_Field10; // +0x10
+    bool m_Field11; // +0x11
+};
+
+Class_001193C0* Class_001193C0::sub_001193C0(int a1, float a2, bool a3)
+{
+    m_Field04 = 21;
+    m_Field00 = (int)DAT_0038F914;
+    m_Field0C = a2;
+    m_Field10 = false;
+    m_Field11 = a3;
+    m_Field08 = sub_0006C370(a1, 0);
     return this;
 }
 
@@ -48776,6 +63994,51 @@ Class_001194C0* Class_001194C0::sub_001194C0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00119510 (0x00119510, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119510
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119510 (Proto 0x00119510, 72 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" char DAT_0038F9A4[];
+
+class Class_00119510
+{
+public:
+    Class_00119510* sub_00119510(int a1, float a2, bool a3);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    char m_pad10[0x4];
+    float m_Field14; // +0x14
+    bool m_Field18; // +0x18
+};
+
+Class_00119510* Class_00119510::sub_00119510(int a1, float a2, bool a3)
+{
+    m_Field0C = DAT_0037CE60;
+    m_Field04 = 25;
+    m_Field00 = (int)DAT_0038F9A4;
+    m_Field08 = a1;
+    m_Field14 = a2;
+    m_Field18 = a3;
+    if (a1 > 0) {
+        if (a1 < 21) goto L_45;
+    }
+    m_Field08 = 17;
+L_45:
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001195B0 (0x001195B0, 25 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -48830,6 +64093,78 @@ Class_00119600* Class_00119600::sub_00119600(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00119670 (0x00119670, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119670
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119670 (Proto 0x00119670, 62 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038FA10[];
+
+class Class_00119670
+{
+public:
+    Class_00119670* sub_00119670(float a1, float a2, float a3, float a4);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+Class_00119670* Class_00119670::sub_00119670(float a1, float a2, float a3, float a4)
+{
+    m_Field08 = a1;
+    m_Field0C = a2;
+    m_Field10 = a3;
+    m_Field04 = 28;
+    m_Field00 = (int)DAT_0038FA10;
+    m_Field14 = a4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001196B0 (0x001196B0, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001196B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001196B0 (Proto 0x001196B0, 40 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038FA34[];
+
+class Class_001196B0
+{
+public:
+    Class_001196B0* sub_001196B0(float a1, float a2);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+Class_001196B0* Class_001196B0::sub_001196B0(float a1, float a2)
+{
+    m_Field08 = a1;
+    m_Field04 = 29;
+    m_Field00 = (int)DAT_0038FA34;
+    m_Field0C = a2;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00119700 (0x00119700, 25 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -48852,6 +64187,38 @@ Class_00119700* Class_00119700::sub_00119700(bool a1)
 {
     m_Field04 = 30;
     m_Field00 = (int)DAT_0038FA58;
+    m_Field08 = a1;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00119750 (0x00119750, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119750
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119750 (Proto 0x00119750, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038FA7C[];
+
+class Class_00119750
+{
+public:
+    Class_00119750* sub_00119750(float a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+};
+
+Class_00119750* Class_00119750::sub_00119750(float a1)
+{
+    m_Field04 = 31;
+    m_Field00 = (int)DAT_0038FA7C;
     m_Field08 = a1;
     return this;
 }
@@ -48934,6 +64301,42 @@ Class_00119840* Class_00119840::sub_00119840(int a1)
     m_Field04 = 34;
     m_Field00 = (int)DAT_0038FAE8;
     m_Field08 = a1;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00119880 (0x00119880, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119880
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119880 (Proto 0x00119880, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038FB0C[];
+
+class Class_00119880
+{
+public:
+    Class_00119880* sub_00119880(float a1, float a2);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_00119880* Class_00119880::sub_00119880(float a1, float a2)
+{
+    m_Field08 = a1;
+    m_Field0C = a2;
+    m_Field04 = 35;
+    m_Field00 = (int)DAT_0038FB0C;
+    m_Field10 = 0.0f;
     return this;
 }
 
@@ -49061,6 +64464,88 @@ Class_001199B0* Class_001199B0::sub_001199B0(int a1)
     m_Field04 = 40;
     m_Field00 = (int)DAT_0038FBC0;
     m_Field08 = a1;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00119D20 (0x00119D20, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119D20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119D20 (Proto 0x00119D20, 66 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038FBE4[];
+
+class Class_00119D20
+{
+public:
+    Class_00119D20* sub_00119D20(float a1, int a2);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    float m_Field14; // +0x14
+    bool m_Field18; // +0x18
+    bool m_Field19; // +0x19
+};
+
+Class_00119D20* Class_00119D20::sub_00119D20(float a1, int a2)
+{
+    m_Field04 = 9;
+    m_Field00 = (int)DAT_0038FBE4;
+    m_Field14 = a1;
+    m_Field18 = false;
+    m_Field19 = !a2;
+    if (a2) {
+        m_Field08 = *(int*)a2;
+        m_Field0C = *(int*)(a2 + 4);
+        m_Field10 = *(int*)(a2 + 8);
+    }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00119F20 (0x00119F20, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00119F20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00119F20 (Proto 0x00119F20, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038F7D0[];
+
+class Class_00119F20
+{
+public:
+    Class_00119F20* sub_00119F20(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+};
+
+Class_00119F20* Class_00119F20::sub_00119F20(int a1)
+{
+    m_Field04 = 12;
+    m_Field00 = (int)DAT_0038F7D0;
+    m_Field08 = a1;
+    m_Field14 = 0.0f;
+    m_Field10 = 0.0f;
+    m_Field0C = 0.0f;
     return this;
 }
 
@@ -50246,6 +65731,80 @@ Class_0011D5E0* Class_0011D5E0::sub_0011D5E0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0011D610 (0x0011D610, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0011D610
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0011D610 (Proto 0x0011D610, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038FE88[];
+
+class Class_0011D610
+{
+public:
+    Class_0011D610* sub_0011D610(int a1, int a2, float a3, bool a4);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    bool m_Field14; // +0x14
+};
+
+Class_0011D610* Class_0011D610::sub_0011D610(int a1, int a2, float a3, bool a4)
+{
+    m_Field08 = a1;
+    m_Field04 = 5;
+    m_Field00 = (int)DAT_0038FE88;
+    m_Field0C = a2;
+    m_Field10 = a3;
+    m_Field14 = a4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0011D6A0 (0x0011D6A0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0011D6A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0011D6A0 (Proto 0x0011D6A0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038FEA8[];
+
+class Class_0011D6A0
+{
+public:
+    Class_0011D6A0* sub_0011D6A0(int a1, int a2, float a3);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_0011D6A0* Class_0011D6A0::sub_0011D6A0(int a1, int a2, float a3)
+{
+    m_Field04 = 7;
+    m_Field08 = a1;
+    m_Field00 = (int)DAT_0038FEA8;
+    m_Field0C = a2;
+    m_Field10 = a3;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0011D710 (0x0011D710, 33 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -50486,6 +66045,40 @@ Class_0011D960* Class_0011D960::sub_0011D960(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0011DAF0 (0x0011DAF0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0011DAF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0011DAF0 (Proto 0x0011DAF0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0038FF50[];
+
+class Class_0011DAF0
+{
+public:
+    Class_0011DAF0* sub_0011DAF0(int a1, float a2);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+};
+
+Class_0011DAF0* Class_0011DAF0::sub_0011DAF0(int a1, float a2)
+{
+    m_Field04 = 17;
+    m_Field08 = a1;
+    m_Field00 = (int)DAT_0038FF50;
+    m_Field0C = a2;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0011DB50 (0x0011DB50, 25 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -50510,6 +66103,30 @@ Class_0011DB50* Class_0011DB50::sub_0011DB50(int a1)
     m_Field08 = a1;
     m_Field00 = (int)DAT_0038FF60;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0011E030 (0x0011E030, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0011E030
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0011E030 (Proto 0x0011E030, 63 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+float __cdecl sub_0011E030(float a1, float a2, float a3, float a4, float a5)
+{
+    if (a1 >= a4) {
+        return (a2 * a4) + a5;
+    }
+    if (a3 >= a1) {
+        return (a2 * a3) + a5;
+    }
+    return (a1 * a2) + a5;
 }
 
 // ============================================================================
@@ -50547,6 +66164,80 @@ void Class_0011E660::sub_0011E660(int a1, int a2, int a3)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0011E6A0 (0x0011E6A0, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0011E6A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0011E6A0 (Proto 0x0011E6A0, 42 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0011E6A0
+{
+public:
+    int sub_0011E6A0(int a1);
+    char m_pad00[0x44];
+    int m_Field44; // +0x44
+    float m_Field48; // +0x48
+    char m_pad4C[0x4];
+    int m_Field50; // +0x50
+    float m_Field54; // +0x54
+};
+
+int Class_0011E6A0::sub_0011E6A0(int a1)
+{
+    int r_eax;
+
+    r_eax = a1;
+    if (a1 != m_Field44) {
+        m_Field44 = a1;
+        r_eax = m_Field50;
+        m_Field48 = 0.0f;
+        if (!r_eax) goto L_27;
+        m_Field50 = 0;
+        m_Field54 = 0.0f;
+    }
+L_27:
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00120370 (0x00120370, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00120370
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00120370 (Proto 0x00120370, 33 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0011E4B0(void);
+
+class Class_00120370
+{
+public:
+    void sub_00120370(int a1);
+    void sub_00120000(int);
+    char m_pad00[0x12C];
+    unsigned char m_Field12C; // +0x12C
+};
+
+void Class_00120370::sub_00120370(int a1)
+{
+    sub_0011E4B0();
+    if ((unsigned int)m_Field12C > (unsigned int)1) {
+        sub_00120000(a1);
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_001210D0 (0x001210D0, 49 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -50579,6 +66270,48 @@ Class_001210D0* Class_001210D0::sub_001210D0(int a1, int a2)
     m_Field00 = (int)DAT_00390034;
     m_Field28.sub_0008D4A0(0);
     m_Field2C = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00121130 (0x00121130, 70 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00121130
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00121130 (Proto 0x00121130, 70 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" char DAT_003900C4[];
+
+class Class_00121130
+{
+public:
+    Class_00121130* sub_00121130(int a1, int a2);
+    void sub_001210D0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x2C];
+    int m_Field30; // +0x30
+    float m_Field34; // +0x34
+    float m_Field38; // +0x38
+    float m_Field3C; // +0x3C
+    float m_Field40; // +0x40
+};
+
+Class_00121130* Class_00121130::sub_00121130(int a1, int a2)
+{
+    sub_001210D0(a1, a2);
+    m_Field00 = (int)DAT_003900C4;
+    m_Field30 = 0;
+    m_Field34 = 0.0f;
+    m_Field38 = 0.0f;
+    m_Field3C = 0.0f;
+    m_Field40 = DAT_0037CE50;
     return this;
 }
 
@@ -50624,6 +66357,154 @@ int Class_00121760::sub_00121760(int a1)
 {
     m_Field34 = a1;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00121770 (0x00121770, 107 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00121770
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00121770 (Proto 0x00121770, 107 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field38
+{
+    void sub_0008D4A0(int);
+};
+
+extern "C" float DAT_0039014C;
+extern "C" char DAT_00390154[];
+
+class Class_00121770
+{
+public:
+    Class_00121770* sub_00121770(int a1, int a2);
+    void sub_001210D0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x2C];
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    Field38 m_Field38; // +0x38
+    char m_pad39[0x3];
+    int m_Field3C; // +0x3C
+    int m_Field40; // +0x40
+    int m_Field44; // +0x44
+    int m_Field48; // +0x48
+    float m_Field4C; // +0x4C
+    float m_Field50; // +0x50
+    int m_Field54; // +0x54
+    float m_Field58; // +0x58
+    int m_Field5C; // +0x5C
+};
+
+Class_00121770* Class_00121770::sub_00121770(int a1, int a2)
+{
+    float t3;
+
+    sub_001210D0(a1, a2);
+    m_Field00 = (int)DAT_00390154;
+    m_Field30 = 0;
+    m_Field34 = 0;
+    m_Field38.sub_0008D4A0(0);
+    m_Field3C = 0;
+    m_Field40 = 0;
+    m_Field48 = 7;
+    m_Field4C = 0.0f;
+    m_Field50 = 0.0f;
+    t3 = DAT_0039014C;
+    m_Field44 = 0;
+    m_Field54 = -1;
+    m_Field58 = t3;
+    m_Field5C = 1;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00121B30 (0x00121B30, 64 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00121B30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00121B30 (Proto 0x00121B30, 64 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0039014C;
+extern "C" char DAT_003901E4[];
+
+class Class_00121B30
+{
+public:
+    Class_00121B30* sub_00121B30(int a1, int a2);
+    void sub_001210D0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x2C];
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    float m_Field38; // +0x38
+    float m_Field3C; // +0x3C
+};
+
+Class_00121B30* Class_00121B30::sub_00121B30(int a1, int a2)
+{
+    float t2;
+
+    sub_001210D0(a1, a2);
+    t2 = DAT_0039014C;
+    m_Field00 = (int)DAT_003901E4;
+    m_Field34 = 4;
+    m_Field38 = t2;
+    m_Field3C = t2;
+    m_Field30 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00121C20 (0x00121C20, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00121C20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00121C20 (Proto 0x00121C20, 59 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldB4
+{
+    void sub_000B5200();
+};
+
+extern "C" float DAT_0037CE50;
+
+class Class_00121C20
+{
+public:
+    int sub_00121C20();
+    char m_pad00[0xB4];
+    FieldB4* m_FieldB4; // +0xB4
+};
+
+int Class_00121C20::sub_00121C20()
+{
+    FieldB4* t2;
+
+    m_FieldB4->sub_000B5200();
+    t2 = m_FieldB4;
+    *(float*)((int)m_FieldB4 + 4) = 0.0f;
+    *(float*)((int)m_FieldB4 + 8) = DAT_0037CE50;
+    *(bool*)((int)m_FieldB4 + 12) = true;
+    return (int)t2;
 }
 
 // ============================================================================
@@ -50713,6 +66594,38 @@ int Class_00121D30::sub_00121D30()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00121DA0 (0x00121DA0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00121DA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00121DA0 (Proto 0x00121DA0, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_00408DD8;
+extern "C" float DAT_00408DDC;
+
+class Class_00121DA0
+{
+public:
+    void sub_00121DA0(float a1);
+    char m_pad00[0x110];
+    float m_Field110; // +0x110
+};
+
+void Class_00121DA0::sub_00121DA0(float a1)
+{
+    float t1;
+
+    t1 = DAT_00408DDC;
+    m_Field110 = ((DAT_00408DD8 - t1) * a1) + t1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00121DD0 (0x00121DD0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -50734,6 +66647,132 @@ Class_00121DD0* Class_00121DD0::sub_00121DD0(int a1)
 {
     sub_0008D4C0(a1);
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00121E50 (0x00121E50, 91 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00121E50
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00121E50 (Proto 0x00121E50, 91 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldE0
+{
+    void sub_0008D4C0(int);
+};
+
+class Class_00121E50
+{
+public:
+    void sub_00121E50(int a1, int a2, int a3, float a4);
+    char m_pad00[0xE0];
+    FieldE0 m_FieldE0; // +0xE0
+    char m_padE1[0x3];
+    int m_FieldE4; // +0xE4
+    int m_FieldE8; // +0xE8
+    int m_FieldEC; // +0xEC
+    int m_FieldF0; // +0xF0
+    float m_FieldF4; // +0xF4
+    char m_padF8[0x79];
+    unsigned char m_Field171; // +0x171
+};
+
+void Class_00121E50::sub_00121E50(int a1, int a2, int a3, float a4)
+{
+    int t2;
+
+    m_FieldE0.sub_0008D4C0(a1);
+    t2 = m_Field171 & 159;
+    m_FieldE4 = a2;
+    m_FieldE8 = a3;
+    m_FieldEC = 1;
+    m_FieldF0 = 0;
+    m_FieldF4 = a4;
+    m_Field171 = (unsigned char)t2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00123450 (0x00123450, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00123450
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00123450 (Proto 0x00123450, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003902A8;
+
+class Class_00123450
+{
+public:
+    void sub_00123450();
+    char m_pad00[0x28];
+    float m_Field28; // +0x28
+    char m_pad2C[0x90];
+    int m_FieldBC; // +0xBC
+    char m_padC0[0x68];
+    float m_Field128; // +0x128
+    char m_pad12C[0x10];
+    float m_Field13C; // +0x13C
+};
+
+void Class_00123450::sub_00123450()
+{
+    float t1;
+
+    m_Field128 = 0.0f;
+    m_Field13C = 0.0f;
+    t1 = DAT_003902A8;
+    m_FieldBC = 6;
+    m_Field28 = t1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00125E80 (0x00125E80, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00125E80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00125E80 (Proto 0x00125E80, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001233F0(void);
+
+class Class_00125E80
+{
+public:
+    void sub_00125E80(float a1);
+    char m_pad00[0x158];
+    int m_Field158; // +0x158
+    int m_Field15C; // +0x15C
+};
+
+void Class_00125E80::sub_00125E80(float a1)
+{
+    int t1;
+
+    t1 = m_Field158;
+    if ((unsigned int)m_Field158 < (unsigned int)m_Field15C) {
+        m_Field158 = t1 + 4;
+        if (!t1) goto L_25;
+        *(float*)t1 = a1;
+    }
+L_25:
+    sub_001233F0();
 }
 
 // ============================================================================
@@ -50905,6 +66944,80 @@ bool Class_0012A160::sub_0012A160(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0012A170 (0x0012A170, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0012A170
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012A170 (Proto 0x0012A170, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0012A170
+{
+public:
+    void sub_0012A170(float a1);
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+    char m_pad2C[0x14];
+    float m_Field40; // +0x40
+};
+
+void Class_0012A170::sub_0012A170(float a1)
+{
+    int t1;
+
+    m_Field40 = a1;
+    t1 = m_Field28;
+    if (m_Field28) {
+        *(float*)(t1 + 40) = a1;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0012A190 (0x0012A190, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0012A190
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012A190 (Proto 0x0012A190, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00121DA0(float);
+};
+
+class Class_0012A190
+{
+public:
+    void sub_0012A190(float a1);
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+    char m_pad2C[0x18];
+    float m_Field44; // +0x44
+};
+
+void Class_0012A190::sub_0012A190(float a1)
+{
+    int t1;
+
+    m_Field44 = a1;
+    t1 = m_Field28;
+    if (m_Field28) {
+        ((Object*)t1)->sub_00121DA0(a1);
+        return;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_0012A600 (0x0012A600, 49 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -50977,6 +67090,154 @@ void Class_0012A680::sub_0012A680(int a1)
         m_Field28->sub_00121EB0(1);
         m_Field7C = false;
     }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0012AA20 (0x0012AA20, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0012AA20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012AA20 (Proto 0x0012AA20, 40 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039055C[];
+
+class Class_0012AA20
+{
+public:
+    Class_0012AA20* sub_0012AA20(int a1, int a2);
+    void sub_00129E80(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x30];
+    float m_Field34; // +0x34
+};
+
+Class_0012AA20* Class_0012AA20::sub_0012AA20(int a1, int a2)
+{
+    sub_00129E80(a1, a2);
+    m_Field00 = (int)DAT_0039055C;
+    m_Field34 = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0012ABE0 (0x0012ABE0, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0012ABE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012ABE0 (Proto 0x0012ABE0, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00390604[];
+
+class Class_0012ABE0
+{
+public:
+    Class_0012ABE0* sub_0012ABE0(int a1, int a2);
+    void sub_00129E80(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x34];
+    int m_Field38; // +0x38
+    int m_Field3C; // +0x3C
+    char m_pad40[0x4];
+    float m_Field44; // +0x44
+};
+
+Class_0012ABE0* Class_0012ABE0::sub_0012ABE0(int a1, int a2)
+{
+    sub_00129E80(a1, a2);
+    m_Field38 = 0;
+    m_Field3C = 0;
+    m_Field00 = (int)DAT_00390604;
+    m_Field44 = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0012B3F0 (0x0012B3F0, 122 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0012B3F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012B3F0 (Proto 0x0012B3F0, 122 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field48
+{
+    void sub_0008D4A0(int);
+};
+
+extern "C" float DAT_0037FCE4;
+extern "C" char DAT_0039069C[];
+
+class Class_0012B3F0
+{
+public:
+    Class_0012B3F0* sub_0012B3F0(int a1, int a2);
+    void sub_0012D9E0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x2C];
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    int m_Field38; // +0x38
+    int m_Field3C; // +0x3C
+    int m_Field40; // +0x40
+    int m_Field44; // +0x44
+    Field48 m_Field48; // +0x48
+    char m_pad49[0x3];
+    int m_Field4C; // +0x4C
+    int m_Field50; // +0x50
+    int m_Field54; // +0x54
+    int m_Field58; // +0x58
+    float m_Field5C; // +0x5C
+    float m_Field60; // +0x60
+    float m_Field64; // +0x64
+    float m_Field68; // +0x68
+    bool m_Field6C; // +0x6C
+    unsigned char m_Field6D; // +0x6D
+};
+
+Class_0012B3F0* Class_0012B3F0::sub_0012B3F0(int a1, int a2)
+{
+    float t3;
+    int t4;
+
+    sub_0012D9E0(a1, a2);
+    m_Field00 = (int)DAT_0039069C;
+    m_Field30 = 0;
+    m_Field34 = 0;
+    m_Field38 = 0;
+    m_Field3C = 0;
+    m_Field40 = 0;
+    m_Field44 = 0;
+    m_Field48.sub_0008D4A0(0);
+    t3 = DAT_0037FCE4;
+    m_Field54 = 1;
+    m_Field58 = 1;
+    t4 = m_Field6D & 254;
+    m_Field5C = t3;
+    m_Field6D = (unsigned char)t4;
+    m_Field4C = 0;
+    m_Field50 = 0;
+    m_Field6C = false;
+    m_Field60 = 0.0f;
+    m_Field64 = 0.0f;
+    m_Field68 = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -51069,6 +67330,79 @@ bool Class_0012CEC0::sub_0012CEC0(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0012CED0 (0x0012CED0, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0012CED0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012CED0 (Proto 0x0012CED0, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_0012CED0
+{
+public:
+    void sub_0012CED0(float a1);
+    char m_pad00[0x2C];
+    int m_Field2C; // +0x2C
+    char m_pad30[0xC];
+    float m_Field3C; // +0x3C
+};
+
+void Class_0012CED0::sub_0012CED0(float a1)
+{
+    int t1;
+
+    m_Field3C = a1;
+    t1 = m_Field2C;
+    if (m_Field2C) {
+        *(float*)(t1 + 40) = a1;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0012D210 (0x0012D210, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0012D210
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012D210 (Proto 0x0012D210, 59 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_0012D210
+{
+public:
+    void sub_0012D210(int a1);
+    char m_pad00[0x2C];
+    int m_Field2C; // +0x2C
+    char m_pad30[0x18];
+    int m_Field48; // +0x48
+    char m_pad4C[0x17];
+    unsigned char m_Field63; // +0x63
+};
+
+void Class_0012D210::sub_0012D210(int a1)
+{
+    if (!m_Field63) {
+        if (!sub_00028120(m_Field48)) {
+            *(int*)(m_Field2C + 48) = 1;
+            m_Field63 = 1;
+            return;
+        }
+        m_Field63 = (unsigned char)(*(bool*)(m_Field2C + 109) & 1);
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_0012D370 (0x0012D370, 25 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -51130,6 +67464,49 @@ int __cdecl sub_0012D7E0(int a1)
 {
     DAT_004094FC = a1;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0012D9E0 (0x0012D9E0, 60 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0012D9E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012D9E0 (Proto 0x0012D9E0, 60 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_00390010;
+extern "C" char DAT_003909EC[];
+
+class Class_0012D9E0
+{
+public:
+    Class_0012D9E0* sub_0012D9E0(int a1, int a2);
+    void sub_00028470(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    float m_Field28; // +0x28
+    int m_Field2C; // +0x2C
+};
+
+Class_0012D9E0* Class_0012D9E0::sub_0012D9E0(int a1, int a2)
+{
+    float t2;
+
+    sub_00028470(a1, a2);
+    t2 = DAT_00390010;
+    m_Field20 = 0;
+    m_Field24 = 0;
+    m_Field00 = (int)DAT_003909EC;
+    m_Field28 = t2;
+    m_Field2C = 3;
+    return this;
 }
 
 // ============================================================================
@@ -51237,6 +67614,151 @@ public:
 float Class_0012DDA0::sub_0012DDA0()
 {
     return m_Field108;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0012F360 (0x0012F360, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0012F360
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012F360 (Proto 0x0012F360, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0012F340(int);
+};
+
+class Class_0012F360
+{
+public:
+    void sub_0012F360(int a1);
+};
+
+void Class_0012F360::sub_0012F360(int a1)
+{
+    int r_eax, r_ecx;
+
+    r_ecx = (int)this;
+    r_eax = *(int*)(r_ecx + 44);
+    if (r_eax) {
+        r_ecx = *(int*)r_eax;
+        if (r_ecx) {
+            ((Object*)r_ecx)->sub_0012F340(a1);
+            return;
+        }
+        r_ecx = a1;
+        *(int*)r_eax = a1;
+        return;
+    }
+    *(int*)(r_ecx + 44) = a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0012F390 (0x0012F390, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0012F390
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012F390 (Proto 0x0012F390, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003850C8;
+extern "C" float DAT_0038980C;
+
+class Class_0012F390
+{
+public:
+    Class_0012F390* sub_0012F390();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    bool m_Field1C; // +0x1C
+};
+
+Class_0012F390* Class_0012F390::sub_0012F390()
+{
+    float t1, t2;
+
+    t1 = DAT_0038980C;
+    m_Field00 = 0;
+    m_Field04 = t1;
+    m_Field08 = t1;
+    t2 = DAT_003850C8;
+    m_Field0C = t2;
+    m_Field10 = t2;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field1C = false;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0012F3D0 (0x0012F3D0, 109 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0012F3D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0012F3D0 (Proto 0x0012F3D0, 109 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char sub_000550C0[];
+extern "C" void __stdcall sub_00012820(int, int, int, int);
+extern "C" int __cdecl sub_00025120(int);
+extern "C" void __cdecl sub_00025160(int);
+
+class Class_0012F3D0
+{
+public:
+    void sub_0012F3D0(int a1);
+    char m_pad00[0x4];
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    char m_pad0C[0x8];
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+};
+
+void Class_0012F3D0::sub_0012F3D0(int a1)
+{
+    int r_edi, t1;
+
+    t1 = m_Field14;
+    if (m_Field14) {
+        if (m_Field18 >= a1) goto L_24;
+        sub_00025160(t1);
+        m_Field14 = 0;
+    }
+L_24:
+    m_Field18 = a1;
+    if (!m_Field14) {
+        r_edi = sub_00025120(a1 * 8);
+        if (r_edi) {
+            sub_00012820(r_edi, 8, a1, (int)sub_000550C0);
+        } else {
+            r_edi = 0;
+        }
+        m_Field14 = r_edi;
+    }
+    m_Field08 = 0.0f;
+    m_Field04 = 0.0f;
 }
 
 // ============================================================================
@@ -51483,6 +68005,37 @@ void __cdecl sub_00132930(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00132950 (0x00132950, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00132950
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00132950 (Proto 0x00132950, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00132950
+{
+public:
+    int sub_00132950();
+    char m_pad00[0xBC];
+    float m_FieldBC; // +0xBC
+    char m_padC0[0x34];
+    float m_FieldF4; // +0xF4
+};
+
+int Class_00132950::sub_00132950()
+{
+    if (m_FieldBC >= m_FieldF4) {
+        return 1;
+    }
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00132970 (0x00132970, 15 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -51504,6 +68057,55 @@ int Class_00132970::sub_00132970()
     m_FieldAC = 0;
     m_FieldB0 = 0;
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00132AC0 (0x00132AC0, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00132AC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00132AC0 (Proto 0x00132AC0, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldE8
+{
+    void sub_00135AE0();
+};
+
+extern "C" char DAT_00390E2C[];
+
+class Class_00132AC0
+{
+public:
+    Class_00132AC0* sub_00132AC0(int a1, int a2);
+    void sub_00136050(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0xA8];
+    int m_FieldAC; // +0xAC
+    int m_FieldB0; // +0xB0
+    char m_padB4[0x8];
+    float m_FieldBC; // +0xBC
+    char m_padC0[0x28];
+    FieldE8 m_FieldE8; // +0xE8
+    char m_padE9[0x3];
+    int m_FieldEC; // +0xEC
+};
+
+Class_00132AC0* Class_00132AC0::sub_00132AC0(int a1, int a2)
+{
+    sub_00136050(a1, a2);
+    m_Field00 = (int)DAT_00390E2C;
+    m_FieldE8.sub_00135AE0();
+    m_FieldB0 = 0;
+    m_FieldAC = 0;
+    m_FieldEC = 0;
+    m_FieldBC = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -52226,6 +68828,34 @@ int Class_00139200::sub_00139200()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00139210 (0x00139210, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00139210
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00139210 (Proto 0x00139210, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD90;
+
+class Class_00139210
+{
+public:
+    void sub_00139210();
+    char m_pad00[0x204];
+    float m_Field204; // +0x204
+};
+
+void Class_00139210::sub_00139210()
+{
+    m_Field204 = DAT_0037CD90;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00139230 (0x00139230, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -52381,6 +69011,33 @@ extern "C" int DAT_0045C4C4;
 void __cdecl sub_0013A550(void)
 {
     DAT_0045C4C0.sub_0008D4E0(DAT_0045C4C4);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0013CC30 (0x0013CC30, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0013CC30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0013CC30 (Proto 0x0013CC30, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_0013CC30
+{
+public:
+    int sub_0013CC30();
+    int m_Field00; // +0x00
+};
+
+int Class_0013CC30::sub_0013CC30()
+{
+    return !sub_00028120(m_Field00);
 }
 
 // ============================================================================
@@ -53072,6 +69729,47 @@ void Class_00143500::sub_00143500()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00144C80 (0x00144C80, 97 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00144C80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00144C80 (Proto 0x00144C80, 97 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045CB68;
+extern "C" int __cdecl sub_00025140(int, int);
+extern "C" int __cdecl sub_002018F0(int, int);
+
+void __cdecl sub_00144C80(void)
+{
+    int r_esi, t3;
+
+    if (!DAT_0045CB68) {
+        r_esi = sub_00025140(16, 15);
+        if (r_esi) {
+            t3 = sub_002018F0(15, 8);
+            *(int*)r_esi = t3;
+            if (t3) {
+                *(int*)(r_esi + 4) = t3;
+                *(int*)(r_esi + 8) = t3 + 8;
+                DAT_0045CB68 = r_esi;
+                return;
+            }
+            *(int*)(r_esi + 4) = 0;
+            *(int*)(r_esi + 8) = 0;
+            DAT_0045CB68 = r_esi;
+            return;
+        }
+        DAT_0045CB68 = 0;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_00144D30 (0x00144D30, 40 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -53121,6 +69819,38 @@ bool Class_00144D70::sub_00144D70(bool a1)
 {
     m_Field30 = a1;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00144D80 (0x00144D80, 27 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00144D80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00144D80 (Proto 0x00144D80, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00144D80
+{
+public:
+    Class_00144D80* sub_00144D80(int a1);
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    bool m_Field08; // +0x08
+    bool m_Field09; // +0x09
+};
+
+Class_00144D80* Class_00144D80::sub_00144D80(int a1)
+{
+    m_Field00 = a1;
+    m_Field04 = 0.0f;
+    m_Field08 = false;
+    m_Field09 = false;
+    return this;
 }
 
 // ============================================================================
@@ -53215,6 +69945,52 @@ Class_00144E00* Class_00144E00::sub_00144E00(int a1, int a2)
     m_Field30 = 0;
     m_Field34 = 0;
     m_Field00 = (int)DAT_00391B2C;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00144EA0 (0x00144EA0, 76 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00144EA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00144EA0 (Proto 0x00144EA0, 76 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD90;
+extern "C" float DAT_0038ADF0;
+extern "C" char DAT_00391BC4[];
+extern "C" float DAT_003A968C;
+
+class Class_00144EA0
+{
+public:
+    Class_00144EA0* sub_00144EA0(int a1, int a2);
+    void sub_000276B0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x2C];
+    float m_Field30; // +0x30
+    float m_Field34; // +0x34
+    float m_Field38; // +0x38
+    float m_Field3C; // +0x3C
+};
+
+Class_00144EA0* Class_00144EA0::sub_00144EA0(int a1, int a2)
+{
+    float t2, t4;
+
+    sub_000276B0(a1, a2);
+    t2 = DAT_003A968C;
+    m_Field30 = t2;
+    m_Field34 = t2;
+    m_Field38 = DAT_0037CD90;
+    t4 = DAT_0038ADF0;
+    m_Field00 = (int)DAT_00391BC4;
+    m_Field3C = t4;
     return this;
 }
 
@@ -53533,6 +70309,85 @@ int Class_001460A0::sub_001460A0(int a1)
 {
     m_Field24 = 3;
     m_Field18 = a1;
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00146770 (0x00146770, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00146770
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00146770 (Proto 0x00146770, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00146770
+{
+public:
+    void sub_00146770(float a1, float a2, float a3);
+    char m_pad00[0x48];
+    float m_Field48; // +0x48
+    float m_Field4C; // +0x4C
+    float m_Field50; // +0x50
+};
+
+void Class_00146770::sub_00146770(float a1, float a2, float a3)
+{
+    m_Field48 = a1;
+    m_Field4C = a2;
+    m_Field50 = a3;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001467A0 (0x001467A0, 31 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001467A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001467A0 (Proto 0x001467A0, 31 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001467A0
+{
+public:
+    Class_001467A0* sub_001467A0(bool a1, bool a2, float a3);
+    unsigned char m_Field00; // +0x00
+    char m_pad01[0x3];
+    float m_Field04; // +0x04
+};
+
+Class_001467A0* Class_001467A0::sub_001467A0(bool a1, bool a2, float a3)
+{
+    m_Field00 = (unsigned char)(((unsigned char)(a1 << 2)) + a2);
+    m_Field04 = a3;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001467C0 (0x001467C0, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001467C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001467C0 (Proto 0x001467C0, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_001467C0(int a1, bool a2, float a3)
+{
+    *(bool*)a1 = a2;
+    *(float*)(a1 + 4) = a3;
     return a1;
 }
 
@@ -54755,6 +71610,37 @@ L_45:
 }
 
 // ============================================================================
+// [VERIFIED] sub_00147D40 (0x00147D40, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00147D40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00147D40 (Proto 0x00147D40, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_00142DE0();
+};
+
+extern "C" int __cdecl sub_00145FE0(void);
+
+bool __cdecl sub_00147D40(void)
+{
+    int t1;
+
+    t1 = sub_00145FE0();
+    if (t1) {
+        return ((Object*)t1)->sub_00142DE0();
+    }
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00147D80 (0x00147D80, 15 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -54856,6 +71742,46 @@ public:
 bool Class_00147E00::sub_00147E00()
 {
     return m_Field280 == 3;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00147E10 (0x00147E10, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00147E10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00147E10 (Proto 0x00147E10, 46 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD94;
+extern "C" float DAT_0037D4CC;
+extern "C" int DAT_0045A0EC;
+
+class Class_00147E10
+{
+public:
+    float sub_00147E10();
+    char m_pad00[0xA0];
+    int m_FieldA0; // +0xA0
+    char m_padA4[0x2F0];
+    int m_Field394; // +0x394
+};
+
+float Class_00147E10::sub_00147E10()
+{
+    int local_4, r_eax;
+
+    r_eax = 0;
+    if (m_FieldA0 >= 4) {
+        r_eax = DAT_0045A0EC;
+        local_4 = *(int*)(r_eax + 44) - m_Field394;
+        return ((float)local_4) * DAT_0037D4CC;
+    }
+    return DAT_0037CD94;
 }
 
 // ============================================================================
@@ -55303,6 +72229,40 @@ public:
 void Class_00148020::sub_00148020()
 {
     ((Object*)(int)this + 644)->sub_0015B750();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00148030 (0x00148030, 27 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00148030
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00148030 (Proto 0x00148030, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field188
+{
+    int sub_000BEEF0();
+};
+
+class Class_00148030
+{
+public:
+    bool sub_00148030();
+    char m_pad00[0x188];
+    Field188* m_Field188; // +0x188
+};
+
+bool Class_00148030::sub_00148030()
+{
+    if (m_Field188) {
+        return m_Field188->sub_000BEEF0() == 3;
+    }
+    return false;
 }
 
 // ============================================================================
@@ -55916,6 +72876,46 @@ float Class_00148610::sub_00148610()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00148690 (0x00148690, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00148690
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00148690 (Proto 0x00148690, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_000C6900();
+};
+
+class Class_00148690
+{
+public:
+    bool sub_00148690();
+    char m_pad00[0x188];
+    int m_Field188; // +0x188
+};
+
+bool Class_00148690::sub_00148690()
+{
+    int t1, t2;
+
+    t1 = m_Field188;
+    if (m_Field188) {
+        t2 = *(int*)(t1 + 384);
+        if (!*(int*)(t1 + 384)) goto L_24;
+        return ((Object*)t2)->sub_000C6900() == 3;
+    }
+L_24:
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001486C0 (0x001486C0, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -56243,6 +73243,45 @@ L_59:
 }
 
 // ============================================================================
+// [VERIFIED] sub_001493B0 (0x001493B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001493B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001493B0 (Proto 0x001493B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_001BB0E0();
+};
+
+extern "C" int DAT_00462DD4;
+extern "C" int __cdecl sub_001BB7D0(void);
+
+class Class_001493B0
+{
+public:
+    bool sub_001493B0();
+};
+
+bool Class_001493B0::sub_001493B0()
+{
+    int r_ecx;
+
+    r_ecx = (int)this;
+    if (*(int*)(r_ecx + 16) == DAT_00462DD4) {
+        r_ecx = sub_001BB7D0();
+        return ((Object*)r_ecx)->sub_001BB0E0();
+    }
+    return *(bool*)(r_ecx + 364);
+}
+
+// ============================================================================
 // [VERIFIED] sub_001493D0 (0x001493D0, 40 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -56488,6 +73527,50 @@ void __cdecl sub_00149900(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00149CB0 (0x00149CB0, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00149CB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00149CB0 (Proto 0x00149CB0, 62 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00139200();
+};
+
+extern "C" bool DAT_0045CC90;
+extern "C" int DAT_00462DD4;
+extern "C" int __cdecl sub_0013A550(void);
+
+class Class_00149CB0
+{
+public:
+    bool sub_00149CB0();
+};
+
+bool Class_00149CB0::sub_00149CB0()
+{
+    int r_esi, t1;
+
+    r_esi = (int)this;
+    if (DAT_0045CC90) {
+        return *(int*)(r_esi + 16) == DAT_00462DD4;
+    }
+    t1 = sub_0013A550();
+    if (t1) {
+        r_esi = *(int*)(r_esi + 16);
+        return ((Object*)t1)->sub_00139200() == r_esi;
+    }
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00149E00 (0x00149E00, 36 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -56549,6 +73632,48 @@ int Class_00149F60::sub_00149F60(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0014A1D0 (0x0014A1D0, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0014A1D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0014A1D0 (Proto 0x0014A1D0, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_0015A830();
+};
+
+extern "C" int DAT_00462DD4;
+extern "C" int __cdecl sub_0015A970(void);
+
+class Class_0014A1D0
+{
+public:
+    bool sub_0014A1D0();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Class_0014A1D0::sub_0014A1D0()
+{
+    int t1;
+
+    t1 = sub_0015A970();
+    if (m_Field10 == DAT_00462DD4) {
+        if (!t1) goto L_1F;
+        return ((Object*)t1)->sub_0015A830();
+    }
+L_1F:
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0014A200 (0x0014A200, 32 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -56583,6 +73708,61 @@ void Class_0014A200::sub_0014A200()
         return;
     }
 L_1F:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0014A220 (0x0014A220, 107 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0014A220
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0014A220 (Proto 0x0014A220, 107 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_0015A830();
+};
+
+extern "C" char DAT_00392134[];
+extern "C" int DAT_0045A0EC;
+extern "C" int DAT_0045CC68;
+extern "C" int DAT_00462DD4;
+extern "C" bool __cdecl sub_001573C0(void);
+extern "C" int __cdecl sub_0015A970(void);
+extern "C" void __cdecl sub_001C3CE0(int);
+
+class Class_0014A220
+{
+public:
+    void sub_0014A220();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+    char m_pad14[0x94];
+    int m_FieldA8; // +0xA8
+};
+
+void Class_0014A220::sub_0014A220()
+{
+    int t2;
+
+    if (!sub_001573C0()) {
+        t2 = sub_0015A970();
+        if (m_Field10 != DAT_00462DD4) goto L_69;
+        if (!t2) goto L_69;
+        if (!((Object*)t2)->sub_0015A830()) goto L_69;
+    }
+    if ((unsigned int)(DAT_0045CC68 + 1500) < (unsigned int)*(int*)(DAT_0045A0EC + 44)) {
+        if (!m_FieldA8) goto L_69;
+        sub_001C3CE0((int)DAT_00392134);
+        DAT_0045CC68 = *(int*)(DAT_0045A0EC + 44);
+    }
+L_69:
     ;
 }
 
@@ -56676,6 +73856,87 @@ int Class_0014A440::sub_0014A440()
         return m_Field2A4;
     }
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0014A460 (0x0014A460, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0014A1D0 (Proto 0x0014A1D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0014A460
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0014A460 (Proto 0x0014A460, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_0002BC00();
+};
+
+extern "C" int DAT_00462DD4;
+extern "C" int __cdecl sub_00144F30(void);
+
+class Class_0014A460
+{
+public:
+    bool sub_0014A460();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Class_0014A460::sub_0014A460()
+{
+    int t1;
+
+    t1 = sub_00144F30();
+    if (m_Field10 == DAT_00462DD4) {
+        if (!t1) goto L_1F;
+        return ((Object*)t1)->sub_0002BC00();
+    }
+L_1F:
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0014A490 (0x0014A490, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0014A490
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0014A490 (Proto 0x0014A490, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_00142CE0();
+};
+
+extern "C" int DAT_00462DD4;
+extern "C" int __cdecl sub_00142FC0(void);
+
+class Class_0014A490
+{
+public:
+    bool sub_0014A490();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Class_0014A490::sub_0014A490()
+{
+    if (m_Field10 == DAT_00462DD4) {
+        return ((Object*)sub_00142FC0())->sub_00142CE0();
+    }
+    return false;
 }
 
 // ============================================================================
@@ -57332,6 +74593,44 @@ void __cdecl sub_001514D0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00151B20 (0x00151B20, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00151B20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00151B20 (Proto 0x00151B20, 40 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_00150860(int);
+
+class Class_00151B20
+{
+public:
+    void sub_00151B20(int a1);
+    char m_pad00[0x3FC];
+    int m_Field3FC; // +0x3FC
+    char m_pad400[0x8];
+    bool m_Field408; // +0x408
+};
+
+void Class_00151B20::sub_00151B20(int a1)
+{
+    if (m_Field3FC != a1) {
+        m_Field3FC = a1;
+        if (m_Field408) goto L_25;
+        a1 = a1;
+        sub_00150860(a1);
+        return;
+    }
+L_25:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00152C70 (0x00152C70, 15 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -57424,6 +74723,32 @@ int Class_00153290::sub_00153290()
     }
 L_19:
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001532B0 (0x001532B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001532B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001532B0 (Proto 0x001532B0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001532B0
+{
+public:
+    unsigned short sub_001532B0();
+    char m_pad00[0x98];
+    unsigned short m_Field98; // +0x98
+};
+
+unsigned short Class_001532B0::sub_001532B0()
+{
+    return m_Field98;
 }
 
 // ============================================================================
@@ -57857,6 +75182,54 @@ L_69:
 }
 
 // ============================================================================
+// [VERIFIED] sub_001538B0 (0x001538B0, 105 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001538B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001538B0 (Proto 0x001538B0, 105 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0009FAD0(int, int);
+    void sub_0013CB80(int, int);
+    void sub_0013CF30(int);
+    int sub_001DB950();
+};
+
+extern "C" int __cdecl sub_00028120(int);
+extern "C" int __cdecl sub_0013CCF0(void);
+
+class Class_001538B0
+{
+public:
+    void sub_001538B0(int a1, int a2);
+    char m_pad00[0x90];
+    int m_Field90; // +0x90
+    int m_Field94; // +0x94
+};
+
+void Class_001538B0::sub_001538B0(int a1, int a2)
+{
+    int t4, t5;
+
+    if (m_Field90) {
+        if (!sub_00028120(m_Field94)) goto L_65;
+        t4 = ((Object*)sub_00028120(m_Field94))->sub_001DB950();
+        t5 = sub_0013CCF0();
+        ((Object*)t5)->sub_0013CB80(1, ((Object*)t4)->sub_0009FAD0(a1, 1));
+        ((Object*)t5)->sub_0013CF30(a2);
+    }
+L_65:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00153A00 (0x00153A00, 81 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -57994,6 +75367,81 @@ void Class_00154780::sub_00154780(int a1)
     }
 L_5A:
     m_Field94.sub_0008D4C0(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00154940 (0x00154940, 117 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00154940
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00154940 (Proto 0x00154940, 117 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field4C
+{
+    void sub_002003C0();
+};
+
+struct Field94
+{
+    void sub_0008D4A0(int);
+};
+
+extern "C" float DAT_0037CD90;
+
+class Class_00154940
+{
+public:
+    Class_00154940* sub_00154940();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    unsigned char m_Field10; // +0x10
+    unsigned char m_Field11; // +0x11
+    char m_pad12[0x2];
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    char m_pad1C[0x28];
+    float m_Field44; // +0x44
+    float m_Field48; // +0x48
+    Field4C m_Field4C; // +0x4C
+    char m_pad4D[0x3F];
+    bool m_Field8C; // +0x8C
+    bool m_Field8D; // +0x8D
+    bool m_Field8E; // +0x8E
+    char m_pad8F[0x1];
+    int m_Field90; // +0x90
+    Field94 m_Field94; // +0x94
+    char m_pad95[0x3];
+    unsigned short m_Field98; // +0x98
+};
+
+Class_00154940* Class_00154940::sub_00154940()
+{
+    m_Field14 = DAT_0037CD90;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = 8;
+    m_Field0C = 0;
+    m_Field10 = 255;
+    m_Field11 = 255;
+    m_Field18 = 0.0f;
+    m_Field44 = 0.0f;
+    m_Field48 = 0.0f;
+    m_Field8C = false;
+    m_Field8D = false;
+    m_Field8E = true;
+    m_Field90 = 0;
+    m_Field94.sub_0008D4A0(0);
+    m_Field98 = 0;
+    m_Field4C.sub_002003C0();
+    return this;
 }
 
 // ============================================================================
@@ -58852,6 +76300,53 @@ bool Class_0015B010::sub_0015B010()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0015B0D0 (0x0015B0D0, 103 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0015B0D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0015B0D0 (Proto 0x0015B0D0, 103 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_001B8330();
+    void sub_001B8880();
+    void sub_001B9B20();
+};
+
+extern "C" int DAT_0040CB30;
+extern "C" int DAT_0045A0EC;
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_0015B0D0
+{
+public:
+    void sub_0015B0D0();
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    char m_pad08[0xC];
+    int m_Field14; // +0x14
+};
+
+void Class_0015B0D0::sub_0015B0D0()
+{
+    if (sub_00028120(m_Field04)) {
+        if (!((Object*)sub_00028120(m_Field04))->sub_001B8330()) goto L_65;
+        if ((unsigned int)(m_Field14 + DAT_0040CB30) >= (unsigned int)*(int*)(DAT_0045A0EC + 44)) goto L_65;
+        ((Object*)sub_00028120(m_Field04))->sub_001B9B20();
+        ((Object*)sub_00028120(m_Field04))->sub_001B8880();
+        return;
+    }
+L_65:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0015B140 (0x0015B140, 38 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -59221,6 +76716,108 @@ L_1D:
 }
 
 // ============================================================================
+// [VERIFIED] sub_0015B820 (0x0015B820, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0015B820
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0015B820 (Proto 0x0015B820, 46 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual void vfunc_48();
+    virtual void vfunc_49();
+    virtual void vfunc_50();
+    virtual void vfunc_51();
+    virtual void vfunc_52();
+    virtual void vfunc_53();
+    virtual void vfunc_54();
+    virtual void vfunc_55();
+    virtual void vfunc_56();
+    virtual void vfunc_57();
+    virtual void vfunc_58();
+    virtual void vfunc_59();
+    virtual void vfunc_60();
+    virtual void vfunc_61();
+    virtual void vfunc_62();
+    virtual void vfunc_63();
+    virtual void vfunc_64();
+    virtual void vfunc_65();
+    virtual bool vfunc_66();
+};
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_0015B820
+{
+public:
+    bool sub_0015B820();
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+};
+
+bool Class_0015B820::sub_0015B820()
+{
+    if (sub_00028120(m_Field04)) {
+        return ((Object*)sub_00028120(m_Field04))->vfunc_66();
+    }
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0015B8E0 (0x0015B8E0, 57 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -59297,6 +76894,60 @@ int Class_0015DA50::sub_0015DA50()
         r_eax = sub_0015D0D0(r_eax);
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0015DC30 (0x0015DC30, 118 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0015DC30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0015DC30 (Proto 0x0015DC30, 118 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0008D4C0(int);
+};
+
+extern "C" int DAT_0045DDB8;
+extern "C" int DAT_00462DD4;
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_0015DC30
+{
+public:
+    void sub_0015DC30(int a1);
+    void sub_0015D420();
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    char m_pad0C[0x14];
+    int m_Field20; // +0x20
+};
+
+void Class_0015DC30::sub_0015DC30(int a1)
+{
+    int r_edi;
+
+    if (*(int*)(m_Field08 + 16) == DAT_00462DD4) {
+        if (sub_00028120(m_Field04)) {
+            DAT_0045DDB8 = *(int*)(sub_00028120(m_Field04) + 16);
+            goto L_44;
+        }
+        DAT_0045DDB8 = 0;
+    }
+L_44:
+    r_edi = (int)(&m_Field04);
+    if (sub_00028120(m_Field04)) {
+        sub_0015D420();
+    }
+    ((Object*)r_edi)->sub_0008D4C0(a1);
+    m_Field20 = *(int*)(a1 + 16);
 }
 
 // ============================================================================
@@ -59893,6 +77544,49 @@ Class_0015E2A0* Class_0015E2A0::sub_0015E2A0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0015E370 (0x0015E370, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0015E370
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0015E370 (Proto 0x0015E370, 46 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+};
+
+extern "C" char DAT_00393F58[];
+extern "C" void __cdecl sub_0001F5E0(void);
+
+class Class_0015E370
+{
+public:
+    Class_0015E370* sub_0015E370(int a1, int a2);
+    int m_Field00; // +0x00
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+};
+
+Class_0015E370* Class_0015E370::sub_0015E370(int a1, int a2)
+{
+    sub_0001F5E0();
+    m_Field00 = (int)DAT_00393F58;
+    m_Field08 = a1;
+    m_Field0C = a2;
+    m_Field10 = 0.0f;
+    ((Object*)a1)->vfunc_00();
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0015E3A0 (0x0015E3A0, 38 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -60350,6 +78044,48 @@ void __cdecl sub_00163380(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001633B0 (0x001633B0, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001633B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001633B0 (Proto 0x001633B0, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_00200310(int);
+};
+
+extern "C" char DAT_0037CD30[];
+extern "C" char DAT_00394B8C[];
+extern "C" void __cdecl sub_000205E0(void);
+
+class Class_001633B0
+{
+public:
+    Class_001633B0* sub_001633B0();
+    int m_Field00; // +0x00
+    char m_pad04[0x10];
+    Field14 m_Field14; // +0x14
+    char m_pad15[0x3];
+    float m_Field18; // +0x18
+};
+
+Class_001633B0* Class_001633B0::sub_001633B0()
+{
+    sub_000205E0();
+    m_Field00 = (int)DAT_00394B8C;
+    m_Field14.sub_00200310((int)DAT_0037CD30);
+    m_Field18 = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00163410 (0x00163410, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -60366,6 +78102,55 @@ extern "C" void __cdecl sub_001FC310(int, int);
 void __cdecl sub_00163410(void)
 {
     sub_001FC310((int)DAT_0045DE70, (int)DAT_0045DE74);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00163440 (0x00163440, 60 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00163440
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00163440 (Proto 0x00163440, 60 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" float DAT_00390DF4;
+extern "C" char DAT_00394C14[];
+extern "C" void __cdecl sub_000205E0(void);
+
+class Class_00163440
+{
+public:
+    Class_00163440* sub_00163440();
+    int m_Field00; // +0x00
+    char m_pad04[0x10];
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+};
+
+Class_00163440* Class_00163440::sub_00163440()
+{
+    float t2, t3;
+
+    sub_000205E0();
+    t2 = DAT_00390DF4;
+    t3 = DAT_0037CE60;
+    m_Field20 = 0;
+    m_Field24 = 0;
+    m_Field28 = 0;
+    m_Field00 = (int)DAT_00394C14;
+    m_Field14 = t2;
+    m_Field18 = t3;
+    m_Field1C = t2;
+    return this;
 }
 
 // ============================================================================
@@ -61538,6 +79323,244 @@ Class_001640B0* Class_001640B0::sub_001640B0()
     sub_000205E0();
     m_Field00 = (int)DAT_0039595C;
     m_Field14 = false;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00164260 (0x00164260, 102 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00164260
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00164260 (Proto 0x00164260, 102 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_00200310(int);
+};
+
+extern "C" char DAT_0037CD30[];
+extern "C" float DAT_0037CE50;
+extern "C" char DAT_00394D24[];
+extern "C" void __cdecl sub_000205E0(void);
+
+class Class_00164260
+{
+public:
+    Class_00164260* sub_00164260();
+    int m_Field00; // +0x00
+    char m_pad04[0x10];
+    Field14 m_Field14; // +0x14
+    char m_pad15[0x3];
+    Field14 m_Field18; // +0x18
+    char m_pad19[0x3];
+    Field14 m_Field1C; // +0x1C
+    char m_pad1D[0x3];
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+    float m_Field34; // +0x34
+    bool m_Field38; // +0x38
+};
+
+Class_00164260* Class_00164260::sub_00164260()
+{
+    sub_000205E0();
+    m_Field00 = (int)DAT_00394D24;
+    m_Field14.sub_00200310((int)DAT_0037CD30);
+    m_Field18.sub_00200310((int)DAT_0037CD30);
+    m_Field1C.sub_00200310((int)DAT_0037CD30);
+    m_Field38 = false;
+    m_Field20 = 0.0f;
+    m_Field24 = 0.0f;
+    m_Field28 = 0.0f;
+    m_Field2C = 0.0f;
+    m_Field30 = 0.0f;
+    m_Field34 = DAT_0037CE50;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00164570 (0x00164570, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00164570
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00164570 (Proto 0x00164570, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_00200310(int);
+};
+
+extern "C" char DAT_0037CD30[];
+extern "C" char DAT_00395274[];
+extern "C" void __cdecl sub_000205E0(void);
+
+class Class_00164570
+{
+public:
+    Class_00164570* sub_00164570();
+    int m_Field00; // +0x00
+    char m_pad04[0x10];
+    Field14 m_Field14; // +0x14
+    char m_pad15[0x3];
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+};
+
+Class_00164570* Class_00164570::sub_00164570()
+{
+    sub_000205E0();
+    m_Field00 = (int)DAT_00395274;
+    m_Field14.sub_00200310((int)DAT_0037CD30);
+    m_Field24 = 0.0f;
+    m_Field20 = 0.0f;
+    m_Field1C = 0.0f;
+    m_Field18 = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00164750 (0x00164750, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00164750
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00164750 (Proto 0x00164750, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_00200310(int);
+};
+
+extern "C" char DAT_0037CD30[];
+extern "C" char DAT_003956B4[];
+extern "C" void __cdecl sub_000205E0(void);
+
+class Class_00164750
+{
+public:
+    Class_00164750* sub_00164750();
+    int m_Field00; // +0x00
+    char m_pad04[0x10];
+    Field14 m_Field14; // +0x14
+    char m_pad15[0xF];
+    float m_Field24; // +0x24
+};
+
+Class_00164750* Class_00164750::sub_00164750()
+{
+    sub_000205E0();
+    m_Field00 = (int)DAT_003956B4;
+    m_Field14.sub_00200310((int)DAT_0037CD30);
+    m_Field24 = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00164860 (0x00164860, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00164860
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00164860 (Proto 0x00164860, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_00200310(int);
+};
+
+extern "C" char DAT_0037CD30[];
+extern "C" char DAT_003957C4[];
+extern "C" void __cdecl sub_000205E0(void);
+
+class Class_00164860
+{
+public:
+    Class_00164860* sub_00164860();
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    float m_Field0C; // +0x0C
+    char m_pad10[0x4];
+    Field14 m_Field14; // +0x14
+    char m_pad15[0x3];
+    Field14 m_Field18; // +0x18
+};
+
+Class_00164860* Class_00164860::sub_00164860()
+{
+    sub_000205E0();
+    m_Field00 = (int)DAT_003957C4;
+    m_Field14.sub_00200310((int)DAT_0037CD30);
+    m_Field18.sub_00200310((int)DAT_0037CD30);
+    m_Field0C = 0.0f;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00164910 (0x00164910, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00164910
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00164910 (Proto 0x00164910, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_000AABF0();
+};
+
+extern "C" float DAT_0037CE60;
+extern "C" char DAT_003958D4[];
+extern "C" void __cdecl sub_000205E0(void);
+
+class Class_00164910
+{
+public:
+    Class_00164910* sub_00164910();
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    float m_Field0C; // +0x0C
+    char m_pad10[0x4];
+    Field14 m_Field14; // +0x14
+};
+
+Class_00164910* Class_00164910::sub_00164910()
+{
+    sub_000205E0();
+    m_Field00 = (int)DAT_003958D4;
+    m_Field14.sub_000AABF0();
+    m_Field0C = DAT_0037CE60;
     return this;
 }
 
@@ -62863,6 +80886,50 @@ void Class_0016ACC0::sub_0016ACC0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0016B530 (0x0016B530, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0016B530
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0016B530 (Proto 0x0016B530, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003975C0[];
+
+class Class_0016B530
+{
+public:
+    Class_0016B530* sub_0016B530();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    bool m_Field20; // +0x20
+};
+
+Class_0016B530* Class_0016B530::sub_0016B530()
+{
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field00 = (int)DAT_003975C0;
+    m_Field0C = 0;
+    m_Field10 = 0;
+    m_Field14 = 0.0f;
+    m_Field18 = 0.0f;
+    m_Field1C = 0.0f;
+    m_Field20 = false;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0016B560 (0x0016B560, 15 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -62888,6 +80955,58 @@ int Class_0016B560::sub_0016B560()
     m_Field10 = 0;
     m_Field00 = (int)DAT_0039758C;
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0016B5D0 (0x0016B5D0, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0016B5D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0016B5D0 (Proto 0x0016B5D0, 62 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003975F4[];
+
+class Class_0016B5D0
+{
+public:
+    Class_0016B5D0* sub_0016B5D0();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    unsigned short m_Field18; // +0x18
+    unsigned short m_Field1A; // +0x1A
+    unsigned short m_Field1C; // +0x1C
+    unsigned short m_Field1E; // +0x1E
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    bool m_Field28; // +0x28
+};
+
+Class_0016B5D0* Class_0016B5D0::sub_0016B5D0()
+{
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field00 = (int)DAT_003975F4;
+    m_Field0C = 0;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field1A = 0;
+    m_Field1C = 0;
+    m_Field1E = 0;
+    m_Field20 = 0.0f;
+    m_Field24 = 0.0f;
+    m_Field28 = false;
+    return this;
 }
 
 // ============================================================================
@@ -63619,6 +81738,92 @@ void __stdcall sub_0016E5E0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0016EE30 (0x0016EE30, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0016EE30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0016EE30 (Proto 0x0016EE30, 72 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31(int, int, int);
+};
+
+class Class_0016EE30
+{
+public:
+    void sub_0016EE30();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    char m_pad20[0x2C];
+    unsigned char m_Field4C; // +0x4C
+    unsigned char m_Field4D; // +0x4D
+};
+
+void Class_0016EE30::sub_0016EE30()
+{
+    int r_ebp, r_esi, t1;
+
+    if (!(m_Field4C & 2)) {
+        if (m_Field4D & 4) goto L_46;
+        r_esi = m_Field1C;
+        r_esi -= m_Field18;
+        r_esi >>= 2;
+        r_ebp = 0;
+        if (r_esi > 0) {
+            do {
+                t1 = *(int*)(m_Field18 + (r_ebp * 4));
+                if (*(int*)(m_Field18 + (r_ebp * 4))) {
+                    ((Object*)t1)->vfunc_31(1, 1, 1);
+                }
+                r_ebp += 1;
+            } while (r_ebp < r_esi);
+        }
+        m_Field4C = (unsigned char)(m_Field4C | 2);
+    }
+L_46:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0016F1C0 (0x0016F1C0, 91 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -63920,6 +82125,55 @@ void Class_0016FA10::sub_0016FA10()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0016FAC0 (0x0016FAC0, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0016FAC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0016FAC0 (Proto 0x0016FAC0, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039861C[];
+
+class Class_0016FAC0
+{
+public:
+    Class_0016FAC0* sub_0016FAC0();
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+    char m_pad24[0x4];
+    int m_Field28; // +0x28
+    int m_Field2C; // +0x2C
+};
+
+Class_0016FAC0* Class_0016FAC0::sub_0016FAC0()
+{
+    m_Field00 = (int)DAT_0039861C;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0;
+    m_Field20 = 0;
+    m_Field28 = -1;
+    m_Field2C = 0;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field1C = 0;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0016FB80 (0x0016FB80, 42 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -64004,6 +82258,61 @@ void Class_001704C0::sub_001704C0(int a1)
 {
     m_Field08 = a1;
     sub_0016FE90();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00170CF0 (0x00170CF0, 71 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00170CF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00170CF0 (Proto 0x00170CF0, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00(int);
+};
+
+extern "C" char DAT_00398740[];
+extern "C" void __cdecl sub_00201990(int, int);
+
+class Class_00170CF0
+{
+public:
+    void sub_00170CF0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void Class_00170CF0::sub_00170CF0()
+{
+    int r_ebx, r_edi, t1, t3, t4;
+
+    r_ebx = m_Field08;
+    r_edi = m_Field04;
+    m_Field00 = (int)DAT_00398740;
+    if (r_edi != r_ebx) {
+        do {
+            t1 = *(int*)r_edi;
+            if (*(int*)r_edi) {
+                ((Object*)t1)->vfunc_00(1);
+            }
+            t3 = m_Field04;
+            r_edi += 4;
+            m_Field08 = t3;
+        } while (r_edi != r_ebx);
+    }
+    t4 = m_Field04;
+    m_Field08 = m_Field04;
+    if (m_Field04) {
+        sub_00201990(7, t4);
+    }
 }
 
 // ============================================================================
@@ -64115,6 +82424,45 @@ Class_00171F90* Class_00171F90::sub_00171F90(int a1, int a2)
     sub_00171AC0(a1, a2);
     m_Field00 = (int)DAT_00398A6C;
     m_Field40 = (int)DAT_00398A60;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00171FD0 (0x00171FD0, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00171FD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00171FD0 (Proto 0x00171FD0, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00398B2C[];
+extern "C" char DAT_00398B34[];
+
+class Class_00171FD0
+{
+public:
+    Class_00171FD0* sub_00171FD0(int a1, int a2);
+    void sub_00171AC0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x3C];
+    int m_Field40; // +0x40
+    char m_pad44[0x30];
+    float m_Field74; // +0x74
+    float m_Field78; // +0x78
+};
+
+Class_00171FD0* Class_00171FD0::sub_00171FD0(int a1, int a2)
+{
+    sub_00171AC0(a1, a2);
+    m_Field00 = (int)DAT_00398B34;
+    m_Field40 = (int)DAT_00398B2C;
+    m_Field74 = 0.0f;
+    m_Field78 = 0.0f;
     return this;
 }
 
@@ -64264,6 +82612,26 @@ Class_00173470* Class_00173470::sub_00173470()
     m_Field54 = 0;
     m_Field58 = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001749D0 (0x001749D0, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001749D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001749D0 (Proto 0x001749D0, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0045E114;
+
+int __cdecl sub_001749D0(void)
+{
+    return DAT_0045E114 != 0;
 }
 
 // ============================================================================
@@ -64765,6 +83133,39 @@ void Class_001784C0::sub_001784C0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00178500 (0x00178500, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00178500
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00178500 (Proto 0x00178500, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003999EC[];
+extern "C" int __cdecl sub_0008ECF0(int, int);
+extern "C" void __cdecl sub_002062D0(int, int, int);
+
+class Class_00178500
+{
+public:
+    void sub_00178500(int a1);
+};
+
+void Class_00178500::sub_00178500(int a1)
+{
+    if (a1 < 100) {
+        if (a1 <= 0) goto L_2D;
+        sub_002062D0((int)this + 76, sub_0008ECF0((int)DAT_003999EC, a1), 4);
+    }
+L_2D:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001786E0 (0x001786E0, 46 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -64976,6 +83377,41 @@ L_10:
         return t1 | -1;
     }
     return r_esi;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00179070 (0x00179070, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00179070
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00179070 (Proto 0x00179070, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __stdcall sub_00179030(int);
+
+class Class_00179070
+{
+public:
+    void sub_00179070(int a1);
+    char m_pad00[0x3A0];
+    int m_Field3A0; // +0x3A0
+};
+
+void Class_00179070::sub_00179070(int a1)
+{
+    int t1;
+
+    t1 = sub_00179030(a1);
+    if (t1 != -1) {
+        m_Field3A0 = (t1 * 68) + (int)this + 180;
+        return;
+    }
+    m_Field3A0 = 0;
 }
 
 // ============================================================================
@@ -65394,6 +83830,94 @@ void __cdecl sub_0017EDA0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0017F7A0 (0x0017F7A0, 73 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0017F7A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0017F7A0 (Proto 0x0017F7A0, 73 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_002018F0(int, int);
+
+class Class_0017F7A0
+{
+public:
+    void sub_0017F7A0(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void Class_0017F7A0::sub_0017F7A0(int a1)
+{
+    int t1;
+
+    if (a1) {
+        t1 = sub_002018F0(7, (a1 + (a1 * 2)) << 2);
+        m_Field00 = t1;
+        if (!t1) goto L_36;
+        m_Field08 = ((a1 + (a1 * 2)) << 2) + t1;
+        m_Field04 = t1;
+        return;
+    }
+    m_Field00 = 0;
+L_36:
+    m_Field04 = 0;
+    m_Field08 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0017FC60 (0x0017FC60, 86 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0017FC60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0017FC60 (Proto 0x0017FC60, 86 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0017F120(int);
+    void sub_0017F290();
+};
+
+extern "C" int DAT_0040FAB0;
+extern "C" int DAT_0040FAB4;
+extern "C" int __cdecl sub_0017ECB0(int);
+extern "C" void __cdecl sub_0017FB30(int);
+
+void __cdecl sub_0017FC60(int a1, int a2)
+{
+    int r_edi, t1;
+
+    if (a2 == -1) goto L_54;
+    r_edi = a1;
+    t1 = sub_0017ECB0(a1);
+    if (t1) {
+        if (!*(bool*)(t1 + 16)) goto L_39;
+        ((Object*)t1)->sub_0017F290();
+        ((Object*)t1)->sub_0017F120(a2);
+        return;
+    }
+L_39:
+    DAT_0040FAB0 = r_edi;
+    if (DAT_0040FAB4 == 1) {
+        sub_0017FB30(1);
+    }
+L_54:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00180010 (0x00180010, 43 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -65634,6 +84158,46 @@ L_28:
     m_Field50 = a3;
 L_2F:
     vfunc_32(a1, 1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00181340 (0x00181340, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00181340
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00181340 (Proto 0x00181340, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039B264[];
+
+class Class_00181340
+{
+public:
+    Class_00181340* sub_00181340(int a1, int a2);
+    void sub_00028470(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+    float m_Field24; // +0x24
+    int m_Field28; // +0x28
+    char m_pad2C[0x4];
+    unsigned char m_Field30; // +0x30
+};
+
+Class_00181340* Class_00181340::sub_00181340(int a1, int a2)
+{
+    sub_00028470(a1, a2);
+    m_Field20 = 0;
+    m_Field28 = 0;
+    m_Field30 |= 1;
+    m_Field00 = (int)DAT_0039B264;
+    m_Field24 = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -66202,6 +84766,52 @@ void Class_00185B10::sub_00185B10()
     ((Object*)sub_000D8FA0(117, -1, 0))->sub_000D99E0();
     ((Object*)sub_000D8FA0(140, 0, 0))->sub_000D99E0();
     sub_00065ED0((int)DAT_0039C1DC, 0, 0, 0, -1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00185B70 (0x00185B70, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00185B70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00185B70 (Proto 0x00185B70, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0016D4C0(int);
+    void sub_0016D670(int, int, int);
+};
+
+extern "C" char DAT_0039C200[];
+extern "C" int DAT_0045E044;
+extern "C" int __cdecl sub_00065830(int, int);
+
+class Class_00185B70
+{
+public:
+    void sub_00185B70();
+    char m_pad00[0x44];
+    int m_Field44; // +0x44
+};
+
+void Class_00185B70::sub_00185B70()
+{
+    int t1, t4;
+
+    t1 = m_Field44;
+    if (m_Field44 > -1) {
+        if (t1 >= 6) goto L_42;
+        ((Object*)DAT_0045E044)->sub_0016D4C0(-1);
+        t4 = DAT_0045E044;
+        ((Object*)t4)->sub_0016D670(8, sub_00065830((int)DAT_0039C200, m_Field44), 0);
+    }
+L_42:
+    ;
 }
 
 // ============================================================================
@@ -66793,6 +85403,148 @@ Class_0018DF80* Class_0018DF80::sub_0018DF80(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0018E130 (0x0018E130, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0018E130
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0018E130 (Proto 0x0018E130, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field48
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14(float);
+};
+
+extern "C" float DAT_00393980;
+
+class Class_0018E130
+{
+public:
+    void sub_0018E130(int a1);
+    char m_pad00[0x48];
+    Field48* m_Field48; // +0x48
+    int m_Field4C; // +0x4C
+    short m_Field50; // +0x50
+};
+
+void Class_0018E130::sub_0018E130(int a1)
+{
+    m_Field48->vfunc_14(((float)a1) / (((float)m_Field50) * DAT_00393980));
+    m_Field4C = a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0018E170 (0x0018E170, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0018E170
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0018E170 (Proto 0x0018E170, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field48
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14(float);
+};
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_003850D4;
+
+class Class_0018E170
+{
+public:
+    void sub_0018E170(float a1, float a2);
+    char m_pad00[0x48];
+    Field48* m_Field48; // +0x48
+};
+
+void Class_0018E170::sub_0018E170(float a1, float a2)
+{
+    m_Field48->vfunc_14(((a1 / a2) + DAT_0037CE50) * DAT_003850D4);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0018E320 (0x0018E320, 71 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0018E320
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0018E320 (Proto 0x0018E320, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" char DAT_0039D8BC[];
+
+class Class_0018E320
+{
+public:
+    Class_0018E320* sub_0018E320(int a1, int a2);
+    void sub_0016E0E0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x3C];
+    int m_Field40; // +0x40
+    int m_Field44; // +0x44
+    float m_Field48; // +0x48
+    float m_Field4C; // +0x4C
+    float m_Field50; // +0x50
+    float m_Field54; // +0x54
+};
+
+Class_0018E320* Class_0018E320::sub_0018E320(int a1, int a2)
+{
+    sub_0016E0E0(a1, a2);
+    m_Field40 = 0;
+    m_Field44 = 0;
+    m_Field00 = (int)DAT_0039D8BC;
+    m_Field48 = 0.0f;
+    m_Field4C = 0.0f;
+    m_Field50 = 0.0f;
+    m_Field54 = DAT_0037CE50;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0018EBC0 (0x0018EBC0, 114 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -67071,6 +85823,102 @@ void Class_0018F700::sub_0018F700()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0018F790 (0x0018F790, 110 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0018F790
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0018F790 (Proto 0x0018F790, 110 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" char DAT_0039DC4C[];
+
+class Class_0018F790
+{
+public:
+    Class_0018F790* sub_0018F790(int a1, int a2, int a3, int a4);
+    int m_Field00; // +0x00
+    float m_Field04; // +0x04
+    float m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    float m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+    unsigned short m_Field34; // +0x34
+    unsigned short m_Field36; // +0x36
+    bool m_Field38; // +0x38
+    char m_pad39[0x3];
+    int m_Field3C; // +0x3C
+};
+
+Class_0018F790* Class_0018F790::sub_0018F790(int a1, int a2, int a3, int a4)
+{
+    float t1;
+
+    m_Field1C = a1;
+    m_Field20 = a2;
+    m_Field28 = a3;
+    m_Field04 = 0.0f;
+    m_Field08 = 0.0f;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+    m_Field14 = 0.0f;
+    m_Field18 = 0.0f;
+    t1 = DAT_0037CE50;
+    m_Field24 = 16;
+    m_Field2C = t1;
+    m_Field30 = t1;
+    m_Field34 = 0;
+    m_Field36 = 0;
+    m_Field38 = false;
+    m_Field00 = (int)DAT_0039DC4C;
+    m_Field3C = a4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001901E0 (0x001901E0, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001901E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001901E0 (Proto 0x001901E0, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0018F9D0(void);
+
+class Class_001901E0
+{
+public:
+    void sub_001901E0(int a1, bool a2);
+    char m_pad00[0x24];
+    int m_Field24; // +0x24
+};
+
+void Class_001901E0::sub_001901E0(int a1, bool a2)
+{
+    m_Field24 = a1;
+    if (a2) {
+        sub_0018F9D0();
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_00190280 (0x00190280, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -67296,6 +86144,100 @@ L_1D:
 }
 
 // ============================================================================
+// [VERIFIED] sub_001906C0 (0x001906C0, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001906C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001906C0 (Proto 0x001906C0, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001906C0
+{
+public:
+    unsigned short sub_001906C0();
+    char m_pad00[0x4C];
+    int m_Field4C; // +0x4C
+};
+
+unsigned short Class_001906C0::sub_001906C0()
+{
+    int r_eax;
+
+    r_eax = m_Field4C;
+    if (r_eax) {
+        r_eax = *(unsigned short*)(r_eax + 28);
+        return r_eax;
+    }
+    r_eax |= 65535;
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00190A40 (0x00190A40, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00190A40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00190A40 (Proto 0x00190A40, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+};
+
+class Class_00190A40
+{
+public:
+    void sub_00190A40();
+    char m_pad00[0x48];
+    int m_Field48; // +0x48
+    int m_Field4C; // +0x4C
+};
+
+void Class_00190A40::sub_00190A40()
+{
+    int r_ebx, r_edi, t1, t2;
+
+    t1 = m_Field48;
+    if (m_Field48) {
+        r_ebx = *(int*)(t1 + 4);
+        r_edi = *(int*)t1;
+        if (r_edi != r_ebx) {
+            do {
+                t2 = *(int*)r_edi;
+                if (!*(bool*)(*(int*)r_edi + 34)) {
+                    ((Object*)t2)->vfunc_02();
+                    *(unsigned short*)(t2 + 32) = *(unsigned short*)(m_Field4C + 28);
+                    ((Object*)t2)->vfunc_11();
+                }
+                r_edi += 4;
+            } while (r_edi != r_ebx);
+        }
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_00191450 (0x00191450, 27 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -67405,6 +86347,38 @@ int Class_001914A0::sub_001914A0(int a1)
         m_Field50 = false;
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001914B0 (0x001914B0, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001914B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001914B0 (Proto 0x001914B0, 28 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001914B0
+{
+public:
+    int sub_001914B0(int a1);
+    int m_Field00; // +0x00
+    char m_pad04[0x4C];
+    bool m_Field50; // +0x50
+};
+
+int Class_001914B0::sub_001914B0(int a1)
+{
+    if (m_Field50) {
+        if (m_Field00 != a1) goto L_17;
+        return 1;
+    }
+L_17:
+    return 0;
 }
 
 // ============================================================================
@@ -68304,6 +87278,103 @@ Class_001959A0* Class_001959A0::sub_001959A0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00195BD0 (0x00195BD0, 61 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00195BD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00195BD0 (Proto 0x00195BD0, 61 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field44
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual int vfunc_07();
+};
+
+struct Field58
+{
+    void sub_001701F0();
+};
+
+extern "C" char DAT_0039F424[];
+extern "C" int __cdecl sub_00065830(int, int);
+
+class Class_00195BD0
+{
+public:
+    void sub_00195BD0();
+    void sub_00195AF0(int);
+    char m_pad00[0x44];
+    Field44* m_Field44; // +0x44
+    char m_pad48[0x10];
+    Field58* m_Field58; // +0x58
+};
+
+void Class_00195BD0::sub_00195BD0()
+{
+    if (m_Field44) {
+        if (!m_Field58) goto L_3B;
+        sub_00195AF0(sub_00065830((int)DAT_0039F424, *(int*)(m_Field44->vfunc_07() + 8)));
+        m_Field58->sub_001701F0();
+        return;
+    }
+L_3B:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00196410 (0x00196410, 55 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00196410
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00196410 (Proto 0x00196410, 55 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0039F5F4[];
+extern "C" char DAT_0039F60C[];
+
+class Class_00196410
+{
+public:
+    Class_00196410* sub_00196410(int a1, int a2);
+    void sub_00193E40(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x3C];
+    int m_Field40; // +0x40
+    char m_pad44[0x14];
+    int m_Field58; // +0x58
+    float m_Field5C; // +0x5C
+    bool m_Field60; // +0x60
+};
+
+Class_00196410* Class_00196410::sub_00196410(int a1, int a2)
+{
+    sub_00193E40(a1, a2);
+    m_Field58 = 0;
+    m_Field60 = false;
+    m_Field00 = (int)DAT_0039F60C;
+    m_Field40 = (int)DAT_0039F5F4;
+    m_Field5C = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001967D0 (0x001967D0, 39 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -68392,6 +87463,136 @@ Class_00197740* Class_00197740::sub_00197740(int a1, int a2)
     m_FieldD0 = -1;
     m_FieldCC = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001979D0 (0x001979D0, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001979D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001979D0 (Proto 0x001979D0, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001C4030(int, int, int, int);
+};
+
+extern "C" int DAT_004601C0[];
+extern "C" bool DAT_0046021C;
+
+void __stdcall sub_001979D0(int a1, int a2, int a3, int a4, int a5)
+{
+    if (DAT_0046021C) {
+        if (!DAT_004601C0[a1]) goto L_31;
+        ((Object*)DAT_004601C0[a1])->sub_001C4030(a2, a3, a4, a5);
+    }
+L_31:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00197B20 (0x00197B20, 124 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00197B20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00197B20 (Proto 0x00197B20, 124 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00028120(int);
+extern "C" void __cdecl sub_000416B0(int, int, int);
+
+class Class_00197B20
+{
+public:
+    void sub_00197B20(int a1);
+    char m_pad00[0xA4];
+    int m_FieldA4; // +0xA4
+    int m_FieldA8; // +0xA8
+    char m_padAC[0x28];
+    int m_FieldD4; // +0xD4
+};
+
+void Class_00197B20::sub_00197B20(int a1)
+{
+    int r_ebp, r_ebx, r_edi, t3, t5;
+
+    r_ebp = *(int*)(sub_00028120(m_FieldD4) + 108);
+    r_ebx = 0;
+    if (m_FieldA8 > 0) {
+        r_edi = 0;
+        do {
+            t3 = m_FieldA4 + r_edi;
+            if (a1 == *(int*)(m_FieldA4 + r_edi + 28)) {
+                sub_000416B0(r_ebp, t3 + 24, 0);
+                *(int*)(m_FieldA4 + r_edi + 20) = 0;
+                *(int*)(m_FieldA4 + r_edi + 28) = 0;
+            }
+            t5 = m_FieldA8;
+            r_ebx += 1;
+            r_edi += 48;
+        } while (r_ebx < t5);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_00197D20 (0x00197D20, 101 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x00197D20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00197D20 (Proto 0x00197D20, 101 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00197D20
+{
+public:
+    int sub_00197D20();
+    char m_pad00[0xA4];
+    int m_FieldA4; // +0xA4
+    int m_FieldA8; // +0xA8
+};
+
+int Class_00197D20::sub_00197D20()
+{
+    int r_eax, r_edx, r_esi;
+
+    r_eax = m_FieldA8;
+    r_esi = 0;
+    if (r_eax > 0) {
+        r_edx = 0;
+        do {
+            r_eax = m_FieldA4;
+            *(int*)(r_edx + r_eax + 20) = 0;
+            r_eax = m_FieldA4;
+            *(bool*)(r_edx + r_eax + 44) = false;
+            r_eax = m_FieldA4;
+            r_eax += r_edx;
+            *(float*)r_eax = 0.0f;
+            *(float*)(r_eax + 4) = 0.0f;
+            *(float*)(r_eax + 8) = 0.0f;
+            r_eax = m_FieldA4;
+            *(int*)(r_edx + r_eax + 28) = 0;
+            r_eax = m_FieldA8;
+            r_esi += 1;
+            r_edx += 48;
+        } while (r_esi < r_eax);
+    }
+    return r_eax;
 }
 
 // ============================================================================
@@ -69055,6 +88256,51 @@ bool __cdecl sub_0019DA50(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0019DD40 (0x0019DD40, 93 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0019DD40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0019DD40 (Proto 0x0019DD40, 93 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0008D4E0(int);
+    bool sub_00148450();
+};
+
+extern "C" Object DAT_00460668;
+extern "C" int DAT_0046066C;
+extern "C" Object DAT_00462DD4;
+extern "C" int DAT_00462DD8;
+
+void __cdecl sub_0019DD40(void)
+{
+    int r_esi, t3;
+
+    r_esi = DAT_00460668.sub_0008D4E0(DAT_0046066C);
+    if (!r_esi) goto L_5B;
+    t3 = DAT_00462DD4.sub_0008D4E0(DAT_00462DD8);
+    if (t3) {
+        if (!((Object*)t3)->sub_00148450()) goto L_4A;
+        if (*(bool*)(r_esi + 136)) goto L_5B;
+        *(bool*)(r_esi + 136) = true;
+        return;
+    }
+L_4A:
+    if (*(bool*)(r_esi + 136)) {
+        *(bool*)(r_esi + 136) = false;
+    }
+L_5B:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0019E4F0 (0x0019E4F0, 106 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -69130,6 +88376,60 @@ int __cdecl sub_0019E5E0(void)
     DAT_0046067C = 0;
     DAT_00460680 = 0;
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0019E620 (0x0019E620, 122 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0019E620
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0019E620 (Proto 0x0019E620, 122 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_004149A8;
+extern "C" unsigned char DAT_004149A9;
+extern "C" int DAT_00460678;
+extern "C" int DAT_0046067C;
+extern "C" int DAT_00460680;
+extern "C" int DAT_00460684;
+extern "C" int __cdecl sub_0019DA30(void);
+
+int __cdecl sub_0019E620(void)
+{
+    int r_eax;
+
+    r_eax = DAT_004149A8;
+    if ((unsigned char)r_eax) {
+        DAT_004149A8 = false;
+    }
+    r_eax = sub_0019DA30();
+    if (DAT_004149A9 != ((unsigned char)r_eax)) {
+        r_eax = sub_0019DA30();
+        DAT_004149A9 = (unsigned char)r_eax;
+        DAT_004149A8 = true;
+    }
+    r_eax = DAT_00460678;
+    DAT_00460684 = 0;
+    if (r_eax) {
+        *(bool*)(r_eax + 205) = true;
+        DAT_00460678 = 0;
+    }
+    r_eax = DAT_0046067C;
+    if (r_eax) {
+        *(bool*)(r_eax + 205) = true;
+        DAT_0046067C = 0;
+    }
+    r_eax = DAT_00460680;
+    if (r_eax) {
+        *(bool*)(r_eax + 205) = true;
+        DAT_00460680 = 0;
+    }
+    return r_eax;
 }
 
 // ============================================================================
@@ -69212,6 +88512,65 @@ void __cdecl sub_0019F0B0(int a1, int a2, int a3, int a4, int a5, int a6)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0019FBD0 (0x0019FBD0, 115 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0019FBD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0019FBD0 (Proto 0x0019FBD0, 115 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037D77C;
+extern "C" char DAT_003A0D3C[];
+extern "C" int DAT_00460A38;
+extern "C" void __cdecl sub_0019FA10(void);
+
+class Class_0019FBD0
+{
+public:
+    Class_0019FBD0* sub_0019FBD0(int a1, int a2);
+    void sub_00026E40(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x74];
+    int m_Field78; // +0x78
+    int m_Field7C; // +0x7C
+    float m_Field80; // +0x80
+    float m_Field84; // +0x84
+    int m_Field88; // +0x88
+    int m_Field8C; // +0x8C
+    bool m_Field90; // +0x90
+};
+
+Class_0019FBD0* Class_0019FBD0::sub_0019FBD0(int a1, int a2)
+{
+    float t2;
+    int t3;
+
+    sub_00026E40(a1, a2);
+    m_Field80 = 0.0f;
+    t2 = DAT_0037D77C;
+    m_Field78 = 0;
+    m_Field00 = (int)DAT_003A0D3C;
+    m_Field7C = 0;
+    m_Field84 = t2;
+    m_Field88 = 0;
+    m_Field8C = 0;
+    m_Field90 = false;
+    m_Field78 = DAT_00460A38;
+    DAT_00460A38 = (int)this;
+    t3 = m_Field78;
+    if (m_Field78) {
+        *(int*)(t3 + 124) = (int)this;
+    }
+    sub_0019FA10();
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0019FD10 (0x0019FD10, 50 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -69289,6 +88648,58 @@ Class_0019FF60* Class_0019FF60::sub_0019FF60()
     if (m_Field00) {
         *(int*)(t1 + 4) = (int)this;
     }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0019FFF0 (0x0019FFF0, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0019FFF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0019FFF0 (Proto 0x0019FFF0, 75 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" char DAT_003A0E5C[];
+
+class Class_0019FFF0
+{
+public:
+    Class_0019FFF0* sub_0019FFF0(int a1, int a2);
+    void sub_00028470(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x1C];
+    unsigned short m_Field20; // +0x20
+    bool m_Field22; // +0x22
+    char m_pad23[0x1];
+    int m_Field24; // +0x24
+    float m_Field28; // +0x28
+    int m_Field2C; // +0x2C
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    int m_Field38; // +0x38
+};
+
+Class_0019FFF0* Class_0019FFF0::sub_0019FFF0(int a1, int a2)
+{
+    float t2;
+
+    sub_00028470(a1, a2);
+    t2 = DAT_0037CE60;
+    m_Field22 = false;
+    m_Field2C = 0;
+    m_Field30 = 0;
+    m_Field34 = 0;
+    m_Field38 = 0;
+    m_Field20 = 65535;
+    m_Field00 = (int)DAT_003A0E5C;
+    m_Field24 = 5;
+    m_Field28 = t2;
     return this;
 }
 
@@ -69559,6 +88970,71 @@ L_55:
 }
 
 // ============================================================================
+// [VERIFIED] sub_001A0E90 (0x001A0E90, 127 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001A0E90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001A0E90 (Proto 0x001A0E90, 127 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037FCE4;
+extern "C" char DAT_003A1244[];
+
+class Class_001A0E90
+{
+public:
+    Class_001A0E90* sub_001A0E90(int a1, int a2);
+    void sub_001B0D80(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x78];
+    float m_Field7C; // +0x7C
+    char m_pad80[0x280];
+    int m_Field300; // +0x300
+    int m_Field304; // +0x304
+    int m_Field308; // +0x308
+    int m_Field30C; // +0x30C
+    char m_pad310[0x4];
+    int m_Field314; // +0x314
+    int m_Field318; // +0x318
+    int m_Field31C; // +0x31C
+    int m_Field320; // +0x320
+    int m_Field324; // +0x324
+    unsigned char m_Field328; // +0x328
+    bool m_Field329; // +0x329
+    bool m_Field32A; // +0x32A
+    bool m_Field32B; // +0x32B
+};
+
+Class_001A0E90* Class_001A0E90::sub_001A0E90(int a1, int a2)
+{
+    float t2;
+
+    sub_001B0D80(a1, a2);
+    t2 = DAT_0037FCE4;
+    m_Field300 = 0;
+    m_Field304 = 0;
+    m_Field308 = 0;
+    m_Field30C = 0;
+    m_Field314 = 0;
+    m_Field318 = 0;
+    m_Field31C = 0;
+    m_Field320 = 0;
+    m_Field324 = 0;
+    m_Field32A = false;
+    m_Field32B = false;
+    m_Field00 = (int)DAT_003A1244;
+    m_Field7C = t2;
+    m_Field328 = 3;
+    m_Field329 = true;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001A0F20 (0x001A0F20, 79 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -69608,6 +89084,57 @@ void Class_001A0F20::sub_001A0F20()
         m_Field32A = false;
     }
     sub_001B0CB0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_001A1530 (0x001A1530, 106 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001A1530
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001A1530 (Proto 0x001A1530, 106 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" float DAT_0037F4BC;
+extern "C" char DAT_003A12FC[];
+
+class Class_001A1530
+{
+public:
+    Class_001A1530* sub_001A1530(int a1, int a2);
+    void sub_001A82B0(int, int, int, int, int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x78];
+    int m_Field7C; // +0x7C
+    int m_Field80; // +0x80
+    char m_pad84[0x4C];
+    float m_FieldD0; // +0xD0
+    float m_FieldD4; // +0xD4
+    char m_padD8[0x8];
+    int m_FieldE0; // +0xE0
+    char m_padE4[0x104];
+    bool m_Field1E8; // +0x1E8
+};
+
+Class_001A1530* Class_001A1530::sub_001A1530(int a1, int a2)
+{
+    float t3;
+
+    sub_001A82B0(6, 1, 6, 0, a1, a2);
+    m_FieldD0 = DAT_0037CE60;
+    t3 = DAT_0037F4BC;
+    m_Field00 = (int)DAT_003A12FC;
+    m_Field1E8 = false;
+    m_FieldD4 = t3;
+    m_FieldE0 = -1;
+    m_Field7C = 0;
+    m_Field80 = 0;
+    return this;
 }
 
 // ============================================================================
@@ -69763,6 +89290,39 @@ void Class_001A1EA0::sub_001A1EA0()
     }
 L_65:
     ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001A1F40 (0x001A1F40, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001A1F40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001A1F40 (Proto 0x001A1F40, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001A1F40
+{
+public:
+    int sub_001A1F40();
+    char m_pad00[0x98];
+    int m_Field98; // +0x98
+    char m_pad9C[0x4];
+    bool m_FieldA0; // +0xA0
+};
+
+int Class_001A1F40::sub_001A1F40()
+{
+    if (m_FieldA0) {
+        if (!*(bool*)(m_Field98 + 20)) goto L_1D;
+        return 1;
+    }
+L_1D:
+    return 0;
 }
 
 // ============================================================================
@@ -70170,6 +89730,24 @@ void Class_001A5C50::sub_001A5C50()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001A61D0 (0x001A61D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001A61D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001A61D0 (Proto 0x001A61D0, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_001A61D0(int a1)
+{
+    return a1 != 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001A62A0 (0x001A62A0, 11 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -70391,6 +89969,59 @@ Class_001A6750* Class_001A6750::sub_001A6750()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001A6A20 (0x001A6A20, 90 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001A6A20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001A6A20 (Proto 0x001A6A20, 90 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_001A64D0(int);
+};
+
+extern "C" int __cdecl sub_0002CCB0(int, int);
+
+class Class_001A6A20
+{
+public:
+    void sub_001A6A20();
+    char m_pad00[0x94];
+    int m_Field94; // +0x94
+    int m_Field98; // +0x98
+};
+
+void Class_001A6A20::sub_001A6A20()
+{
+    int r_eax, r_esi;
+
+    r_eax = m_Field98;
+    if (r_eax > 0) goto L_58;
+    r_eax = sub_0002CCB0(0, (m_Field94 - r_eax) - 1);
+    r_esi = 0;
+    do {
+        if (!*(bool*)((int)this + r_esi + 144)) {
+            r_eax -= 1;
+            if (r_eax < 0) goto L_3B;
+        }
+        r_esi += 1;
+    } while (r_esi < 4);
+    return;
+L_3B:
+    ((Object*)*(int*)((int)this + (r_esi * 4) + 128))->sub_001A64D0(8);
+    *(bool*)(r_esi + (int)this + 144) = true;
+    m_Field98 += 1;
+L_58:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001A6F40 (0x001A6F40, 57 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -70416,6 +90047,61 @@ Class_001A6F40* Class_001A6F40::sub_001A6F40(int a1, int a2)
     sub_001A82B0(10, 0, 8, 32, a1, a2);
     m_Field00 = (int)DAT_003A1B0C;
     m_Field7C = 2;
+    m_Field80 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001A70C0 (0x001A70C0, 107 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001A70C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001A70C0 (Proto 0x001A70C0, 107 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field1F0
+{
+    void sub_000AB6E0();
+};
+
+extern "C" float DAT_0037CE60;
+extern "C" float DAT_0038AEFC;
+extern "C" char DAT_003A1BEC[];
+
+class Class_001A70C0
+{
+public:
+    Class_001A70C0* sub_001A70C0(int a1, int a2);
+    void sub_001A82B0(int, int, int, int, int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x78];
+    int m_Field7C; // +0x7C
+    int m_Field80; // +0x80
+    char m_pad84[0x164];
+    float m_Field1E8; // +0x1E8
+    float m_Field1EC; // +0x1EC
+    Field1F0 m_Field1F0; // +0x1F0
+    char m_pad1F1[0x7B];
+    bool m_Field26C; // +0x26C
+};
+
+Class_001A70C0* Class_001A70C0::sub_001A70C0(int a1, int a2)
+{
+    float t3;
+
+    sub_001A82B0(10, 8, 8, 0, a1, a2);
+    m_Field1E8 = DAT_0037CE60;
+    t3 = DAT_0038AEFC;
+    m_Field00 = (int)DAT_003A1BEC;
+    m_Field1EC = t3;
+    m_Field1F0.sub_000AB6E0();
+    m_Field26C = false;
+    m_Field7C = 0;
     m_Field80 = 0;
     return this;
 }
@@ -70528,6 +90214,92 @@ extern "C" int DAT_00462ED0;
 void __cdecl sub_001A8140(void)
 {
     ((Object*)DAT_00462ED0)->sub_001E7F40();
+}
+
+// ============================================================================
+// [VERIFIED] sub_001A8150 (0x001A8150, 71 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001A8150
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001A8150 (Proto 0x001A8150, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_001E9CD0(int, int, int, int);
+};
+
+extern "C" float DAT_003902F0;
+extern "C" int DAT_00462ED0;
+
+class Class_001A8150
+{
+public:
+    int sub_001A8150(int a1, int a2, int a3, int a4, int a5);
+    char m_pad00[0xA8];
+    int m_FieldA8; // +0xA8
+};
+
+int Class_001A8150::sub_001A8150(int a1, int a2, int a3, int a4, int a5)
+{
+    int r_eax, t1;
+
+    r_eax = 1;
+    t1 = *(int*)m_FieldA8;
+    if (*(int*)m_FieldA8) {
+        r_eax = *(char*)(t1 + 22);
+    }
+    r_eax = ((Object*)DAT_00462ED0)->sub_001E9CD0(r_eax, a2, a3, a4);
+    if (a5) {
+        *(float*)a5 = DAT_003902F0;
+    }
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001A8210 (0x001A8210, 65 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001A8210
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001A8210 (Proto 0x001A8210, 65 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_001AF720(int, int);
+};
+
+extern "C" int DAT_00460C24;
+
+class Class_001A8210
+{
+public:
+    void sub_001A8210(int a1);
+    char m_pad00[0x98];
+    int m_Field98; // +0x98
+    char m_pad9C[0x4];
+    int m_FieldA0; // +0xA0
+};
+
+void Class_001A8210::sub_001A8210(int a1)
+{
+    int t2;
+
+    *(int*)(m_Field98 + (m_FieldA0 * 4)) = ((Object*)DAT_00460C24)->sub_001AF720(a1, 0);
+    t2 = m_FieldA0;
+    if (*(int*)(m_Field98 + (m_FieldA0 * 4))) {
+        m_FieldA0 = t2 + 1;
+    }
 }
 
 // ============================================================================
@@ -70807,6 +90579,117 @@ public:
 bool Class_001AA910::sub_001AA910()
 {
     return m_Flag0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001AACE0 (0x001AACE0, 83 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001AACE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001AACE0 (Proto 0x001AACE0, 83 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE60;
+extern "C" int __cdecl sub_001AAA20(void);
+
+class Class_001AACE0
+{
+public:
+    void sub_001AACE0();
+};
+
+void Class_001AACE0::sub_001AACE0()
+{
+    int r_eax, r_ecx, r_edi, r_edx, r_esi;
+    float t1;
+
+    r_ecx = (int)this;
+    t1 = DAT_0037CE60;
+    r_edi = (int)this;
+    *(float*)(r_edi + 152) = t1;
+    r_eax = sub_001AAA20();
+    r_edx = *(int*)r_eax;
+    r_esi = *(int*)(r_eax + 4);
+    if (r_edx == r_esi) goto L_50;
+L_22:
+    if (*(int*)r_edx != r_edi) {
+        r_edx += 4;
+        if (r_edx != r_esi) goto L_22;
+        return;
+    }
+    r_ecx = r_edx + 4;
+    if (r_ecx != r_esi) {
+        r_edx -= r_ecx;
+        do {
+            r_edi = *(int*)r_ecx;
+            *(int*)(r_edx + r_ecx) = r_edi;
+            r_ecx += 4;
+        } while (r_ecx != r_esi);
+    }
+    *(int*)(r_eax + 4) += -4;
+L_50:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001AAD40 (0x001AAD40, 114 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001AAD40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001AAD40 (Proto 0x001AAD40, 114 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00029460();
+};
+
+extern "C" int __cdecl sub_001AA9A0(void);
+
+void __cdecl sub_001AAD40(int a1)
+{
+    int r_eax, r_ebp, r_ecx, r_edi, r_edx, r_esi;
+
+    r_eax = sub_001AA9A0();
+    r_esi = *(int*)r_eax;
+    r_eax = sub_001AA9A0();
+    r_ebp = r_eax;
+    if (r_esi != *(int*)(r_ebp + 4)) {
+        r_edi = r_esi + 4;
+        do {
+            r_eax = *(int*)r_esi;
+            r_ecx = *(int*)(r_eax + 160);
+            if (r_ecx == a1) {
+                *(unsigned char*)(r_eax + 169) &= 247;
+                r_ecx = *(int*)r_esi;
+                ((Object*)r_ecx)->sub_00029460();
+                r_ecx = *(int*)(r_ebp + 4);
+                r_eax = r_edi;
+                if (r_edi != r_ecx) {
+                    r_edx = r_esi;
+                    r_edx -= r_edi;
+                    do {
+                        *(int*)(r_edx + r_eax) = *(int*)r_eax;
+                        r_eax += 4;
+                    } while (r_eax != r_ecx);
+                }
+                *(int*)(r_ebp + 4) += -4;
+            } else {
+                r_esi += 4;
+                r_edi += 4;
+            }
+        } while (r_esi != *(int*)(r_ebp + 4));
+    }
 }
 
 // ============================================================================
@@ -71190,6 +91073,40 @@ bool Class_001AF410::sub_001AF410(bool a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001AF810 (0x001AF810, 94 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001AF810
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001AF810 (Proto 0x001AF810, 94 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+void __cdecl sub_001AF810(int a1, int a2, int a3, int a4)
+{
+    int t3, t6, t9;
+
+    if (((bool (__cdecl*)(int, int))a4)(*(int*)a2, *(int*)a1)) {
+        t3 = *(int*)a2;
+        *(int*)a2 = *(int*)a1;
+        *(int*)a1 = t3;
+    }
+    if (((bool (__cdecl*)(int, int))a4)(*(int*)a3, *(int*)a2)) {
+        t6 = *(int*)a3;
+        *(int*)a3 = *(int*)a2;
+        *(int*)a2 = t6;
+    }
+    if (((bool (__cdecl*)(int, int))a4)(*(int*)a2, *(int*)a1)) {
+        t9 = *(int*)a2;
+        *(int*)a2 = *(int*)a1;
+        *(int*)a1 = t9;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_001AFA70 (0x001AFA70, 27 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -71464,6 +91381,108 @@ Class_001B1080* Class_001B1080::sub_001B1080(int a1, int a2)
     sub_00028470(a1, a2);
     m_Field00 = (int)DAT_003A2C94;
     m_Field20 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B12A0 (0x001B12A0, 96 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001B12A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001B12A0 (Proto 0x001B12A0, 96 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037FCE4;
+extern "C" float DAT_003A1754;
+extern "C" char DAT_003A2D1C[];
+
+class Class_001B12A0
+{
+public:
+    Class_001B12A0* sub_001B12A0(int a1, int a2);
+    void sub_001A82B0(int, int, int, int, int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x78];
+    int m_Field7C; // +0x7C
+    int m_Field80; // +0x80
+    char m_pad84[0x4C];
+    float m_FieldD0; // +0xD0
+    float m_FieldD4; // +0xD4
+    char m_padD8[0x110];
+    bool m_Field1E8; // +0x1E8
+};
+
+Class_001B12A0* Class_001B12A0::sub_001B12A0(int a1, int a2)
+{
+    float t3;
+
+    sub_001A82B0(6, 1, 6, 0, a1, a2);
+    m_FieldD4 = DAT_0037FCE4;
+    t3 = DAT_003A1754;
+    m_Field00 = (int)DAT_003A2D1C;
+    m_Field1E8 = false;
+    m_Field80 = 0;
+    m_Field7C = 1;
+    m_FieldD0 = t3;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B1390 (0x001B1390, 106 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001B1390
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001B1390 (Proto 0x001B1390, 106 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_00383E60;
+extern "C" float DAT_003A1754;
+extern "C" char DAT_003A2DF4[];
+
+class Class_001B1390
+{
+public:
+    Class_001B1390* sub_001B1390(int a1, int a2);
+    void sub_001A82B0(int, int, int, int, int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x78];
+    int m_Field7C; // +0x7C
+    int m_Field80; // +0x80
+    char m_pad84[0x4C];
+    float m_FieldD0; // +0xD0
+    float m_FieldD4; // +0xD4
+    char m_padD8[0x8];
+    int m_FieldE0; // +0xE0
+    char m_padE4[0x8];
+    int m_FieldEC; // +0xEC
+    char m_padF0[0xF8];
+    bool m_Field1E8; // +0x1E8
+};
+
+Class_001B1390* Class_001B1390::sub_001B1390(int a1, int a2)
+{
+    float t3;
+
+    sub_001A82B0(6, 1, 6, 0, a1, a2);
+    m_FieldD0 = DAT_00383E60;
+    t3 = DAT_003A1754;
+    m_Field7C = 1;
+    m_Field80 = 1;
+    m_FieldE0 = 1;
+    m_FieldEC = 1;
+    m_Field00 = (int)DAT_003A2DF4;
+    m_Field1E8 = false;
+    m_FieldD4 = t3;
     return this;
 }
 
@@ -72383,6 +92402,124 @@ void Class_001B5510::sub_001B5510()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001B5530 (0x001B5530, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001B5530
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001B5530 (Proto 0x001B5530, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27(int);
+};
+
+class Class_001B5530
+{
+public:
+    void sub_001B5530(int a1);
+    char m_pad00[0x112];
+    unsigned char m_Field112; // +0x112
+};
+
+void Class_001B5530::sub_001B5530(int a1)
+{
+    if (a1) {
+        if (m_Field112 & 64) goto L_21;
+        ((Object*)a1)->vfunc_27((int)this);
+        m_Field112 |= 64;
+    }
+L_21:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B5BA0 (0x001B5BA0, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001B5BA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001B5BA0 (Proto 0x001B5BA0, 116 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldC0
+{
+    int sub_0007E1F0();
+    void sub_0007F350(int);
+};
+
+extern "C" int __cdecl sub_00028120(int);
+extern "C" int __cdecl sub_0007E860(int, int);
+
+class Class_001B5BA0
+{
+public:
+    void sub_001B5BA0(int a1);
+    void sub_001B4F40();
+    char m_pad00[0xB8];
+    int m_FieldB8; // +0xB8
+    char m_padBC[0x4];
+    FieldC0* m_FieldC0; // +0xC0
+    int m_FieldC4; // +0xC4
+};
+
+void Class_001B5BA0::sub_001B5BA0(int a1)
+{
+    int t5, t6;
+
+    if (m_FieldC0) {
+        m_FieldC0->sub_0007F350(a1);
+        m_FieldC4 = m_FieldC0->sub_0007E1F0();
+        sub_001B4F40();
+        return;
+    }
+    if (sub_00028120(m_FieldB8)) {
+        t5 = sub_00028120(m_FieldB8);
+        t6 = *(int*)(t5 + 76);
+        if (!*(int*)(t5 + 76)) goto L_70;
+        m_FieldC4 = sub_0007E860(t6, a1);
+    }
+L_70:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001B5D80 (0x001B5D80, 11 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -72499,6 +92636,47 @@ void __cdecl sub_001B5E00(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001B5F80 (0x001B5F80, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001B5F80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001B5F80 (Proto 0x001B5F80, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0007E280(int, int);
+};
+
+class Class_001B5F80
+{
+public:
+    void sub_001B5F80(int a1, int a2);
+    char m_pad00[0xC0];
+    int m_FieldC0; // +0xC0
+};
+
+void Class_001B5F80::sub_001B5F80(int a1, int a2)
+{
+    int t1;
+
+    *(float*)(a2 + 8) = 0.0f;
+    *(float*)(a2 + 4) = 0.0f;
+    *(float*)a2 = 0.0f;
+    t1 = m_FieldC0;
+    if (m_FieldC0) {
+        a2 = a2;
+        ((Object*)t1)->sub_0007E280(a1, a2);
+        return;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_001B6340 (0x001B6340, 43 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
 // ============================================================================
@@ -72605,6 +92783,39 @@ Class_001B7940* Class_001B7940::sub_001B7940(int a1, int a2)
     sub_001B4CA0(a1, a2);
     m_Field00 = (int)DAT_003A3C54;
     m_Field24.sub_0007D010();
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B7A20 (0x001B7A20, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001B7A20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001B7A20 (Proto 0x001B7A20, 40 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003A3CE4[];
+
+class Class_001B7A20
+{
+public:
+    Class_001B7A20* sub_001B7A20(int a1, int a2);
+    void sub_001B4CA0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x20];
+    float m_Field24; // +0x24
+};
+
+Class_001B7A20* Class_001B7A20::sub_001B7A20(int a1, int a2)
+{
+    sub_001B4CA0(a1, a2);
+    m_Field00 = (int)DAT_003A3CE4;
+    m_Field24 = 0.0f;
     return this;
 }
 
@@ -73317,6 +93528,82 @@ int Class_001B8A00::sub_001B8A00()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001B8B30 (0x001B8B30, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001B8B30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001B8B30 (Proto 0x001B8B30, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field12C
+{
+    void sub_001C43D0(int);
+};
+
+extern "C" int DAT_00462DD4;
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_001B8B30
+{
+public:
+    void sub_001B8B30(int a1);
+    char m_pad00[0x12C];
+    Field12C* m_Field12C; // +0x12C
+    int m_Field130; // +0x130
+};
+
+void Class_001B8B30::sub_001B8B30(int a1)
+{
+    if (*(int*)(sub_00028120(m_Field130) + 16) == DAT_00462DD4) {
+        m_Field12C->sub_001C43D0(a1);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_001B8B70 (0x001B8B70, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001B8B30 (Proto 0x001B8B30), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x001B8B70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001B8B70 (Proto 0x001B8B70, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field12C
+{
+    void sub_001C43E0(int);
+};
+
+extern "C" int DAT_00462DD4;
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_001B8B70
+{
+public:
+    void sub_001B8B70(int a1);
+    char m_pad00[0x12C];
+    Field12C* m_Field12C; // +0x12C
+    int m_Field130; // +0x130
+};
+
+void Class_001B8B70::sub_001B8B70(int a1)
+{
+    if (*(int*)(sub_00028120(m_Field130) + 16) == DAT_00462DD4) {
+        m_Field12C->sub_001C43E0(a1);
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_001B8F50 (0x001B8F50, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // What it does: Passes a value stored in the object to another function and returns its result.
@@ -73906,6 +94193,193 @@ int Class_001BB8D0::sub_001BB8D0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001BD220 (0x001BD220, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001BD220
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD220 (Proto 0x001BD220, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003F47F4[];
+extern "C" char DAT_003F4DA4[];
+extern "C" int __cdecl sub_002C92F8(int, int, int, int, int);
+
+bool __cdecl sub_001BD220(int a1)
+{
+    if (a1) {
+        return sub_002C92F8(a1, 0, (int)DAT_003F4DA4, (int)DAT_003F47F4, 0) != 0;
+    }
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001BD250 (0x001BD250, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001BD220 (Proto 0x001BD220), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x001BD250
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD250 (Proto 0x001BD250, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00402E94[];
+extern "C" char DAT_003F4DA4[];
+extern "C" int __cdecl sub_002C92F8(int, int, int, int, int);
+
+bool __cdecl sub_001BD250(int a1)
+{
+    if (a1) {
+        return sub_002C92F8(a1, 0, (int)DAT_003F4DA4, (int)DAT_00402E94, 0) != 0;
+    }
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001BD280 (0x001BD280, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001BD220 (Proto 0x001BD220), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x001BD280
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD280 (Proto 0x001BD280, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003F4D80[];
+extern "C" char DAT_003F4DA4[];
+extern "C" int __cdecl sub_002C92F8(int, int, int, int, int);
+
+bool __cdecl sub_001BD280(int a1)
+{
+    if (a1) {
+        return sub_002C92F8(a1, 0, (int)DAT_003F4DA4, (int)DAT_003F4D80, 0) != 0;
+    }
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001BD2B0 (0x001BD2B0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001BD220 (Proto 0x001BD220), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x001BD2B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD2B0 (Proto 0x001BD2B0, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003F4D64[];
+extern "C" char DAT_003F4DA4[];
+extern "C" int __cdecl sub_002C92F8(int, int, int, int, int);
+
+bool __cdecl sub_001BD2B0(int a1)
+{
+    if (a1) {
+        return sub_002C92F8(a1, 0, (int)DAT_003F4DA4, (int)DAT_003F4D64, 0) != 0;
+    }
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001BD2E0 (0x001BD2E0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001BD220 (Proto 0x001BD220), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x001BD2E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD2E0 (Proto 0x001BD2E0, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003F4D44[];
+extern "C" char DAT_003F4DA4[];
+extern "C" int __cdecl sub_002C92F8(int, int, int, int, int);
+
+bool __cdecl sub_001BD2E0(int a1)
+{
+    if (a1) {
+        return sub_002C92F8(a1, 0, (int)DAT_003F4DA4, (int)DAT_003F4D44, 0) != 0;
+    }
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001BD310 (0x001BD310, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001BD220 (Proto 0x001BD220), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x001BD310
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD310 (Proto 0x001BD310, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004098C8[];
+extern "C" char DAT_003F4DA4[];
+extern "C" int __cdecl sub_002C92F8(int, int, int, int, int);
+
+bool __cdecl sub_001BD310(int a1)
+{
+    if (a1) {
+        return sub_002C92F8(a1, 0, (int)DAT_003F4DA4, (int)DAT_004098C8, 0) != 0;
+    }
+    return false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001BD340 (0x001BD340, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_001BD220 (Proto 0x001BD220), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x001BD340
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD340 (Proto 0x001BD340, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_004010CC[];
+extern "C" char DAT_003F4DA4[];
+extern "C" int __cdecl sub_002C92F8(int, int, int, int, int);
+
+bool __cdecl sub_001BD340(int a1)
+{
+    if (a1) {
+        return sub_002C92F8(a1, 0, (int)DAT_003F4DA4, (int)DAT_004010CC, 0) != 0;
+    }
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001BD380 (0x001BD380, 5 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -73924,6 +94398,188 @@ public:
 void Class_001BD380::sub_001BD380()
 {
     m_Field20 = true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001BD590 (0x001BD590, 76 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001BD590
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD590 (Proto 0x001BD590, 76 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_001BD590
+{
+public:
+    void sub_001BD590(int a1);
+};
+
+void Class_001BD590::sub_001BD590(int a1)
+{
+    int r_edi, r_esi;
+
+    r_esi = 0;
+    r_edi = (int)this;
+L_10:
+    if (sub_00028120(*(int*)r_edi)) {
+        if (!*(bool*)(r_edi + 13)) goto L_36;
+        *(int*)(a1 + (r_esi * 4)) = sub_00028120(*(int*)r_edi);
+        goto L_3D;
+    }
+L_36:
+    *(int*)(a1 + (r_esi * 4)) = 0;
+L_3D:
+    r_esi += 1;
+    r_edi += 16;
+    if (r_esi < 8) goto L_10;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001BD6F0 (0x001BD6F0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001BD6F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD6F0 (Proto 0x001BD6F0, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0008D4C0(int);
+};
+
+class Class_001BD6F0
+{
+public:
+    void sub_001BD6F0();
+    char m_pad00[0x8];
+    int m_Field08; // +0x08
+};
+
+void Class_001BD6F0::sub_001BD6F0()
+{
+    int r_edi, r_esi;
+
+    r_esi = (int)(&m_Field08);
+    r_edi = 8;
+    do {
+        ((Object*)r_esi + -8)->sub_0008D4C0(0);
+        *(float*)(r_esi + -4) = 0.0f;
+        *(float*)r_esi = 0.0f;
+        *(bool*)(r_esi + 5) = false;
+        *(bool*)(r_esi + 4) = false;
+        r_esi += 16;
+        r_edi -= 1;
+    } while (r_edi);
+}
+
+// ============================================================================
+// [VERIFIED] sub_001BD730 (0x001BD730, 58 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001BD730
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD730 (Proto 0x001BD730, 58 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0008D4C0(int);
+};
+
+class Class_001BD730
+{
+public:
+    void sub_001BD730();
+    char m_pad00[0x8];
+    int m_Field08; // +0x08
+};
+
+void Class_001BD730::sub_001BD730()
+{
+    int r_edi, r_esi;
+
+    r_esi = (int)(&m_Field08);
+    r_edi = 8;
+    do {
+        if (!*(unsigned char*)(r_esi + 4)) {
+            ((Object*)r_esi + -8)->sub_0008D4C0(0);
+            *(float*)(r_esi + -4) = 0.0f;
+            *(float*)r_esi = 0.0f;
+            *(bool*)(r_esi + 5) = false;
+            *(bool*)(r_esi + 4) = false;
+        }
+        r_esi += 16;
+        r_edi -= 1;
+    } while (r_edi);
+}
+
+// ============================================================================
+// [VERIFIED] sub_001BD870 (0x001BD870, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001BD870
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001BD870 (Proto 0x001BD870, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual bool vfunc_23(int);
+    int sub_0008D4E0(int);
+};
+
+extern "C" Object DAT_004615C4;
+extern "C" int DAT_004615C8;
+
+bool __cdecl sub_001BD870(int a1)
+{
+    if (a1) {
+        return ((Object*)a1)->vfunc_23(DAT_004615C4.sub_0008D4E0(DAT_004615C8));
+    }
+    return false;
 }
 
 // ============================================================================
@@ -74257,6 +94913,55 @@ Class_001C09B0* Class_001C09B0::sub_001C09B0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001C0A00 (0x001C0A00, 97 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001C0A00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001C0A00 (Proto 0x001C0A00, 97 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003A4A2C[];
+
+class Class_001C0A00
+{
+public:
+    Class_001C0A00* sub_001C0A00(int a1, int a2);
+    void sub_001D70E0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x17C];
+    float m_Field180; // +0x180
+    float m_Field184; // +0x184
+    float m_Field188; // +0x188
+    float m_Field18C; // +0x18C
+    float m_Field190; // +0x190
+    float m_Field194; // +0x194
+    char m_pad198[0x4];
+    int m_Field19C; // +0x19C
+    char m_pad1A0[0x4];
+    int m_Field1A4; // +0x1A4
+};
+
+Class_001C0A00* Class_001C0A00::sub_001C0A00(int a1, int a2)
+{
+    sub_001D70E0(a1, a2);
+    m_Field19C = 0;
+    m_Field1A4 = 0;
+    m_Field00 = (int)DAT_003A4A2C;
+    m_Field180 = 0.0f;
+    m_Field184 = 0.0f;
+    m_Field188 = 0.0f;
+    m_Field18C = 0.0f;
+    m_Field190 = 0.0f;
+    m_Field194 = 0.0f;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001C0BB0 (0x001C0BB0, 50 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -74497,6 +95202,58 @@ Class_001C3970* Class_001C3970::sub_001C3970(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001C39F0 (0x001C39F0, 86 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001C39F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001C39F0 (Proto 0x001C39F0, 86 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CE50;
+extern "C" float DAT_0038ADF0;
+extern "C" char DAT_003A5154[];
+extern "C" float DAT_003AA7B8;
+
+class Class_001C39F0
+{
+public:
+    Class_001C39F0* sub_001C39F0(int a1, int a2);
+    void sub_00028470(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x1C];
+    unsigned short m_Field20; // +0x20
+    bool m_Field22; // +0x22
+    char m_pad23[0x1];
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+};
+
+Class_001C39F0* Class_001C39F0::sub_001C39F0(int a1, int a2)
+{
+    float t2, t3, t4;
+
+    sub_00028470(a1, a2);
+    t2 = DAT_0037CE50;
+    t3 = DAT_0038ADF0;
+    m_Field24 = t2;
+    m_Field2C = t2;
+    t4 = DAT_003AA7B8;
+    m_Field20 = 65535;
+    m_Field22 = false;
+    m_Field00 = (int)DAT_003A5154;
+    m_Field28 = t3;
+    m_Field30 = t4;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001C3E10 (0x001C3E10, 50 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -74551,6 +95308,77 @@ extern "C" int DAT_0041AAA8[];
 int __cdecl sub_001C3E80(int a1)
 {
     return DAT_0041AAA8[a1];
+}
+
+// ============================================================================
+// [VERIFIED] sub_001C3E90 (0x001C3E90, 113 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001C3E90
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001C3E90 (Proto 0x001C3E90, 113 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00028470(int, int);
+};
+
+extern "C" float DAT_0037CE50;
+extern "C" char DAT_003A52EC[];
+
+class Class_001C3E90
+{
+public:
+    int sub_001C3E90(int a1, int a2);
+    int m_Field00; // +0x00
+    char m_pad04[0x1C];
+    unsigned short m_Field20; // +0x20
+    bool m_Field22; // +0x22
+    char m_pad23[0x5];
+    int m_Field28; // +0x28
+    char m_pad2C[0x160];
+    int m_Field18C; // +0x18C
+};
+
+int Class_001C3E90::sub_001C3E90(int a1, int a2)
+{
+    int r_eax, r_ecx, r_edx;
+    float t2;
+
+    r_ecx = (int)this;
+    r_eax = a2;
+    r_ecx = a1;
+    r_ecx = (int)this;
+    ((Object*)r_ecx)->sub_00028470(a1, a2);
+    t2 = DAT_0037CE50;
+    r_ecx = 0;
+    m_Field20 = 65535;
+    m_Field22 = false;
+    m_Field00 = (int)DAT_003A52EC;
+    m_Field18C = 0;
+    r_eax = (int)(&m_Field28);
+    r_edx = 9;
+    do {
+        *(int*)(r_eax + -4) = r_ecx;
+        *(int*)r_eax = r_ecx;
+        *(float*)(r_eax + 4) = t2;
+        *(float*)(r_eax + 8) = t2;
+        *(int*)(r_eax + 12) = r_ecx;
+        *(int*)(r_eax + 16) = r_ecx;
+        *(int*)(r_eax + 20) = r_ecx;
+        *(int*)(r_eax + 32) = r_ecx;
+        *(float*)(r_eax + 24) = t2;
+        *(float*)(r_eax + 28) = t2;
+        r_eax += 40;
+        r_edx -= 1;
+    } while (r_edx);
+    r_eax = (int)this;
+    return r_eax;
 }
 
 // ============================================================================
@@ -74640,6 +95468,131 @@ public:
 void Class_001C43E0::sub_001C43E0(int a1)
 {
     sub_001C3DD0(m_Field74);
+}
+
+// ============================================================================
+// [VERIFIED] sub_001C4610 (0x001C4610, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001C4610
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001C4610 (Proto 0x001C4610, 80 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003841B4;
+extern "C" char DAT_003A53EC[];
+extern "C" float DAT_003A968C;
+extern "C" float DAT_003AB1D0;
+
+class Class_001C4610
+{
+public:
+    Class_001C4610* sub_001C4610(int a1, int a2);
+    void sub_001C43F0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0xD4];
+    float m_FieldD8; // +0xD8
+    float m_FieldDC; // +0xDC
+    float m_FieldE0; // +0xE0
+};
+
+Class_001C4610* Class_001C4610::sub_001C4610(int a1, int a2)
+{
+    float t4;
+
+    sub_001C43F0(a1, a2);
+    m_FieldD8 = DAT_003841B4;
+    m_FieldDC = DAT_003AB1D0;
+    t4 = DAT_003A968C;
+    m_Field00 = (int)DAT_003A53EC;
+    m_FieldE0 = t4;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001C46C0 (0x001C46C0, 64 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001C46C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001C46C0 (Proto 0x001C46C0, 64 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003A5464[];
+
+class Class_001C46C0
+{
+public:
+    Class_001C46C0* sub_001C46C0(int a1, int a2);
+    void sub_001C43F0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0xB1];
+    bool m_FieldB5; // +0xB5
+    char m_padB6[0x22];
+    int m_FieldD8; // +0xD8
+    int m_FieldDC; // +0xDC
+    float m_FieldE0; // +0xE0
+};
+
+Class_001C46C0* Class_001C46C0::sub_001C46C0(int a1, int a2)
+{
+    sub_001C43F0(a1, a2);
+    m_FieldD8 = 0;
+    m_FieldDC = 0;
+    m_Field00 = (int)DAT_003A5464;
+    m_FieldE0 = 0.0f;
+    m_FieldB5 = true;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001C47D0 (0x001C47D0, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001C47D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001C47D0 (Proto 0x001C47D0, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003A54DC[];
+
+class Class_001C47D0
+{
+public:
+    Class_001C47D0* sub_001C47D0(int a1, int a2);
+    void sub_001C43F0(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0xB1];
+    bool m_FieldB5; // +0xB5
+    char m_padB6[0x22];
+    int m_FieldD8; // +0xD8
+    int m_FieldDC; // +0xDC
+    float m_FieldE0; // +0xE0
+    int m_FieldE4; // +0xE4
+};
+
+Class_001C47D0* Class_001C47D0::sub_001C47D0(int a1, int a2)
+{
+    sub_001C43F0(a1, a2);
+    m_FieldD8 = 0;
+    m_FieldDC = 0;
+    m_FieldE0 = 0.0f;
+    m_FieldB5 = true;
+    m_Field00 = (int)DAT_003A54DC;
+    m_FieldE4 = 3;
+    return this;
 }
 
 // ============================================================================
@@ -74947,6 +95900,61 @@ Class_001C4FF0* Class_001C4FF0::sub_001C4FF0(int a1, int a2)
     *(int*)((char*)this + 0x7C) = (int)(&m_FieldDC);
     m_FieldA0 = (int)(&m_Field204);
     m_Field84 = (int)(&m_FieldA4);
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001C5270 (0x001C5270, 106 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001C5270
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001C5270 (Proto 0x001C5270, 106 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037E6C0;
+extern "C" float DAT_003A58E8;
+extern "C" char DAT_003A58F4[];
+
+class Class_001C5270
+{
+public:
+    Class_001C5270* sub_001C5270(int a1, int a2);
+    void sub_00028470(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x1C];
+    float m_Field20; // +0x20
+    float m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+    float m_Field34; // +0x34
+    float m_Field38; // +0x38
+    float m_Field3C; // +0x3C
+    float m_Field40; // +0x40
+    float m_Field44; // +0x44
+    float m_Field48; // +0x48
+};
+
+Class_001C5270* Class_001C5270::sub_001C5270(int a1, int a2)
+{
+    sub_00028470(a1, a2);
+    m_Field00 = (int)DAT_003A58F4;
+    m_Field20 = 0.0f;
+    m_Field24 = 0.0f;
+    m_Field28 = 0.0f;
+    m_Field2C = 0.0f;
+    m_Field30 = 0.0f;
+    m_Field34 = 0.0f;
+    m_Field38 = 0.0f;
+    m_Field3C = 0.0f;
+    m_Field40 = 0.0f;
+    m_Field44 = DAT_0037E6C0;
+    m_Field48 = DAT_003A58E8;
     return this;
 }
 
@@ -76435,6 +97443,54 @@ Class_001D21C0* Class_001D21C0::sub_001D21C0(int a1, int a2)
     m_Field2C.sub_0009B030();
     m_Field34 = 0;
     m_Field38 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001D2270 (0x001D2270, 61 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001D2270
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001D2270 (Proto 0x001D2270, 61 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field38
+{
+    void sub_0009AF10();
+};
+
+extern "C" float DAT_0037D068;
+extern "C" char DAT_003A79C4[];
+
+class Class_001D2270
+{
+public:
+    Class_001D2270* sub_001D2270(int a1, int a2);
+    void sub_001D1840(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x28];
+    int m_Field2C; // +0x2C
+    int m_Field30; // +0x30
+    float m_Field34; // +0x34
+    Field38 m_Field38; // +0x38
+};
+
+Class_001D2270* Class_001D2270::sub_001D2270(int a1, int a2)
+{
+    float t2;
+
+    sub_001D1840(a1, a2);
+    t2 = DAT_0037D068;
+    m_Field00 = (int)DAT_003A79C4;
+    m_Field2C = 0;
+    m_Field30 = 0;
+    m_Field34 = t2;
+    m_Field38.sub_0009AF10();
     return this;
 }
 
@@ -78593,6 +99649,61 @@ Class_001D64A0* Class_001D64A0::sub_001D64A0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001D6510 (0x001D6510, 97 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001D6510
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001D6510 (Proto 0x001D6510, 97 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037F550;
+extern "C" float DAT_0037F688;
+extern "C" float DAT_00383F40;
+extern "C" char DAT_003A8CDC[];
+
+class Class_001D6510
+{
+public:
+    Class_001D6510* sub_001D6510(int a1, int a2);
+    void sub_00028470(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    float m_Field28; // +0x28
+    float m_Field2C; // +0x2C
+    float m_Field30; // +0x30
+    float m_Field34; // +0x34
+    float m_Field38; // +0x38
+    float m_Field3C; // +0x3C
+};
+
+Class_001D6510* Class_001D6510::sub_001D6510(int a1, int a2)
+{
+    float t2, t3, t4;
+
+    sub_00028470(a1, a2);
+    t2 = DAT_0037F688;
+    t3 = DAT_0037F550;
+    m_Field28 = t2;
+    m_Field2C = t2;
+    t4 = DAT_00383F40;
+    m_Field20 = 3;
+    m_Field24 = 3;
+    m_Field00 = (int)DAT_003A8CDC;
+    m_Field30 = t4;
+    m_Field34 = t3;
+    m_Field38 = t4;
+    m_Field3C = t3;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001D65A0 (0x001D65A0, 50 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -79728,6 +100839,40 @@ int __cdecl sub_001DB690(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001DB730 (0x001DB730, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001DB730
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001DB730 (Proto 0x001DB730, 20 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_0009FE00(int);
+};
+
+class Class_001DB730
+{
+public:
+    bool sub_001DB730(int a1);
+    char m_pad00[0x44];
+    bool m_Field44; // +0x44
+};
+
+bool Class_001DB730::sub_001DB730(int a1)
+{
+    if (m_Field44) {
+        return ((Object*)(int)this + 72)->sub_0009FE00(a1);
+    }
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001DB790 (0x001DB790, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -79827,6 +100972,104 @@ public:
 void Class_001DB7C0::sub_001DB7C0()
 {
     ((Object*)(int)this + 72)->sub_000A0120();
+}
+
+// ============================================================================
+// [VERIFIED] sub_001DB7F0 (0x001DB7F0, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001DB7F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001DB7F0 (Proto 0x001DB7F0, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0009F2F0(int);
+};
+
+class Class_001DB7F0
+{
+public:
+    void sub_001DB7F0(int a1);
+    char m_pad00[0x44];
+    bool m_Field44; // +0x44
+};
+
+void Class_001DB7F0::sub_001DB7F0(int a1)
+{
+    if (m_Field44) {
+        ((Object*)(int)this + 72)->sub_0009F2F0(a1);
+        return;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_001DB830 (0x001DB830, 24 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001DB830
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001DB830 (Proto 0x001DB830, 24 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001DB830
+{
+public:
+    void sub_001DB830(float a1);
+    char m_pad00[0x44];
+    bool m_Field44; // +0x44
+    char m_pad45[0x7F];
+    float m_FieldC4; // +0xC4
+};
+
+void Class_001DB830::sub_001DB830(float a1)
+{
+    if (m_Field44) {
+        m_FieldC4 = a1;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_001DB850 (0x001DB850, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001DB850
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001DB850 (Proto 0x001DB850, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    bool sub_0009FE50();
+};
+
+class Class_001DB850
+{
+public:
+    bool sub_001DB850();
+    char m_pad00[0x44];
+    bool m_Field44; // +0x44
+};
+
+bool Class_001DB850::sub_001DB850()
+{
+    if (m_Field44) {
+        return ((Object*)(int)this + 72)->sub_0009FE50();
+    }
+    return false;
 }
 
 // ============================================================================
@@ -79947,6 +101190,202 @@ int Class_001DB950::sub_001DB950()
     }
 L_18:
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001DB970 (0x001DB970, 108 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001DB970
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001DB970 (Proto 0x001DB970, 108 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00(int);
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28(int);
+};
+
+extern "C" char DAT_00382268[];
+extern "C" int DAT_00462ED0;
+extern "C" bool __stdcall sub_00028CB0(int);
+extern "C" void __cdecl sub_00066030(int, int, int);
+
+class Class_001DB970
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    void sub_001DB970();
+    char m_pad04[0xB8];
+    int m_FieldBC; // +0xBC
+    char m_padC0[0x4];
+    int m_FieldC4; // +0xC4
+};
+
+void Class_001DB970::sub_001DB970()
+{
+    int t6;
+
+    if (m_FieldBC) {
+        if (sub_00028CB0(3)) {
+            sub_00066030((int)this, 1, (int)DAT_00382268);
+        } else {
+            vfunc_47();
+        }
+        ((Object*)*(int*)(DAT_00462ED0 + 208))->vfunc_28((int)this);
+        t6 = m_FieldBC;
+        if (m_FieldBC) {
+            ((Object*)t6)->vfunc_00(1);
+        }
+        m_FieldBC = 0;
+    }
+    m_FieldC4 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001DBF10 (0x001DBF10, 85 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001DBF10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001DBF10 (Proto 0x001DBF10, 85 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field30
+{
+    void sub_0009ED40();
+};
+
+struct Field48
+{
+    void sub_000A14C0();
+};
+
+struct Object
+{
+    void sub_00029460();
+    void sub_0008D4C0(int);
+};
+
+extern "C" int __cdecl sub_00028120(int);
+
+class Class_001DBF10
+{
+public:
+    void sub_001DBF10();
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+    char m_pad20[0x10];
+    Field30 m_Field30; // +0x30
+    char m_pad31[0x13];
+    bool m_Field44; // +0x44
+    char m_pad45[0x3];
+    Field48 m_Field48; // +0x48
+};
+
+void Class_001DBF10::sub_001DBF10()
+{
+    int r_edi, r_esi, t3;
+
+    if (m_Field44) {
+        m_Field30.sub_0009ED40();
+        r_esi = (int)(&m_Field1C);
+        r_edi = 5;
+        do {
+            t3 = sub_00028120(*(int*)r_esi);
+            if (t3) {
+                ((Object*)t3)->sub_00029460();
+            }
+            ((Object*)r_esi)->sub_0008D4C0(0);
+            r_esi += 4;
+            r_edi -= 1;
+        } while (r_edi);
+        m_Field48.sub_000A14C0();
+        m_Field44 = false;
+    }
 }
 
 // ============================================================================
@@ -80163,6 +101602,46 @@ bool Class_001DD4B0::sub_001DD4B0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001DD550 (0x001DD550, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001DD550
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001DD550 (Proto 0x001DD550, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_0008D4E0(int);
+};
+
+extern "C" Object DAT_00462DD4;
+extern "C" int DAT_00462DD8;
+
+class Class_001DD550
+{
+public:
+    bool sub_001DD550();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Class_001DD550::sub_001DD550()
+{
+    int t2;
+
+    t2 = DAT_00462DD4.sub_0008D4E0(DAT_00462DD8);
+    if (t2) {
+        return m_Field10 == *(int*)(t2 + 368);
+    }
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001DD580 (0x001DD580, 11 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -80342,6 +101821,37 @@ void Class_001DFE30::sub_001DFE30()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001DFE70 (0x001DFE70, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001DFE70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001DFE70 (Proto 0x001DFE70, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0037CD90;
+
+class Class_001DFE70
+{
+public:
+    bool sub_001DFE70();
+    char m_pad00[0x104];
+    float m_Field104; // +0x104
+};
+
+bool Class_001DFE70::sub_001DFE70()
+{
+    if (m_Field104 > DAT_0037CD90) {
+        return true;
+    }
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001DFE90 (0x001DFE90, 32 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -80365,6 +101875,56 @@ Class_001DFE90* Class_001DFE90::sub_001DFE90(int a1, int a2)
 {
     sub_001D8710(a1, a2);
     m_Field00 = (int)DAT_003A9F2C;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001DFF50 (0x001DFF50, 83 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001DFF50
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001DFF50 (Proto 0x001DFF50, 83 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldF8
+{
+    void sub_0008D4A0(int);
+};
+
+extern "C" char DAT_003A9E44[];
+
+class Class_001DFF50
+{
+public:
+    Class_001DFF50* sub_001DFF50(int a1, int a2);
+    void sub_001D8710(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0xF4];
+    FieldF8 m_FieldF8; // +0xF8
+    char m_padF9[0x3];
+    int m_FieldFC; // +0xFC
+    bool m_Field100; // +0x100
+    bool m_Field101; // +0x101
+    char m_pad102[0x2];
+    float m_Field104; // +0x104
+    bool m_Field108; // +0x108
+};
+
+Class_001DFF50* Class_001DFF50::sub_001DFF50(int a1, int a2)
+{
+    sub_001D8710(a1, a2);
+    m_Field00 = (int)DAT_003A9E44;
+    m_FieldF8.sub_0008D4A0(0);
+    m_FieldFC = 0;
+    m_Field100 = false;
+    m_Field101 = false;
+    m_Field108 = false;
+    m_Field104 = 0.0f;
     return this;
 }
 
@@ -80924,6 +102484,105 @@ int Class_001E1580::sub_001E1580(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001E1650 (0x001E1650, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001E1650
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001E1650 (Proto 0x001E1650, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001E1650
+{
+public:
+    void sub_001E1650(float a1);
+    char m_pad00[0x40];
+    float m_Field40; // +0x40
+};
+
+void Class_001E1650::sub_001E1650(float a1)
+{
+    m_Field40 = a1 * a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001E1670 (0x001E1670, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001E1670
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001E1670 (Proto 0x001E1670, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001E1670
+{
+public:
+    void sub_001E1670(float a1);
+    char m_pad00[0x3C];
+    float m_Field3C; // +0x3C
+};
+
+void Class_001E1670::sub_001E1670(float a1)
+{
+    m_Field3C = a1 * a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001E18C0 (0x001E18C0, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001E18C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001E18C0 (Proto 0x001E18C0, 62 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00461F90;
+
+class Class_001E18C0
+{
+public:
+    Class_001E18C0* sub_001E18C0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    float m_Field0C; // +0x0C
+    float m_Field10; // +0x10
+    float m_Field14; // +0x14
+    bool m_Field18; // +0x18
+    bool m_Field19; // +0x19
+    char m_pad1A[0x1A];
+    int m_Field34; // +0x34
+    int m_Field38; // +0x38
+};
+
+Class_001E18C0* Class_001E18C0::sub_001E18C0()
+{
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = DAT_00461F90;
+    m_Field0C = 0.0f;
+    m_Field10 = 0.0f;
+    m_Field14 = 0.0f;
+    m_Field18 = false;
+    m_Field19 = true;
+    m_Field34 = DAT_00461F90;
+    m_Field38 = DAT_00461F90;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001E2BD0 (0x001E2BD0, 77 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -81117,6 +102776,30 @@ extern "C" void __cdecl sub_001E3060(float value);
 void __cdecl sub_001E3060(float value)
 {
     DAT_004626C4 = value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001E3080 (0x001E3080, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001E3080
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001E3080 (Proto 0x001E3080, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_003AA674;
+extern "C" float DAT_004626B0;
+
+int __cdecl sub_001E3080(void)
+{
+    if (DAT_004626B0 >= DAT_003AA674) {
+        return 1;
+    }
+    return 0;
 }
 
 // ============================================================================
@@ -81511,6 +103194,43 @@ void __cdecl sub_001E5640(int a1, int a2, int a3, int a4, int a5, int a6, int a7
         object = 0;
     }
     sub_00065E70(a1, a2, a3, object, a7, a5, a6);
+}
+
+// ============================================================================
+// [VERIFIED] sub_001E5DD0 (0x001E5DD0, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x001E5DD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001E5DD0 (Proto 0x001E5DD0, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003AB114[];
+
+class Class_001E5DD0
+{
+public:
+    Class_001E5DD0* sub_001E5DD0(int a1, int a2);
+    void sub_00028470(int, int);
+    int m_Field00; // +0x00
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    float m_Field28; // +0x28
+};
+
+Class_001E5DD0* Class_001E5DD0::sub_001E5DD0(int a1, int a2)
+{
+    sub_00028470(a1, a2);
+    m_Field20 = 0;
+    m_Field24 = 0;
+    m_Field00 = (int)DAT_003AB114;
+    m_Field28 = 0.0f;
+    return this;
 }
 
 // ============================================================================
@@ -82084,6 +103804,34 @@ void Class_001E69E0::sub_001E69E0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001E6A80 (0x001E6A80, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001E6A80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001E6A80 (Proto 0x001E6A80, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char sub_0007FFFF[];
+
+class Class_001E6A80
+{
+public:
+    int sub_001E6A80();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Class_001E6A80::sub_001E6A80()
+{
+    return (*(int*)(*(int*)m_Field18 + 32) & (int)sub_0007FFFF) == 64;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001E6AB0 (0x001E6AB0, 17 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -82199,6 +103947,59 @@ L_42:
     r_edi += 20;
     r_ebx -= 1;
     if (r_ebx) goto L_10;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001E6CE0 (0x001E6CE0, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001E6CE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001E6CE0 (Proto 0x001E6CE0, 67 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00027240(int);
+    int sub_00029460();
+    int sub_0008E380();
+};
+
+class Class_001E6CE0
+{
+public:
+    int sub_001E6CE0();
+    char m_pad00[0x48];
+    int m_Field48; // +0x48
+};
+
+int Class_001E6CE0::sub_001E6CE0()
+{
+    int r_eax, r_ebx, r_edi, r_esi;
+
+    r_edi = (int)(&m_Field48);
+    r_ebx = 4;
+    do {
+        r_eax = *(int*)r_edi;
+        r_eax = ((Object*)r_eax + 48)->sub_0008E380();
+        r_esi = (short)((unsigned short)r_eax);
+        if (r_esi) {
+            do {
+                r_esi -= 1;
+                r_eax = ((Object*)*(int*)r_edi)->sub_00027240(r_esi);
+                if (r_eax) {
+                    r_eax = ((Object*)r_eax)->sub_00029460();
+                }
+            } while (r_esi);
+        }
+        r_edi += 20;
+        r_ebx -= 1;
+    } while (r_ebx);
+    return r_eax;
 }
 
 // ============================================================================
@@ -83685,6 +105486,49 @@ void Class_001F7A60::sub_001F7A60()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001F7A70 (0x001F7A70, 27 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001F7A70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001F7A70 (Proto 0x001F7A70, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field18
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(int);
+};
+
+extern "C" void __cdecl sub_001F8200(void);
+
+class Class_001F7A70
+{
+public:
+    void sub_001F7A70();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+    Field18* m_Field18; // +0x18
+};
+
+void Class_001F7A70::sub_001F7A70()
+{
+    sub_001F8200();
+    if (m_Field14) {
+        m_Field18->vfunc_06(0);
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_001F7B00 (0x001F7B00, 122 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -83742,6 +105586,70 @@ bool Class_001F7B00::sub_001F7B00(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001F7BD0 (0x001F7BD0, 56 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001F7BD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001F7BD0 (Proto 0x001F7BD0, 56 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21(int, int);
+};
+
+class Class_001F7BD0
+{
+public:
+    void sub_001F7BD0(int a1, int a2);
+};
+
+void Class_001F7BD0::sub_001F7BD0(int a1, int a2)
+{
+    int r_ebx, r_esi, t1;
+
+    if (a1) {
+        r_ebx = *(int*)(a1 + 44);
+        r_esi = 0;
+        if (r_ebx > 0) {
+            do {
+                t1 = *(int*)(*(int*)(a1 + 48) + (r_esi * 4));
+                if (*(int*)(*(int*)(a1 + 48) + (r_esi * 4))) {
+                    ((Object*)t1)->vfunc_21(a2, (int)this);
+                }
+                r_esi += 1;
+            } while (r_esi < r_ebx);
+        }
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_001F7E30 (0x001F7E30, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -83763,6 +105671,54 @@ public:
 void Class_001F7E30::sub_001F7E30()
 {
     m_Field00 = (int)DAT_0037D85C;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001F7FE0 (0x001F7FE0, 65 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001F7FE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001F7FE0 (Proto 0x001F7FE0, 65 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_001F7FE0
+{
+public:
+    void sub_001F7FE0(int a1, int a2, int a3);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+void Class_001F7FE0::sub_001F7FE0(int a1, int a2, int a3)
+{
+    int t2;
+
+    m_Field00 = a1;
+    m_Field04 = a2;
+    if (a3) {
+        ((Object*)a3)->vfunc_00();
+    }
+    t2 = m_Field08;
+    if (m_Field08) {
+        ((Object*)t2)->vfunc_01();
+    }
+    m_Field08 = a3;
+    m_Field0C = 0;
+    m_Field10 = 0;
 }
 
 // ============================================================================
@@ -84079,6 +106035,144 @@ void Class_001F9A80::sub_001F9A80()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001F9AB0 (0x001F9AB0, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001F9AB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001F9AB0 (Proto 0x001F9AB0, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001FCEA0(int, int, int);
+
+class Class_001F9AB0
+{
+public:
+    void sub_001F9AB0(int a1);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    bool m_Field10; // +0x10
+    char m_pad11[0x103];
+    int m_Field114; // +0x114
+};
+
+void Class_001F9AB0::sub_001F9AB0(int a1)
+{
+    int t2;
+
+    if (!m_Field10) {
+        sub_001FCEA0((int)(((char*)this + 0x11)), 256, a1);
+        t2 = m_Field0C;
+        m_Field10 = true;
+        m_Field114 = t2;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_001F9AF0 (0x001F9AF0, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001F9AF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001F9AF0 (Proto 0x001F9AF0, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001FCE40(int, int, int, int);
+
+void __cdecl sub_001F9AF0(int a1, int a2, int a3)
+{
+    int t2;
+
+    if (!*(bool*)(a1 + 16)) {
+        sub_001FCE40(a1 + 17, 256, a2, (int)(&a3));
+        t2 = *(int*)(a1 + 12);
+        *(bool*)(a1 + 16) = true;
+        *(int*)(a1 + 276) = t2;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_001F9B30 (0x001F9B30, 55 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001F9B30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001F9B30 (Proto 0x001F9B30, 55 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_001FCE40(int, int, int, int);
+
+void __cdecl sub_001F9B30(int a1, int a2, int a3, int a4)
+{
+    if (!*(bool*)(a1 + 16)) {
+        sub_001FCE40(a1 + 17, 256, a3, (int)(&a4));
+        *(bool*)(a1 + 16) = true;
+        *(int*)(a1 + 276) = a2;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_001F9B70 (0x001F9B70, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001F9B70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001F9B70 (Proto 0x001F9B70, 67 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004285EC;
+extern "C" int DAT_004638F4;
+
+class Class_001F9B70
+{
+public:
+    bool sub_001F9B70();
+    char m_pad00[0x10];
+    bool m_Field10; // +0x10
+    bool m_Field11; // +0x11
+    char m_pad12[0x102];
+    int m_Field114; // +0x114
+    char m_pad118[0x208];
+    bool m_Field320; // +0x320
+};
+
+bool Class_001F9B70::sub_001F9B70()
+{
+    int t1;
+    bool t2;
+
+    if (!m_Field10) {
+        return true;
+    }
+    t1 = DAT_004285EC;
+    if (DAT_004285EC) {
+        t2 = ((bool (__cdecl*)(int, int))t1)((int)this, DAT_004638F4);
+        m_Field11 = false;
+        m_Field10 = false;
+        m_Field114 = -1;
+        m_Field320 = true;
+        return t2;
+    }
+    return false;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001FB2F0 (0x001FB2F0, 34 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -84107,6 +106201,37 @@ bool Class_001FB2F0::sub_001FB2F0(int a1)
 
     t2 = vfunc_06();
     return t2 == sub_00200280(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_001FB320 (0x001FB320, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001FB320
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001FB320 (Proto 0x001FB320, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001FB320
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06();
+    int sub_001FB320(int a1);
+};
+
+int Class_001FB320::sub_001FB320(int a1)
+{
+    return vfunc_06() == a1;
 }
 
 // ============================================================================
@@ -85357,6 +107482,52 @@ void Class_001FD320::sub_001FD320()
 }
 
 // ============================================================================
+// [VERIFIED] sub_001FD510 (0x001FD510, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001FD510
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001FD510 (Proto 0x001FD510, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(int);
+};
+
+class Class_001FD510
+{
+public:
+    void sub_001FD510(int a1);
+    void sub_001FD470();
+    char m_pad00[0x8];
+    Field08* m_Field08; // +0x08
+    char m_pad0C[0x1];
+    bool m_Field0D; // +0x0D
+    char m_pad0E[0xA];
+    int m_Field18; // +0x18
+};
+
+void Class_001FD510::sub_001FD510(int a1)
+{
+    m_Field08->vfunc_06(m_Field18 + a1);
+    m_Field18 = m_Field18 + a1;
+    if (m_Field0D) {
+        sub_001FD470();
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_001FD550 (0x001FD550, 76 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -86135,6 +108306,45 @@ void Class_001FEC90::sub_001FEC90(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001FEDD0 (0x001FEDD0, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x001FEDD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_001FEDD0 (Proto 0x001FEDD0, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_001FEDD0
+{
+public:
+    void sub_001FEDD0(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+void Class_001FEDD0::sub_001FEDD0(int a1)
+{
+    int r_edx;
+
+    *(int*)a1 = 0;
+    r_edx = m_Field04;
+    if (!r_edx) {
+        m_Field00 = a1;
+        m_Field04 = a1;
+        m_Field08 += 1;
+        return;
+    }
+    *(int*)r_edx = a1;
+    m_Field04 = a1;
+    m_Field08 += 1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001FEE00 (0x001FEE00, 36 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -86551,6 +108761,31 @@ void __cdecl sub_001FFFB0(void)
 {
     sub_001B7A10((int)DAT_00463B90);
     DAT_00463BAC = 0x33333333;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00200260 (0x00200260, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00200260
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00200260 (Proto 0x00200260, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00200260
+{
+public:
+    int sub_00200260(int a1);
+    int m_Field00; // +0x00
+};
+
+int Class_00200260::sub_00200260(int a1)
+{
+    return m_Field00 == *(int*)a1;
 }
 
 // ============================================================================
@@ -88089,6 +110324,49 @@ void Class_002065C0::sub_002065C0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_002066C0 (0x002066C0, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002066C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002066C0 (Proto 0x002066C0, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00025120(int);
+
+class Class_002066C0
+{
+public:
+    void sub_002066C0(int a1);
+    char m_pad00[0x38];
+    int m_Field38; // +0x38
+    int m_Field3C; // +0x3C
+    int m_Field40; // +0x40
+};
+
+void Class_002066C0::sub_002066C0(int a1)
+{
+    int t1;
+
+    if (a1) {
+        t1 = sub_00025120(a1 * 4);
+        m_Field38 = t1;
+        if (!t1) goto L_37;
+        m_Field40 = (a1 * 4) + t1;
+        m_Field3C = t1;
+        return;
+    }
+    m_Field38 = 0;
+L_37:
+    m_Field3C = 0;
+    m_Field40 = 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00206E30 (0x00206E30, 61 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -88160,6 +110438,34 @@ bool __cdecl sub_00206E70(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00206FE0 (0x00206FE0, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00206FE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00206FE0 (Proto 0x00206FE0, 25 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_00206FE0(int a1)
+{
+    int r_eax;
+
+    r_eax = 0;
+    if (a1) {
+        if (!*(unsigned short*)a1) goto L_18;
+        do {
+            r_eax += 1;
+        } while (*(unsigned short*)(a1 + (r_eax * 2)));
+    }
+L_18:
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002070E0 (0x002070E0, 45 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -88214,6 +110520,66 @@ public:
 int Class_00207150::sub_00207150()
 {
     return (m_Field18 - m_Field14) >> 2;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00207220 (0x00207220, 120 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00207220
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00207220 (Proto 0x00207220, 120 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field24
+{
+    void sub_00208760(int, int);
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+    void sub_00205ED0(int, int);
+};
+
+class Class_00207220
+{
+public:
+    void sub_00207220(int a1);
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+    char m_pad18[0xC];
+    Field24* m_Field24; // +0x24
+    char m_Field28; // +0x28
+};
+
+void Class_00207220::sub_00207220(int a1)
+{
+    int local_10, local_4, local_8, local_C, t2, t4;
+
+    if (m_Field24) {
+        t2 = ((Object*)*(int*)(m_Field14 + (m_Field28 * 4)))->vfunc_12();
+        t4 = ((Object*)*(int*)(m_Field14 + (a1 * 4)))->vfunc_12();
+        ((Object*)t2)->sub_00205ED0((int)(&local_4), (int)(&local_C));
+        ((Object*)t4)->sub_00205ED0((int)(&local_8), (int)(&local_10));
+        m_Field24->sub_00208760(local_8 - local_4, local_10 - local_C);
+    }
 }
 
 // ============================================================================
@@ -88499,6 +110865,49 @@ int Class_00208970::sub_00208970(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00208ED0 (0x00208ED0, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00208ED0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00208ED0 (Proto 0x00208ED0, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00025120(int);
+
+class Class_00208ED0
+{
+public:
+    void sub_00208ED0(int a1);
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+    int m_Field38; // +0x38
+    int m_Field3C; // +0x3C
+};
+
+void Class_00208ED0::sub_00208ED0(int a1)
+{
+    int t1;
+
+    if (a1) {
+        t1 = sub_00025120(a1 * 4);
+        m_Field34 = t1;
+        if (!t1) goto L_37;
+        m_Field3C = (a1 * 4) + t1;
+        m_Field38 = t1;
+        return;
+    }
+    m_Field34 = 0;
+L_37:
+    m_Field38 = 0;
+    m_Field3C = 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0020A140 (0x0020A140, 34 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -88546,6 +110955,28 @@ extern "C" void __cdecl sub_0024ACA0(int, int);
 void __cdecl sub_0020AEB0(int a1)
 {
     sub_0024ACA0(a1, (int)sub_002DA027);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020AFD0 (0x0020AFD0, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_000C6750 (Proto 0x000C6750), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0020AFD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0020AFD0 (Proto 0x0020AFD0, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" unsigned short DAT_00464C80;
+
+unsigned short __cdecl sub_0020AFD0(void)
+{
+    return DAT_00464C80;
 }
 
 // ============================================================================
@@ -89172,6 +111603,59 @@ void Class_0020D060::sub_0020D060(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0020D080 (0x0020D080, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0020D080
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0020D080 (Proto 0x0020D080, 62 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07(int);
+};
+
+class Class_0020D080
+{
+public:
+    void sub_0020D080(int a1);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    char m_pad10[0x80];
+    char m_Field90; // +0x90
+};
+
+void Class_0020D080::sub_0020D080(int a1)
+{
+    int r_ebp, r_edi, r_esi;
+    char t2;
+
+    r_esi = 0;
+    if (m_Field90 > 0) {
+        r_ebp = a1;
+        r_edi = (int)(&m_Field0C);
+        do {
+            ((Object*)*(int*)r_edi)->vfunc_07(r_ebp);
+            t2 = m_Field90;
+            r_esi += 1;
+            r_edi += 4;
+        } while (r_esi < t2);
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_0020D170 (0x0020D170, 240 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -89604,6 +112088,32 @@ public:
 void Class_0020DDA0::sub_0020DDA0()
 {
     sub_0024DEE0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0020DEA0 (0x0020DEA0, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0020DEA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0020DEA0 (Proto 0x0020DEA0, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00201440(int, int);
+
+void __cdecl sub_0020DEA0(int a1)
+{
+    int r_eax;
+
+    r_eax = a1;
+    if (*(unsigned char*)r_eax == 92) {
+        r_eax += 1;
+    }
+    sub_00201440(r_eax, 0);
 }
 
 // ============================================================================
@@ -90265,6 +112775,69 @@ int Class_00211CF0::sub_00211CF0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00211D80 (0x00211D80, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00211D80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00211D80 (Proto 0x00211D80, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldE8
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+};
+
+extern "C" int DAT_00464C98;
+
+class Class_00211D80
+{
+public:
+    void sub_00211D80(bool a1);
+    char m_pad00[0xE8];
+    FieldE8* m_FieldE8; // +0xE8
+    char m_padEC[0x8];
+    bool m_FieldF4; // +0xF4
+};
+
+void Class_00211D80::sub_00211D80(bool a1)
+{
+    ((Object*)DAT_00464C98)->vfunc_05();
+    m_FieldF4 = false;
+    if (a1) {
+        m_FieldE8->vfunc_14();
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_00211E70 (0x00211E70, 64 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -90797,6 +113370,68 @@ void Class_00216BB0::sub_00216BB0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00216C00 (0x00216C00, 70 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00216C00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00216C00 (Proto 0x00216C00, 70 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual bool vfunc_11();
+    virtual bool vfunc_12();
+};
+
+class Class_00216C00
+{
+public:
+    void sub_00216C00();
+    char m_pad00[0x38];
+    unsigned char m_Field38; // +0x38
+    char m_pad39[0xB];
+    int m_Field44; // +0x44
+    int m_Field48; // +0x48
+};
+
+void Class_00216C00::sub_00216C00()
+{
+    int r_ebp, r_edi, t1;
+
+    t1 = (m_Field48 - m_Field44) >> 4;
+    if (((m_Field48 - m_Field44) >> 4) > 0) {
+        r_edi = 0;
+        r_ebp = t1;
+        do {
+            if (((Object*)*(int*)(r_edi + m_Field44))->vfunc_11()) {
+                m_Field38 |= 1;
+            }
+            if (((Object*)*(int*)(r_edi + m_Field44))->vfunc_12()) {
+                m_Field38 |= 2;
+            }
+            r_edi += 16;
+            r_ebp -= 1;
+        } while (r_ebp);
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_00216D90 (0x00216D90, 38 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -91237,6 +113872,48 @@ void* Class_00217B50::sub_00217B50()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00218010 (0x00218010, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00218010
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00218010 (Proto 0x00218010, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_00218010
+{
+public:
+    void sub_00218010(int a1, int a2);
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+void Class_00218010::sub_00218010(int a1, int a2)
+{
+    int r_esi, t2;
+
+    r_esi = m_Field14 + (a1 * 4);
+    if (a2) {
+        ((Object*)a2)->vfunc_00();
+    }
+    t2 = *(int*)r_esi;
+    if (*(int*)r_esi) {
+        ((Object*)t2)->vfunc_01();
+    }
+    *(int*)r_esi = a2;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002181C0 (0x002181C0, 44 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -91279,6 +113956,45 @@ void Class_002181C0::sub_002181C0(int a1, int a2, int a3)
     m_Field5C = a3;
     m_Field54.sub_00201610();
     vfunc_11(1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00219150 (0x00219150, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00219150
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00219150 (Proto 0x00219150, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_00217B20(int);
+};
+
+void __stdcall sub_00219150(int a1)
+{
+    int r_esi, t2;
+
+    if (!a1) goto L_32;
+    r_esi = 0;
+    if (*(int*)(a1 + 16) <= 0) goto L_31;
+L_13:
+    if (r_esi < *(int*)(a1 + 12)) {
+        if (!*(int*)(*(int*)(a1 + 20) + (r_esi * 4))) goto L_29;
+        ((Object*)*(int*)(*(int*)(a1 + 20) + (r_esi * 4)))->sub_00217B20(1);
+    }
+L_29:
+    t2 = *(int*)(a1 + 16);
+    r_esi += 1;
+    if (r_esi < t2) goto L_13;
+L_31:
+L_32:
+    ;
 }
 
 // ============================================================================
@@ -91923,6 +114639,89 @@ void Class_0021A420::sub_0021A420(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0021A490 (0x0021A490, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0021A490
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0021A490 (Proto 0x0021A490, 19 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    void sub_00252550(int);
+};
+
+class Class_0021A490
+{
+public:
+    void sub_0021A490();
+    char m_pad00[0x8];
+    Field08* m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+};
+
+void Class_0021A490::sub_0021A490()
+{
+    if (m_Field08) {
+        m_Field08->sub_00252550(m_Field0C);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0021B8A0 (0x0021B8A0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0021B8A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0021B8A0 (Proto 0x0021B8A0, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00(int);
+    virtual void vfunc_01();
+};
+
+class Class_0021B8A0
+{
+public:
+    void sub_0021B8A0();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    char m_pad08[0x7C];
+    int m_Field84; // +0x84
+};
+
+void Class_0021B8A0::sub_0021B8A0()
+{
+    int r_edi, r_esi, t1, t4;
+
+    t1 = m_Field84;
+    if (m_Field84) {
+        ((Object*)t1)->vfunc_00(1);
+    }
+    r_esi = 0;
+    if (m_Field00 > 0) {
+        r_edi = (int)(&m_Field04);
+        do {
+            ((Object*)*(int*)r_edi)->vfunc_01();
+            t4 = m_Field00;
+            r_esi += 1;
+            r_edi += 4;
+        } while (r_esi < t4);
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_0021B8E0 (0x0021B8E0, 43 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -92398,6 +115197,38 @@ Class_002213A0* Class_002213A0::sub_002213A0()
     m_Field10 = 0;
     m_Field00 = (int)DAT_003AF82C;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00221590 (0x00221590, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00221590
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00221590 (Proto 0x00221590, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00025160(int);
+
+void __cdecl sub_00221590(int a1, int a2)
+{
+    int r_edi, r_esi, t1;
+
+    r_esi = a1;
+    r_edi = a2;
+    if (a1 != a2) {
+        do {
+            t1 = *(int*)r_esi;
+            if (*(int*)r_esi) {
+                sub_00025160(t1);
+            }
+            r_esi += 16;
+        } while (r_esi != r_edi);
+    }
 }
 
 // ============================================================================
@@ -93865,6 +116696,68 @@ void Class_002398F0::sub_002398F0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0023D200 (0x0023D200, 86 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0023D200
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0023D200 (Proto 0x0023D200, 86 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_0023D200
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08(int, int);
+    void sub_0023D200(int a1);
+    void sub_0023C730();
+    void sub_0023C9B0();
+    char m_pad04[0x38];
+    int m_Field3C; // +0x3C
+    int m_Field40; // +0x40
+    char m_pad44[0x40];
+    int m_Field84; // +0x84
+    unsigned char m_Field88; // +0x88
+};
+
+void Class_0023D200::sub_0023D200(int a1)
+{
+    int t1;
+
+    if (m_Field3C == -1) {
+        t1 = m_Field84;
+        if (!m_Field84) goto L_22;
+        ((Object*)t1)->vfunc_01();
+        m_Field84 = 0;
+    }
+L_22:
+    m_Field3C = a1;
+    m_Field40 = 0;
+    sub_0023C730();
+    vfunc_08(0, 0);
+    if (m_Field88 == 1) {
+        sub_0023C9B0();
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_0023D340 (0x0023D340, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -93888,6 +116781,123 @@ public:
 void Class_0023D340::sub_0023D340()
 {
     m_Field08->sub_0022A160();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0023DCA0 (0x0023DCA0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0023DCA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0023DCA0 (Proto 0x0023DCA0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_0031A4D0(int);
+
+class Class_0023DCA0
+{
+public:
+    void sub_0023DCA0(int a1);
+    char m_pad00[0x110];
+    int m_Field110; // +0x110
+};
+
+void Class_0023DCA0::sub_0023DCA0(int a1)
+{
+    if (m_Field110 != a1) {
+        m_Field110 = a1;
+        a1 = a1;
+        sub_0031A4D0(a1);
+        return;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0023DCC0 (0x0023DCC0, 91 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0023DCC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0023DCC0 (Proto 0x0023DCC0, 91 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int sub_00325508;
+extern "C" char sub_00325540[];
+extern "C" char sub_00325548[];
+
+class Class_0023DCC0
+{
+public:
+    void sub_0023DCC0(int a1, int a2, int a3);
+};
+
+void Class_0023DCC0::sub_0023DCC0(int a1, int a2, int a3)
+{
+    int r_eax, t1;
+
+    r_eax = a1;
+    if (*(int*)((int)this + (r_eax * 4) + 100) != a2) {
+        *(int*)((int)this + (r_eax * 4) + 100) = a2;
+        sub_00325508 |= 2048;
+        *(int*)(((int)sub_00325540) + (a1 << 7)) = a2;
+    }
+    if (*(int*)((int)this + (r_eax * 4) + 132) != a3) {
+        *(int*)((int)this + (r_eax * 4) + 132) = a3;
+        t1 = sub_00325508 | 2048;
+        r_eax <<= 7;
+        sub_00325508 = t1;
+        *(int*)(((int)sub_00325548) + r_eax) = a3;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0023DD20 (0x0023DD20, 91 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0023DD20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0023DD20 (Proto 0x0023DD20, 91 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int sub_00325508;
+extern "C" char sub_00325550[];
+extern "C" char sub_00325558[];
+
+class Class_0023DD20
+{
+public:
+    void sub_0023DD20(int a1, int a2, int a3);
+};
+
+void Class_0023DD20::sub_0023DD20(int a1, int a2, int a3)
+{
+    int r_eax, t1;
+
+    r_eax = a1;
+    if (*(int*)((int)this + (r_eax * 4) + 116) != a2) {
+        *(int*)((int)this + (r_eax * 4) + 116) = a2;
+        sub_00325508 |= 2048;
+        *(int*)(((int)sub_00325550) + (a1 << 7)) = a2;
+    }
+    if (*(int*)((int)this + (r_eax * 4) + 180) != a3) {
+        *(int*)((int)this + (r_eax * 4) + 180) = a3;
+        t1 = sub_00325508 | 2048;
+        r_eax <<= 7;
+        sub_00325508 = t1;
+        *(int*)(((int)sub_00325558) + r_eax) = a3;
+    }
 }
 
 // ============================================================================
@@ -94834,6 +117844,49 @@ void Class_00241660::sub_00241660(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00241DB0 (0x00241DB0, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00241DB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00241DB0 (Proto 0x00241DB0, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00025120(int);
+
+class Class_00241DB0
+{
+public:
+    void sub_00241DB0(int a1);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+};
+
+void Class_00241DB0::sub_00241DB0(int a1)
+{
+    int t1;
+
+    if (a1) {
+        t1 = sub_00025120(a1 * 4);
+        m_Field0C = t1;
+        if (!t1) goto L_37;
+        m_Field14 = (a1 * 4) + t1;
+        m_Field10 = t1;
+        return;
+    }
+    m_Field0C = 0;
+L_37:
+    m_Field10 = 0;
+    m_Field14 = 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00241E00 (0x00241E00, 52 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -95062,6 +118115,60 @@ int __cdecl sub_00244550(int a1, int a2, int a3, int a4, int a5)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00244790 (0x00244790, 61 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00244790
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00244790 (Proto 0x00244790, 61 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_0037D85C[];
+extern "C" char DAT_003B13A0[];
+
+class Class_00244790
+{
+public:
+    void sub_00244790();
+    int m_Field00; // +0x00
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+};
+
+void Class_00244790::sub_00244790()
+{
+    int r_ebx, r_esi, t1, t3;
+
+    r_ebx = 0;
+    m_Field00 = (int)DAT_003B13A0;
+    if (m_Field08 > 0) {
+        r_esi = (int)(&m_Field0C);
+        do {
+            t1 = *(int*)r_esi;
+            if (*(int*)r_esi) {
+                ((Object*)t1)->vfunc_01();
+                *(int*)r_esi = 0;
+            }
+            t3 = m_Field08;
+            r_ebx += 1;
+            r_esi += 4;
+        } while (r_ebx < t3);
+    }
+    m_Field00 = (int)DAT_0037D85C;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00247900 (0x00247900, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -95085,6 +118192,49 @@ void Class_00247900::sub_00247900()
 {
     m_Field00 = (int)DAT_003B15B4;
     sub_001F7E30();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00247ED0 (0x00247ED0, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00247ED0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00247ED0 (Proto 0x00247ED0, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00247ED0
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07(int, int);
+    void sub_00247ED0(bool a1);
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    char m_pad18[0xB5];
+    unsigned char m_FieldCD; // +0xCD
+};
+
+void Class_00247ED0::sub_00247ED0(bool a1)
+{
+    int t1;
+
+    if (a1 != m_FieldCD) {
+        t1 = m_Field10;
+        m_FieldCD = a1;
+        vfunc_07(t1, m_Field14);
+    }
 }
 
 // ============================================================================
@@ -95245,6 +118395,48 @@ Class_00248B50* Class_00248B50::sub_00248B50()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00248C70 (0x00248C70, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00248C70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00248C70 (Proto 0x00248C70, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_00248C70
+{
+public:
+    void sub_00248C70(int a1);
+    char m_pad00[0x38];
+    int m_Field38; // +0x38
+};
+
+void Class_00248C70::sub_00248C70(int a1)
+{
+    int r_esi, t2;
+
+    r_esi = *(int*)(a1 + 104);
+    if (r_esi) {
+        ((Object*)r_esi)->vfunc_00();
+    }
+    t2 = m_Field38;
+    if (m_Field38) {
+        ((Object*)t2)->vfunc_01();
+    }
+    m_Field38 = r_esi;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00249220 (0x00249220, 82 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -95359,6 +118551,49 @@ bool Class_00249310::sub_00249310()
     }
 L_1A:
     return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00249480 (0x00249480, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00249480
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00249480 (Proto 0x00249480, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00025120(int);
+
+class Class_00249480
+{
+public:
+    void sub_00249480(int a1);
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+void Class_00249480::sub_00249480(int a1)
+{
+    int t1;
+
+    if (a1) {
+        t1 = sub_00025120(a1 * 4);
+        m_Field14 = t1;
+        if (!t1) goto L_37;
+        m_Field1C = (a1 * 4) + t1;
+        m_Field18 = t1;
+        return;
+    }
+    m_Field14 = 0;
+L_37:
+    m_Field18 = 0;
+    m_Field1C = 0;
 }
 
 // ============================================================================
@@ -95501,6 +118736,54 @@ public:
 void Class_00249E30::sub_00249E30()
 {
     sub_002494D0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0024A910 (0x0024A910, 110 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0024A910
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0024A910 (Proto 0x0024A910, 110 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int, int);
+};
+
+extern "C" int DAT_0048CEF4;
+extern "C" int DAT_0048CEF8;
+
+void __cdecl sub_0024A910(int a1)
+{
+    int t1, t2;
+
+    t1 = DAT_0048CEF8;
+    if (DAT_0048CEF8 != a1) {
+        t2 = DAT_0048CEF4;
+        if (!DAT_0048CEF4) goto L_6C;
+        if (t1) {
+            ((Object*)*(int*)(t2 + 12))->vfunc_05(0x584554, 0);
+            ((Object*)DAT_0048CEF8)->vfunc_01();
+            DAT_0048CEF8 = 0;
+        }
+        if (!a1) goto L_6C;
+        DAT_0048CEF8 = a1;
+        ((Object*)a1)->vfunc_00();
+        ((Object*)*(int*)(DAT_0048CEF4 + 12))->vfunc_05(0x584554, *(int*)(DAT_0048CEF8 + 12));
+    }
+L_6C:
+    ;
 }
 
 // ============================================================================
@@ -96763,6 +120046,48 @@ Class_0025B110* Class_0025B110::sub_0025B110()
     m_Field00 = (int)DAT_003B2AB4;
     m_Field34 = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0025B260 (0x0025B260, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0025B260
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0025B260 (Proto 0x0025B260, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+class Class_0025B260
+{
+public:
+    void sub_0025B260(int a1);
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+};
+
+void Class_0025B260::sub_0025B260(int a1)
+{
+    int r_esi, t2;
+
+    r_esi = *(int*)(a1 + 92);
+    if (r_esi) {
+        ((Object*)r_esi)->vfunc_00();
+    }
+    t2 = m_Field34;
+    if (m_Field34) {
+        ((Object*)t2)->vfunc_01();
+    }
+    m_Field34 = r_esi;
 }
 
 // ============================================================================
@@ -98858,6 +122183,64 @@ Class_0026ACF0* Class_0026ACF0::sub_0026ACF0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0026AFB0 (0x0026AFB0, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0026AFB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0026AFB0 (Proto 0x0026AFB0, 66 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+};
+
+class Class_0026AFB0
+{
+public:
+    void sub_0026AFB0();
+    void sub_0026ADC0(int, int);
+    char m_pad00[0x5];
+    bool m_Field05; // +0x05
+    char m_pad06[0x2];
+    int m_Field08; // +0x08
+    char m_pad0C[0x108];
+    int m_Field114; // +0x114
+};
+
+void Class_0026AFB0::sub_0026AFB0()
+{
+    int r_esi, t1, t3;
+
+    if (!m_Field05) goto L_40;
+    t1 = m_Field114;
+    m_Field05 = false;
+    ((Object*)t1)->vfunc_03();
+    r_esi = m_Field08;
+    if (!r_esi) goto L_3F;
+L_21:
+    t3 = *(int*)(r_esi + 4);
+    if (*(int*)(r_esi + 4) != 2) {
+        if (t3 != 1) goto L_38;
+    }
+    sub_0026ADC0(r_esi, 0);
+L_38:
+    r_esi = *(int*)(r_esi + 24);
+    if (r_esi) goto L_21;
+L_3F:
+L_40:
+    ;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0026C140 (0x0026C140, 44 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -100039,6 +123422,59 @@ void Class_0026EE50::sub_0026EE50()
 }
 
 // ============================================================================
+// [VERIFIED] sub_0026F220 (0x0026F220, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0026F220
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0026F220 (Proto 0x0026F220, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field6C
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int);
+};
+
+class Class_0026F220
+{
+public:
+    void sub_0026F220(int a1);
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+    char m_pad24[0x48];
+    Field6C* m_Field6C; // +0x6C
+    int m_Field70; // +0x70
+};
+
+void Class_0026F220::sub_0026F220(int a1)
+{
+    Field6C* t1;
+
+    t1 = m_Field6C;
+    m_Field20 = a1;
+    if (m_Field6C) {
+        ((Object*)(int)t1)->vfunc_04(m_Field70);
+        m_Field6C->vfunc_01();
+        m_Field6C = 0;
+        m_Field70 = 0;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_0026F470 (0x0026F470, 45 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -100114,6 +123550,40 @@ Class_0026F880* Class_0026F880::sub_0026F880()
     m_Field0C = 0;
     sub_0023F170((int)(&m_Field14));
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0026F9E0 (0x0026F9E0, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0026F9E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0026F9E0 (Proto 0x0026F9E0, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_0020DEA0(int);
+
+class Class_0026F9E0
+{
+public:
+    void sub_0026F9E0(int a1, int a2);
+    void sub_0026F7F0(int, int);
+};
+
+void Class_0026F9E0::sub_0026F9E0(int a1, int a2)
+{
+    int r_eax;
+
+    r_eax = a1;
+    if (*(unsigned char*)r_eax == 92) {
+        r_eax += 1;
+    }
+    r_eax = sub_0020DEA0(r_eax);
+    sub_0026F7F0(r_eax, a2);
 }
 
 // ============================================================================
@@ -100916,6 +124386,57 @@ L_33:
 }
 
 // ============================================================================
+// [VERIFIED] sub_0027BA70 (0x0027BA70, 115 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0027BA70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0027BA70 (Proto 0x0027BA70, 115 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_0027BA70(int a1, int a2, int a3, int a4, int a5)
+{
+    int r_eax, r_ecx;
+
+    r_ecx = a1;
+    r_eax = 0;
+    if (!a1) goto L_72;
+    r_ecx = a2;
+    if (!a2) goto L_72;
+    if (!(*(unsigned char*)(r_ecx + 8) & 16)) goto L_72;
+    if (*(unsigned char*)(r_ecx + 25) == 3) {
+        if (a3) {
+            r_eax = *(int*)(r_ecx + 76);
+            *(int*)a3 = r_eax;
+            r_eax = 16;
+        }
+        if (!a5) goto L_61;
+        *(int*)a5 = r_ecx + 80;
+        goto L_61;
+    }
+    if (a5) {
+        r_eax = r_ecx + 80;
+        *(int*)a5 = r_eax;
+        r_eax = 16;
+    }
+    if (a3) {
+        *(int*)a3 = 0;
+    }
+L_61:
+    if (a4) {
+        r_ecx = *(unsigned short*)(r_ecx + 22);
+        *(int*)a4 = r_ecx;
+        r_eax |= 16;
+    }
+L_72:
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0027BAF0 (0x0027BAF0, 12 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -101277,6 +124798,31 @@ Class_002816D0* Class_002816D0::sub_002816D0()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00281700 (0x00281700, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00281700
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00281700 (Proto 0x00281700, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00281700
+{
+public:
+    int sub_00281700();
+    int m_Field00; // +0x00
+};
+
+int Class_00281700::sub_00281700()
+{
+    return m_Field00 != 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00281710 (0x00281710, 18 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -101326,6 +124872,43 @@ bool __cdecl sub_002833D0(int a1, int a2, int a3)
     sub_001F6F28(r_esi, a1, a2);
     sub_001F6F76(r_esi, a3);
     return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00283560 (0x00283560, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00283560
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00283560 (Proto 0x00283560, 63 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00283560
+{
+public:
+    int sub_00283560(int a1, int a2);
+};
+
+int Class_00283560::sub_00283560(int a1, int a2)
+{
+    int r_ecx;
+
+    r_ecx = (int)this;
+    if (*(unsigned char*)(r_ecx + 232) == 85) {
+        r_ecx = a2;
+        *(int*)a1 = -1;
+        *(int*)r_ecx = -1;
+        return a1;
+    }
+    *(int*)a1 = *(char*)(r_ecx + 239) - 49;
+    r_ecx = *(char*)(r_ecx + 240);
+    r_ecx -= 65;
+    *(int*)a2 = r_ecx;
+    return a1;
 }
 
 // ============================================================================
@@ -101649,6 +125232,39 @@ void Class_002858A0::sub_002858A0(int a1, int a2, int a3, int a4)
         r_esi <<= 7;
         sub_00325508 = t3;
         *(int*)(((int)sub_0032555C) + r_esi) = a4;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_00285930 (0x00285930, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00285930
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00285930 (Proto 0x00285930, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __stdcall sub_00317B60(int);
+
+class Class_00285930
+{
+public:
+    void sub_00285930(int a1);
+    char m_pad00[0x108];
+    int m_Field108; // +0x108
+};
+
+void Class_00285930::sub_00285930(int a1)
+{
+    if (a1 != m_Field108) {
+        m_Field108 = a1;
+        a1 = a1;
+        sub_00317B60(a1);
+        return;
     }
 }
 
@@ -102179,6 +125795,24 @@ bool __cdecl sub_0028E220(int a1, int a2, int a3, int a4, int a5)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0028E830 (0x0028E830, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0028E830
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0028E830 (Proto 0x0028E830, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+unsigned short __cdecl sub_0028E830(void)
+{
+    return 1304;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0028EA60 (0x0028EA60, 17 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -102290,6 +125924,33 @@ extern "C" uLong ZEXPORT adler32(uLong adler, const Bytef *buf, uInt len)
         MOD(s2);
     }
     return (s2 << 16) | s1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00290890 (0x00290890, 49 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00290890
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00290890 (Proto 0x00290890, 49 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+void __cdecl sub_00290890(int a1, int a2, int a3)
+{
+    if (a1) {
+        if (!a2) goto L_30;
+        if (!(512 & *(int*)(a1 + 104))) {
+            *(int*)(a2 + 60) = *(int*)a3;
+            *(int*)(a2 + 64) = *(int*)(a3 + 4);
+            *(int*)(a2 + 8) |= 512;
+        }
+    }
+L_30:
+    ;
 }
 
 // ============================================================================
@@ -103340,6 +127001,42 @@ Class_00293670* Class_00293670::sub_00293670(int a1, int a2)
     m_Field04 = a1;
     m_Field08 = a2;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002937E0 (0x002937E0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002937E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002937E0 (Proto 0x002937E0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003834C4[];
+extern "C" char DAT_003B92A4[];
+extern "C" void __cdecl sub_002CB933(int);
+
+class Class_002937E0
+{
+public:
+    void sub_002937E0();
+    int m_Field00; // +0x00
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+    bool m_Field24; // +0x24
+};
+
+void Class_002937E0::sub_002937E0()
+{
+    m_Field00 = (int)DAT_003B92A4;
+    if (m_Field24) {
+        sub_002CB933(m_Field20);
+    }
+    m_Field00 = (int)DAT_003834C4;
 }
 
 // ============================================================================
@@ -104654,6 +128351,32 @@ void Class_00297750::sub_00297750()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00297760 (0x00297760, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00297760
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00297760 (Proto 0x00297760, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_00297760
+{
+public:
+    unsigned short sub_00297760();
+    char m_pad00[0x28];
+    unsigned short m_Field28; // +0x28
+};
+
+unsigned short Class_00297760::sub_00297760()
+{
+    return m_Field28;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002978E0 (0x002978E0, 119 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -104735,6 +128458,53 @@ public:
 int Class_00297960::sub_00297960()
 {
     return (m_Field2C << 28) >> 28;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00297E30 (0x00297E30, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00297E30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00297E30 (Proto 0x00297E30, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field18
+{
+    int sub_00057190();
+};
+
+class Class_00297E30
+{
+public:
+    void sub_00297E30();
+    void sub_00297BD0();
+    char m_pad00[0x18];
+    Field18* m_Field18; // +0x18
+    char m_pad1C[0xC];
+    unsigned short m_Field28; // +0x28
+    char m_pad2A[0x2];
+    unsigned char m_Field2C; // +0x2C
+};
+
+void Class_00297E30::sub_00297E30()
+{
+    int t1;
+
+    m_Field28 -= 1;
+    if (!m_Field28) {
+        if (m_Field2C & 15) goto L_2E;
+        t1 = m_Field18->sub_00057190();
+        if (((unsigned char)(((unsigned int)*(int*)(t1 + 120)) >> 11)) & 1) goto L_2E;
+        sub_00297BD0();
+        return;
+    }
+L_2E:
+    ;
 }
 
 // ============================================================================
@@ -105025,6 +128795,57 @@ void Class_00298A20::sub_00298A20(int a1)
 {
     a1 = (int)DAT_00490D5C;
     sub_00293590(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00299010 (0x00299010, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00299010
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00299010 (Proto 0x00299010, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_0029BA30(int, int);
+
+int __cdecl sub_00299010(int a1, int a2)
+{
+    int local_4, t1;
+
+    t1 = sub_0029BA30(a1, (int)(&local_4));
+    *(int*)a2 = local_4;
+    return t1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00299030 (0x00299030, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00299030
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00299030 (Proto 0x00299030, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __stdcall sub_0029B950(int, int);
+
+class Class_00299030
+{
+public:
+    int sub_00299030(int a1, int a2);
+};
+
+int Class_00299030::sub_00299030(int a1, int a2)
+{
+    a2 = *(int*)a2;
+    return sub_0029B950(a1, a2);
 }
 
 // ============================================================================
@@ -105475,6 +129296,149 @@ bool __cdecl sub_0029B7B0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0029B8A0 (0x0029B8A0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0029B8A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0029B8A0 (Proto 0x0029B8A0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __stdcall sub_0029C3E0(int);
+
+class Class_0029B8A0
+{
+public:
+    int sub_0029B8A0(int a1);
+};
+
+int Class_0029B8A0::sub_0029B8A0(int a1)
+{
+    a1 = *(int*)a1;
+    return sub_0029C3E0(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029B8F0 (0x0029B8F0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029B8A0 (Proto 0x0029B8A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0029B8F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0029B8F0 (Proto 0x0029B8F0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __stdcall sub_0029C400(int);
+
+class Class_0029B8F0
+{
+public:
+    int sub_0029B8F0(int a1);
+};
+
+int Class_0029B8F0::sub_0029B8F0(int a1)
+{
+    a1 = *(int*)a1;
+    return sub_0029C400(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029B940 (0x0029B940, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029B8A0 (Proto 0x0029B8A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0029B940
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0029B940 (Proto 0x0029B940, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __stdcall sub_0029C3C0(int);
+
+class Class_0029B940
+{
+public:
+    int sub_0029B940(int a1);
+};
+
+int Class_0029B940::sub_0029B940(int a1)
+{
+    a1 = *(int*)a1;
+    return sub_0029C3C0(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029BA00 (0x0029BA00, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029B8A0 (Proto 0x0029B8A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0029BA00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0029BA00 (Proto 0x0029BA00, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __stdcall sub_0029C310(int);
+
+class Class_0029BA00
+{
+public:
+    int sub_0029BA00(int a1);
+};
+
+int Class_0029BA00::sub_0029BA00(int a1)
+{
+    a1 = *(int*)a1;
+    return sub_0029C310(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029BA50 (0x0029BA50, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029B8A0 (Proto 0x0029B8A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0029BA50
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0029BA50 (Proto 0x0029BA50, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __stdcall sub_0029C650(int);
+
+class Class_0029BA50
+{
+public:
+    int sub_0029BA50(int a1);
+};
+
+int Class_0029BA50::sub_0029BA50(int a1)
+{
+    a1 = *(int*)a1;
+    return sub_0029C650(a1);
+}
+
+// ============================================================================
 // [VERIFIED] sub_0029BED0 (0x0029BED0, 43 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -105721,6 +129685,100 @@ void Class_0029CC00::sub_0029CC00(int a1)
 {
     a1 = a1 + 16;
     ((Object*)(int)this + 56)->sub_0029CBB0(a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029CC20 (0x0029CC20, 55 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0029CC20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0029CC20 (Proto 0x0029CC20, 55 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_0029CB70(int);
+};
+
+struct Object
+{
+    void sub_002916D0();
+    void sub_002916F0();
+};
+
+class Class_0029CC20
+{
+public:
+    void sub_0029CC20(int a1);
+    char m_pad00[0x14];
+    Field14 m_Field14; // +0x14
+    char m_pad15[0x2B];
+    bool m_Field40; // +0x40
+    bool m_Field41; // +0x41
+};
+
+void Class_0029CC20::sub_0029CC20(int a1)
+{
+    m_Field14.sub_0029CB70(a1 + 16);
+    if (m_Field41) {
+        ((Object*)*(int*)(a1 + 32))->sub_002916D0();
+    }
+    if (m_Field40) {
+        ((Object*)*(int*)(a1 + 32))->sub_002916F0();
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029CC60 (0x0029CC60, 55 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_0029CC20 (Proto 0x0029CC20), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0029CC60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0029CC60 (Proto 0x0029CC60, 55 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_0029CBB0(int);
+};
+
+struct Object
+{
+    void sub_002916E0();
+    void sub_00291700();
+};
+
+class Class_0029CC60
+{
+public:
+    void sub_0029CC60(int a1);
+    char m_pad00[0x14];
+    Field14 m_Field14; // +0x14
+    char m_pad15[0x2B];
+    bool m_Field40; // +0x40
+    bool m_Field41; // +0x41
+};
+
+void Class_0029CC60::sub_0029CC60(int a1)
+{
+    m_Field14.sub_0029CBB0(a1 + 16);
+    if (m_Field41) {
+        ((Object*)*(int*)(a1 + 32))->sub_002916E0();
+    }
+    if (m_Field40) {
+        ((Object*)*(int*)(a1 + 32))->sub_00291700();
+    }
 }
 
 // ============================================================================
@@ -106070,6 +130128,47 @@ Class_0029DF20* Class_0029DF20::sub_0029DF20(int a1, int a2)
     m_Field18 = a1;
     ((Object*)a1 + 4)->sub_0029DBD0((int)(&m_Field04), (int)sub_0029DE10, 0);
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0029E540 (0x0029E540, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0029E540
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0029E540 (Proto 0x0029E540, 52 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __stdcall sub_0029E150(int);
+
+class Class_0029E540
+{
+public:
+    void sub_0029E540(int a1);
+    void sub_0029E2E0(int);
+    char m_pad00[0x28];
+    bool m_Field28; // +0x28
+};
+
+void Class_0029E540::sub_0029E540(int a1)
+{
+    int t1;
+
+    if (m_Field28) {
+        m_Field28 = false;
+        if (a1) {
+            t1 = sub_0029E150((int)(&a1));
+            if (!t1) goto L_30;
+            sub_0029E2E0(t1);
+        }
+        m_Field28 = true;
+    }
+L_30:
+    ;
 }
 
 // ============================================================================
@@ -108499,6 +132598,26 @@ int __cdecl sub_002AB580(int a1, float a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002AB670 (0x002AB670, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002AB670
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002AB670 (Proto 0x002AB670, 28 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+void __cdecl sub_002AB670(int a1, float a2)
+{
+    if (*(float*)(a1 + 16) != a2) {
+        *(float*)(a1 + 16) = a2;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_002AB690 (0x002AB690, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -108735,6 +132854,57 @@ L_3C:
         m_Field2C = 5;
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC7E0 (0x002AC7E0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002AC7E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002AC7E0 (Proto 0x002AC7E0, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01(int);
+};
+
+class Class_002AC7E0
+{
+public:
+    void sub_002AC7E0();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+    char m_pad1C[0x10];
+    int m_Field2C; // +0x2C
+};
+
+void Class_002AC7E0::sub_002AC7E0()
+{
+    int r_ecx, t1, t2;
+
+    r_ecx = (int)this;
+    t1 = m_Field18;
+    if (m_Field18) {
+        r_ecx = t1 + -12;
+        if (!r_ecx) goto L_24;
+        t2 = *(int*)(r_ecx + 8);
+        if (*(int*)(r_ecx + 8) != 2) {
+            if (t2 != 4) goto L_24;
+        }
+        ((Object*)r_ecx)->vfunc_01((int)this);
+    }
+L_24:
+    r_ecx = m_Field2C;
+    if (r_ecx != 3) {
+        m_Field2C = 3;
+    }
 }
 
 // ============================================================================
@@ -109069,6 +133239,28 @@ void Class_002AFC20::sub_002AFC20()
 }
 
 // ============================================================================
+// [VERIFIED] sub_002AFCB0 (0x002AFCB0, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002AFCB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002AFCB0 (Proto 0x002AFCB0, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_004915C4;
+extern "C" void __cdecl sub_002AFF80(int);
+
+void __cdecl sub_002AFCB0(int a1)
+{
+    sub_002AFF80(a1);
+    DAT_004915C4 = (unsigned char)(DAT_004915C4 | 1);
+}
+
+// ============================================================================
 // [VERIFIED] sub_002AFCD0 (0x002AFCD0, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -109271,6 +133463,56 @@ int Class_002B1560::sub_002B1560(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002B1F20 (0x002B1F20, 82 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002B1F20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002B1F20 (Proto 0x002B1F20, 82 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_002B1F20
+{
+public:
+    void sub_002B1F20();
+    int sub_002B1700(int, int);
+    void sub_002B1B20();
+    char m_pad00[0x24];
+    int m_Field24; // +0x24
+    char m_pad28[0x4];
+    int m_Field2C; // +0x2C
+    unsigned short m_Field30; // +0x30
+    unsigned short m_Field32; // +0x32
+    unsigned char m_Field34; // +0x34
+};
+
+void Class_002B1F20::sub_002B1F20()
+{
+    int r_eax, r_edi;
+    unsigned short t2;
+
+    r_eax = 0;
+    m_Field34 = (unsigned char)(m_Field34 | 2);
+    if (m_Field32) {
+        r_edi = 0;
+        if (m_Field30) {
+            do {
+                r_eax = m_Field24;
+                r_eax = *(int*)(r_eax + (r_edi * 4));
+                r_eax = sub_002B1700(r_eax, (*(unsigned short*)(r_eax + 2) * 272) + m_Field2C + 12);
+                t2 = m_Field30;
+                r_edi += 1;
+            } while (r_edi != t2);
+        }
+    }
+    sub_002B1B20();
+}
+
+// ============================================================================
 // [VERIFIED] sub_002B21E0 (0x002B21E0, 135 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -109405,6 +133647,40 @@ void Class_002B6650::sub_002B6650()
     DAT_004915E0 = m_Field0C;
     DAT_004915E4 = m_Field10;
     DAT_004915D8.sub_002C44A0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_002B6680 (0x002B6680, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002B6680
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002B6680 (Proto 0x002B6680, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00025160(int);
+
+class Class_002B6680
+{
+public:
+    void sub_002B6680();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+};
+
+void Class_002B6680::sub_002B6680()
+{
+    int t1;
+
+    t1 = m_Field00;
+    m_Field04 = m_Field00;
+    if (m_Field00) {
+        sub_00025160(t1);
+    }
 }
 
 // ============================================================================
@@ -110554,6 +134830,178 @@ Class_002BA500* Class_002BA500::sub_002BA500()
 }
 
 // ============================================================================
+// [VERIFIED] sub_002BA610 (0x002BA610, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002BA610
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002BA610 (Proto 0x002BA610, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004916F0;
+extern "C" void __cdecl sub_00025160(int);
+extern "C" void __cdecl sub_002BC300(void);
+extern "C" void __cdecl sub_002BD650(void);
+extern "C" void __cdecl sub_002C3C80(void);
+
+void __cdecl sub_002BA610(void)
+{
+    int t4;
+
+    sub_002BC300();
+    sub_002BD650();
+    sub_002C3C80();
+    t4 = DAT_004916F0;
+    if (DAT_004916F0) {
+        sub_00025160(t4);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_002BA820 (0x002BA820, 28 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002BA820
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002BA820 (Proto 0x002BA820, 28 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" unsigned short DAT_004390D8;
+
+class Class_002BA820
+{
+public:
+    unsigned short sub_002BA820();
+    unsigned char m_Field00; // +0x00
+    char m_pad01[0x7];
+    unsigned short m_Field08; // +0x08
+    char m_pad0A[0xD2];
+    int m_FieldDC; // +0xDC
+    char m_padE0[0x4];
+    int m_FieldE4; // +0xE4
+};
+
+unsigned short Class_002BA820::sub_002BA820()
+{
+    unsigned short t1;
+
+    m_Field00 &= 254;
+    m_FieldDC = 0;
+    m_FieldE4 = 0;
+    t1 = DAT_004390D8;
+    m_Field08 = DAT_004390D8;
+    return t1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002BACF0 (0x002BACF0, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002BACF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002BACF0 (Proto 0x002BACF0, 59 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" unsigned short DAT_004390D8;
+
+class Class_002BACF0
+{
+public:
+    void sub_002BACF0(int a1);
+    unsigned char m_Field00; // +0x00
+    char m_pad01[0x7];
+    unsigned short m_Field08; // +0x08
+    char m_pad0A[0x42];
+    int m_Field4C; // +0x4C
+    int m_Field50; // +0x50
+    int m_Field54; // +0x54
+    char m_pad58[0x84];
+    int m_FieldDC; // +0xDC
+    char m_padE0[0x4];
+    int m_FieldE4; // +0xE4
+};
+
+void Class_002BACF0::sub_002BACF0(int a1)
+{
+    unsigned char t1;
+    unsigned short t2;
+
+    m_Field4C = *(int*)a1;
+    m_Field50 = *(int*)(a1 + 4);
+    m_Field54 = *(int*)(a1 + 8);
+    t1 = m_Field00;
+    if (m_Field00 & 1) {
+        t2 = DAT_004390D8;
+        m_Field00 = (unsigned char)(t1 & 254);
+        m_FieldDC = 0;
+        m_FieldE4 = 0;
+        m_Field08 = t2;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_002BAD30 (0x002BAD30, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002BAD30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002BAD30 (Proto 0x002BAD30, 59 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" unsigned short DAT_004390D8;
+
+class Class_002BAD30
+{
+public:
+    void sub_002BAD30(int a1);
+    unsigned char m_Field00; // +0x00
+    char m_pad01[0x7];
+    unsigned short m_Field08; // +0x08
+    char m_pad0A[0x4E];
+    int m_Field58; // +0x58
+    int m_Field5C; // +0x5C
+    int m_Field60; // +0x60
+    char m_pad64[0x78];
+    int m_FieldDC; // +0xDC
+    char m_padE0[0x4];
+    int m_FieldE4; // +0xE4
+};
+
+void Class_002BAD30::sub_002BAD30(int a1)
+{
+    unsigned char t1;
+    unsigned short t2;
+
+    m_Field58 = *(int*)a1;
+    m_Field5C = *(int*)(a1 + 4);
+    m_Field60 = *(int*)(a1 + 8);
+    t1 = m_Field00;
+    if (m_Field00 & 1) {
+        t2 = DAT_004390D8;
+        m_Field00 = (unsigned char)(t1 & 254);
+        m_FieldDC = 0;
+        m_FieldE4 = 0;
+        m_Field08 = t2;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_002BB310 (0x002BB310, 27 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -110751,6 +135199,53 @@ void __cdecl sub_002BC300(void)
         sub_00025160(t1);
     }
     DAT_00491698 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002BC390 (0x002BC390, 74 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002BC390
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002BC390 (Proto 0x002BC390, 74 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_002BC390(int a1, int a2)
+{
+    int r_eax, r_ecx, r_edi, r_edx;
+    unsigned short t1;
+
+    r_edi = 0;
+    r_edx = a1;
+    r_eax = a2;
+    if (a1 == a2) goto L_48;
+    r_ecx = r_edx + 2;
+    if (r_ecx == a2) goto L_48;
+L_14:
+    if (*(unsigned short*)r_edx != *(unsigned short*)r_ecx) {
+        r_edx = r_ecx;
+        r_ecx += 2;
+        if (r_ecx != r_eax) goto L_14;
+        return r_eax;
+    }
+    r_ecx += 2;
+    if (r_ecx != r_eax) {
+        do {
+            t1 = *(unsigned short*)r_ecx;
+            if (*(unsigned short*)r_edx != *(unsigned short*)r_ecx) {
+                r_edx += 2;
+                *(unsigned short*)r_edx = t1;
+            }
+            r_ecx += 2;
+        } while (r_ecx != r_eax);
+    }
+    r_eax = r_edx + 2;
+L_48:
+    return r_eax;
 }
 
 // ============================================================================
@@ -111596,5 +136091,37 @@ int __stdcall sub_002D89F0(int a1, int a2)
     DAT_00494DA0 = a1;
     DAT_00494DA4 = a2;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002D8A80 (0x002D8A80, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x002D8A80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_002D8A80 (Proto 0x002D8A80, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002CB42A(int);
+
+void __stdcall sub_002D8A80(int a1)
+{
+    int r_eax, r_ecx;
+
+    r_eax = a1;
+    if (a1) {
+        r_ecx = *(unsigned char*)(r_eax + -1);
+        if (*(unsigned char*)(r_eax + -2) == 3) {
+            a1 = a1 - r_ecx;
+            ((void (__stdcall*)(int))*(int*)(r_eax + -8))(a1);
+            return;
+        }
+        r_eax -= r_ecx;
+        sub_002CB42A(r_eax);
+    }
 }
 

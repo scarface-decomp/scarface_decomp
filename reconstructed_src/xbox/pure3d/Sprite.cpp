@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Sprite.cpp (9 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Sprite.cpp (10 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 9 of 17 functions matched (52.94%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 10 of 17 functions matched (58.82%). NOT COMPLETE YET.
+// The 7 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -209,6 +209,73 @@ public:
 int Sprite::vfunc_09()
 {
     return m_Field44;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Sprite::vfunc_08 (0x0026D190, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::Sprite::vfunc_08 (Proto 0x0021E210), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0026D190
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::Sprite::vfunc_08 (Proto 0x0026D190, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int, int);
+};
+
+namespace pure3d {
+
+class Sprite
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    void sub_0026D010(int);
+    char m_pad04[0x34];
+    int m_Field38; // +0x38
+    char m_pad3C[0x4];
+    int m_Field40; // +0x40
+    int m_Field44; // +0x44
+    char m_pad48[0x51];
+    bool m_Field99; // +0x99
+};
+
+void Sprite::vfunc_08()
+{
+    int r_edi, t3;
+
+    r_edi = 0;
+    if (m_Field38 > 0) {
+        do {
+            ((Object*)*(int*)(m_Field44 + 12))->vfunc_05(0x584554, *(int*)(*(int*)(m_Field40 + (r_edi * 4)) + 12));
+            m_Field99 = true;
+            sub_0026D010(r_edi);
+            t3 = m_Field38;
+            r_edi += 1;
+        } while (r_edi < t3);
+    }
 }
 
 }

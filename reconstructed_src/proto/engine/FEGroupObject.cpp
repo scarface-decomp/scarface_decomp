@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/FEGroupObject.cpp (13 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/FEGroupObject.cpp (17 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 13 of 20 functions matched (65.00%). NOT COMPLETE YET.
-// The 7 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 17 of 20 functions matched (85.00%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -389,6 +389,250 @@ L_29:
 }
 
 // ============================================================================
+// [VERIFIED] FEGroupObject::vfunc_11 (0x000274A0, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000274A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// FEGroupObject::vfunc_11 (Proto 0x000274A0, 66 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual int vfunc_11();
+    int sub_0008E380();
+};
+
+class FEGroupObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual int vfunc_11();
+};
+
+int FEGroupObject::vfunc_11()
+{
+    int r_eax, r_ebx, r_ecx, r_edi, r_esi;
+
+    r_ecx = (int)this;
+    r_edi = r_ecx + 48;
+    r_ecx = r_edi;
+    r_eax = ((Object*)r_ecx)->sub_0008E380();
+    r_ebx = (short)((unsigned short)r_eax);
+    r_esi = 0;
+    if (r_ebx <= 0) goto L_3E;
+L_16:
+    r_ecx = r_edi;
+    r_eax = ((Object*)r_ecx)->sub_0008E380();
+    r_eax = (short)((unsigned short)r_eax);
+    if (r_esi >= 0) {
+        if (r_esi >= r_eax) goto L_32;
+        r_ecx = *(int*)r_edi;
+        r_eax = (short)((unsigned short)r_esi);
+        r_ecx = *(int*)(r_ecx + (r_eax * 4));
+        goto L_34;
+    }
+L_32:
+    r_ecx = 0;
+L_34:
+    r_eax = ((Object*)r_ecx)->vfunc_11();
+    r_esi += 1;
+    if (r_esi < r_ebx) goto L_16;
+L_3E:
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] FEGroupObject::vfunc_12 (0x000274F0, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000274F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// FEGroupObject::vfunc_12 (Proto 0x000274F0, 66 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+    int sub_0008E380();
+};
+
+class FEGroupObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12();
+};
+
+int FEGroupObject::vfunc_12()
+{
+    int r_eax, r_ebx, r_ecx, r_edi, r_esi;
+
+    r_ecx = (int)this;
+    r_edi = r_ecx + 48;
+    r_ecx = r_edi;
+    r_eax = ((Object*)r_ecx)->sub_0008E380();
+    r_ebx = (short)((unsigned short)r_eax);
+    r_esi = 0;
+    if (r_ebx <= 0) goto L_3E;
+L_16:
+    r_ecx = r_edi;
+    r_eax = ((Object*)r_ecx)->sub_0008E380();
+    r_eax = (short)((unsigned short)r_eax);
+    if (r_esi >= 0) {
+        if (r_esi >= r_eax) goto L_32;
+        r_ecx = *(int*)r_edi;
+        r_eax = (short)((unsigned short)r_esi);
+        r_ecx = *(int*)(r_ecx + (r_eax * 4));
+        goto L_34;
+    }
+L_32:
+    r_ecx = 0;
+L_34:
+    r_eax = ((Object*)r_ecx)->vfunc_12();
+    r_esi += 1;
+    if (r_esi < r_ebx) goto L_16;
+L_3E:
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] FEGroupObject::vfunc_13 (0x00027540, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00027540
+// what: 
+// tool: the portal's starter code (no AI)
+
+// FEGroupObject::vfunc_13 (Proto 0x00027540, 80 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual int vfunc_13(int);
+    int sub_0008E380();
+};
+
+class FEGroupObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual int vfunc_13(int a1);
+};
+
+int FEGroupObject::vfunc_13(int a1)
+{
+    int r_eax, r_ebp, r_ebx, r_ecx, r_edi, r_esi;
+
+    r_ecx = (int)this;
+    r_edi = r_ecx + 48;
+    r_ecx = r_edi;
+    r_eax = ((Object*)r_ecx)->sub_0008E380();
+    r_ebx = (short)((unsigned short)r_eax);
+    r_esi = 0;
+    if (r_ebx <= 0) goto L_4A;
+    r_ebp = a1;
+L_20:
+    r_ecx = r_edi;
+    r_eax = ((Object*)r_ecx)->sub_0008E380();
+    r_eax = (short)((unsigned short)r_eax);
+    if (r_esi >= 0) {
+        if (r_esi >= r_eax) goto L_3C;
+        r_ecx = *(int*)r_edi;
+        r_eax = (short)((unsigned short)r_esi);
+        r_ecx = *(int*)(r_ecx + (r_eax * 4));
+        goto L_3E;
+    }
+L_3C:
+    r_ecx = 0;
+L_3E:
+    r_eax = ((Object*)r_ecx)->vfunc_13(r_ebp);
+    r_esi += 1;
+    if (r_esi < r_ebx) goto L_20;
+L_4A:
+    return r_eax;
+}
+
+// ============================================================================
 // [VERIFIED] FEGroupObject::vfunc_21 (0x00027720, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -482,6 +726,66 @@ public:
 void FEGroupObject::vfunc_22(int a1)
 {
     sub_00029F20((int)this, a1, (int)(&m_Field20), 8);
+}
+
+// ============================================================================
+// [VERIFIED] FEGroupObject::vfunc_23 (0x00027760, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00027760
+// what: 
+// tool: the portal's starter code (no AI)
+
+// FEGroupObject::vfunc_23 (Proto 0x00027760, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_000281A0(void);
+extern "C" bool __cdecl sub_00029F70(int, int, int);
+
+class FEGroupObject
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual bool vfunc_23(int a1);
+};
+
+bool FEGroupObject::vfunc_23(int a1)
+{
+    int r_ecx, r_esi, t1;
+
+    r_ecx = (int)this;
+    r_esi = (int)this;
+    t1 = sub_000281A0();
+    r_ecx = a1;
+    if (t1 == a1) {
+        return true;
+    }
+    r_esi += 32;
+    return sub_00029F70(r_ecx, r_esi, 8);
 }
 
 // ============================================================================

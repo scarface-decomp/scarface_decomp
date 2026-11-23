@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/ParticleEmitter.cpp (9 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/ParticleEmitter.cpp (12 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 9 of 17 functions matched (52.94%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 12 of 17 functions matched (70.59%). NOT COMPLETE YET.
+// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -434,6 +434,259 @@ void ParticleEmitter::vfunc_29(int a1)
         ((Object*)t2)->vfunc_01();
     }
     m_Field78 = r_edi;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticleEmitter::vfunc_31 (0x0025E330, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x0025E330
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::ParticleEmitter::vfunc_31 (0x0025E330, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+namespace pure3d {
+
+class ParticleEmitter
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31(int a1);
+    char m_pad04[0x78];
+    int m_Field7C; // +0x7C
+};
+
+void ParticleEmitter::vfunc_31(int a1)
+{
+    int r_edi, t2;
+
+    r_edi = a1;
+    if (a1 != m_Field7C) {
+        if (a1) {
+            ((Object*)r_edi)->vfunc_00();
+        }
+        t2 = m_Field7C;
+        if (m_Field7C) {
+            ((Object*)t2)->vfunc_01();
+        }
+        m_Field7C = r_edi;
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticleEmitter::vfunc_35 (0x0025E360, 57 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x0025E360
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::ParticleEmitter::vfunc_35 (0x0025E360, 57 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+namespace pure3d {
+
+class ParticleEmitter
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35(int a1);
+    char m_pad04[0x80];
+    int m_Field84; // +0x84
+};
+
+void ParticleEmitter::vfunc_35(int a1)
+{
+    int r_edi, t2;
+
+    r_edi = a1;
+    if (a1 != m_Field84) {
+        if (a1) {
+            ((Object*)r_edi)->vfunc_00();
+        }
+        t2 = m_Field84;
+        if (m_Field84) {
+            ((Object*)t2)->vfunc_01();
+        }
+        m_Field84 = r_edi;
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::ParticleEmitter::vfunc_37 (0x0025E3A0, 57 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x0025E3A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::ParticleEmitter::vfunc_37 (0x0025E3A0, 57 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+namespace pure3d {
+
+class ParticleEmitter
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37(int a1);
+    char m_pad04[0x84];
+    int m_Field88; // +0x88
+};
+
+void ParticleEmitter::vfunc_37(int a1)
+{
+    int r_edi, t2;
+
+    r_edi = a1;
+    if (a1 != m_Field88) {
+        if (a1) {
+            ((Object*)r_edi)->vfunc_00();
+        }
+        t2 = m_Field88;
+        if (m_Field88) {
+            ((Object*)t2)->vfunc_01();
+        }
+        m_Field88 = r_edi;
+    }
 }
 
 }

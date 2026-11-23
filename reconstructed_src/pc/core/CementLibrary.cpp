@@ -1,13 +1,93 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/CementLibrary.cpp (9 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/CementLibrary.cpp (11 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 9 of 17 functions matched (52.94%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 11 of 17 functions matched (64.71%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_05 (0x006E6730, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E6730
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::CementLibrary::vfunc_05 (PC 0x006E6730, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006DCAD0(void);
+extern "C" void __cdecl sub_006DEFA0(int);
+
+namespace core {
+
+class CementLibrary
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+};
+
+void CementLibrary::vfunc_05()
+{
+    if (!m_Field20) {
+        do {
+            sub_006DCAD0();
+            sub_006DEFA0(0);
+        } while (!m_Field20);
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_07 (0x006E6760, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E6760
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::CementLibrary::vfunc_07 (PC 0x006E6760, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class CementLibrary
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual int vfunc_07();
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+};
+
+int CementLibrary::vfunc_07()
+{
+    return m_Field20 == 1;
+}
+
+}
 
 // ============================================================================
 // [VERIFIED] core::CementLibrary::vfunc_06 (0x006E6770, 23 B)

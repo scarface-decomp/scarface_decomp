@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/StateProp.cpp (4 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/StateProp.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 4 of 13 functions matched (30.77%). NOT COMPLETE YET.
-// The 9 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 13 functions matched (53.85%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -71,6 +71,212 @@ void StateProp::vfunc_16()
 {
     m_Field98->vfunc_16();
     sub_00280730();
+}
+
+} }
+
+// ============================================================================
+// [VERIFIED] pure3d::prop::StateProp::vfunc_17 (0x00281230, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x00281230
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::prop::StateProp::vfunc_17 (0x00281230, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+struct Field98
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17(int);
+};
+
+namespace pure3d { namespace prop {
+
+class StateProp
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17(int a1);
+    char m_pad04[0x94];
+    Field98* m_Field98; // +0x98
+};
+
+void StateProp::vfunc_17(int a1)
+{
+    m_Field98->vfunc_17(a1);
+}
+
+} }
+
+// ============================================================================
+// [VERIFIED] pure3d::prop::StateProp::vfunc_18 (0x00281240, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x00281240
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::prop::StateProp::vfunc_18 (0x00281240, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+struct Field98
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18(int);
+};
+
+namespace pure3d { namespace prop {
+
+class StateProp
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18(int a1);
+    char m_pad04[0x94];
+    Field98* m_Field98; // +0x98
+};
+
+void StateProp::vfunc_18(int a1)
+{
+    m_Field98->vfunc_18(a1);
+}
+
+} }
+
+// ============================================================================
+// [VERIFIED] pure3d::prop::StateProp::vfunc_09 (0x00281250, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::prop::StateProp::vfunc_09 (Proto 0x0023C550), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x00281250
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::prop::StateProp::vfunc_09 (Proto 0x00281250, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field98
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual bool vfunc_09();
+};
+
+namespace pure3d { namespace prop {
+
+class StateProp
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual int vfunc_09();
+    char m_pad04[0x94];
+    Field98* m_Field98; // +0x98
+    char m_pad9C[0x8C];
+    unsigned short m_Field128; // +0x128
+};
+
+int StateProp::vfunc_09()
+{
+    if (!m_Field128) {
+        if (!m_Field98->vfunc_09()) goto L_1F;
+        return 1;
+    }
+L_1F:
+    return 0;
 }
 
 } }

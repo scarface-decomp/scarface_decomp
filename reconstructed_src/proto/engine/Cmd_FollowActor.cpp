@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/Cmd_FollowActor.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/Cmd_FollowActor.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 3 functions matched (33.33%). NOT COMPLETE YET.
-// The 2 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 3 functions matched (66.67%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -49,6 +49,45 @@ bool Cmd_FollowActor::vfunc_05(int a1, int a2, int a3)
         ((Object*)a3)->sub_0010A150(m_Field08, m_Field0C, m_Field10);
     }
     return true;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] AICommands::Cmd_FollowActor::vfunc_07 (0x00112AF0, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00112AF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// AICommands::Cmd_FollowActor::vfunc_07 (Proto 0x00112AF0, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_00028120(int);
+
+namespace AICommands {
+
+class Cmd_FollowActor
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual int vfunc_07(int a1, int a2, int a3);
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+};
+
+int Cmd_FollowActor::vfunc_07(int a1, int a2, int a3)
+{
+    return sub_00028120(m_Field08) != 0;
 }
 
 }

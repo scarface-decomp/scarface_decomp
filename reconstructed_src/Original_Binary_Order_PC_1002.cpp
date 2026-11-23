@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 642 of 1,515 functions matched (42.38%). NOT COMPLETE YET.
-// The 873 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 777 of 1,515 functions matched (51.29%). NOT COMPLETE YET.
+// The 738 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -160,7 +160,64 @@ ControllerDirectInput::ControllerDirectInput() {}                  // building o
 }
 
 // [TODO] 0x006DDFE0 core::ControllerDirectInput::vfunc_04 (22 B)
-// [TODO] 0x006DE000 core::ControllerDirectInput::vfunc_07 (21 B)
+// ============================================================================
+// [VERIFIED] core::ControllerDirectInput::vfunc_07 (0x006DE000, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DE000
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::ControllerDirectInput::vfunc_07 (PC 0x006DE000, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08();
+};
+
+extern "C" char DAT_00771830[];
+
+namespace core {
+
+class ControllerDirectInput
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual int vfunc_07();
+    char m_pad04[0x278];
+    int m_Field27C; // +0x27C
+};
+
+int ControllerDirectInput::vfunc_07()
+{
+    int t1;
+
+    t1 = m_Field27C;
+    if (m_Field27C) {
+        return ((Object*)t1)->vfunc_08();
+    }
+    return (int)DAT_00771830;
+}
+
+}
+
 // [TODO] 0x006DE020 core::ControllerDirectInput::vfunc_21 (74 B)
 // [TODO] 0x006DE070 core::ControllerDirectInput::vfunc_19 (256 B)
 // [TODO] 0x006DE170 core::ControllerDirectInput::vfunc_20 (94 B)
@@ -251,7 +308,80 @@ int ControllerSystemDirectInput::vfunc_12(int a1)
 }
 
 // [TODO] 0x006DE5B0 core::ControllerSystemDirectInput::vfunc_06 (103 B)
-// [TODO] 0x006DE620 core::ControllerSystemDirectInput::vfunc_09 (44 B)
+// ============================================================================
+// [VERIFIED] core::ControllerSystemDirectInput::vfunc_09 (0x006DE620, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DE620
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::ControllerSystemDirectInput::vfunc_09 (PC 0x006DE620, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19(int, int);
+};
+
+namespace core {
+
+class ControllerSystemDirectInput
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09(int a1);
+    char m_pad04[0x14];
+    int m_Field18; // +0x18
+    char m_pad1C[0xC];
+    int m_Field28; // +0x28
+};
+
+void ControllerSystemDirectInput::vfunc_09(int a1)
+{
+    int r_ebx, r_esi;
+
+    r_esi = m_Field28;
+    if (r_esi) {
+        r_ebx = a1;
+        do {
+            ((Object*)r_esi)->vfunc_19(r_ebx, m_Field18);
+            r_esi = *(int*)(r_esi + 640);
+        } while (r_esi);
+    }
+}
+
+}
+
 // [TODO] 0x006DE650 core::ControllerSystemDirectInput::vfunc_05 (38 B)
 // ============================================================================
 // [VERIFIED] core::ControllerSystemDirectInput::vfunc_00 (0x006DE680, 8 B)
@@ -492,10 +622,103 @@ void __cdecl sub_006DF080(int a1)
 }
 
 // [TODO] 0x006DF090 sub_006DF090 (11 B)
-// [TODO] 0x006DF0B0 sub_006DF0B0 (14 B)
-// [TODO] 0x006DF0C0 sub_006DF0C0 (16 B)
-// [TODO] 0x006DF0D0 sub_006DF0D0 (18 B)
-// [TODO] 0x006DF0F0 sub_006DF0F0 (78 B)
+// ============================================================================
+// [VERIFIED] sub_006DF0B0 (0x006DF0B0, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF0B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006DF0B0 (PC 0x006DF0B0, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F04C;
+
+void __cdecl sub_006DF0B0(int a1)
+{
+    ((void (__stdcall*)(int))DAT_0072F04C)(*(int*)a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006DF0C0 (0x006DF0C0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF0C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006DF0C0 (PC 0x006DF0C0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F028;
+
+void __cdecl sub_006DF0C0(int a1)
+{
+    ((void (__stdcall*)(int, int))DAT_0072F028)(*(int*)a1, -1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006DF0D0 (0x006DF0D0, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF0D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006DF0D0 (PC 0x006DF0D0, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F038;
+
+void __cdecl sub_006DF0D0(int a1)
+{
+    ((void (__stdcall*)(int, int, int))DAT_0072F038)(*(int*)a1, 1, 0);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006DF0F0 (0x006DF0F0, 78 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF0F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006DF0F0 (PC 0x006DF0F0, 78 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F094;
+extern "C" int DAT_0072F098;
+extern "C" int DAT_0085CDB8;
+extern "C" int DAT_0085CDBC;
+extern "C" char DAT_0085CDC4[];
+
+void __cdecl sub_006DF0F0(int a1)
+{
+    int r_eax;
+
+    ((void (__stdcall*)(int))DAT_0072F094)((int)DAT_0085CDC4);
+    r_eax = a1;
+    if (!DAT_0085CDBC) {
+        DAT_0085CDBC = a1;
+        *(int*)(r_eax + 4) = 0;
+    } else {
+        *(int*)DAT_0085CDB8 = r_eax;
+        *(int*)(r_eax + 4) = DAT_0085CDB8;
+    }
+    DAT_0085CDB8 = r_eax;
+    *(int*)r_eax = 0;
+    ((void (__stdcall*)(int))DAT_0072F098)((int)DAT_0085CDC4);
+}
+
 // [TODO] 0x006DF140 sub_006DF140 (80 B)
 // [TODO] 0x006DF220 sub_006DF220 (129 B)
 // ============================================================================
@@ -546,7 +769,28 @@ int __cdecl sub_006DF3E0(void)
     return r_eax;
 }
 
-// [TODO] 0x006DF3F0 sub_006DF3F0 (23 B)
+// ============================================================================
+// [VERIFIED] sub_006DF3F0 (0x006DF3F0, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF3F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006DF3F0 (PC 0x006DF3F0, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F0EC;
+extern "C" int __cdecl sub_006DF3A0(void);
+
+void __cdecl sub_006DF3F0(int a1)
+{
+    *(int*)(sub_006DF3A0() + 32) = a1;
+    ((void (__stdcall*)(int))DAT_0072F0EC)(*(int*)(a1 + 20));
+}
+
 // [TODO] 0x006DF430 sub_006DF430 (81 B)
 // ============================================================================
 // [VERIFIED] sub_006DF490 (0x006DF490, 6 B)
@@ -565,11 +809,160 @@ int __cdecl sub_006DF490(void)
     return DAT_0085AEF4;
 }
 
-// [TODO] 0x006DF4A0 LoadSet::vfunc_00 (5 B)
-// [TODO] 0x006DF4B0 core::Platform::vfunc_01 (5 B)
-// [TODO] 0x006DF4C0 core::Platform::vfunc_04 (24 B)
+// ============================================================================
+// [VERIFIED] LoadSet::vfunc_00 (0x006DF4A0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF4A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// LoadSet::vfunc_00 (PC 0x006DF4A0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class LoadSet
+{
+public:
+    virtual void vfunc_00();
+    char m_pad04[0x10];
+    int m_Field14; // +0x14
+};
+
+void LoadSet::vfunc_00()
+{
+    m_Field14 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] core::Platform::vfunc_01 (0x006DF4B0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF4B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::Platform::vfunc_01 (PC 0x006DF4B0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class Platform
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    char m_pad04[0x10];
+    int m_Field14; // +0x14
+};
+
+void Platform::vfunc_01()
+{
+    m_Field14 += -1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::Platform::vfunc_04 (0x006DF4C0, 24 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF4C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::Platform::vfunc_04 (PC 0x006DF4C0, 24 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F268;
+extern "C" int DAT_0072F288;
+
+namespace core {
+
+class Platform
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual int vfunc_04();
+    int m_Field04; // +0x04
+};
+
+int Platform::vfunc_04()
+{
+    int r_eax;
+
+    r_eax = m_Field04;
+    if (!r_eax) {
+        r_eax = ((int (__cdecl*)(void))DAT_0072F288)();
+        if (r_eax) goto L_17;
+        return ((int (__cdecl*)(void))DAT_0072F268)();
+    }
+L_17:
+    return r_eax;
+}
+
+}
+
 // [TODO] 0x006DF4E0 core::Platform::vfunc_07 (68 B)
-// [TODO] 0x006DF590 core::Platform::vfunc_06 (50 B)
+// ============================================================================
+// [VERIFIED] core::Platform::vfunc_06 (0x006DF590, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF590
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::Platform::vfunc_06 (PC 0x006DF590, 50 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F28C;
+extern "C" char sub_006DF530[];
+
+namespace core {
+
+class Platform
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual int vfunc_06(int a1);
+    int m_Field04; // +0x04
+    char m_pad08[0x4];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+};
+
+int Platform::vfunc_06(int a1)
+{
+    int t1;
+
+    if (!m_Field10) {
+        t1 = m_Field04;
+        if (!m_Field04) goto L_21;
+        m_Field0C = ((int (__stdcall*)(int, int, int))DAT_0072F28C)(t1, -4, (int)sub_006DF530);
+    }
+L_21:
+    *(int*)(a1 + 4) = m_Field10;
+    m_Field10 = a1;
+    return a1;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] sub_006DF650 (0x006DF650, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -595,7 +988,36 @@ void Class_006DF650::sub_006DF650()
 
 // [TODO] 0x006DF6B0 sub_006DF6B0 (33 B)
 // [TODO] 0x006DF6E0 sub_006DF6E0 (34 B)
-// [TODO] 0x006DF710 core::MemorySpaceAsyncRequest_Copy::vfunc_01 (5 B)
+// ============================================================================
+// [VERIFIED] core::MemorySpaceAsyncRequest_Copy::vfunc_01 (0x006DF710, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF710
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::MemorySpaceAsyncRequest_Copy::vfunc_01 (PC 0x006DF710, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class MemorySpaceAsyncRequest_Copy
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    int m_Field04; // +0x04
+};
+
+void MemorySpaceAsyncRequest_Copy::vfunc_01()
+{
+    m_Field04 += -1;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] UpperBodyAnimStateCondition::vfunc_13 (0x006DF720, 5 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -630,8 +1052,82 @@ bool UpperBodyAnimStateCondition::vfunc_13(int a1)
     return true;
 }
 
-// [TODO] 0x006DF730 core::MemoryAllocatorMalloc::vfunc_04 (26 B)
-// [TODO] 0x006DF750 core::MemoryAllocatorMalloc::vfunc_05 (15 B)
+// ============================================================================
+// [VERIFIED] core::MemoryAllocatorMalloc::vfunc_04 (0x006DF730, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF730
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::MemoryAllocatorMalloc::vfunc_04 (PC 0x006DF730, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F158;
+
+namespace core {
+
+class MemoryAllocatorMalloc
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual int vfunc_04(int a1);
+};
+
+int MemoryAllocatorMalloc::vfunc_04(int a1)
+{
+    int r_eax;
+
+    r_eax = a1;
+    if (!a1) {
+        r_eax = 1;
+    }
+    r_eax = ((int (__cdecl*)(int))DAT_0072F158)(r_eax);
+    return r_eax;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::MemoryAllocatorMalloc::vfunc_05 (0x006DF750, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF750
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::MemoryAllocatorMalloc::vfunc_05 (PC 0x006DF750, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F15C;
+
+namespace core {
+
+class MemoryAllocatorMalloc
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(int a1);
+};
+
+void MemoryAllocatorMalloc::vfunc_05(int a1)
+{
+    ((void (__cdecl*)(int))DAT_0072F15C)(a1);
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::MemoryAllocatorMalloc::vfunc_07 (0x006DF760, 21 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -667,8 +1163,83 @@ void MemoryAllocatorMalloc::vfunc_07(int a1, int a2)
 }
 
 // [TODO] 0x006DF780 sub_006DF780 (55 B)
-// [TODO] 0x006DF7C0 core::MemoryAllocatorMalloc::vfunc_08 (22 B)
-// [TODO] 0x006DF7E0 pure3d::pddiDisplay::vfunc_09 (5 B)
+// ============================================================================
+// [VERIFIED] core::MemoryAllocatorMalloc::vfunc_08 (0x006DF7C0, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF7C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::MemoryAllocatorMalloc::vfunc_08 (PC 0x006DF7C0, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F15C;
+
+namespace core {
+
+class MemoryAllocatorMalloc
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08(int a1);
+};
+
+void MemoryAllocatorMalloc::vfunc_08(int a1)
+{
+    if (a1) {
+        ((void (__cdecl*)(int))DAT_0072F15C)(*(int*)(a1 + -4));
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::pddiDisplay::vfunc_09 (0x006DF7E0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006DF7E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::pddiDisplay::vfunc_09 (PC 0x006DF7E0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class pddiDisplay
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual bool vfunc_09(int a1, int a2, int a3, int a4);
+};
+
+bool pddiDisplay::vfunc_09(int a1, int a2, int a3, int a4)
+{
+    return false;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::MemoryAllocatorMalloc::vfunc_12 (0x006DF7F0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -753,9 +1324,82 @@ void Class_006DF970::sub_006DF970()
 // [TODO] 0x006DFB40 sub_006DFB40 (370 B)
 // [TODO] 0x006DFD00 sub_006DFD00 (322 B)
 // [TODO] 0x006DFFC0 sub_006DFFC0 (74 B)
-// [TODO] 0x006E0010 GameMemorySegmentCollection::vfunc_00 (5 B)
+// ============================================================================
+// [VERIFIED] GameMemorySegmentCollection::vfunc_00 (0x006E0010, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E0010
+// what: 
+// tool: the portal's starter code (no AI)
+
+// GameMemorySegmentCollection::vfunc_00 (PC 0x006E0010, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class GameMemorySegmentCollection
+{
+public:
+    virtual void vfunc_00();
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void GameMemorySegmentCollection::vfunc_00()
+{
+    m_Field0C += 1;
+}
+
 // [TODO] 0x006E0020 core::String::vfunc_05 (110 B)
-// [TODO] 0x006E0090 core::String::vfunc_04 (36 B)
+// ============================================================================
+// [VERIFIED] core::String::vfunc_04 (0x006E0090, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E0090
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::String::vfunc_04 (PC 0x006E0090, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08();
+};
+
+namespace core {
+
+class String
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual bool vfunc_04(int a1);
+    virtual bool vfunc_05(int);
+};
+
+bool String::vfunc_04(int a1)
+{
+    if (a1) {
+        return vfunc_05(((Object*)a1)->vfunc_08());
+    }
+    return false;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::String::vfunc_24 (0x006E00C0, 9 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -784,21 +1428,444 @@ int Class_006E00C0::sub_006E00C0()
 
 // [TODO] 0x006E00D0 core::String::vfunc_23 (100 B)
 // [TODO] 0x006E0140 core::String::vfunc_07 (160 B)
-// [TODO] 0x006E01E0 core::String::vfunc_06 (34 B)
+// ============================================================================
+// [VERIFIED] core::String::vfunc_06 (0x006E01E0, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E01E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::String::vfunc_06 (PC 0x006E01E0, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08();
+};
+
+namespace core {
+
+class String
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(int a1);
+    virtual void vfunc_07(int);
+};
+
+void String::vfunc_06(int a1)
+{
+    if (a1) {
+        if (a1 == (int)this) goto L_1E;
+        vfunc_07(((Object*)a1)->vfunc_08());
+    }
+L_1E:
+    ;
+}
+
+}
+
 // [TODO] 0x006E0210 core::String::vfunc_09 (54 B)
-// [TODO] 0x006E0250 core::String::vfunc_08 (17 B)
+// ============================================================================
+// [VERIFIED] core::String::vfunc_08 (0x006E0250, 17 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E0250
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::String::vfunc_08 (PC 0x006E0250, 17 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class String
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08();
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+};
+
+int String::vfunc_08()
+{
+    if (((unsigned char)(((unsigned int)m_Field14) >> 31)) & 1) {
+        return 0;
+    }
+    return m_Field10;
+}
+
+}
+
 // [TODO] 0x006E0270 core::String::vfunc_10 (31 B)
-// [TODO] 0x006E0290 core::String::vfunc_18 (30 B)
+// ============================================================================
+// [VERIFIED] core::String::vfunc_18 (0x006E0290, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E0290
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::String::vfunc_18 (PC 0x006E0290, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08();
+};
+
+namespace core {
+
+class String
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17(int);
+    virtual void vfunc_18(int a1);
+};
+
+void String::vfunc_18(int a1)
+{
+    if (a1) {
+        vfunc_17(((Object*)a1)->vfunc_08());
+    }
+}
+
+}
+
 // [TODO] 0x006E02B0 core::String::vfunc_17 (293 B)
-// [TODO] 0x006E03E0 core::String::vfunc_16 (5 B)
+// ============================================================================
+// [VERIFIED] core::String::vfunc_16 (0x006E03E0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E03E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::String::vfunc_16 (PC 0x006E03E0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class String
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+};
+
+void String::vfunc_16()
+{
+    vfunc_15();
+}
+
+}
+
 // [TODO] 0x006E03F0 core::String::vfunc_15 (55 B)
 // [TODO] 0x006E0430 core::String::vfunc_14 (26 B)
 // [TODO] 0x006E0450 core::String::vfunc_12 (54 B)
 // [TODO] 0x006E0490 core::String::vfunc_11 (26 B)
-// [TODO] 0x006E04B0 core::String::vfunc_19 (22 B)
-// [TODO] 0x006E04D0 core::String::vfunc_20 (22 B)
-// [TODO] 0x006E04F0 core::String::vfunc_22 (20 B)
-// [TODO] 0x006E0510 core::String::vfunc_21 (36 B)
+// ============================================================================
+// [VERIFIED] core::String::vfunc_19 (0x006E04B0, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E04B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::String::vfunc_19 (PC 0x006E04B0, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F23C;
+
+namespace core {
+
+class String
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+};
+
+void String::vfunc_19()
+{
+    if (!(((unsigned char)(((unsigned int)m_Field14) >> 31)) & 1)) {
+        ((void (__cdecl*)(int))DAT_0072F23C)(m_Field10);
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::String::vfunc_20 (0x006E04D0, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::String::vfunc_19 (PC 0x006E04B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006E04D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::String::vfunc_20 (PC 0x006E04D0, 22 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F238;
+
+namespace core {
+
+class String
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+};
+
+void String::vfunc_20()
+{
+    if (!(((unsigned char)(((unsigned int)m_Field14) >> 31)) & 1)) {
+        ((void (__cdecl*)(int))DAT_0072F238)(m_Field10);
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::String::vfunc_22 (0x006E04F0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E04F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::String::vfunc_22 (PC 0x006E04F0, 20 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006DE7A0(int, int);
+
+namespace core {
+
+class String
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22(int a1);
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+};
+
+void String::vfunc_22(int a1)
+{
+    sub_006DE7A0(m_Field10, a1);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::String::vfunc_21 (0x006E0510, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E0510
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::String::vfunc_21 (PC 0x006E0510, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08();
+};
+
+namespace core {
+
+class String
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual bool vfunc_21(int a1);
+    virtual bool vfunc_22(int);
+};
+
+bool String::vfunc_21(int a1)
+{
+    if (a1) {
+        return vfunc_22(((Object*)a1)->vfunc_08());
+    }
+    return false;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::String::vfunc_03 (0x006E0540, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -835,7 +1902,53 @@ String* String::vfunc_03(int a1)
 
 }
 
-// [TODO] 0x006E0570 sub_006E0570 (67 B)
+// ============================================================================
+// [VERIFIED] sub_006E0570 (0x006E0570, 67 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E0570
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E0570 (PC 0x006E0570, 67 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0073523C[];
+extern "C" char DAT_00736074[];
+extern "C" char DAT_00771A50[];
+extern "C" char DAT_00771A5C[];
+extern "C" int DAT_007F5A70;
+extern "C" void __cdecl sub_006DC430(int, int);
+
+class Class_006E0570
+{
+public:
+    void sub_006E0570();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    char m_pad0C[0x4];
+    int m_Field10; // +0x10
+};
+
+void Class_006E0570::sub_006E0570()
+{
+    int t1;
+
+    t1 = m_Field10;
+    m_Field00 = (int)DAT_00771A5C;
+    m_Field04 = (int)DAT_00771A50;
+    if (m_Field10) {
+        sub_006DC430(m_Field08, t1);
+        m_Field10 = 0;
+    }
+    DAT_007F5A70 = m_Field08;
+    m_Field04 = (int)DAT_00736074;
+    m_Field00 = (int)DAT_0073523C;
+}
+
 // ============================================================================
 // [VERIFIED] core::String::vfunc_00 (0x006E05C0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -868,7 +1981,36 @@ String::String() {}                  // building one is what makes the compiler 
 // [TODO] 0x006E0680 sub_006E0680 (241 B)
 // [TODO] 0x006E0780 sub_006E0780 (60 B)
 // [TODO] 0x006E07C0 sub_006E07C0 (19 B)
-// [TODO] 0x006E0930 core::MemoryDlAllocator::vfunc_00 (5 B)
+// ============================================================================
+// [VERIFIED] core::MemoryDlAllocator::vfunc_00 (0x006E0930, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E0930
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::MemoryDlAllocator::vfunc_00 (PC 0x006E0930, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class MemoryDlAllocator
+{
+public:
+    virtual void vfunc_00();
+    char m_pad04[0x38];
+    int m_Field3C; // +0x3C
+};
+
+void MemoryDlAllocator::vfunc_00()
+{
+    m_Field3C += 1;
+}
+
+}
+
 // [TODO] 0x006E0940 core::MemoryDlAllocator::vfunc_11 (159 B)
 // [TODO] 0x006E09E0 core::MemoryDlAllocator::vfunc_06 (28 B)
 // [TODO] 0x006E0A00 core::MemoryDlAllocator::vfunc_10 (86 B)
@@ -1303,7 +2445,38 @@ int DriveCompletionRequest::vfunc_06()
 
 }
 
-// [TODO] 0x006E3770 core::FileRequest::vfunc_02 (15 B)
+// ============================================================================
+// [VERIFIED] core::FileRequest::vfunc_02 (0x006E3770, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E3770
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::FileRequest::vfunc_02 (PC 0x006E3770, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class FileRequest
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual int vfunc_02(int a1);
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+};
+
+int FileRequest::vfunc_02(int a1)
+{
+    return a1 == m_Field08;
+}
+
+}
+
 // [TODO] 0x006E3780 core::FileRequest::vfunc_04 (63 B)
 // ============================================================================
 // [VERIFIED] core::FileRequest::vfunc_05 (0x006E37C0, 8 B)
@@ -2795,8 +3968,86 @@ Class_006E4AA0* Class_006E4AA0::sub_006E4AA0(int a1)
     return this;
 }
 
-// [TODO] 0x006E4AC0 sub_006E4AC0 (54 B)
-// [TODO] 0x006E4B00 sub_006E4B00 (54 B)
+// ============================================================================
+// [VERIFIED] sub_006E4AC0 (0x006E4AC0, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E4AC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E4AC0 (PC 0x006E4AC0, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F204;
+extern "C" char DAT_00771F44[];
+extern "C" void __cdecl sub_006DEC00(void);
+extern "C" void __stdcall sub_006E4980(int);
+
+class Class_006E4AC0
+{
+public:
+    Class_006E4AC0* sub_006E4AC0(int a1, int a2);
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+    char m_pad10[0xC];
+    bool m_Field1C; // +0x1C
+};
+
+Class_006E4AC0* Class_006E4AC0::sub_006E4AC0(int a1, int a2)
+{
+    sub_006E4980(a1);
+    m_Field00 = (int)DAT_00771F44;
+    sub_006DEC00();
+    ((void (__cdecl*)(int, int, int))DAT_0072F204)((int)(&m_Field0C), a2, 16);
+    m_Field1C = false;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006E4B00 (0x006E4B00, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006E4AC0 (PC 0x006E4AC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006E4B00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E4B00 (PC 0x006E4B00, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F204;
+extern "C" char DAT_00771F64[];
+extern "C" void __cdecl sub_006DEC00(void);
+extern "C" void __stdcall sub_006E4980(int);
+
+class Class_006E4B00
+{
+public:
+    Class_006E4B00* sub_006E4B00(int a1, int a2);
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+    char m_pad10[0xC];
+    bool m_Field1C; // +0x1C
+};
+
+Class_006E4B00* Class_006E4B00::sub_006E4B00(int a1, int a2)
+{
+    sub_006E4980(a1);
+    m_Field00 = (int)DAT_00771F64;
+    sub_006DEC00();
+    ((void (__cdecl*)(int, int, int))DAT_0072F204)((int)(&m_Field0C), a2, 16);
+    m_Field1C = false;
+    return this;
+}
+
 // [TODO] 0x006E4B40 sub_006E4B40 (70 B)
 // ============================================================================
 // [VERIFIED] sub_006E4B90 (0x006E4B90, 37 B)
@@ -2863,7 +4114,45 @@ Class_006E4BC0* Class_006E4BC0::sub_006E4BC0(int a1)
     return this;
 }
 
-// [TODO] 0x006E4BE0 sub_006E4BE0 (60 B)
+// ============================================================================
+// [VERIFIED] sub_006E4BE0 (0x006E4BE0, 60 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E4BE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E4BE0 (PC 0x006E4BE0, 60 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F204;
+extern "C" char DAT_00771FE4[];
+extern "C" void __cdecl sub_006DEC00(void);
+extern "C" void __stdcall sub_006E4980(int);
+
+class Class_006E4BE0
+{
+public:
+    Class_006E4BE0* sub_006E4BE0(int a1, int a2);
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+    char m_pad10[0xFC];
+    bool m_Field10C; // +0x10C
+};
+
+Class_006E4BE0* Class_006E4BE0::sub_006E4BE0(int a1, int a2)
+{
+    sub_006E4980(a1);
+    m_Field00 = (int)DAT_00771FE4;
+    sub_006DEC00();
+    ((void (__cdecl*)(int, int, int))DAT_0072F204)((int)(&m_Field0C), a2, 256);
+    m_Field10C = false;
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006E4C20 (0x006E4C20, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -5800,7 +7089,55 @@ InstanceDrive* InstanceDrive::vfunc_03(int a1)
 // [TODO] 0x006E5EE0 sub_006E5EE0 (114 B)
 // [TODO] 0x006E5F60 sub_006E5F60 (66 B)
 // [TODO] 0x006E5FB0 sub_006E5FB0 (67 B)
-// [TODO] 0x006E6000 sub_006E6000 (38 B)
+// ============================================================================
+// [VERIFIED] sub_006E6000 (0x006E6000, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E6000
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E6000 (PC 0x006E6000, 38 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23(int);
+};
+
+extern "C" void __cdecl sub_006E7DE0(int, int, int);
+
+void __cdecl sub_006E6000(int a1, int a2, int a3, int a4)
+{
+    sub_006E7DE0(a1, a2, a3);
+    ((Object*)*(int*)a1)->vfunc_23(a4);
+}
+
 // [TODO] 0x006E6070 core::Drive::vfunc_00 (23 B)
 // [TODO] 0x006E60C0 sub_006E60C0 (22 B)
 // [TODO] 0x006E60E0 sub_006E60E0 (36 B)
@@ -5874,9 +7211,103 @@ void Class_006E6370::sub_006E6370()
     ((void (__cdecl*)(void))DAT_00FB0E38)();
 }
 
-// [TODO] 0x006E6380 sub_006E6380 (11 B)
-// [TODO] 0x006E63B0 sub_006E63B0 (11 B)
-// [TODO] 0x006E63E0 sub_006E63E0 (11 B)
+// ============================================================================
+// [VERIFIED] sub_006E6380 (0x006E6380, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E6380
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E6380 (PC 0x006E6380, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldD0
+{
+    void sub_006E7F90();
+};
+
+class Class_006E6380
+{
+public:
+    void sub_006E6380();
+    char m_pad00[0xD0];
+    FieldD0* m_FieldD0; // +0xD0
+};
+
+void Class_006E6380::sub_006E6380()
+{
+    m_FieldD0->sub_006E7F90();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006E63B0 (0x006E63B0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006E6380 (PC 0x006E6380), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006E63B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E63B0 (PC 0x006E63B0, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldD0
+{
+    void sub_006E8030();
+};
+
+class Class_006E63B0
+{
+public:
+    void sub_006E63B0();
+    char m_pad00[0xD0];
+    FieldD0* m_FieldD0; // +0xD0
+};
+
+void Class_006E63B0::sub_006E63B0()
+{
+    m_FieldD0->sub_006E8030();
+}
+
+// ============================================================================
+// [VERIFIED] sub_006E63E0 (0x006E63E0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006E6380 (PC 0x006E6380), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006E63E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E63E0 (PC 0x006E63E0, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldD0
+{
+    void sub_006E8120();
+};
+
+class Class_006E63E0
+{
+public:
+    void sub_006E63E0();
+    char m_pad00[0xD0];
+    FieldD0* m_FieldD0; // +0xD0
+};
+
+void Class_006E63E0::sub_006E63E0()
+{
+    m_FieldD0->sub_006E8120();
+}
+
 // ============================================================================
 // [VERIFIED] sub_006E6400 (0x006E6400, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -6198,8 +7629,86 @@ SafeRefCount* SafeRefCount::vfunc_02(int a1)
 // [TODO] 0x006E66A0 sub_006E66A0 (103 B)
 // [TODO] 0x006E6710 core::CementLibrary::vfunc_00 (11 B)
 // [TODO] 0x006E6720 core::CementLibrary::vfunc_01 (12 B)
-// [TODO] 0x006E6730 core::CementLibrary::vfunc_05 (39 B)
-// [TODO] 0x006E6760 core::CementLibrary::vfunc_07 (10 B)
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_05 (0x006E6730, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E6730
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::CementLibrary::vfunc_05 (PC 0x006E6730, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006DCAD0(void);
+extern "C" void __cdecl sub_006DEFA0(int);
+
+namespace core {
+
+class CementLibrary
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+};
+
+void CementLibrary::vfunc_05()
+{
+    if (!m_Field20) {
+        do {
+            sub_006DCAD0();
+            sub_006DEFA0(0);
+        } while (!m_Field20);
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_07 (0x006E6760, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E6760
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::CementLibrary::vfunc_07 (PC 0x006E6760, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace core {
+
+class CementLibrary
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual int vfunc_07();
+    char m_pad04[0x1C];
+    int m_Field20; // +0x20
+};
+
+int CementLibrary::vfunc_07()
+{
+    return m_Field20 == 1;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::CementLibrary::vfunc_06 (0x006E6770, 23 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -6597,10 +8106,91 @@ CementLibrary::CementLibrary() {}                  // building one is what makes
 // [TODO] 0x006E6BE0 core::CementLibrary::vfunc_04 (419 B)
 // [TODO] 0x006E6C82 sub_006E6C82 (257 B)
 // [TODO] 0x006E6D90 sub_006E6D90 (137 B)
-// [TODO] 0x006E6E20 sub_006E6E20 (54 B)
+// ============================================================================
+// [VERIFIED] sub_006E6E20 (0x006E6E20, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E6E20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E6E20 (PC 0x006E6E20, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006DEC00(void);
+extern "C" void __cdecl sub_006DF050(int);
+
+class Class_006E6E20
+{
+public:
+    Class_006E6E20* sub_006E6E20();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    char m_pad18[0x14];
+    int m_Field2C; // +0x2C
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    int m_Field38; // +0x38
+};
+
+Class_006E6E20* Class_006E6E20::sub_006E6E20()
+{
+    m_Field10 = 0;
+    m_Field2C = 0;
+    m_Field30 = 0;
+    m_Field34 = 0;
+    m_Field38 = 0;
+    sub_006DEC00();
+    m_Field00 = 0;
+    m_Field08 = 0;
+    m_Field04 = 0;
+    m_Field0C = 0;
+    sub_006DF050((int)(&m_Field14));
+    return this;
+}
+
 // [TODO] 0x006E6E60 sub_006E6E60 (227 B)
 // [TODO] 0x006E6F50 core::CementLibrary::vfunc_03 (13 B)
-// [TODO] 0x006E6F80 sub_006E6F80 (41 B)
+// ============================================================================
+// [VERIFIED] sub_006E6F80 (0x006E6F80, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E6F80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E6F80 (PC 0x006E6F80, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_006DCC70(int);
+
+class Class_006E6F80
+{
+public:
+    void sub_006E6F80(int a1, int a2);
+    void sub_006E6D90(int, int);
+};
+
+void Class_006E6F80::sub_006E6F80(int a1, int a2)
+{
+    int r_eax;
+
+    r_eax = a1;
+    if (*(unsigned char*)r_eax == 92) {
+        r_eax += 1;
+    }
+    r_eax = sub_006DCC70(r_eax);
+    sub_006E6D90(r_eax, a2);
+}
+
 // [TODO] 0x006E6FB0 sub_006E6FB0 (135 B)
 // ============================================================================
 // [VERIFIED] sub_006E7040 (0x006E7040, 37 B)
@@ -6676,7 +8266,63 @@ void Class_006E7070::sub_006E7070()
 
 // [TODO] 0x006E7390 sub_006E7390 (124 B)
 // [TODO] 0x006E7410 sub_006E7410 (28 B)
-// [TODO] 0x006E7430 sub_006E7430 (80 B)
+// ============================================================================
+// [VERIFIED] sub_006E7430 (0x006E7430, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E7430
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E7430 (PC 0x006E7430, 80 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" int DAT_0072F0FC;
+extern "C" char DAT_00772320[];
+extern "C" char DAT_00772330[];
+extern "C" char DAT_0077233C[];
+extern "C" void __cdecl sub_006DF060(int);
+
+class Class_006E7430
+{
+public:
+    void sub_006E7430();
+    void sub_006E6030();
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    char m_pad08[0x4];
+    int m_Field0C; // +0x0C
+    char m_pad10[0xC0];
+    int m_FieldD0; // +0xD0
+    char m_padD4[0x4];
+    int m_FieldD8; // +0xD8
+    char m_padDC[0x1C];
+    int m_FieldF8; // +0xF8
+};
+
+void Class_006E7430::sub_006E7430()
+{
+    int t1;
+
+    t1 = m_FieldD0;
+    m_Field00 = (int)DAT_0077233C;
+    m_Field04 = (int)DAT_00772330;
+    m_Field0C = (int)DAT_00772320;
+    ((Object*)t1)->vfunc_01();
+    m_FieldD0 = 0;
+    sub_006DF060((int)(&m_FieldF8));
+    ((void (__stdcall*)(int))DAT_0072F0FC)(m_FieldD8);
+    sub_006E6030();
+}
+
 // ============================================================================
 // [VERIFIED] core::Win32Drive::vfunc_00 (0x006E7480, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -6771,8 +8417,106 @@ void* Win32Drive::vfunc_05()
 }
 }
 
-// [TODO] 0x006E74B0 core::Win32Drive::vfunc_12 (30 B)
-// [TODO] 0x006E74D0 core::Win32Drive::vfunc_22 (29 B)
+// ============================================================================
+// [VERIFIED] core::Win32Drive::vfunc_12 (0x006E74B0, 30 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E74B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::Win32Drive::vfunc_12 (PC 0x006E74B0, 30 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F04C;
+
+namespace core {
+
+class Win32Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual int vfunc_12(int a1, int a2);
+    char m_pad04[0xD8];
+    int m_FieldDC; // +0xDC
+};
+
+int Win32Drive::vfunc_12(int a1, int a2)
+{
+    ((void (__stdcall*)(int))DAT_0072F04C)(a1);
+    m_FieldDC += -1;
+    return 1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::Win32Drive::vfunc_22 (0x006E74D0, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E74D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::Win32Drive::vfunc_22 (PC 0x006E74D0, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F104;
+
+namespace core {
+
+class Win32Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual int vfunc_22(int a1);
+};
+
+int Win32Drive::vfunc_22(int a1)
+{
+    ((void (__stdcall*)(int))DAT_0072F104)(*(int*)a1);
+    *(int*)a1 = -1;
+    return 1;
+}
+
+}
+
 // [TODO] 0x006E74F0 sub_006E74F0 (13 B)
 // [TODO] 0x006E75D0 sub_006E75D0 (150 B)
 // [TODO] 0x006E7670 sub_006E7670 (138 B)
@@ -6870,10 +8614,123 @@ Win32Drive* Win32Drive::vfunc_03(int a1)
 
 }
 
-// [TODO] 0x006E78E0 core::Win32Drive::vfunc_09 (80 B)
+// ============================================================================
+// [VERIFIED] core::Win32Drive::vfunc_09 (0x006E78E0, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E78E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::Win32Drive::vfunc_09 (PC 0x006E78E0, 80 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_006E74F0(void);
+
+namespace core {
+
+class Win32Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual int vfunc_09();
+    char m_pad04[0x74];
+    int m_Field78; // +0x78
+    char m_pad7C[0x50];
+    int m_FieldCC; // +0xCC
+    char m_padD0[0xC];
+    int m_FieldDC; // +0xDC
+    char m_padE0[0x14];
+    int m_FieldF4; // +0xF4
+};
+
+int Win32Drive::vfunc_09()
+{
+    if (m_FieldDC) {
+        if (sub_006E74F0() == m_FieldF4) goto L_43;
+        if (m_FieldCC != 4) {
+            m_FieldCC = 3;
+            m_Field78 = 3;
+        }
+        return 0;
+    }
+    sub_006E74F0();
+    m_FieldF4 = 0;
+L_43:
+    return !m_FieldCC;
+}
+
+}
+
 // [TODO] 0x006E7930 core::Win32Drive::vfunc_10 (265 B)
 // [TODO] 0x006E7938 sub_006E7938 (257 B)
-// [TODO] 0x006E7A40 core::Win32Drive::vfunc_14 (111 B)
+// ============================================================================
+// [VERIFIED] core::Win32Drive::vfunc_14 (0x006E7A40, 111 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E7A40
+// what: 
+// tool: the portal's starter code (no AI)
+
+// core::Win32Drive::vfunc_14 (PC 0x006E7A40, 111 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F054;
+extern "C" int DAT_0072F07C;
+extern "C" int DAT_0072F080;
+
+namespace core {
+
+class Win32Drive
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual int vfunc_14(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8);
+    int sub_006E7670(int);
+    char m_pad04[0xC8];
+    int m_FieldCC; // +0xCC
+};
+
+int Win32Drive::vfunc_14(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8)
+{
+    if (((int (__stdcall*)(int, int, int, int))DAT_0072F07C)(a1, a4, 0, 0) == a4) {
+        if (!((int (__stdcall*)(int, int, int, int, int))DAT_0072F080)(a1, a5, a6, a7, 0)) goto L_52;
+        *(int*)a7 = a6;
+        m_FieldCC = 0;
+        return 1;
+    }
+L_52:
+    m_FieldCC = sub_006E7670(((int (__cdecl*)(void))DAT_0072F054)());
+    return 0;
+}
+
+}
+
 // [TODO] 0x006E7AB0 core::Win32Drive::vfunc_15 (178 B)
 // [TODO] 0x006E7B70 core::Win32Drive::vfunc_20 (137 B)
 // [TODO] 0x006E7C00 core::Win32Drive::vfunc_21 (140 B)
@@ -7008,7 +8865,54 @@ void DriveThread::vfunc_01()
 
 // [TODO] 0x006E7ED0 sub_006E7ED0 (19 B)
 // [TODO] 0x006E8030 sub_006E8030 (123 B)
-// [TODO] 0x006E80B0 sub_006E80B0 (103 B)
+// ============================================================================
+// [VERIFIED] sub_006E80B0 (0x006E80B0, 103 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E80B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E80B0 (PC 0x006E80B0, 103 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006DF0D0(int);
+
+class Class_006E80B0
+{
+public:
+    void sub_006E80B0(int a1, int a2);
+    char m_pad00[0x5C];
+    int m_Field5C; // +0x5C
+};
+
+void Class_006E80B0::sub_006E80B0(int a1, int a2)
+{
+    int r_eax, r_ebx, r_edi, r_esi;
+
+    r_eax = a1;
+    r_edi = (a1 << 4) + (int)this;
+    if (*(unsigned short*)((a1 << 4) + (int)this + 132) == 1) {
+        r_esi = *(int*)((int)this + (r_eax * 4) + 96);
+        if (r_esi) {
+            r_ebx = (int)(&m_Field5C);
+            do {
+                sub_006DF0D0(r_ebx);
+                r_esi = *(int*)(r_esi + 4);
+            } while (r_esi);
+            r_eax = a1;
+        }
+        r_eax += 8;
+        r_eax <<= 4;
+        *(int*)(r_edi + 124) = 0;
+        *(bool*)(r_edi + 134) = false;
+        *(int*)(r_eax + (int)this) = -1;
+    }
+    *(unsigned short*)(r_edi + 132) += 65535;
+}
+
 // [TODO] 0x006E8120 sub_006E8120 (43 B)
 // ============================================================================
 // [VERIFIED] sub_006E8190 (0x006E8190, 36 B)
@@ -7254,7 +9158,49 @@ Class_006E9280* Class_006E9280::sub_006E9280(int a1)
 // [TODO] 0x006E93A0 sub_006E93A0 (162 B)
 // [TODO] 0x006E9450 sub_006E9450 (121 B)
 // [TODO] 0x006E94D0 sub_006E94D0 (14 B)
-// [TODO] 0x006E94F0 sub_006E94F0 (54 B)
+// ============================================================================
+// [VERIFIED] sub_006E94F0 (0x006E94F0, 54 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E94F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E94F0 (PC 0x006E94F0, 54 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E94F0
+{
+public:
+    int sub_006E94F0();
+};
+
+int Class_006E94F0::sub_006E94F0()
+{
+    int r_eax, r_ecx, r_edx, t1;
+
+    r_ecx = (int)this;
+    r_edx = *(int*)r_ecx;
+L_04:
+    *(int*)(r_ecx + 4) += 1;
+    r_eax = *(int*)(r_ecx + 4);
+    if ((unsigned int)r_eax < (unsigned int)*(unsigned short*)(r_edx + 12)) {
+        t1 = *(int*)(*(int*)r_edx + (r_eax * 4));
+        if (!*(int*)(*(int*)r_edx + (r_eax * 4))) goto L_04;
+        if (t1 == (r_edx + 8)) goto L_04;
+    }
+    r_ecx = *(unsigned short*)(r_edx + 12);
+    if ((unsigned int)r_eax >= (unsigned int)r_ecx) {
+        r_eax = 0;
+        return r_eax;
+    }
+    r_edx = *(int*)r_edx;
+    r_eax = *(int*)(r_edx + (r_eax * 4));
+    return r_eax;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006E9530 (0x006E9530, 27 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -7287,7 +9233,50 @@ L_18:
     return 0;
 }
 
-// [TODO] 0x006E9550 sub_006E9550 (68 B)
+// ============================================================================
+// [VERIFIED] sub_006E9550 (0x006E9550, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006E9550
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006E9550 (PC 0x006E9550, 68 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006E9550
+{
+public:
+    Class_006E9550* sub_006E9550(int a1, int a2, int a3);
+    void sub_006E91B0(int);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    unsigned short m_Field0C; // +0x0C
+    unsigned short m_Field0E; // +0x0E
+    unsigned short m_Field10; // +0x10
+    unsigned short m_Field12; // +0x12
+    unsigned short m_Field14; // +0x14
+    unsigned char m_Field16; // +0x16
+};
+
+Class_006E9550* Class_006E9550::sub_006E9550(int a1, int a2, int a3)
+{
+    m_Field16 &= 254;
+    m_Field00 = 0;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = (unsigned short)a1;
+    m_Field0E = 0;
+    m_Field10 = 0;
+    m_Field12 = (unsigned short)a3;
+    m_Field14 = (unsigned short)a2;
+    sub_006E91B0((unsigned short)((unsigned short)a1));
+    return this;
+}
+
 // [TODO] 0x006E95A0 sub_006E95A0 (167 B)
 // ============================================================================
 // [VERIFIED] sub_006E9650 (0x006E9650, 6 B)
@@ -7671,7 +9660,48 @@ void __stdcall sub_006EA1C0(int a1)
     sub_006E9F60(a1, 1);
 }
 
-// [TODO] 0x006EA1D0 sub_006EA1D0 (39 B)
+// ============================================================================
+// [VERIFIED] sub_006EA1D0 (0x006EA1D0, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EA1D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EA1D0 (PC 0x006EA1D0, 39 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_006DC000(void);
+
+class Class_006EA1D0
+{
+public:
+    int sub_006EA1D0();
+    int sub_006E9F60(int, int);
+    char m_pad00[0x4];
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    char m_pad0C[0x4];
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+};
+
+int Class_006EA1D0::sub_006EA1D0()
+{
+    int r_eax;
+
+    r_eax = sub_006DC000();
+    r_eax -= m_Field08;
+    m_Field14 = 0;
+    m_Field10 = r_eax;
+    if ((unsigned int)r_eax > (unsigned int)m_Field04) {
+        r_eax = sub_006E9F60(2, 0);
+    }
+    return r_eax;
+}
+
 // [TODO] 0x006EA4B0 sub_006EA4B0 (162 B)
 // [TODO] 0x006EA570 sub_006EA570 (268 B)
 // ============================================================================
@@ -7750,15 +9780,336 @@ void Class_006EA790::sub_006EA790()
 // [TODO] 0x006EA9E0 sub_006EA9E0 (60 B)
 // [TODO] 0x006EAA20 sub_006EAA20 (80 B)
 // [TODO] 0x006EAA70 sub_006EAA70 (108 B)
-// [TODO] 0x006EAAE0 sub_006EAAE0 (43 B)
-// [TODO] 0x006EAB10 sub_006EAB10 (71 B)
+// ============================================================================
+// [VERIFIED] sub_006EAAE0 (0x006EAAE0, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EAAE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EAAE0 (PC 0x006EAAE0, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(int);
+};
+
+class Class_006EAAE0
+{
+public:
+    void sub_006EAAE0(int a1);
+    void sub_006EA9E0();
+    char m_pad00[0x8];
+    Field08* m_Field08; // +0x08
+    char m_pad0C[0x1];
+    unsigned char m_Field0D; // +0x0D
+    char m_pad0E[0xA];
+    int m_Field18; // +0x18
+};
+
+void Class_006EAAE0::sub_006EAAE0(int a1)
+{
+    m_Field08->vfunc_06(m_Field18 + a1);
+    m_Field18 += a1;
+    if (m_Field0D) {
+        sub_006EA9E0();
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EAB10 (0x006EAB10, 71 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EAB10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EAB10 (PC 0x006EAB10, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int, int, int);
+};
+
+class Class_006EAB10
+{
+public:
+    bool sub_006EAB10(int a1, int a2, int a3, int a4);
+    void sub_006EA9E0();
+    void sub_006EAA20(int, int, int);
+    char m_pad00[0x8];
+    Field08* m_Field08; // +0x08
+    char m_pad0C[0xC];
+    int m_Field18; // +0x18
+};
+
+bool Class_006EAB10::sub_006EAB10(int a1, int a2, int a3, int a4)
+{
+    m_Field08->vfunc_04(a1, a2 * a3, a4);
+    m_Field18 += a2 * a3;
+    sub_006EA9E0();
+    sub_006EAA20(a1, a2, a3);
+    return true;
+}
+
 // [TODO] 0x006EAB60 sub_006EAB60 (60 B)
 // [TODO] 0x006EABA0 sub_006EABA0 (109 B)
-// [TODO] 0x006EAC60 content::LoadStream::vfunc_03 (70 B)
+// ============================================================================
+// [VERIFIED] content::LoadStream::vfunc_03 (0x006EAC60, 70 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EAC60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// content::LoadStream::vfunc_03 (PC 0x006EAC60, 70 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_0073523C[];
+extern "C" char DAT_0077240C[];
+extern "C" void __cdecl sub_006DC500(int);
+extern "C" void __cdecl sub_006E9810(int);
+extern "C" void __cdecl sub_006EA9E0(void);
+
+namespace content {
+
+class LoadStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual LoadStream* vfunc_03(int a1);
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    char m_pad0C[0x18];
+    int m_Field24; // +0x24
+};
+
+LoadStream* LoadStream::vfunc_03(int a1)
+{
+    int t2, t4;
+
+    *(int*)this = (int)DAT_0077240C;
+    sub_006EA9E0();
+    t2 = m_Field08;
+    if (m_Field08) {
+        ((Object*)t2)->vfunc_01();
+    }
+    t4 = m_Field24;
+    if (m_Field24) {
+        sub_006DC500(t4);
+    }
+    *(int*)this = (int)DAT_0073523C;
+    if (a1 & 1) {
+        sub_006E9810((int)this);
+    }
+    return this;
+}
+
+}
+
 // [TODO] 0x006EACB0 sub_006EACB0 (312 B)
 // [TODO] 0x006EADF0 sub_006EADF0 (116 B)
-// [TODO] 0x006EAEE0 sub_006EAEE0 (103 B)
-// [TODO] 0x006EAF50 sub_006EAF50 (69 B)
+// ============================================================================
+// [VERIFIED] sub_006EAEE0 (0x006EAEE0, 103 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EAEE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EAEE0 (PC 0x006EAEE0, 103 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0077240C[];
+
+class Class_006EAEE0
+{
+public:
+    Class_006EAEE0* sub_006EAEE0(int a1, int a2, int a3);
+    void sub_006EADF0(int);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+    bool m_Field0D; // +0x0D
+    bool m_Field0E; // +0x0E
+    bool m_Field0F; // +0x0F
+    bool m_Field10; // +0x10
+    char m_pad11[0x3];
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+    int m_Field2C; // +0x2C
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+    int m_Field38; // +0x38
+    int m_Field3C; // +0x3C
+    int m_Field40; // +0x40
+};
+
+Class_006EAEE0* Class_006EAEE0::sub_006EAEE0(int a1, int a2, int a3)
+{
+    m_Field0D = false;
+    m_Field04 = 0;
+    m_Field08 = 0;
+    m_Field0C = false;
+    m_Field0F = false;
+    m_Field10 = false;
+    m_Field14 = 0;
+    m_Field18 = 0;
+    m_Field1C = 0;
+    m_Field20 = 0;
+    m_Field24 = 0;
+    m_Field28 = 0;
+    m_Field2C = 0;
+    m_Field30 = 0;
+    m_Field34 = 0;
+    m_Field38 = 0;
+    m_Field3C = 0;
+    m_Field40 = 0;
+    m_Field0E = a3 == 1;
+    m_Field00 = (int)DAT_0077240C;
+    m_Field0D = *(bool*)(a1 + 272);
+    sub_006EADF0(a1);
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EAF50 (0x006EAF50, 69 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EAF50
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EAF50 (PC 0x006EAF50, 69 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual bool vfunc_24();
+};
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual bool vfunc_24();
+};
+
+class Class_006EAF50
+{
+public:
+    bool sub_006EAF50();
+    void sub_006EA9E0();
+    void sub_006EABA0();
+    char m_pad00[0x8];
+    Field08* m_Field08; // +0x08
+    bool m_Field0C; // +0x0C
+    char m_pad0D[0x3];
+    unsigned char m_Field10; // +0x10
+};
+
+bool Class_006EAF50::sub_006EAF50()
+{
+    Field08* t1;
+
+    if (m_Field10) {
+        t1 = m_Field08;
+        m_Field10 = 0;
+        if (!((Object*)(int)t1)->vfunc_24()) {
+            sub_006EA9E0();
+        }
+        if (m_Field08->vfunc_24()) {
+            m_Field0C = true;
+            sub_006EABA0();
+            return m_Field0C;
+        }
+        m_Field0C = false;
+    }
+    return m_Field0C;
+}
+
 // [TODO] 0x006EAFA0 sub_006EAFA0 (168 B)
 // [TODO] 0x006EB050 sub_006EB050 (141 B)
 // ============================================================================
@@ -7790,7 +10141,32 @@ void Class_006EB0E0::sub_006EB0E0()
     m_Field284->vfunc_01();
 }
 
-// [TODO] 0x006EB0F0 sub_006EB0F0 (20 B)
+// ============================================================================
+// [VERIFIED] sub_006EB0F0 (0x006EB0F0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EB0F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EB0F0 (PC 0x006EB0F0, 20 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F204;
+
+class Class_006EB0F0
+{
+public:
+    void sub_006EB0F0(int a1);
+};
+
+void Class_006EB0F0::sub_006EB0F0(int a1)
+{
+    ((void (__cdecl*)(int, int, int))DAT_0072F204)((int)this, a1, 127);
+}
+
 // [TODO] 0x006EB110 sub_006EB110 (7 B)
 // [TODO] 0x006EB150 sub_006EB150 (242 B)
 // [TODO] 0x006EB250 sub_006EB250 (162 B)
@@ -7984,7 +10360,40 @@ int Class_006EB620::sub_006EB620()
 }
 
 // [TODO] 0x006EB630 sub_006EB630 (98 B)
-// [TODO] 0x006EB6A0 sub_006EB6A0 (34 B)
+// ============================================================================
+// [VERIFIED] sub_006EB6A0 (0x006EB6A0, 34 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EB6A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EB6A0 (PC 0x006EB6A0, 34 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_007F6398;
+
+class Class_006EB6A0
+{
+public:
+    Class_006EB6A0* sub_006EB6A0();
+    int m_Field00; // +0x00
+    unsigned short m_Field04; // +0x04
+    char m_pad06[0x2];
+    unsigned short m_Field08; // +0x08
+};
+
+Class_006EB6A0* Class_006EB6A0::sub_006EB6A0()
+{
+    m_Field00 = DAT_007F6398;
+    *(unsigned short*)(DAT_007F6398 + -4) += 1;
+    m_Field08 = 0;
+    m_Field04 = 2;
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006EB6D0 (0x006EB6D0, 16 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -8077,7 +10486,40 @@ Class_006EB9B0* Class_006EB9B0::sub_006EB9B0(int a1)
 // [TODO] 0x006EBA00 sub_006EBA00 (94 B)
 // [TODO] 0x006EBA60 sub_006EBA60 (94 B)
 // [TODO] 0x006EBAE0 sub_006EBAE0 (24 B)
-// [TODO] 0x006EBBD0 sub_006EBBD0 (15 B)
+// ============================================================================
+// [VERIFIED] sub_006EBBD0 (0x006EBBD0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EBBD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EBBD0 (PC 0x006EBBD0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field00
+{
+    void sub_006EB750();
+};
+
+class Class_006EBBD0
+{
+public:
+    void sub_006EBBD0();
+    Field00* m_Field00; // +0x00
+    unsigned short m_Field04; // +0x04
+};
+
+void Class_006EBBD0::sub_006EBBD0()
+{
+    if (m_Field04 == 2) {
+        m_Field00->sub_006EB750();
+        return;
+    }
+}
+
 // [TODO] 0x006EBBE0 sub_006EBBE0 (69 B)
 // [TODO] 0x006EBCA0 sub_006EBCA0 (70 B)
 // ============================================================================
@@ -8242,7 +10684,39 @@ int OmHalStream::vfunc_09(int a1)
 }
 
 // [TODO] 0x006EBFF0 audio::OmHalStream::vfunc_05 (46 B)
-// [TODO] 0x006EC020 audio::OmHalStream::vfunc_03 (13 B)
+// ============================================================================
+// [VERIFIED] audio::OmHalStream::vfunc_03 (0x006EC020, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EC020
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::OmHalStream::vfunc_03 (PC 0x006EC020, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_006F13A0(int);
+
+namespace audio {
+
+class OmHalStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+};
+
+int OmHalStream::vfunc_03()
+{
+    return sub_006F13A0((int)this + 12);
+}
+
+}
+
 // [TODO] 0x006EC030 sub_006EC030 (227 B)
 // [TODO] 0x006EC120 sub_006EC120 (185 B)
 // [TODO] 0x006EC1E0 sub_006EC1E0 (78 B)
@@ -8611,7 +11085,32 @@ MetaTypeBase* MetaTypeBase::vfunc_00(int a1)
 
 // [TODO] 0x006ECBD0 sub_006ECBD0 (76 B)
 // [TODO] 0x006ECC20 sub_006ECC20 (133 B)
-// [TODO] 0x006ECCB0 GlobalVehicleSound::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] GlobalVehicleSound::vfunc_00 (0x006ECCB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006ECCB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// GlobalVehicleSound::vfunc_00 (PC 0x006ECCB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class GlobalVehicleSound
+{
+public:
+    virtual void vfunc_00();
+    char m_pad04[0x1C];
+    unsigned short m_Field20; // +0x20
+};
+
+void GlobalVehicleSound::vfunc_00()
+{
+    m_Field20 += 1;
+}
+
 // [TODO] 0x006ECCC0 GlobalVehicleSound::vfunc_01 (26 B)
 // ============================================================================
 // [VERIFIED] GlobalVehicleSound::vfunc_02 (0x006ECCE0, 5 B)
@@ -9378,8 +11877,75 @@ void __cdecl sub_006EDFD0(int a1)
     sub_006EE890((int)DAT_007F6824, a1);
 }
 
-// [TODO] 0x006EDFF0 audio::MixerMix::vfunc_00 (5 B)
-// [TODO] 0x006EE000 audio::MixerMix::vfunc_01 (23 B)
+// ============================================================================
+// [VERIFIED] audio::MixerMix::vfunc_00 (0x006EDFF0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EDFF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::MixerMix::vfunc_00 (PC 0x006EDFF0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace audio {
+
+class MixerMix
+{
+public:
+    virtual void vfunc_00();
+    char m_pad04[0x44];
+    int m_Field48; // +0x48
+};
+
+void MixerMix::vfunc_00()
+{
+    m_Field48 += 1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] audio::MixerMix::vfunc_01 (0x006EE000, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EE000
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::MixerMix::vfunc_01 (PC 0x006EE000, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace audio {
+
+class MixerMix
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+void MixerMix::vfunc_01()
+{
+    int r_eax, r_ecx;
+
+    r_ecx = (int)this;
+    r_eax = *(int*)(r_ecx + 72);
+    if (r_eax == 1) {
+        r_eax = *(int*)r_ecx;
+        ((void (__stdcall*)(int))*(int*)(r_eax + 12))(1);
+        return;
+    }
+    r_eax += -1;
+    *(int*)(r_ecx + 72) = r_eax;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] sub_006EE040 (0x006EE040, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9397,11 +11963,145 @@ int __cdecl sub_006EE040(void)
     return DAT_0085CEB0;
 }
 
-// [TODO] 0x006EE050 sub_006EE050 (5 B)
-// [TODO] 0x006EE060 sub_006EE060 (15 B)
-// [TODO] 0x006EE070 sub_006EE070 (13 B)
-// [TODO] 0x006EE080 sub_006EE080 (5 B)
-// [TODO] 0x006EE090 sub_006EE090 (5 B)
+// ============================================================================
+// [VERIFIED] sub_006EE050 (0x006EE050, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EE050
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EE050 (PC 0x006EE050, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006EE050
+{
+public:
+    void sub_006EE050();
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+void Class_006EE050::sub_006EE050()
+{
+    m_Field28 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EE060 (0x006EE060, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EE060
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EE060 (PC 0x006EE060, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006EE060
+{
+public:
+    int sub_006EE060();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+    char m_pad24[0x18];
+    int m_Field3C; // +0x3C
+};
+
+int Class_006EE060::sub_006EE060()
+{
+    m_Field3C += 1;
+    *(int*)(m_Field20 + 72) += 1;
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EE070 (0x006EE070, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EE070
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EE070 (PC 0x006EE070, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// Note: eax is not known here (left as 0).
+
+class Class_006EE070
+{
+public:
+    int sub_006EE070();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+    char m_pad24[0x18];
+    int m_Field3C; // +0x3C
+};
+
+int Class_006EE070::sub_006EE070()
+{
+    m_Field3C += 0 | -1;
+    *(int*)(m_Field20 + 72) += 0 | -1;
+    return 0 | -1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EE080 (0x006EE080, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EE080
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EE080 (PC 0x006EE080, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006EE080
+{
+public:
+    void sub_006EE080();
+    char m_pad00[0x40];
+    int m_Field40; // +0x40
+};
+
+void Class_006EE080::sub_006EE080()
+{
+    m_Field40 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EE090 (0x006EE090, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EE090
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EE090 (PC 0x006EE090, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006EE090
+{
+public:
+    void sub_006EE090();
+    char m_pad00[0x40];
+    int m_Field40; // +0x40
+};
+
+void Class_006EE090::sub_006EE090()
+{
+    m_Field40 += -1;
+}
+
 // [TODO] 0x006EE0A0 sub_006EE0A0 (115 B)
 // [TODO] 0x006EE120 om::TRbTree<audio::MixerMix, 4>::Comp<audio::MixerMix, 4, audio::Mix*>::vfunc_00 (35 B)
 // [TODO] 0x006EE150 sub_006EE150 (427 B)
@@ -9464,7 +12164,60 @@ Class_006EE310* Class_006EE310::sub_006EE310()
 // [TODO] 0x006EE420 om::TRbTree<audio::MixerBuss, 0>::Comp<audio::MixerBuss, 0, om::Name<om::CaseSensitive32BitKey>>::vfunc_00 (29 B)
 // [TODO] 0x006EE440 sub_006EE440 (88 B)
 // [TODO] 0x006EE4A0 sub_006EE4A0 (71 B)
-// [TODO] 0x006EE4F0 sub_006EE4F0 (60 B)
+// ============================================================================
+// [VERIFIED] sub_006EE4F0 (0x006EE4F0, 60 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EE4F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EE4F0 (PC 0x006EE4F0, 60 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field20
+{
+    void sub_006F2A40(int);
+};
+
+struct Object
+{
+    void sub_006F2C40(int);
+};
+
+extern "C" char DAT_007F682C[];
+extern "C" int __cdecl sub_006EE890(int, int);
+
+class Class_006EE4F0
+{
+public:
+    int sub_006EE4F0();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+    char m_pad14[0xC];
+    Field20* m_Field20; // +0x20
+    char m_pad24[0x4];
+    int m_Field28; // +0x28
+};
+
+int Class_006EE4F0::sub_006EE4F0()
+{
+    int t1;
+    Field20* t2;
+
+    t1 = m_Field28;
+    if ((unsigned int)m_Field28 > (unsigned int)1) {
+        m_Field28 = t1 + -1;
+        return t1 + -1;
+    }
+    t2 = m_Field20;
+    m_Field20->sub_006F2A40((int)this);
+    ((Object*)(int)t2 + 40)->sub_006F2C40((int)(&m_Field10));
+    return sub_006EE890((int)DAT_007F682C, (int)this);
+}
+
 // ============================================================================
 // [VERIFIED] sub_006EE530 (0x006EE530, 56 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9647,7 +12400,26 @@ Allocator* Allocator::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006EE9B0 sub_006EE9B0 (6 B)
+// ============================================================================
+// [VERIFIED] sub_006EE9B0 (0x006EE9B0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EE9B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EE9B0 (PC 0x006EE9B0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0085CEC0[];
+
+void* __cdecl sub_006EE9B0(void)
+{
+    return DAT_0085CEC0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006EE9D0 (0x006EE9D0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -10316,7 +13088,28 @@ void __cdecl sub_006EF170(int a1)
 }
 
 // [TODO] 0x006EF190 sub_006EF190 (222 B)
-// [TODO] 0x006EF290 sub_006EF290 (6 B)
+// ============================================================================
+// [VERIFIED] sub_006EF290 (0x006EF290, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006EE9B0 (PC 0x006EE9B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006EF290
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EF290 (PC 0x006EF290, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0085D0F0[];
+
+void* __cdecl sub_006EF290(void)
+{
+    return DAT_0085D0F0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006EF360 (0x006EF360, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -10393,9 +13186,51 @@ int __cdecl sub_006EF980(int a1)
     return *(int*)(a1 + 16);
 }
 
-// [TODO] 0x006EF990 sub_006EF990 (12 B)
+// ============================================================================
+// [VERIFIED] sub_006EF990 (0x006EF990, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EF990
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EF990 (PC 0x006EF990, 12 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006EF990(int a1, int a2)
+{
+    *(int*)(a1 + 32) = a2;
+    return a2;
+}
+
 // [TODO] 0x006EF9A0 sub_006EF9A0 (34 B)
-// [TODO] 0x006EF9E0 sub_006EF9E0 (35 B)
+// ============================================================================
+// [VERIFIED] sub_006EF9E0 (0x006EF9E0, 35 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EF9E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EF9E0 (PC 0x006EF9E0, 35 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0085D134;
+extern "C" void __cdecl sub_006F4A80(int, int);
+
+bool __cdecl sub_006EF9E0(int a1)
+{
+    sub_006F4A80(DAT_0085D134, a1);
+    *(int*)(a1 + 32) = 0;
+    *(int*)(a1 + 28) = 0;
+    *(bool*)(a1 + 24) = false;
+    return true;
+}
+
 // [TODO] 0x006EFA10 sub_006EFA10 (61 B)
 // ============================================================================
 // [VERIFIED] sub_006EFA50 (0x006EFA50, 12 B)
@@ -10529,7 +13364,45 @@ bool __cdecl sub_006EFD30(int a1, bool a2)
 // [TODO] 0x006EFD40 sub_006EFD40 (43 B)
 // [TODO] 0x006EFD70 sub_006EFD70 (143 B)
 // [TODO] 0x006EFE00 sub_006EFE00 (205 B)
-// [TODO] 0x006EFF60 sub_006EFF60 (86 B)
+// ============================================================================
+// [VERIFIED] sub_006EFF60 (0x006EFF60, 86 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006EFF60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006EFF60 (PC 0x006EFF60, 86 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_006EBBD0();
+    void sub_006F2C40(int);
+};
+
+extern "C" int DAT_0072F058;
+extern "C" char DAT_007F69E0[];
+extern "C" int DAT_0085D134;
+extern "C" void __cdecl sub_006EE890(int, int);
+extern "C" void __cdecl sub_006F3C50(int, int);
+
+int __cdecl sub_006EFF60(int a1)
+{
+    int t6;
+
+    ((Object*)DAT_0085D134 + 8)->sub_006F2C40(a1);
+    ((void (__stdcall*)(int, int, int))DAT_0072F058)(*(int*)(a1 + 20), 0, 32768);
+    sub_006F3C50(DAT_0085D134, a1);
+    ((Object*)a1 + 104)->sub_006EBBD0();
+    sub_006EE890((int)DAT_007F69E0, a1);
+    t6 = DAT_0085D134;
+    *(int*)(DAT_0085D134 + 20) += -1;
+    return t6;
+}
+
 // [TODO] 0x006F0210 sub_006F0210 (445 B)
 // ============================================================================
 // [VERIFIED] om::MetaType<audio::LayerTemplate>::vfunc_00 (0x006F03D0, 36 B)
@@ -10778,7 +13651,40 @@ void __cdecl sub_006F0990(int a1)
     sub_006EE890((int)DAT_007F6BB4, a1);
 }
 
-// [TODO] 0x006F09B0 audio::StreamPlayerAllocator::vfunc_00 (44 B)
+// ============================================================================
+// [VERIFIED] audio::StreamPlayerAllocator::vfunc_00 (0x006F09B0, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F09B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::StreamPlayerAllocator::vfunc_00 (PC 0x006F09B0, 44 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_006F2080(int, int, int, int, int, int, int);
+
+namespace audio {
+
+class StreamPlayerAllocator
+{
+public:
+    virtual int vfunc_00(int a1, int a2, int a3, int a4, int a5, int a6);
+};
+
+int StreamPlayerAllocator::vfunc_00(int a1, int a2, int a3, int a4, int a5, int a6)
+{
+    int t1;
+
+    t1 = sub_006F2080(a4, 1, a3, a5, 0, 0, 1);
+    *(int*)a6 = 0x20000;
+    return t1;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::StreamPlayerAllocator::vfunc_01 (0x006F09E0, 14 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -11109,7 +14015,36 @@ int __cdecl sub_006F1800(int a1)
 }
 
 // [TODO] 0x006F1810 sub_006F1810 (45 B)
-// [TODO] 0x006F1840 sub_006F1840 (20 B)
+// ============================================================================
+// [VERIFIED] sub_006F1840 (0x006F1840, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F1840
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006F1840 (PC 0x006F1840, 20 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006F1840
+{
+public:
+    int sub_006F1840();
+    char m_pad00[0x78];
+    unsigned char m_Field78; // +0x78
+    unsigned char m_Field79; // +0x79
+};
+
+int Class_006F1840::sub_006F1840()
+{
+    if (!m_Field79) {
+        return 0;
+    }
+    return (int)this + ((m_Field78 + (m_Field78 * 2)) * 4);
+}
+
 // [TODO] 0x006F1860 sub_006F1860 (72 B)
 // [TODO] 0x006F18B0 sub_006F18B0 (111 B)
 // [TODO] 0x006F1920 sub_006F1920 (9 B)
@@ -11288,7 +14223,41 @@ int Class_006F2C00::sub_006F2C00(int a1)
 }
 
 // [TODO] 0x006F2C40 sub_006F2C40 (47 B)
-// [TODO] 0x006F2C70 sub_006F2C70 (18 B)
+// ============================================================================
+// [VERIFIED] sub_006F2C70 (0x006F2C70, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F2C70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006F2C70 (PC 0x006F2C70, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_006F2C70
+{
+public:
+    int sub_006F2C70();
+};
+
+int Class_006F2C70::sub_006F2C70()
+{
+    int r_eax, r_ecx;
+
+    r_ecx = (int)this;
+    r_ecx = *(int*)r_ecx;
+    r_eax = 0;
+    if (r_ecx) {
+        do {
+            r_ecx = *(int*)r_ecx;
+            r_eax += 1;
+        } while (r_ecx);
+    }
+    return r_eax;
+}
+
 // [TODO] 0x006F2C90 sub_006F2C90 (116 B)
 // ============================================================================
 // [VERIFIED] om::SparksHeap::vfunc_00 (0x006F2EF0, 14 B)
@@ -11483,23 +14452,275 @@ void HalRsdFileStream::vfunc_10()
 
 // [TODO] 0x006F35A0 audio::HalRsdFileStream::vfunc_07 (117 B)
 // [TODO] 0x006F3620 audio::HalRsdFileStream::vfunc_06 (79 B)
-// [TODO] 0x006F3670 audio::HalRsdFileStream::vfunc_08 (32 B)
+// ============================================================================
+// [VERIFIED] audio::HalRsdFileStream::vfunc_08 (0x006F3670, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F3670
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::HalRsdFileStream::vfunc_08 (PC 0x006F3670, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace audio {
+
+class HalRsdFileStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual bool vfunc_08(int a1);
+    char m_pad04[0x38];
+    int m_Field3C; // +0x3C
+    char m_pad40[0x4];
+    unsigned short m_Field44; // +0x44
+};
+
+bool HalRsdFileStream::vfunc_08(int a1)
+{
+    if (m_Field44 == 5) {
+        return false;
+    }
+    *(int*)a1 = m_Field3C;
+    m_Field44 = 4;
+    return true;
+}
+
+}
+
 // [TODO] 0x006F36E0 audio::HalRsdFileStream::vfunc_11 (255 B)
 // [TODO] 0x006F37E0 sub_006F37E0 (58 B)
 // [TODO] 0x006F3820 sub_006F3820 (155 B)
-// [TODO] 0x006F38C0 audio::HalRsdFileStream::vfunc_15 (45 B)
+// ============================================================================
+// [VERIFIED] audio::HalRsdFileStream::vfunc_15 (0x006F38C0, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F38C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::HalRsdFileStream::vfunc_15 (PC 0x006F38C0, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0085D360;
+
+namespace audio {
+
+class HalRsdFileStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual int vfunc_15(int a1);
+    char m_pad04[0x3D];
+    unsigned char m_Field41; // +0x41
+    char m_pad42[0x6];
+    int m_Field48; // +0x48
+};
+
+int HalRsdFileStream::vfunc_15(int a1)
+{
+    int r_eax;
+
+    r_eax = DAT_0085D360;
+    if (r_eax) {
+        if (!m_Field41) goto L_29;
+        r_eax = ((int (__cdecl*)(int, int, int, int, int))r_eax)((int)(&m_Field48), a1, 0, 0, 0);
+        m_Field41 = (unsigned char)r_eax;
+    }
+L_29:
+    return r_eax;
+}
+
+}
+
 // [TODO] 0x006F38F0 sub_006F38F0 (154 B)
-// [TODO] 0x006F3990 audio::HalRsdFileStream::vfunc_12 (77 B)
-// [TODO] 0x006F39E0 sub_006F39E0 (66 B)
+// ============================================================================
+// [VERIFIED] audio::HalRsdFileStream::vfunc_12 (0x006F3990, 77 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F3990
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::HalRsdFileStream::vfunc_12 (PC 0x006F3990, 77 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    void sub_006EBBD0();
+};
+
+struct Field20
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_007F6D44[];
+extern "C" char DAT_007F6D4C[];
+extern "C" void __cdecl sub_006EE890(int, int);
+
+namespace audio {
+
+class HalRsdFileStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15(int);
+    Field10 m_Field04; // +0x04
+    char m_pad05[0xB];
+    Field10 m_Field10; // +0x10
+    char m_pad11[0xF];
+    Field20* m_Field20; // +0x20
+    int m_Field24; // +0x24
+};
+
+void HalRsdFileStream::vfunc_12()
+{
+    int t3;
+
+    if (m_Field20) {
+        vfunc_15(4);
+        m_Field20->vfunc_01();
+    }
+    t3 = m_Field24;
+    if (m_Field24) {
+        sub_006EE890((int)DAT_007F6D44, t3);
+    }
+    m_Field10.sub_006EBBD0();
+    m_Field04.sub_006EBBD0();
+    sub_006EE890((int)DAT_007F6D4C, (int)this);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F39E0 (0x006F39E0, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F39E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006F39E0 (PC 0x006F39E0, 66 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0072F990;
+extern "C" float DAT_0072F994;
+extern "C" float DAT_0074660C;
+extern "C" float DAT_00763FFC;
+extern "C" float DAT_00764004;
+extern "C" float DAT_00764008;
+
+float __cdecl sub_006F39E0(bool a1)
+{
+    if (a1 & 16) {
+        return DAT_0074660C;
+    }
+    if (a1 & 8) {
+        return DAT_0072F990;
+    }
+    if (a1 & 4) {
+        return DAT_00764004;
+    }
+    if (a1 & 2) {
+        return DAT_00764008;
+    }
+    if (a1 & 1) {
+        return DAT_00763FFC;
+    }
+    return DAT_0072F994;
+}
+
 // [TODO] 0x006F3A30 sub_006F3A30 (116 B)
 // [TODO] 0x006F3AB0 sub_006F3AB0 (19 B)
-// [TODO] 0x006F3AD0 sub_006F3AD0 (15 B)
+// ============================================================================
+// [VERIFIED] sub_006F3AD0 (0x006F3AD0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F3AD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006F3AD0 (PC 0x006F3AD0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006F3AD0(int a1, int a2)
+{
+    *(int*)(a2 + 144) = 0;
+    return a2;
+}
+
 // [TODO] 0x006F3AE0 sub_006F3AE0 (82 B)
 // [TODO] 0x006F3B40 sub_006F3B40 (204 B)
 // [TODO] 0x006F3C10 sub_006F3C10 (57 B)
 // [TODO] 0x006F3C50 sub_006F3C50 (51 B)
 // [TODO] 0x006F3C90 sub_006F3C90 (146 B)
-// [TODO] 0x006F3D30 sub_006F3D30 (61 B)
+// ============================================================================
+// [VERIFIED] sub_006F3D30 (0x006F3D30, 61 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F3D30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006F3D30 (PC 0x006F3D30, 61 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_006F3C90(int, int, int, int, int);
+
+void __cdecl sub_006F3D30(int a1, int a2, int a3, int a4)
+{
+    sub_006F3C90(a1 + 12, *(int*)(a1 + 20) + (((((((unsigned int)*(int*)(a1 + 12)) >> 4) & 31) * a3) + a2) * 2), *(int*)(a1 + (a2 * 4) + 40), a3, a4);
+}
+
 // [TODO] 0x006F3D70 sub_006F3D70 (11 B)
 // [TODO] 0x006F3E30 sub_006F3E30 (181 B)
 // [TODO] 0x006F4010 sub_006F4010 (595 B)
@@ -11511,7 +14732,58 @@ void HalRsdFileStream::vfunc_10()
 // [TODO] 0x006F4A80 sub_006F4A80 (105 B)
 // [TODO] 0x006F4AF0 sub_006F4AF0 (270 B)
 // [TODO] 0x006F4C00 sub_006F4C00 (225 B)
-// [TODO] 0x006F4D00 audio::OggVorbisStream::vfunc_00 (40 B)
+// ============================================================================
+// [VERIFIED] audio::OggVorbisStream::vfunc_00 (0x006F4D00, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F4D00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::OggVorbisStream::vfunc_00 (PC 0x006F4D00, 40 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field04
+{
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+};
+
+namespace audio {
+
+class OggVorbisStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    Field04* m_Field04; // +0x04
+    char m_pad08[0x2E4];
+    int m_Field2EC; // +0x2EC
+};
+
+void OggVorbisStream::vfunc_00()
+{
+    if (!m_Field04->vfunc_01()) {
+        m_Field04->vfunc_00();
+    }
+    m_Field2EC = 1;
+    vfunc_11();
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::OggVorbisStream::vfunc_12 (0x006F4D30, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -11618,7 +14890,39 @@ void* OggVorbisStream::vfunc_02()
 }
 }
 
-// [TODO] 0x006F4DA0 audio::OggVorbisStream::vfunc_03 (15 B)
+// ============================================================================
+// [VERIFIED] audio::OggVorbisStream::vfunc_03 (0x006F4DA0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F4DA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::OggVorbisStream::vfunc_03 (PC 0x006F4DA0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace audio {
+
+class OggVorbisStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03();
+    char m_pad04[0x2D8];
+    int m_Field2DC; // +0x2DC
+};
+
+int OggVorbisStream::vfunc_03()
+{
+    return ((((unsigned int)m_Field2DC) >> 4) & 31) + ((((unsigned int)m_Field2DC) >> 4) & 31);
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] AirplanePlaneCollisionReceiver::vfunc_00 (0x006F4DB0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -11706,13 +15010,295 @@ void OggVorbisStream::vfunc_10()
 
 }
 
-// [TODO] 0x006F4DD0 audio::OggVorbisStream::vfunc_04 (13 B)
+// ============================================================================
+// [VERIFIED] audio::OggVorbisStream::vfunc_04 (0x006F4DD0, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F4DD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::OggVorbisStream::vfunc_04 (PC 0x006F4DD0, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace audio {
+
+class OggVorbisStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual int vfunc_04();
+    char m_pad04[0x2DC];
+    int m_Field2E0; // +0x2E0
+    int m_Field2E4; // +0x2E4
+};
+
+int OggVorbisStream::vfunc_04()
+{
+    return m_Field2E0 - m_Field2E4;
+}
+
+}
+
 // [TODO] 0x006F4DE0 audio::OggVorbisStream::vfunc_06 (117 B)
-// [TODO] 0x006F4E60 audio::OggVorbisStream::vfunc_08 (27 B)
-// [TODO] 0x006F4F10 sub_006F4F10 (73 B)
-// [TODO] 0x006F4F60 audio::OggVorbisStream::vfunc_17 (95 B)
-// [TODO] 0x006F4FC0 sub_006F4FC0 (53 B)
-// [TODO] 0x006F5000 sub_006F5000 (33 B)
+// ============================================================================
+// [VERIFIED] audio::OggVorbisStream::vfunc_08 (0x006F4E60, 27 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F4E60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::OggVorbisStream::vfunc_08 (PC 0x006F4E60, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace audio {
+
+class OggVorbisStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual bool vfunc_08(int a1);
+    char m_pad04[0x2E4];
+    int m_Field2E8; // +0x2E8
+};
+
+bool OggVorbisStream::vfunc_08(int a1)
+{
+    *(int*)a1 = m_Field2E8;
+    m_Field2E8 = 0;
+    return true;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F4F10 (0x006F4F10, 73 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F4F10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006F4F10 (PC 0x006F4F10, 73 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field2DC
+{
+    void sub_006F1340();
+};
+
+extern "C" char DAT_00772B5C[];
+
+class Class_006F4F10
+{
+public:
+    Class_006F4F10* sub_006F4F10(int a1);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    char m_pad08[0x2D0];
+    int m_Field2D8; // +0x2D8
+    Field2DC m_Field2DC; // +0x2DC
+    char m_pad2DD[0x3];
+    int m_Field2E0; // +0x2E0
+    int m_Field2E4; // +0x2E4
+    int m_Field2E8; // +0x2E8
+    int m_Field2EC; // +0x2EC
+    int m_Field2F0; // +0x2F0
+};
+
+Class_006F4F10* Class_006F4F10::sub_006F4F10(int a1)
+{
+    m_Field00 = (int)DAT_00772B5C;
+    m_Field04 = a1;
+    m_Field2D8 = 0;
+    m_Field2DC.sub_006F1340();
+    m_Field2E0 = 0;
+    m_Field2E4 = 0;
+    m_Field2E8 = 0;
+    m_Field2EC = 0;
+    m_Field2F0 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] audio::OggVorbisStream::vfunc_17 (0x006F4F60, 95 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F4F60
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::OggVorbisStream::vfunc_17 (PC 0x006F4F60, 95 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+};
+
+extern "C" char DAT_00772B5C[];
+extern "C" char DAT_007F6D80[];
+extern "C" void __cdecl sub_0043CE70(int);
+extern "C" void __cdecl sub_006EE890(int, int);
+extern "C" void __cdecl sub_00702724(int);
+
+namespace audio {
+
+class OggVorbisStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual OggVorbisStream* vfunc_17(int a1);
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    char m_pad0C[0x2CC];
+    int m_Field2D8; // +0x2D8
+    char m_pad2DC[0x14];
+    int m_Field2F0; // +0x2F0
+};
+
+OggVorbisStream* OggVorbisStream::vfunc_17(int a1)
+{
+    int t1;
+
+    t1 = m_Field04;
+    *(int*)this = (int)DAT_00772B5C;
+    ((Object*)t1)->vfunc_12();
+    sub_0043CE70(m_Field2F0);
+    if (m_Field2D8) {
+        sub_00702724((int)(&m_Field08));
+    }
+    sub_0043CE70(m_Field2D8);
+    if (a1 & 1) {
+        sub_006EE890((int)DAT_007F6D80, (int)this);
+    }
+    return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F4FC0 (0x006F4FC0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F4FC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006F4FC0 (PC 0x006F4FC0, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char sub_00652580[];
+extern "C" char sub_006EF980[];
+extern "C" char sub_006F4E80[];
+extern "C" char sub_006F4ED0[];
+
+class Class_006F4FC0
+{
+public:
+    Class_006F4FC0* sub_006F4FC0(int a1, int a2);
+    int m_Field00; // +0x00
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+};
+
+Class_006F4FC0* Class_006F4FC0::sub_006F4FC0(int a1, int a2)
+{
+    m_Field10 = 0;
+    m_Field14 = a2;
+    m_Field18 = a1;
+    m_Field00 = (int)sub_006F4E80;
+    m_Field04 = (int)sub_006F4ED0;
+    m_Field08 = (int)sub_00652580;
+    m_Field0C = (int)sub_006EF980;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F5000 (0x006F5000, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F5000
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006F5000 (PC 0x006F5000, 33 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_006F4F10(int);
+};
+
+extern "C" char DAT_007F6D80[];
+extern "C" int __cdecl sub_006EE870(int);
+
+int __cdecl sub_006F5000(int a1)
+{
+    int t1;
+
+    t1 = sub_006EE870((int)DAT_007F6D80);
+    if (t1) {
+        return ((Object*)t1)->sub_006F4F10(a1);
+    }
+    return 0;
+}
+
 // [TODO] 0x006F5030 audio::OggVorbisStream::vfunc_11 (414 B)
 // [TODO] 0x006F51D0 sub_006F51D0 (137 B)
 // [TODO] 0x006F5260 sub_006F5260 (298 B)
@@ -11921,10 +15507,153 @@ int Class_006F57A0::sub_006F57A0(int a1, int a2)
 }
 
 // [TODO] 0x006F57B0 audio::SeqActionChannelSendVolumes::vfunc_05 (38 B)
-// [TODO] 0x006F57E0 audio::SeqActionChannelSendVolumes::vfunc_02 (16 B)
-// [TODO] 0x006F57F0 audio::SeqActionChannelSendVolumes::vfunc_01 (32 B)
-// [TODO] 0x006F5810 audio::SeqActionChannelSendVolumes::vfunc_03 (16 B)
-// [TODO] 0x006F5820 audio::SeqActionChannelSendVolumes::vfunc_04 (16 B)
+// ============================================================================
+// [VERIFIED] audio::SeqActionChannelSendVolumes::vfunc_02 (0x006F57E0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F57E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::SeqActionChannelSendVolumes::vfunc_02 (PC 0x006F57E0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace audio {
+
+class SeqActionChannelSendVolumes
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual int vfunc_02(int a1, int a2);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+int SeqActionChannelSendVolumes::vfunc_02(int a1, int a2)
+{
+    if (m_Field0C != 1) {
+        m_Field0C = 1;
+    }
+    return 1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] audio::SeqActionChannelSendVolumes::vfunc_01 (0x006F57F0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F57F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::SeqActionChannelSendVolumes::vfunc_01 (PC 0x006F57F0, 32 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace audio {
+
+class SeqActionChannelSendVolumes
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01(int a1);
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(int);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+void SeqActionChannelSendVolumes::vfunc_01(int a1)
+{
+    vfunc_06(a1);
+    if (m_Field0C) {
+        m_Field0C = 0;
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] audio::SeqActionChannelSendVolumes::vfunc_03 (0x006F5810, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F5810
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::SeqActionChannelSendVolumes::vfunc_03 (PC 0x006F5810, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace audio {
+
+class SeqActionChannelSendVolumes
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual int vfunc_03(int a1);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+int SeqActionChannelSendVolumes::vfunc_03(int a1)
+{
+    if (m_Field0C != 4) {
+        m_Field0C = 4;
+    }
+    return 4;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] audio::SeqActionChannelSendVolumes::vfunc_04 (0x006F5820, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F5820
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::SeqActionChannelSendVolumes::vfunc_04 (PC 0x006F5820, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace audio {
+
+class SeqActionChannelSendVolumes
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual int vfunc_04(int a1);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+int SeqActionChannelSendVolumes::vfunc_04(int a1)
+{
+    if (m_Field0C != 5) {
+        m_Field0C = 5;
+    }
+    return 5;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] audio::SeqEvent::vfunc_04 (0x006F5830, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -12216,8 +15945,100 @@ void Class_006F5F80::sub_006F5F80(int a1)
     ((Object*)(int)this + 40)->sub_006F2C40(a1);
 }
 
-// [TODO] 0x006F5FA0 sub_006F5FA0 (53 B)
-// [TODO] 0x006F5FE0 sub_006F5FE0 (53 B)
+// ============================================================================
+// [VERIFIED] sub_006F5FA0 (0x006F5FA0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006F5FA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006F5FA0 (PC 0x006F5FA0, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_006F2C00(int);
+};
+
+struct Object
+{
+    void sub_006EE060();
+    void sub_006EE080();
+};
+
+class Class_006F5FA0
+{
+public:
+    void sub_006F5FA0(int a1);
+    char m_pad00[0x14];
+    Field14 m_Field14; // +0x14
+    char m_pad15[0x1F];
+    unsigned char m_Field34; // +0x34
+    unsigned char m_Field35; // +0x35
+};
+
+void Class_006F5FA0::sub_006F5FA0(int a1)
+{
+    m_Field14.sub_006F2C00(a1 + 16);
+    if (m_Field35) {
+        ((Object*)*(int*)(a1 + 32))->sub_006EE060();
+    }
+    if (m_Field34) {
+        ((Object*)*(int*)(a1 + 32))->sub_006EE080();
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_006F5FE0 (0x006F5FE0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006F5FA0 (PC 0x006F5FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: pc
+// va: 0x006F5FE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006F5FE0 (PC 0x006F5FE0, 53 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field14
+{
+    void sub_006F2C40(int);
+};
+
+struct Object
+{
+    void sub_006EE070();
+    void sub_006EE090();
+};
+
+class Class_006F5FE0
+{
+public:
+    void sub_006F5FE0(int a1);
+    char m_pad00[0x14];
+    Field14 m_Field14; // +0x14
+    char m_pad15[0x1F];
+    unsigned char m_Field34; // +0x34
+    unsigned char m_Field35; // +0x35
+};
+
+void Class_006F5FE0::sub_006F5FE0(int a1)
+{
+    m_Field14.sub_006F2C40(a1 + 16);
+    if (m_Field35) {
+        ((Object*)*(int*)(a1 + 32))->sub_006EE070();
+    }
+    if (m_Field34) {
+        ((Object*)*(int*)(a1 + 32))->sub_006EE090();
+    }
+}
+
 // ============================================================================
 // [VERIFIED] audio::Mix::vfunc_12 (0x006F6060, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -18300,7 +22121,59 @@ void __cdecl sub_006FA7F0(void)
 }
 
 // [TODO] 0x006FA870 audio::SeqEventSilence::vfunc_02 (112 B)
-// [TODO] 0x006FA8E0 audio::SeqEventLogicRepeat::vfunc_01 (109 B)
+// ============================================================================
+// [VERIFIED] audio::SeqEventLogicRepeat::vfunc_01 (0x006FA8E0, 109 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006FA8E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::SeqEventLogicRepeat::vfunc_01 (PC 0x006FA8E0, 109 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_006F33F0(int, int);
+
+namespace audio {
+
+class SeqEventLogicRepeat
+{
+public:
+    virtual void vfunc_00();
+    virtual int vfunc_01(int a1);
+    bool sub_006F5760(int);
+    bool sub_006F5AC0(int);
+    char m_pad04[0xC];
+    bool m_Field10; // +0x10
+    bool m_Field11; // +0x11
+};
+
+int SeqEventLogicRepeat::vfunc_01(int a1)
+{
+    int r_ebp, r_ebx;
+
+    r_ebp = (unsigned char)m_Field10;
+    if (m_Field10 == 255) {
+        r_ebp |= -1;
+    }
+    r_ebx = (unsigned char)m_Field11;
+    if (m_Field11 == 255) {
+        r_ebx |= -1;
+    }
+    if (sub_006F5760(a1)) {
+        if (!sub_006F5AC0(a1)) goto L_64;
+        if (!sub_006F33F0(a1, r_ebp)) goto L_64;
+        if (!sub_006F33F0(a1, r_ebx)) goto L_64;
+        return 1;
+    }
+L_64:
+    return 0;
+}
+
+}
+
 // [TODO] 0x006FA950 audio::SeqEventLogicRepeat::vfunc_00 (153 B)
 // ============================================================================
 // [VERIFIED] sub_006FA9F0 (0x006FA9F0, 116 B)
@@ -19337,10 +23210,71 @@ void __cdecl sub_006FBC20(void)
 // [TODO] 0x006FC290 sub_006FC290 (106 B)
 // [TODO] 0x006FC300 sub_006FC300 (30 B)
 // [TODO] 0x006FC320 sub_006FC320 (1486 B)
-// [TODO] 0x006FC910 sub_006FC910 (26 B)
-// [TODO] 0x006FCF70 sub_006FCF70 (31 B)
+// ============================================================================
+// [VERIFIED] sub_006FC910 (0x006FC910, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006FC910
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006FC910 (PC 0x006FC910, 26 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006FC910(int a1)
+{
+    return (((((unsigned int)*(int*)(*(int*)(a1 + 8) + 12)) >> 4) & 31) * *(int*)(a1 + 136)) + (((((unsigned int)*(int*)(*(int*)(a1 + 8) + 12)) >> 4) & 31) * *(int*)(a1 + 136));
+}
+
+// ============================================================================
+// [VERIFIED] sub_006FCF70 (0x006FCF70, 31 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006FCF70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006FCF70 (PC 0x006FCF70, 31 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006FCF70(int a1, int a2)
+{
+    *(int*)(a2 + 128) = 0;
+    *(int*)(a2 + 132) = 0;
+    *(int*)(a2 + 136) = 0;
+    *(int*)(a2 + 140) = 0;
+    return a2;
+}
+
 // [TODO] 0x006FCF90 sub_006FCF90 (69 B)
-// [TODO] 0x006FCFE0 sub_006FCFE0 (45 B)
+// ============================================================================
+// [VERIFIED] sub_006FCFE0 (0x006FCFE0, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006FCFE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006FCFE0 (PC 0x006FCFE0, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F094;
+extern "C" int DAT_0072F098;
+extern "C" void __cdecl sub_006FC320(int, int, int);
+
+void __cdecl sub_006FCFE0(int a1, int a2)
+{
+    ((void (__stdcall*)(int))DAT_0072F094)(a1 + 0x290448);
+    sub_006FC320(a1, a2, 0);
+    ((void (__stdcall*)(int))DAT_0072F098)(a1 + 0x290448);
+}
+
 // [TODO] 0x006FD010 sub_006FD010 (43 B)
 // [TODO] 0x006FD040 sub_006FD040 (666 B)
 // [TODO] 0x006FD740 sub_006FD740 (237 B)
@@ -19482,7 +23416,32 @@ void __cdecl sub_006FD9D0(int a1)
     sub_006EE890((int)DAT_007F7F4C, a1);
 }
 
-// [TODO] 0x006FD9F0 SoundLoadSequence::vfunc_00 (6 B)
+// ============================================================================
+// [VERIFIED] SoundLoadSequence::vfunc_00 (0x006FD9F0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006FD9F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// SoundLoadSequence::vfunc_00 (PC 0x006FD9F0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class SoundLoadSequence
+{
+public:
+    virtual void vfunc_00();
+    char m_pad04[0x30];
+    unsigned short m_Field34; // +0x34
+};
+
+void SoundLoadSequence::vfunc_00()
+{
+    m_Field34 += 1;
+}
+
 // ============================================================================
 // [VERIFIED] sub_006FDA00 (0x006FDA00, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -19515,7 +23474,71 @@ unsigned short Class_006FDA00::sub_006FDA00()
 // [TODO] 0x006FDEC0 sub_006FDEC0 (146 B)
 // [TODO] 0x006FDF60 sub_006FDF60 (77 B)
 // [TODO] 0x006FDFB0 sub_006FDFB0 (115 B)
-// [TODO] 0x006FE030 sub_006FE030 (114 B)
+// ============================================================================
+// [VERIFIED] sub_006FE030 (0x006FE030, 114 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006FE030
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006FE030 (PC 0x006FE030, 114 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field28
+{
+    int sub_00700200();
+    int sub_007002F0(int);
+};
+
+extern "C" void __stdcall sub_006FDBB0(int);
+
+class Class_006FE030
+{
+public:
+    int sub_006FE030(int a1, int a2);
+    char m_pad00[0x1C];
+    unsigned short m_Field1C; // +0x1C
+    unsigned short m_Field1E; // +0x1E
+    unsigned short m_Field20; // +0x20
+    unsigned short m_Field22; // +0x22
+    char m_pad24[0x4];
+    Field28* m_Field28; // +0x28
+};
+
+int Class_006FE030::sub_006FE030(int a1, int a2)
+{
+    int r_eax, r_edi;
+
+    sub_006FDBB0(5);
+    r_eax = a1;
+    if (a1) {
+        m_Field1C = *(unsigned short*)r_eax;
+        m_Field1E = *(unsigned short*)(r_eax + 4);
+    } else {
+        m_Field1C = 0;
+        m_Field1E = 0;
+    }
+    r_edi = a2;
+    m_Field22 = 0;
+    m_Field20 = 0;
+    if (!a2) goto L_6C;
+    r_eax = m_Field28->sub_00700200();
+    if (r_eax != 1) {
+        if (r_eax == 2) goto L_63;
+        if (r_eax == 3) goto L_63;
+        if (r_eax == 4) goto L_63;
+        *(int*)r_edi = 0;
+        return r_eax;
+    }
+L_63:
+    r_eax = m_Field28->sub_007002F0(r_edi);
+L_6C:
+    return r_eax;
+}
+
 // [TODO] 0x006FE0B0 sub_006FE0B0 (175 B)
 // [TODO] 0x006FE160 sub_006FE160 (429 B)
 // [TODO] 0x006FE310 sub_006FE310 (140 B)
@@ -19614,8 +23637,54 @@ void __cdecl sub_006FE3E0(int a1)
 // [TODO] 0x006FE680 sub_006FE680 (29 B)
 // [TODO] 0x006FE6A0 sub_006FE6A0 (196 B)
 // [TODO] 0x006FE770 sub_006FE770 (56 B)
-// [TODO] 0x006FE7B0 sub_006FE7B0 (24 B)
-// [TODO] 0x006FE7D0 sub_006FE7D0 (21 B)
+// ============================================================================
+// [VERIFIED] sub_006FE7B0 (0x006FE7B0, 24 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006FE7B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006FE7B0 (PC 0x006FE7B0, 24 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006FE7B0(int a1)
+{
+    int t1, t2;
+
+    t1 = *(int*)(a1 + 4);
+    if (*(int*)(a1 + 4)) {
+        t2 = *(int*)t1;
+        *(int*)(a1 + 12) += 1;
+        *(int*)(a1 + 4) = t2;
+        return t1;
+    }
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006FE7D0 (0x006FE7D0, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006FE7D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_006FE7D0 (PC 0x006FE7D0, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_006FE7D0(int a1, int a2)
+{
+    *(int*)a2 = *(int*)(a1 + 4);
+    *(int*)(a1 + 12) += -1;
+    *(int*)(a1 + 4) = a2;
+    return a1;
+}
+
 // [TODO] 0x006FE7F0 sub_006FE7F0 (62 B)
 // [TODO] 0x006FE830 sub_006FE830 (125 B)
 // [TODO] 0x006FE8B0 sub_006FE8B0 (711 B)
@@ -19796,10 +23865,150 @@ int FETextObject::vfunc_46()
 }
 
 // [TODO] 0x00700210 sub_00700210 (223 B)
-// [TODO] 0x007002F0 sub_007002F0 (77 B)
-// [TODO] 0x00700340 sub_00700340 (51 B)
+// ============================================================================
+// [VERIFIED] sub_007002F0 (0x007002F0, 77 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007002F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_007002F0 (PC 0x007002F0, 77 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_006F16C0(int);
+
+class Class_007002F0
+{
+public:
+    int sub_007002F0(int a1);
+    char m_pad00[0xC];
+    int m_Field0C; // +0x0C
+    char m_pad10[0x1C];
+    int m_Field2C; // +0x2C
+    unsigned char m_Field30; // +0x30
+};
+
+int Class_007002F0::sub_007002F0(int a1)
+{
+    int r_eax;
+
+    if (a1) {
+        r_eax = m_Field0C;
+        if (r_eax) {
+            r_eax = sub_006F16C0(r_eax);
+            if (r_eax != 2) goto L_3B;
+            if (m_Field30) goto L_3B;
+            r_eax = m_Field0C;
+            *(int*)a1 = r_eax;
+            m_Field0C = 0;
+            goto L_3B;
+        }
+        *(int*)a1 = 0;
+    }
+L_3B:
+    r_eax = 5;
+    if (m_Field2C != 5) {
+        m_Field2C = 5;
+    }
+    return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00700340 (0x00700340, 51 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00700340
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00700340 (PC 0x00700340, 51 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01(int);
+};
+
+class Class_00700340
+{
+public:
+    void sub_00700340();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+    char m_pad1C[0x10];
+    int m_Field2C; // +0x2C
+};
+
+void Class_00700340::sub_00700340()
+{
+    int r_ecx, t1, t2;
+
+    r_ecx = (int)this;
+    t1 = m_Field18;
+    if (m_Field18) {
+        r_ecx = t1 + -8;
+        if (!r_ecx) goto L_24;
+        t2 = *(int*)(r_ecx + 12);
+        if (*(int*)(r_ecx + 12) != 2) {
+            if (t2 != 4) goto L_24;
+        }
+        ((Object*)r_ecx)->vfunc_01((int)this);
+    }
+L_24:
+    if (m_Field2C != 3) {
+        m_Field2C = 3;
+    }
+}
+
 // [TODO] 0x00700380 sub_00700380 (44 B)
-// [TODO] 0x007003B0 sub_007003B0 (42 B)
+// ============================================================================
+// [VERIFIED] sub_007003B0 (0x007003B0, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007003B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_007003B0 (PC 0x007003B0, 42 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class Class_007003B0
+{
+public:
+    int sub_007003B0();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+    char m_pad24[0x4];
+    int m_Field28; // +0x28
+};
+
+int Class_007003B0::sub_007003B0()
+{
+    int r_eax, r_edi;
+
+    r_edi = 0;
+L_06:
+    r_eax = m_Field28;
+    if (r_eax) {
+        if (!(r_eax + -4)) goto L_27;
+        if (m_Field20 == 30) goto L_27;
+        r_eax = *(int*)(r_eax + -4);
+        r_eax = ((int (__stdcall*)(int))*(int*)r_eax)((int)this);
+        r_edi += 1;
+        if ((unsigned int)r_edi < (unsigned int)5) goto L_06;
+    }
+L_27:
+    return r_eax;
+}
+
 // ============================================================================
 // [VERIFIED] sub_007003E0 (0x007003E0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -19918,8 +24127,56 @@ void Class_00700EE0::sub_00700EE0()
     sub_00700EB0();
 }
 
-// [TODO] 0x00700EF0 sub_00700EF0 (16 B)
-// [TODO] 0x00700F00 sub_00700F00 (18 B)
+// ============================================================================
+// [VERIFIED] sub_00700EF0 (0x00700EF0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00700EF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00700EF0 (PC 0x00700EF0, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0085D580;
+
+int __cdecl sub_00700EF0(void)
+{
+    int t1;
+
+    t1 = DAT_0085D580;
+    if (DAT_0085D580) {
+        return t1 + -4;
+    }
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00700F00 (0x00700F00, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00700F00
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00700F00 (PC 0x00700F00, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+int __cdecl sub_00700F00(int a1)
+{
+    int t1;
+
+    t1 = *(int*)(a1 + 4);
+    if (*(int*)(a1 + 4)) {
+        return t1 + -4;
+    }
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00700F20 (0x00700F20, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -19994,7 +24251,55 @@ void Class_00700F30::sub_00700F30()
 
 // [TODO] 0x00700FD0 movie::PlayerBink::vfunc_07 (135 B)
 // [TODO] 0x00701060 movie::PlayerBink::vfunc_11 (113 B)
-// [TODO] 0x007010E0 movie::PlayerBink::vfunc_14 (36 B)
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_14 (0x007010E0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007010E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// movie::PlayerBink::vfunc_14 (PC 0x007010E0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual bool vfunc_14(int a1);
+    char m_pad04[0x18];
+    int m_Field1C; // +0x1C
+};
+
+bool PlayerBink::vfunc_14(int a1)
+{
+    if (m_Field1C) {
+        *(int*)(a1 + 4) = *(int*)m_Field1C;
+        *(int*)a1 = *(int*)(m_Field1C + 4);
+        return true;
+    }
+    return false;
+}
+
+}
+
 // [TODO] 0x00701110 movie::PlayerBink::vfunc_15 (54 B)
 // ============================================================================
 // [VERIFIED] movie::PlayerBink::vfunc_16 (0x00701150, 14 B)
@@ -20180,9 +24485,160 @@ void PlayerBink::vfunc_05()
 }
 
 // [TODO] 0x00701290 movie::PlayerBink::vfunc_06 (196 B)
-// [TODO] 0x00701360 movie::PlayerBink::vfunc_08 (35 B)
-// [TODO] 0x00701390 movie::PlayerBink::vfunc_09 (46 B)
-// [TODO] 0x007013C0 movie::PlayerBink::vfunc_10 (46 B)
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_08 (0x00701360, 35 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00701360
+// what: 
+// tool: the portal's starter code (no AI)
+
+// movie::PlayerBink::vfunc_08 (PC 0x00701360, 35 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F2FC;
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    char m_pad04[0x14];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+void PlayerBink::vfunc_08()
+{
+    if (m_Field18) {
+        ((void (__stdcall*)(int))DAT_0072F2FC)(m_Field1C);
+        m_Field1C = 0;
+        m_Field18 = 0;
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_09 (0x00701390, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00701390
+// what: 
+// tool: the portal's starter code (no AI)
+
+// movie::PlayerBink::vfunc_09 (PC 0x00701390, 46 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F2E0;
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual int vfunc_09();
+    char m_pad04[0x14];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+int PlayerBink::vfunc_09()
+{
+    int r_eax;
+
+    r_eax = m_Field18;
+    if (r_eax == 3) {
+        r_eax = m_Field1C;
+        r_eax = ((int (__stdcall*)(int, int))DAT_0072F2E0)(r_eax, 0);
+        m_Field18 = 4;
+        return r_eax;
+    }
+    if (r_eax == 1) {
+        m_Field18 = 2;
+    }
+    return r_eax;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_10 (0x007013C0, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007013C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// movie::PlayerBink::vfunc_10 (PC 0x007013C0, 46 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F2E0;
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual int vfunc_10();
+    char m_pad04[0x14];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+int PlayerBink::vfunc_10()
+{
+    int r_eax;
+
+    r_eax = m_Field18;
+    if (r_eax == 4) {
+        r_eax = m_Field1C;
+        r_eax = ((int (__stdcall*)(int, int))DAT_0072F2E0)(r_eax, 1);
+        m_Field18 = 3;
+        return r_eax;
+    }
+    if (r_eax == 2) {
+        m_Field18 = 1;
+    }
+    return r_eax;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] movie::PlayerBink::vfunc_00 (0x00701580, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -20428,7 +24884,56 @@ public:
 BinkCallback::BinkCallback() {}                  // building one is what makes the compiler write its tables and the thunk
 }
 
-// [TODO] 0x00702690 movie::BinkCallback::vfunc_00 (63 B)
+// ============================================================================
+// [VERIFIED] movie::BinkCallback::vfunc_00 (0x00702690, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00702690
+// what: 
+// tool: the portal's starter code (no AI)
+
+// movie::BinkCallback::vfunc_00 (PC 0x00702690, 63 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0073523C[];
+extern "C" char DAT_00736074[];
+extern "C" int DAT_007F5A70;
+extern "C" void __cdecl sub_006DC430(int, int);
+
+namespace movie {
+
+class BinkCallback
+{
+public:
+    virtual int vfunc_00(int a1);
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+int BinkCallback::vfunc_00(int a1)
+{
+    int r_eax;
+
+    if (this) {
+        r_eax = (int)(&m_Field08);
+    } else {
+        r_eax = 0;
+    }
+    *(int*)r_eax = (int)DAT_0073523C;
+    r_eax = m_Field04;
+    DAT_007F5A70 = r_eax;
+    *(int*)this = (int)DAT_00736074;
+    if (a1 & 1) {
+        sub_006DC430(DAT_007F5A70, (int)this);
+    }
+    r_eax = (int)this;
+    return r_eax;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] sub_0070271E (0x0070271E, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -20991,11 +25496,203 @@ int d3dDevice::vfunc_06(int a1)
 
 }
 
-// [TODO] 0x00703310 pure3d::d3dDevice::vfunc_08 (78 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dDevice::vfunc_08 (0x00703310, 78 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00703310
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dDevice::vfunc_08 (PC 0x00703310, 78 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    int sub_00654130(int, int);
+};
+
+extern "C" int __cdecl sub_0043CE00(int);
+
+namespace pure3d {
+
+class d3dDevice
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int);
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1);
+    char m_pad04[0x10];
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+};
+
+int d3dDevice::vfunc_08(int a1)
+{
+    int local_4, t2;
+
+    vfunc_04((int)(&local_4));
+    t2 = sub_0043CE00(564);
+    if (t2) {
+        return ((Object*)t2)->sub_00654130(m_Field14 + (((a1 + (a1 * 8) + a1 + (a1 * 8) + a1 + (a1 * 8) + a1 + (a1 * 8) + a1 + (a1 * 8) + a1 + (a1 * 8) + a1 + (a1 * 8) + a1 + (a1 * 8)) - a1) * 4), m_Field18);
+    }
+    return 0;
+}
+
+}
+
 // [TODO] 0x00703360 pure3d::d3dDevice::vfunc_09 (63 B)
 // [TODO] 0x007033A0 pure3d::d3dDevice::vfunc_10 (183 B)
-// [TODO] 0x00703460 pure3d::d3dDevice::vfunc_11 (109 B)
-// [TODO] 0x007034D0 pure3d::d3dDevice::vfunc_15 (112 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dDevice::vfunc_11 (0x00703460, 109 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00703460
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dDevice::vfunc_11 (PC 0x00703460, 109 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual int vfunc_02();
+    virtual void vfunc_03(int);
+    int sub_00703F80(int);
+    void sub_00703FF0(int, int, int, int, int, int, int);
+};
+
+extern "C" int __cdecl sub_0043CE00(int);
+
+namespace pure3d {
+
+class d3dDevice
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual int vfunc_11(int a1);
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+};
+
+int d3dDevice::vfunc_11(int a1)
+{
+    int r_esi, t1, t5;
+
+    t1 = sub_0043CE00(76);
+    if (t1) {
+        r_esi = ((Object*)t1)->sub_00703F80(m_Field0C);
+    } else {
+        r_esi = 0;
+    }
+    ((Object*)r_esi)->sub_00703FF0(*(char*)(a1 + 68), *(int*)(a1 + 48), 0, *(int*)(a1 + 52), *(int*)(a1 + 56), *(int*)(a1 + 60), 0);
+    t5 = ((Object*)r_esi)->vfunc_02();
+    m_Field08 = t5;
+    if (t5 != 1) {
+        ((Object*)r_esi)->vfunc_03(1);
+        return 0;
+    }
+    return r_esi;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dDevice::vfunc_15 (0x007034D0, 112 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007034D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dDevice::vfunc_15 (PC 0x007034D0, 112 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual int vfunc_02();
+    virtual void vfunc_03(int);
+    int sub_00703F80(int);
+    void sub_00703FF0(int, int, int, int, int, int, int);
+};
+
+extern "C" int __cdecl sub_0043CE00(int);
+
+namespace pure3d {
+
+class d3dDevice
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual int vfunc_15(int a1, int a2);
+    char m_pad04[0x4];
+    int m_Field08; // +0x08
+    int m_Field0C; // +0x0C
+};
+
+int d3dDevice::vfunc_15(int a1, int a2)
+{
+    int r_esi, t1, t4;
+
+    t1 = sub_0043CE00(76);
+    if (t1) {
+        r_esi = ((Object*)t1)->sub_00703F80(m_Field0C);
+    } else {
+        r_esi = 0;
+    }
+    ((Object*)r_esi)->sub_00703FF0(*(char*)(a1 + 68), *(int*)(a1 + 48), 0, *(int*)(a1 + 52), *(int*)(a1 + 56), *(int*)(a1 + 60), a2);
+    t4 = ((Object*)r_esi)->vfunc_02();
+    m_Field08 = t4;
+    if (t4 != 1) {
+        ((Object*)r_esi)->vfunc_03(1);
+        return 0;
+    }
+    return r_esi;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dDevice::vfunc_12 (0x00703540, 22 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -21037,7 +25734,47 @@ void d3dDevice::vfunc_12(int a1, int a2)
 
 }
 
-// [TODO] 0x00703560 sub_00703560 (47 B)
+// ============================================================================
+// [VERIFIED] sub_00703560 (0x00703560, 47 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00703560
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00703560 (PC 0x00703560, 47 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007747EC[];
+extern "C" void __cdecl sub_0065C9B0(void);
+extern "C" void __cdecl sub_00704770(int);
+
+class Class_00703560
+{
+public:
+    Class_00703560* sub_00703560(int a1);
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+    int m_Field10; // +0x10
+    int m_Field14; // +0x14
+    int m_Field18; // +0x18
+};
+
+Class_00703560* Class_00703560::sub_00703560(int a1)
+{
+    sub_0065C9B0();
+    m_Field00 = (int)DAT_007747EC;
+    m_Field18 = a1;
+    m_Field0C = 0;
+    m_Field10 = 0;
+    m_Field14 = 0;
+    sub_00704770(a1);
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dDevice::vfunc_03 (0x00703590, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -21114,7 +25851,44 @@ pddiPrimBuffer* pddiPrimBuffer::vfunc_03(int a1)
 // [TODO] 0x00703A90 pure3d::d3dPrimBuffer::vfunc_05 (70 B)
 // [TODO] 0x00703AE0 pure3d::d3dPrimBuffer::vfunc_07 (48 B)
 // [TODO] 0x00703B10 pure3d::d3dPrimBuffer::vfunc_08 (27 B)
-// [TODO] 0x00703B30 pure3d::d3dPrimBuffer::vfunc_10 (16 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBuffer::vfunc_10 (0x00703B30, 16 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00703B30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBuffer::vfunc_10 (PC 0x00703B30, 16 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dPrimBuffer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual int vfunc_10(int a1);
+};
+
+int d3dPrimBuffer::vfunc_10(int a1)
+{
+    return a1 == 0x20001;
+}
+
+}
+
 // [TODO] 0x00703B40 pure3d::d3dPrimBuffer::vfunc_11 (62 B)
 // [TODO] 0x00703B80 pure3d::d3dPrimBuffer::vfunc_12 (61 B)
 // [TODO] 0x00703BC0 pure3d::d3dPrimBuffer::vfunc_09 (85 B)
@@ -21232,7 +26006,68 @@ void d3dPrimBufferStream::vfunc_24()
 }
 
 // [TODO] 0x00703DE0 sub_00703DE0 (9 B)
-// [TODO] 0x00703F80 sub_00703F80 (77 B)
+// ============================================================================
+// [VERIFIED] sub_00703F80 (0x00703F80, 77 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00703F80
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00703F80 (PC 0x00703F80, 77 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_00774894[];
+extern "C" void __cdecl sub_0065C9B0(void);
+
+class Class_00703F80
+{
+public:
+    Class_00703F80* sub_00703F80(int a1);
+    int m_Field00; // +0x00
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+    char m_pad10[0x8];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+    int m_Field20; // +0x20
+    int m_Field24; // +0x24
+    int m_Field28; // +0x28
+    int m_Field2C; // +0x2C
+    int m_Field30; // +0x30
+    bool m_Field34; // +0x34
+    bool m_Field35; // +0x35
+    bool m_Field36; // +0x36
+    char m_pad37[0x1];
+    int m_Field38; // +0x38
+    char m_pad3C[0x8];
+    int m_Field44; // +0x44
+    int m_Field48; // +0x48
+};
+
+Class_00703F80* Class_00703F80::sub_00703F80(int a1)
+{
+    sub_0065C9B0();
+    m_Field18 = 0;
+    m_Field1C = 0;
+    m_Field20 = 0;
+    m_Field24 = 0;
+    m_Field28 = 0;
+    m_Field2C = 0;
+    m_Field30 = 0;
+    m_Field34 = false;
+    m_Field35 = false;
+    m_Field36 = false;
+    m_Field44 = 0;
+    m_Field48 = 0;
+    m_Field38 = a1;
+    m_Field00 = (int)DAT_00774894;
+    m_Field0C = *(int*)(*(int*)(a1 + 540) + 16);
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dPrimBuffer::vfunc_03 (0x00703FD0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -21266,19 +26101,562 @@ d3dPrimBuffer* d3dPrimBuffer::vfunc_03(int a1)
 }
 
 // [TODO] 0x00703FF0 sub_00703FF0 (119 B)
-// [TODO] 0x00704070 pure3d::d3dPrimBufferStream::vfunc_00 (48 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_00 (0x00704070, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00704070
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_00 (PC 0x00704070, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00(int a1, int a2, int a3);
+    void sub_007037B0();
+    char m_pad04[0x20];
+    int m_Field24; // +0x24
+};
+
+void d3dPrimBufferStream::vfunc_00(int a1, int a2, int a3)
+{
+    sub_00703DE0();
+    *(int*)m_Field24 = a1;
+    *(int*)(m_Field24 + 4) = a2;
+    *(int*)(m_Field24 + 8) = a3;
+    sub_007037B0();
+}
+
+}
+
 // [TODO] 0x007040A0 pure3d::d3dPrimBufferStream::vfunc_01 (263 B)
-// [TODO] 0x007041B0 pure3d::d3dPrimBufferStream::vfunc_11 (42 B)
-// [TODO] 0x007041E0 pure3d::d3dPrimBufferStream::vfunc_13 (37 B)
-// [TODO] 0x00704210 pure3d::d3dPrimBufferStream::vfunc_16 (21 B)
-// [TODO] 0x00704230 pure3d::d3dPrimBufferStream::vfunc_09 (41 B)
-// [TODO] 0x00704260 pure3d::d3dPrimBufferStream::vfunc_10 (41 B)
-// [TODO] 0x00704290 pure3d::d3dPrimBufferStream::vfunc_07 (41 B)
-// [TODO] 0x007042C0 pure3d::d3dPrimBufferStream::vfunc_08 (41 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_11 (0x007041B0, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007041B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_11 (PC 0x007041B0, 42 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual int vfunc_11(int a1, int a2);
+    char m_pad04[0x2C];
+    int m_Field30; // +0x30
+    char m_pad34[0x10];
+    int m_Field44; // +0x44
+};
+
+int d3dPrimBufferStream::vfunc_11(int a1, int a2)
+{
+    int r_eax, r_edx;
+
+    sub_00703DE0();
+    r_eax = a2;
+    r_edx = a1;
+    if (a2 < 2) {
+        *(int*)(m_Field30 + (r_eax * 4)) = a1;
+        return r_eax;
+    }
+    *(int*)(m_Field44 + (r_eax * 4) + -8) = r_edx;
+    return r_eax;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_13 (0x007041E0, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007041E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_13 (PC 0x007041E0, 37 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual int vfunc_13(float a1, float a2, int a3);
+    char m_pad04[0x34];
+    int m_Field38; // +0x38
+};
+
+int d3dPrimBufferStream::vfunc_13(float a1, float a2, int a3)
+{
+    sub_00703DE0();
+    *(float*)(m_Field38 + (a3 * 8)) = a1;
+    *(float*)(m_Field38 + (a3 * 8) + 4) = a2;
+    return a3;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_16 (0x00704210, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00704210
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_16 (PC 0x00704210, 21 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual int vfunc_16(int a1);
+    char m_pad04[0x30];
+    int m_Field34; // +0x34
+};
+
+int d3dPrimBufferStream::vfunc_16(int a1)
+{
+    int t2;
+
+    sub_00703DE0();
+    t2 = m_Field34;
+    *(int*)m_Field34 = a1;
+    return t2;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_09 (0x00704230, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00704230
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_09 (PC 0x00704230, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual int vfunc_09(int a1, int a2, int a3);
+    char m_pad04[0x38];
+    int m_Field3C; // +0x3C
+};
+
+int d3dPrimBufferStream::vfunc_09(int a1, int a2, int a3)
+{
+    sub_00703DE0();
+    *(int*)m_Field3C = a1;
+    *(int*)(m_Field3C + 4) = a2;
+    *(int*)(m_Field3C + 8) = a3;
+    return a2;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_10 (0x00704260, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00704260
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_10 (PC 0x00704260, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual int vfunc_10(int a1, int a2, int a3);
+    char m_pad04[0x3C];
+    int m_Field40; // +0x40
+};
+
+int d3dPrimBufferStream::vfunc_10(int a1, int a2, int a3)
+{
+    sub_00703DE0();
+    *(int*)m_Field40 = a1;
+    *(int*)(m_Field40 + 4) = a2;
+    *(int*)(m_Field40 + 8) = a3;
+    return a2;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_07 (0x00704290, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00704290
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_07 (PC 0x00704290, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual int vfunc_07(int a1, int a2, int a3);
+    char m_pad04[0x44];
+    int m_Field48; // +0x48
+};
+
+int d3dPrimBufferStream::vfunc_07(int a1, int a2, int a3)
+{
+    sub_00703DE0();
+    *(int*)m_Field48 = a1;
+    *(int*)(m_Field48 + 4) = a2;
+    *(int*)(m_Field48 + 8) = a3;
+    return a2;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_08 (0x007042C0, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007042C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_08 (PC 0x007042C0, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual int vfunc_08(int a1, int a2, int a3);
+    char m_pad04[0x48];
+    int m_Field4C; // +0x4C
+};
+
+int d3dPrimBufferStream::vfunc_08(int a1, int a2, int a3)
+{
+    sub_00703DE0();
+    *(int*)m_Field4C = a1;
+    *(int*)(m_Field4C + 4) = a2;
+    *(int*)(m_Field4C + 8) = a3;
+    return a2;
+}
+
+}
+
 // [TODO] 0x007042F0 pure3d::d3dPrimBufferStream::vfunc_17 (61 B)
-// [TODO] 0x00704330 pure3d::d3dPrimBufferStream::vfunc_18 (41 B)
-// [TODO] 0x00704360 pure3d::d3dPrimBufferStream::vfunc_23 (51 B)
-// [TODO] 0x007043A0 pure3d::d3dPrimBufferStream::vfunc_22 (64 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_18 (0x00704330, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00704330
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_18 (PC 0x00704330, 41 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual int vfunc_18(int a1, int a2, int a3);
+    char m_pad04[0x50];
+    int m_Field54; // +0x54
+};
+
+int d3dPrimBufferStream::vfunc_18(int a1, int a2, int a3)
+{
+    sub_00703DE0();
+    *(int*)m_Field54 = a1;
+    *(int*)(m_Field54 + 4) = a2;
+    *(int*)(m_Field54 + 8) = a3;
+    return a2;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_23 (0x00704360, 51 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00704360
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_23 (PC 0x00704360, 51 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23(int a1, int a2);
+    void sub_007037B0();
+    char m_pad04[0x20];
+    int m_Field24; // +0x24
+    char m_pad28[0x8];
+    int m_Field30; // +0x30
+};
+
+void d3dPrimBufferStream::vfunc_23(int a1, int a2)
+{
+    int t2;
+
+    sub_00703DE0();
+    t2 = m_Field24;
+    *(int*)m_Field24 = *(int*)a1;
+    *(int*)(t2 + 4) = *(int*)(a1 + 4);
+    *(int*)(t2 + 8) = *(int*)(a1 + 8);
+    *(int*)m_Field30 = a2;
+    sub_007037B0();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBufferStream::vfunc_22 (0x007043A0, 64 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007043A0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBufferStream::vfunc_22 (PC 0x007043A0, 64 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00703DE0(void);
+
+namespace pure3d {
+
+class d3dPrimBufferStream
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01(int, int, int);
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22(int a1, int a2);
+    void sub_007037B0();
+    char m_pad04[0x20];
+    int m_Field24; // +0x24
+};
+
+void d3dPrimBufferStream::vfunc_22(int a1, int a2)
+{
+    int t2;
+
+    sub_00703DE0();
+    t2 = m_Field24;
+    *(int*)m_Field24 = *(int*)a1;
+    *(int*)(t2 + 4) = *(int*)(a1 + 4);
+    *(int*)(t2 + 8) = *(int*)(a1 + 8);
+    vfunc_01(*(int*)a2, *(int*)(a2 + 4), *(int*)(a2 + 8));
+    sub_007037B0();
+}
+
+}
+
 // [TODO] 0x007043E0 pure3d::d3dPrimBufferStream::vfunc_21 (59 B)
 // [TODO] 0x00704420 pure3d::d3dPrimBufferStream::vfunc_20 (68 B)
 // [TODO] 0x00704470 pure3d::d3dPrimBufferStream::vfunc_19 (81 B)
@@ -21355,7 +26733,103 @@ Class_007048E0* Class_007048E0::sub_007048E0(int a1)
 }
 
 // [TODO] 0x00704920 pure3d::d3dErrorShader::vfunc_15 (226 B)
-// [TODO] 0x00704A10 sub_00704A10 (36 B)
+// ============================================================================
+// [VERIFIED] sub_00704A10 (0x00704A10, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00704A10
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00704A10 (PC 0x00704A10, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field04
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual void vfunc_48();
+    virtual void vfunc_49();
+    virtual void vfunc_50();
+    virtual void vfunc_51();
+    virtual void vfunc_52();
+    virtual void vfunc_53();
+    virtual void vfunc_54();
+    virtual void vfunc_55();
+    virtual void vfunc_56();
+    virtual int vfunc_57(int, int, int);
+};
+
+class Class_00704A10
+{
+public:
+    int sub_00704A10(int a1);
+    char m_pad00[0x4];
+    Field04* m_Field04; // +0x04
+    char m_pad08[0x10C];
+    int m_Field114; // +0x114
+};
+
+int Class_00704A10::sub_00704A10(int a1)
+{
+    int r_eax;
+
+    r_eax = a1;
+    if (a1 != m_Field114) {
+        m_Field114 = a1;
+        r_eax = m_Field04->vfunc_57((int)m_Field04, 60, a1);
+    }
+    return r_eax;
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dReflShader::vfunc_16 (0x00704A40, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -22053,7 +27527,68 @@ d3dLayeredShader* d3dLayeredShader::vfunc_03(int a1)
 // [TODO] 0x00705C00 pure3d::d3dLayeredShader::vfunc_15 (844 B)
 // [TODO] 0x00705FA0 sub_00705FA0 (927 B)
 // [TODO] 0x00706340 pure3d::d3dLayeredShader::vfunc_25 (743 B)
-// [TODO] 0x00706680 pure3d::d3dSpecularShader::vfunc_24 (20 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dSpecularShader::vfunc_24 (0x00706680, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00706680
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dSpecularShader::vfunc_24 (PC 0x00706680, 20 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007376F4[];
+extern "C" char DAT_007680D8[];
+extern "C" unsigned char DAT_00830A19;
+
+namespace pure3d {
+
+class d3dSpecularShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual int vfunc_24();
+};
+
+int d3dSpecularShader::vfunc_24()
+{
+    int r_eax;
+
+    r_eax = (int)DAT_007376F4;
+    if (!DAT_00830A19) {
+        r_eax = (int)DAT_007680D8;
+    }
+    return r_eax;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dSpecularShader::vfunc_04 (0x007066A0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -22554,7 +28089,74 @@ void* d3dVehicleShader::vfunc_04()
 }
 
 // [TODO] 0x00707EB0 pure3d::d3dVehicleShader::vfunc_36 (35 B)
-// [TODO] 0x00707EE0 pure3d::d3dVehicleShader::vfunc_37 (15 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVehicleShader::vfunc_37 (0x00707EE0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00707EE0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dVehicleShader::vfunc_37 (PC 0x00707EE0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00830A50;
+
+namespace pure3d {
+
+class d3dVehicleShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual int vfunc_37(int a1);
+};
+
+int d3dVehicleShader::vfunc_37(int a1)
+{
+    *(int*)a1 = DAT_00830A50;
+    return a1;
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dVehicleShader::vfunc_16 (0x00707EF0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -23234,7 +28836,128 @@ void* d3dShadowDecalShader::vfunc_04()
 
 }
 
-// [TODO] 0x007090F0 pure3d::d3dShadowDecalShader::vfunc_14 (23 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_14 (0x007090F0, 23 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007090F0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dShadowDecalShader::vfunc_14 (PC 0x007090F0, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field10
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual void vfunc_48();
+    virtual void vfunc_49();
+    virtual void vfunc_50();
+    virtual void vfunc_51();
+    virtual void vfunc_52();
+    virtual void vfunc_53();
+    virtual void vfunc_54();
+    virtual void vfunc_55();
+    virtual void vfunc_56();
+    virtual void vfunc_57();
+    virtual void vfunc_58();
+    virtual void vfunc_59();
+    virtual void vfunc_60();
+    virtual void vfunc_61();
+    virtual void vfunc_62();
+    virtual void vfunc_63();
+    virtual void vfunc_64();
+    virtual void vfunc_65();
+    virtual void vfunc_66();
+    virtual void vfunc_67();
+    virtual void vfunc_68();
+    virtual void vfunc_69();
+    virtual void vfunc_70(int);
+};
+
+extern "C" void __cdecl sub_005E1BB0(void);
+
+namespace pure3d {
+
+class d3dShadowDecalShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    char m_pad04[0xC];
+    Field10* m_Field10; // +0x10
+};
+
+void d3dShadowDecalShader::vfunc_14()
+{
+    sub_005E1BB0();
+    m_Field10->vfunc_70(1);
+}
+
+}
+
 // [TODO] 0x00709110 sub_00709110 (83 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dShadowDecalShader::vfunc_03 (0x00709170, 53 B)
@@ -23526,7 +29249,69 @@ void ParticleEmitter::vfunc_33(int a1)
 
 }
 
-// [TODO] 0x007094B0 pure3d::d3dVertexFadeShader::vfunc_24 (20 B)
+// ============================================================================
+// [VERIFIED] pure3d::d3dVertexFadeShader::vfunc_24 (0x007094B0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007094B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dVertexFadeShader::vfunc_24 (PC 0x007094B0, 20 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_007680A8[];
+extern "C" char DAT_007680BC[];
+
+namespace pure3d {
+
+class d3dVertexFadeShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual int vfunc_24();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+};
+
+int d3dVertexFadeShader::vfunc_24()
+{
+    int r_eax;
+
+    r_eax = (int)DAT_007680A8;
+    if (!m_Field80) {
+        r_eax = (int)DAT_007680BC;
+    }
+    return r_eax;
+}
+
+}
+
 // [TODO] 0x007094D0 sub_007094D0 (1239 B)
 // [TODO] 0x007099B0 sub_007099B0 (63 B)
 // ============================================================================

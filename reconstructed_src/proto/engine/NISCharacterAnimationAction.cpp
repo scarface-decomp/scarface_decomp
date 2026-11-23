@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/NISCharacterAnimationAction.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/NISCharacterAnimationAction.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 6 functions matched (33.33%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 6 functions matched (50.00%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -32,6 +32,71 @@ public:
 bool NISCharacterAnimationAction::vfunc_04()
 {
     return m_Field21;
+}
+
+// ============================================================================
+// [VERIFIED] NISCharacterAnimationAction::vfunc_07 (0x0015E1D0, 76 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0015E1D0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// NISCharacterAnimationAction::vfunc_07 (Proto 0x0015E1D0, 76 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07(int, int);
+    void sub_000C6970();
+};
+
+class NISCharacterAnimationAction
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    char m_pad04[0xC];
+    int m_Field10; // +0x10
+};
+
+void NISCharacterAnimationAction::vfunc_07()
+{
+    int t1, t2, t3, t5, t6;
+
+    t1 = m_Field10;
+    if (!m_Field10) goto L_4B;
+    t2 = *(int*)(t1 + 392);
+    if (!*(int*)(t1 + 392)) goto L_4B;
+    t3 = *(int*)(t2 + 384);
+    if (*(int*)(t2 + 384)) {
+        *(int*)(t3 + 332) = 0;
+        ((Object*)t3)->sub_000C6970();
+        t5 = *(int*)(t3 + 12);
+        if (!*(int*)(t3 + 12)) goto L_4A;
+        t6 = *(int*)(t5 + 12);
+        if (!*(int*)(t5 + 12)) goto L_4A;
+        ((Object*)t6)->vfunc_07(0, 0);
+        *(bool*)(t6 + 36) = false;
+    }
+L_4A:
+L_4B:
+    ;
 }
 
 // ============================================================================

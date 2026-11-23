@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtVertexProgram.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtVertexProgram.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 8 functions matched (37.50%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 8 functions matched (50.00%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -128,6 +128,45 @@ public:
 void d3dExtVertexProgram::vfunc_08(int a1, int a2)
 {
     ((Object*)a1)->vfunc_21(a2);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtVertexProgram::vfunc_03 (0x00268280, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x00268280
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dExtVertexProgram::vfunc_03 (0x00268280, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+struct Object
+{
+    void sub_0029BAC0(int);
+};
+
+namespace pure3d {
+
+class d3dExtVertexProgram
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03(int a1);
+    int m_Field04; // +0x04
+};
+
+void d3dExtVertexProgram::vfunc_03(int a1)
+{
+    ((Object*)*(int*)(m_Field04 + 724))->sub_0029BAC0(a1);
 }
 
 }

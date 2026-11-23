@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/LightAnimationController.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/LightAnimationController.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 6 functions matched (33.33%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 6 functions matched (50.00%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -114,6 +114,50 @@ int LightAnimationController::vfunc_05()
         return t1;
     }
     return 0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::LightAnimationController::vfunc_07 (0x002A7C30, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::CameraAnimationController::vfunc_07 (0x0028CC80), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002A7C30
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::LightAnimationController::vfunc_07 (0x002A7C30, 45 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+extern "C" char DAT_00419538[];
+extern "C" char DAT_00458F34[];
+extern "C" int __cdecl sub_002FC034(int, int, int, int, int);
+
+namespace pure3d {
+
+class LightAnimationController
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07(int a1);
+    void sub_002A74B0(int);
+};
+
+void LightAnimationController::vfunc_07(int a1)
+{
+    sub_002A74B0(sub_002FC034(a1, 0, (int)DAT_00419538, (int)DAT_00458F34, 0));
 }
 
 }

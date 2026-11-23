@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/BinkCallback.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/BinkCallback.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 3 functions matched (33.33%). NOT COMPLETE YET.
-// The 2 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 3 functions matched (66.67%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -35,5 +35,55 @@ public:
 };
 
 BinkCallback::BinkCallback() {}                  // building one is what makes the compiler write its tables and the thunk
+}
+
+// ============================================================================
+// [VERIFIED] movie::BinkCallback::vfunc_00 (0x00702690, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00702690
+// what: 
+// tool: the portal's starter code (no AI)
+
+// movie::BinkCallback::vfunc_00 (PC 0x00702690, 63 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_0073523C[];
+extern "C" char DAT_00736074[];
+extern "C" int DAT_007F5A70;
+extern "C" void __cdecl sub_006DC430(int, int);
+
+namespace movie {
+
+class BinkCallback
+{
+public:
+    virtual int vfunc_00(int a1);
+    int m_Field04; // +0x04
+    int m_Field08; // +0x08
+};
+
+int BinkCallback::vfunc_00(int a1)
+{
+    int r_eax;
+
+    if (this) {
+        r_eax = (int)(&m_Field08);
+    } else {
+        r_eax = 0;
+    }
+    *(int*)r_eax = (int)DAT_0073523C;
+    r_eax = m_Field04;
+    DAT_007F5A70 = r_eax;
+    *(int*)this = (int)DAT_00736074;
+    if (a1 & 1) {
+        sub_006DC430(DAT_007F5A70, (int)this);
+    }
+    r_eax = (int)this;
+    return r_eax;
+}
+
 }
 

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dPrimBuffer.cpp (6 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dPrimBuffer.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6 of 10 functions matched (60.00%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 10 functions matched (70.00%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -241,6 +241,67 @@ public:
 void d3dPrimBuffer::vfunc_12()
 {
     m_Field36 = false;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBuffer::vfunc_03 (0x002ADCA0, 97 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x002ADCA0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBuffer::vfunc_03 (0x002ADCA0, 97 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+extern "C" char DAT_003DAD84[];
+extern "C" char DAT_003DADCC[];
+extern "C" void __cdecl sub_00027600(int);
+extern "C" void __cdecl sub_0029E570(int);
+extern "C" void __stdcall sub_0032C6D0(int);
+
+namespace pure3d {
+
+class d3dPrimBuffer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dPrimBuffer* vfunc_03(int a1);
+    void sub_002A06C0();
+    char m_pad04[0x28];
+    int m_Field2C; // +0x2C
+    int m_Field30; // +0x30
+};
+
+d3dPrimBuffer* d3dPrimBuffer::vfunc_03(int a1)
+{
+    int t1, t4;
+
+    t1 = m_Field2C;
+    *(int*)this = (int)DAT_003DADCC;
+    if (m_Field2C) {
+        sub_0029E570(t1);
+        sub_0032C6D0(m_Field2C);
+    }
+    t4 = m_Field30;
+    if (m_Field30) {
+        sub_0029E570(t4);
+        sub_0032C6D0(m_Field30);
+    }
+    *(int*)this = (int)DAT_003DAD84;
+    sub_002A06C0();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
 }
 
 }

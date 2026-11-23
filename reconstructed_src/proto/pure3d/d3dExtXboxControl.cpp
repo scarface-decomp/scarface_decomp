@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/d3dExtXboxControl.cpp (11 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/d3dExtXboxControl.cpp (15 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11 of 24 functions matched (45.83%). NOT COMPLETE YET.
-// The 13 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 15 of 24 functions matched (62.50%). NOT COMPLETE YET.
+// The 9 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -34,6 +34,44 @@ int d3dExtXboxControl::vfunc_01(int a1)
 {
     DAT_0042D0EC = a1;
     return a1;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_03 (0x00264540, 24 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00264540
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dExtXboxControl::vfunc_03 (Proto 0x00264540, 24 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_0043064C;
+extern "C" void __stdcall sub_00318C00(int);
+extern "C" void __stdcall sub_00318C60(int);
+
+namespace pure3d {
+
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+};
+
+void d3dExtXboxControl::vfunc_03()
+{
+    sub_00318C60(0);
+    if (DAT_0043064C) {
+        sub_00318C00(2);
+    }
 }
 
 }
@@ -106,6 +144,49 @@ void d3dExtXboxControl::vfunc_06()
     DAT_0048E12F = false;
     DAT_0048E12E = false;
     DAT_0048E131 = false;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_10 (0x00264590, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00264590
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dExtXboxControl::vfunc_10 (Proto 0x00264590, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_0048E12D;
+extern "C" bool DAT_0048E131;
+
+namespace pure3d {
+
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual bool vfunc_10();
+};
+
+bool d3dExtXboxControl::vfunc_10()
+{
+    DAT_0048E12D = false;
+    DAT_0048E131 = false;
+    return false;
 }
 
 }
@@ -361,6 +442,61 @@ void d3dExtXboxControl::vfunc_16()
 }
 
 // ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_20 (0x00264A20, 13 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dExtXboxControl::vfunc_10 (Proto 0x00264590), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x00264A20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dExtXboxControl::vfunc_20 (Proto 0x00264A20, 13 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_0042D0F0;
+extern "C" bool DAT_0048E131;
+
+namespace pure3d {
+
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual bool vfunc_20();
+};
+
+bool d3dExtXboxControl::vfunc_20()
+{
+    DAT_0042D0F0 = false;
+    DAT_0048E131 = false;
+    return false;
+}
+
+}
+
+// ============================================================================
 // [VERIFIED] pure3d::d3dExtXboxControl::vfunc_24 (0x00264A90, 15 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -566,6 +702,50 @@ void d3dExtXboxControl::vfunc_28()
 {
     vfunc_08();
     sub_00318C00(0);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtXboxControl::vfunc_02 (0x00264AD0, 25 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00264AD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dExtXboxControl::vfunc_02 (Proto 0x00264AD0, 25 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual int vfunc_07();
+};
+
+namespace pure3d {
+
+class d3dExtXboxControl
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual int vfunc_02();
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+};
+
+int d3dExtXboxControl::vfunc_02()
+{
+    return ((Object*)*(int*)(m_Field0C + 536))->vfunc_07() == 720;
 }
 
 }

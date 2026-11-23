@@ -1,13 +1,50 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/d3dPrimBuffer.cpp (6 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/d3dPrimBuffer.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6 of 10 functions matched (60.00%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 10 functions matched (70.00%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dPrimBuffer::vfunc_05 (0x0026FDF0, 15 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0026FDF0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dPrimBuffer::vfunc_05 (Proto 0x0026FDF0, 15 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class d3dPrimBuffer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual bool vfunc_05(int a1);
+    char m_pad04[0x30];
+    bool m_Field34; // +0x34
+};
+
+bool d3dPrimBuffer::vfunc_05(int a1)
+{
+    m_Field34 = false;
+    *(bool*)(a1 + 4) = false;
+    return false;
+}
+
+}
 
 // ============================================================================
 // [VERIFIED] pure3d::d3dPrimBuffer::vfunc_07 (0x0026FE00, 29 B)

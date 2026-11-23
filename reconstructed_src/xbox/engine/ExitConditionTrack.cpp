@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/ExitConditionTrack.cpp (7 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/ExitConditionTrack.cpp (8 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7 of 9 functions matched (77.78%). NOT COMPLETE YET.
-// The 2 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 8 of 9 functions matched (88.89%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -213,6 +213,62 @@ public:
 int ExitConditionTrack::vfunc_33()
 {
     return DAT_004878C4;
+}
+
+// ============================================================================
+// [VERIFIED] ExitConditionTrack::vfunc_17 (0x000E9250, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as ExitConditionTrack::vfunc_17 (Proto 0x000D6C00), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x000E9250
+// what: 
+// tool: the portal's starter code (no AI)
+
+// ExitConditionTrack::vfunc_17 (Proto 0x000E9250, 43 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0039D65C;
+
+class ExitConditionTrack
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual float vfunc_17();
+    char m_pad04[0x18];
+    float m_Field1C; // +0x1C
+    float m_Field20; // +0x20
+    char m_pad24[0x8];
+    float m_Field2C; // +0x2C
+};
+
+float ExitConditionTrack::vfunc_17()
+{
+    if (m_Field1C > m_Field20) {
+        return DAT_0039D65C;
+    }
+    if (m_Field2C > m_Field20) {
+        return m_Field2C - m_Field1C;
+    }
+    return m_Field20 - m_Field1C;
 }
 
 // ============================================================================

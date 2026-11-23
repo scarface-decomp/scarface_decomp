@@ -1,13 +1,66 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, audio/SeqEventLogicRepeat.cpp (2 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, audio/SeqEventLogicRepeat.cpp (3 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 5 functions matched (40.00%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3 of 5 functions matched (60.00%). NOT COMPLETE YET.
+// The 2 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] audio::SeqEventLogicRepeat::vfunc_01 (0x006FA8E0, 109 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006FA8E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// audio::SeqEventLogicRepeat::vfunc_01 (PC 0x006FA8E0, 109 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool __cdecl sub_006F33F0(int, int);
+
+namespace audio {
+
+class SeqEventLogicRepeat
+{
+public:
+    virtual void vfunc_00();
+    virtual int vfunc_01(int a1);
+    bool sub_006F5760(int);
+    bool sub_006F5AC0(int);
+    char m_pad04[0xC];
+    bool m_Field10; // +0x10
+    bool m_Field11; // +0x11
+};
+
+int SeqEventLogicRepeat::vfunc_01(int a1)
+{
+    int r_ebp, r_ebx;
+
+    r_ebp = (unsigned char)m_Field10;
+    if (m_Field10 == 255) {
+        r_ebp |= -1;
+    }
+    r_ebx = (unsigned char)m_Field11;
+    if (m_Field11 == 255) {
+        r_ebx |= -1;
+    }
+    if (sub_006F5760(a1)) {
+        if (!sub_006F5AC0(a1)) goto L_64;
+        if (!sub_006F33F0(a1, r_ebp)) goto L_64;
+        if (!sub_006F33F0(a1, r_ebx)) goto L_64;
+        return 1;
+    }
+L_64:
+    return 0;
+}
+
+}
 
 // ============================================================================
 // [VERIFIED] audio::SeqEventLogicRepeat::vfunc_04 (0x006FAAA0, 35 B)

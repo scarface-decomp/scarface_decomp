@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dLayeredShader.cpp (6 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dLayeredShader.cpp (7 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6 of 11 functions matched (54.55%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7 of 11 functions matched (63.64%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -210,6 +210,69 @@ public:
 void* d3dLayeredShader::vfunc_04()
 {
     return DAT_003D57F4;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dLayeredShader::vfunc_03 (0x002C2A20, 71 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as pure3d::d3dReflShader::vfunc_03 (0x002C1FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002C2A20
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::d3dLayeredShader::vfunc_03 (0x002C2A20, 71 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+extern "C" char DAT_003DB74C[];
+extern "C" void __cdecl sub_00027600(int);
+
+namespace pure3d {
+
+class d3dLayeredShader
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual d3dLayeredShader* vfunc_03(int a1);
+    void sub_0029A500();
+    char m_pad04[0x7C];
+    int m_Field80; // +0x80
+    int m_Field84; // +0x84
+};
+
+d3dLayeredShader* d3dLayeredShader::vfunc_03(int a1)
+{
+    int t1, t3;
+
+    t1 = m_Field80;
+    *(int*)this = (int)DAT_003DB74C;
+    if (m_Field80) {
+        ((Object*)t1)->vfunc_01();
+    }
+    t3 = m_Field84;
+    if (m_Field84) {
+        ((Object*)t3)->vfunc_01();
+    }
+    sub_0029A500();
+    if (a1 & 1) {
+        sub_00027600((int)this);
+    }
+    return this;
 }
 
 }

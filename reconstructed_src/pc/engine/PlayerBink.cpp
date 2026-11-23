@@ -1,13 +1,62 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/PlayerBink.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/PlayerBink.cpp (9 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 13 functions matched (38.46%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 9 of 13 functions matched (69.23%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_14 (0x007010E0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007010E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// movie::PlayerBink::vfunc_14 (PC 0x007010E0, 36 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual bool vfunc_14(int a1);
+    char m_pad04[0x18];
+    int m_Field1C; // +0x1C
+};
+
+bool PlayerBink::vfunc_14(int a1)
+{
+    if (m_Field1C) {
+        *(int*)(a1 + 4) = *(int*)m_Field1C;
+        *(int*)a1 = *(int*)(m_Field1C + 4);
+        return true;
+    }
+    return false;
+}
+
+}
 
 // ============================================================================
 // [VERIFIED] movie::PlayerBink::vfunc_16 (0x00701150, 14 B)
@@ -163,6 +212,160 @@ void PlayerBink::vfunc_05()
 {
     m_Field24 = false;
     m_Field14->vfunc_09();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_08 (0x00701360, 35 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00701360
+// what: 
+// tool: the portal's starter code (no AI)
+
+// movie::PlayerBink::vfunc_08 (PC 0x00701360, 35 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F2FC;
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    char m_pad04[0x14];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+void PlayerBink::vfunc_08()
+{
+    if (m_Field18) {
+        ((void (__stdcall*)(int))DAT_0072F2FC)(m_Field1C);
+        m_Field1C = 0;
+        m_Field18 = 0;
+    }
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_09 (0x00701390, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x00701390
+// what: 
+// tool: the portal's starter code (no AI)
+
+// movie::PlayerBink::vfunc_09 (PC 0x00701390, 46 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F2E0;
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual int vfunc_09();
+    char m_pad04[0x14];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+int PlayerBink::vfunc_09()
+{
+    int r_eax;
+
+    r_eax = m_Field18;
+    if (r_eax == 3) {
+        r_eax = m_Field1C;
+        r_eax = ((int (__stdcall*)(int, int))DAT_0072F2E0)(r_eax, 0);
+        m_Field18 = 4;
+        return r_eax;
+    }
+    if (r_eax == 1) {
+        m_Field18 = 2;
+    }
+    return r_eax;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] movie::PlayerBink::vfunc_10 (0x007013C0, 46 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x007013C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// movie::PlayerBink::vfunc_10 (PC 0x007013C0, 46 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F2E0;
+
+namespace movie {
+
+class PlayerBink
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual int vfunc_10();
+    char m_pad04[0x14];
+    int m_Field18; // +0x18
+    int m_Field1C; // +0x1C
+};
+
+int PlayerBink::vfunc_10()
+{
+    int r_eax;
+
+    r_eax = m_Field18;
+    if (r_eax == 4) {
+        r_eax = m_Field1C;
+        r_eax = ((int (__stdcall*)(int, int))DAT_0072F2E0)(r_eax, 1);
+        m_Field18 = 3;
+        return r_eax;
+    }
+    if (r_eax == 2) {
+        m_Field18 = 1;
+    }
+    return r_eax;
 }
 
 }

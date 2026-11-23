@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/Image8.cpp (7 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, pure3d/Image8.cpp (8 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7 of 14 functions matched (50.00%). NOT COMPLETE YET.
-// The 7 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 8 of 14 functions matched (57.14%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -87,6 +87,50 @@ public:
 int Image8::vfunc_16()
 {
     return m_Field428;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Image8::vfunc_12 (0x0021C700, 27 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x0021C700
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::Image8::vfunc_12 (Proto 0x0021C700, 27 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+namespace pure3d {
+
+class Image8
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12(int a1, int a2, bool a3);
+    char m_pad04[0x8];
+    int m_Field0C; // +0x0C
+    char m_pad10[0x10];
+    int m_Field20; // +0x20
+};
+
+void Image8::vfunc_12(int a1, int a2, bool a3)
+{
+    *(bool*)((m_Field0C * a2) + m_Field20 + a1) = a3;
 }
 
 }

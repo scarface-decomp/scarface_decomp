@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, world/CollisionBehaviourTypeGroup.cpp (9 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, world/CollisionBehaviourTypeGroup.cpp (10 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 9 of 13 functions matched (69.23%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 10 of 13 functions matched (76.92%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -210,6 +210,50 @@ void CollisionBehaviourTypeGroup::vfunc_08()
     vfunc_05(1);
     vfunc_06(1);
     vfunc_07();
+}
+
+// ============================================================================
+// [VERIFIED] CollisionBehaviourTypeGroup::vfunc_04 (0x000293E0, 56 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x000293E0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// CollisionBehaviourTypeGroup::vfunc_04 (Proto 0x000293E0, 56 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int __cdecl sub_0006C370(int, int);
+
+class CollisionBehaviourTypeGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int a1);
+    void sub_00028C40(int);
+    int m_Field04; // +0x04
+    char m_pad08[0x4];
+    int m_Field0C; // +0x0C
+    char m_pad10[0xE];
+    unsigned char m_Field1E; // +0x1E
+};
+
+void CollisionBehaviourTypeGroup::vfunc_04(int a1)
+{
+    if (a1) {
+        if (!*(unsigned char*)a1) goto L_25;
+        m_Field04 = sub_0006C370(a1, 0);
+        m_Field0C = 0;
+    }
+L_25:
+    if (m_Field1E & 2) {
+        sub_00028C40(0);
+    }
 }
 
 // ============================================================================

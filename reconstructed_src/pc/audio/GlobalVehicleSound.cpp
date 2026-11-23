@@ -1,13 +1,39 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, audio/GlobalVehicleSound.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, audio/GlobalVehicleSound.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 7 functions matched (42.86%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 7 functions matched (57.14%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] GlobalVehicleSound::vfunc_00 (0x006ECCB0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: pc
+// va: 0x006ECCB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// GlobalVehicleSound::vfunc_00 (PC 0x006ECCB0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class GlobalVehicleSound
+{
+public:
+    virtual void vfunc_00();
+    char m_pad04[0x1C];
+    unsigned short m_Field20; // +0x20
+};
+
+void GlobalVehicleSound::vfunc_00()
+{
+    m_Field20 += 1;
+}
 
 // ============================================================================
 // [VERIFIED] GlobalVehicleSound::vfunc_02 (0x006ECCE0, 5 B)

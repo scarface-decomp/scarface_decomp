@@ -1,14 +1,14 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-22 01:25:43",
+  "updated_at": "2026-11-22 22:17:56",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
-    "pc": 642,
-    "xb": 8224,
-    "proto": 7502,
+    "pc": 777,
+    "xb": 9091,
+    "proto": 8295,
     "ps2": 0,
-    "total": 8866,
-    "bytes": 309618,
+    "total": 9868,
+    "bytes": 362155,
     "ps2_bytes": 0
   },
   "readable": {
@@ -20,10 +20,10 @@
   },
   "source": {
     "member_functions": {
-      "pc": 414,
-      "xb": 4094,
-      "proto": 4103,
-      "total": 4508
+      "pc": 487,
+      "xb": 4320,
+      "proto": 4312,
+      "total": 4807
     },
     "shared_class": {
       "pc": 159,
@@ -32,48 +32,39 @@
       "total": 3032
     },
     "named": {
-      "pc": 0,
-      "xb": 239,
+      "pc": 1,
+      "xb": 248,
       "proto": 3,
-      "total": 239
+      "total": 249
     }
   },
   "size_buckets": {
-    "1-9 B": 1952,
-    "10-19 B": 1393,
-    "20-39 B": 2609,
-    "40-79 B": 2279,
-    "80+ B": 633
+    "1-9 B": 1982,
+    "10-19 B": 1505,
+    "20-39 B": 2864,
+    "40-79 B": 2669,
+    "80+ B": 848
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 10862,
+    "RRutherrfordd (Founder)": 12657,
     "NoahBPeterson": 5400,
     "lemiur": 106
   },
   "unattributed": 0,
   "queue": {
-    "pc": 873,
-    "xb": 11295,
-    "proto": 10042,
+    "pc": 738,
+    "xb": 10429,
+    "proto": 9249,
     "ps2": 24297,
-    "total": 12168,
+    "total": 11167,
     "tiers": {
-      "TIER_1_QUICK": 461,
-      "TIER_2_SMALL": 1438,
-      "TIER_3_MEDIUM": 2650,
-      "TIER_4_LARGE": 7619
+      "TIER_1_QUICK": 319,
+      "TIER_2_SMALL": 1183,
+      "TIER_3_MEDIUM": 2261,
+      "TIER_4_LARGE": 7404
     }
   },
   "good_first": [
-    {
-      "id": "pc_006EE9B0",
-      "bin": "pc",
-      "va": "PC 0x006EE9B0",
-      "symbol": "sub_006EE9B0",
-      "size": 6,
-      "why": "it was matched before the reset, so it can be done",
-      "kind": "matched_before"
-    },
     {
       "id": "xb_00322D90",
       "bin": "xb",
@@ -81,15 +72,6 @@
       "symbol": "sub_00322D90",
       "size": 1,
       "why": "matching it also matches its 3 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_0028D0F0",
-      "bin": "xb",
-      "va": "0x0028D0F0",
-      "symbol": "core::MemoryAllocatorMalloc::vfunc_10",
-      "size": 5,
-      "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     },
     {
@@ -102,42 +84,6 @@
       "kind": "group"
     },
     {
-      "id": "xb_0014A270",
-      "bin": "xb",
-      "va": "0x0014A270",
-      "symbol": "GameSimObject::vfunc_57",
-      "size": 5,
-      "why": "the game's class information names it",
-      "kind": "named"
-    },
-    {
-      "id": "pc_006DF4A0",
-      "bin": "pc",
-      "va": "PC 0x006DF4A0",
-      "symbol": "LoadSet::vfunc_00",
-      "size": 5,
-      "why": "the game's class information names it",
-      "kind": "named"
-    },
-    {
-      "id": "pc_006DF4B0",
-      "bin": "pc",
-      "va": "PC 0x006DF4B0",
-      "symbol": "core::Platform::vfunc_01",
-      "size": 5,
-      "why": "the game's class information names it",
-      "kind": "named"
-    },
-    {
-      "id": "xb_000D8260",
-      "bin": "xb",
-      "va": "0x000D8260",
-      "symbol": "sub_000D8260",
-      "size": 7,
-      "why": "matching it also matches its 3 look-alikes",
-      "kind": "group"
-    },
-    {
       "id": "xb_002FD289",
       "bin": "xb",
       "va": "0x002FD289",
@@ -147,11 +93,65 @@
       "kind": "group"
     },
     {
-      "id": "xb_00267E90",
+      "id": "xb_0006D500",
       "bin": "xb",
-      "va": "0x00267E90",
-      "symbol": "pure3d::d3dExtAntialiasControl::vfunc_03",
+      "va": "0x0006D500",
+      "symbol": "TTagSetStmtNode::vfunc_01",
+      "size": 8,
+      "why": "the game's class information names it",
+      "kind": "named"
+    },
+    {
+      "id": "xb_0006D510",
+      "bin": "xb",
+      "va": "0x0006D510",
+      "symbol": "TTagDerefNode::vfunc_04",
+      "size": 8,
+      "why": "the game's class information names it",
+      "kind": "named"
+    },
+    {
+      "id": "xb_00197070",
+      "bin": "xb",
+      "va": "0x00197070",
+      "symbol": "GenericMenuClient::vfunc_01",
+      "size": 8,
+      "why": "the game's class information names it",
+      "kind": "named"
+    },
+    {
+      "id": "xb_002E0600",
+      "bin": "xb",
+      "va": "0x002E0600",
+      "symbol": "sub_002E0600",
       "size": 9,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "pc_006E4610",
+      "bin": "pc",
+      "va": "PC 0x006E4610",
+      "symbol": "sub_006E4610",
+      "size": 9,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_003111AB",
+      "bin": "xb",
+      "va": "0x003111AB",
+      "symbol": "sub_003111AB",
+      "size": 10,
+      "why": "matching it also matches its 47 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002FE371",
+      "bin": "xb",
+      "va": "0x002FE371",
+      "symbol": "sub_002FE371",
+      "size": 10,
       "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     }

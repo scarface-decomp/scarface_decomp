@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GenericP3DMeter.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GenericP3DMeter.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 8 functions matched (37.50%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 8 functions matched (50.00%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -127,5 +127,42 @@ GenericP3DMeter* GenericP3DMeter::vfunc_00(int a1)
         sub_00025160((int)this);
     }
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] GenericP3DMeter::vfunc_01 (0x0016B810, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// bin: proto
+// va: 0x0016B810
+// what: 
+// tool: the portal's starter code (no AI)
+
+// GenericP3DMeter::vfunc_01 (Proto 0x0016B810, 66 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" float DAT_0040F2BC;
+
+class GenericP3DMeter
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01(float a1);
+    float m_Field04; // +0x04
+    char m_pad08[0x10];
+    float m_Field18; // +0x18
+    float m_Field1C; // +0x1C
+    bool m_Field20; // +0x20
+};
+
+void GenericP3DMeter::vfunc_01(float a1)
+{
+    if (m_Field20) {
+        m_Field04 = ((m_Field1C / DAT_0040F2BC) * m_Field18) + m_Field04;
+        m_Field1C = 0.0f;
+    }
+    m_Field18 = a1 - m_Field04;
+    m_Field20 = true;
 }
 

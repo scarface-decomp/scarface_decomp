@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/ViceCopHUD.cpp (7 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, fe/ViceCopHUD.cpp (9 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7 of 13 functions matched (53.85%). NOT COMPLETE YET.
-// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 9 of 13 functions matched (69.23%). NOT COMPLETE YET.
+// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -109,6 +109,92 @@ bool ViceCopHUD::vfunc_45(int a1)
     }
     sub_000702E0((int)DAT_003BF754, r_ebx, r_ebx, r_ebx, -1);
     return false;
+}
+
+// ============================================================================
+// [VERIFIED] ViceCopHUD::vfunc_00 (0x001AE870, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x001AE870
+// what: 
+// tool: the portal's starter code (no AI)
+
+// ViceCopHUD::vfunc_00 (0x001AE870, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02(int, int);
+};
+
+extern "C" char DAT_003BF55C[];
+
+class ViceCopHUD
+{
+public:
+    virtual void vfunc_00();
+};
+
+void ViceCopHUD::vfunc_00()
+{
+    int r_ecx;
+
+    r_ecx = (int)this;
+    if (!(*(unsigned char*)(r_ecx + -8) & 16)) {
+        if (!*(int*)(r_ecx + 24)) goto L_1C;
+    }
+    r_ecx = *(int*)(r_ecx + 24);
+    ((Object*)r_ecx)->vfunc_02(0, (int)DAT_003BF55C);
+L_1C:
+    ;
+}
+
+// ============================================================================
+// [VERIFIED] ViceCopHUD::vfunc_01 (0x001AE890, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x001AE890
+// what: 
+// tool: the portal's starter code (no AI)
+
+// ViceCopHUD::vfunc_01 (0x001AE890, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03(int, int);
+};
+
+extern "C" char DAT_003BF55C[];
+
+class ViceCopHUD
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+void ViceCopHUD::vfunc_01()
+{
+    int r_ecx;
+
+    r_ecx = (int)this;
+    if (!(*(unsigned char*)(r_ecx + -8) & 16)) {
+        if (!*(int*)(r_ecx + 24)) goto L_1C;
+    }
+    r_ecx = *(int*)(r_ecx + 24);
+    ((Object*)r_ecx)->vfunc_03(0, (int)DAT_003BF55C);
+L_1C:
+    ;
 }
 
 // ============================================================================

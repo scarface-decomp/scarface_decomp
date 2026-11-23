@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/HelicopterLocomotion.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/HelicopterLocomotion.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 5 functions matched (60.00%). NOT COMPLETE YET.
-// The 2 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4 of 5 functions matched (80.00%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -31,6 +31,52 @@ public:
 void HelicopterLocomotion::vfunc_02()
 {
     sub_00022710();
+}
+
+// ============================================================================
+// [VERIFIED] HelicopterLocomotion::vfunc_04 (0x000A4DB0, 35 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// ============================================================================
+// Same machine code as HelicopterLocomotion::vfunc_06 (Proto 0x00098F70), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x000A4DB0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// HelicopterLocomotion::vfunc_04 (Proto 0x000A4DB0, 35 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Field08
+{
+    void sub_000A4CB0();
+};
+
+extern "C" float DAT_0039D65C;
+extern "C" void __cdecl sub_002A9290(void);
+
+class HelicopterLocomotion
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    char m_pad04[0x4];
+    Field08* m_Field08; // +0x08
+    char m_pad0C[0x4];
+    float m_Field10; // +0x10
+};
+
+void HelicopterLocomotion::vfunc_04()
+{
+    sub_002A9290();
+    if (m_Field08) {
+        m_Field08->sub_000A4CB0();
+    }
+    m_Field10 = DAT_0039D65C;
 }
 
 // ============================================================================

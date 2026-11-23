@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/xboxOceanRenderer.cpp (7 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/xboxOceanRenderer.cpp (9 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7 of 11 functions matched (63.64%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 9 of 11 functions matched (81.82%). NOT COMPLETE YET.
+// The 2 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -72,6 +72,60 @@ int xboxOceanRenderer::vfunc_03(int a1, int a2, int a3)
     *(int*)(a3 + 4) = 0x3F800000;
     *(int*)(a3 + 8) = 0;
     return a3;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::xboxOceanRenderer::vfunc_07 (0x00296D70, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x00296D70
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::xboxOceanRenderer::vfunc_07 (0x00296D70, 48 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+struct Field10
+{
+    void sub_002B7A40(int);
+    void sub_002B7D40();
+};
+
+extern "C" bool DAT_0045C0A0;
+
+namespace pure3d {
+
+class xboxOceanRenderer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07(int a1);
+    char m_pad04[0xC];
+    Field10* m_Field10; // +0x10
+};
+
+void xboxOceanRenderer::vfunc_07(int a1)
+{
+    if (a1) {
+        if (!m_Field10) goto L_2B;
+        m_Field10->sub_002B7A40(a1);
+        if (!DAT_0045C0A0) goto L_2B;
+        m_Field10->sub_002B7D40();
+    }
+L_2B:
+    ;
 }
 
 }
@@ -183,6 +237,70 @@ public:
 bool xboxOceanRenderer::vfunc_09()
 {
     return m_Field450;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::xboxOceanRenderer::vfunc_04 (0x002970C0, 105 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// bin: xb
+// va: 0x002970C0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// pure3d::xboxOceanRenderer::vfunc_04 (0x002970C0, 105 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+// This function keeps a frame pointer (push ebp; mov ebp, esp), so it is built with them on.
+#pragma optimize("y", off)
+
+struct Object
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+namespace pure3d {
+
+class xboxOceanRenderer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int a1, int a2, int a3);
+    char m_pad04[0x218];
+    int m_Field21C; // +0x21C
+    int m_Field220; // +0x220
+    int m_Field224; // +0x224
+};
+
+void xboxOceanRenderer::vfunc_04(int a1, int a2, int a3)
+{
+    int t1, t4, t7;
+
+    t1 = m_Field21C;
+    if (m_Field21C) {
+        ((Object*)t1)->vfunc_01();
+        m_Field21C = 0;
+    }
+    m_Field21C = a1;
+    ((Object*)a1)->vfunc_00();
+    t4 = m_Field220;
+    if (m_Field220) {
+        ((Object*)t4)->vfunc_01();
+    }
+    m_Field220 = a2;
+    ((Object*)a2)->vfunc_00();
+    t7 = m_Field224;
+    if (m_Field224) {
+        ((Object*)t7)->vfunc_01();
+    }
+    m_Field224 = a3;
+    ((Object*)a3)->vfunc_00();
 }
 
 }
