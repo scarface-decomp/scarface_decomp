@@ -101,8 +101,10 @@ def _words(text: str) -> Iterable[str]:
     return re.findall(r"[%$]?[A-Za-z_][A-Za-z0-9_]*", text)
 
 
-def names_for(script_files: Iterable[Path], bin_dir: Path) -> Dict[int, str]:
-    """Readable names for the hashed identifiers in these scripts, from the user's own game files."""
+def names_for(script_files: Iterable[Path], bin_dir: Path, dictionary: bool = False) -> Dict[int, str]:
+    """Readable names for the hashed identifiers in these scripts, from the user's own game files, and then
+    from reports/hash_names.json (portal/tools/hash_names.py) for the rest: its certain names, and with
+    dictionary its probable ones too."""
     wanted, texts = set(), []
     for p in script_files:
         if not p.is_file() or p.suffix.lower() not in (".cso", ".dso", ".cs"):
@@ -123,7 +125,12 @@ def names_for(script_files: Iterable[Path], bin_dir: Path) -> Dict[int, str]:
                     texts.append(v)
     bins = [(bin_dir / e).read_bytes() for e in EXECUTABLES if (bin_dir / e).is_file()]
     texts += field_names()
-    return recover(wanted, candidates(bins, texts))
+    names = recover(wanted, candidates(bins, texts))
+    import hash_names
+    for k, n in hash_names.best(hash_names.load(), dictionary).items():
+        if k in wanted:
+            names.setdefault(k, n)
+    return names
 
 
 def field_names(path: Optional[Path] = None) -> list:
@@ -150,6 +157,8 @@ def main(argv=None) -> int:
     d.add_argument("--bin", type=Path, default=Path(__file__).resolve().parents[2] / "binaries",
                    help="folder with the game's executables, for names (default: binaries/)")
     d.add_argument("--hashed", action="store_true", help="keep every name hashed (no name recovery)")
+    d.add_argument("--dictionary", action="store_true",
+                   help="also use reports/hash_names.json's probable (dictionary) names, not only certain ones")
     c = sub.add_parser("compile", help="compile one TorqueScript file")
     c.add_argument("source", type=Path)
     c.add_argument("-o", "--output", type=Path, required=True)
@@ -168,7 +177,7 @@ def main(argv=None) -> int:
     for f in a.files:
         files += sorted(p for p in f.rglob("*") if p.suffix.lower() in (".cso", ".dso")) if f.is_dir() else [f]
     roots = {f: f for f in a.files if f.is_dir()}
-    names = None if a.hashed else names_for(files, a.bin)
+    names = None if a.hashed else names_for(files, a.bin, a.dictionary)
     exact = failed = 0
     for p in files:
         root = next((r for r in roots if r in p.parents), p.parent)
