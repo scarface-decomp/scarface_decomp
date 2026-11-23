@@ -88,6 +88,11 @@ no game files and no compiler: the matched C++ is in the repository.
     #   write work/descriptions_NAME.json (the command prints the format)
     python portal/agent.py describe-keep work/descriptions_NAME.json    # checked, ready to send
 
+The batch comes in the call graph's order (`reports/callgraph_xb.json`, from `portal/tools/callgraph.py`):
+script commands and functions that use text first, then each function after the ones it calls. It says
+when a function is a script command (the name the scripts use for it) and which classes it checks with
+dynamic_cast.
+
 Read each function and what it calls (the batch shows the names and descriptions of its calls), and write
 what it does in the game's terms. When you can't tell what it's for, say what it returns or changes. Skip
 a function rather than guess. `describe-keep` turns down a sentence that is too long, only restates the
