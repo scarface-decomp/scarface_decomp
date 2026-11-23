@@ -255,9 +255,14 @@ def test_describing_a_rebuilt_function(S, described):
     assert "Only rebuilt functions" in S.describe_verified(tasks[1], "Something", "Bob")
     assert S.describe_verified(tasks[0], "Turns the car's lights on", "Bob") is None
     e = reg["entries"]["xb:0x00011000"]
-    assert e["what"] == "Turns the car's lights on" and e["what_by"] == "Bob"
+    assert e["what"] == "Turns the car's lights on" and e["what_by"] == "Bob" and e["what_how"] == "human"
     assert S.live_task(tasks[0])["what"] == "Turns the car's lights on"
+    # too long, or only addresses: turned down with the reason, not cut short
+    assert "longer than 160" in S.describe_verified(tasks[0], "x " * 90, "Bob")
+    assert "restates the code" in S.describe_verified(tasks[0], "Calls sub_00012340(DAT_00450000, 0x20, 8)", "Bob")
+    assert e["what"] == "Turns the car's lights on"
     assert S.describe_verified(tasks[0], "  ", "Bob") is None and "what" not in e         # cleared
+    assert "what_how" not in e
 
 
 def test_descriptions_travel_in_submissions(S, described, monkeypatch):
@@ -267,15 +272,41 @@ def test_descriptions_travel_in_submissions(S, described, monkeypatch):
     S.describe_verified(tasks[0], "Turns the car's lights on", "Bob")
     bundle = S.make_submission("Bob")
     assert bundle["count"] == 1 and bundle["entries"] == {}
-    assert bundle["descriptions"] == {"xb:0x00011000": {"what": "Turns the car's lights on", "what_by": "Bob"}}
+    assert bundle["descriptions"] == {"xb:0x00011000": {"what": "Turns the car's lights on", "what_by": "Bob",
+                                                        "how": "human"}}
     # a maintainer imports it elsewhere: the text only, nothing to compile
     reg["entries"]["xb:0x00011000"].pop("what")
     monkeypatch.setattr(S, "append_audit", lambda *a: None)
-    st = S.import_submission(dict(bundle, descriptions={"xb:0x00011000": {"what": "Turns the car's lights on\n", "what_by": "Bob"},
+    st = S.import_submission(dict(bundle, descriptions={"xb:0x00011000": {"what": "Turns the car's lights on\n", "what_by": "Bob",
+                                                                          "how": "by shape"},
                                                         "xb:0x0FFFFFFF": {"what": "nobody", "what_by": "Eve"}}), "Maint")
-    assert st["described"] == 1 and not st["error"]
+    assert st["described"] == 1 and not st["error"] and st["refused"] == []
     assert reg["entries"]["xb:0x00011000"]["what"] == "Turns the car's lights on"
     assert reg["entries"]["xb:0x00011000"]["what_by"] == "Bob"
+    assert reg["entries"]["xb:0x00011000"]["what_how"] == "shape"
+    # one too long is turned down with the reason, not cut short (the first 2,085 lost their ends that way)
+    st = S.import_submission(dict(bundle, descriptions={"xb:0x00011000": {"what": "y" * 161, "what_by": "Bob"}}), "Maint")
+    assert st["described"] == 0 and st["refused"][0]["key"] == "xb:0x00011000"
+    assert reg["entries"]["xb:0x00011000"]["what"] == "Turns the car's lights on"
+
+
+def test_a_text_only_import_needs_no_compiler(S, monkeypatch):
+    """Descriptions and names are text: only matches and revisions need the compiler to import."""
+    started = []
+    monkeypatch.setattr(S.MV, "find_msvc71_bin", lambda: None)
+    monkeypatch.setattr(S.threading, "Thread", lambda **kw: type("T", (), {"start": lambda self: started.append(kw)})())
+
+    class H:
+        _auth = lambda self, body: "Maint"                                    # noqa: E731
+        answers = []
+        _json = lambda self, obj, code=200: H.answers.append(obj)            # noqa: E731
+    monkeypatch.setattr(S, "MAINTAINERS", {"Maint"})
+    h = H()
+    S.Handler.post_import(h, {"bundle": {"format": S.SUBMISSION_FORMAT, "entries": {},
+                                         "descriptions": {"xb:0x00011000": {"what": "A thing."}}}})
+    assert H.answers[-1]["ok"] is True and started
+    S.Handler.post_import(h, {"bundle": {"format": S.SUBMISSION_FORMAT, "entries": {"xb:0x00011000": {"code": "x"}}}})
+    assert H.answers[-1]["ok"] is False and len(started) == 1
 
 
 def test_what_reaches_the_generated_files_and_the_feed(S):

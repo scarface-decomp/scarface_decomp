@@ -354,6 +354,18 @@
         + fmt(src.shared_class.total) + ' functions share one class declaration, ' + fmt(src.named.total)
         + ' have a real name, and ' + fmt(done0) + (done0 === 1 ? ' is' : ' are') + ' fully named.';
     }
+    // Third measure, after rebuilt and named: how many say in a sentence what they do. The ones a rule wrote
+    // from the code's shape alone (destructors, class records) are counted apart, so boilerplate isn't
+    // mistaken for understanding.
+    var des = prog && prog.described;
+    $('sb-described').hidden = !(des && des.total);
+    if (des && des.total) {
+      var how = des.how || {}, shape = how.shape || 0, twin = how.twin || 0, real = (how.human || 0) + (how.read || 0);
+      $('sb-described').textContent = fmt(des.total) + ' of the rebuilt functions have a one-line description of what they do'
+        + (shape || twin ? ': ' + fmt(real) + ' written by someone who read the code, ' + fmt(shape)
+          + ' worked out from the shape of the code alone (destructors, class records and the like)'
+          + (twin ? ', ' + fmt(twin) + ' copied from the same code in another version' : '') + '.' : '.');
+    }
     ['pc', 'xb', 'proto', 'ps2'].forEach(function (b) {
       var done = v[b] || 0, left = q ? (q[b] || 0) : 0, all = done + left;
       $(b + '-big').textContent = q ? fmtPct(pct(done, all)) + '%' : fmt(done);

@@ -172,6 +172,15 @@ def test_scoreboard_and_progress(site, browser):
     line = pg.text_content("#sb-source")
     assert f"{src['shared_class']['total']:,} functions share one class declaration" in line
     assert f"{src['named']['total']:,} have a real name" in line and "placeholder names" in line
+    des = PROG.get("described")                                # third measure: says what it does
+    if des and des["total"]:
+        line = pg.text_content("#sb-described")
+        assert line.startswith(f"{des['total']:,} of the rebuilt functions have a one-line description")
+        if des["how"]["shape"]:                                # boilerplate counted apart from real reading
+            assert f"{des['how']['shape']:,} worked out from the shape of the code alone" in line
+            assert f"{des['how']['human'] + des['how']['read']:,} written by someone who read the code" in line
+    else:
+        assert pg.is_hidden("#sb-described")
     share = v["total"] / total * 100
     assert pg.text_content("#claim") == f"The world is {share:.1f}% yours." if share >= 10 else \
         pg.text_content("#claim") == f"The world is {share:.2f}% yours."

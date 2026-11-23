@@ -4,14 +4,20 @@
 Each file is reports/to_submit/descriptions_*.json:
 
     {"schema": "scarface_descriptions_v1", "by": "who wrote them",
-     "descriptions": {"xb:0x00329310": {"what": "One plain sentence, at most 160 characters."}, ...}}
+     "descriptions": {"xb:0x00329310": {"what": "One plain sentence, at most 160 characters.",
+                                        "how": "read"}, ...}}
+
+"how" says where the sentence came from: "read" (someone read the function and what it calls), "shape" (a
+rule on the shape of the code alone: destructors, class records), "twin" (copied from the same bytes in
+another version) or "human" (the default). The website counts them apart.
 
 With the portal running (START_PORTAL.bat) and you signed in as a maintainer:
 
     python portal/scripts/submit_descriptions.py
 
 The portal records each description on the function (credited to the file's "by"), skips functions that
-aren't rebuilt yet or already say the same, and the file is deleted once it's taken. Nothing is compiled:
+aren't rebuilt yet or already say the same, turns down (with the reason) a sentence that is longer than 160
+characters or only restates the code, and the file is deleted once it's taken. Nothing is compiled:
 descriptions are text only. Standard library only.
 """
 
@@ -63,7 +69,7 @@ def main() -> int:
     for path in files:
         data = json.loads(path.read_text(encoding="utf-8"))
         by = str(data.get("by") or user)[:64]
-        notes = {k: {"what": v.get("what", ""), "what_by": by}
+        notes = {k: {"what": v.get("what", ""), "what_by": str(v.get("by") or by)[:64], "how": v.get("how", "")}
                  for k, v in (data.get("descriptions") or {}).items() if isinstance(v, dict)}
         bundle = {"format": "scarface-decomp-submission", "submitted_by": by, "entries": {}, "descriptions": notes}
         res = call(args.portal, "/api/import-submission", {"user": user, "pin": pin, "bundle": bundle})
@@ -80,8 +86,20 @@ def main() -> int:
             print(f"  NO   {path.name}: {st['error']}")
             bad += 1
             continue
+        refused = st.get("refused") or []
+        for r in refused[:20]:
+            print(f"  no   {r.get('key')}: {r.get('reason')}")
+        if len(refused) > 20:
+            print(f"  ... and {len(refused) - 20} more turned down")
         print(f"  ok   {path.name}: {st.get('described', 0)} of {len(notes)} described "
-              "(the rest weren't rebuilt here yet or already said the same)")
+              "(the rest weren't rebuilt here yet, already said the same, or were turned down above)")
+        if refused:
+            keep = {r.get("key") for r in refused}
+            data["descriptions"] = {k: v for k, v in (data.get("descriptions") or {}).items() if k in keep}
+            path.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+            print(f"       {path.name} now holds only the {len(refused)} turned down: fix them and send it again.")
+            bad += 1
+            continue
         path.unlink()
     print("Done. Commit reports/ and reconstructed_src/ as the portal left them.")
     return 1 if bad else 0
