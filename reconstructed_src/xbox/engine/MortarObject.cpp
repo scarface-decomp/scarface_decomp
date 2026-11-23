@@ -12,7 +12,7 @@
 // ============================================================================
 // [VERIFIED] MortarObject::vfunc_00 (0x001EC7C0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Returns MortarObject's static class record (ConcreteClassRep<MortarObject>), the object's run-time type.
+// What it does: Returns StatePropObject's class record (ConcreteClassRep<StatePropObject>), not one of its own: this class has none.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

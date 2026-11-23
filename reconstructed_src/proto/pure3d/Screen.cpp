@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::frontend::Screen::vfunc_14 (0x00249E20, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x24.
 // ============================================================================
 // Same machine code as pure3d::frontend::Screen::vfunc_14 (0x0028D580), which was matched first;
 // its addresses and names were swapped for this function's.

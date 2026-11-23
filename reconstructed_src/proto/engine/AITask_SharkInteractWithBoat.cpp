@@ -74,6 +74,7 @@ int AITask_SharkInteractWithBoat::vfunc_43()
 // ============================================================================
 // [VERIFIED] AITask_SharkInteractWithBoat::vfunc_41 (0x000F30A0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_SharkInteractWithBoat: Always returns 200.
 // ============================================================================
 // AITask_SharkInteractWithBoat::vfunc_41 (Proto 0x000F30A0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

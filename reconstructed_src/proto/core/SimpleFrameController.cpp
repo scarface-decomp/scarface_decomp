@@ -66,6 +66,7 @@ int SimpleFrameController::vfunc_27()
 // ============================================================================
 // [VERIFIED] pure3d::SimpleFrameController::vfunc_12 (0x00225180, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x10 of the object pointed to at +0x30, or the constant at 0x0039F068 when there is none.
 // ============================================================================
 // Same machine code as pure3d::SimpleFrameController::vfunc_12 (0x00273400), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -99,6 +100,7 @@ float Class_00225180::sub_00225180()
 // ============================================================================
 // [VERIFIED] pure3d::SimpleFrameController::vfunc_13 (0x002251A0, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0xC of the object pointed to at +0x30, or the constant at 0x0039D584 when there is none.
 // ============================================================================
 // Same machine code as pure3d::SimpleFrameController::vfunc_13 (0x00273420), which was matched first;
 // its addresses and names were swapped for this function's.

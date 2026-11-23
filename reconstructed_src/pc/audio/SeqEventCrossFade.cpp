@@ -102,6 +102,7 @@ int SeqEventCrossFade::vfunc_03()
 // ============================================================================
 // [VERIFIED] audio::SeqEventCrossFade::vfunc_04 (0x006FB250, 53 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::SeqEventCrossFade's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as audio::SeqEventCrossFade::vfunc_04 (0x002DD640), which was matched first;
 // its addresses and names were swapped for this function's.

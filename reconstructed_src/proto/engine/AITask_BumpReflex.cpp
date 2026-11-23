@@ -109,6 +109,7 @@ void* AITask_BumpReflex::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_BumpReflex::vfunc_01 (0x0010C9D0, 51 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_BumpReflex's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_BumpReflex::vfunc_01 (Proto 0x0010C9D0, 51 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

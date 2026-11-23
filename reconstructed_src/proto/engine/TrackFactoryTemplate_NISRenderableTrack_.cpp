@@ -49,6 +49,7 @@ template <> fight::TrackFactoryTemplate<NISRenderableTrack>* fight::TrackFactory
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISRenderableTrack>::vfunc_07 (0x00162030, 55 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for NISRenderableTrack: allocates a new one (152 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<NISRenderableTrack>::vfunc_07 (Proto 0x00162030, 55 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

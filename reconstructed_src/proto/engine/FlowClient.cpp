@@ -41,6 +41,7 @@ FlowClient* FlowClient::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] FlowClient::vfunc_01 (0x000F9A60, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: FlowClient: Always returns 1.
 // ============================================================================
 // FlowClient::vfunc_01 (Proto 0x000F9A60, 8 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

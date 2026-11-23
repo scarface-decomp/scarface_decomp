@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] core::DriveCompletionRequest::vfunc_06 (0x006E3760, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveCompletionRequest: Always returns 22.
 // ============================================================================
 // Same machine code as core::CompletionEventRequest::vfunc_06 (Proto 0x0026C190), which was matched first;
 // its addresses and names were swapped for this function's.

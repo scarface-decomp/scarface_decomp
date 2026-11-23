@@ -74,6 +74,7 @@ void ControllerXBox::vfunc_22(int a1)
 // ============================================================================
 // [VERIFIED] core::ControllerXBox::vfunc_04 (0x00204FA0, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x8 is set.
 // ============================================================================
 // Same machine code as core::ControllerXBox::vfunc_04 (0x00247C00), which was matched first;
 // its addresses and names were swapped for this function's.

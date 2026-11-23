@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] content::LoadInventory::vfunc_03 (0x001FD230, 81 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: LoadInventory's deleting destructor: frees its inventory at +0x08, releases the object at +0x0C, then frees itself when asked.
 // ============================================================================
 // content::LoadInventory::vfunc_03 (Proto 0x001FD230, 81 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

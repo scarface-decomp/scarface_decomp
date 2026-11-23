@@ -41,6 +41,7 @@ int CompletionEventRequest::vfunc_01()
 // ============================================================================
 // [VERIFIED] core::CompletionEventRequest::vfunc_06 (0x006E36C0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::CompletionEventRequest: Always returns 23.
 // ============================================================================
 // Same machine code as core::CompletionEventRequest::vfunc_06 (0x002A98D0), which was matched first;
 // its addresses and names were swapped for this function's.

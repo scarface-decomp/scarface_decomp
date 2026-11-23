@@ -10,7 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<DirectionalGetHitCondition>::vfunc_03 (0x000DE9A0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::ConditionFactoryTemplate<DirectionalGetHitCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it
+// What it does: fight::ConditionFactoryTemplate<DirectionalGetHitCondition>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] GlanceAtOvertakingPed::vfunc_10 (0x006E4010, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GlanceAtOvertakingPed: Always returns 13.
 // ============================================================================
 // Same machine code as GlanceAtOvertakingPed::vfunc_10 (Proto 0x0026CAA0), which was matched first;
 // its addresses and names were swapped for this function's.

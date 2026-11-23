@@ -85,6 +85,7 @@ void* AITask_ProvokeAnotherPed::vfunc_56()
 // ============================================================================
 // [VERIFIED] AITask_ProvokeAnotherPed::vfunc_57 (0x0010A710, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_ProvokeAnotherPed: Always returns 28.
 // ============================================================================
 // AITask_ProvokeAnotherPed::vfunc_57 (Proto 0x0010A710, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -258,6 +259,7 @@ int AITask_ProvokeAnotherPed::vfunc_44()
 // ============================================================================
 // [VERIFIED] AITask_ProvokeAnotherPed::vfunc_59 (0x0010A870, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_ProvokeAnotherPed: Always returns 3000.
 // ============================================================================
 // AITask_ProvokeAnotherPed::vfunc_59 (Proto 0x0010A870, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

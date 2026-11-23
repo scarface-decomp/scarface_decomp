@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::PrimGroupStreamed::vfunc_07 (0x0024F300, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::PrimGroupStreamed: Always returns 129.
 // ============================================================================
 // pure3d::PrimGroupStreamed::vfunc_07 (Proto 0x0024F300, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

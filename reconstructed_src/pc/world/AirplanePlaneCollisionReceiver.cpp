@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AirplanePlaneCollisionReceiver::vfunc_00 (0x006F4DB0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Airplane-plane collision receiver: forwards to the 10th virtual of its owner at +0x04.
 // ============================================================================
 // Same machine code as AirplanePlaneCollisionReceiver::vfunc_00 (0x0009B2D0), which was matched first;
 // its addresses and names were swapped for this function's.

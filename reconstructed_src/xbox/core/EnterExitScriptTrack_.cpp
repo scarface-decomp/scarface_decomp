@@ -155,7 +155,7 @@ bool Class_00022700::sub_00022700(float value)
 // ============================================================================
 // [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_03 (0x000227A0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: FightTree::FightActionController<fight::EnterExitScriptTrack>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns
+// What it does: FightTree::FightActionController<fight::EnterExitScriptTrack>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_03 (0x000227A0, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

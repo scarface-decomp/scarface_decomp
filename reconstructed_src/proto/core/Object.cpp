@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] core::Object::vfunc_00 (0x000248F0, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::Object's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as core::Object::vfunc_00 (0x00026CD0), which was matched first;
 // its addresses and names were swapped for this function's.

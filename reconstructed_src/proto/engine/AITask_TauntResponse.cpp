@@ -239,6 +239,7 @@ void* AITask_TauntResponse::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_TauntResponse::vfunc_01 (0x0010D920, 43 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_TauntResponse's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_TauntResponse::vfunc_01 (Proto 0x0010D920, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -56,6 +56,7 @@ int AIActionSetSharedIntRelativeToCurrentTime::vfunc_07()
 // ============================================================================
 // [VERIFIED] AIActionSetSharedIntRelativeToCurrentTime::vfunc_00 (0x00105EB0, 47 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIActionSetSharedIntRelativeToCurrentTime's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIActionSetSharedIntRelativeToCurrentTime::vfunc_00 (Proto 0x00105EB0, 47 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

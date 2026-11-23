@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] fight::ParamString<TimedCharacterFightTrack>::vfunc_01 (0x00062870, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamString<TimedCharacterFightTrack>: Always returns 3.
 // ============================================================================
 // Same machine code as fight::ParamString<TimedCharacterFightTrack>::vfunc_01 (0x00022A00), which was matched first;
 // its addresses and names were swapped for this function's.

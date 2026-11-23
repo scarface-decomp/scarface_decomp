@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] core::DriveMediaRequest::vfunc_06 (0x006E3FC0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveMediaRequest: Always returns 12.
 // ============================================================================
 // Same machine code as core::DriveMediaRequest::vfunc_06 (Proto 0x0026CA50), which was matched first;
 // its addresses and names were swapped for this function's.

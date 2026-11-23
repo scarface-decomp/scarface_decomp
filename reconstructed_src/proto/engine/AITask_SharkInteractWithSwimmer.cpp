@@ -76,6 +76,7 @@ int AITask_SharkInteractWithSwimmer::vfunc_43()
 // ============================================================================
 // [VERIFIED] AITask_SharkInteractWithSwimmer::vfunc_41 (0x000F3010, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_SharkInteractWithSwimmer: Always returns 300.
 // ============================================================================
 // AITask_SharkInteractWithSwimmer::vfunc_41 (Proto 0x000F3010, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -12,7 +12,7 @@
 // ============================================================================
 // [VERIFIED] AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_00 (0x00109DE0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Returns AITask_ReactToStaggeredStimInStationaryVehicle's static class record (ConcreteClassRep<AITask_ReactToStaggeredStimInStationaryVehicle>), the object's ru
+// What it does: Returns AITask_ReactToStaggeredStimInStationaryVehicle's static class record (its ConcreteClassRep), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

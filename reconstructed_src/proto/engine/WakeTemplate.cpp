@@ -33,6 +33,7 @@ void* WakeTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] WakeTemplate::vfunc_11 (0x001C3E60, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Wake template: marks the wake as started and copies its starting value (0x20) into the current value (0x28); returns it.
 // ============================================================================
 // bin: proto
 // va: 0x001C3E60

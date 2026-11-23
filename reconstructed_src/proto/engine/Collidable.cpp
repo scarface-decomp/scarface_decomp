@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] Collidable::vfunc_01 (0x00011E80, 28 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Releases one reference to a loaded object; at the last one it marks it and deletes it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_01 (0x00011930), which was matched first;
 // its addresses and names were swapped for this function's.

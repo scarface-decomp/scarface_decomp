@@ -96,6 +96,7 @@ int NISRenderableTrack::vfunc_20(int a1)
 // ============================================================================
 // [VERIFIED] NISRenderableTrack::vfunc_03 (0x00164480, 49 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISRenderableTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // NISRenderableTrack::vfunc_03 (Proto 0x00164480, 49 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

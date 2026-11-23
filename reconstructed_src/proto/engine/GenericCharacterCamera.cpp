@@ -159,6 +159,7 @@ GenericCharacterCamera* GenericCharacterCamera::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] GenericCharacterCamera::vfunc_36 (0x0013A460, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_0002AC90 gives a nonzero result for the value at +0x28C.
 // ============================================================================
 // Same machine code as GenericCharacterCamera::vfunc_38 (0x00155690), which was matched first;
 // its addresses and names were swapped for this function's.

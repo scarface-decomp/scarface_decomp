@@ -86,6 +86,7 @@ int AITask_ReactToVisibleGun::vfunc_44()
 // ============================================================================
 // [VERIFIED] AITask_ReactToVisibleGun::vfunc_02 (0x0010BD00, 20 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: React-to-visible-gun task: passes the value to its member at +0x0C and returns it.
 // ============================================================================
 // AITask_ReactToVisibleGun::vfunc_02 (Proto 0x0010BD00, 20 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

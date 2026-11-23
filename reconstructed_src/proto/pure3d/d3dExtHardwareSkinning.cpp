@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::d3dExtHardwareSkinning::vfunc_01 (0x00237000, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dExtHardwareSkinning: Always returns 25.
 // ============================================================================
 // pure3d::d3dExtHardwareSkinning::vfunc_01 (Proto 0x00237000, 8 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

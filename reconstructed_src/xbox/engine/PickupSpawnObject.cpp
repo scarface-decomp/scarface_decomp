@@ -12,7 +12,7 @@
 // ============================================================================
 // [VERIFIED] PickupSpawnObject::vfunc_00 (0x001E3A80, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Returns PickupSpawnObject's static class record (ConcreteClassRep<PickupSpawnObject>), the object's run-time type.
+// What it does: Returns SpawnObject's class record (ConcreteClassRep<SpawnObject>), not one of its own: this class has none.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.

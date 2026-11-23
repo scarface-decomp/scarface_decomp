@@ -72,6 +72,7 @@ Struct_0010B5D0 Class_0010B5D0::sub_0010B5D0() const
 // ============================================================================
 // [VERIFIED] AITask_MonitorCustomLoopState::vfunc_44 (0x0010B600, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_MonitorCustomLoopState: Always returns 10000.
 // ============================================================================
 // AITask_MonitorCustomLoopState::vfunc_44 (Proto 0x0010B600, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

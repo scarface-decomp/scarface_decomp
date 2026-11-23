@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] ControllerManager::ControllerFlowClient::vfunc_00 (0x0001DCA0, 60 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ControllerManager::ControllerFlowClient's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as ControllerManager::ControllerFlowClient::vfunc_00 (0x0001F120), which was matched first;
 // its addresses and names were swapped for this function's.

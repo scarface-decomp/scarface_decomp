@@ -293,6 +293,7 @@ DealerSpawnObject* DealerSpawnObject::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] DealerSpawnObject::vfunc_43 (0x0021E9A0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: DealerSpawnObject: Always returns 8.
 // ============================================================================
 // DealerSpawnObject::vfunc_43 (Proto 0x0021E9A0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

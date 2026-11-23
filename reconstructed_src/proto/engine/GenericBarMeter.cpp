@@ -49,6 +49,7 @@ void GenericBarMeter::vfunc_01(float a1)
 // ============================================================================
 // [VERIFIED] GenericBarMeter::vfunc_00 (0x0016BC70, 60 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GenericBarMeter's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // GenericBarMeter::vfunc_00 (Proto 0x0016BC70, 60 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

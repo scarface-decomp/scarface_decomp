@@ -39,16 +39,16 @@
     }
   },
   "described": {
-    "pc": 29,
+    "pc": 60,
     "xb": 2376,
-    "proto": 136,
+    "proto": 314,
     "ps2": 0,
-    "total": 2405,
+    "total": 2436,
     "how": {
       "human": 320,
-      "read": 40,
-      "shape": 2045,
-      "twin": 0
+      "read": 44,
+      "shape": 2041,
+      "twin": 31
     }
   },
   "size_buckets": {

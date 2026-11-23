@@ -113,6 +113,7 @@ template <> float FightTree::FightActionController<fight::EnterExitScriptTrack>:
 // ============================================================================
 // [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_24 (0x00020380, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0xC and returns true.
 // ============================================================================
 // Same machine code as FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_24 (0x000226F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -187,6 +188,7 @@ template <> float FightTree::FightActionController<fight::EnterExitScriptTrack>:
 // ============================================================================
 // [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_26 (0x000203A0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x10 and returns true.
 // ============================================================================
 // Same machine code as FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_26 (0x00022700), which was matched first;
 // its addresses and names were swapped for this function's.

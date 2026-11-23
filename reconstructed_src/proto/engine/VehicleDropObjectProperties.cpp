@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] VehicleDropObjectProperties::vfunc_05 (0x001C5130, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Vehicle drop-object properties: runs the base step, then sets the value at +0x44 to the value at +0x48 times a global scale.
 // ============================================================================
 // bin: proto
 // va: 0x001C5130

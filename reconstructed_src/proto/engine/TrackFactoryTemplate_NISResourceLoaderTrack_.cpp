@@ -49,6 +49,7 @@ template <> fight::TrackFactoryTemplate<NISResourceLoaderTrack>* fight::TrackFac
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISResourceLoaderTrack>::vfunc_07 (0x001620A0, 55 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for NISResourceLoaderTrack: allocates a new one (148 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<NISResourceLoaderTrack>::vfunc_07 (Proto 0x001620A0, 55 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

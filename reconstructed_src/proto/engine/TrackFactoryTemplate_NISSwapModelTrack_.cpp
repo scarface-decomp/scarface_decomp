@@ -49,6 +49,7 @@ template <> fight::TrackFactoryTemplate<NISSwapModelTrack>* fight::TrackFactoryT
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISSwapModelTrack>::vfunc_07 (0x001623B0, 52 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for NISSwapModelTrack: allocates a new one (88 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<NISSwapModelTrack>::vfunc_07 (Proto 0x001623B0, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

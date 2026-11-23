@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] GangSpawnObject::vfunc_45 (0x006E4150, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GangSpawnObject: Always returns 16.
 // ============================================================================
 // Same machine code as GangSpawnObject::vfunc_43 (Proto 0x00213E60), which was matched first;
 // its addresses and names were swapped for this function's.

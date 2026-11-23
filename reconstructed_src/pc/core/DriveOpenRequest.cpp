@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] core::DriveOpenRequest::vfunc_06 (0x006E3F60, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveOpenRequest: Always returns 11.
 // ============================================================================
 // Same machine code as core::DriveOpenRequest::vfunc_06 (Proto 0x0026C9F0), which was matched first;
 // its addresses and names were swapped for this function's.

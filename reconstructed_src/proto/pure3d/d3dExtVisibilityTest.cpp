@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] pure3d::d3dExtVisibilityTest::vfunc_01 (0x00237110, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dExtVisibilityTest: Always returns 16384.
 // ============================================================================
 // pure3d::d3dExtVisibilityTest::vfunc_01 (Proto 0x00237110, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

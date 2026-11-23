@@ -228,6 +228,7 @@ float AITask_IdleChatInitiate::vfunc_52()
 // ============================================================================
 // [VERIFIED] AITask_IdleChatInitiate::vfunc_57 (0x0010A6A0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_IdleChatInitiate: Always returns 24.
 // ============================================================================
 // AITask_IdleChatInitiate::vfunc_57 (Proto 0x0010A6A0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -378,6 +379,7 @@ int AITask_IdleChatInitiate::vfunc_44()
 // ============================================================================
 // [VERIFIED] AITask_IdleChatInitiate::vfunc_59 (0x0010AB00, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_IdleChatInitiate: Always returns 1500.
 // ============================================================================
 // AITask_IdleChatInitiate::vfunc_59 (Proto 0x0010AB00, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

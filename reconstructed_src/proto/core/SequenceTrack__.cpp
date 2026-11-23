@@ -49,6 +49,7 @@ TrackFactoryTemplate_FightTree__FightActionController_fight__EnterExitScriptTrac
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<FightTree::FightActionController<fight::SequenceTrack>>::vfunc_07 (0x000203E0, 58 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for FightTree::FightActionController<fight::SequenceTrack>: allocates a new one (44 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // Same machine code as fight::TrackFactoryTemplate<FightTree::FightActionController<fight::SequenceTrack>>::vfunc_07 (0x00022760), which was matched first;
 // its addresses and names were swapped for this function's.

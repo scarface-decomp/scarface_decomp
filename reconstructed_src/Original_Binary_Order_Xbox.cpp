@@ -5931,7 +5931,7 @@ TrackFactory* TrackFactory::vfunc_03(int a1)
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_03 (0x00022650, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>'s deleting destructor: destroys the object, frees its memory when ask
+// What it does: Deleting destructor of the TrackFactoryTemplate for EnterExitScriptTrack: destroys it, frees it when asked (flag bit 0), returns it.
 // ============================================================================
 // fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_03 (0x00022650, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -5969,7 +5969,7 @@ TrackFactoryTemplate_FightTree__FightActionController_fight__EnterExitScriptTrac
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_07 (0x00022680, 61 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Factory for FightTree::FightActionController<fight::EnterExitScriptTrack>: allocates a new one (148 bytes), constructs it, and hands it the factory's data at +8
+// What it does: Factory for EnterExitScriptTrack's fight action controller: allocates one (148 bytes), constructs it, gives it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_07 (0x00022680, 61 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -6214,7 +6214,7 @@ bool Collidable::vfunc_04()
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<FightTree::FightActionController<fight::SequenceTrack>>::vfunc_03 (0x00022730, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::TrackFactoryTemplate<FightTree::FightActionController<fight::SequenceTrack>>'s deleting destructor: destroys the object, frees its memory when asked (fla
+// What it does: Deleting destructor of the TrackFactoryTemplate for SequenceTrack: destroys it, frees it when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_03 (0x00022650), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -6308,7 +6308,7 @@ int TrackFactoryTemplate_FightTree__FightActionController_fight__SequenceTrack__
 // ============================================================================
 // [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_03 (0x000227A0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: FightTree::FightActionController<fight::EnterExitScriptTrack>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns
+// What it does: FightTree::FightActionController<fight::EnterExitScriptTrack>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_03 (0x000227A0, 30 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -84816,7 +84816,7 @@ template <> int fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>::vfunc_03 (0x000DE540, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns i
+// What it does: fight::ConditionFactoryTemplate<UpperBodyAnimStateCondition>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -85754,7 +85754,7 @@ template <> int fight::ConditionFactoryTemplate<IsRageMode>::vfunc_07()
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<DirectionalGetHitCondition>::vfunc_03 (0x000DE9A0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::ConditionFactoryTemplate<DirectionalGetHitCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it
+// What it does: fight::ConditionFactoryTemplate<DirectionalGetHitCondition>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -86128,7 +86128,7 @@ template <> int fight::ConditionFactoryTemplate<ButtonEventCondition>::vfunc_07(
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<MeleeAttackDirectionCondition>::vfunc_03 (0x000DEB60, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::ConditionFactoryTemplate<MeleeAttackDirectionCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns
+// What it does: fight::ConditionFactoryTemplate<MeleeAttackDirectionCondition>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -86316,7 +86316,7 @@ template <> int fight::ConditionFactoryTemplate<MeleeGetHitTypeCondition>::vfunc
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<MeleeGetHitDirectionCondition>::vfunc_03 (0x000DEC40, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::ConditionFactoryTemplate<MeleeGetHitDirectionCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns
+// What it does: fight::ConditionFactoryTemplate<MeleeGetHitDirectionCondition>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -106166,7 +106166,7 @@ Class_00109DB0* Class_00109DB0::sub_00109DB0(int a1, int a2)
 // ============================================================================
 // [VERIFIED] AITask_ReactToStaggeredStimInStationaryVehicle::vfunc_00 (0x00109DE0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Returns AITask_ReactToStaggeredStimInStationaryVehicle's static class record (ConcreteClassRep<AITask_ReactToStaggeredStimInStationaryVehicle>), the object's ru
+// What it does: Returns AITask_ReactToStaggeredStimInStationaryVehicle's static class record (its ConcreteClassRep), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -167087,7 +167087,7 @@ template <> int fight::ConditionFactoryTemplate<IsMainCharacterCondition>::vfunc
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<IsFemaleCharacterCondition>::vfunc_03 (0x00183210, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::ConditionFactoryTemplate<IsFemaleCharacterCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it
+// What it does: fight::ConditionFactoryTemplate<IsFemaleCharacterCondition>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::ConditionFactoryTemplate<AnimationStateCondition>::vfunc_03 (0x000DE4D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -216920,7 +216920,7 @@ PersistentVehicleSpawnObject* PersistentVehicleSpawnObject::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] PickupSpawnObject::vfunc_00 (0x001E3A80, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Returns PickupSpawnObject's static class record (ConcreteClassRep<PickupSpawnObject>), the object's run-time type.
+// What it does: Returns SpawnObject's class record (ConcreteClassRep<SpawnObject>), not one of its own: this class has none.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -217800,7 +217800,7 @@ ResourceLoader* ResourceLoader::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_00 (0x001E5300, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Returns ScatteredEnemyCharacterGeneratorSpawnObject's static class record (ConcreteClassRep<ScatteredEnemyCharacterGeneratorSpawnObject>), the object's run-time
+// What it does: Returns ScatteredEnemyCharacterGeneratorSpawnObject's static class record (its ConcreteClassRep), the object's run-time type.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -221974,7 +221974,7 @@ Class_001EC600* Class_001EC600::sub_001EC600(int a1, int a2)
 // ============================================================================
 // [VERIFIED] MeleeWeaponStateProp::vfunc_00 (0x001EC630, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Returns MeleeWeaponStateProp's static class record (ConcreteClassRep<MeleeWeaponStateProp>), the object's run-time type.
+// What it does: Returns WeaponStateProp's class record (ConcreteClassRep<WeaponStateProp>), not one of its own: this class has none.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -222254,7 +222254,7 @@ Class_001EC730* Class_001EC730::sub_001EC730(int a1, int a2)
 // ============================================================================
 // [VERIFIED] MortarObject::vfunc_00 (0x001EC7C0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Returns MortarObject's static class record (ConcreteClassRep<MortarObject>), the object's run-time type.
+// What it does: Returns StatePropObject's class record (ConcreteClassRep<StatePropObject>), not one of its own: this class has none.
 // ============================================================================
 // Same machine code as CollisionBehaviourTypeGroup::vfunc_00 (0x000123B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -239936,7 +239936,7 @@ int FourWheelerPhysicsTemplate::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] ConcreteWheeledVehiclePhysicsTemplate<4>::vfunc_00 (0x0020BE30, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Returns ConcreteWheeledVehiclePhysicsTemplate<4>'s static class record (ConcreteClassRep<ConcreteWheeledVehiclePhysicsTemplate<4>>), the object's run-time type.
+// What it does: Returns WheeledVehiclePhysicsTemplate's class record (ConcreteClassRep<WheeledVehiclePhysicsTemplate>), not one of its own: this class has none.
 // ============================================================================
 // Same machine code as ConcreteWheeledVehiclePhysicsTemplate<4>::vfunc_00 (Proto 0x001D0910), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -267698,7 +267698,7 @@ Class_0023E180* Class_0023E180::sub_0023E180(int a1)
 // ============================================================================
 // [VERIFIED] fight::ConditionParameterlessFactoryTemplate<fight::AndCondition>::vfunc_03 (0x0023E1F0, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::ConditionParameterlessFactoryTemplate<fight::AndCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and retu
+// What it does: fight::ConditionParameterlessFactoryTemplate<fight::AndCondition>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // bin: xb
 // va: 0x0023E1F0
@@ -267818,7 +267818,7 @@ Class_0023E230* Class_0023E230::sub_0023E230(int a1)
 // ============================================================================
 // [VERIFIED] fight::ConditionParameterlessFactoryTemplate<fight::OrCondition>::vfunc_03 (0x0023E2A0, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::ConditionParameterlessFactoryTemplate<fight::OrCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and retur
+// What it does: fight::ConditionParameterlessFactoryTemplate<fight::OrCondition>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::ConditionParameterlessFactoryTemplate<fight::AndCondition>::vfunc_03 (0x0023E1F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -267940,7 +267940,7 @@ Class_0023E2E0* Class_0023E2E0::sub_0023E2E0(int a1)
 // ============================================================================
 // [VERIFIED] fight::ConditionParameterlessFactoryTemplate<fight::NotCondition>::vfunc_03 (0x0023E350, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::ConditionParameterlessFactoryTemplate<fight::NotCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and retu
+// What it does: fight::ConditionParameterlessFactoryTemplate<fight::NotCondition>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::ConditionParameterlessFactoryTemplate<fight::AndCondition>::vfunc_03 (0x0023E1F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -268100,7 +268100,7 @@ Class_0023E4E0* Class_0023E4E0::sub_0023E4E0(int a1)
 // ============================================================================
 // [VERIFIED] fight::ConditionParameterlessFactoryTemplate<fight::FalseCondition>::vfunc_03 (0x0023E540, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::ConditionParameterlessFactoryTemplate<fight::FalseCondition>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and re
+// What it does: fight::ConditionParameterlessFactoryTemplate<fight::FalseCondition>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::ConditionParameterlessFactoryTemplate<fight::AndCondition>::vfunc_03 (0x0023E1F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -298889,7 +298889,7 @@ Class_0028A410* Class_0028A410::sub_0028A410(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::CompressedQuaternionChannel<math::CompressedQuaternion6>::vfunc_00 (0x0028A440, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: pure3d::CompressedQuaternionChannel<math::CompressedQuaternion6>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and retur
+// What it does: pure3d::CompressedQuaternionChannel<math::CompressedQuaternion6>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_00 (0x0028A410), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -298927,7 +298927,7 @@ Class_0028A440* Class_0028A440::sub_0028A440(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::CompressedQuaternionChannel<math::CompressedQuaternion4>::vfunc_00 (0x0028A470, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: pure3d::CompressedQuaternionChannel<math::CompressedQuaternion4>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and retur
+// What it does: pure3d::CompressedQuaternionChannel<math::CompressedQuaternion4>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_00 (0x0028A410), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -298965,7 +298965,7 @@ Class_0028A470* Class_0028A470::sub_0028A470(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::CompressedQuaternionChannel<math::CompressedQuaternion3>::vfunc_00 (0x0028A4A0, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: pure3d::CompressedQuaternionChannel<math::CompressedQuaternion3>'s deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and retur
+// What it does: pure3d::CompressedQuaternionChannel<math::CompressedQuaternion3>'s deleting destructor: destroys it, frees its memory when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as pure3d::CompressedQuaternionChannel<math::CompressedQuaternion8>::vfunc_00 (0x0028A410), which was matched first;
 // its addresses and names were swapped for this function's.

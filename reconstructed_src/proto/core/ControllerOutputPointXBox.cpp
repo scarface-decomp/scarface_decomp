@@ -42,6 +42,7 @@ void* ControllerOutputPointXBox::vfunc_05()
 // ============================================================================
 // [VERIFIED] core::ControllerOutputPointXBox::vfunc_07 (0x00205380, 64 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a number in the controller output, kept between zero and one.
 // ============================================================================
 // Same machine code as core::ControllerOutputPointXBox::vfunc_07 (0x00247FD0), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AIConditionSemaphoreIsSet::vfunc_04 (0x00106290, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AI condition: true when the semaphore (flag) it points to is set.
 // ============================================================================
 // AIConditionSemaphoreIsSet::vfunc_04 (Proto 0x00106290, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

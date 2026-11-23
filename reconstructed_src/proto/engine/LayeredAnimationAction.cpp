@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] LayeredAnimationAction::vfunc_04 (0x000D3070, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x10.
 // ============================================================================
 // Same machine code as LayeredAnimationAction::vfunc_04 (0x000E5280), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -154,6 +154,7 @@ PolySkin* PolySkin::vfunc_03(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::PolySkin::vfunc_05 (0x00229B30, 33 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: PolySkin: makes a new 112-byte PolySkin that is a copy of this one; null if out of memory.
 // ============================================================================
 // pure3d::PolySkin::vfunc_05 (Proto 0x00229B30, 33 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] core::DriveFindNextRequest::vfunc_06 (0x006E41B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveFindNextRequest: Always returns 17.
 // ============================================================================
 // Same machine code as core::DriveFindNextRequest::vfunc_06 (0x0006F9A0), which was matched first;
 // its addresses and names were swapped for this function's.

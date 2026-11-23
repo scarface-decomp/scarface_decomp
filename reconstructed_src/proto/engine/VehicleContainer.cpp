@@ -105,6 +105,7 @@ bool VehicleContainer::vfunc_17(bool a1)
 // ============================================================================
 // [VERIFIED] renderer::VehicleContainer::vfunc_18 (0x000535B0, 17 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0xD0.
 // ============================================================================
 // Same machine code as renderer::VehicleContainer::vfunc_18 (0x0005DB90), which was matched first;
 // its addresses and names were swapped for this function's.

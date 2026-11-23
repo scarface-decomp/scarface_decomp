@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<fight::MaybeCondition>::vfunc_07 (0x001FB9C0, 65 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for fight::MaybeCondition: allocates a new one (20 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::ConditionFactoryTemplate<fight::MaybeCondition>::vfunc_07 (Proto 0x001FB9C0, 65 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

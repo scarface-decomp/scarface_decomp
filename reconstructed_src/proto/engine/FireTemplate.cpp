@@ -35,6 +35,7 @@ void* FireTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] FireTemplate::vfunc_12 (0x001667C0, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fire template: if it was started, stops its member at +0x24 and clears the started flag.
 // ============================================================================
 // bin: proto
 // va: 0x001667C0

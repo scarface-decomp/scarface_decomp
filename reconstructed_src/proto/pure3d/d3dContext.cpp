@@ -1196,6 +1196,7 @@ void d3dContext::vfunc_89(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] pure3d::d3dContext::vfunc_96 (0x00234DF0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dContext: Always returns 2048.
 // ============================================================================
 // pure3d::d3dContext::vfunc_96 (Proto 0x00234DF0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

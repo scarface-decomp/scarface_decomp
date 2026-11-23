@@ -308,6 +308,7 @@ GangSpawnObject* GangSpawnObject::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] GangSpawnObject::vfunc_43 (0x00213E60, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GangSpawnObject: Always returns 16.
 // ============================================================================
 // GangSpawnObject::vfunc_43 (Proto 0x00213E60, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

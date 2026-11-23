@@ -43,6 +43,7 @@ float GlanceAtOvertakingPed::vfunc_08()
 // ============================================================================
 // [VERIFIED] GlanceAtOvertakingPed::vfunc_07 (0x000DC5E0, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_000CA1C0 on the member at +0x14 answers no.
 // ============================================================================
 // Same machine code as GlanceAtOvertakingPed::vfunc_07 (0x000EFCF0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -107,6 +108,7 @@ L_25:
 // ============================================================================
 // [VERIFIED] GlanceAtOvertakingPed::vfunc_10 (0x0026CAA0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GlanceAtOvertakingPed: Always returns 13.
 // ============================================================================
 // GlanceAtOvertakingPed::vfunc_10 (Proto 0x0026CAA0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

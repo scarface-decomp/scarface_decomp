@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AIConditionNot::vfunc_04 (0x00106300, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AI condition 'not': true when the condition it wraps is false.
 // ============================================================================
 // bin: proto
 // va: 0x00106300

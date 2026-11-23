@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] core::DriveOpenRequest::vfunc_06 (0x0026C9F0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveOpenRequest: Always returns 11.
 // ============================================================================
 // core::DriveOpenRequest::vfunc_06 (Proto 0x0026C9F0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

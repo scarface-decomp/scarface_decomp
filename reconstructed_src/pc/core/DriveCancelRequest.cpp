@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] core::DriveCancelRequest::vfunc_06 (0x006E42C0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveCancelRequest: Always returns 20.
 // ============================================================================
 // Same machine code as core::DriveCancelRequest::vfunc_06 (Proto 0x0026CD30), which was matched first;
 // its addresses and names were swapped for this function's.

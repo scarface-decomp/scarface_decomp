@@ -10,7 +10,7 @@
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<FightTree::FightActionController<fight::SequenceTrack>>::vfunc_03 (0x00022730, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: fight::TrackFactoryTemplate<FightTree::FightActionController<fight::SequenceTrack>>'s deleting destructor: destroys the object, frees its memory when asked (fla
+// What it does: Deleting destructor of the TrackFactoryTemplate for SequenceTrack: destroys it, frees it when asked (flag bit 0), returns it.
 // ============================================================================
 // Same machine code as fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_03 (0x00022650), which was matched first;
 // its addresses and names were swapped for this function's.

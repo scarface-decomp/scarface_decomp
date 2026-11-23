@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] core::DriveCreateDirectoryRequest::vfunc_06 (0x006E4070, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveCreateDirectoryRequest: Always returns 14.
 // ============================================================================
 // Same machine code as core::DriveCreateDirectoryRequest::vfunc_06 (Proto 0x0026CB00), which was matched first;
 // its addresses and names were swapped for this function's.

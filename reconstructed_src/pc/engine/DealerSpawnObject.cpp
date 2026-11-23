@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] DealerSpawnObject::vfunc_45 (0x006E3EB0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: DealerSpawnObject: Always returns 8.
 // ============================================================================
 // Same machine code as DealerSpawnObject::vfunc_43 (Proto 0x0021E9A0), which was matched first;
 // its addresses and names were swapped for this function's.

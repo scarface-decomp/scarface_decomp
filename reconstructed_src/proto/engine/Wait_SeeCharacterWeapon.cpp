@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] AICommandWaits::Wait_SeeCharacterWeapon::vfunc_00 (0x0011D9E0, 103 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Wait-until-character-sees-weapon: builds its two sub-objects (a 92-byte check and a 16-byte watcher of type 6) and starts the watcher.
 // ============================================================================
 // AICommandWaits::Wait_SeeCharacterWeapon::vfunc_00 (Proto 0x0011D9E0, 103 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

@@ -146,6 +146,7 @@ int XboxSaveDrive::vfunc_12(int a1, int a2)
 // ============================================================================
 // [VERIFIED] core::XboxSaveDrive::vfunc_02 (0x002834F0, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::XboxSaveDrive: Always returns 4.
 // ============================================================================
 // core::XboxSaveDrive::vfunc_02 (Proto 0x002834F0, 8 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -171,6 +172,7 @@ int XboxSaveDrive::vfunc_02(int a1)
 // ============================================================================
 // [VERIFIED] core::XboxSaveDrive::vfunc_01 (0x00283500, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::XboxSaveDrive: Always returns 8172.
 // ============================================================================
 // core::XboxSaveDrive::vfunc_01 (Proto 0x00283500, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

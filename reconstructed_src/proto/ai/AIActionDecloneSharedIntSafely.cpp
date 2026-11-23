@@ -59,6 +59,7 @@ int AIActionDecloneSharedIntSafely::vfunc_07()
 // ============================================================================
 // [VERIFIED] AIActionDecloneSharedIntSafely::vfunc_00 (0x00105F80, 39 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIActionDecloneSharedIntSafely's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIActionDecloneSharedIntSafely::vfunc_00 (Proto 0x00105F80, 39 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

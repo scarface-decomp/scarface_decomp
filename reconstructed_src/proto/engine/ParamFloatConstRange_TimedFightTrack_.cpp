@@ -121,6 +121,7 @@ template <> void fight::ParamFloatConstRange<TimedFightTrack>::vfunc_04(int a1, 
 // ============================================================================
 // [VERIFIED] fight::ParamFloatConstRange<TimedFightTrack>::vfunc_01 (0x00205320, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamFloatConstRange<TimedFightTrack>: Always returns 2.
 // ============================================================================
 // fight::ParamFloatConstRange<TimedFightTrack>::vfunc_01 (Proto 0x00205320, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

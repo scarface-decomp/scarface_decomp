@@ -119,6 +119,7 @@ int Drive::vfunc_15(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int 
 // ============================================================================
 // [VERIFIED] core::Drive::vfunc_22 (0x006E6460, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::Drive: Always returns 1.
 // ============================================================================
 // Same machine code as core::Drive::vfunc_22 (Proto 0x0026EEA0), which was matched first;
 // its addresses and names were swapped for this function's.

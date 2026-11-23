@@ -724,6 +724,7 @@ void __cdecl sub_006DF0F0(int a1)
 // ============================================================================
 // [VERIFIED] sub_006DF2B0 (0x006DF2B0, 34 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes its four arguments, the last a 64-bit number, unchanged to another function.
 // ============================================================================
 // Same machine code as sub_00283FE0 (0x00283FE0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2320,6 +2321,7 @@ int CompletionEventRequest::vfunc_01()
 // ============================================================================
 // [VERIFIED] core::CompletionEventRequest::vfunc_06 (0x006E36C0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::CompletionEventRequest: Always returns 23.
 // ============================================================================
 // Same machine code as core::CompletionEventRequest::vfunc_06 (0x002A98D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2417,6 +2419,7 @@ int FileCompletionRequest::vfunc_03()
 // ============================================================================
 // [VERIFIED] core::DriveCompletionRequest::vfunc_06 (0x006E3760, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveCompletionRequest: Always returns 22.
 // ============================================================================
 // Same machine code as core::CompletionEventRequest::vfunc_06 (Proto 0x0026C190), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2577,6 +2580,7 @@ template <> int fight::ParamString<UpperBodyAnimStateCondition>::vfunc_01()
 // ============================================================================
 // [VERIFIED] fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (0x006E3DD0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamEnumConstList<DirectionalGetHitCondition>: Always returns 5.
 // ============================================================================
 // Same machine code as fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (Proto 0x000CB900), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2605,6 +2609,7 @@ template <> int fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01(
 // ============================================================================
 // [VERIFIED] core::FileGetPositionRequest::vfunc_06 (0x006E3E60, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::FileGetPositionRequest: Always returns 7.
 // ============================================================================
 // Same machine code as core::FileGetPositionRequest::vfunc_06 (Proto 0x0026C8F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2637,6 +2642,7 @@ int FileGetPositionRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] DealerSpawnObject::vfunc_45 (0x006E3EB0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: DealerSpawnObject: Always returns 8.
 // ============================================================================
 // Same machine code as DealerSpawnObject::vfunc_43 (Proto 0x0021E9A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2704,6 +2710,7 @@ int DealerSpawnObject::vfunc_45()
 // ============================================================================
 // [VERIFIED] fight::ParamBranch<ExitConditionTrack>::vfunc_01 (0x006E3F00, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamBranch<ExitConditionTrack>: Always returns 9.
 // ============================================================================
 // Same machine code as fight::ParamBranch<ExitConditionTrack>::vfunc_01 (Proto 0x000D6C80), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2761,6 +2768,7 @@ int FileRequest::vfunc_03()
 // ============================================================================
 // [VERIFIED] core::DriveOpenRequest::vfunc_06 (0x006E3F60, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveOpenRequest: Always returns 11.
 // ============================================================================
 // Same machine code as core::DriveOpenRequest::vfunc_06 (Proto 0x0026C9F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2793,6 +2801,7 @@ int DriveOpenRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveMediaRequest::vfunc_06 (0x006E3FC0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveMediaRequest: Always returns 12.
 // ============================================================================
 // Same machine code as core::DriveMediaRequest::vfunc_06 (Proto 0x0026CA50), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2825,6 +2834,7 @@ int DriveMediaRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] GlanceAtOvertakingPed::vfunc_10 (0x006E4010, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GlanceAtOvertakingPed: Always returns 13.
 // ============================================================================
 // Same machine code as GlanceAtOvertakingPed::vfunc_10 (Proto 0x0026CAA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2857,6 +2867,7 @@ int GlanceAtOvertakingPed::vfunc_10()
 // ============================================================================
 // [VERIFIED] core::DriveCreateDirectoryRequest::vfunc_06 (0x006E4070, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveCreateDirectoryRequest: Always returns 14.
 // ============================================================================
 // Same machine code as core::DriveCreateDirectoryRequest::vfunc_06 (Proto 0x0026CB00), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2889,6 +2900,7 @@ int DriveCreateDirectoryRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveDestroyDirectoryRequest::vfunc_06 (0x006E40D0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveDestroyDirectoryRequest: Always returns 15.
 // ============================================================================
 // Same machine code as core::DriveDestroyDirectoryRequest::vfunc_06 (Proto 0x0026CB60), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2921,6 +2933,7 @@ int DriveDestroyDirectoryRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] GangSpawnObject::vfunc_45 (0x006E4150, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GangSpawnObject: Always returns 16.
 // ============================================================================
 // Same machine code as GangSpawnObject::vfunc_43 (Proto 0x00213E60), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -2988,6 +3001,7 @@ int GangSpawnObject::vfunc_45()
 // ============================================================================
 // [VERIFIED] core::DriveFindNextRequest::vfunc_06 (0x006E41B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveFindNextRequest: Always returns 17.
 // ============================================================================
 // Same machine code as core::DriveFindNextRequest::vfunc_06 (0x0006F9A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -3020,6 +3034,7 @@ int DriveFindNextRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveFindCloseRequest::vfunc_06 (0x006E4200, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveFindCloseRequest: Always returns 18.
 // ============================================================================
 // Same machine code as core::DriveFindCloseRequest::vfunc_06 (Proto 0x0026CC80), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -3099,6 +3114,7 @@ void* d3dContext::vfunc_22()
 // ============================================================================
 // [VERIFIED] core::DriveFileDestroyRequest::vfunc_06 (0x006E4270, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveFileDestroyRequest: Always returns 19.
 // ============================================================================
 // Same machine code as core::DriveFileDestroyRequest::vfunc_06 (Proto 0x0026CCE0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -3131,6 +3147,7 @@ int DriveFileDestroyRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveCancelRequest::vfunc_06 (0x006E42C0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveCancelRequest: Always returns 20.
 // ============================================================================
 // Same machine code as core::DriveCancelRequest::vfunc_06 (Proto 0x0026CD30), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -3162,6 +3179,7 @@ int DriveCancelRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveLockRequest::vfunc_06 (0x006E42D0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveLockRequest: Always returns 21.
 // ============================================================================
 // Same machine code as core::DriveCompletionRequest::vfunc_06 (Proto 0x0026C230), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -3195,6 +3213,7 @@ int DriveLockRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::Request::vfunc_00 (0x006E4380, 60 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::Request's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as core::Request::vfunc_00 (Proto 0x0026CD90), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -7491,6 +7510,7 @@ int Drive::vfunc_15(int a1, int a2, int a3, int a4, int a5, int a6, int a7, int 
 // ============================================================================
 // [VERIFIED] core::Drive::vfunc_22 (0x006E6460, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::Drive: Always returns 1.
 // ============================================================================
 // Same machine code as core::Drive::vfunc_22 (Proto 0x0026EEA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -9412,6 +9432,7 @@ void Class_006E9A10::sub_006E9A10(int a1, int a2)
 // ============================================================================
 // [VERIFIED] content::LoadInventory::vfunc_03 (0x006E9AE0, 81 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: LoadInventory's deleting destructor: frees its inventory at +0x08, releases the object at +0x0C, then frees itself when asked.
 // ============================================================================
 // Same machine code as content::LoadInventory::vfunc_03 (Proto 0x001FD230), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -11031,6 +11052,7 @@ void Class_006ECB50::sub_006ECB50()
 // ============================================================================
 // [VERIFIED] om::MetaTypeBase::vfunc_00 (0x006ECB80, 74 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: om::MetaTypeBase's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as om::MetaTypeBase::vfunc_00 (0x002CEFA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -11291,6 +11313,7 @@ void Class_006ED0C0::sub_006ED0C0()
 // ============================================================================
 // [VERIFIED] om::EntityTypeBase::vfunc_00 (0x006ED3B0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: om::EntityTypeBase's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as om::EntityTypeBase::vfunc_00 (0x002CF7D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -11333,6 +11356,7 @@ EntityTypeBase* EntityTypeBase::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] om::Entity::vfunc_03 (0x006ED440, 51 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: om::Entity's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as om::Entity::vfunc_03 (0x002CF860), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -11650,6 +11674,7 @@ Class_006EDCB0* Class_006EDCB0::sub_006EDCB0(int a1, bool a2)
 // ============================================================================
 // [VERIFIED] om::ContentStream::vfunc_00 (0x006EDE70, 45 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: om::ContentStream's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as om::ContentStream::vfunc_00 (Proto 0x00293E50), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -14926,6 +14951,7 @@ int OggVorbisStream::vfunc_03()
 // ============================================================================
 // [VERIFIED] AirplanePlaneCollisionReceiver::vfunc_00 (0x006F4DB0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Airplane-plane collision receiver: forwards to the 10th virtual of its owner at +0x04.
 // ============================================================================
 // Same machine code as AirplanePlaneCollisionReceiver::vfunc_00 (0x0009B2D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -15358,6 +15384,7 @@ void HalRadicalAdpcmDecodeStream::vfunc_00()
 // ============================================================================
 // [VERIFIED] audio::HalRadicalAdpcmDecodeStream::vfunc_17 (0x006F5660, 44 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::HalRadicalAdpcmDecodeStream's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as audio::HalRadicalAdpcmDecodeStream::vfunc_13 (Proto 0x002AD500), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -15764,6 +15791,7 @@ void Class_006F59B0::sub_006F59B0()
 // ============================================================================
 // [VERIFIED] audio::SeqEventTypeBase::vfunc_00 (0x006F5C10, 61 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::SeqEventTypeBase's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as audio::SeqEventTypeBase::vfunc_00 (Proto 0x0029EE70), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -18899,6 +18927,7 @@ SeqActionStopTrack* SeqActionStopTrack::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] audio::SeqEventStopTrack::vfunc_04 (0x006F8280, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::SeqEventStopTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as audio::SeqEventStopTrack::vfunc_04 (0x002DA660), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -19190,6 +19219,7 @@ int SeqEventPlayTrack::vfunc_03()
 // ============================================================================
 // [VERIFIED] audio::SeqEventPlayTrack::vfunc_04 (0x006F8660, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::SeqEventPlayTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as audio::SeqEventPlayTrack::vfunc_04 (0x002DAA30), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22829,6 +22859,7 @@ int SeqEventCrossFade::vfunc_03()
 // ============================================================================
 // [VERIFIED] audio::SeqEventCrossFade::vfunc_04 (0x006FB250, 53 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::SeqEventCrossFade's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as audio::SeqEventCrossFade::vfunc_04 (0x002DD640), which was matched first;
 // its addresses and names were swapped for this function's.

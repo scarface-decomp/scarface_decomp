@@ -131,6 +131,7 @@ int ExitConditionTrack::vfunc_08(int a1)
 // ============================================================================
 // [VERIFIED] ExitConditionTrack::vfunc_26 (0x000D6BE0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x20 and returns true.
 // ============================================================================
 // Same machine code as ExitConditionTrack::vfunc_26 (0x000E80A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -244,6 +245,7 @@ float ExitConditionTrack::vfunc_17()
 // ============================================================================
 // [VERIFIED] ExitConditionTrack::vfunc_03 (0x000D6C40, 54 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ExitConditionTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // ExitConditionTrack::vfunc_03 (Proto 0x000D6C40, 54 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -291,6 +293,7 @@ ExitConditionTrack* ExitConditionTrack::vfunc_03(int a1)
 // ============================================================================
 // [VERIFIED] ExitConditionTrack::vfunc_24 (0x000D7800, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x1C and returns true.
 // ============================================================================
 // Same machine code as ExitConditionTrack::vfunc_24 (0x000E9220), which was matched first;
 // its addresses and names were swapped for this function's.

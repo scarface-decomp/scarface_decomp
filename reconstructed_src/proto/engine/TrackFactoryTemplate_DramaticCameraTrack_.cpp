@@ -49,6 +49,7 @@ template <> fight::TrackFactoryTemplate<DramaticCameraTrack>* fight::TrackFactor
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_07 (0x000CD6F0, 52 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for DramaticCameraTrack: allocates a new one (116 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_07 (Proto 0x000CD6F0, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

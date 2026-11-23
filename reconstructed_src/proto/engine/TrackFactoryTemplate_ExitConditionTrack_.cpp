@@ -49,6 +49,7 @@ template <> fight::TrackFactoryTemplate<ExitConditionTrack>* fight::TrackFactory
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<ExitConditionTrack>::vfunc_07 (0x000CD450, 52 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for ExitConditionTrack: allocates a new one (72 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<ExitConditionTrack>::vfunc_07 (Proto 0x000CD450, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

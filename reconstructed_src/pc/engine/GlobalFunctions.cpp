@@ -272,6 +272,7 @@ void __cdecl sub_006DF0F0(int a1)
 // ============================================================================
 // [VERIFIED] sub_006DF2B0 (0x006DF2B0, 34 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes its four arguments, the last a 64-bit number, unchanged to another function.
 // ============================================================================
 // Same machine code as sub_00283FE0 (0x00283FE0), which was matched first;
 // its addresses and names were swapped for this function's.

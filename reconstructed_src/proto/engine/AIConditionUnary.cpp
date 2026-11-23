@@ -10,6 +10,7 @@
 // ============================================================================
 // [VERIFIED] AIConditionUnary::vfunc_05 (0x001062F0, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AI condition (unary): forwards this slot to the condition it wraps.
 // ============================================================================
 // AIConditionUnary::vfunc_05 (Proto 0x001062F0, 8 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -46,6 +47,7 @@ void AIConditionUnary::vfunc_05()
 // ============================================================================
 // [VERIFIED] AIConditionUnary::vfunc_03 (0x00106ED0, 50 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIConditionUnary's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIConditionUnary::vfunc_03 (Proto 0x00106ED0, 50 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and

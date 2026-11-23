@@ -435,6 +435,7 @@ void Class_00011E20::sub_00011E20(float a1)
 // ============================================================================
 // [VERIFIED] sub_00011E60 (0x00011E60, 31 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the squared length of a three-number vector (x*x + y*y + z*z).
 // ============================================================================
 // Same machine code as sub_00011910 (0x00011910), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -540,6 +541,7 @@ L_17:
 // ============================================================================
 // [VERIFIED] sub_000121D0 (0x000121D0, 33 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the length of a three-number vector.
 // ============================================================================
 // Same machine code as sub_0003DBD0 (0x0003DBD0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -5148,6 +5150,7 @@ int Class_00024390::sub_00024390(float a1)
 // ============================================================================
 // [VERIFIED] sub_000243B0 (0x000243B0, 19 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Rounds a float down to the nearest whole number (the C++ floorf overload from <math.h>).
 // ============================================================================
 // Same machine code as sub_00026740 (0x00026740), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -7533,6 +7536,7 @@ bool __cdecl sub_0002BFA0(bool a1)
 // ============================================================================
 // [VERIFIED] sub_0002BFE0 (0x0002BFE0, 27 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether either of two global on/off flags is set.
 // ============================================================================
 // Same machine code as sub_0002EAA0 (0x0002EAA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -8544,6 +8548,7 @@ void Class_00031030::sub_00031030(int a1, int a2, int a3, int a4)
 // ============================================================================
 // [VERIFIED] sub_00031260 (0x00031260, 52 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Builds an object from two three-number vectors, such as the two ends of a line.
 // ============================================================================
 // Same machine code as sub_000CA160 (0x000CA160), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -16836,6 +16841,7 @@ bool __cdecl sub_000590C0(bool a1)
 // ============================================================================
 // [VERIFIED] sub_000590E0 (0x000590E0, 18 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets an on/off flag on the object held in a global pointer.
 // ============================================================================
 // Same machine code as sub_00063880 (0x00063880), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -19883,6 +19889,7 @@ int __cdecl sub_00065690(void)
 // ============================================================================
 // [VERIFIED] sub_000656C0 (0x000656C0, 36 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Formats a debug message into a local buffer; this build prints it nowhere.
 // ============================================================================
 // Same machine code as sub_0006F9C0 (0x0006F9C0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -29191,6 +29198,7 @@ Class_0008D490* Class_0008D490::sub_0008D490(int a1)
 // ============================================================================
 // [VERIFIED] sub_0008D4A0 (0x0008D4A0, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Copies the key (+0x10) of the object it is given, or 0 when there is no object.
 // ============================================================================
 // Same machine code as sub_00098B70 (0x00098B70), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -29884,6 +29892,7 @@ Class_0008F4A0* Class_0008F4A0::sub_0008F4A0()
 // ============================================================================
 // [VERIFIED] sub_0008F4D0 (0x0008F4D0, 33 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Resets a four-number rotation to "no rotation" (0, 0, 0, 1).
 // ============================================================================
 // Same machine code as sub_0009ACA0 (0x0009ACA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -31870,6 +31879,7 @@ void Class_00097410::sub_00097410()
 // ============================================================================
 // [VERIFIED] sub_00097430 (0x00097430, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether the number at +0x20 is above the constant at 0x003A4A84.
 // ============================================================================
 // Same machine code as sub_000A33A0 (0x000A33A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -31984,6 +31994,7 @@ void Class_00097480::sub_00097480()
 // ============================================================================
 // [VERIFIED] sub_00097490 (0x00097490, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x4.
 // ============================================================================
 // Same machine code as sub_000A3400 (0x000A3400), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -33137,6 +33148,7 @@ float Class_0009AE40::sub_0009AE40(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_0009AE70 (0x0009AE70, 96 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Builds an object of thirty values, all set to zero.
 // ============================================================================
 // Same machine code as sub_000A6D40 (0x000A6D40), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -34911,6 +34923,7 @@ void __cdecl sub_0009EFE0(void)
 // ============================================================================
 // [VERIFIED] sub_0009F010 (0x0009F010, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x14 is set.
 // ============================================================================
 // Same machine code as sub_000AB070 (0x000AB070), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -36768,6 +36781,7 @@ L_13:
 // ============================================================================
 // [VERIFIED] sub_000A8470 (0x000A8470, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 1 of the byte at +0x98.
 // ============================================================================
 // Same machine code as sub_000B5A90 (0x000B5A90), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -37182,6 +37196,7 @@ Class_000AA7D0* Class_000AA7D0::sub_000AA7D0()
 // ============================================================================
 // [VERIFIED] sub_000AA7F0 (0x000AA7F0, 23 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Sets four numbers of an object to zero.
 // ============================================================================
 // Same machine code as sub_000A5670 (0x000A5670), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -37669,6 +37684,7 @@ bool Class_000AADC0::sub_000AADC0()
 // ============================================================================
 // [VERIFIED] sub_000AAE30 (0x000AAE30, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x4 is set.
 // ============================================================================
 // Same machine code as sub_000B8530 (0x000B8530), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -38135,6 +38151,7 @@ void Class_000AB0D0::sub_000AB0D0()
 // ============================================================================
 // [VERIFIED] sub_000AB1C0 (0x000AB1C0, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0xC is set.
 // ============================================================================
 // Same machine code as sub_000B8900 (0x000B8900), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -39209,6 +39226,7 @@ void __cdecl sub_000AEFA0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000AF240 (0x000AF240, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x28.
 // ============================================================================
 // Same machine code as sub_000BC990 (0x000BC990), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -41262,6 +41280,7 @@ bool Class_000B76D0::sub_000B76D0()
 // ============================================================================
 // [VERIFIED] sub_000B77A0 (0x000B77A0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the value at +0x14 to sub_0002AC90 and returns its result.
 // ============================================================================
 // Same machine code as sub_000C5310 (0x000C5310), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -44038,6 +44057,7 @@ L_27:
 // ============================================================================
 // [VERIFIED] sub_000BE230 (0x000BE230, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x18.
 // ============================================================================
 // Same machine code as sub_000CE7F0 (0x000CE7F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -47724,6 +47744,7 @@ L_35:
 // ============================================================================
 // [VERIFIED] sub_000CA710 (0x000CA710, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x20 is set.
 // ============================================================================
 // Same machine code as sub_000DC5F0 (0x000DC5F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49787,6 +49808,7 @@ int Class_000D4F20::sub_000D4F20()
 // ============================================================================
 // [VERIFIED] sub_000D4F40 (0x000D4F40, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x33.
 // ============================================================================
 // Same machine code as sub_000E75E0 (0x000E75E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -50591,6 +50613,7 @@ int Class_000D6F60::sub_000D6F60(int a1)
 // ============================================================================
 // [VERIFIED] sub_000D6F80 (0x000D6F80, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x29.
 // ============================================================================
 // Same machine code as sub_000E9610 (0x000E9610), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -50653,6 +50676,7 @@ Class_000D7180* Class_000D7180::sub_000D7180()
 // ============================================================================
 // [VERIFIED] sub_000D7330 (0x000D7330, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x1C.
 // ============================================================================
 // Same machine code as sub_000E99B0 (0x000E99B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -50676,6 +50700,7 @@ bool Class_000D7330::sub_000D7330()
 // ============================================================================
 // [VERIFIED] sub_000D7360 (0x000D7360, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 1 of the byte at +0x1C.
 // ============================================================================
 // Same machine code as sub_000E99E0 (0x000E99E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -54935,6 +54960,7 @@ L_58:
 // ============================================================================
 // [VERIFIED] sub_000EB670 (0x000EB670, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the value at +0x18 to sub_0002AC90 and returns its result.
 // ============================================================================
 // Same machine code as sub_00101AC0 (0x00101AC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -55437,6 +55463,7 @@ L_25:
 // ============================================================================
 // [VERIFIED] sub_000EEA80 (0x000EEA80, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_0002AC90 gives a nonzero result for the value at +0x20.
 // ============================================================================
 // Same machine code as sub_00104FA0 (0x00104FA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -55462,6 +55489,7 @@ int Class_000EEA80::sub_000EEA80()
 // ============================================================================
 // [VERIFIED] sub_000EEAA0 (0x000EEAA0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the value at +0x20 to sub_0002AC90 and returns its result.
 // ============================================================================
 // Same machine code as sub_00104FC0 (0x00104FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -55487,6 +55515,7 @@ int Class_000EEAA0::sub_000EEAA0()
 // ============================================================================
 // [VERIFIED] sub_000EEAB0 (0x000EEAB0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the value at +0x24 to sub_0002AC90 and returns its result.
 // ============================================================================
 // Same machine code as sub_00104FD0 (0x00104FD0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -56547,6 +56576,7 @@ L_10:
 // ============================================================================
 // [VERIFIED] sub_000F7770 (0x000F7770, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x30.
 // ============================================================================
 // Same machine code as sub_000B5A30 (0x000B5A30), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -68685,6 +68715,7 @@ void Class_001341F0::sub_001341F0(bool a1)
 // ============================================================================
 // [VERIFIED] sub_00135AE0 (0x00135AE0, 30 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Builds a camera transition: two values cleared and a third set to one.
 // ============================================================================
 // Same machine code as sub_001522C0 (0x001522C0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -68780,6 +68811,7 @@ void Class_00135B50::sub_00135B50()
 // ============================================================================
 // [VERIFIED] sub_00136010 (0x00136010, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x10 of the object pointed to at +0x84.
 // ============================================================================
 // Same machine code as sub_001527D0 (0x001527D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -69332,6 +69364,7 @@ L_10:
 // ============================================================================
 // [VERIFIED] sub_00142DE0 (0x00142DE0, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x30 is set.
 // ============================================================================
 // Same machine code as sub_00161030 (0x00161030), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -70415,6 +70448,7 @@ void Class_001467E0::sub_001467E0()
 // ============================================================================
 // [VERIFIED] sub_001467F0 (0x001467F0, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x90 is set.
 // ============================================================================
 // Same machine code as sub_001624F0 (0x001624F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -85775,6 +85809,7 @@ void Class_0018F420::sub_0018F420()
 // ============================================================================
 // [VERIFIED] sub_0018F6E0 (0x0018F6E0, 25 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores two numbers in an object.
 // ============================================================================
 // Same machine code as sub_001C4640 (0x001C4640), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -87956,6 +87991,7 @@ void __stdcall sub_0019BE00(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0019C0E0 (0x0019C0E0, 17 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
 // ============================================================================
 // Same machine code as sub_001D3C70 (0x001D3C70), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -92679,6 +92715,7 @@ void Class_001B5F80::sub_001B5F80(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_001B6340 (0x001B6340, 43 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Copies a three-number value (such as a colour) into a global setting.
 // ============================================================================
 // Same machine code as sub_001F0540 (0x001F0540), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -93900,6 +93937,7 @@ void Class_001BB120::sub_001BB120()
 // ============================================================================
 // [VERIFIED] sub_001BB130 (0x001BB130, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_0002AC90 gives a nonzero result for the value at +0xE0.
 // ============================================================================
 // Same machine code as sub_001F6330 (0x001F6330), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -93962,6 +94000,7 @@ L_4A:
 // ============================================================================
 // [VERIFIED] sub_001BB1A0 (0x001BB1A0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the value at +0xE0 to sub_0002AC90 and returns its result.
 // ============================================================================
 // Same machine code as sub_001F6390 (0x001F6390), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -107287,6 +107326,7 @@ void Class_001FCF60::sub_001FCF60()
 // ============================================================================
 // [VERIFIED] sub_001FCF70 (0x001FCF70, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets flag bit 1 of the byte at +0x12.
 // ============================================================================
 // Same machine code as sub_0023F7E0 (0x0023F7E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -107783,6 +107823,7 @@ bool Class_001FD990::sub_001FD990()
 // ============================================================================
 // [VERIFIED] sub_001FDA90 (0x001FDA90, 144 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads from a stream: opens it first if an open is pending, then reads one of two ways depending on its mode.
 // ============================================================================
 // Same machine code as sub_00240570 (0x00240570), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -109131,6 +109172,7 @@ int Class_002006A0::sub_002006A0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00201440 (0x00201440, 75 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: The game's name key: h = (h * 65599) & 0x7FFFFFFF, each character + 0x20 if below 'a', XORed in; top bit set.
 // ============================================================================
 // Same machine code as sub_00243FA0 (0x00243FA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -109168,6 +109210,7 @@ unsigned int __cdecl sub_00201440(const char* text, unsigned int start)
 // ============================================================================
 // [VERIFIED] sub_00201490 (0x00201490, 67 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: The game's name key without case folding: h = (h * 65599) & 0x7FFFFFFF, each character XORed in; top bit set.
 // ============================================================================
 // Same machine code as sub_00243FF0 (0x00243FF0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -109219,6 +109262,7 @@ void Class_002014E0::sub_002014E0()
 // ============================================================================
 // [VERIFIED] sub_002015A0 (0x002015A0, 99 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Scales a three-number vector to length one and returns its old length; a near-zero vector becomes zero.
 // ============================================================================
 // Same machine code as sub_00244100 (0x00244100), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -109260,6 +109304,7 @@ float Vec_002015A0::sub_002015A0()
 // ============================================================================
 // [VERIFIED] sub_00201610 (0x00201610, 59 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Scales a three-number vector so its length becomes one.
 // ============================================================================
 // Same machine code as sub_00244170 (0x00244170), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -109564,6 +109609,7 @@ int __cdecl sub_002019D0(int a1)
 // ============================================================================
 // [VERIFIED] sub_002019E0 (0x002019E0, 62 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Finds the deepest heap in the heap tree that owns a block of memory, or 0 when none does.
 // ============================================================================
 // Same machine code as sub_00244540 (0x00244540), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -111041,6 +111087,7 @@ void Class_0020BC60::sub_0020BC60()
 // ============================================================================
 // [VERIFIED] sub_0020BCC0 (0x0020BCC0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 448.
 // ============================================================================
 // sub_0020BCC0 (Proto 0x0020BCC0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -111054,6 +111101,7 @@ int __cdecl sub_0020BCC0(void)
 // ============================================================================
 // [VERIFIED] sub_0020BCD0 (0x0020BCD0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 640.
 // ============================================================================
 // sub_0020BCD0 (Proto 0x0020BCD0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -114352,6 +114400,7 @@ Class_0021A0C0* Class_0021A0C0::sub_0021A0C0()
 // ============================================================================
 // [VERIFIED] sub_0021A160 (0x0021A160, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x184 of the object pointed to at +0xC, or the constant at 0x0039D584 when there is none.
 // ============================================================================
 // Same machine code as sub_00260B20 (0x00260B20), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -116376,6 +116425,7 @@ Class_00231540* Class_00231540::sub_00231540()
 // ============================================================================
 // [VERIFIED] sub_00232720 (0x00232720, 9 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 2 of the byte at +0x38.
 // ============================================================================
 // Same machine code as sub_00280640 (0x00280640), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -117385,6 +117435,7 @@ void __cdecl sub_0023F510(int a1)
 // ============================================================================
 // [VERIFIED] sub_0023F5F0 (0x0023F5F0, 34 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes its four arguments, the last a 64-bit number, unchanged to another function.
 // ============================================================================
 // Same machine code as sub_00283FE0 (0x00283FE0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -125537,6 +125588,7 @@ int __cdecl sub_00288AC0(int a1, int a2, int a3, int a4)
 // ============================================================================
 // [VERIFIED] sub_00288D00 (0x00288D00, 35 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Copies a block of memory for the PNG image library after checking that its length fits (libpng png_memcpy_check).
 // ============================================================================
 // Same machine code as sub_002C6A20 (0x002C6A20), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -125574,6 +125626,7 @@ extern "C" png_voidp __cdecl png_memcpy_check(png_structp png_ptr, png_voidp s1,
 // ============================================================================
 // [VERIFIED] sub_00288D30 (0x00288D30, 49 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fills a block of memory for the PNG image library after checking that its length fits (libpng png_memset_check).
 // ============================================================================
 // Same machine code as sub_002C6A50 (0x002C6A50), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -125871,6 +125924,7 @@ int Class_0028EB00::sub_0028EB00(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_0028F690 (0x0028F690, 297 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Updates an Adler-32 checksum with a block of bytes (zlib adler32), used to check compressed data.
 // ============================================================================
 // Same machine code as sub_002CCCB0 (0x002CCCB0), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -12,6 +12,7 @@
 // ============================================================================
 // [VERIFIED] GlanceAbsentMindedly::vfunc_00 (0x000DC600, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_000CA1C0 on the member at +0x10 answers no.
 // ============================================================================
 // Same machine code as GlanceAbsentMindedly::vfunc_00 (0x000EFDE0), which was matched first;
 // its addresses and names were swapped for this function's.

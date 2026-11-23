@@ -678,6 +678,7 @@ void Class_00011E20::sub_00011E20(float a1)
 // ============================================================================
 // [VERIFIED] sub_00011E60 (0x00011E60, 31 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the squared length of a three-number vector (x*x + y*y + z*z).
 // ============================================================================
 // Same machine code as sub_00011910 (0x00011910), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -706,6 +707,7 @@ float Class_00011E60::sub_00011E60() const
 // ============================================================================
 // [VERIFIED] Collidable::vfunc_01 (0x00011E80, 28 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Releases one reference to a loaded object; at the last one it marks it and deletes it.
 // ============================================================================
 // Same machine code as Collidable::vfunc_01 (0x00011930), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -854,6 +856,7 @@ L_17:
 // ============================================================================
 // [VERIFIED] sub_000121D0 (0x000121D0, 33 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the length of a three-number vector.
 // ============================================================================
 // Same machine code as sub_0003DBD0 (0x0003DBD0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -3530,6 +3533,7 @@ bool __cdecl sub_0001DC90(bool a1)
 // ============================================================================
 // [VERIFIED] ControllerManager::ControllerFlowClient::vfunc_00 (0x0001DCA0, 60 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ControllerManager::ControllerFlowClient's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as ControllerManager::ControllerFlowClient::vfunc_00 (0x0001F120), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -4574,6 +4578,7 @@ void Class_0001F600::sub_0001F600()
 // ============================================================================
 // [VERIFIED] FightAction::vfunc_01 (0x0001F640, 20 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: FightAction: drops one reference and deletes the object (through its virtual destructor) when none are left.
 // ============================================================================
 // Same machine code as FightAction::vfunc_01 (0x00021830), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -5380,6 +5385,7 @@ TrackFactoryTemplate_FightTree__FightActionController_fight__EnterExitScriptTrac
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_07 (0x00020310, 61 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for EnterExitScriptTrack's fight action controller: allocates one (148 bytes), constructs it, gives it the factory's data at +8.
 // ============================================================================
 // Same machine code as fight::TrackFactoryTemplate<FightTree::FightActionController<fight::EnterExitScriptTrack>>::vfunc_07 (0x00022680), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -5536,6 +5542,7 @@ template <> float FightTree::FightActionController<fight::EnterExitScriptTrack>:
 // ============================================================================
 // [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_24 (0x00020380, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0xC and returns true.
 // ============================================================================
 // Same machine code as FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_24 (0x000226F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -5610,6 +5617,7 @@ template <> float FightTree::FightActionController<fight::EnterExitScriptTrack>:
 // ============================================================================
 // [VERIFIED] FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_26 (0x000203A0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x10 and returns true.
 // ============================================================================
 // Same machine code as FightTree::FightActionController<fight::EnterExitScriptTrack>::vfunc_26 (0x00022700), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -5673,6 +5681,7 @@ TrackFactoryTemplate_FightTree__FightActionController_fight__EnterExitScriptTrac
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<FightTree::FightActionController<fight::SequenceTrack>>::vfunc_07 (0x000203E0, 58 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for FightTree::FightActionController<fight::SequenceTrack>: allocates a new one (44 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // Same machine code as fight::TrackFactoryTemplate<FightTree::FightActionController<fight::SequenceTrack>>::vfunc_07 (0x00022760), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -8889,6 +8898,7 @@ L_7F:
 // ============================================================================
 // [VERIFIED] FrontEndFlowClient::vfunc_00 (0x00022630, 53 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: FrontEndFlowClient's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as FrontEndFlowClient::vfunc_00 (0x000244A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -9815,6 +9825,7 @@ void __cdecl sub_00023530(int a1, int a2, int a3, int a4, int a5, int a6)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<FEObject>::vfunc_02 (0x000235A0, 61 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Static initialiser for FEObject's class record: fills in two of its fields (one through sub_00070520) at program start.
 // ============================================================================
 // Same machine code as ConcreteClassRep<FEObject>::vfunc_02 (0x000253C0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -10182,6 +10193,7 @@ int Class_00024390::sub_00024390(float a1)
 // ============================================================================
 // [VERIFIED] sub_000243B0 (0x000243B0, 19 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Rounds a float down to the nearest whole number (the C++ floorf overload from <math.h>).
 // ============================================================================
 // Same machine code as sub_00026740 (0x00026740), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -10200,6 +10212,7 @@ float (*g_FloorF)(float) = floorf;
 // ============================================================================
 // [VERIFIED] Graph::vfunc_01 (0x000243D0, 54 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Graph's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as Graph::vfunc_01 (0x00026760), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -10661,6 +10674,7 @@ Class_000248E0* Class_000248E0::sub_000248E0()
 // ============================================================================
 // [VERIFIED] core::Object::vfunc_00 (0x000248F0, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::Object's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as core::Object::vfunc_00 (0x00026CD0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -13461,6 +13475,7 @@ void Class_000277E0::sub_000277E0()
 // ============================================================================
 // [VERIFIED] GameSetObject::vfunc_01 (0x00027800, 51 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GameSetObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as GameSetObject::vfunc_01 (0x00029FB0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -17167,6 +17182,7 @@ bool __cdecl sub_0002BFA0(bool a1)
 // ============================================================================
 // [VERIFIED] sub_0002BFE0 (0x0002BFE0, 27 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether either of two global on/off flags is set.
 // ============================================================================
 // Same machine code as sub_0002EAA0 (0x0002EAA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -18457,6 +18473,7 @@ RoadPath* RoadPath::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] sub_00031260 (0x00031260, 52 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Builds an object from two three-number vectors, such as the two ends of a line.
 // ============================================================================
 // Same machine code as sub_000CA160 (0x000CA160), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -20839,6 +20856,7 @@ Class_00040B10* Class_00040B10::sub_00040B10()
 // ============================================================================
 // [VERIFIED] renderer::SkidMarksHandle::vfunc_00 (0x00040C50, 53 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: renderer::SkidMarksHandle's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as renderer::SkidMarksHandle::vfunc_00 (0x00047DF0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -24414,6 +24432,7 @@ Class_00045170* Class_00045170::sub_00045170()
 // ============================================================================
 // [VERIFIED] renderer::RenderManager::vfunc_00 (0x00045920, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: renderer::RenderManager's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as renderer::RenderManager::vfunc_00 (0x0004CFA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -29422,6 +29441,7 @@ bool VehicleContainer::vfunc_17(bool a1)
 // ============================================================================
 // [VERIFIED] renderer::VehicleContainer::vfunc_18 (0x000535B0, 17 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0xD0.
 // ============================================================================
 // Same machine code as renderer::VehicleContainer::vfunc_18 (0x0005DB90), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -30458,6 +30478,7 @@ void Class_00056460::sub_00056460(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] CementLoadTracker::vfunc_03 (0x000566B0, 59 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CementLoadTracker's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as CementLoadTracker::vfunc_03 (0x00060EC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -31272,6 +31293,7 @@ bool Collidable::vfunc_04()
 // ============================================================================
 // [VERIFIED] sub_000590E0 (0x000590E0, 18 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets an on/off flag on the object held in a global pointer.
 // ============================================================================
 // Same machine code as sub_00063880 (0x00063880), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -34377,6 +34399,7 @@ Class_0005DF30* Class_0005DF30::sub_0005DF30()
 // ============================================================================
 // [VERIFIED] ScriptFileObject::vfunc_03 (0x0005DF50, 53 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ScriptFileObject's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as ScriptFileObject::vfunc_03 (0x00068380), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -35162,6 +35185,7 @@ void ConditionalExprNode::vfunc_05()
 // ============================================================================
 // [VERIFIED] fight::ParamString<TimedCharacterFightTrack>::vfunc_01 (0x00062870, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamString<TimedCharacterFightTrack>: Always returns 3.
 // ============================================================================
 // Same machine code as fight::ParamString<TimedCharacterFightTrack>::vfunc_01 (0x00022A00), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -36350,6 +36374,7 @@ int __cdecl sub_00065690(void)
 // ============================================================================
 // [VERIFIED] sub_000656C0 (0x000656C0, 36 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Formats a debug message into a local buffer; this build prints it nowhere.
 // ============================================================================
 // Same machine code as sub_0006F9C0 (0x0006F9C0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -37287,6 +37312,7 @@ void Class_0006B040::sub_0006B040()
 // ============================================================================
 // [VERIFIED] MemStream::vfunc_00 (0x0006B1C0, 51 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: MemStream's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as MemStream::vfunc_00 (0x00075860), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -44994,6 +45020,7 @@ L_AC:
 // ============================================================================
 // [VERIFIED] StatePropEngine::vfunc_00 (0x0007F050, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: StatePropEngine: calls a routine on the object 0x0C bytes before this interface (its owner).
 // ============================================================================
 // Same machine code as StatePropEngine::vfunc_00 (0x000895D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49037,6 +49064,7 @@ Class_0008D490* Class_0008D490::sub_0008D490(int a1)
 // ============================================================================
 // [VERIFIED] sub_0008D4A0 (0x0008D4A0, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Copies the key (+0x10) of the object it is given, or 0 when there is no object.
 // ============================================================================
 // Same machine code as sub_00098B70 (0x00098B70), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -49953,6 +49981,7 @@ Class_0008F4A0* Class_0008F4A0::sub_0008F4A0()
 // ============================================================================
 // [VERIFIED] sub_0008F4D0 (0x0008F4D0, 33 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Resets a four-number rotation to "no rotation" (0, 0, 0, 1).
 // ============================================================================
 // Same machine code as sub_0009ACA0 (0x0009ACA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -52914,6 +52943,7 @@ bool BoatLocomotion::vfunc_07(int a1)
 // ============================================================================
 // [VERIFIED] BoatLocomotion::vfunc_00 (0x000955C0, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: BoatLocomotion's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as BoatLocomotion::vfunc_00 (0x000A1310), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -53046,6 +53076,7 @@ void Class_00097410::sub_00097410()
 // ============================================================================
 // [VERIFIED] sub_00097430 (0x00097430, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Says whether the number at +0x20 is above the constant at 0x003A4A84.
 // ============================================================================
 // Same machine code as sub_000A33A0 (0x000A33A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -53160,6 +53191,7 @@ void Class_00097480::sub_00097480()
 // ============================================================================
 // [VERIFIED] sub_00097490 (0x00097490, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x4.
 // ============================================================================
 // Same machine code as sub_000A3400 (0x000A3400), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -54523,6 +54555,7 @@ float Class_0009AE40::sub_0009AE40(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_0009AE70 (0x0009AE70, 96 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Builds an object of thirty values, all set to zero.
 // ============================================================================
 // Same machine code as sub_000A6D40 (0x000A6D40), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -56431,6 +56464,7 @@ void __cdecl sub_0009EFE0(void)
 // ============================================================================
 // [VERIFIED] sub_0009F010 (0x0009F010, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x14 is set.
 // ============================================================================
 // Same machine code as sub_000AB070 (0x000AB070), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -58475,6 +58509,7 @@ L_13:
 // ============================================================================
 // [VERIFIED] sub_000A8470 (0x000A8470, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 1 of the byte at +0x98.
 // ============================================================================
 // Same machine code as sub_000B5A90 (0x000B5A90), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -58749,6 +58784,7 @@ void Class_000A9150::sub_000A9150()
 // ============================================================================
 // [VERIFIED] VehiclePropellerBehaviour::vfunc_00 (0x000A9190, 57 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: VehiclePropellerBehaviour's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as VehiclePropellerBehaviour::vfunc_00 (0x000B6900), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -58889,6 +58925,7 @@ Class_000A9560* Class_000A9560::sub_000A9560(int a1, int a2)
 // ============================================================================
 // [VERIFIED] VehicleRenderMaskBehaviour::vfunc_00 (0x000A95A0, 65 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: VehicleRenderMaskBehaviour's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as VehicleRenderMaskBehaviour::vfunc_00 (0x000B6E70), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -59185,6 +59222,7 @@ Class_000AA7D0* Class_000AA7D0::sub_000AA7D0()
 // ============================================================================
 // [VERIFIED] sub_000AA7F0 (0x000AA7F0, 23 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Sets four numbers of an object to zero.
 // ============================================================================
 // Same machine code as sub_000A5670 (0x000A5670), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -59685,6 +59723,7 @@ bool Class_000AADC0::sub_000AADC0()
 // ============================================================================
 // [VERIFIED] sub_000AAE30 (0x000AAE30, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x4 is set.
 // ============================================================================
 // Same machine code as sub_000B8530 (0x000B8530), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -60156,6 +60195,7 @@ void Class_000AB0D0::sub_000AB0D0()
 // ============================================================================
 // [VERIFIED] sub_000AB1C0 (0x000AB1C0, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0xC is set.
 // ============================================================================
 // Same machine code as sub_000B8900 (0x000B8900), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -61294,6 +61334,7 @@ void __cdecl sub_000AEFA0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000AF240 (0x000AF240, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x28.
 // ============================================================================
 // Same machine code as sub_000BC990 (0x000BC990), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -63566,6 +63607,7 @@ bool Class_000B76D0::sub_000B76D0()
 // ============================================================================
 // [VERIFIED] sub_000B77A0 (0x000B77A0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the value at +0x14 to sub_0002AC90 and returns its result.
 // ============================================================================
 // Same machine code as sub_000C5310 (0x000C5310), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -67176,6 +67218,7 @@ NISPartition* NISPartition::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] sub_000BE230 (0x000BE230, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x18.
 // ============================================================================
 // Same machine code as sub_000CE7F0 (0x000CE7F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -67391,6 +67434,7 @@ void MovieRenderLoop::vfunc_01()
 // ============================================================================
 // [VERIFIED] NISStreamData::vfunc_03 (0x000BE460, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISStreamData's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // Same machine code as NISStreamData::vfunc_03 (0x000CEA90), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -71121,6 +71165,7 @@ L_35:
 // ============================================================================
 // [VERIFIED] sub_000CA710 (0x000CA710, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x20 is set.
 // ============================================================================
 // Same machine code as sub_000DC5F0 (0x000DC5F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -72469,6 +72514,7 @@ template <> int fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_06(
 // ============================================================================
 // [VERIFIED] fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (0x000CB900, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamEnumConstList<DirectionalGetHitCondition>: Always returns 5.
 // ============================================================================
 // fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (Proto 0x000CB900, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -76060,6 +76106,7 @@ template <> fight::TrackFactoryTemplate<ExecScriptFunctionTrack>* fight::TrackFa
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<ExecScriptFunctionTrack>::vfunc_07 (0x000CD3E0, 52 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for ExecScriptFunctionTrack: allocates a new one (92 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<ExecScriptFunctionTrack>::vfunc_07 (Proto 0x000CD3E0, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -76150,6 +76197,7 @@ template <> fight::TrackFactoryTemplate<ExitConditionTrack>* fight::TrackFactory
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<ExitConditionTrack>::vfunc_07 (0x000CD450, 52 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for ExitConditionTrack: allocates a new one (72 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<ExitConditionTrack>::vfunc_07 (Proto 0x000CD450, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -76424,6 +76472,7 @@ template <> fight::TrackFactoryTemplate<SoundFadeTrack>* fight::TrackFactoryTemp
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<SoundFadeTrack>::vfunc_07 (0x000CD5A0, 55 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for SoundFadeTrack: allocates a new one (292 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<SoundFadeTrack>::vfunc_07 (Proto 0x000CD5A0, 55 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -76698,6 +76747,7 @@ template <> fight::TrackFactoryTemplate<DramaticCameraTrack>* fight::TrackFactor
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_07 (0x000CD6F0, 52 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for DramaticCameraTrack: allocates a new one (116 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<DramaticCameraTrack>::vfunc_07 (Proto 0x000CD6F0, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -78095,6 +78145,7 @@ Class_000D2D40* Class_000D2D40::sub_000D2D40(int a1, int a2)
 // ============================================================================
 // [VERIFIED] LayeredAnimationAction::vfunc_04 (0x000D3070, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x10.
 // ============================================================================
 // Same machine code as LayeredAnimationAction::vfunc_04 (0x000E5280), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -79600,6 +79651,7 @@ int Class_000D4F20::sub_000D4F20()
 // ============================================================================
 // [VERIFIED] sub_000D4F40 (0x000D4F40, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x33.
 // ============================================================================
 // Same machine code as sub_000E75E0 (0x000E75E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -81772,6 +81824,7 @@ Class_000D6B90* Class_000D6B90::sub_000D6B90()
 // ============================================================================
 // [VERIFIED] ExitConditionTrack::vfunc_26 (0x000D6BE0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x20 and returns true.
 // ============================================================================
 // Same machine code as ExitConditionTrack::vfunc_26 (0x000E80A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -81923,6 +81976,7 @@ int FightTrack::vfunc_18(int a1)
 // ============================================================================
 // [VERIFIED] ExitConditionTrack::vfunc_03 (0x000D6C40, 54 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ExitConditionTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // ExitConditionTrack::vfunc_03 (Proto 0x000D6C40, 54 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -81970,6 +82024,7 @@ ExitConditionTrack* ExitConditionTrack::vfunc_03(int a1)
 // ============================================================================
 // [VERIFIED] fight::ParamBranch<ExitConditionTrack>::vfunc_01 (0x000D6C80, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamBranch<ExitConditionTrack>: Always returns 9.
 // ============================================================================
 // fight::ParamBranch<ExitConditionTrack>::vfunc_01 (Proto 0x000D6C80, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -81994,6 +82049,7 @@ template <> int fight::ParamBranch<ExitConditionTrack>::vfunc_01()
 // ============================================================================
 // [VERIFIED] fight::ParamConditionGroup<ExitConditionTrack>::vfunc_01 (0x000D6C90, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamConditionGroup<ExitConditionTrack>: Always returns 10.
 // ============================================================================
 // fight::ParamConditionGroup<ExitConditionTrack>::vfunc_01 (Proto 0x000D6C90, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -82218,6 +82274,7 @@ int Class_000D6F60::sub_000D6F60(int a1)
 // ============================================================================
 // [VERIFIED] sub_000D6F80 (0x000D6F80, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x29.
 // ============================================================================
 // Same machine code as sub_000E9610 (0x000E9610), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -82567,6 +82624,7 @@ L_16:
 // ============================================================================
 // [VERIFIED] sub_000D7330 (0x000D7330, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x1C.
 // ============================================================================
 // Same machine code as sub_000E99B0 (0x000E99B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -82590,6 +82648,7 @@ bool Class_000D7330::sub_000D7330()
 // ============================================================================
 // [VERIFIED] sub_000D7360 (0x000D7360, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 1 of the byte at +0x1C.
 // ============================================================================
 // Same machine code as sub_000E99E0 (0x000E99E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -83340,6 +83399,7 @@ void* Class_000D77D0::sub_000D77D0()
 // ============================================================================
 // [VERIFIED] ExitConditionTrack::vfunc_24 (0x000D7800, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x1C and returns true.
 // ============================================================================
 // Same machine code as ExitConditionTrack::vfunc_24 (0x000E9220), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -86032,6 +86092,7 @@ float CheckOutToeToHead::vfunc_05()
 // ============================================================================
 // [VERIFIED] GlanceAtOvertakingPed::vfunc_07 (0x000DC5E0, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_000CA1C0 on the member at +0x14 answers no.
 // ============================================================================
 // Same machine code as GlanceAtOvertakingPed::vfunc_07 (0x000EFCF0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -86092,6 +86153,7 @@ float GlanceAtVehicle::vfunc_08()
 // ============================================================================
 // [VERIFIED] GlanceAbsentMindedly::vfunc_00 (0x000DC600, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_000CA1C0 on the member at +0x10 answers no.
 // ============================================================================
 // Same machine code as GlanceAbsentMindedly::vfunc_00 (0x000EFDE0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -88702,6 +88764,7 @@ L_58:
 // ============================================================================
 // [VERIFIED] sub_000EB670 (0x000EB670, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the value at +0x18 to sub_0002AC90 and returns its result.
 // ============================================================================
 // Same machine code as sub_00101AC0 (0x00101AC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -89598,6 +89661,7 @@ L_25:
 // ============================================================================
 // [VERIFIED] sub_000EEA80 (0x000EEA80, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_0002AC90 gives a nonzero result for the value at +0x20.
 // ============================================================================
 // Same machine code as sub_00104FA0 (0x00104FA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -89623,6 +89687,7 @@ int Class_000EEA80::sub_000EEA80()
 // ============================================================================
 // [VERIFIED] sub_000EEAA0 (0x000EEAA0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the value at +0x20 to sub_0002AC90 and returns its result.
 // ============================================================================
 // Same machine code as sub_00104FC0 (0x00104FC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -89648,6 +89713,7 @@ int Class_000EEAA0::sub_000EEAA0()
 // ============================================================================
 // [VERIFIED] sub_000EEAB0 (0x000EEAB0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the value at +0x24 to sub_0002AC90 and returns its result.
 // ============================================================================
 // Same machine code as sub_00104FD0 (0x00104FD0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -90732,6 +90798,7 @@ void* AITask_FleeFromExplodingCar::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_FleeFromExplodingCar::vfunc_01 (0x000F0DA0, 51 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_FleeFromExplodingCar's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_FleeFromExplodingCar::vfunc_01 (Proto 0x000F0DA0, 51 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -91428,6 +91495,7 @@ void Class_000F2930::sub_000F2930()
 // ============================================================================
 // [VERIFIED] AITask_PedFlee::vfunc_01 (0x000F2940, 51 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_PedFlee's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_PedFlee::vfunc_01 (Proto 0x000F2940, 51 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -91755,6 +91823,7 @@ int AITask_SharkInteractWithSwimmer::vfunc_43()
 // ============================================================================
 // [VERIFIED] AITask_SharkInteractWithSwimmer::vfunc_41 (0x000F3010, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_SharkInteractWithSwimmer: Always returns 300.
 // ============================================================================
 // AITask_SharkInteractWithSwimmer::vfunc_41 (Proto 0x000F3010, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -92015,6 +92084,7 @@ int AITask_SharkInteractWithBoat::vfunc_43()
 // ============================================================================
 // [VERIFIED] AITask_SharkInteractWithBoat::vfunc_41 (0x000F30A0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_SharkInteractWithBoat: Always returns 200.
 // ============================================================================
 // AITask_SharkInteractWithBoat::vfunc_41 (Proto 0x000F30A0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -93830,6 +93900,7 @@ void* AITask_InVehicle::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_BasicInVehicle::vfunc_01 (0x000F6280, 48 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_BasicInVehicle's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_BasicInVehicle::vfunc_01 (Proto 0x000F6280, 48 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -94381,6 +94452,7 @@ void* AttractPointTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] sub_000F7770 (0x000F7770, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores a number at +0x30.
 // ============================================================================
 // Same machine code as sub_000B5A30 (0x000B5A30), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -95209,6 +95281,7 @@ CopManager* CopManager::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] FlowClient::vfunc_01 (0x000F9A60, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: FlowClient: Always returns 1.
 // ============================================================================
 // FlowClient::vfunc_01 (Proto 0x000F9A60, 8 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -96395,6 +96468,7 @@ void __cdecl sub_000FC930(int a1, int a2, int a3, int a4, int a5, int a6, int a7
 // ============================================================================
 // [VERIFIED] PathGroup::vfunc_01 (0x000FCA30, 48 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: PathGroup's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // PathGroup::vfunc_01 (Proto 0x000FCA30, 48 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -102227,6 +102301,7 @@ Class_00102CB0* Class_00102CB0::sub_00102CB0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] AIStimulusDetector::vfunc_00 (0x00102CF0, 64 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIStimulusDetector's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIStimulusDetector::vfunc_00 (Proto 0x00102CF0, 64 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -103715,6 +103790,7 @@ Class_00104C50* Class_00104C50::sub_00104C50(int a1, int a2, bool a3)
 // ============================================================================
 // [VERIFIED] AIActionUnary::vfunc_00 (0x00104CE0, 50 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIActionUnary's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIActionUnary::vfunc_00 (Proto 0x00104CE0, 50 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -103895,6 +103971,7 @@ AIActionOrConditional* AIActionOrConditional::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] AIActionStrengthenInvariant::vfunc_00 (0x00104EC0, 40 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIActionStrengthenInvariant's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIActionStrengthenInvariant::vfunc_00 (Proto 0x00104EC0, 40 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -105008,6 +105085,7 @@ AIActionCustomLogicalEffect* AIActionCustomLogicalEffect::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] AIActionPlayAnim::vfunc_00 (0x00105BD0, 44 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIActionPlayAnim's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIActionPlayAnim::vfunc_00 (Proto 0x00105BD0, 44 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -105220,6 +105298,7 @@ Class_00105E80* Class_00105E80::sub_00105E80(int a1, int a2)
 // ============================================================================
 // [VERIFIED] AIActionSetSharedIntRelativeToCurrentTime::vfunc_00 (0x00105EB0, 47 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIActionSetSharedIntRelativeToCurrentTime's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIActionSetSharedIntRelativeToCurrentTime::vfunc_00 (Proto 0x00105EB0, 47 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -105331,6 +105410,7 @@ Class_00105F50* Class_00105F50::sub_00105F50(int a1, int a2)
 // ============================================================================
 // [VERIFIED] AIActionDecloneSharedIntSafely::vfunc_00 (0x00105F80, 39 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIActionDecloneSharedIntSafely's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIActionDecloneSharedIntSafely::vfunc_00 (Proto 0x00105F80, 39 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -105497,6 +105577,7 @@ Class_00106020* Class_00106020::sub_00106020(int a1, int a2)
 // ============================================================================
 // [VERIFIED] AIActionExecuteSimpleScriptMethod::vfunc_00 (0x00106050, 44 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIActionExecuteSimpleScriptMethod's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIActionExecuteSimpleScriptMethod::vfunc_00 (Proto 0x00106050, 44 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -105702,6 +105783,7 @@ void AIConditionCustom::vfunc_04()
 // ============================================================================
 // [VERIFIED] AIConditionSemaphoreIsSet::vfunc_04 (0x00106290, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AI condition: true when the semaphore (flag) it points to is set.
 // ============================================================================
 // AIConditionSemaphoreIsSet::vfunc_04 (Proto 0x00106290, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -105820,6 +105902,7 @@ int AIConditionIsInFightTreePhysicalMode::vfunc_04()
 // ============================================================================
 // [VERIFIED] AIConditionUnary::vfunc_05 (0x001062F0, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AI condition (unary): forwards this slot to the condition it wraps.
 // ============================================================================
 // AIConditionUnary::vfunc_05 (Proto 0x001062F0, 8 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -105856,6 +105939,7 @@ void AIConditionUnary::vfunc_05()
 // ============================================================================
 // [VERIFIED] AIConditionNot::vfunc_04 (0x00106300, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AI condition 'not': true when the condition it wraps is false.
 // ============================================================================
 // bin: proto
 // va: 0x00106300
@@ -106657,6 +106741,7 @@ L_4C:
 // ============================================================================
 // [VERIFIED] AIConditionUnary::vfunc_03 (0x00106ED0, 50 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AIConditionUnary's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AIConditionUnary::vfunc_03 (Proto 0x00106ED0, 50 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -109380,6 +109465,7 @@ float AITask_IdleChatInitiate::vfunc_52()
 // ============================================================================
 // [VERIFIED] AITask_IdleChatInitiate::vfunc_57 (0x0010A6A0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_IdleChatInitiate: Always returns 24.
 // ============================================================================
 // AITask_IdleChatInitiate::vfunc_57 (Proto 0x0010A6A0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -109553,6 +109639,7 @@ void* AITask_ProvokeAnotherPed::vfunc_56()
 // ============================================================================
 // [VERIFIED] AITask_ProvokeAnotherPed::vfunc_57 (0x0010A710, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_ProvokeAnotherPed: Always returns 28.
 // ============================================================================
 // AITask_ProvokeAnotherPed::vfunc_57 (Proto 0x0010A710, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -109727,6 +109814,7 @@ int AITask_ProvokeAnotherPed::vfunc_44()
 // ============================================================================
 // [VERIFIED] AITask_ProvokeAnotherPed::vfunc_59 (0x0010A870, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_ProvokeAnotherPed: Always returns 3000.
 // ============================================================================
 // AITask_ProvokeAnotherPed::vfunc_59 (Proto 0x0010A870, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -110296,6 +110384,7 @@ int AITask_IdleChatResponse::vfunc_44()
 // ============================================================================
 // [VERIFIED] AITask_IdleChatInitiate::vfunc_59 (0x0010AB00, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_IdleChatInitiate: Always returns 1500.
 // ============================================================================
 // AITask_IdleChatInitiate::vfunc_59 (Proto 0x0010AB00, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -110665,6 +110754,7 @@ Struct_0010B5D0 Class_0010B5D0::sub_0010B5D0() const
 // ============================================================================
 // [VERIFIED] AITask_MonitorCustomLoopState::vfunc_44 (0x0010B600, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_MonitorCustomLoopState: Always returns 10000.
 // ============================================================================
 // AITask_MonitorCustomLoopState::vfunc_44 (Proto 0x0010B600, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -111147,6 +111237,7 @@ int AITask_ReactToVisibleGun::vfunc_44()
 // ============================================================================
 // [VERIFIED] AITask_ReactToVisibleGun::vfunc_02 (0x0010BD00, 20 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: React-to-visible-gun task: passes the value to its member at +0x0C and returns it.
 // ============================================================================
 // AITask_ReactToVisibleGun::vfunc_02 (Proto 0x0010BD00, 20 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -111935,6 +112026,7 @@ AITask_Cower* AITask_Cower::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] AITask_CopChallenge::vfunc_01 (0x0010C990, 51 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_CopChallenge's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_CopChallenge::vfunc_01 (Proto 0x0010C990, 51 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -111978,6 +112070,7 @@ AITask_CopChallenge* AITask_CopChallenge::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] AITask_BumpReflex::vfunc_01 (0x0010C9D0, 51 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_BumpReflex's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_BumpReflex::vfunc_01 (Proto 0x0010C9D0, 51 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -112896,6 +112989,7 @@ void* AITask_TauntResponse::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_TauntResponse::vfunc_01 (0x0010D920, 43 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_TauntResponse's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_TauntResponse::vfunc_01 (Proto 0x0010D920, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -112997,6 +113091,7 @@ void* AITask_BumpApology::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_BumpApology::vfunc_01 (0x0010D9B0, 43 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_BumpApology's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_BumpApology::vfunc_01 (Proto 0x0010D9B0, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -113597,6 +113692,7 @@ void* AITask_CarjackingResponse::vfunc_00()
 // ============================================================================
 // [VERIFIED] AITask_CarjackingResponse::vfunc_01 (0x0010DF20, 48 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: AITask_CarjackingResponse's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // AITask_CarjackingResponse::vfunc_01 (Proto 0x0010DF20, 48 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -120047,6 +120143,7 @@ Class_0011D960* Class_0011D960::sub_0011D960(int a1, int a2)
 // ============================================================================
 // [VERIFIED] AICommandWaits::Wait_SeeCharacterWeapon::vfunc_00 (0x0011D9E0, 103 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Wait-until-character-sees-weapon: builds its two sub-objects (a 92-byte check and a 16-byte watcher of type 6) and starts the watcher.
 // ============================================================================
 // AICommandWaits::Wait_SeeCharacterWeapon::vfunc_00 (Proto 0x0011D9E0, 103 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -125497,6 +125594,7 @@ Object* __cdecl sub_00130DD0(void)
 // ============================================================================
 // [VERIFIED] WaterObstacle::vfunc_03 (0x001328F0, 51 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: WaterObstacle's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // WaterObstacle::vfunc_03 (Proto 0x001328F0, 51 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -125680,6 +125778,7 @@ Class_00132AC0* Class_00132AC0::sub_00132AC0(int a1, int a2)
 // ============================================================================
 // [VERIFIED] BlendCamera::vfunc_01 (0x00132B10, 63 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: BlendCamera's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // BlendCamera::vfunc_01 (Proto 0x00132B10, 63 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -126407,6 +126506,7 @@ void Class_001341F0::sub_001341F0(bool a1)
 // ============================================================================
 // [VERIFIED] sub_00135AE0 (0x00135AE0, 30 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Builds a camera transition: two values cleared and a third set to one.
 // ============================================================================
 // Same machine code as sub_001522C0 (0x001522C0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -126927,6 +127027,7 @@ void BlendCamera::vfunc_29(int a1)
 // ============================================================================
 // [VERIFIED] sub_00136010 (0x00136010, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x10 of the object pointed to at +0x84.
 // ============================================================================
 // Same machine code as sub_001527D0 (0x001527D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -127491,6 +127592,7 @@ L_42:
 // ============================================================================
 // [VERIFIED] GenericCharacterCamera::vfunc_36 (0x0013A460, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_0002AC90 gives a nonzero result for the value at +0x28C.
 // ============================================================================
 // Same machine code as GenericCharacterCamera::vfunc_38 (0x00155690), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -128849,6 +128951,7 @@ L_10:
 // ============================================================================
 // [VERIFIED] sub_00142DE0 (0x00142DE0, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x30 is set.
 // ============================================================================
 // Same machine code as sub_00161030 (0x00161030), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -130580,6 +130683,7 @@ void Class_001467E0::sub_001467E0()
 // ============================================================================
 // [VERIFIED] sub_001467F0 (0x001467F0, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x90 is set.
 // ============================================================================
 // Same machine code as sub_001624F0 (0x001624F0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -145633,6 +145737,7 @@ template <> fight::TrackFactoryTemplate<NISRenderableTrack>* fight::TrackFactory
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISRenderableTrack>::vfunc_07 (0x00162030, 55 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for NISRenderableTrack: allocates a new one (152 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<NISRenderableTrack>::vfunc_07 (Proto 0x00162030, 55 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -145723,6 +145828,7 @@ template <> fight::TrackFactoryTemplate<NISResourceLoaderTrack>* fight::TrackFac
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISResourceLoaderTrack>::vfunc_07 (0x001620A0, 55 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for NISResourceLoaderTrack: allocates a new one (148 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<NISResourceLoaderTrack>::vfunc_07 (Proto 0x001620A0, 55 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -146271,6 +146377,7 @@ template <> fight::TrackFactoryTemplate<NISStatePropSpawnTrack>* fight::TrackFac
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISStatePropSpawnTrack>::vfunc_07 (0x00162340, 55 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for NISStatePropSpawnTrack: allocates a new one (236 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<NISStatePropSpawnTrack>::vfunc_07 (Proto 0x00162340, 55 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -146361,6 +146468,7 @@ template <> fight::TrackFactoryTemplate<NISSwapModelTrack>* fight::TrackFactoryT
 // ============================================================================
 // [VERIFIED] fight::TrackFactoryTemplate<NISSwapModelTrack>::vfunc_07 (0x001623B0, 52 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for NISSwapModelTrack: allocates a new one (88 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::TrackFactoryTemplate<NISSwapModelTrack>::vfunc_07 (Proto 0x001623B0, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -150265,6 +150373,7 @@ NISFadeTrack* NISFadeTrack::vfunc_03(int a1)
 // ============================================================================
 // [VERIFIED] NISCharacterEffectTrack::vfunc_03 (0x00164220, 62 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISCharacterEffectTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // NISCharacterEffectTrack::vfunc_03 (Proto 0x00164220, 62 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -150620,6 +150729,7 @@ NISWeaponFireTrack* NISWeaponFireTrack::vfunc_03(int a1)
 // ============================================================================
 // [VERIFIED] NISRenderableTrack::vfunc_03 (0x00164480, 49 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISRenderableTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // NISRenderableTrack::vfunc_03 (Proto 0x00164480, 49 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -150921,6 +151031,7 @@ NISCharacterAnimationTrack* NISCharacterAnimationTrack::vfunc_03(int a1)
 // ============================================================================
 // [VERIFIED] NISSwapModelTrack::vfunc_03 (0x00164620, 46 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: NISSwapModelTrack's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // NISSwapModelTrack::vfunc_03 (Proto 0x00164620, 46 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -152220,6 +152331,7 @@ void* FireTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] FireTemplate::vfunc_12 (0x001667C0, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fire template: if it was started, stops its member at +0x24 and clears the started flag.
 // ============================================================================
 // bin: proto
 // va: 0x001667C0
@@ -154872,6 +154984,7 @@ GenericMeter* GenericMeter::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] GenericP3DMeter::vfunc_00 (0x0016B7E0, 39 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GenericP3DMeter's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // GenericP3DMeter::vfunc_00 (Proto 0x0016B7E0, 39 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -155023,6 +155136,7 @@ int Class_0016BB60::sub_0016BB60()
 // ============================================================================
 // [VERIFIED] GenericBarMeter::vfunc_00 (0x0016BC70, 60 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GenericBarMeter's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // GenericBarMeter::vfunc_00 (Proto 0x0016BC70, 60 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -171241,6 +171355,7 @@ template <> void ConcreteClassRep<InventoryHUD>::vfunc_02()
 // ============================================================================
 // [VERIFIED] fight::ParamVector<AnimationRetargetingTrack>::vfunc_01 (0x0018B8B0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamVector<AnimationRetargetingTrack>: Always returns 6.
 // ============================================================================
 // fight::ParamVector<AnimationRetargetingTrack>::vfunc_01 (Proto 0x0018B8B0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -174270,6 +174385,7 @@ void DistanceBubble::vfunc_29()
 // ============================================================================
 // [VERIFIED] HUDDistanceBubbleRestoreData::vfunc_00 (0x0018E490, 54 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: HUDDistanceBubbleRestoreData's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // bin: proto
 // va: 0x0018E490
@@ -174902,6 +175018,7 @@ SystemDialogBox* SystemDialogBox::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] sub_0018F6E0 (0x0018F6E0, 25 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores two numbers in an object.
 // ============================================================================
 // Same machine code as sub_001C4640 (0x001C4640), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -180925,6 +181042,7 @@ void* TraceFireObject::vfunc_00()
 // ============================================================================
 // [VERIFIED] sub_0019C0E0 (0x0019C0E0, 17 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Stores one number in an object.
 // ============================================================================
 // Same machine code as sub_001D3C70 (0x001D3C70), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -183372,6 +183490,7 @@ TapeTrack* TapeTrack::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] TapeMixTape::vfunc_01 (0x001A03F0, 43 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: TapeMixTape's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // TapeMixTape::vfunc_01 (Proto 0x001A03F0, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -197437,6 +197556,7 @@ void Class_001B5F80::sub_001B5F80(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_001B6340 (0x001B6340, 43 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Copies a three-number value (such as a colour) into a global setting.
 // ============================================================================
 // Same machine code as sub_001F0540 (0x001F0540), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -199884,6 +200004,7 @@ void Class_001BB120::sub_001BB120()
 // ============================================================================
 // [VERIFIED] sub_001BB130 (0x001BB130, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether sub_0002AC90 gives a nonzero result for the value at +0xE0.
 // ============================================================================
 // Same machine code as sub_001F6330 (0x001F6330), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -199946,6 +200067,7 @@ L_4A:
 // ============================================================================
 // [VERIFIED] sub_001BB1A0 (0x001BB1A0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes the value at +0xE0 to sub_0002AC90 and returns its result.
 // ============================================================================
 // Same machine code as sub_001F6390 (0x001F6390), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -201308,6 +201430,7 @@ void* CharacterSpeedsObject::vfunc_00()
 // ============================================================================
 // [VERIFIED] CharacterFightTreeTemplate::vfunc_01 (0x001C0020, 50 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CharacterFightTreeTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // CharacterFightTreeTemplate::vfunc_01 (Proto 0x001C0020, 50 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -201567,6 +201690,7 @@ void* ExplosionTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] ExplosionTemplate::vfunc_01 (0x001C0750, 52 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: ExplosionTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // ExplosionTemplate::vfunc_01 (Proto 0x001C0750, 52 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -204350,6 +204474,7 @@ void* WakeTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] WakeTemplate::vfunc_11 (0x001C3E60, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Wake template: marks the wake as started and copies its starting value (0x20) into the current value (0x28); returns it.
 // ============================================================================
 // bin: proto
 // va: 0x001C3E60
@@ -206170,6 +206295,7 @@ void* AirplaneTemplate::vfunc_00()
 // ============================================================================
 // [VERIFIED] VehicleDropObjectProperties::vfunc_05 (0x001C5130, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
+// What it does: Vehicle drop-object properties: runs the base step, then sets the value at +0x44 to the value at +0x48 times a global scale.
 // ============================================================================
 // bin: proto
 // va: 0x001C5130
@@ -213573,6 +213699,7 @@ VehicleTargetingLocatorProperties* VehicleTargetingLocatorProperties::vfunc_01(i
 // ============================================================================
 // [VERIFIED] VehicleArtTemplate::vfunc_01 (0x001D12E0, 60 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: VehicleArtTemplate's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // VehicleArtTemplate::vfunc_01 (Proto 0x001D12E0, 60 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -219040,6 +219167,7 @@ VehicleParticleTriggerProperties* VehicleParticleTriggerProperties::vfunc_01(int
 // ============================================================================
 // [VERIFIED] VehicleDamageEffectProperties::vfunc_01 (0x001D4290, 46 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: VehicleDamageEffectProperties's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // VehicleDamageEffectProperties::vfunc_01 (Proto 0x001D4290, 46 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -237058,6 +237186,7 @@ int __cdecl sub_001FB960(void)
 // ============================================================================
 // [VERIFIED] fight::ConditionFactoryTemplate<fight::MaybeCondition>::vfunc_07 (0x001FB9C0, 65 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Factory for fight::MaybeCondition: allocates a new one (20 bytes), constructs it, and hands it the factory's data at +8.
 // ============================================================================
 // fight::ConditionFactoryTemplate<fight::MaybeCondition>::vfunc_07 (Proto 0x001FB9C0, 65 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -238782,6 +238911,7 @@ void Class_001FCF60::sub_001FCF60()
 // ============================================================================
 // [VERIFIED] sub_001FCF70 (0x001FCF70, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Sets flag bit 1 of the byte at +0x12.
 // ============================================================================
 // Same machine code as sub_0023F7E0 (0x0023F7E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -238883,6 +239013,7 @@ void Class_001FD190::sub_001FD190(int a1)
 // ============================================================================
 // [VERIFIED] content::LoadInventory::vfunc_03 (0x001FD230, 81 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: LoadInventory's deleting destructor: frees its inventory at +0x08, releases the object at +0x0C, then frees itself when asked.
 // ============================================================================
 // content::LoadInventory::vfunc_03 (Proto 0x001FD230, 81 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -239408,6 +239539,7 @@ bool Class_001FD990::sub_001FD990()
 // ============================================================================
 // [VERIFIED] sub_001FDA90 (0x001FDA90, 144 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads from a stream: opens it first if an open is pending, then reads one of two ways depending on its mode.
 // ============================================================================
 // Same machine code as sub_00240570 (0x00240570), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -240955,6 +241087,7 @@ int Class_002006A0::sub_002006A0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00201440 (0x00201440, 75 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: The game's name key: h = (h * 65599) & 0x7FFFFFFF, each character + 0x20 if below 'a', XORed in; top bit set.
 // ============================================================================
 // Same machine code as sub_00243FA0 (0x00243FA0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -240992,6 +241125,7 @@ unsigned int __cdecl sub_00201440(const char* text, unsigned int start)
 // ============================================================================
 // [VERIFIED] sub_00201490 (0x00201490, 67 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: The game's name key without case folding: h = (h * 65599) & 0x7FFFFFFF, each character XORed in; top bit set.
 // ============================================================================
 // Same machine code as sub_00243FF0 (0x00243FF0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -241043,6 +241177,7 @@ void Class_002014E0::sub_002014E0()
 // ============================================================================
 // [VERIFIED] sub_002015A0 (0x002015A0, 99 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Scales a three-number vector to length one and returns its old length; a near-zero vector becomes zero.
 // ============================================================================
 // Same machine code as sub_00244100 (0x00244100), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -241084,6 +241219,7 @@ float Vec_002015A0::sub_002015A0()
 // ============================================================================
 // [VERIFIED] sub_00201610 (0x00201610, 59 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Scales a three-number vector so its length becomes one.
 // ============================================================================
 // Same machine code as sub_00244170 (0x00244170), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -241393,6 +241529,7 @@ int __cdecl sub_002019D0(int a1)
 // ============================================================================
 // [VERIFIED] sub_002019E0 (0x002019E0, 62 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Finds the deepest heap in the heap tree that owns a block of memory, or 0 when none does.
 // ============================================================================
 // Same machine code as sub_00244540 (0x00244540), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -241956,6 +242093,7 @@ void ControllerXBox::vfunc_22(int a1)
 // ============================================================================
 // [VERIFIED] core::ControllerXBox::vfunc_04 (0x00204FA0, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Says whether the pointer at +0x8 is set.
 // ============================================================================
 // Same machine code as core::ControllerXBox::vfunc_04 (0x00247C00), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -242121,6 +242259,7 @@ int ControllerXBox::vfunc_12(int a1)
 // ============================================================================
 // [VERIFIED] fight::ParamFloatConstRange<TimedFightTrack>::vfunc_01 (0x00205320, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: fight::ParamFloatConstRange<TimedFightTrack>: Always returns 2.
 // ============================================================================
 // fight::ParamFloatConstRange<TimedFightTrack>::vfunc_01 (Proto 0x00205320, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -242252,6 +242391,7 @@ void* ControllerOutputPointXBox::vfunc_05()
 // ============================================================================
 // [VERIFIED] core::ControllerOutputPointXBox::vfunc_07 (0x00205380, 64 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Stores a number in the controller output, kept between zero and one.
 // ============================================================================
 // Same machine code as core::ControllerOutputPointXBox::vfunc_07 (0x00247FD0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -245371,6 +245511,7 @@ void App::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] sub_0020BCC0 (0x0020BCC0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 448.
 // ============================================================================
 // sub_0020BCC0 (Proto 0x0020BCC0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -245384,6 +245525,7 @@ int __cdecl sub_0020BCC0(void)
 // ============================================================================
 // [VERIFIED] sub_0020BCD0 (0x0020BCD0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Always returns 640.
 // ============================================================================
 // sub_0020BCD0 (Proto 0x0020BCD0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -248431,6 +248573,7 @@ Class_00213DF0* Class_00213DF0::sub_00213DF0()
 // ============================================================================
 // [VERIFIED] GangSpawnObject::vfunc_43 (0x00213E60, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GangSpawnObject: Always returns 16.
 // ============================================================================
 // GangSpawnObject::vfunc_43 (Proto 0x00213E60, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -248687,6 +248830,7 @@ Class_00214400* Class_00214400::sub_00214400()
 // ============================================================================
 // [VERIFIED] CopSpawnObject::vfunc_43 (0x00214440, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: CopSpawnObject: Always returns 32.
 // ============================================================================
 // CopSpawnObject::vfunc_43 (Proto 0x00214440, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -250777,6 +250921,7 @@ Class_0021A0C0* Class_0021A0C0::sub_0021A0C0()
 // ============================================================================
 // [VERIFIED] sub_0021A160 (0x0021A160, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x184 of the object pointed to at +0xC, or the constant at 0x0039D584 when there is none.
 // ============================================================================
 // Same machine code as sub_00260B20 (0x00260B20), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -252611,6 +252756,7 @@ int SpriteObject::vfunc_30()
 // ============================================================================
 // [VERIFIED] DealerSpawnObject::vfunc_43 (0x0021E9A0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: DealerSpawnObject: Always returns 8.
 // ============================================================================
 // DealerSpawnObject::vfunc_43 (Proto 0x0021E9A0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -254789,6 +254935,7 @@ void AnimationFrameController::vfunc_25()
 // ============================================================================
 // [VERIFIED] pure3d::SimpleFrameController::vfunc_12 (0x00225180, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0x10 of the object pointed to at +0x30, or the constant at 0x0039F068 when there is none.
 // ============================================================================
 // Same machine code as pure3d::SimpleFrameController::vfunc_12 (0x00273400), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -254822,6 +254969,7 @@ float Class_00225180::sub_00225180()
 // ============================================================================
 // [VERIFIED] pure3d::SimpleFrameController::vfunc_13 (0x002251A0, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns the number at +0xC of the object pointed to at +0x30, or the constant at 0x0039D584 when there is none.
 // ============================================================================
 // Same machine code as pure3d::SimpleFrameController::vfunc_13 (0x00273420), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -256139,6 +256287,7 @@ PolySkin* PolySkin::vfunc_03(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::PolySkin::vfunc_05 (0x00229B30, 33 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: PolySkin: makes a new 112-byte PolySkin that is a copy of this one; null if out of memory.
 // ============================================================================
 // pure3d::PolySkin::vfunc_05 (Proto 0x00229B30, 33 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -258263,6 +258412,7 @@ int Geometry::vfunc_05()
 // ============================================================================
 // [VERIFIED] sub_00232720 (0x00232720, 9 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 2 of the byte at +0x38.
 // ============================================================================
 // Same machine code as sub_00280640 (0x00280640), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -260632,6 +260782,7 @@ void d3dContext::vfunc_89(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] pure3d::d3dContext::vfunc_96 (0x00234DF0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dContext: Always returns 2048.
 // ============================================================================
 // pure3d::d3dContext::vfunc_96 (Proto 0x00234DF0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -261053,6 +261204,7 @@ d3dExtGlobalProjectedTexture* d3dExtGlobalProjectedTexture::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::d3dExtHardwareSkinning::vfunc_01 (0x00237000, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dExtHardwareSkinning: Always returns 25.
 // ============================================================================
 // pure3d::d3dExtHardwareSkinning::vfunc_01 (Proto 0x00237000, 8 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -261079,6 +261231,7 @@ int d3dExtHardwareSkinning::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::d3dExtVisibilityTest::vfunc_01 (0x00237110, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dExtVisibilityTest: Always returns 16384.
 // ============================================================================
 // pure3d::d3dExtVisibilityTest::vfunc_01 (Proto 0x00237110, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -263800,6 +263953,7 @@ void __cdecl sub_0023F510(int a1)
 // ============================================================================
 // [VERIFIED] sub_0023F5F0 (0x0023F5F0, 34 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Passes its four arguments, the last a 64-bit number, unchanged to another function.
 // ============================================================================
 // Same machine code as sub_00283FE0 (0x00283FE0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -268894,6 +269048,7 @@ Class_00249E00* Class_00249E00::sub_00249E00(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::frontend::Screen::vfunc_14 (0x00249E20, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Reads flag bit 0 of the byte at +0x24.
 // ============================================================================
 // Same machine code as pure3d::frontend::Screen::vfunc_14 (0x0028D580), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -270796,6 +270951,7 @@ int PrimGroup::vfunc_09()
 // ============================================================================
 // [VERIFIED] pure3d::PrimGroupStreamed::vfunc_07 (0x0024F300, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::PrimGroupStreamed: Always returns 129.
 // ============================================================================
 // pure3d::PrimGroupStreamed::vfunc_07 (Proto 0x0024F300, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -270920,6 +271076,7 @@ void PrimGroupStreamed::vfunc_16(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::PrimGroupSkinnedStreamed::vfunc_07 (0x0024F440, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::PrimGroupSkinnedStreamed: Always returns 385.
 // ============================================================================
 // pure3d::PrimGroupSkinnedStreamed::vfunc_07 (Proto 0x0024F440, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -277417,6 +277574,7 @@ int Class_0025ECA0::sub_0025ECA0(int a1)
 // ============================================================================
 // [VERIFIED] pure3d::d3dTexture::vfunc_10 (0x0025F230, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: pure3d::d3dTexture: Always returns 256.
 // ============================================================================
 // pure3d::d3dTexture::vfunc_10 (Proto 0x0025F230, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -288954,6 +289112,7 @@ void FileRequest::vfunc_05()
 // ============================================================================
 // [VERIFIED] core::FileGetPositionRequest::vfunc_06 (0x0026C8F0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::FileGetPositionRequest: Always returns 7.
 // ============================================================================
 // core::FileGetPositionRequest::vfunc_06 (Proto 0x0026C8F0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -289041,6 +289200,7 @@ int FileRequest::vfunc_03()
 // ============================================================================
 // [VERIFIED] core::DriveOpenRequest::vfunc_06 (0x0026C9F0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveOpenRequest: Always returns 11.
 // ============================================================================
 // core::DriveOpenRequest::vfunc_06 (Proto 0x0026C9F0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -289071,6 +289231,7 @@ int DriveOpenRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveMediaRequest::vfunc_06 (0x0026CA50, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveMediaRequest: Always returns 12.
 // ============================================================================
 // core::DriveMediaRequest::vfunc_06 (Proto 0x0026CA50, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -289101,6 +289262,7 @@ int DriveMediaRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] GlanceAtOvertakingPed::vfunc_10 (0x0026CAA0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: GlanceAtOvertakingPed: Always returns 13.
 // ============================================================================
 // GlanceAtOvertakingPed::vfunc_10 (Proto 0x0026CAA0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -289131,6 +289293,7 @@ int GlanceAtOvertakingPed::vfunc_10()
 // ============================================================================
 // [VERIFIED] core::DriveCreateDirectoryRequest::vfunc_06 (0x0026CB00, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveCreateDirectoryRequest: Always returns 14.
 // ============================================================================
 // core::DriveCreateDirectoryRequest::vfunc_06 (Proto 0x0026CB00, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -289161,6 +289324,7 @@ int DriveCreateDirectoryRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveDestroyDirectoryRequest::vfunc_06 (0x0026CB60, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveDestroyDirectoryRequest: Always returns 15.
 // ============================================================================
 // core::DriveDestroyDirectoryRequest::vfunc_06 (Proto 0x0026CB60, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -289192,6 +289356,7 @@ int DriveDestroyDirectoryRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveFindNextRequest::vfunc_06 (0x0026CC30, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveFindNextRequest: Always returns 17.
 // ============================================================================
 // Same machine code as core::DriveFindNextRequest::vfunc_06 (0x0006F9A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -289224,6 +289389,7 @@ int DriveFindNextRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveFindCloseRequest::vfunc_06 (0x0026CC80, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveFindCloseRequest: Always returns 18.
 // ============================================================================
 // core::DriveFindCloseRequest::vfunc_06 (Proto 0x0026CC80, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -289254,6 +289420,7 @@ int DriveFindCloseRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveFileDestroyRequest::vfunc_06 (0x0026CCE0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveFileDestroyRequest: Always returns 19.
 // ============================================================================
 // core::DriveFileDestroyRequest::vfunc_06 (Proto 0x0026CCE0, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -289284,6 +289451,7 @@ int DriveFileDestroyRequest::vfunc_06()
 // ============================================================================
 // [VERIFIED] core::DriveCancelRequest::vfunc_06 (0x0026CD30, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::DriveCancelRequest: Always returns 20.
 // ============================================================================
 // core::DriveCancelRequest::vfunc_06 (Proto 0x0026CD30, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -289359,6 +289527,7 @@ void __cdecl sub_0026CD40(void)
 // ============================================================================
 // [VERIFIED] core::Request::vfunc_00 (0x0026CD90, 60 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::Request's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // core::Request::vfunc_00 (Proto 0x0026CD90, 60 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -293179,6 +293348,7 @@ int Drive::vfunc_20(int a1, int a2, int a3, int a4)
 // ============================================================================
 // [VERIFIED] core::Drive::vfunc_22 (0x0026EEA0, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::Drive: Always returns 1.
 // ============================================================================
 // core::Drive::vfunc_22 (Proto 0x0026EEA0, 8 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -297088,6 +297258,7 @@ int XboxSaveDrive::vfunc_12(int a1, int a2)
 // ============================================================================
 // [VERIFIED] core::XboxSaveDrive::vfunc_02 (0x002834F0, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::XboxSaveDrive: Always returns 4.
 // ============================================================================
 // core::XboxSaveDrive::vfunc_02 (Proto 0x002834F0, 8 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -297113,6 +297284,7 @@ int XboxSaveDrive::vfunc_02(int a1)
 // ============================================================================
 // [VERIFIED] core::XboxSaveDrive::vfunc_01 (0x00283500, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: core::XboxSaveDrive: Always returns 8172.
 // ============================================================================
 // core::XboxSaveDrive::vfunc_01 (Proto 0x00283500, 6 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -300477,6 +300649,7 @@ int __cdecl sub_00288AC0(int a1, int a2, int a3, int a4)
 // ============================================================================
 // [VERIFIED] sub_00288D00 (0x00288D00, 35 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Copies a block of memory for the PNG image library after checking that its length fits (libpng png_memcpy_check).
 // ============================================================================
 // Same machine code as sub_002C6A20 (0x002C6A20), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -300514,6 +300687,7 @@ extern "C" png_voidp __cdecl png_memcpy_check(png_structp png_ptr, png_voidp s1,
 // ============================================================================
 // [VERIFIED] sub_00288D30 (0x00288D30, 49 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Fills a block of memory for the PNG image library after checking that its length fits (libpng png_memset_check).
 // ============================================================================
 // Same machine code as sub_002C6A50 (0x002C6A50), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -300860,6 +301034,7 @@ int Class_0028EB00::sub_0028EB00(int a1, int a2)
 // ============================================================================
 // [VERIFIED] sub_0028F690 (0x0028F690, 297 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Updates an Adler-32 checksum with a block of bytes (zlib adler32), used to check compressed data.
 // ============================================================================
 // Same machine code as sub_002CCCB0 (0x002CCCB0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -302636,6 +302811,7 @@ StdStream* StdStream::vfunc_00(int a1)
 // ============================================================================
 // [VERIFIED] om::ContentStream::vfunc_00 (0x00293E50, 45 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: om::ContentStream's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // om::ContentStream::vfunc_00 (Proto 0x00293E50, 45 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -307746,6 +307922,7 @@ void Class_0029E9F0::sub_0029E9F0()
 // ============================================================================
 // [VERIFIED] audio::SeqEventTypeBase::vfunc_00 (0x0029EE70, 61 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::SeqEventTypeBase's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // audio::SeqEventTypeBase::vfunc_00 (Proto 0x0029EE70, 61 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -317388,6 +317565,7 @@ void* HalRadicalAdpcmDecodeStream::vfunc_02()
 // ============================================================================
 // [VERIFIED] audio::HalRadicalAdpcmDecodeStream::vfunc_13 (0x002AD500, 44 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: audio::HalRadicalAdpcmDecodeStream's deleting destructor: destroys the object, frees its memory when asked (flag bit 0), and returns it.
 // ============================================================================
 // audio::HalRadicalAdpcmDecodeStream::vfunc_13 (Proto 0x002AD500, 44 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
