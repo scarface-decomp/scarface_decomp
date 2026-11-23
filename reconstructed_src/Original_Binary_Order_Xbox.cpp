@@ -18044,6 +18044,7 @@ template <> void ConcreteClassRep<GameObject>::vfunc_02()
 // ============================================================================
 // [VERIFIED] sub_0002D4F0 (0x0002D4F0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GameSet::Add: looks up the object the script names and adds it to the set; returns false when there is no such object.
 // ============================================================================
 // bin: xb
 // va: 0x0002D4F0
@@ -22169,6 +22170,7 @@ void __cdecl sub_0003D770(void)
 // ============================================================================
 // [VERIFIED] sub_0003D780 (0x0003D780, 38 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command RoadGraph_ShowRaceHUD: turns two race display flags of the road graph manager on or off together, by the script's true or false.
 // ============================================================================
 // sub_0003D780 (0x0003D780, 38 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -22191,6 +22193,7 @@ void __cdecl sub_0003D780(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0003D7B0 (0x0003D7B0, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command RoadGraph_SetArrivedAtDestinationCallback: remembers the script function to call when the destination is reached.
 // ============================================================================
 // sub_0003D7B0 (0x0003D7B0, 31 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -22210,6 +22213,7 @@ void __cdecl sub_0003D7B0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0003D7D0 (0x0003D7D0, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command RoadGraph_SetLapCompletedCallback: remembers the script function to call when a lap is completed.
 // ============================================================================
 // sub_0003D7D0 (0x0003D7D0, 31 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -22244,6 +22248,7 @@ void __cdecl sub_0003D840(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_0003D920 (0x0003D920, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DisplayExteriors_Enable: turns the drawing of exteriors on or off, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22258,6 +22263,7 @@ void __cdecl sub_0003D920(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_0003D940 (0x0003D940, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command DisplayInteriors_Enable: turns the drawing of interiors on or off, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22272,6 +22278,7 @@ void __cdecl sub_0003D940(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_0003D960 (0x0003D960, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command TimeOfDay_Enable: turns the time of day system on or off, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22286,6 +22293,7 @@ void __cdecl sub_0003D960(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_0003D980 (0x0003D980, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command Widescreen_Enable: turns widescreen on or off, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -22300,6 +22308,7 @@ void __cdecl sub_0003D980(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_0003D9B0 (0x0003D9B0, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command HDTV_Enable: turns HDTV mode on or off, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -40847,6 +40856,7 @@ extern "C" Made* __cdecl sub_00068740(void)
 // ============================================================================
 // [VERIFIED] sub_000689A0 (0x000689A0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command RemoveCodeBlock: copies the script file name it is given, turns it into the game's own form, and removes that file's compiled code.
 // ============================================================================
 // sub_000689A0 (0x000689A0, 43 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -40866,6 +40876,7 @@ void __cdecl sub_000689A0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000689D0 (0x000689D0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CodeBlockExists: copies the script file name it is given, turns it into the game's own form, and checks whether its compiled code is loaded.
 // ============================================================================
 // Same machine code as sub_000689A0 (0x000689A0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -43855,6 +43866,7 @@ Class_00072740* Class_00072740::sub_00072740()
 // ============================================================================
 // [VERIFIED] sub_00072760 (0x00072760, 95 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command backtrace: adds up the lengths of the names of the script functions now running and gets an empty text buffer that size; it prints nothing.
 // ============================================================================
 // sub_00072760 (0x00072760, 95 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -44823,6 +44835,7 @@ void __cdecl sub_00076FE0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000771B0 (0x000771B0, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SoundGetCharacterPoiIndex: returns the sound system's point-of-interest index for the character the script names.
 // ============================================================================
 // sub_000771B0 (0x000771B0, 46 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -44849,6 +44862,7 @@ int __cdecl sub_000771B0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000771E0 (0x000771E0, 41 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SoundSetPOIConversationCompleteStatus: marks a point-of-interest conversation, by number, as finished or not, by the script's true or false.
 // ============================================================================
 // sub_000771E0 (0x000771E0, 41 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -44884,6 +44898,7 @@ void __cdecl sub_00077210(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_00077270 (0x00077270, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SoundDisableMusic: turns the music off or back on, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -44898,6 +44913,7 @@ void __cdecl sub_00077270(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_00077290 (0x00077290, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SoundDisableAmbience: turns the ambient sounds off or back on, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -44912,6 +44928,7 @@ void __cdecl sub_00077290(int a1, int a2, int* a3)
 // ============================================================================
 // [VERIFIED] sub_000772B0 (0x000772B0, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SoundDisableClips: turns sound clips off or back on, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -75744,6 +75761,7 @@ void __cdecl sub_000CA030(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000CA050 (0x000CA050, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SaveGameController::SetMissionStatus: tells the save game controller whether a mission is under way, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -76255,6 +76273,7 @@ L_16:
 // ============================================================================
 // [VERIFIED] sub_000CA670 (0x000CA670, 40 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SubtitleManager_QueingFMVSubtitles: passes the opposite of the script's true or false to the subtitle manager's switch.
 // ============================================================================
 // sub_000CA670 (0x000CA670, 40 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -76277,6 +76296,7 @@ void __cdecl sub_000CA670(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_000CA770 (0x000CA770, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SubtitleManager_SetIsSubtitleEnabled: turns subtitles on or off, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -113153,6 +113173,7 @@ L_23:
 // ============================================================================
 // [VERIFIED] sub_00119930 (0x00119930, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SetAIAttacksEnabled: turns AI attacks on or off for the whole game, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_0003D840 (0x0003D840), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -118477,6 +118498,7 @@ void __cdecl sub_0011CF00(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0011CF20 (0x0011CF20, 41 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command NME_SetAIDef: gives the NME manager an AI definition, from the script's number and two texts.
 // ============================================================================
 // sub_0011CF20 (0x0011CF20, 41 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -118501,6 +118523,7 @@ void __cdecl sub_0011CF20(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0011CF50 (0x0011CF50, 20 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command NME_SetWeaponPickerWeights: gives the NME manager the weapon picking weights, from the script's text.
 // ============================================================================
 // sub_0011CF50 (0x0011CF50, 20 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -118521,6 +118544,7 @@ void __cdecl sub_0011CF50(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0011CF70 (0x0011CF70, 17 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command PickElementFromWeightedStringList: returns the element picked from the weighted list of texts the script gives.
 // ============================================================================
 // bin: xb
 // va: 0x0011CF70
@@ -118541,6 +118565,7 @@ int __cdecl sub_0011CF70(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0011CF90 (0x0011CF90, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command NME_SetTunables: looks up the object the script names and gives it to the NME manager as its tunables; does nothing if there is none.
 // ============================================================================
 // sub_0011CF90 (0x0011CF90, 35 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -118568,6 +118593,7 @@ void __cdecl sub_0011CF90(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0011D000 (0x0011D000, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command NME_CreateInitialWeapon: looks up the object the script names and has the NME manager create the initial weapon from it.
 // ============================================================================
 // Same machine code as sub_0011CF90 (0x0011CF90), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -118596,6 +118622,7 @@ void __cdecl sub_0011D000(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0011D030 (0x0011D030, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command TSM_NewTargetSet: starts a new target set in the target set manager, named by the script's text.
 // ============================================================================
 // sub_0011D030 (0x0011D030, 35 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -146411,6 +146438,7 @@ NISCamera* NISCamera::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] sub_0015C550 (0x0015C550, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CameraManager::SetFinishedCallback: when the script gives a non-empty text, registers it as the script code to run when the camera finishes.
 // ============================================================================
 // bin: xb
 // va: 0x0015C550
@@ -146528,6 +146556,7 @@ template <> void ConcreteClassRep<CameraManager>::vfunc_02()
 // ============================================================================
 // [VERIFIED] sub_0015C780 (0x0015C780, 57 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CameraObject::SetActionMap: gives the camera its action map, which the script passes as an object number or an object's name.
 // ============================================================================
 // sub_0015C780 (0x0015C780, 57 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -146636,6 +146665,7 @@ template <> void SemiConcreteClassRep<CameraObject>::vfunc_02()
 // ============================================================================
 // [VERIFIED] sub_0015CEE0 (0x0015CEE0, 54 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GenericCharacterCamera::SnapToObject: looks up the object the script names, snaps the camera to it and returns its id, or 0 if there is none.
 // ============================================================================
 // sub_0015CEE0 (0x0015CEE0, 54 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -146704,6 +146734,7 @@ L_32:
 // ============================================================================
 // [VERIFIED] sub_0015CF20 (0x0015CF20, 54 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command GenericCharacterCamera::SetActionMap: looks up the action map the script names, gives it to the camera and returns its id, or 0 if none.
 // ============================================================================
 // sub_0015CF20 (0x0015CF20, 54 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -146954,6 +146985,7 @@ void __cdecl sub_0015D0D0(Object* object)
 // ============================================================================
 // [VERIFIED] sub_0015D320 (0x0015D320, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command NISCamera::SetCameraAnimation: gives the cutscene camera the animation the script names.
 // ============================================================================
 // Same machine code as sub_001199E0 (0x001199E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -148847,6 +148879,7 @@ int __cdecl sub_001614A0(int a1)
 // ============================================================================
 // [VERIFIED] sub_001614C0 (0x001614C0, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SetCharacterContextsEnabled: stores the script's true or false in the game-wide switch for character contexts.
 // ============================================================================
 // sub_001614C0 (0x001614C0, 22 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -156157,6 +156190,7 @@ void ScriptCharacter::vfunc_13()
 // ============================================================================
 // [VERIFIED] sub_0016E150 (0x0016E150, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command SetFitnessHenchmen: stores the script's true or false in the game-wide fitness henchmen switch.
 // ============================================================================
 // Same machine code as sub_001614C0 (0x001614C0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -159165,6 +159199,7 @@ int __cdecl sub_00177FF0(int a1)
 // ============================================================================
 // [VERIFIED] sub_00178000 (0x00178000, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::BeKickedOutOfCar: asks the character's part at +744 to throw the character out of the car; does nothing without a character.
 // ============================================================================
 // sub_00178000 (0x00178000, 24 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -159189,6 +159224,7 @@ int __cdecl sub_00178000(int a1)
 // ============================================================================
 // [VERIFIED] sub_00178020 (0x00178020, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::CreateSplash: asks the character's part at +744 to make a water splash, and returns true.
 // ============================================================================
 // sub_00178020 (0x00178020, 18 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -159208,6 +159244,7 @@ bool __cdecl sub_00178020(int a1)
 // ============================================================================
 // [VERIFIED] sub_00178040 (0x00178040, 26 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::CreateBloodPool: asks the blood pool manager, when there is one, to make a pool for the character, and returns true.
 // ============================================================================
 // sub_00178040 (0x00178040, 26 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -159234,6 +159271,7 @@ bool __cdecl sub_00178040(int a1)
 // ============================================================================
 // [VERIFIED] sub_00178060 (0x00178060, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::InitializeOpenDoorTimer: asks the character's part at +744 to start its open-door timer, and returns true.
 // ============================================================================
 // Same machine code as sub_00178020 (0x00178020), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -159255,6 +159293,7 @@ bool __cdecl sub_00178060(int a1)
 // ============================================================================
 // [VERIFIED] sub_00178080 (0x00178080, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::InitializeCloseDoorTimer: asks the character's part at +744 to start its close-door timer, and returns true.
 // ============================================================================
 // Same machine code as sub_00178020 (0x00178020), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -159292,6 +159331,7 @@ void __cdecl sub_001780A0(Object* object)
 // ============================================================================
 // [VERIFIED] sub_001780B0 (0x001780B0, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::HasSample: asks the character about the sample the script names.
 // ============================================================================
 // Same machine code as sub_001199E0 (0x001199E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -159356,6 +159396,7 @@ int __cdecl sub_00178190(int a1)
 // ============================================================================
 // [VERIFIED] sub_001781A0 (0x001781A0, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::EnterVehicleLowLevel: passes the script's number (the vehicle) to the character's own enter-vehicle function.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -159447,6 +159488,7 @@ void __cdecl sub_00178200(int a1)
 // ============================================================================
 // [VERIFIED] sub_00178230 (0x00178230, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::InfiniteAmmo: turns the character's infinite ammo flag (at +728) on or off, by the script's true or false.
 // ============================================================================
 // sub_00178230 (0x00178230, 27 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -159486,6 +159528,7 @@ L_15:
 // ============================================================================
 // [VERIFIED] sub_00178270 (0x00178270, 26 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::IsCharacterInDangerousVehicleState: returns 1 when the character's own check says so, 0 otherwise or with no character.
 // ============================================================================
 // sub_00178270 (0x00178270, 26 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -159541,6 +159584,7 @@ void __cdecl sub_001782A0(Object* object)
 // ============================================================================
 // [VERIFIED] sub_001782B0 (0x001782B0, 73 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::DetachObject: detaches an object from the character, given as a number or as the name of the place it is attached.
 // ============================================================================
 struct Object
 {
@@ -159569,6 +159613,7 @@ void __cdecl sub_001782B0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00178300 (0x00178300, 73 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::GetAttachedObject: asks the character for an attached object, given as a number or as the name of the place it is attached.
 // ============================================================================
 // Same machine code as sub_001782B0 (0x001782B0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -159601,6 +159646,7 @@ void __cdecl sub_00178300(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_001783B0 (0x001783B0, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::RemoveWeaponFromInventory: takes the weapon whose number the script gives out of the character's inventory, if above 0.
 // ============================================================================
 // sub_001783B0 (0x001783B0, 31 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -159660,6 +159706,7 @@ void __cdecl sub_001783E0(Object* object)
 // ============================================================================
 // [VERIFIED] sub_00178440 (0x00178440, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::SetDisabled: turns the character's disabled flag (at +668) on or off, by the script's true or false.
 // ============================================================================
 // sub_00178440 (0x00178440, 27 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -159689,6 +159736,7 @@ int __cdecl sub_00178490(int a1)
 // ============================================================================
 // [VERIFIED] sub_001784A0 (0x001784A0, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::AddHealth: adds the script's number to the character's health through the character's own function.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -159711,6 +159759,7 @@ void __cdecl sub_001784A0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_001784C0 (0x001784C0, 57 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::FireWeapon: when the character has a weapon in hand, tells that weapon to fire.
 // ============================================================================
 // sub_001784C0 (0x001784C0, 57 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -159916,6 +159965,7 @@ void __cdecl sub_00178680(Object* object)
 // ============================================================================
 // [VERIFIED] sub_001786B0 (0x001786B0, 38 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::FadeAndDelete: starts the character fading out (calling its own fade with 500.0) and then marks it to be removed.
 // ============================================================================
 // sub_001786B0 (0x001786B0, 38 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -160004,6 +160054,7 @@ void __cdecl sub_00178710(Object* object)
 // ============================================================================
 // [VERIFIED] sub_00178750 (0x00178750, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::SetAmbientCollision: calls the character's ambient collision setter with 0; does nothing without a character.
 // ============================================================================
 // sub_00178750 (0x00178750, 16 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -160024,6 +160075,7 @@ void __cdecl sub_00178750(int a1)
 // ============================================================================
 // [VERIFIED] sub_00178760 (0x00178760, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::IsWallCoverAvailable: returns the cover system's answer to whether wall cover is available.
 // ============================================================================
 // sub_00178760 (0x00178760, 16 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -160045,6 +160097,7 @@ int __cdecl sub_00178760(void)
 // ============================================================================
 // [VERIFIED] sub_001787A0 (0x001787A0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::SetSpawnUsage: passes the script's number to the character's own spawn usage setter.
 // ============================================================================
 // sub_001787A0 (0x001787A0, 36 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -160126,6 +160179,7 @@ void __cdecl sub_001787A0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_001787D0 (0x001787D0, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::SetIsShoveable: sets whether the character can be shoved, by the script's true or false.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -160149,6 +160203,7 @@ void __cdecl sub_001787D0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00178810 (0x00178810, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::IsWithinTimeOfDayParameters: passes the script's number to the character's own time-of-day check.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -160171,6 +160226,7 @@ void __cdecl sub_00178810(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00178830 (0x00178830, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::SetTimeOfDayParameters: gives the character its time-of-day limits, from the two numbers the script passes.
 // ============================================================================
 // Same machine code as sub_00024D50 (0x00024D50), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -160768,6 +160824,7 @@ void Class_00178920::sub_00178920()
 // ============================================================================
 // [VERIFIED] sub_00178E10 (0x00178E10, 66 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::SetActionMap: gives the character its action map, which the script passes as an object number or an object's name.
 // ============================================================================
 // sub_00178E10 (0x00178E10, 66 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -160800,6 +160857,7 @@ void __cdecl sub_00178E10(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_00178EE0 (0x00178EE0, 29 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::GetCurrentWeapon: returns the id of the weapon in the character's hand, or the weapon id stored at +716 when the hand is empty.
 // ============================================================================
 // sub_00178EE0 (0x00178EE0, 29 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -160824,6 +160882,7 @@ int __cdecl sub_00178EE0(int a1)
 // ============================================================================
 // [VERIFIED] sub_00178F00 (0x00178F00, 20 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command CharacterObject::GetCurrentDrawnWeapon: returns the id of the weapon in the character's hand, or 0 when there is none.
 // ============================================================================
 // Same machine code as sub_0002E0D0 (0x0002E0D0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -161290,6 +161349,7 @@ void Class_00179DC0::sub_00179DC0(float value)
 // ============================================================================
 // [VERIFIED] sub_00179DE0 (0x00179DE0, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command ScriptCharacter::SetNeedsMissionManagerHooks: turns the character's flag at +1072 on or off, by the script's true or false.
 // ============================================================================
 // sub_00179DE0 (0x00179DE0, 27 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -162043,6 +162103,7 @@ void __cdecl sub_0017A6A0(Object* object)
 // ============================================================================
 // [VERIFIED] sub_0017A6B0 (0x0017A6B0, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command InventoryBox::GetCountOfType: asks the inventory box how many it holds of the item type whose number the script gives.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -162065,6 +162126,7 @@ void __cdecl sub_0017A6B0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0017A6D0 (0x0017A6D0, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command InventoryBox::GetMaxCountOfType: asks the inventory box the most it can hold of the item type whose number the script gives.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -162087,6 +162149,7 @@ void __cdecl sub_0017A6D0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0017A6F0 (0x0017A6F0, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command InventoryBox::PRIVATE_INV_ADD: adds to the inventory box, from the script's number, text and second number.
 // ============================================================================
 // sub_0017A6F0 (0x0017A6F0, 46 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -162110,6 +162173,7 @@ void __cdecl sub_0017A6F0(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0017A720 (0x0017A720, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command InventoryBox::GetWeightOfType: asks the inventory box the weight of the item type whose number the script gives.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -162132,6 +162196,7 @@ void __cdecl sub_0017A720(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0017A740 (0x0017A740, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command InventoryBox::GetWeightCapacity: asks the inventory box how much weight it can carry, passing the script's number.
 // ============================================================================
 // Same machine code as sub_00024DC0 (0x00024DC0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -162154,6 +162219,7 @@ void __cdecl sub_0017A740(int a1, int a2, int a3)
 // ============================================================================
 // [VERIFIED] sub_0017A760 (0x0017A760, 37 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command InventoryBox::GetInventoryType: returns the id of the inventory box's item type at the position the script gives, or 0 when there is none.
 // ============================================================================
 // sub_0017A760 (0x0017A760, 37 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -162339,6 +162405,7 @@ template <> int ConcreteClassRep<InventoryBox>::vfunc_01()
 // ============================================================================
 // [VERIFIED] sub_0017AA30 (0x0017AA30, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command InventoryOwner::GetCountInInventory: asks the owner's inventory how many it holds of the item the script names.
 // ============================================================================
 // Same machine code as sub_001199E0 (0x001199E0), which was matched first;
 // its addresses and names were swapped for this function's.
@@ -183350,6 +183417,7 @@ LaunderCashHUD* LaunderCashHUD::vfunc_01(int a1)
 // ============================================================================
 // [VERIFIED] sub_00195610 (0x00195610, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command ResetLookTutorial: finds item 56 in the manager at 0x0048C23C and, when it is there, resets it.
 // ============================================================================
 // sub_00195610 (0x00195610, 25 bytes)
 // Starter code written from the disassembly. Names and types are guesses; rename and
@@ -183377,6 +183445,7 @@ void __cdecl sub_00195610(void)
 // ============================================================================
 // [VERIFIED] sub_00195630 (0x00195630, 25 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Script command AdvanceTutorialState: finds item 56 in the manager at 0x0048C23C and, when it is there, moves it to its next state.
 // ============================================================================
 // Same machine code as sub_00195610 (0x00195610), which was matched first;
 // its addresses and names were swapped for this function's.

@@ -1,5 +1,13 @@
 [
   {
+    "time": "2026-11-23 15:53:16",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "0 function(s) submitted by Claude (AI) for RRutherrfordd",
+    "va": "",
+    "bytes": "checked again on import"
+  },
+  {
     "time": "2026-11-23 15:44:44",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
@@ -1990,13 +1998,5 @@
     "symbol": "sub_001CF290",
     "va": "0x001CF290",
     "bytes": "124/124 B"
-  },
-  {
-    "time": "2026-11-22 21:29:01",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "PauseMenuPageSerialize::vfunc_45",
-    "va": "0x001CD4C0",
-    "bytes": "69/69 B"
   }
 ]

@@ -40,13 +40,13 @@
   },
   "described": {
     "pc": 60,
-    "xb": 2439,
+    "xb": 2508,
     "proto": 314,
     "ps2": 0,
-    "total": 2499,
+    "total": 2568,
     "how": {
       "human": 327,
-      "read": 100,
+      "read": 169,
       "shape": 2041,
       "twin": 31
     }
