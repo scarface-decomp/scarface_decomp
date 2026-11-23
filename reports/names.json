@@ -35738,9 +35738,9 @@
       "why": "Paired by shape with the Xbox's 0x00073270 (Namespace::ClassLinkTo), and what the prototype's classLinkNamespaces (0x000660D0) calls."
     },
     "xb:0x000766D0": {
-      "name": "HashToLetters",
+      "name": "KeyToStxString",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Writes a 32-bit value as eight letters a-p, one per four bits, lowest first, into the next of eight 16-byte buffers at 0x004220D2 (counter at 0x00480ADC) and returns it: how classLinkNamespaces prints the two namespaces' names (which are stored as hashes) in its error message."
+      "why": "Writes a 32-bit key as \"stx\" and eight letters a-p (one per four bits, lowest first) into the next of eight 16-byte buffers at 0x004220D0, each set up as \"stx34567890\" (the letters go at +3..+10; counter at 0x00480ADC), and returns it: the text StxStringToKey (0x00076760) turns back into the key, and how names that are only known as keys show up (in classLinkNamespaces' error, and as stxXXXXXXXX in the scripts)."
     },
     "xb:0x0023F760": {
       "name": "OperatorNew_Lib",
@@ -35766,6 +35766,66 @@
       "name": "OperatorNew",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
       "why": "AllocateFromHeap(GetCurrentHeap(), size) (0x002018F0, 0x002018B0), the same instructions as the Xbox's OperatorNew 0x00027590; OperatorNew_Lib (0x001FCF20) jumps to it."
+    },
+    "xb:0x0006FE50": {
+      "name": "LookupNamespace",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Takes a name: with none, returns the global namespace (tail-jump to GetGlobalNamespace 0x00072260); otherwise StringToKey(name, 0) (0x000767E0) and tail-jumps to FindOrCreateNamespace (0x00072CD0) with the key. InitializeClassReps (0x00073650) gives every class record's namespace (+0x20) from LookupNamespace(record's class name at +0x14)."
+    },
+    "proto:0x00065A50": {
+      "name": "LookupNamespace",
+      "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
+      "why": "Paired by shape (the same instructions, addresses apart) with xb:0x0006FE50, named there."
+    },
+    "xb:0x000767E0": {
+      "name": "StringToKey",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Turns text into a name key: StxStringToKey (0x00076760) first (an \"stx\" token is the key written out), else NameKeyCaseSensitive (0x00243FF0) when its second argument is true, NameKey (0x00243FA0) when false."
+    },
+    "xb:0x00076760": {
+      "name": "StxStringToKey",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "If the text starts with \"stx\", reads the 8 letters after it ('a'+n, lowest four bits first) back into the 32-bit key; otherwise returns 0. The inverse of KeyToStxString (0x000766D0)."
+    },
+    "xb:0x00243FF0": {
+      "name": "NameKeyCaseSensitive",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "NameKey's (0x00243FA0) loop (key * 0x1003F, 31 bits, xor each character, top bit set at the end) without its lower-casing of characters below 'a'; StringToKey (0x000767E0) uses it when asked to keep case."
+    },
+    "proto:0x00201490": {
+      "name": "NameKeyCaseSensitive",
+      "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
+      "why": "Paired by shape (the same instructions, addresses apart) with xb:0x00243FF0, named there."
+    },
+    "xb:0x000727C0": {
+      "name": "FindNamespace",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Looks a key up in the 512-bucket table at [0x0047B35C] (bucket (key >> 2) & 0x1FF, chained through +0x08, key at +0x00); when it isn't there, returns 0 unless its second argument asks to create one, which it then makes through the namespace manager at [0x0047B358]."
+    },
+    "xb:0x00072CD0": {
+      "name": "FindOrCreateNamespace",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "FindNamespace(key, 1) (0x000727C0): the namespace with that key, made if there is none. LookupNamespace (0x0006FE50) tail-jumps to it."
+    },
+    "proto:0x00068670": {
+      "name": "FindOrCreateNamespace",
+      "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
+      "why": "Paired by shape (the same instructions, addresses apart) with xb:0x00072CD0, named there."
+    },
+    "xb:0x00072260": {
+      "name": "GetGlobalNamespace",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Returns the global at 0x0047B354; LookupNamespace (0x0006FE50) returns it for an empty name."
+    },
+    "xb:0x00073400": {
+      "name": "RegisterClassRep",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Every one of its 396 calls passes a class record (392 ConcreteClassRep<T>, 4 SemiConcreteClassRep<T>, by their run-time type information): it keys the record's class name (+0x14) into +0x18 (0x000767E0, case folded) and links it at the front of bucket key % 127 of the table at 0x0047D7E8 through +0x1C, clearing the table first the first time."
+    },
+    "xb:0x00073650": {
+      "name": "InitializeClassReps",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Walks the 127 buckets at 0x0047D7E8 that RegisterClassRep (0x00073400) fills, and for every record (+0x1C: the next) sets its namespace (+0x20) to LookupNamespace(its class name, +0x14) and calls 0x00072220 on that namespace."
     }
   },
   "members": {
@@ -36048,6 +36108,38 @@
         "name": "m_child",
         "by": "RRutherrfordd (Founder)",
         "why": "The name the matched code of NISScriptFunctionCallAction::vfunc_03 (0x001812D0) uses for this member."
+      }
+    },
+    "xb:ConcreteClassRep": {
+      "+0x14": {
+        "name": "m_className",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "The class's name as text: RegisterClassRep (0x00073400) keys it into +0x18 and InitializeClassReps (0x00073650) looks its namespace up by it; the static image of each record holds a pointer to the name (e.g. 0x0041BDC0's reads \"ScriptObject\")."
+      },
+      "+0x18": {
+        "name": "m_nameKey",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "StringToKey(m_className, 0) (0x000767E0), stored by RegisterClassRep (0x00073400), which buckets the record by it (key % 127)."
+      },
+      "+0x1C": {
+        "name": "m_nextClass",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "The next record in its bucket of the class table at 0x0047D7E8: RegisterClassRep (0x00073400) links the record in front through it and InitializeClassReps (0x00073650) walks it."
+      },
+      "+0x20": {
+        "name": "m_namespace",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "Set by InitializeClassReps (0x00073650) to LookupNamespace(m_className); every ConcreteClassRep<T>::Init links it under its parent record's with classLinkNamespaces (0x00070520)."
+      },
+      "+0x24": {
+        "name": "m_parentClass",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "Every ConcreteClassRep<T>::Init stores its parent class's record here (0 in the static image; ScriptObject's stays 0: the root)."
+      },
+      "+0x28": {
+        "name": "m_heap",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "The heap the class's objects are made in: every ConcreteClassRep<T>::Create passes it to AllocateInHeap (0x000275B0); 9 in every record checked."
       }
     }
   }
