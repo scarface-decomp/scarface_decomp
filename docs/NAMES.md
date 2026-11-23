@@ -48,8 +48,11 @@ the address-order files in [`reconstructed_src/`](../reconstructed_src).)
   `if (a1 & 1) free(this); return this;`, the class's only function that does), the function that returns
   the class's record (`Class::GetClassRep`: the record whose set-up function, `ConcreteClassRep<Class>`'s,
   writes its parent link), and the class records' and fight factories' `Create` (allocate N bytes,
-  construct, return). `python portal/scripts/names_from_shapes.py` finds them (2,305 names on the Xbox and
-  the prototype so far; the script's own text has the exact rules).
+  construct, return), and the record's set-up (`ConcreteClassRep<Class>::Init`: it links the class's namespace
+  under its parent's with `classLinkNamespaces`, named from the game's own error message). With the game's
+  program file present, a record's own run-time type information confirms whose record a getter returns.
+  `python portal/scripts/names_from_shapes.py` finds them (3,433 names on the Xbox and the prototype so far;
+  the script's own text has the exact rules).
 
 * **A named Xbox function's PS2 twin.** Where the portal pairs a PS2 function with an Xbox one and the
   Xbox one has a name here, the PS2 function takes it (`python portal/scripts/names_to_ps2.py`, 49 so
