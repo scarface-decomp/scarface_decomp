@@ -511,6 +511,18 @@ def matched_tasks(tasks: List[dict], have) -> List[dict]:
     return out
 
 
+def starts_not_queued(tasks: list, have) -> int:
+    """How many function starts of reports/extra_function_starts.json, for the game files that are here, are
+    neither in the queue nor matched: more than a handful means the queue was built before the list grew."""
+    listed = read_json(BASE_DIR / "reports" / "extra_function_starts.json", {}) or {}
+    there = {task_key(t) for t in tasks or [] if "fva_int" in t and t.get("bin")} | set(REGISTRY["entries"])
+    n = 0
+    for b, starts in (listed.get("starts") or {}).items():
+        if b in have:
+            n += sum(1 for v in starts if f"{b}:0x{int(v, 16):08X}" not in there)
+    return n
+
+
 def load_tasks() -> None:
     global ALL_TASKS, TASK_BY_ID
     tasks = read_json(QUEUE_JSON, None)
@@ -525,6 +537,11 @@ def load_tasks() -> None:
             print(f"[*] New game files found ({names}); adding their functions to the work queue (a few minutes)...")
         tasks = build_queue(have, tasks, set(REGISTRY["entries"]), progress=print, **seed_data(BASE_DIR))
         write_json(QUEUE_JSON, tasks)
+    missing = starts_not_queued(tasks, have)
+    if missing > 50:
+        print(f"[!] {missing:,} functions listed in reports/extra_function_starts.json are not in your work queue "
+              "(the list grew since your queue was built). Close the portal and run:  "
+              "python portal/tools/queue_builder.py  (a few minutes), then start it again.")
     done = matched_tasks(tasks, have)
     if done:
         print(f"[*] Adding {len(done):,} functions that are already matched, so they can be opened, tidied and "

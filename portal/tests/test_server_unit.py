@@ -579,3 +579,17 @@ def test_cmov_and_fcomi_also_mean_arch_sse():
     assert MV.flag_options("xb", "/O2 /G6", bytes.fromhex("0F44C1C3")) == ["/O2 /G6", "/O2 /G6 /arch:SSE"]
     assert MV.verify_line_options("// verify: python portal/verify.py a.cpp --va 0x1 --bin xb --match '??_I'\n") == {"match": "??_I"}
     assert MV.allowed_flags("/O2 /G6 /EHsc", "/O2 /G6") == "" and MV.allowed_flags("/O2", "/O2 /Fo x")
+
+
+def test_starts_missing_from_the_queue_are_counted(S, tmp_path, monkeypatch):
+    """A queue built before reports/extra_function_starts.json grew lacks those functions: the start-up
+    message counts the listed starts that are neither queued nor matched, for the game files that are here."""
+    (tmp_path / "reports").mkdir()
+    (tmp_path / "reports" / "extra_function_starts.json").write_text(json.dumps(
+        {"starts": {"xb": ["0x00011000", "0x00011010", "0x00011020"], "proto": ["0x00012000"]}}))
+    monkeypatch.setattr(S, "BASE_DIR", tmp_path)
+    monkeypatch.setattr(S, "REGISTRY", {"entries": {"xb:0x00011010": {}}})
+    queue = [{"bin": "xb", "fva_int": 0x11000}]
+    assert S.starts_not_queued(queue, {"xb"}) == 1            # 0x11020; the prototype's file is not here
+    assert S.starts_not_queued(queue, {"xb", "proto"}) == 2
+    assert S.starts_not_queued(None, set()) == 0
