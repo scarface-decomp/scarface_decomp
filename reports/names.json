@@ -29971,6 +29971,111 @@
       "name": "audio::SeqEventType<audio::SeqEventNestTrack>::~SeqEventType",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Deleting destructor: it ends `if (a1 & 1) sub_00027600(this); return this;` (sub_00027600 is called that way by 498 matched functions), and it is the only function of audio::SeqEventType<audio::SeqEventNestTrack> that does."
+    },
+    "xb:0x00244410": {
+      "name": "GetCurrentHeap",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Returns the global at 0x00493B54, the heap the game's new allocates from: OperatorNew (0x00027590) passes it to AllocateFromHeap, and SetCurrentHeap (0x00244420) swaps it."
+    },
+    "xb:0x00244420": {
+      "name": "SetCurrentHeap",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Stores its argument in 0x00493B54 (the heap GetCurrentHeap returns and OperatorNew allocates from) and returns the one that was there."
+    },
+    "xb:0x00244450": {
+      "name": "AllocateFromHeap",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Takes a heap number and a size: calls the allocate slot (vfunc_04) of entry number heap of the table at 0x00493330 (16 bytes each) with the size, and when that fails calls the out-of-memory callback stored at 0x00493B58."
+    },
+    "proto:0x002018F0": {
+      "name": "AllocateFromHeap",
+      "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
+      "why": "Paired by shape (the same instructions, addresses apart) with xb:0x00244450, named there: Takes a heap number and a size: calls the allocate slot (vfunc_04) of entry number heap of the table at 0x00493330 (16 bytes each) with the size, and when that fails calls the out-of-memory callback stored at 0x00493B58."
+    },
+    "xb:0x002445E0": {
+      "name": "FreeMemory",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Finds the heap that owns the block (trying the one it found last, 0x00493B60, first), remembers it, and calls that heap's free on the block."
+    },
+    "xb:0x00027590": {
+      "name": "OperatorNew",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "The game's operator new: AllocateFromHeap(GetCurrentHeap(), size). Called 1,113 times."
+    },
+    "xb:0x000275B0": {
+      "name": "AllocateInHeap",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "AllocateFromHeap with the size first and the heap second: what every ConcreteClassRep<T>::Create calls, with the heap the class record keeps at +0x28."
+    },
+    "proto:0x00025140": {
+      "name": "AllocateInHeap",
+      "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
+      "why": "Paired by shape (the same instructions, addresses apart) with xb:0x000275B0, named there: AllocateFromHeap with the size first and the heap second: what every ConcreteClassRep<T>::Create calls, with the heap the class record keeps at +0x28."
+    },
+    "xb:0x00027600": {
+      "name": "OperatorDelete",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "The game's operator delete: FreeMemory(p) when p isn't null. 1,230 matched deleting destructors call it (or sub_0023F7A0) as `if (a1 & 1) OperatorDelete(this)`."
+    },
+    "proto:0x00025160": {
+      "name": "OperatorDelete",
+      "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
+      "why": "Paired by shape (the same instructions, addresses apart) with xb:0x00027600, named there: The game's operator delete: FreeMemory(p) when p isn't null. 1,230 matched deleting destructors call it (or sub_0023F7A0) as `if (a1 & 1) OperatorDelete(this)`."
+    },
+    "xb:0x00026EC0": {
+      "name": "ScopedHeap::ScopedHeap",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Keeps GetCurrentHeap() in its one member and makes its argument the current heap (SetCurrentHeap); ~ScopedHeap (0x00026EE0) puts the kept one back."
+    },
+    "proto:0x00024AB0": {
+      "name": "ScopedHeap::ScopedHeap",
+      "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
+      "why": "Paired by shape (the same instructions, addresses apart) with xb:0x00026EC0, named there: Keeps GetCurrentHeap() in its one member and makes its argument the current heap (SetCurrentHeap); ~ScopedHeap (0x00026EE0) puts the kept one back."
+    },
+    "xb:0x00026EE0": {
+      "name": "ScopedHeap::~ScopedHeap",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Puts back the heap its constructor (0x00026EC0) kept: SetCurrentHeap(m_Field00)."
+    },
+    "xb:0x0002AC90": {
+      "name": "LookUpHandle",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Finds the object a handle stands for: index = handle & 0x3FFF into the 6,000-entry table at 0x004740DC, returning the entry's object only if the entry still holds that exact handle (0 for a stale one)."
+    },
+    "xb:0x002FC43E": {
+      "name": "atoi",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Five bytes that jump straight to atol (0x002FC3E6, named from the Xbox SDK's own linker map); in Microsoft's C runtime atoi is exactly atol, and this sits among the runtime's functions."
+    },
+    "xb:0x00242EB0": {
+      "name": "math::Matrix::Identity",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Writes the sixteen floats of a 4x4 matrix as the identity (1.0 on the diagonal, 0 elsewhere); next to math::Matrix::FillTranslate (0x00243170) in the same part of the program."
+    },
+    "proto:0x002003C0": {
+      "name": "math::Matrix::Identity",
+      "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
+      "why": "Paired by shape (the same instructions, addresses apart) with xb:0x00242EB0, named there: Writes the sixteen floats of a 4x4 matrix as the identity (1.0 on the diagonal, 0 elsewhere); next to math::Matrix::FillTranslate (0x00243170) in the same part of the program."
+    },
+    "xb:0x00244170": {
+      "name": "math::Vector::Normalize",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Divides x, y and z by the vector's length so its length becomes one (no check for zero)."
+    },
+    "proto:0x00201610": {
+      "name": "math::Vector::Normalize",
+      "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
+      "why": "Paired by shape (the same instructions, addresses apart) with xb:0x00244170, named there: Divides x, y and z by the vector's length so its length becomes one (no check for zero)."
+    },
+    "xb:0x00244100": {
+      "name": "math::Vector::NormalizeSafe",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd)",
+      "why": "Normalizes x, y, z and returns the old length, but sets a vector shorter than the threshold at 0x00458248 to zero instead of dividing by almost nothing."
+    },
+    "proto:0x002015A0": {
+      "name": "math::Vector::NormalizeSafe",
+      "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
+      "why": "Paired by shape (the same instructions, addresses apart) with xb:0x00244100, named there: Normalizes x, y, z and returns the old length, but sets a vector shorter than the threshold at 0x00458248 to zero instead of dividing by almost nothing."
     }
   },
   "members": {
