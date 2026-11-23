@@ -43,6 +43,14 @@ the address-order files in [`reconstructed_src/`](../reconstructed_src).)
   classes), the name is carried to that slot in every class the game's class information says derives
   from their shared base. `python portal/scripts/names_from_messages.py` finds them (101 names so far).
 
+* **The shape of the matched code.** Some functions are certain from their verified C++ alone, in a class the
+  game's class information already gives them: the deleting destructor (`Class::~Class`: it ends
+  `if (a1 & 1) free(this); return this;`, the class's only function that does), the function that returns
+  the class's record (`Class::GetClassRep`: the record whose set-up function, `ConcreteClassRep<Class>`'s,
+  writes its parent link), and the class records' and fight factories' `Create` (allocate N bytes,
+  construct, return). `python portal/scripts/names_from_shapes.py` finds them (2,305 names on the Xbox and
+  the prototype so far; the script's own text has the exact rules).
+
 * **A named Xbox function's PS2 twin.** Where the portal pairs a PS2 function with an Xbox one and the
   Xbox one has a name here, the PS2 function takes it (`python portal/scripts/names_to_ps2.py`, 49 so
   far), unless two PS2 functions claim the same twin.
