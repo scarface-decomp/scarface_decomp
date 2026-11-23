@@ -26,6 +26,7 @@ import re
 import shutil
 import sys
 from pathlib import Path
+from typing import Optional
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "portal" / "tools"))
@@ -197,26 +198,53 @@ def described_elsewhere() -> set:
 
 
 def describe_batch(entries: dict, names: dict, b: str, n: int, who: str = "", skip: set = frozenset(),
-                   min_size: int = 16) -> list:
+                   min_size: int = 16, graph: Optional[dict] = None, commands: Optional[dict] = None) -> list:
     """[(key, entry, [(callee key, its name, its description)])]: matched functions of b with no description,
-    those whose calls are already explained first (so the batch reads bottom-up), smaller first."""
+    those whose calls are already explained first (so the batch reads bottom-up), smaller first.
+
+    With the call graph (reports/callgraph_xb.json, portal/tools/callgraph.py) the functions that use text
+    or are script commands (commands: {key: command name}) come first, then leaves first in its order, and a
+    function's calls include the vtable calls the graph could tell."""
+    graph = graph or {}
+    order = {f"{b}:{f}": i for i, comp in enumerate(graph.get("order", [])) for f in comp}
+    funcs = graph.get("functions", {})
+    commands = commands or {}
     rows = []
     for k, e in entries.items():
         if not k.startswith(b + ":") or (e.get("what") or "").strip() or e.get("excerpt") or k in skip \
                 or int(e.get("size", 0)) < min_size:
             continue
         calls = []
-        for sub in dict.fromkeys(_CALL.findall(e.get("code", ""))):
-            ck = f"{b}:0x{sub[4:]}"
+        g = funcs.get(k.split(":", 1)[1], {})
+        subs = [f"{b}:0x{sub[4:]}" for sub in _CALL.findall(e.get("code", ""))]
+        subs += [f"{b}:{t}" for t, _ in g.get("virtual", [])]
+        for ck in dict.fromkeys(subs):
             if ck == k:
                 continue
             ce = entries.get(ck) or {}
-            calls.append((ck, (names.get(ck) or {}).get("name") or ce.get("symbol") or sub, (ce.get("what") or "").strip()))
+            calls.append((ck, (names.get(ck) or {}).get("name") or ce.get("symbol") or "sub_" + ck[-8:],
+                          (ce.get("what") or "").strip()))
         unknown = sum(1 for _, name, what in calls if not what and name.startswith("sub_"))
         known = len(calls) - unknown
-        rows.append((unknown, -known, int(e.get("size", 0)), k, e, calls))
+        first = 0 if (g.get("strings") or k in commands) else 1
+        rows.append(((first, unknown, order.get(k, 0)) if graph else (unknown,), -known, int(e.get("size", 0)), k,
+                     e, calls))
     rows.sort(key=lambda r: r[:4])
     return [(k, e, calls) for _, _, _, k, e, calls in spread(rows, who)[:n]]
+
+
+def script_commands(b: str = "xb") -> dict:
+    """{key: script command name} for the commands the program registers (reports/script_bindings.json)."""
+    try:
+        data = json.loads((ROOT / "reports" / "script_bindings.json").read_text())
+    except (OSError, ValueError):
+        return {}
+    out = {}
+    for c in data.get("versions", {}).get(b, []):
+        if c.get("handler"):
+            name = (c["class"] + "::" if c.get("class") else "") + c["name"]
+            out.setdefault(f"{b}:0x{int(c['handler'], 16):08X}", name)
+    return out
 
 
 def _code_only(code: str, limit: int = 120) -> str:
@@ -232,13 +260,22 @@ def _code_only(code: str, limit: int = 120) -> str:
 def cmd_describe(args) -> int:
     entries = registry()
     names = NAMES.load(ROOT / "reports" / "names.json").get("names", {})
-    batch = describe_batch(entries, names, args.bin, args.n, args.who, described_elsewhere(), args.min_size)
+    import callgraph as CG
+    graph = CG.load(ROOT / "reports" / f"callgraph_{args.bin}.json")
+    commands = script_commands(args.bin)
+    batch = describe_batch(entries, names, args.bin, args.n, args.who, described_elsewhere(), args.min_size,
+                           graph, commands)
     left = sum(1 for k, e in entries.items() if k.startswith(args.bin + ":") and not (e.get("what") or "").strip())
     print(f"{left:,} matched {args.bin} functions have no description yet. {len(batch)} of them:\n")
     print(DESCRIBE_RULES.replace("<who>", args.who or "yourname") + "\n")
     for k, e, calls in batch:
         own = (names.get(k) or {}).get("name")
         print(f"=== {k}  {own or e.get('symbol', '')}  ({e.get('size')} bytes)")
+        if k in commands:
+            print(f"  it is the script command {commands[k]} (scripts call it by that name)")
+        g = graph.get("functions", {}).get(k.split(":", 1)[1], {})
+        if g.get("casts"):
+            print("  checks objects' class with dynamic_cast to " + ", ".join(g["casts"][:4]))
         for ck, name, what in calls[:12]:
             print(f"  calls {name}" + (f": {what}" if what else "") + ("" if name.startswith("sub_") else f"  ({ck})"))
         cls = e.get("symbol", "").rsplit("::", 1)[0] if "::" in e.get("symbol", "") else ""
