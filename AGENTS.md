@@ -32,19 +32,22 @@ A person can start you with one sentence: **"Read AGENTS.md in this repository a
 
     python portal/doctor.py          # says what is missing: game files, the compiler
 
-If the compiler or the game's program file is missing, stop and tell the person what `doctor.py` said.
-`docs/CONTRIBUTING.md` has the setup; you cannot download the game or the compiler for them.
+If the compiler or the game's program file is missing, tell the person what `doctor.py` said
+(`docs/CONTRIBUTING.md` has the setup; you cannot download the game or the compiler for them), and offer
+the work that needs neither: **writing descriptions** (below).
 
 ## The loop
 
     python portal/tools/similar.py rank                    # once per session: open functions by their nearest match
-    python portal/agent.py next --bin xb --order similar   # pick one: most like a matched function first
+    python portal/agent.py next --bin xb --order similar --who NAME   # pick one: most like a matched function first
     python portal/agent.py packet xb 0x00248810            # disassembly, bytes, classmates, starter file
     #   edit work/xb_00248810.cpp
     python portal/agent.py check work/xb_00248810.cpp      # compile and compare; repeat until MATCH
     #   fill in '// what:' and '// tool:' at the top of the file
     python portal/agent.py keep work/xb_00248810.cpp       # copies it to reports/to_submit/
 
+- `--who` with the person's name (their Discord or GitHub handle) gives them an order of their own near the
+  top of the list, so several people's agents don't all start on the same functions.
 - `check` on the untouched starter first: for many small functions it already matches.
 - When the object file holds more than one function (an inline helper, `<math.h>`, `delete`), `check`
   picks the one named `sub_XXXXXXXX` for the address. A template instantiation or a compiler helper
@@ -75,6 +78,22 @@ Tell the person how many files are in `reports/to_submit/` and that they record 
 (with the portal running; it asks for their handle and PIN, verifies every file again and credits them).
 Then they commit and push, or press **Submit your work** in the portal. Don't do those steps for them
 unless they ask.
+
+## No game files? Write descriptions
+
+Every matched function should say in one plain sentence what it does, and thousands don't yet. This needs
+no game files and no compiler: the matched C++ is in the repository.
+
+    python portal/agent.py describe --who NAME                          # a batch, with what their calls do
+    #   write work/descriptions_NAME.json (the command prints the format)
+    python portal/agent.py describe-keep work/descriptions_NAME.json    # checked, ready to send
+
+Read each function and what it calls (the batch shows the names and descriptions of its calls), and write
+what it does in the game's terms. When you can't tell what it's for, say what it returns or changes. Skip
+a function rather than guess. `describe-keep` turns down a sentence that is too long, only restates the
+code, or is for a function that is already described. The person posts the kept file
+(`reports/to_submit/descriptions_NAME.json`) in the Discord or a pull request; a maintainer sends it in with
+`python portal/scripts/submit_descriptions.py`. Put your model in `"by"` ("Claude for NAME").
 
 ## Making matched code readable
 
