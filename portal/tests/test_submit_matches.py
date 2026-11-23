@@ -48,6 +48,28 @@ def test_one_proposal_goes_through_claim_and_verify(tmp_path, monkeypatch):
     assert S.submit("http://x", "me", "1234", path)[0] is False
 
 
+def test_one_recorded_meanwhile_as_a_look_alike_is_a_success(tmp_path, monkeypatch):
+    """The portal matches the look-alikes of each recorded function in the background: one can be recorded
+    between this script's look at it and its claim or compile. Its file goes, like an already verified one."""
+    path = tmp_path / "xb_00243FA0.cpp"
+    path.write_text(FILE, encoding="utf-8")
+    looks = iter([{"status": "UNCLAIMED"}, {"status": "VERIFIED"}])
+    answers = {"/api/claim": {"ok": False, "error": "Already verified."}}
+
+    def call(base, where, body=None):
+        return {"ok": True, "task": next(looks)} if where.startswith("/api/task") else answers[where]
+    monkeypatch.setattr(S, "call", call)
+    ok, said = S.submit("http://x", "me", "1234", path)
+    assert ok and "look-alike" in said
+    looks = iter([{"status": "CLAIMED"}, {"status": "VERIFIED"}])                # recorded while it compiled
+    answers.update({"/api/claim": {"ok": True}, "/api/cancel": {"ok": True},
+                    "/api/verify": {"ok": False, "error": "Your claim expired or was released while compiling."}})
+    assert S.submit("http://x", "me", "1234", path)[0] is True
+    looks = iter([{"status": "UNCLAIMED"}, {"status": "CLAIMED"}])                # someone else's claim: a failure
+    answers["/api/claim"] = {"ok": False, "error": "Claimed by Bob."}
+    assert S.submit("http://x", "me", "1234", path) == (False, "couldn't claim it: Claimed by Bob.")
+
+
 def test_the_waiting_matches_are_well_formed():
     for path in sorted((Path(__file__).resolve().parents[2] / "reports" / "to_submit").glob("*.cpp")):
         fields, _code = S.read_proposal(path.read_text(encoding="utf-8"))

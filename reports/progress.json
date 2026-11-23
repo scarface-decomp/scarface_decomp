@@ -38,6 +38,19 @@
       "total": 249
     }
   },
+  "described": {
+    "pc": 29,
+    "xb": 2376,
+    "proto": 136,
+    "ps2": 0,
+    "total": 2405,
+    "how": {
+      "human": 320,
+      "read": 40,
+      "shape": 2045,
+      "twin": 0
+    }
+  },
   "size_buckets": {
     "1-9 B": 1986,
     "10-19 B": 1548,

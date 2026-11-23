@@ -104,14 +104,28 @@ def submit(base: str, user: str, pin: str, path: Path) -> Tuple[bool, str]:
         return True, "already verified"
     claim = call(base, "/api/claim", {"user": user, "pin": pin, "id": tid})
     if claim.get("ok") is False:
+        if recorded_meanwhile(base, tid):
+            return True, "already verified (as a look-alike of one sent just before)"
         return False, "couldn't claim it: " + str(claim.get("error"))
     res = call(base, "/api/verify", {"user": user, "pin": pin, "id": tid, "cpp_code": code,
                                      "tool_used": fields.get("tool", "")[:120], "what": fields.get("what", "")[:160],
                                      **verify_options(text)})
     if res.get("verified"):
         return True, f"verified, {res.get('total_bytes')} bytes"
+    if recorded_meanwhile(base, tid):
+        return True, "already verified (as a look-alike of one sent just before)"
     call(base, "/api/cancel", {"user": user, "pin": pin, "id": tid, "cpp_code": code})
     return False, res.get("error") or res.get("compiler_error") or f"not a match: {res.get('matched_bytes')} of {res.get('total_bytes')} bytes"
+
+
+def recorded_meanwhile(base: str, tid: str) -> bool:
+    """Whether the function is rebuilt now. While this script works through a folder, the portal matches the
+    look-alikes of each function it records in the background (the same code at other addresses); one of
+    them can be recorded between this script's look at it and its claim or its compile, and the portal then
+    answers "Already verified." or "Your claim expired or was released while compiling." That is a
+    success: the function is recorded, so its file can go."""
+    task = call(base, "/api/task?id=" + tid).get("task") or {}
+    return task.get("status") == "VERIFIED"
 
 
 def main() -> int:

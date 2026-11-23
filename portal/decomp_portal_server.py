@@ -46,6 +46,7 @@ BASE_DIR = PORTAL_DIR.parent                          # the project folder: bina
 sys.path.insert(0, str(PORTAL_DIR / "tools"))
 
 import msvc_verify as MV  # noqa: E402
+import descriptions as DESC  # noqa: E402
 from disasm_synth import disassemble, synthesize_all, synthesize_cpp  # noqa: E402
 import decompme as DME  # noqa: E402
 import lookalikes as LA  # noqa: E402
@@ -1222,12 +1223,17 @@ def submission_task(t: dict, body: dict) -> Tuple[dict, str]:
 WHAT_MAX = 160
 
 
-def clean_what(text) -> str:
-    """A function's one-line, plain-English description: one line of ordinary text, at most WHAT_MAX characters."""
+def one_line(text) -> str:
+    """Text as one line of ordinary text (control characters and runs of spaces made one space)."""
     if not isinstance(text, str):
         return ""
     text = re.sub(r"[\x00-\x1f\x7f]+", " ", text)
-    return re.sub(r"\s+", " ", text).strip()[:WHAT_MAX]
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def clean_what(text) -> str:
+    """A function's one-line, plain-English description: one line of ordinary text, at most WHAT_MAX characters."""
+    return one_line(text)[:WHAT_MAX]
 
 
 def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, ported_from: str = "",
@@ -1243,7 +1249,7 @@ def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, por
     if ported_from:
         REGISTRY["entries"][key]["ported_from"] = ported_from
     if clean_what(what):
-        REGISTRY["entries"][key]["what"] = clean_what(what)
+        REGISTRY["entries"][key].update(what=clean_what(what), what_how="human")
     if write:
         save_registry()
 
@@ -1253,13 +1259,16 @@ def describe_verified(t: dict, what: str, user: str) -> Optional[str]:
     e = REGISTRY["entries"].get(task_key(t))
     if not e:
         return "Only rebuilt functions can be described here: write it when you verify the function."
-    what = clean_what(what)
+    what = one_line(what)
     if what == (e.get("what") or ""):
         return None
     if what:
-        e.update(what=what, what_by=user, what_at=stamp())
+        why = DESC.problem(what)
+        if why:
+            return f"That description is {why}. One plain sentence of at most {WHAT_MAX} characters, please."
+        e.update(what=what, what_by=user, what_at=stamp(), what_how="human")
     else:
-        for k in ("what", "what_by", "what_at"):
+        for k in ("what", "what_by", "what_at", "what_how"):
             e.pop(k, None)
     save_registry()
     return None
@@ -1973,7 +1982,7 @@ def git_sync(user: str, base: Path = BASE_DIR) -> dict:
 
 SUBMISSION_FORMAT = "scarface-decomp-submission"
 SUBMISSION_FIELDS = ("bin", "va", "size", "symbol", "flags", "verified_by", "tool_used", "verified_at", "code",
-                     "ported_from", "revised_by", "note", "what", "what_by")
+                     "ported_from", "revised_by", "note", "what", "what_by", "what_how")
 IMPORT_MAX = 20000
 _PUBLISHED: Dict[str, object] = {"head": None, "keys": frozenset(), "what": {}, "code": {}, "names": {}}
 IMPORT_STATUS: Dict[str, object] = {"running": False}
@@ -2033,7 +2042,7 @@ def pending_descriptions() -> Dict[str, dict]:
     pub = published_keys()
     old = _PUBLISHED.get("what") or {}
     with STATE_LOCK:
-        return {k: {"what": e.get("what", ""), "what_by": e.get("what_by", "")}
+        return {k: {"what": e.get("what", ""), "what_by": e.get("what_by", ""), "how": DESC.how_of(e)}
                 for k, e in REGISTRY.get("entries", {}).items()
                 if k in pub and (e.get("what") or "") != (old.get(k) or "")}
 
@@ -2141,6 +2150,8 @@ def import_submission(bundle: dict, importer: str) -> dict:
                 REGISTRY["entries"][task_key(t)].update(imported_by=importer, imported_at=stamp())
                 if REGISTRY["entries"][task_key(t)].get("what") and e.get("what_by"):
                     REGISTRY["entries"][task_key(t)]["what_by"] = str(e["what_by"])[:64]
+                if REGISTRY["entries"][task_key(t)].get("what") and e.get("what_how"):
+                    REGISTRY["entries"][task_key(t)]["what_how"] = DESC.normal_how(e["what_how"])
                 t.update(status="VERIFIED", claimed_by="", claim_expires_at=0)
                 save_overlay(t)
                 added += 1
@@ -2148,17 +2159,25 @@ def import_submission(bundle: dict, importer: str) -> dict:
             if not res.get("reloc_unverified"):
                 queue_port(t, code, who, tool)
         # descriptions of functions that are rebuilt already: text only, nothing to compile
-        described = 0
+        # "how": where the sentence came from (descriptions.HOWS); one that is too long or only restates the
+        # code is turned down with the reason, not cut short
+        described, refused = 0, []
         notes = bundle.get("descriptions") if isinstance(bundle.get("descriptions"), dict) else {}
         with STATE_LOCK:
             for key, d in list(notes.items())[:IMPORT_MAX]:
                 e = REGISTRY["entries"].get(str(key))
-                what = clean_what((d or {}).get("what")) if isinstance(d, dict) else ""
+                what = one_line((d or {}).get("what")) if isinstance(d, dict) else ""
                 if not e or not what or what == e.get("what"):
                     continue
-                e.update(what=what, what_by=str(d.get("what_by") or who_sent)[:64], what_at=stamp())
+                why = DESC.problem(what)
+                if why:
+                    refused.append({"key": str(key), "reason": why})
+                    continue
+                e.update(what=what, what_by=str(d.get("what_by") or who_sent)[:64], what_at=stamp(),
+                         what_how=DESC.normal_how(d.get("how") or d.get("what_how")))
                 described += 1
             st["described"] = described
+            st["refused"] = refused
         # functions matched already, sent again with better names: compiled again, kept on the same terms as here
         revised = 0
         sent = bundle.get("revisions") if isinstance(bundle.get("revisions"), dict) else {}
@@ -3586,11 +3605,14 @@ class Handler(BaseHTTPRequestHandler):
             return
         if user not in MAINTAINERS:
             return self._json({"ok": False, "error": "Only maintainers can import submissions."}, 403)
-        if not MV.find_msvc71_bin():
+        bundle = body.get("bundle")
+        # descriptions and names are text: only matches and revisions are compiled, so only they need the compiler
+        to_compile = isinstance(bundle, dict) and any(isinstance(bundle.get(k), dict) and bundle.get(k)
+                                                      for k in ("entries", "revisions"))
+        if to_compile and not MV.find_msvc71_bin():
             return self._json({"ok": False, "error": NO_COMPILER_HELP})
         if IMPORT_STATUS.get("running"):
             return self._json({"ok": False, "error": "A submission is already being imported."}, 409)
-        bundle = body.get("bundle")
         n = len(bundle.get("entries") or {}) if isinstance(bundle, dict) and isinstance(bundle.get("entries"), dict) else 0
         IMPORT_STATUS.clear()
         IMPORT_STATUS.update(running=True, total=n, done=0, added=0, already=0, failed=[], error="")

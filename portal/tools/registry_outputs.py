@@ -30,6 +30,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional
 
+import descriptions
 import ps2_overlay
 
 BIN_INFO = {
@@ -250,6 +251,9 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         # of the matched: the ones with no stand-in names or raw address work left (tools/readability.py)
         "readable": _readable_counts(entries, names),
         "source": _source_counts(registry, names, classes),
+        # of the matched: the ones with a one-line description of what they do, and where it came from
+        # (written by a person, read by someone, a rule on the code's shape, copied from a same-bytes twin)
+        "described": descriptions.counts(entries, ps2_overlay.is_ps2),
         "size_buckets": {name: sum(1 for e in entries if e["bin"] in ("pc", "xb") and lo <= int(e.get("size", 0)) < hi)
                          for name, lo, hi in SIZE_BUCKETS},
         "contributors": dict(sorted(contributors.items(), key=lambda kv: (-kv[1], kv[0].lower()))),
