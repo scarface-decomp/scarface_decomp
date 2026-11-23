@@ -8,13 +8,20 @@ No browser, no AI key and no PIN: it reads the same files the portal does and ch
     python portal/agent.py check work/xb_00248810.cpp       compile it and compare with the original bytes
     python portal/agent.py keep work/xb_00248810.cpp        an exact match goes to reports/to_submit/
 
+No game files or compiler? Matched functions still need a one-line description of what they do:
+
+    python portal/agent.py describe --who yourname           a batch of matched functions with none yet
+    python portal/agent.py describe-keep work/descriptions_yourname.json     check them; ready to send
+
 A match is only *recorded* by the portal, under a person's handle: after `keep`, the person runs
 `python portal/scripts/submit_matches.py`. See AGENTS.md for the whole loop and the rules.
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import random
 import re
 import shutil
 import sys
@@ -132,12 +139,163 @@ def cmd_next(args) -> int:
         rows.sort(key=lambda t: (-score[(t["bin"], t["fva_int"])][0], int(t["size"]), t["bin"], t["fva_int"]))
     waiting = {p.stem.lower() for p in TO_SUBMIT.glob("*.cpp")} if TO_SUBMIT.exists() else set()
     rows = [t for t in rows if f"{t['bin']}_{t['fva_int']:08x}" not in waiting]
+    rows = spread(rows, args.who)
     print(f"{len(rows):,} open functions match. " + ("Most like a matched function first:" if score else "Smallest first:"))
     for t in rows[args.skip:args.skip + args.n]:
         near = score.get((t["bin"], t["fva_int"]))
         tail = f"   {near[0]:.2f} like {near[1]}" if near else ""
         print(f"  {t['bin']:<5} 0x{t['fva_int']:08X}  {int(t['size']):>5} B  {t.get('symbol', '')}{tail}")
     return 0
+
+
+WINDOW = 40          # --who reorders within runs of this many, so the list keeps its order of priority
+
+
+def spread(rows: list, who: str) -> list:
+    """The same list in an order of this person's own: within each run of WINDOW, shuffled by their name.
+    Several people (or their AIs) working from the same list then start on different functions instead of
+    racing for the same ones, and everyone still works near the top of it."""
+    if not who:
+        return rows
+    rng = random.Random(int(hashlib.sha256(who.strip().lower().encode()).hexdigest(), 16))
+    out = []
+    for i in range(0, len(rows), WINDOW):
+        run = rows[i:i + WINDOW]
+        rng.shuffle(run)
+        out += run
+    return out
+
+
+# ---------------------------------------------------------------------------------------------------------
+# Descriptions: no game files or compiler needed. The matched C++ is in the repository; an AI reads it (and
+# what the functions it calls do) and writes one plain sentence per function.
+
+DESCRIBE_RULES = """\
+Write one plain sentence per function, at most 160 characters, saying what it does in the game's terms
+("Turns the car's headlights on or off", "Returns the weapon the character is holding"). If you can't
+tell what it is for, say what it returns or changes ("Clears the list at +0x20 and resets its count").
+Don't restate the code (no sentence that is mostly sub_/DAT_ names and offsets), don't guess at names,
+and skip a function rather than write a guess. Put them in work/descriptions_<who>.json:
+
+  {"schema": "scarface_descriptions_v1", "by": "<the model> for <who>",
+   "descriptions": {"xb:0x00012340": {"what": "...", "how": "read"}, ...}}
+
+then: python portal/agent.py describe-keep work/descriptions_<who>.json"""
+_CALL = re.compile(r"\b(sub_[0-9A-F]{8})\b")
+
+
+def described_elsewhere() -> set:
+    """Keys already described in a file waiting to be sent (work/ or reports/to_submit/)."""
+    out = set()
+    for folder in (WORK, TO_SUBMIT):
+        for path in folder.glob("descriptions_*.json") if folder.exists() else ():
+            try:
+                out |= set((json.loads(path.read_text(encoding="utf-8")).get("descriptions") or {}))
+            except (OSError, ValueError):
+                continue
+    return out
+
+
+def describe_batch(entries: dict, names: dict, b: str, n: int, who: str = "", skip: set = frozenset(),
+                   min_size: int = 16) -> list:
+    """[(key, entry, [(callee key, its name, its description)])]: matched functions of b with no description,
+    those whose calls are already explained first (so the batch reads bottom-up), smaller first."""
+    rows = []
+    for k, e in entries.items():
+        if not k.startswith(b + ":") or (e.get("what") or "").strip() or e.get("excerpt") or k in skip \
+                or int(e.get("size", 0)) < min_size:
+            continue
+        calls = []
+        for sub in dict.fromkeys(_CALL.findall(e.get("code", ""))):
+            ck = f"{b}:0x{sub[4:]}"
+            if ck == k:
+                continue
+            ce = entries.get(ck) or {}
+            calls.append((ck, (names.get(ck) or {}).get("name") or ce.get("symbol") or sub, (ce.get("what") or "").strip()))
+        unknown = sum(1 for _, name, what in calls if not what and name.startswith("sub_"))
+        known = len(calls) - unknown
+        rows.append((unknown, -known, int(e.get("size", 0)), k, e, calls))
+    rows.sort(key=lambda r: r[:4])
+    return [(k, e, calls) for _, _, _, k, e, calls in spread(rows, who)[:n]]
+
+
+def _code_only(code: str, limit: int = 120) -> str:
+    """The C++ without the starter-code boilerplate comments at the top."""
+    lines = [ln for ln in code.splitlines() if not re.match(r"^//\s*(bin|va|what|tool|spec|verify):", ln)
+             and not re.search(r"Starter code written from the disassembly|retype them as you work|"
+                               r"^// Same machine code as|^// its addresses and names were swapped", ln)]
+    text = "\n".join(lines).strip()
+    rows = text.splitlines()
+    return text if len(rows) <= limit else "\n".join(rows[:limit]) + f"\n// ... {len(rows) - limit} more lines"
+
+
+def cmd_describe(args) -> int:
+    entries = registry()
+    names = NAMES.load(ROOT / "reports" / "names.json").get("names", {})
+    batch = describe_batch(entries, names, args.bin, args.n, args.who, described_elsewhere(), args.min_size)
+    left = sum(1 for k, e in entries.items() if k.startswith(args.bin + ":") and not (e.get("what") or "").strip())
+    print(f"{left:,} matched {args.bin} functions have no description yet. {len(batch)} of them:\n")
+    print(DESCRIBE_RULES.replace("<who>", args.who or "yourname") + "\n")
+    for k, e, calls in batch:
+        own = (names.get(k) or {}).get("name")
+        print(f"=== {k}  {own or e.get('symbol', '')}  ({e.get('size')} bytes)")
+        for ck, name, what in calls[:12]:
+            print(f"  calls {name}" + (f": {what}" if what else "") + ("" if name.startswith("sub_") else f"  ({ck})"))
+        cls = e.get("symbol", "").rsplit("::", 1)[0] if "::" in e.get("symbol", "") else ""
+        import descriptions as DESC
+        mates = [(m.get("symbol"), m.get("what")) for mk, m in entries.items() if cls and mk != k
+                 and mk.startswith(args.bin + ":") and m.get("symbol", "").startswith(cls + "::") and m.get("what")
+                 and DESC.how_of(m) in ("human", "read")]
+        for sym, what in mates[:3]:
+            print(f"  same class: {sym}: {what}")
+        print(_code_only(e.get("code", "")) + "\n")
+    return 0
+
+
+def check_descriptions(data: dict, entries: dict) -> tuple:
+    """(the descriptions that can be sent, [(key, why not)]) for a descriptions file."""
+    import descriptions as DESC
+    if not isinstance(data, dict) or data.get("schema") != "scarface_descriptions_v1":
+        return {}, [("file", 'its "schema" must be "scarface_descriptions_v1"')]
+    if not str(data.get("by") or "").strip():
+        return {}, [("file", 'say who wrote them in "by" (the model, for whom)')]
+    good, bad = {}, []
+    for k, d in (data.get("descriptions") or {}).items():
+        what = re.sub(r"\s+", " ", str((d or {}).get("what") or "")).strip() if isinstance(d, dict) else ""
+        e = entries.get(k)
+        if not e:
+            bad.append((k, "not a matched function (only matched functions are described)"))
+        elif (e.get("what") or "").strip():
+            bad.append((k, "already described"))
+        elif DESC.problem(what):
+            bad.append((k, DESC.problem(what)))
+        else:
+            good[k] = {"what": what, "how": DESC.normal_how(d.get("how") or "read")}
+    return good, bad
+
+
+def cmd_describe_keep(args) -> int:
+    path = Path(args.file)
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as ex:
+        sys.exit(f"Can't read {path}: {ex}")
+    good, bad = check_descriptions(data, registry())
+    for k, why in bad:
+        print(f"  no   {k}: {why}")
+    if not good:
+        print("Nothing to keep.")
+        return 1
+    TO_SUBMIT.mkdir(parents=True, exist_ok=True)
+    dest = TO_SUBMIT / ("descriptions_" + re.sub(r"[^A-Za-z0-9_-]+", "_", path.stem.replace("descriptions_", "")) + ".json")
+    if dest.exists():
+        old = json.loads(dest.read_text(encoding="utf-8"))
+        good = dict(old.get("descriptions") or {}, **good)
+    dest.write_text(json.dumps({"schema": "scarface_descriptions_v1", "by": str(data["by"])[:64], "descriptions": good},
+                               indent=1, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"Kept {len(good)} in {dest.relative_to(ROOT)}. A maintainer sends them with "
+          "python portal/scripts/submit_descriptions.py; anyone else posts the file in the Discord or a pull request.")
+    return 0 if not bad else 1
 
 
 def cmd_packet(args) -> int:
@@ -331,7 +489,18 @@ def main(argv=None) -> int:
     p.add_argument("--skip", type=int, default=0)
     p.add_argument("--order", choices=("size", "similar"), default="size",
                    help="similar: those most like an already matched function first (portal/tools/similar.py rank)")
+    p.add_argument("--who", default="", help="your name: an order of your own near the top of the list, so "
+                   "several people's AIs don't all start on the same functions")
     p.set_defaults(fn=cmd_next)
+    p = sub.add_parser("describe", help="matched functions with no description yet, to describe (no game files needed)")
+    p.add_argument("--bin", choices=sorted(BINARIES), default="xb")
+    p.add_argument("-n", type=int, default=15)
+    p.add_argument("--min-size", type=int, default=16, help="skip smaller ones (mostly one-line getters)")
+    p.add_argument("--who", default="", help="your name: a batch of your own, so people don't overlap")
+    p.set_defaults(fn=cmd_describe)
+    p = sub.add_parser("describe-keep", help="check a descriptions file and make it ready to send")
+    p.add_argument("file")
+    p.set_defaults(fn=cmd_describe_keep)
     p = sub.add_parser("packet", help="everything known about one function, and a starter file in work/")
     p.add_argument("bin", choices=sorted(BINARIES))
     p.add_argument("va")

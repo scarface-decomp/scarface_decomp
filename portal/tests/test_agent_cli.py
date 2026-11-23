@@ -1,5 +1,6 @@
 """portal/agent.py: the command-line loop a coding agent works with (next, packet, check, keep)."""
 import importlib
+import json
 import sys
 from pathlib import Path
 
@@ -89,3 +90,52 @@ def test_packet_hints_come_from_the_functions_own_instructions():
     # fsqrt next to an SSE move: write sqrt() on doubles
     assert any("sqrt()" in h for h in A.codegen_hints("xb", bytes.fromhex("D9FAF30F1045 08C3".replace(" ", ""))))
     assert A.codegen_hints("xb", bytes.fromhex("C3")) == []
+
+
+def test_who_gives_each_person_an_order_of_their_own_near_the_top():
+    rows = list(range(100))
+    a, b = A.spread(rows, "alice"), A.spread(rows, "bob")
+    assert a != b and a == A.spread(rows, "Alice ") and A.spread(rows, "") == rows
+    assert sorted(a[:A.WINDOW]) == list(range(A.WINDOW))            # still the top of the list first
+
+
+def _entry(code, size=40, what="", symbol="sub_00011000"):
+    return {"code": code, "size": size, "what": what, "symbol": symbol}
+
+
+def test_describe_picks_matched_functions_without_one_explained_calls_first():
+    entries = {
+        "xb:0x00011000": _entry("int f() { return sub_00012000() + sub_00013000(); }"),   # one call unexplained
+        "xb:0x00011100": _entry("int g() { return sub_00012000(); }"),                    # its call is explained
+        "xb:0x00011200": _entry("int h() { return 1; }", what="Returns one."),             # described already
+        "xb:0x00011300": _entry("int i() { return 2; }", size=4),                          # too small to be worth it
+        "xb:0x00012000": _entry("int j() { return 3; }", what="Returns three."),
+        "proto:0x00011000": _entry("int k() { return 4; }"),
+    }
+    names = {"xb:0x00012000": {"name": "Three"}}
+    batch = A.describe_batch(entries, names, "xb", 10)
+    assert [k for k, _, _ in batch] == ["xb:0x00011100", "xb:0x00011000"]
+    assert batch[0][2] == [("xb:0x00012000", "Three", "Returns three.")]
+    assert A.describe_batch(entries, names, "xb", 10, skip={"xb:0x00011100"})[0][0] == "xb:0x00011000"
+
+
+def test_describe_keep_takes_only_good_new_descriptions(monkeypatch, tmp_path):
+    entries = {"xb:0x00011000": _entry("x"), "xb:0x00011100": _entry("y", what="Already."), "xb:0x00011200": _entry("z")}
+    data = {"schema": "scarface_descriptions_v1", "by": "Claude for bob", "descriptions": {
+        "xb:0x00011000": {"what": "Turns the car's headlights on or off."},
+        "xb:0x00011100": {"what": "Something new."},
+        "xb:0x00011200": {"what": "Calls sub_00012340(DAT_00450000, 0x20, 8)."},
+        "xb:0x0FFFFFF0": {"what": "Nothing there."}}}
+    good, bad = A.check_descriptions(data, entries)
+    assert good == {"xb:0x00011000": {"what": "Turns the car's headlights on or off.", "how": "read"}}
+    assert {k for k, _ in bad} == {"xb:0x00011100", "xb:0x00011200", "xb:0x0FFFFFF0"}
+    assert A.check_descriptions(dict(data, by=""), entries)[1][0][0] == "file"
+    # kept where submit_descriptions.py looks, merged with what is waiting there already
+    monkeypatch.setattr(A, "registry", lambda: entries)
+    monkeypatch.setattr(A, "TO_SUBMIT", tmp_path / "to_submit")
+    monkeypatch.setattr(A, "ROOT", tmp_path)
+    f = tmp_path / "descriptions_bob.json"
+    f.write_text(json.dumps(data), encoding="utf-8")
+    assert A.main(["describe-keep", str(f)]) == 1                      # some were turned down
+    kept = json.loads((tmp_path / "to_submit" / "descriptions_bob.json").read_text(encoding="utf-8"))
+    assert kept["by"] == "Claude for bob" and list(kept["descriptions"]) == ["xb:0x00011000"]
