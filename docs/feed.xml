@@ -5,8 +5,22 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-22T23:05:17Z</updated>
+  <updated>2026-11-23T00:18:36Z</updated>
   <author><name>Scarface decomp contributors</name></author>
+  <entry>
+    <title>sub_002CE560 (Xbox, 75 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CE560"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CE560</id>
+    <updated>2026-11-23T00:18:36Z</updated>
+    <summary>Releases a string's text: one fewer user, and when it was the last, gives its memory back (never the shared empty one). 0x002CE560 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00073400 (Xbox, 85 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00073400"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00073400</id>
+    <updated>2026-11-23T00:18:20Z</updated>
+    <summary>Adds an object to the 127-bucket table its name key picks (clearing the table first the first time). 0x00073400 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
   <entry>
     <title>sub_00329310 (Xbox, 27 bytes) by RRutherrfordd (Founder)</title>
     <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00329310"/>
@@ -342,19 +356,5 @@
     <id>tag:scarface-decomp.pages.dev,2026:xb:0x0031B7C0</id>
     <updated>2026-11-22T23:01:18Z</updated>
     <summary>0x0031B7C0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_0031B7A0 (Xbox, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0031B7A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0031B7A0</id>
-    <updated>2026-11-22T23:01:18Z</updated>
-    <summary>0x0031B7A0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00317740 (Xbox, 35 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00317740"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00317740</id>
-    <updated>2026-11-22T23:01:18Z</updated>
-    <summary>0x00317740 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

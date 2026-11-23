@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (4866 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (4868 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 4,866 of 12,757 functions matched (38.14%). NOT COMPLETE YET.
-// The 7,891 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 4,868 of 12,757 functions matched (38.16%). NOT COMPLETE YET.
+// The 7,889 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -25895,6 +25895,44 @@ L_3F:
     r_eax <<= 4;
     r_eax += r_edx;
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00073400 (0x00073400, 85 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Adds an object to the 127-bucket table its name key picks (clearing the table first the first time).
+// ============================================================================
+// bin: xb
+// va: 0x00073400
+// what: Adds an object to the 127-bucket table its name key picks (clearing the table first the first time).
+// tool: Claude Opus 5.5
+
+// sub_00073400 (0x00073400, 85 bytes)
+
+#include <string.h>
+
+extern "C" bool DAT_0041F0F4;                   // the table still has to be cleared
+extern "C" struct Entry_00073400* DAT_0047D7E8[127];
+extern "C" unsigned int __cdecl sub_000767E0(int, int);
+
+struct Entry_00073400
+{
+    char m_pad00[0x14];
+    int m_Name;                                 // +0x14
+    unsigned int m_Key;                         // +0x18
+    Entry_00073400* m_Next;                     // +0x1C
+};
+
+void __cdecl sub_00073400(Entry_00073400* e)
+{
+    if (DAT_0041F0F4) {
+        DAT_0041F0F4 = false;
+        memset(DAT_0047D7E8, 0, sizeof(DAT_0047D7E8));
+    }
+    e->m_Key = sub_000767E0(e->m_Name, 0);
+    short bucket = (short)(e->m_Key % 127);
+    e->m_Next = DAT_0047D7E8[bucket];
+    DAT_0047D7E8[bucket] = e;
 }
 
 // ============================================================================
@@ -148943,6 +148981,47 @@ int Class_002CE4D0::sub_002CE4D0()
         r_eax = (int)DAT_0039D520;
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002CE560 (0x002CE560, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Releases a string's text: one fewer user, and when it was the last, gives its memory back (never the shared empty one).
+// ============================================================================
+// bin: xb
+// va: 0x002CE560
+// what: Releases a string's text: one fewer user, and when it was the last, gives its memory back (never the shared empty one).
+// tool: Claude Opus 5.5
+
+// sub_002CE560 (0x002CE560, 75 bytes)
+
+extern "C" char* DAT_004630F8;                            // the shared empty text
+struct Block_002CE560 { int m_Size; int m_Align; };
+struct Header_002CE560 { int m_pad00; short m_Users; unsigned short m_Length; };     // the 8 bytes before the text
+extern "C" void __cdecl sub_002CF980(Block_002CE560* block, void* memory);
+
+class String_002CE560
+{
+public:
+    void sub_002CE560();
+    char* m_Text;                                         // +0x00, after an 8-byte header
+    short m_Kind;                                         // +0x04
+};
+
+void String_002CE560::sub_002CE560()
+{
+    if (m_Kind == 2) {
+        if (((Header_002CE560*)m_Text - 1)->m_Users == 1) {
+            if (m_Text != DAT_004630F8) {
+                Block_002CE560 block;
+                block.m_Size = ((Header_002CE560*)m_Text - 1)->m_Length + 9;
+                block.m_Align = 4;
+                sub_002CF980(&block, (Header_002CE560*)m_Text - 1);
+            }
+        } else {
+            ((Header_002CE560*)m_Text - 1)->m_Users--;
+        }
+    }
 }
 
 // ============================================================================

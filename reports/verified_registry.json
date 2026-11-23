@@ -289466,6 +289466,40 @@
       "compiler": "13.10.3052",
       "code": "// bin: xb\n// va: 0x00329310\n// what: \n// tool: the portal's starter code (no AI)\n\n// sub_00329310 (0x00329310, 27 bytes)\n// Starter code written from the disassembly. Names and types are guesses; rename and\n// retype them as you work it out. Calls and globals already use their real addresses.\n\nextern \"C\" char DAT_003D7758[];\nextern \"C\" int DAT_0045A8C0;\nextern \"C\" int DAT_0045A8C8;\nextern \"C\" void __cdecl sub_00027600(int);\n\nvoid __cdecl sub_00329310(void)\n{\n    int t1;\n\n    t1 = DAT_0045A8C8;\n    DAT_0045A8C0 = (int)DAT_003D7758;\n    if (DAT_0045A8C8) {\n        sub_00027600(t1);\n    }\n}",
       "note": ""
+    },
+    "xb:0x00073400": {
+      "bin": "xb",
+      "va": "0x00073400",
+      "size": 85,
+      "symbol": "sub_00073400",
+      "match": "sub_00073400",
+      "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4",
+      "source": "portal",
+      "verified_by": "RRutherrfordd (Founder)",
+      "tool_used": "Claude Opus 5.5",
+      "verified_at": "2026-11-23 00:18:20",
+      "compiler": "13.10.3052",
+      "code": "// bin: xb\n// va: 0x00073400\n// what: Adds an object to the 127-bucket table its name key picks (clearing the table first the first time).\n// tool: Claude Opus 5.5\n\n// sub_00073400 (0x00073400, 85 bytes)\n\n#include <string.h>\n\nextern \"C\" bool DAT_0041F0F4;                   // the table still has to be cleared\nextern \"C\" struct Entry_00073400* DAT_0047D7E8[127];\nextern \"C\" unsigned int __cdecl sub_000767E0(int, int);\n\nstruct Entry_00073400\n{\n    char m_pad00[0x14];\n    int m_Name;                                 // +0x14\n    unsigned int m_Key;                         // +0x18\n    Entry_00073400* m_Next;                     // +0x1C\n};\n\nvoid __cdecl sub_00073400(Entry_00073400* e)\n{\n    if (DAT_0041F0F4) {\n        DAT_0041F0F4 = false;\n        memset(DAT_0047D7E8, 0, sizeof(DAT_0047D7E8));\n    }\n    e->m_Key = sub_000767E0(e->m_Name, 0);\n    short bucket = (short)(e->m_Key % 127);\n    e->m_Next = DAT_0047D7E8[bucket];\n    DAT_0047D7E8[bucket] = e;\n}",
+      "note": "",
+      "what": "Adds an object to the 127-bucket table its name key picks (clearing the table first the first time).",
+      "what_how": "human"
+    },
+    "xb:0x002CE560": {
+      "bin": "xb",
+      "va": "0x002CE560",
+      "size": 75,
+      "symbol": "sub_002CE560",
+      "match": "sub_002CE560",
+      "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4",
+      "source": "portal",
+      "verified_by": "RRutherrfordd (Founder)",
+      "tool_used": "Claude Opus 5.5",
+      "verified_at": "2026-11-23 00:18:36",
+      "compiler": "13.10.3052",
+      "code": "// bin: xb\n// va: 0x002CE560\n// what: Releases a string's text: one fewer user, and when it was the last, gives its memory back (never the shared empty one).\n// tool: Claude Opus 5.5\n\n// sub_002CE560 (0x002CE560, 75 bytes)\n\nextern \"C\" char* DAT_004630F8;                            // the shared empty text\nstruct Block_002CE560 { int m_Size; int m_Align; };\nstruct Header_002CE560 { int m_pad00; short m_Users; unsigned short m_Length; };     // the 8 bytes before the text\nextern \"C\" void __cdecl sub_002CF980(Block_002CE560* block, void* memory);\n\nclass String_002CE560\n{\npublic:\n    void sub_002CE560();\n    char* m_Text;                                         // +0x00, after an 8-byte header\n    short m_Kind;                                         // +0x04\n};\n\nvoid String_002CE560::sub_002CE560()\n{\n    if (m_Kind == 2) {\n        if (((Header_002CE560*)m_Text - 1)->m_Users == 1) {\n            if (m_Text != DAT_004630F8) {\n                Block_002CE560 block;\n                block.m_Size = ((Header_002CE560*)m_Text - 1)->m_Length + 9;\n                block.m_Align = 4;\n                sub_002CF980(&block, (Header_002CE560*)m_Text - 1);\n            }\n        } else {\n            ((Header_002CE560*)m_Text - 1)->m_Users--;\n        }\n    }\n}",
+      "note": "",
+      "what": "Releases a string's text: one fewer user, and when it was the last, gives its memory back (never the shared empty one).",
+      "what_how": "human"
     }
   },
   "reset": {
