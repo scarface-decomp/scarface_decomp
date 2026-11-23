@@ -1,0 +1,42 @@
+name: Discord
+
+# After every push to main (git push, the portal, a merged pull request), post what it brought to the
+# Discord: new matches, and how many functions got a description or a name. The webhook is the repository
+# secret DISCORD_WEBHOOK (Settings > Secrets and variables > Actions); with none set, nothing is posted.
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: discord
+  cancel-in-progress: false
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Post what the push brought
+        env:
+          SCARFACE_DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if ! git cat-file -e "$BEFORE:reports/verified_registry.json" 2>/dev/null; then
+            echo "No earlier registry to compare with (a new branch or a forced push): nothing posted."
+            exit 0
+          fi
+          git show "$BEFORE:reports/verified_registry.json" > "$RUNNER_TEMP/old_registry.json"
+          git show "$BEFORE:reports/names.json" > "$RUNNER_TEMP/old_names.json" 2>/dev/null || echo '{}' > "$RUNNER_TEMP/old_names.json"
+          python portal/tools/discord_feed.py --old-registry "$RUNNER_TEMP/old_registry.json" \
+            --old-names "$RUNNER_TEMP/old_names.json"
