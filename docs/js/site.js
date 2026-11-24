@@ -336,6 +336,19 @@
       $('sb-compiler').textContent = m ? 'cl.exe ' + m[1] : prog.compiler;
     }
 
+    // The compiler writes a one-line start-up or shutdown stub for many global objects; they are real code and
+    // count, but the line under the headline says how many there are, the share without them, and the share
+    // by size, so the headline can't be read as more than it is.
+    var stubsAll = (v.stubs || 0) + (q && q.stubs ? q.stubs : 0);
+    $('sb-stubs').hidden = !(q && (stubsAll || q.bytes));
+    if (q && (stubsAll || q.bytes)) {
+      var rest = total - stubsAll, restDone = v.total - (v.stubs || 0);
+      $('sb-stubs').textContent = (stubsAll ? fmt(v.stubs || 0) + ' of the ' + fmt(stubsAll)
+          + ' start-up and shutdown stubs are among them (one-liners the compiler writes for global objects); without them, '
+          + fmt(restDone) + ' of ' + fmt(rest) + ' (' + fmtPct(pct(restDone, rest)) + '%). ' : '')
+        + (q.bytes ? 'By size, the rebuilt functions are ' + fmtPct(pct(v.bytes, v.bytes + q.bytes))
+          + '% of the released game\'s code: the large functions are still to come.' : '');
+    }
     // The prototype (unreleased code) has its own row once it is in the queue; the headline is the released game.
     $('proto-row').hidden = !((v.proto || 0) + (q && q.proto ? q.proto : 0));
     // ...and a line under the headline, so its number and the chart's two lines visibly add up

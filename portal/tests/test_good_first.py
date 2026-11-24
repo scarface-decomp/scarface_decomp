@@ -206,3 +206,23 @@ def test_class_totals_are_the_same_from_the_queue_and_from_the_files(tmp_path):
     assert "2 of 3 functions matched" in text                       # the two matched and the one still to do
     RO.write_outputs(reg, b / "reconstructed_src", known_from=a / "reconstructed_src")
     assert (b / rel).read_text(encoding="utf-8") == text
+
+
+def test_progress_counts_the_compiler_made_stubs_and_open_bytes(tmp_path, monkeypatch):
+    """The site says how many matches are start-up/shutdown stubs and the share by size."""
+    import json as _json
+    import registry_outputs as RO
+    stubs = tmp_path / "compiler_stubs.json"
+    stubs.write_text(_json.dumps({"versions": {"xb": [{"kind": "initializers", "first": "0x00311860",
+                                                        "last": "0x003224A0", "count": 2}]}}))
+    is_stub = RO.stub_test(stubs)
+    assert is_stub("xb", "0x00311860") and is_stub("xb", 0x3224A0) and not is_stub("xb", 0x3224B0)
+    assert not is_stub("proto", 0x311860)
+    monkeypatch.setattr(RO, "stub_test", lambda path=None: is_stub)
+    reg = {"entries": {"xb:0x00311860": {"bin": "xb", "va": "0x00311860", "size": 10},
+                       "xb:0x00011000": {"bin": "xb", "va": "0x00011000", "size": 30}}}
+    queue = [{"bin": "xb", "fva_int": 0x311870, "size": 12}, {"bin": "xb", "fva_int": 0x12000, "size": 100},
+             {"bin": "proto", "fva_int": 0x311870, "size": 5}]
+    p = RO.progress_summary(reg, queue, None, picks=False)
+    assert p["verified"]["stubs"] == 1 and p["verified"]["bytes"] == 40
+    assert p["queue"]["stubs"] == 1 and p["queue"]["bytes"] == 112

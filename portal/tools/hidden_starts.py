@@ -264,6 +264,26 @@ def scan(bin_dir: Path) -> Dict[str, dict]:
     return out
 
 
+STUBS_FILE = ROOT / "reports" / "compiler_stubs.json"
+
+
+def stub_ranges(found: Dict[str, dict]) -> dict:
+    """Where the compiler-made one-liners sit, per version: the static initializers and the atexit stubs each
+    fill one stretch at the end of the game's code (from the first to the last one found)."""
+    out = {}
+    for b, d in found.items():
+        rows = []
+        for kind in ("initializers", "atexit stubs"):
+            v = d["starts"][kind]
+            if v:
+                rows.append({"kind": kind, "first": f"0x{min(v):08X}", "last": f"0x{max(v):08X}", "count": len(v)})
+        out[b] = rows
+    return {"what": "Where the compiler-made start-up and shutdown stubs are (portal/tools/hidden_starts.py): one "
+                    "static initializer per global object that needs one, one atexit stub per global object "
+                    "with a destructor. The site counts the functions from first to last of each apart.",
+            "versions": out}
+
+
 def write(found: Dict[str, dict]) -> Tuple[int, int]:
     sp = ROOT / "reports" / "extra_function_starts.json"
     starts = json.loads(sp.read_text(encoding="utf-8"))
@@ -292,6 +312,7 @@ def write(found: Dict[str, dict]) -> Tuple[int, int]:
                 excluded += 1
         rows.sort(key=lambda r: r["va"])
     ep.write_text(json.dumps(ex, indent=1) + "\n", encoding="utf-8")
+    STUBS_FILE.write_text(json.dumps(stub_ranges(found), indent=1) + "\n", encoding="utf-8")
     return added, excluded
 
 

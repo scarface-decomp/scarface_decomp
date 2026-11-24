@@ -182,6 +182,15 @@ def test_scoreboard_and_progress(site, browser):
             assert f"{des['how']['human'] + des['how']['read']:,} written by someone who read the code" in line
     else:
         assert pg.is_hidden("#sb-described")
+    q = PROG["queue"]                                           # the stubs and the share by size, said apart
+    if q.get("bytes") or (v.get("stubs", 0) + q.get("stubs", 0)):
+        line = pg.text_content("#sb-stubs")
+        if q.get("bytes"):
+            assert f"{v['bytes'] / (v['bytes'] + q['bytes']) * 100:.1f}% of the released game's code" in line
+        if v.get("stubs", 0) + q.get("stubs", 0):
+            assert f"of the {v.get('stubs', 0) + q['stubs']:,} start-up and shutdown stubs" in line
+    else:
+        assert pg.is_hidden("#sb-stubs")
     share = v["total"] / total * 100
     assert pg.text_content("#claim") == f"The world is {share:.1f}% yours." if share >= 10 else \
         pg.text_content("#claim") == f"The world is {share:.2f}% yours."

@@ -139,6 +139,7 @@ STATUS_END = "<!-- status:end -->"
 
 def status_block(registry: dict) -> str:
     entries = list(registry.get("entries", {}).values())
+    is_stub = stub_test()
     by = defaultdict(int)
     for e in entries:
         by[e["bin"]] += 1
@@ -226,11 +227,32 @@ def _tier_of(size: int) -> str:
             "TIER_3_MEDIUM" if size < 80 else "TIER_4_LARGE")
 
 
+def stub_test(path: Optional[Path] = None):
+    """is_stub(bin, va): a compiler-made start-up or shutdown stub (reports/compiler_stubs.json)."""
+    import json
+    try:
+        data = json.loads((path or Path(__file__).resolve().parents[2] / "reports" / "compiler_stubs.json")
+                          .read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        data = {}
+    spans = {b: [(int(r["first"], 16), int(r["last"], 16)) for r in rows]
+             for b, rows in (data.get("versions") or {}).items()}
+
+    def is_stub(b, va) -> bool:
+        try:
+            va = int(va, 16) if isinstance(va, str) else int(va)
+        except (TypeError, ValueError):
+            return False
+        return any(lo <= va <= hi for lo, hi in spans.get(b, ()))
+    return is_stub
+
+
 def progress_summary(registry: dict, queue: Optional[list], previous: Optional[dict],
                      names: Optional[dict] = None, picks: bool = True, classes: Optional[dict] = None) -> dict:
     """Small summary for the website: verified counts from the registry, work-queue counts from the local
     queue file when there is one (otherwise the last known numbers are kept)."""
     entries = list(registry.get("entries", {}).values())
+    is_stub = stub_test()
     by = defaultdict(int)
     for e in entries:
         by["ps2" if ps2_overlay.is_ps2(e["bin"]) else e["bin"]] += 1         # the PS2 overlays count as the PS2
@@ -247,7 +269,9 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
         # (unreleased code) and the PS2 game (another compiler) are counted only under "proto" and "ps2".
         "verified": {"pc": by["pc"], "xb": by["xb"], "proto": by["proto"], "ps2": by["ps2"], "total": by["pc"] + by["xb"],
                      "bytes": sum(int(e.get("size", 0)) for e in entries if e["bin"] in ("pc", "xb")),
-                     "ps2_bytes": sum(int(e.get("size", 0)) for e in entries if ps2_overlay.is_ps2(e["bin"]))},
+                     "ps2_bytes": sum(int(e.get("size", 0)) for e in entries if ps2_overlay.is_ps2(e["bin"])),
+                     # of "total": the compiler-made start-up and shutdown stubs, counted apart on the site
+                     "stubs": sum(1 for e in entries if e["bin"] in ("pc", "xb") and is_stub(e["bin"], e.get("va")))},
         # of the matched: the ones with no stand-in names or raw address work left (tools/readability.py)
         "readable": _readable_counts(entries, names),
         "source": _source_counts(registry, names, classes),
@@ -279,8 +303,13 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
             q["ps2" if ps2_overlay.is_ps2(t.get("bin")) else t.get("bin", "?")] += 1
             if t.get("bin") in ("pc", "xb"):
                 tiers[t.get("tier") or _tier_of(int(t.get("size", 0)))] += 1
+        released = [t for t in open_tasks if t.get("bin") in ("pc", "xb")]
         out["queue"] = {"pc": q["pc"], "xb": q["xb"], "proto": q["proto"], "ps2": q["ps2"], "total": q["pc"] + q["xb"],
-                        "tiers": dict(sorted(tiers.items()))}
+                        "tiers": dict(sorted(tiers.items())),
+                        # the released game's open bytes and open stubs, for the size-weighted share and the
+                        # count without the stubs
+                        "bytes": sum(int(t.get("size", 0)) for t in released),
+                        "stubs": sum(1 for t in released if is_stub(t.get("bin"), t.get("fva_int")))}
     import good_first
     # picks=False: `queue` is only a list of functions to count (from the address-order files), not the real
     # queue the picks for newcomers are ranked from
