@@ -109,4 +109,4 @@ def test_command_line_writes_the_names(tmp_path, monkeypatch, capsys):
     assert SC.main(["--bin-dir", str(tmp_path), "--json", str(table)]) == 0
     assert json.loads(table.read_text())["versions"]["xb"] == [
         {"class": "", "name": "DBChangeDirtyCash", "handler": "0x00011800", "fewest": 2, "most": 2,
-         "registered_at": json.loads(table.read_text())["versions"]["xb"][0]["registered_at"]}]
+         "registered_at": json.loads(table.read_text())["versions"]["xb"][0]["registered_at"], "returns": ""}]

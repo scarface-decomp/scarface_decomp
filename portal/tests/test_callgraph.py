@@ -32,10 +32,18 @@ class FakeRtti:
         self.of_class = {("A", 0): 0x5100, ("A", 8): 0x5200}
 
 
-def run(code: bytes, cls="A"):
+def run(code: bytes, cls="A", td_names=None, dyn_cast=None):
     md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
     img = FakeImg({0x1000: code + b"\xc3" * 16, 0x5000: b"\0" * 0x1000})
-    return C.analyse(md, img, FakeRtti(), 0x1000, len(code), cls, {0x1000, 0x1100, 0x1200, 0x1300, 0x1400}, {})
+    return C.analyse(md, img, FakeRtti(), 0x1000, len(code), cls, {0x1000, 0x1100, 0x1200, 0x1300, 0x1400},
+                     td_names or {}, dyn_cast)
+
+
+def test_dynamic_cast_gives_from_and_to():
+    # push 0; mov eax, 0x5800 (to); push eax; push 0x5900 (from); push 0; push esi; call 0x1100
+    code = bytes.fromhex("6a00" "b800580000" "50" "6800590000" "6a00" "56" "e8eb000000")
+    a = run(code, cls=None, td_names={0x5800: "CharacterObject", 0x5900: "ScriptObject"}, dyn_cast=0x1100)
+    assert a["casts"] == [("ScriptObject", "CharacterObject")]
 
 
 def test_own_class_vcall():

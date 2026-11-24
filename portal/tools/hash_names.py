@@ -7,8 +7,10 @@ keeps the ones that land on a key the scripts use:
 
     {"0x8F3A...": {"stx": "stx...", "names": [{"text", "fold", "source", "certain"}], "ambiguous": bool}}
 
-A name is "certain" when its text is in the game's own data: a string in an executable or a script, a class
-name from the run-time type information, a script command or class field the program registers. Names from
+A name is "certain" when its text is in the game's own data: a string in an executable (the PS2 one too) or
+a script, a name in a fight script or AI tree (.fsc, .dtr), a class name from the run-time type information,
+a script command or class field the program registers. A word of three letters or fewer found only in an
+executable is too likely a chance hit and counts as "dictionary". Names from
 the project's own files (reports/names.json) and names made by joining two known words are "dictionary":
 probably right, but a wrong text matches some key by chance now and then (the report says how often to
 expect that). A key two different texts hash to is "ambiguous".
@@ -32,7 +34,9 @@ import torque_dso as TD  # noqa: E402
 from torque_names import RUN, WORD, casing_score, is_hashed, name_key, stx  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
-EXECUTABLES = ("default.xbe", "game.xbe", "Scarface.exe")
+EXECUTABLES = ("default.xbe", "game.xbe", "Scarface.exe", "SLUS_211.11")
+DATA_TEXT = (".fsc", ".dtr", ".txt")          # other game files that hold names as text (fight scripts, AI trees)
+SHORT = 3                                   # an executable-only word this short is too likely a chance hit
 PREFIXES = ("", "$", "%")
 # The script compiler keys every name with NameKey (folded). A case-sensitive key landing on a script's key
 # is a coincidence of the folding ("Ei" kept as is is "%i" folded), so scripts are matched folded only;
@@ -63,11 +67,16 @@ def _finish(h: int) -> int:
 
 # ---------------------------------------------------------------------------- what the scripts use
 
-def script_keys(files: Iterable[Path]) -> Tuple[set, List[str]]:
-    """The hashed keys the scripts use, and the plain texts they hold (strings, .cs files)."""
+def script_keys(files: Iterable[Path], data_texts: Optional[List[str]] = None) -> Tuple[set, List[str]]:
+    """The hashed keys the scripts use, and the plain texts they hold (strings, .cs files). The text of the
+    other game files that hold names (DATA_TEXT) is added to data_texts when one is given."""
     wanted, texts = set(), []
     for p in files:
         suf = p.suffix.lower()
+        if suf in DATA_TEXT:
+            if data_texts is not None:
+                data_texts.append(p.read_bytes().decode("latin-1"))
+            continue
         if suf == ".cs":
             texts.append(p.read_bytes().decode("latin-1"))
             continue
@@ -102,13 +111,15 @@ def demangle(body: str) -> List[str]:
     return out
 
 
-def certain_candidates(bins: Iterable[bytes], texts: Iterable[str]) -> Dict[str, str]:
+def certain_candidates(bins: Iterable[bytes], texts: Iterable[str], data_texts: Iterable[str] = ()) -> Dict[str, str]:
     """{text: source} for texts in the game's own data."""
     c: Dict[str, str] = {}
-    for s in texts:
-        for t in WORD.findall(s.encode("latin-1", "replace")):
-            if len(t) <= 64:
-                c.setdefault(t.decode(), "script")
+    for label, group in (("script", texts), ("game data file", data_texts)):
+        for s in group:
+            for run in RUN.findall(s.encode("latin-1", "replace")):
+                for t in WORD.findall(run):
+                    if len(t) <= 64:
+                        c.setdefault(t.decode(), label)
     for name, data in bins:
         for m in RTTI.finditer(data):
             for t in demangle(m.group(1).decode("latin-1")):
@@ -195,7 +206,8 @@ def expected_chance(words: List[str], n_wanted: int) -> float:
 # ---------------------------------------------------------------------------- the table
 
 def build(bin_dir: Path, script_files: Iterable[Path], compound: bool = True) -> dict:
-    wanted, texts = script_keys(script_files)
+    data_texts: List[str] = []
+    wanted, texts = script_keys(script_files, data_texts)
     bins = [(e, (bin_dir / e).read_bytes()) for e in EXECUTABLES if (bin_dir / e).is_file()]
     found: Dict[int, Dict[str, dict]] = defaultdict(dict)
 
@@ -212,8 +224,9 @@ def build(bin_dir: Path, script_files: Iterable[Path], compound: bool = True) ->
                         found[k][t.lower() if fold else t] = {"text": t, "fold": fold, "source": source,
                                                               "certain": certain}
 
-    for t, src in certain_candidates(bins, texts).items():
-        offer(t, src, True)
+    for t, src in certain_candidates(bins, texts, data_texts).items():
+        # a short word found only in an executable is as likely chance as a name: probable, not certain
+        offer(t, src, not (src in EXECUTABLES and len(t.lstrip("$%")) <= SHORT))
     for t, src in project_candidates().items():
         offer(t, src, False)
     chance = 0.0
@@ -239,7 +252,34 @@ def build(bin_dir: Path, script_files: Iterable[Path], compound: bool = True) ->
             "dictionary": len(table) - certain,
             "ambiguous": sum(1 for v in table.values() if v["ambiguous"]),
             "compound_chance_hits": round(chance, 1),
+            "engine_callbacks": engine_callbacks(bin_dir),
             "keys": table}
+
+
+def engine_callbacks(bin_dir: Path) -> List[dict]:
+    """The script function names the engine itself looks for (Initialize, OnKilled ...), in the order of its
+    table: bit i of a namespace's callback mask says a script defines the i-th. Read from the Xbox game's
+    InitNamespaces (its address from reports/names.json), which stores the 36 name pointers one after another."""
+    import struct
+    try:
+        names = json.loads((ROOT / "reports" / "names.json").read_text())["names"]
+        va = next(int(k.split(":")[1], 16) for k, v in names.items() if k.startswith("xb:") and v["name"] == "InitNamespaces")
+        from sf_binaries import BinaryImage
+        img = BinaryImage(bin_dir / "default.xbe")
+    except (OSError, ValueError, KeyError, StopIteration):
+        return []
+    body = img.read(va, 0x140) or b""
+    found = []
+    for m in re.finditer(rb"\xC7(?:\x44\x24(.)|\x84\x24(.{4}))(.{4})", body, re.S):      # mov [esp+N], imm32
+        slot = m.group(1)[0] if m.group(1) else struct.unpack("<I", m.group(2))[0]
+        off = img.va_to_off(struct.unpack("<I", m.group(3))[0])
+        if off is None:
+            continue
+        end = img.data.find(b"\0", off, off + 64)
+        text = img.data[off:end].decode("latin-1") if end > off else ""
+        if re.fullmatch(r"[A-Za-z_]\w*", text):
+            found.append((slot, text))
+    return [{"bit": i, "name": t, "key": f"0x{key(t):08X}"} for i, (_slot, t) in enumerate(sorted(found))]
 
 
 def best(table: dict, dictionary: bool = False) -> Dict[int, str]:
@@ -258,9 +298,13 @@ def best(table: dict, dictionary: bool = False) -> Dict[int, str]:
 
 def write(t: dict, path: Path) -> None:
     """One key per line, so a change shows as a few lines in a diff."""
-    head = {k: v for k, v in t.items() if k != "keys"}
+    head = {k: v for k, v in t.items() if k not in ("keys", "engine_callbacks")}
+    head["engine_callbacks"] = "see below"
     lines = [f" {json.dumps(k)}: {json.dumps(v, ensure_ascii=False)}" for k, v in t["keys"].items()]
-    text = json.dumps(head, indent=1, ensure_ascii=False)[:-2] + ',\n "keys": {\n' + ",\n".join(lines) + "\n }\n}\n"
+    text = json.dumps(head, indent=1, ensure_ascii=False)[:-2].replace(
+        '"engine_callbacks": "see below"', '"engine_callbacks": [\n  ' + ",\n  ".join(
+            json.dumps(c) for c in t.get("engine_callbacks", [])) + "\n ]")
+    text += ',\n "keys": {\n' + ",\n".join(lines) + "\n }\n}\n"
     path.write_text(text, newline="\n")
 
 
@@ -281,7 +325,7 @@ def main(argv=None) -> int:
     ap.add_argument("--no-compounds", action="store_true", help="skip joining two known words")
     a = ap.parse_args(argv)
     files = [p for d in (a.scripts or [a.folder]) for p in sorted(d.rglob("*"))
-             if p.suffix.lower() in (".cso", ".dso", ".cs")]
+             if p.suffix.lower() in (".cso", ".dso", ".cs") + DATA_TEXT]
     t = build(a.folder, files, compound=not a.no_compounds)
     write(t, a.out)
     print(f"{t['named']} of {t['keys_in_scripts']} keys named: {t['certain']} certain, {t['dictionary']} "
