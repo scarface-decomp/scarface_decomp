@@ -108,9 +108,11 @@ def test_sse_code_reads_as_float_code(tmp_path):
     cpp = starter(image_with(tmp_path, code), code, "Sse::vfunc_02")
     assert "float m_Field08;" in cpp and "vfunc_02(float a1)" in cpp and "m_Field08 = a1;" in cpp and "TODO" not in cpp
     assert MV.uses_sse(code) and not MV.uses_sse(CASES["Foo::vfunc_02"])
-    assert MV.flag_options("xb", FLAGS, code) == [FLAGS, FLAGS + " /arch:SSE"]
+    no_eh = FLAGS.replace(" /EHsc", "")               # no exception frame: also tried without /EHsc, last
+    assert MV.flag_options("xb", FLAGS, code) == [FLAGS, FLAGS + " /arch:SSE", no_eh, no_eh + " /arch:SSE"]
     assert MV.flag_options("proto", FLAGS, code)[-1].endswith("/arch:SSE")
-    assert MV.flag_options("xb", FLAGS, CASES["Foo::vfunc_02"]) == [FLAGS]
+    assert MV.flag_options("xb", FLAGS, CASES["Foo::vfunc_02"]) == [FLAGS, no_eh]
+    assert MV.flag_options("xb", no_eh, CASES["Foo::vfunc_02"]) == [no_eh]
     assert MV.flag_options("pc", FLAGS, code) == [FLAGS, FLAGS.replace("/G6", "/G7")]
 
 

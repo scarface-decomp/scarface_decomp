@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 10,948 of 20,692 functions matched (52.91%). NOT COMPLETE YET.
-// The 9,744 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 10,948 of 20,717 functions matched (52.85%). NOT COMPLETE YET.
+// The 9,769 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -31966,6 +31966,7 @@ int __cdecl sub_00055FA0(int a1, int a2, int a3)
     return r_eax;
 }
 
+// [TODO] 0x00055FC0 sub_00055FC0 (38 B)
 // [TODO] 0x00055FF0 DecisionTreeFileHandler::vfunc_04 (626 B)
 // ============================================================================
 // [VERIFIED] sub_00056270 (0x00056270, 6 B)
@@ -40081,6 +40082,7 @@ void Class_0006C6F0::sub_0006C6F0()
     sub_0006D1C0();
 }
 
+// [TODO] 0x0006C700 sub_0006C700 (29 B)
 // ============================================================================
 // [VERIFIED] sub_0006C720 (0x0006C720, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -40372,6 +40374,15 @@ void __cdecl sub_0006C8B0(int a1, int a2, int a3)
 
 // [TODO] 0x0006C8E0 sub_0006C8E0 (75 B)
 // [TODO] 0x0006C930 sub_0006C930 (99 B)
+// [TODO] 0x0006C9A0 sub_0006C9A0 (207 B)
+// [TODO] 0x0006CA70 sub_0006CA70 (94 B)
+// [TODO] 0x0006CAD0 sub_0006CAD0 (130 B)
+// [TODO] 0x0006CB60 sub_0006CB60 (130 B)
+// [TODO] 0x0006CBF0 sub_0006CBF0 (130 B)
+// [TODO] 0x0006CC80 sub_0006CC80 (170 B)
+// [TODO] 0x0006CD30 sub_0006CD30 (130 B)
+// [TODO] 0x0006CDC0 sub_0006CDC0 (294 B)
+// [TODO] 0x0006CEF0 sub_0006CEF0 (347 B)
 // ============================================================================
 // [VERIFIED] sub_0006D050 (0x0006D050, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -48562,6 +48573,7 @@ void Class_00084B30::sub_00084B30()
     sub_000854A0();
 }
 
+// [TODO] 0x00084B40 sub_00084B40 (93 B)
 // ============================================================================
 // [VERIFIED] sub_00084BA0 (0x00084BA0, 15 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -48718,6 +48730,7 @@ void __cdecl sub_00084C30(void)
 }
 
 // [TODO] 0x00084C50 sub_00084C50 (39 B)
+// [TODO] 0x00084C80 sub_00084C80 (85 B)
 // ============================================================================
 // [VERIFIED] sub_00084CE0 (0x00084CE0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -49164,7 +49177,6 @@ int __cdecl sub_00085600(void)
 // [TODO] 0x00085680 sub_00085680 (170 B)
 // [TODO] 0x00085730 sub_00085730 (358 B)
 // [TODO] 0x000858A0 sub_000858A0 (219 B)
-// [TODO] 0x0008591C sub_0008591C (95 B)
 // [TODO] 0x00085980 sub_00085980 (566 B)
 // [TODO] 0x00085BC0 sub_00085BC0 (422 B)
 // [TODO] 0x00085C30 sub_00085C30 (310 B)
@@ -182414,6 +182426,9 @@ void __cdecl sub_0018C190(Object* object)
     object->sub_0018DC50();
 }
 
+// [TODO] 0x0018C1A0 sub_0018C1A0 (153 B)
+// [TODO] 0x0018C240 sub_0018C240 (43 B)
+// [TODO] 0x0018C270 sub_0018C270 (183 B)
 // ============================================================================
 // [VERIFIED] sub_0018C330 (0x0018C330, 9 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -182890,6 +182905,7 @@ void SlotMachineHUD::vfunc_00(int a1, int a2)
 // [TODO] 0x0018C9D0 SlotMachineHUD::vfunc_27 (277 B)
 // [TODO] 0x0018CAF0 sub_0018CAF0 (253 B)
 // [TODO] 0x0018CBF0 sub_0018CBF0 (520 B)
+// [TODO] 0x0018CE00 sub_0018CE00 (28 B)
 // [TODO] 0x0018CE20 TargetHUD::vfunc_27 (215 B)
 // ============================================================================
 // [VERIFIED] TargetHUD::vfunc_29 (0x0018CF00, 67 B)
@@ -183686,6 +183702,7 @@ L_50:
     ;
 }
 
+// [TODO] 0x0018DC50 sub_0018DC50 (37 B)
 // [TODO] 0x0018DC80 sub_0018DC80 (137 B)
 // ============================================================================
 // [VERIFIED] sub_0018DD10 (0x0018DD10, 65 B)
@@ -192512,6 +192529,7 @@ bool __cdecl sub_0019DA50(bool a1)
     return a1;
 }
 
+// [TODO] 0x0019DA60 sub_0019DA60 (46 B)
 // [TODO] 0x0019DA90 sub_0019DA90 (245 B)
 // [TODO] 0x0019DB90 sub_0019DB90 (200 B)
 // [TODO] 0x0019DC60 sub_0019DC60 (211 B)
@@ -193481,6 +193499,7 @@ void __cdecl sub_0019F5A0(int a1, int a2, int a3)
     *(unsigned char*)(a1 + 61) = sub_0008E600(*(int*)(a3 + 8));
 }
 
+// [TODO] 0x0019F5C0 sub_0019F5C0 (19 B)
 // ============================================================================
 // [VERIFIED] sub_0019F5E0 (0x0019F5E0, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -193519,6 +193538,12 @@ bool __cdecl sub_0019F600(int a1)
     return *(bool*)(a1 + 60);
 }
 
+// [TODO] 0x0019F610 sub_0019F610 (47 B)
+// [TODO] 0x0019F640 sub_0019F640 (53 B)
+// [TODO] 0x0019F680 sub_0019F680 (47 B)
+// [TODO] 0x0019F6B0 sub_0019F6B0 (53 B)
+// [TODO] 0x0019F6F0 sub_0019F6F0 (49 B)
+// [TODO] 0x0019F730 sub_0019F730 (49 B)
 // ============================================================================
 // [VERIFIED] sub_0019F770 (0x0019F770, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -194588,6 +194613,7 @@ void* TapePlayer::vfunc_00()
     return DAT_00415098;
 }
 
+// [TODO] 0x001A0220 sub_001A0220 (74 B)
 // ============================================================================
 // [VERIFIED] sub_001A0270 (0x001A0270, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -209861,7 +209887,6 @@ StatePropWaterCollisionTemplate* StatePropWaterCollisionTemplate::vfunc_01(int a
 
 // [TODO] 0x001B7B30 StatePropWaterCollisionTemplate::vfunc_05 (83 B)
 // [TODO] 0x001B7B90 StatePropWaterCollisionTemplate::vfunc_27 (108 B)
-// [TODO] 0x001B7BCD sub_001B7BCD (29 B)
 // ============================================================================
 // [VERIFIED] StatePropDragTemplate::vfunc_01 (0x001B7C00, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

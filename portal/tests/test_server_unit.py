@@ -579,6 +579,12 @@ def test_cmov_and_fcomi_also_mean_arch_sse():
     assert MV.flag_options("xb", "/O2 /G6", bytes.fromhex("0F44C1C3")) == ["/O2 /G6", "/O2 /G6 /arch:SSE"]
     assert MV.verify_line_options("// verify: python portal/verify.py a.cpp --va 0x1 --bin xb --match '??_I'\n") == {"match": "??_I"}
     assert MV.allowed_flags("/O2 /G6 /EHsc", "/O2 /G6") == "" and MV.allowed_flags("/O2", "/O2 /Fo x")
+    # /EHsc: tried without it when the function has no exception frame at fs:[0]; kept when it has one
+    frame = bytes.fromhex("6AFF68000000006" "4A10000000050C3")    # push -1; push h; mov eax, fs:[0]; push eax; ret
+    assert MV.has_eh_frame(frame) and not MV.has_eh_frame(bytes.fromhex("C3"))
+    assert MV.flag_options("xb", "/O2 /G6 /EHsc", bytes.fromhex("C3")) == ["/O2 /G6 /EHsc", "/O2 /G6"]
+    assert MV.flag_options("xb", "/O2 /G6 /EHsc", frame) == ["/O2 /G6 /EHsc"]
+    assert MV.flag_options("pc", "/O2 /G5 /EHsc", bytes.fromhex("C3")) == ["/O2 /G5 /EHsc"]
 
 
 def test_starts_missing_from_the_queue_are_counted(S, tmp_path, monkeypatch):

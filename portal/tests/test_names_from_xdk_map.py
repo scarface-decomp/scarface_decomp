@@ -101,3 +101,20 @@ def test_library_functions_among_the_games_code_are_not_queued(tmp_path):
     assert {0x11020, 0x11040} <= every
     left = {t["fva_int"] for t in QB.build_queue({"xb": p}, library={"xb": ["0x00011040"]})}
     assert left == every - {0x11040}
+
+
+def test_a_verified_function_keeps_its_matched_size_in_the_queue(tmp_path):
+    """A short verified function that ends in a jump to another function: the scanner alone can measure it
+    past its end and hide the function after it. With the registry's sizes that function is queued."""
+    import queue_builder as QB
+    tail = bytes.fromhex("8B 0D 00 20 01 00 E9") + struct.pack("<i", 0x60 - (0x20 + 11))             # mov ecx, [x]; jmp 0x11060
+    hidden = bytes.fromhex("55 8B EC 8B 45 08 03 45 0C 5D C3")                                     # reached only through data
+    last = bytes.fromhex("55 8B EC 8B 45 08 2B 45 0C 5D C3")
+    caller = bytes.fromhex("E8") + struct.pack("<i", 0x20 - 5) + b"\xC3"
+    text = (caller + b"\xCC" * (0x20 - len(caller)) + tail + b"\xCC" * (0x10 - len(tail)) + hidden
+            + b"\xCC" * (0x30 - len(hidden)) + last + b"\xCC" * 8)
+    p = make_xbe(tmp_path / "default.xbe", [(".text", 0x11000, text, 6)])
+    extra = {"xb": ["0x00011030"]}
+    with_sizes = {t["fva_int"]: t for t in QB.build_queue({"xb": p}, None, {"xb:0x00011020": 11}, extra_starts=extra)}
+    assert 0x11030 in with_sizes and with_sizes[0x11030]["size"] == len(hidden) and 0x11020 not in with_sizes
+    assert "/EHsc" not in with_sizes[0x11030]["flags"]                                              # no exception frame

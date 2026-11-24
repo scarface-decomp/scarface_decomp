@@ -535,7 +535,8 @@ def load_tasks() -> None:
         else:
             names = ", ".join(BINARIES[b].name for b in missing_lanes)
             print(f"[*] New game files found ({names}); adding their functions to the work queue (a few minutes)...")
-        tasks = build_queue(have, tasks, set(REGISTRY["entries"]), progress=print, **seed_data(BASE_DIR))
+        sizes = {k: int(e.get("size") or 0) for k, e in REGISTRY["entries"].items()}
+        tasks = build_queue(have, tasks, sizes, progress=print, **seed_data(BASE_DIR))
         write_json(QUEUE_JSON, tasks)
     missing = starts_not_queued(tasks, have)
     if missing > 50:
