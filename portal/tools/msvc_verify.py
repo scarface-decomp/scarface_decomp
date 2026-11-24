@@ -524,6 +524,26 @@ class CompareResult:
         }
 
 
+def same_code_there(coff: "CoffObject", sym, image, va: int) -> bool:
+    """True when sym is a function this same object file defines in a section of its own (a template
+    instantiation, or a member the compiler writes itself such as operator=), and the original has the
+    same bytes at va, the addresses the linker fills in aside. Such a function has no name of ours to
+    check the address by; that its whole code is there is the check. The linker may also have folded
+    several identical functions into the one at va, which this allows: the bytes are what is called."""
+    if image is None or sym is None or sym.section <= 0 or sym.value != 0:
+        return False
+    sec = coff.sections[sym.section - 1]
+    if not (sec.chars & IMAGE_SCN_CNT_CODE) or not (sec.chars & IMAGE_SCN_LNK_COMDAT) or len(sec.data) < 8:
+        return False
+    there = image.read(va, len(sec.data))
+    if there is None:
+        return False
+    masked = {o + k for (o, _si, _t) in sec.relocs for k in range(4)}
+    if len(sec.data) - len(masked) < 4:
+        return False
+    return all(i in masked or there[i] == sec.data[i] for i in range(len(sec.data)))
+
+
 def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Optional[int] = None,
                      image=None, known_symbols: Optional[Dict[str, int]] = None,
                      known_names: Optional[Dict[str, int]] = None) -> CompareResult:
@@ -631,6 +651,8 @@ def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Op
                     else:
                         verdict, why = "bad", (f"+0x{off:X}: '{qualified_name(sym.name)}' is at 0x{want:08X}, but "
                                                f"the original uses 0x{sym_va_in_orig:08X} here")
+                elif same_code_there(coff, sym, image, sym_va_in_orig):
+                    verdict = "ok"          # a compiler-made or template function compiled here: same bytes there
                 else:
                     verdict = "unverified"
                 ext_seen.setdefault(sym.name, sym_va_in_orig)

@@ -599,3 +599,24 @@ def test_starts_missing_from_the_queue_are_counted(S, tmp_path, monkeypatch):
     assert S.starts_not_queued(queue, {"xb"}) == 1            # 0x11020; the prototype's file is not here
     assert S.starts_not_queued(queue, {"xb", "proto"}) == 2
     assert S.starts_not_queued(None, set()) == 0
+
+
+def test_a_function_compiled_alongside_is_checked_by_its_bytes():
+    """A call to a function the same object file defines in its own section (a template instantiation, a
+    compiler-written operator=) has no name to check the address by: the original must hold the same
+    code at the called address, the linker-filled addresses aside."""
+    import msvc_verify as MV
+    from types import SimpleNamespace as NS
+    body = bytes.fromhex("8B C1 8B 4C 24 04 E8 00 00 00 00 C2 04 00")
+    code = NS(chars=MV.IMAGE_SCN_CNT_CODE | MV.IMAGE_SCN_LNK_COMDAT, data=body, relocs=[(7, 3, MV.REL_REL32)])
+    data = NS(chars=0x40, data=body, relocs=[])
+    coff = NS(sections=[code, data])
+    there = bytearray(body); there[7:11] = b"\x12\x34\x56\x78"          # the linker's call target
+    image = NS(read=lambda va, n: bytes(there[:n]) if va == 0x11000 else None)
+    sym = NS(section=1, value=0)
+    assert MV.same_code_there(coff, sym, image, 0x11000)
+    assert not MV.same_code_there(coff, sym, image, 0x12000)            # nothing readable there
+    assert not MV.same_code_there(coff, NS(section=2, value=0), image, 0x11000)     # data, not code
+    assert not MV.same_code_there(coff, NS(section=0, value=0), image, 0x11000)     # defined elsewhere
+    there[0] = 0x90
+    assert not MV.same_code_there(coff, sym, image, 0x11000)            # other code at that address
