@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/SpriteParticleEmitter.cpp (9 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/SpriteParticleEmitter.cpp (10 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 9 of 17 functions matched (52.94%). NOT COMPLETE YET.
-// The 8 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 10 of 17 functions matched (58.82%). NOT COMPLETE YET.
+// The 7 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -164,6 +164,54 @@ public:
 int SpriteParticleEmitter::vfunc_09()
 {
     return m_FieldA0;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::SpriteParticleEmitter::vfunc_12 (0x0025DE40, 22 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns bit 2 of the flags byte at +0x16 of the object pointed to at +0xA0, or false when the pointer is null.
+// ============================================================================
+// bin: xb
+// va: 0x0025DE40
+// what: Returns bit 2 of the flags byte at +0x16 of the object pointed to at +0xA0, or false when the pointer is null.
+// tool: Gemini 4 Neon
+
+namespace pure3d {
+
+struct Shader_0025DE40
+{
+    char m_pad00[0x16];
+    unsigned char m_Bits01 : 2;
+    unsigned char m_Bit2 : 1; // +0x16 bit 2
+};
+
+class SpriteParticleEmitter
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual bool vfunc_12();
+    char m_pad04[0x9C];
+    Shader_0025DE40* m_FieldA0; // +0xA0
+};
+
+bool SpriteParticleEmitter::vfunc_12()
+{
+    if (m_FieldA0)
+        return m_FieldA0->m_Bit2;
+    return false;
 }
 
 }

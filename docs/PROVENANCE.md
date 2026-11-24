@@ -12,24 +12,32 @@ rules for what may go into the repository.
   the code does.
 * **Public, licensed material:** open-source libraries the game links against (with their license
   kept), public documentation and published research, credited in the pull request or commit.
+* **Two prototype builds' linker maps, for names only:** the builds, and what may be taken from each, are
+  listed in [CLEAN_ROOM.md](CLEAN_ROOM.md#names-from-another-games-build). The map files stay out of the
+  repository. Another build's map may be used only after the founder adds it to that list.
 
-## Not allowed
+## Not allowed in the repository
 
-* Leaked, stolen or unreleased source code, debug symbols (PDB files), link maps or internal documents
-  from the developer or its partners, and names or structures derived from them.
+* Leaked, stolen or unreleased source code, debug symbols (PDB files) or internal documents from the
+  developer or its partners, and code, names or structures taken from them.
+* Link maps from the developer or its partners, as files, and names from any map other than the ones
+  listed in CLEAN_ROOM.md.
 * Code copied from other decompilation projects without a compatible license and credit.
 * Anything from the game files themselves other than what is needed to describe the code (no assets,
   no data dumps).
 
 If you are unsure where something came from, leave it out and ask in an issue.
 
-## Research done next to leaked code: the clean room
+## Studying material that can't come in: the clean room
 
-Some published research on the game was done with leaked source at hand. Its code and names stay out
-of the project. What it found out about the game's files and behaviour may come in only through the
-clean-room process in [CLEAN_ROOM.md](CLEAN_ROOM.md): someone who read it writes a spec in their own words
-(no code, no names from it), the spec is reviewed, and someone who has never read it writes the code from
-the spec and the game files. The record of who read what is kept in CLEAN_ROOM.md.
+Material that can't come into the repository may still be studied, whatever it is: leaked source, debug
+symbols, other builds, and research that was done with them at hand. Its code and names stay out of the
+project. What it shows about the game's files and behaviour may come in only through the clean-room
+process in [CLEAN_ROOM.md](CLEAN_ROOM.md): someone who read it (the examiner) writes a spec in their own
+words (no code, no names from it), with every statement something that can be checked on a copy of the
+game; the spec is reviewed; and someone who has never read the material writes the code from the spec and
+the game files. Whoever has read such material doesn't write code for what it covers, and never supplies
+or confirms a name from it. The record of who read what is kept in CLEAN_ROOM.md.
 
 ## Names
 
@@ -37,7 +45,8 @@ Function and class names come from RTTI in the retail binaries, from strings the
 the game registers its script commands under among them), or from what the code does. A name another
 project published under a licence that allows it may be used when it is checked against the code and the
 project is named as its source (`by` in `reports/names.json`, and in [CREDITS.md](CREDITS.md)). A guessed name is fine; say it is a guess in a comment if it is not obvious. Names
-are never taken from unreleased builds' debug data.
+are never taken from leaked source or debug symbols. The only names from other games' builds are those
+from the linker maps listed in [CLEAN_ROOM.md](CLEAN_ROOM.md#names-from-another-games-build).
 
 ## AI tools
 

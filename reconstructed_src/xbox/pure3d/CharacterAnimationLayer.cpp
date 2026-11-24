@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/CharacterAnimationLayer.cpp (4 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/CharacterAnimationLayer.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 4 of 9 functions matched (44.44%). NOT COMPLETE YET.
-// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 9 functions matched (66.67%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -50,6 +50,59 @@ CharacterAnimationLayer* CharacterAnimationLayer::vfunc_03(int a1)
         sub_00027600((int)this);
     }
     return this;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::CharacterAnimationLayer::vfunc_04 (0x00285060, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Forwards its argument to virtual method slot 14 on the embedded member object at +0x28.
+// ============================================================================
+// bin: xb
+// va: 0x00285060
+// what: Forwards its argument to virtual method slot 14 on the embedded member object at +0x28.
+// tool: Gemini 4 Neon
+
+#pragma optimize("y", off)
+
+struct Field28
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14(int a1);
+    void Call14(int a1) { vfunc_14(a1); }
+};
+
+namespace pure3d {
+
+class CharacterAnimationLayer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04(int a1);
+    char m_pad04[0x24];
+    Field28 m_Field28; // +0x28
+};
+
+void CharacterAnimationLayer::vfunc_04(int a1)
+{
+    m_Field28.Call14(a1);
 }
 
 }
@@ -119,6 +172,54 @@ void CharacterAnimationLayer::vfunc_05(int a1, int a2, int a3)
     }
     ((Object*)r_esi)->sub_00286880(m_Field20);
     ((Object*)r_esi)->vfunc_08(r_ebx, 0);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::CharacterAnimationLayer::vfunc_06 (0x002850C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Calls virtual method slot 9 on the embedded member object at +0x28.
+// ============================================================================
+// bin: xb
+// va: 0x002850C0
+// what: Calls virtual method slot 9 on the embedded member object at +0x28.
+// tool: Gemini 4 Neon
+
+struct Field28
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    void Call09() { vfunc_09(); }
+};
+
+namespace pure3d {
+
+class CharacterAnimationLayer
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06(int a1, int a2);
+    char m_pad04[0x24];
+    Field28 m_Field28; // +0x28
+};
+
+void CharacterAnimationLayer::vfunc_06(int, int)
+{
+    m_Field28.Call09();
 }
 
 }

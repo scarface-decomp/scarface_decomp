@@ -1550,7 +1550,7 @@
     "proto:0x00068CB0": {
       "name": "Namespace::ClassLinkTo",
       "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
-      "why": "Paired by shape with the Xbox's 0x00073270 (Namespace::ClassLinkTo), and what the prototype's classLinkNamespaces (0x000660D0) calls."
+      "why": "Paired by shape with the Xbox's 0x00073270 (Namespace::ClassLinkTo), and what the prototype's classLinkNamespaces (0x000660D0) calls. The name follows the published Torque engine's Namespace::classLinkTo (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "proto:0x0006B1C0": {
       "name": "MemStream::~MemStream",
@@ -22180,7 +22180,7 @@
     "xb:0x00073270": {
       "name": "Namespace::ClassLinkTo",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "What classLinkNamespaces (0x00070520) calls on the child with the parent: skips the child's own chain of the same name (+0x00), and if its parent (+0x04) is another one, drops one reference on the old parent (u16 at +0x24) and releases it at zero, then stores the new parent at +0x04, calls 0x00072CE0 and adds a reference to the new parent."
+      "why": "What classLinkNamespaces (0x00070520) calls on the child with the parent: skips the child's own chain of the same name (+0x00), and if its parent (+0x04) is another one, drops one reference on the old parent (u16 at +0x24) and releases it at zero, then stores the new parent at +0x04, calls 0x00072CE0 and adds a reference to the new parent. The name follows the published Torque engine's Namespace::classLinkTo (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x00073400": {
       "name": "RegisterClassRep",
@@ -44450,12 +44450,12 @@
     "xb:0x00072FE0": {
       "name": "Namespace::CreateLocalEntry",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key): returns the namespace's own entry for the key from its list (+0x18, next +0x10), or takes a new one from the entry pool ([0x0047B360], virtual 16), marks its type invalid (+0x1A |= 0x1F), links it at the list head and in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364]."
+      "why": "thiscall(namespace, key): returns the namespace's own entry for the key from its list (+0x18, next +0x10), or takes a new one from the entry pool ([0x0047B360], virtual 16), marks its type invalid (+0x1A |= 0x1F), links it at the list head and in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364]. The name follows the published Torque engine's Namespace::createLocalEntry (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x00072420": {
       "name": "Namespace::Lookup",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key): looks in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364] for an entry of this namespace (+0x0C) with that key (+0x00, next +0x14), then tries the parent (+0x04) and so on up; returns the entry or 0. How a script's call finds its function."
+      "why": "thiscall(namespace, key): looks in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364] for an entry of this namespace (+0x0C) with that key (+0x00, next +0x14), then tries the parent (+0x04) and so on up; returns the entry or 0. How a script's call finds its function. The name follows the published Torque engine's Namespace::lookup (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x00072CE0": {
       "name": "Namespace::RecomputeCallbackMask",
@@ -44470,7 +44470,7 @@
     "xb:0x000728B0": {
       "name": "NamespaceEntry::Execute",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(entry, argc, argv, state): runs the entry by its type (low 5 bits of +0x1A): 0 a script function, through the interpreter (0x000695B0); 1 to 5 a handler (+0x04) called as handler(object, argc, argv), its result turned to text by kind (string as is, int \"%d\", float \"%g\", void \"\", bool \"%d\"); 6 a typed binding object, through CScript::CallTyped (0x00066C90)."
+      "why": "thiscall(entry, argc, argv, state): runs the entry by its type (low 5 bits of +0x1A): 0 a script function, through the interpreter (0x000695B0); 1 to 5 a handler (+0x04) called as handler(object, argc, argv), its result turned to text by kind (string as is, int \"%d\", float \"%g\", void \"\", bool \"%d\"); 6 a typed binding object, through CScript::CallTyped (0x00066C90). The name follows the published Torque engine's Namespace::Entry::execute (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x00073070": {
       "name": "Namespace::AddScriptFunction",
@@ -44535,7 +44535,7 @@
     "xb:0x000694E0": {
       "name": "GetReturnBuffer",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(size): the interpreter state at [0x00478E60]; when size is over 0x200 grows its buffer (0x00068FF0); returns the buffer pointer at +0x2478. Handlers that return text write it there."
+      "why": "(size): the interpreter state at [0x00478E60]; when size is over 0x200 grows its buffer (0x00068FF0); returns the buffer pointer at +0x2478. Handlers that return text write it there. The name follows the published Torque engine's Con::getReturnBuffer (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x00068FF0": {
       "name": "GrowReturnBuffer",
@@ -44545,12 +44545,12 @@
     "xb:0x00099BC0": {
       "name": "dAtob",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Text to true/false: false for no text, empty text, \"false\", \"0\" or \"nil\" (compared without case, _stricmp); true for anything else."
+      "why": "Text to true/false: false for no text, empty text, \"false\", \"0\" or \"nil\" (compared without case, _stricmp); true for anything else. The name follows the published Torque engine's dAtob (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x00068E40": {
       "name": "dSprintf",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(buffer, size, format, ...): vsprintf(buffer, format, the arguments); the size is not used."
+      "why": "(buffer, size, format, ...): vsprintf(buffer, format, the arguments); the size is not used. The name follows the published Torque engine's dSprintf (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x0011B010": {
       "name": "SemiConcreteClassRep::Create",

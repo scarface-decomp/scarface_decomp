@@ -1,9 +1,7 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, ai/AIActionSkipIfFail.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, ai/AIActionSkipIfFail.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 2 functions matched (50.00%). NOT COMPLETE YET.
-// The 1 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
-// lines, so you can see what is missing and where; matched ones are the C++ itself.
+// PROGRESS: COMPLETE. All 2 functions are matched.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
@@ -44,5 +42,39 @@ int AIActionSkipIfFail::vfunc_03()
         r_eax = 2;
     }
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] AIActionSkipIfFail::vfunc_01 (0x00120040, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Calls virtual method slot 1 on m_Field08 and returns 2 if it returned 0.
+// ============================================================================
+// bin: xb
+// va: 0x00120040
+// what: Calls virtual method slot 1 on m_Field08 and returns 2 if it returned 0.
+// tool: Gemini 4 Neon
+
+struct Field08_00120040
+{
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+};
+
+class AIActionSkipIfFail
+{
+public:
+    virtual void vfunc_00();
+    virtual int vfunc_01();
+    char m_pad04[0x4];
+    Field08_00120040* m_Field08; // +0x08
+};
+
+int AIActionSkipIfFail::vfunc_01()
+{
+    int result = m_Field08->vfunc_01();
+    if (!result) {
+        result = 2;
+    }
+    return result;
 }
 

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/PrimGroup.cpp (1 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/PrimGroup.cpp (2 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1 of 7 functions matched (14.29%). NOT COMPLETE YET.
-// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2 of 7 functions matched (28.57%). NOT COMPLETE YET.
+// The 5 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -41,6 +41,56 @@ public:
 int PrimGroup::vfunc_09()
 {
     return m_Field38;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::PrimGroup::vfunc_12 (0x002929F0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns bit 2 of the flags byte at +0x16 of the object pointed to by +0x38, or false if null.
+// ============================================================================
+// bin: xb
+// va: 0x002929F0
+// what: Returns bit 2 of the flags byte at +0x16 of the object pointed to by +0x38, or false if null.
+// tool: Gemini 4 Neon
+
+struct Field38_002929F0
+{
+    char m_pad00[0x16];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+};
+
+namespace pure3d {
+
+class PrimGroup
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual bool vfunc_12();
+    char m_pad04[0x34];
+    Field38_002929F0* m_Field38; // +0x38
+};
+
+bool PrimGroup::vfunc_12()
+{
+    if (m_Field38) {
+        return m_Field38->m_Flag2;
+    }
+    return false;
 }
 
 }

@@ -1,13 +1,44 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, fe/GenericMenuClient.cpp (8 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, fe/GenericMenuClient.cpp (9 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 8 of 11 functions matched (72.73%). NOT COMPLETE YET.
-// The 3 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 9 of 11 functions matched (81.82%). NOT COMPLETE YET.
+// The 2 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] GenericMenuClient::vfunc_01 (0x0016FA40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as GenericMenuClient::vfunc_01 (0x00197070), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0016FA40
+// what: Calls virtual slot 0 on the embedded member object at +0x14.
+// tool: Gemini 4 Neon
+
+struct Embedded_0016FA40
+{
+    virtual void vfunc_00();
+    void Call() { vfunc_00(); }
+};
+
+class GenericMenuClient
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    char m_pad04[0x10];
+    Embedded_0016FA40 m_Field14; // +0x14
+};
+
+void GenericMenuClient::vfunc_01()
+{
+    m_Field14.Call();
+}
 
 // ============================================================================
 // [VERIFIED] GenericMenuClient::vfunc_06 (0x0016FA90, 16 B)

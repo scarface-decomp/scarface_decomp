@@ -1,9 +1,7 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/SkidmarkTemplate.cpp (3 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/SkidmarkTemplate.cpp (4 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3 of 4 functions matched (75.00%). NOT COMPLETE YET.
-// The 1 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
-// lines, so you can see what is missing and where; matched ones are the C++ itself.
+// PROGRESS: COMPLETE. All 4 functions are matched.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
@@ -30,6 +28,50 @@ public:
 void* SkidmarkTemplate::vfunc_00()
 {
     return DAT_0041993C;
+}
+
+// ============================================================================
+// [VERIFIED] SkidmarkTemplate::vfunc_11 (0x001C0C90, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as ParticleEffectTemplate::vfunc_10 (0x001FC110), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x001C0C90
+// what: Marks the particle effect template active at +0x22 and calls sub_0007D330 on m_Field24 with m_Field20.
+// tool: Gemini 4 Neon
+
+struct Field24_001C0C90
+{
+    void sub_0007D330(unsigned short value);
+};
+
+class SkidmarkTemplate
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    char m_pad04[0x1C];
+    unsigned short m_Field20; // +0x20
+    bool m_Field22; // +0x22
+    char m_pad23[0x1];
+    Field24_001C0C90 m_Field24; // +0x24
+};
+
+void SkidmarkTemplate::vfunc_11()
+{
+    m_Field22 = true;
+    m_Field24.sub_0007D330(m_Field20);
 }
 
 // ============================================================================

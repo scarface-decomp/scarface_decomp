@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Sprite.cpp (10 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/Sprite.cpp (11 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 10 of 17 functions matched (58.82%). NOT COMPLETE YET.
-// The 7 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 11 of 17 functions matched (64.71%). NOT COMPLETE YET.
+// The 6 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -209,6 +209,56 @@ public:
 int Sprite::vfunc_09()
 {
     return m_Field44;
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::Sprite::vfunc_12 (0x0026CFB0, 19 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Returns bit 2 of the flags byte at +0x16 of the object pointed to by +0x44, or false if null.
+// ============================================================================
+// bin: xb
+// va: 0x0026CFB0
+// what: Returns bit 2 of the flags byte at +0x16 of the object pointed to by +0x44, or false if null.
+// tool: Gemini 4 Neon
+
+struct Field44_0026CFB0
+{
+    char m_pad00[0x16];
+    unsigned char m_Flag0 : 1;
+    unsigned char m_Flag1 : 1;
+    unsigned char m_Flag2 : 1;
+};
+
+namespace pure3d {
+
+class Sprite
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual bool vfunc_12();
+    char m_pad04[0x40];
+    Field44_0026CFB0* m_Field44; // +0x44
+};
+
+bool Sprite::vfunc_12()
+{
+    if (m_Field44) {
+        return m_Field44->m_Flag2;
+    }
+    return false;
 }
 
 }
