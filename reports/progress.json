@@ -1,14 +1,14 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-23 20:44:40",
+  "updated_at": "2026-11-24 12:19:39",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
     "pc": 780,
-    "xb": 9546,
-    "proto": 8820,
+    "xb": 11678,
+    "proto": 10948,
     "ps2": 0,
-    "total": 10326,
-    "bytes": 370795,
+    "total": 12458,
+    "bytes": 438726,
     "ps2_bytes": 0
   },
   "readable": {
@@ -21,9 +21,9 @@
   "source": {
     "member_functions": {
       "pc": 489,
-      "xb": 4370,
+      "xb": 4378,
       "proto": 4342,
-      "total": 4859
+      "total": 4867
     },
     "shared_class": {
       "pc": 159,
@@ -33,61 +33,52 @@
     },
     "named": {
       "pc": 1,
-      "xb": 2326,
-      "proto": 2257,
-      "total": 2327
+      "xb": 2335,
+      "proto": 2263,
+      "total": 2336
     }
   },
   "described": {
     "pc": 60,
-    "xb": 2614,
-    "proto": 314,
+    "xb": 2679,
+    "proto": 1207,
     "ps2": 0,
-    "total": 2674,
+    "total": 2739,
     "how": {
       "human": 433,
       "read": 169,
       "bound": 0,
-      "shape": 2041,
+      "shape": 2106,
       "twin": 31
     }
   },
   "size_buckets": {
-    "1-9 B": 2090,
-    "10-19 B": 1675,
-    "20-39 B": 3013,
-    "40-79 B": 2696,
-    "80+ B": 852
+    "1-9 B": 2097,
+    "10-19 B": 1781,
+    "20-39 B": 4544,
+    "40-79 B": 3172,
+    "80+ B": 864
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 13633,
+    "RRutherrfordd (Founder)": 17893,
     "NoahBPeterson": 5405,
     "lemiur": 108
   },
   "unattributed": 0,
   "queue": {
     "pc": 735,
-    "xb": 12214,
-    "proto": 11897,
+    "xb": 10039,
+    "proto": 9744,
     "ps2": 24297,
-    "total": 12949,
+    "total": 10774,
     "tiers": {
-      "TIER_1_QUICK": 283,
-      "TIER_2_SMALL": 2319,
-      "TIER_3_MEDIUM": 2821,
-      "TIER_4_LARGE": 7526
+      "TIER_1_QUICK": 166,
+      "TIER_2_SMALL": 779,
+      "TIER_3_MEDIUM": 2328,
+      "TIER_4_LARGE": 7501
     }
   },
   "good_first": [
-    {
-      "id": "xb_003225B0",
-      "bin": "xb",
-      "va": "0x003225B0",
-      "symbol": "sub_003225B0",
-      "size": 1,
-      "why": "matching it also matches its 12 look-alikes",
-      "kind": "group"
-    },
     {
       "id": "xb_00098BE0",
       "bin": "xb",
@@ -104,6 +95,15 @@
       "symbol": "sub_002FD289",
       "size": 8,
       "why": "matching it also matches its 3 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002E0600",
+      "bin": "xb",
+      "va": "0x002E0600",
+      "symbol": "sub_002E0600",
+      "size": 9,
+      "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     },
     {
@@ -134,15 +134,6 @@
       "kind": "named"
     },
     {
-      "id": "xb_002E0600",
-      "bin": "xb",
-      "va": "0x002E0600",
-      "symbol": "sub_002E0600",
-      "size": 9,
-      "why": "matching it also matches its 2 look-alikes",
-      "kind": "group"
-    },
-    {
       "id": "pc_006E4610",
       "bin": "pc",
       "va": "PC 0x006E4610",
@@ -152,21 +143,30 @@
       "kind": "group"
     },
     {
-      "id": "xb_00313540",
-      "bin": "xb",
-      "va": "0x00313540",
-      "symbol": "sub_00313540",
-      "size": 10,
-      "why": "matching it also matches its 123 look-alikes",
-      "kind": "group"
-    },
-    {
       "id": "xb_0015C6C0",
       "bin": "xb",
       "va": "0x0015C6C0",
       "symbol": "sub_0015C6C0",
       "size": 10,
-      "why": "matching it also matches its 3 look-alikes",
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002FE371",
+      "bin": "xb",
+      "va": "0x002FE371",
+      "symbol": "sub_002FE371",
+      "size": 10,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_00178210",
+      "bin": "xb",
+      "va": "0x00178210",
+      "symbol": "sub_00178210",
+      "size": 12,
+      "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     }
   ]

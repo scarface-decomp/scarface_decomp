@@ -1,2002 +1,2002 @@
 [
   {
-    "time": "2026-11-23 20:44:54",
+    "time": "2026-11-24 12:20:04",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "2 look-alike(s) of sub_002E0FA0",
-    "va": "0x002E0FA0",
-    "bytes": "same code, own addresses"
+    "symbol": "sub_00325170",
+    "va": "0x00325170",
+    "bytes": "26/26 B"
   },
   {
-    "time": "2026-11-23 20:44:40",
+    "time": "2026-11-24 12:19:34",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_002E0FA0",
-    "va": "0x002E0FA0",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 20:44:25",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "2 look-alike(s) of core::CementLibrary::vfunc_01",
-    "va": "0x002ACA50",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:44:10",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "core::CementLibrary::vfunc_01",
-    "va": "0x002ACA50",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 20:43:56",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "2 look-alike(s) of core::CementLibrary::vfunc_00",
-    "va": "0x002ACA40",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:43:41",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "core::CementLibrary::vfunc_00",
-    "va": "0x002ACA40",
-    "bytes": "11/11 B"
-  },
-  {
-    "time": "2026-11-23 20:43:27",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of pure3d::d3dDisplay::vfunc_23",
-    "va": "0x0029AF30",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:43:13",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::d3dDisplay::vfunc_23",
-    "va": "0x0029AF30",
-    "bytes": "9/9 B"
-  },
-  {
-    "time": "2026-11-23 20:42:59",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of pure3d::PrimGroup::vfunc_12",
-    "va": "0x002929F0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:42:45",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::PrimGroup::vfunc_12",
-    "va": "0x002929F0",
-    "bytes": "19/19 B"
-  },
-  {
-    "time": "2026-11-23 20:42:31",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::ShadowMesh::vfunc_30",
-    "va": "0x002927A0",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 20:42:17",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::CharacterAnimationLayer::vfunc_06",
-    "va": "0x002850C0",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 20:42:02",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::CharacterAnimationLayer::vfunc_04",
-    "va": "0x00285060",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 20:41:48",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00283A60",
-    "va": "0x00283A60",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:41:34",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00283A60",
-    "va": "0x00283A60",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-23 20:41:20",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of pure3d::BlendFrameController::vfunc_15",
-    "va": "0x00273720",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:41:06",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::BlendFrameController::vfunc_15",
-    "va": "0x00273720",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:40:52",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::DefaultParticleEmitterHandler::vfunc_04",
-    "va": "0x00270BA0",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 20:40:37",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of pure3d::Sprite::vfunc_12",
-    "va": "0x0026CFB0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:40:23",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::Sprite::vfunc_12",
-    "va": "0x0026CFB0",
-    "bytes": "19/19 B"
-  },
-  {
-    "time": "2026-11-23 20:40:08",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::d3dExtVertexProgram::vfunc_01",
-    "va": "0x00268260",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:39:54",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::AmbientLight::vfunc_07",
-    "va": "0x00260650",
-    "bytes": "10/10 B"
-  },
-  {
-    "time": "2026-11-23 20:39:40",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of pure3d::SpriteParticleEmitter::vfunc_12",
-    "va": "0x0025DE40",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:39:26",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "pure3d::SpriteParticleEmitter::vfunc_12",
-    "va": "0x0025DE40",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:39:12",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00242F50",
-    "va": "0x00242F50",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:38:57",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00242F50",
-    "va": "0x00242F50",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-23 20:38:42",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00231440",
-    "va": "0x00231440",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 20:38:28",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00231160",
-    "va": "0x00231160",
-    "bytes": "42/42 B"
-  },
-  {
-    "time": "2026-11-23 20:38:13",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00231150",
-    "va": "0x00231150",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 20:37:59",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00231120",
-    "va": "0x00231120",
-    "bytes": "11/11 B"
-  },
-  {
-    "time": "2026-11-23 20:37:45",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00230890",
-    "va": "0x00230890",
-    "bytes": "31/31 B"
-  },
-  {
-    "time": "2026-11-23 20:37:31",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00230790",
-    "va": "0x00230790",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:37:16",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00230720",
-    "va": "0x00230720",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 20:37:02",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002306B0",
-    "va": "0x002306B0",
+    "symbol": "sub_00322F00",
+    "va": "0x00322F00",
     "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 20:36:48",
+    "time": "2026-11-24 12:19:07",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_00230630",
-    "va": "0x00230630",
-    "bytes": "53/53 B"
-  },
-  {
-    "time": "2026-11-23 20:36:34",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00230600",
-    "va": "0x00230600",
-    "bytes": "30/30 B"
-  },
-  {
-    "time": "2026-11-23 20:36:20",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002305E0",
-    "va": "0x002305E0",
+    "symbol": "sub_00322970",
+    "va": "0x00322970",
     "bytes": "29/29 B"
   },
   {
-    "time": "2026-11-23 20:36:05",
+    "time": "2026-11-24 12:18:43",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_0022C880",
-    "va": "0x0022C880",
-    "bytes": "21/21 B"
+    "symbol": "sub_00322950",
+    "va": "0x00322950",
+    "bytes": "29/29 B"
   },
   {
-    "time": "2026-11-23 20:35:51",
+    "time": "2026-11-24 12:18:16",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_00222B70",
-    "va": "0x00222B70",
+    "symbol": "sub_00320350",
+    "va": "0x00320350",
     "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 20:35:37",
+    "time": "2026-11-24 12:17:51",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_00222B30",
-    "va": "0x00222B30",
+    "symbol": "sub_00320320",
+    "va": "0x00320320",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 12:17:26",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_003202F0",
+    "va": "0x003202F0",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 12:17:02",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_003202C0",
+    "va": "0x003202C0",
+    "bytes": "37/37 B"
+  },
+  {
+    "time": "2026-11-24 12:16:37",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0031FB70",
+    "va": "0x0031FB70",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 12:16:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0031FB60",
+    "va": "0x0031FB60",
     "bytes": "14/14 B"
   },
   {
-    "time": "2026-11-23 20:35:22",
+    "time": "2026-11-24 12:15:47",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_0021F9D0",
-    "va": "0x0021F9D0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:35:08",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0021F9D0",
-    "va": "0x0021F9D0",
-    "bytes": "8/8 B"
-  },
-  {
-    "time": "2026-11-23 20:34:54",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0021F6D0",
-    "va": "0x0021F6D0",
-    "bytes": "11/11 B"
-  },
-  {
-    "time": "2026-11-23 20:34:40",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00218F70",
-    "va": "0x00218F70",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:34:25",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00217690",
-    "va": "0x00217690",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:34:11",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00217690",
-    "va": "0x00217690",
-    "bytes": "35/35 B"
-  },
-  {
-    "time": "2026-11-23 20:33:57",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00217670",
-    "va": "0x00217670",
-    "bytes": "30/30 B"
-  },
-  {
-    "time": "2026-11-23 20:33:43",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00217630",
-    "va": "0x00217630",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-23 20:33:29",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00217300",
-    "va": "0x00217300",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:33:15",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00217300",
-    "va": "0x00217300",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:33:01",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00216780",
-    "va": "0x00216780",
+    "symbol": "sub_0031FB10",
+    "va": "0x0031FB10",
     "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 20:32:47",
+    "time": "2026-11-24 12:15:22",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_00216750",
-    "va": "0x00216750",
-    "bytes": "35/35 B"
-  },
-  {
-    "time": "2026-11-23 20:32:33",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00216720",
-    "va": "0x00216720",
+    "symbol": "sub_0031FAE0",
+    "va": "0x0031FAE0",
     "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 20:32:18",
+    "time": "2026-11-24 12:14:58",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_00216370",
-    "va": "0x00216370",
-    "bytes": "57/57 B"
+    "symbol": "sub_0031FAB0",
+    "va": "0x0031FAB0",
+    "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 20:32:04",
+    "time": "2026-11-24 12:14:33",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_00216340",
-    "va": "0x00216340",
-    "bytes": "44/44 B"
+    "symbol": "sub_0031FA80",
+    "va": "0x0031FA80",
+    "bytes": "37/37 B"
   },
   {
-    "time": "2026-11-23 20:31:50",
+    "time": "2026-11-24 12:14:08",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_00216100",
-    "va": "0x00216100",
-    "bytes": "26/26 B"
+    "symbol": "sub_0031F910",
+    "va": "0x0031F910",
+    "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 20:31:36",
+    "time": "2026-11-24 12:13:43",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_002160F0",
-    "va": "0x002160F0",
-    "bytes": "16/16 B"
+    "symbol": "sub_0031F8E0",
+    "va": "0x0031F8E0",
+    "bytes": "37/37 B"
   },
   {
-    "time": "2026-11-23 20:31:22",
+    "time": "2026-11-24 12:13:17",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_00216060",
-    "va": "0x00216060",
-    "bytes": "11/11 B"
-  },
-  {
-    "time": "2026-11-23 20:31:08",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00216010",
-    "va": "0x00216010",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:30:54",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00215EE0",
-    "va": "0x00215EE0",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 20:30:39",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00215CD0",
-    "va": "0x00215CD0",
-    "bytes": "8/8 B"
-  },
-  {
-    "time": "2026-11-23 20:30:25",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00212ED0",
-    "va": "0x00212ED0",
-    "bytes": "23/23 B"
-  },
-  {
-    "time": "2026-11-23 20:30:11",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "5 look-alike(s) of ParticleEffectTemplate::vfunc_10",
-    "va": "0x001FC110",
+    "symbol": "1 look-alike(s) of sub_0031F200",
+    "va": "0x0031F200",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-23 20:29:57",
+    "time": "2026-11-24 12:12:53",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_00212EC0",
-    "va": "0x00212EC0",
-    "bytes": "15/15 B"
+    "symbol": "sub_0031F200",
+    "va": "0x0031F200",
+    "bytes": "29/29 B"
   },
   {
-    "time": "2026-11-23 20:29:43",
+    "time": "2026-11-24 12:12:28",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001FEC40",
-    "va": "0x001FEC40",
-    "bytes": "13/13 B"
+    "symbol": "sub_0031EF50",
+    "va": "0x0031EF50",
+    "bytes": "37/37 B"
   },
   {
-    "time": "2026-11-23 20:29:29",
+    "time": "2026-11-24 12:12:04",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "ParticleEffectTemplate::vfunc_10",
-    "va": "0x001FC110",
+    "symbol": "sub_0031EF10",
+    "va": "0x0031EF10",
+    "bytes": "42/42 B"
+  },
+  {
+    "time": "2026-11-24 12:11:34",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0031B620",
+    "va": "0x0031B620",
+    "bytes": "37/37 B"
+  },
+  {
+    "time": "2026-11-24 12:11:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0031AC00",
+    "va": "0x0031AC00",
+    "bytes": "32/32 B"
+  },
+  {
+    "time": "2026-11-24 12:10:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0031A280",
+    "va": "0x0031A280",
+    "bytes": "32/32 B"
+  },
+  {
+    "time": "2026-11-24 12:10:15",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_003195E0",
+    "va": "0x003195E0",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 12:09:50",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00319400",
+    "va": "0x00319400",
     "bytes": "20/20 B"
   },
   {
-    "time": "2026-11-23 20:29:14",
+    "time": "2026-11-24 12:09:26",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001F8490",
-    "va": "0x001F8490",
-    "bytes": "9/9 B"
-  },
-  {
-    "time": "2026-11-23 20:29:00",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001F8480",
-    "va": "0x001F8480",
-    "bytes": "9/9 B"
-  },
-  {
-    "time": "2026-11-23 20:28:46",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of MeleeWeaponStateProp::vfunc_67",
-    "va": "0x001EF0A0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:28:32",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "MeleeWeaponStateProp::vfunc_67",
-    "va": "0x001EF0A0",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:28:18",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EEEC0",
-    "va": "0x001EEEC0",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 20:28:03",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EA850",
-    "va": "0x001EA850",
-    "bytes": "8/8 B"
-  },
-  {
-    "time": "2026-11-23 20:27:49",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001E5360",
-    "va": "0x001E5360",
-    "bytes": "8/8 B"
-  },
-  {
-    "time": "2026-11-23 20:27:35",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001E4640",
-    "va": "0x001E4640",
-    "bytes": "15/15 B"
-  },
-  {
-    "time": "2026-11-23 20:27:20",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001DFC90",
-    "va": "0x001DFC90",
-    "bytes": "9/9 B"
-  },
-  {
-    "time": "2026-11-23 20:27:06",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001D8F40",
-    "va": "0x001D8F40",
-    "bytes": "6/6 B"
-  },
-  {
-    "time": "2026-11-23 20:26:52",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001D8F20",
-    "va": "0x001D8F20",
+    "symbol": "sub_003193E0",
+    "va": "0x003193E0",
     "bytes": "20/20 B"
   },
   {
-    "time": "2026-11-23 20:26:37",
+    "time": "2026-11-24 12:09:00",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001D81B0",
-    "va": "0x001D81B0",
-    "bytes": "54/54 B"
+    "symbol": "sub_00318C00",
+    "va": "0x00318C00",
+    "bytes": "32/32 B"
   },
   {
-    "time": "2026-11-23 20:26:23",
+    "time": "2026-11-24 12:08:30",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "TapeTrackLibrary::vfunc_01",
-    "va": "0x001D7940",
-    "bytes": "14/14 B"
+    "symbol": "sub_00316950",
+    "va": "0x00316950",
+    "bytes": "37/37 B"
   },
   {
-    "time": "2026-11-23 20:26:09",
+    "time": "2026-11-24 12:08:05",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001D2190",
-    "va": "0x001D2190",
-    "bytes": "18/18 B"
+    "symbol": "sub_003168D0",
+    "va": "0x003168D0",
+    "bytes": "37/37 B"
   },
   {
-    "time": "2026-11-23 20:25:54",
+    "time": "2026-11-24 12:07:41",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001CE0A0",
-    "va": "0x001CE0A0",
-    "bytes": "22/22 B"
+    "symbol": "sub_003168A0",
+    "va": "0x003168A0",
+    "bytes": "37/37 B"
   },
   {
-    "time": "2026-11-23 20:25:40",
+    "time": "2026-11-24 12:07:15",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "2 look-alike(s) of PauseMenuPageMain::vfunc_45",
-    "va": "0x001CC0E0",
+    "symbol": "sub_003164C0",
+    "va": "0x003164C0",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 12:06:51",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_00316340",
+    "va": "0x00316340",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-23 20:25:27",
+    "time": "2026-11-24 12:06:28",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "PauseMenuPageRewards::PauseMenuPageCheatItem::vfunc_04",
-    "va": "0x001CD050",
-    "bytes": "8/8 B"
+    "symbol": "sub_00316340",
+    "va": "0x00316340",
+    "bytes": "29/29 B"
   },
   {
-    "time": "2026-11-23 20:25:12",
+    "time": "2026-11-24 12:06:02",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "PauseMenuPageMain::vfunc_45",
-    "va": "0x001CC0E0",
-    "bytes": "18/18 B"
+    "symbol": "sub_00315F10",
+    "va": "0x00315F10",
+    "bytes": "67/67 B"
   },
   {
-    "time": "2026-11-23 20:24:57",
+    "time": "2026-11-24 12:05:37",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "PauseMenuPage::vfunc_01",
-    "va": "0x001CA890",
-    "bytes": "12/12 B"
+    "symbol": "sub_003155C0",
+    "va": "0x003155C0",
+    "bytes": "29/29 B"
   },
   {
-    "time": "2026-11-23 20:24:43",
+    "time": "2026-11-24 12:05:13",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "PauseMenuPage::vfunc_00",
-    "va": "0x001CA880",
-    "bytes": "12/12 B"
+    "symbol": "sub_003154F0",
+    "va": "0x003154F0",
+    "bytes": "37/37 B"
   },
   {
-    "time": "2026-11-23 20:24:29",
+    "time": "2026-11-24 12:04:48",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of CScript::Method0<int>::vfunc_00",
-    "va": "0x001C88E0",
-    "bytes": "same code, own addresses"
+    "symbol": "sub_003154C0",
+    "va": "0x003154C0",
+    "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 20:24:15",
+    "time": "2026-11-24 12:04:23",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "CScript::Method0<int>::vfunc_00",
-    "va": "0x001C88E0",
-    "bytes": "18/18 B"
+    "symbol": "sub_003152B0",
+    "va": "0x003152B0",
+    "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 20:24:01",
+    "time": "2026-11-24 12:03:58",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001C87D0",
-    "va": "0x001C87D0",
-    "bytes": "38/38 B"
+    "symbol": "sub_00315230",
+    "va": "0x00315230",
+    "bytes": "20/20 B"
   },
   {
-    "time": "2026-11-23 20:23:46",
+    "time": "2026-11-24 12:03:33",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001C8760",
-    "va": "0x001C8760",
+    "symbol": "sub_00314F00",
+    "va": "0x00314F00",
+    "bytes": "37/37 B"
+  },
+  {
+    "time": "2026-11-24 12:03:08",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00314D50",
+    "va": "0x00314D50",
+    "bytes": "37/37 B"
+  },
+  {
+    "time": "2026-11-24 12:02:44",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00314C60",
+    "va": "0x00314C60",
+    "bytes": "37/37 B"
+  },
+  {
+    "time": "2026-11-24 12:02:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00314C30",
+    "va": "0x00314C30",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 12:01:54",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_003149C0",
+    "va": "0x003149C0",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 12:01:29",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_003145B0",
+    "va": "0x003145B0",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 12:01:02",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_003138B0",
+    "va": "0x003138B0",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 12:00:38",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00313840",
+    "va": "0x00313840",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 12:00:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_003132B0",
+    "va": "0x003132B0",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 11:59:47",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00313000",
+    "va": "0x00313000",
+    "bytes": "37/37 B"
+  },
+  {
+    "time": "2026-11-24 11:59:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00312D10",
+    "va": "0x00312D10",
+    "bytes": "20/20 B"
+  },
+  {
+    "time": "2026-11-24 11:58:57",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00312800",
+    "va": "0x00312800",
+    "bytes": "37/37 B"
+  },
+  {
+    "time": "2026-11-24 11:58:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_003127D0",
+    "va": "0x003127D0",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 11:58:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_003127A0",
+    "va": "0x003127A0",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 11:57:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00312500",
+    "va": "0x00312500",
+    "bytes": "29/29 B"
+  },
+  {
+    "time": "2026-11-24 11:57:18",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00312370",
+    "va": "0x00312370",
+    "bytes": "37/37 B"
+  },
+  {
+    "time": "2026-11-24 11:56:53",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00312130",
+    "va": "0x00312130",
+    "bytes": "40/40 B"
+  },
+  {
+    "time": "2026-11-24 11:56:28",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00311D10",
+    "va": "0x00311D10",
+    "bytes": "37/37 B"
+  },
+  {
+    "time": "2026-11-24 11:56:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00311A90",
+    "va": "0x00311A90",
     "bytes": "41/41 B"
   },
   {
-    "time": "2026-11-23 20:23:33",
+    "time": "2026-11-24 11:55:31",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001C8720",
-    "va": "0x001C8720",
+    "symbol": "sub_00311860",
+    "va": "0x00311860",
+    "bytes": "20/20 B"
+  },
+  {
+    "time": "2026-11-24 11:55:06",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002C2990",
+    "va": "0x002C2990",
+    "bytes": "136/136 B"
+  },
+  {
+    "time": "2026-11-24 11:54:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002C1E00",
+    "va": "0x002C1E00",
+    "bytes": "141/141 B"
+  },
+  {
+    "time": "2026-11-24 11:54:18",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002A55E0",
+    "va": "0x002A55E0",
+    "bytes": "148/148 B"
+  },
+  {
+    "time": "2026-11-24 11:53:53",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::BoneMatrixList::vfunc_03",
+    "va": "0x00292CF0",
+    "bytes": "80/80 B"
+  },
+  {
+    "time": "2026-11-24 11:53:29",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::Language::vfunc_03",
+    "va": "0x0028E580",
+    "bytes": "71/71 B"
+  },
+  {
+    "time": "2026-11-24 11:53:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::AnimationMemoryBlock::vfunc_03",
+    "va": "0x002757F0",
+    "bytes": "62/62 B"
+  },
+  {
+    "time": "2026-11-24 11:52:40",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::Expression::vfunc_03",
+    "va": "0x0026F860",
+    "bytes": "62/62 B"
+  },
+  {
+    "time": "2026-11-24 11:52:16",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::Ocean::vfunc_03",
+    "va": "0x00260F70",
+    "bytes": "84/84 B"
+  },
+  {
+    "time": "2026-11-24 11:51:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_0025DB70",
+    "va": "0x0025DB70",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-23 20:23:19",
+    "time": "2026-11-24 11:51:28",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001C8720",
-    "va": "0x001C8720",
+    "symbol": "sub_0025DB70",
+    "va": "0x0025DB70",
+    "bytes": "92/92 B"
+  },
+  {
+    "time": "2026-11-24 11:51:03",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::ShadowSkinTopology::vfunc_03",
+    "va": "0x002580B0",
+    "bytes": "71/71 B"
+  },
+  {
+    "time": "2026-11-24 11:50:39",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_00257AD0",
+    "va": "0x00257AD0",
+    "bytes": "72/72 B"
+  },
+  {
+    "time": "2026-11-24 11:50:15",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of pure3d::ShadowMeshVertices::vfunc_03",
+    "va": "0x002579C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 11:49:51",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "pure3d::ShadowMeshVertices::vfunc_03",
+    "va": "0x002579C0",
+    "bytes": "62/62 B"
+  },
+  {
+    "time": "2026-11-24 11:49:26",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002530A0",
+    "va": "0x002530A0",
+    "bytes": "137/137 B"
+  },
+  {
+    "time": "2026-11-24 11:49:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002492A0",
+    "va": "0x002492A0",
+    "bytes": "59/59 B"
+  },
+  {
+    "time": "2026-11-24 11:48:38",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002491C0",
+    "va": "0x002491C0",
+    "bytes": "127/127 B"
+  },
+  {
+    "time": "2026-11-24 11:48:13",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0023DC00",
+    "va": "0x0023DC00",
+    "bytes": "137/137 B"
+  },
+  {
+    "time": "2026-11-24 11:47:49",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0023DB70",
+    "va": "0x0023DB70",
+    "bytes": "135/135 B"
+  },
+  {
+    "time": "2026-11-24 11:47:24",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002306E0",
+    "va": "0x002306E0",
+    "bytes": "47/47 B"
+  },
+  {
+    "time": "2026-11-24 11:46:59",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0020EDB0",
+    "va": "0x0020EDB0",
+    "bytes": "29/29 B"
+  },
+  {
+    "time": "2026-11-24 11:46:35",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_0020C270",
+    "va": "0x0020C270",
+    "bytes": "53/53 B"
+  },
+  {
+    "time": "2026-11-24 11:46:11",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_001EA4F0",
+    "va": "0x001EA4F0",
     "bytes": "58/58 B"
   },
   {
-    "time": "2026-11-23 20:23:05",
+    "time": "2026-11-24 11:45:46",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001C86F0",
-    "va": "0x001C86F0",
-    "bytes": "38/38 B"
+    "symbol": "sub_001EA1A0",
+    "va": "0x001EA1A0",
+    "bytes": "16/16 B"
   },
   {
-    "time": "2026-11-23 20:22:50",
+    "time": "2026-11-24 11:45:22",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001C45F0",
-    "va": "0x001C45F0",
-    "bytes": "14/14 B"
+    "symbol": "sub_001E5950",
+    "va": "0x001E5950",
+    "bytes": "64/64 B"
   },
   {
-    "time": "2026-11-23 20:22:36",
+    "time": "2026-11-24 11:44:57",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001C32E0",
-    "va": "0x001C32E0",
-    "bytes": "30/30 B"
+    "symbol": "sub_001E5600",
+    "va": "0x001E5600",
+    "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 20:22:22",
+    "time": "2026-11-24 11:44:33",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001C26A0",
-    "va": "0x001C26A0",
-    "bytes": "22/22 B"
+    "symbol": "7 look-alike(s) of sub_001E2420",
+    "va": "0x001E2420",
+    "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-23 20:22:08",
+    "time": "2026-11-24 11:44:09",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001C0F60",
-    "va": "0x001C0F60",
-    "bytes": "20/20 B"
+    "symbol": "sub_001E5220",
+    "va": "0x001E5220",
+    "bytes": "35/35 B"
   },
   {
-    "time": "2026-11-23 20:21:54",
+    "time": "2026-11-24 11:43:44",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001BF180",
-    "va": "0x001BF180",
-    "bytes": "19/19 B"
+    "symbol": "sub_001E2420",
+    "va": "0x001E2420",
+    "bytes": "24/24 B"
   },
   {
-    "time": "2026-11-23 20:21:40",
+    "time": "2026-11-24 11:43:19",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001BF100",
-    "va": "0x001BF100",
-    "bytes": "19/19 B"
-  },
-  {
-    "time": "2026-11-23 20:21:25",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001BE7B0",
-    "va": "0x001BE7B0",
+    "symbol": "sub_001BF620",
+    "va": "0x001BF620",
     "bytes": "98/98 B"
   },
   {
-    "time": "2026-11-23 20:21:11",
+    "time": "2026-11-24 11:42:55",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001BE340",
-    "va": "0x001BE340",
+    "symbol": "sub_001BD740",
+    "va": "0x001BD740",
     "bytes": "41/41 B"
   },
   {
-    "time": "2026-11-23 20:20:57",
+    "time": "2026-11-24 11:42:30",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001BD720",
-    "va": "0x001BD720",
-    "bytes": "25/25 B"
+    "symbol": "sub_001BD6D0",
+    "va": "0x001BD6D0",
+    "bytes": "46/46 B"
   },
   {
-    "time": "2026-11-23 20:20:42",
+    "time": "2026-11-24 11:42:06",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001BD460",
-    "va": "0x001BD460",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 20:20:28",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001BCAB0",
-    "va": "0x001BCAB0",
-    "bytes": "36/36 B"
-  },
-  {
-    "time": "2026-11-23 20:20:14",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001BB360",
-    "va": "0x001BB360",
+    "symbol": "1 look-alike(s) of sub_002F8100",
+    "va": "Proto 0x002F8100",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-23 20:20:00",
+    "time": "2026-11-24 11:41:42",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001BB360",
-    "va": "0x001BB360",
-    "bytes": "17/17 B"
+    "symbol": "sub_002F8100",
+    "va": "Proto 0x002F8100",
+    "bytes": "74/74 B"
   },
   {
-    "time": "2026-11-23 20:19:45",
+    "time": "2026-11-24 11:41:18",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "GenericWeaponHUD::GenericWeaponHUDMenuItem::vfunc_04",
-    "va": "0x001B7070",
-    "bytes": "8/8 B"
-  },
-  {
-    "time": "2026-11-23 20:19:31",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "3 look-alike(s) of HUDTrackable::vfunc_37",
-    "va": "0x001A2BA0",
+    "symbol": "2 look-alike(s) of sub_002F77F0",
+    "va": "Proto 0x002F77F0",
     "bytes": "same code, own addresses"
   },
   {
-    "time": "2026-11-23 20:19:18",
+    "time": "2026-11-24 11:40:53",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001ADAF0",
-    "va": "0x001ADAF0",
+    "symbol": "1 look-alike(s) of sub_002F4860",
+    "va": "Proto 0x002F4860",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 11:40:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002F2CF0",
+    "va": "Proto 0x002F2CF0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 11:40:06",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F7940",
+    "va": "Proto 0x002F7940",
+    "bytes": "20/20 B"
+  },
+  {
+    "time": "2026-11-24 11:39:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of sub_002F2880",
+    "va": "Proto 0x002F2880",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 11:39:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002F27C0",
+    "va": "Proto 0x002F27C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 11:38:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002F1750",
+    "va": "Proto 0x002F1750",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 11:38:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of sub_002F11F0",
+    "va": "Proto 0x002F11F0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 11:38:06",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "3 look-alike(s) of sub_002F1130",
+    "va": "Proto 0x002F1130",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 11:37:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F7840",
+    "va": "Proto 0x002F7840",
+    "bytes": "33/33 B"
+  },
+  {
+    "time": "2026-11-24 11:37:18",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F77F0",
+    "va": "Proto 0x002F77F0",
+    "bytes": "33/33 B"
+  },
+  {
+    "time": "2026-11-24 11:36:54",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of sub_002F09B0",
+    "va": "Proto 0x002F09B0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 11:36:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "657 look-alike(s) of sub_002F0930",
+    "va": "Proto 0x002F0930",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 11:33:59",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F4860",
+    "va": "Proto 0x002F4860",
     "bytes": "26/26 B"
   },
   {
-    "time": "2026-11-23 20:19:03",
+    "time": "2026-11-24 11:33:02",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "HUDTrackable::vfunc_37",
-    "va": "0x001A2BA0",
-    "bytes": "20/20 B"
+    "symbol": "sub_002F36C0",
+    "va": "Proto 0x002F36C0",
+    "bytes": "26/26 B"
   },
   {
-    "time": "2026-11-23 20:18:49",
+    "time": "2026-11-24 11:32:15",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_0019D420",
-    "va": "0x0019D420",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 20:18:35",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001972C0",
-    "va": "0x001972C0",
-    "bytes": "19/19 B"
-  },
-  {
-    "time": "2026-11-23 20:18:21",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00197210",
-    "va": "0x00197210",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 20:18:07",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of GenericMenuClient::vfunc_01",
-    "va": "0x00197070",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:17:53",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "GenericMenuClient::vfunc_01",
-    "va": "0x00197070",
-    "bytes": "8/8 B"
-  },
-  {
-    "time": "2026-11-23 20:17:39",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "ExoticsHUD2::ExoticsHUDMenuItem::vfunc_04",
-    "va": "0x00197060",
-    "bytes": "9/9 B"
-  },
-  {
-    "time": "2026-11-23 20:17:24",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00193140",
-    "va": "0x00193140",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 20:17:10",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of ExoticsHUD2::vfunc_35",
-    "va": "0x001911B0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:16:56",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "ExoticsHUD2::vfunc_35",
-    "va": "0x001911B0",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:16:41",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0018F0B0",
-    "va": "0x0018F0B0",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 20:16:27",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "GenericBarMeter::vfunc_11",
-    "va": "0x0018F090",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 20:16:13",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "GameOverHUD::vfunc_42",
-    "va": "0x0018E1F0",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:15:58",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of fight::ParamName<Animation360Track>::vfunc_06",
-    "va": "0x00186E80",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:15:44",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "fight::ParamName<Animation360Track>::vfunc_06",
-    "va": "0x00186E80",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 20:15:29",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0017DA40",
-    "va": "0x0017DA40",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 20:15:14",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of CScript::Method0<bool>::vfunc_00",
-    "va": "0x00179150",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:15:00",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "CScript::Method0<bool>::vfunc_00",
-    "va": "0x00179150",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:14:45",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00178690",
-    "va": "0x00178690",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:14:31",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00164980",
-    "va": "0x00164980",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-23 20:14:16",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00163550",
-    "va": "0x00163550",
-    "bytes": "16/16 B"
-  },
-  {
-    "time": "2026-11-23 20:14:02",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001631A0",
-    "va": "0x001631A0",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-23 20:13:48",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00162630",
-    "va": "0x00162630",
-    "bytes": "11/11 B"
-  },
-  {
-    "time": "2026-11-23 20:13:34",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "4 look-alike(s) of sub_0015C840",
-    "va": "0x0015C840",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:13:19",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0015C840",
-    "va": "0x0015C840",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 20:13:05",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001527E0",
-    "va": "0x001527E0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:12:51",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001527E0",
-    "va": "0x001527E0",
-    "bytes": "16/16 B"
-  },
-  {
-    "time": "2026-11-23 20:12:37",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0013DC70",
-    "va": "0x0013DC70",
-    "bytes": "21/21 B"
-  },
-  {
-    "time": "2026-11-23 20:12:23",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of AICommandWaits::Wait_AnimationPriority::vfunc_01",
-    "va": "0x001382D0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:12:09",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "AICommandWaits::Wait_AnimationPriority::vfunc_01",
-    "va": "0x001382D0",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:11:54",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00134480",
-    "va": "0x00134480",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-23 20:11:40",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of AIActionAimAt::vfunc_07",
-    "va": "0x00120A80",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:11:26",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "AIActionAimAt::vfunc_07",
-    "va": "0x00120A80",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:11:12",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of AIActionAimAt::vfunc_02",
-    "va": "0x00120A60",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:10:58",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "AIActionAimAt::vfunc_02",
-    "va": "0x00120A60",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:10:44",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of AIActionMoveTowards::vfunc_07",
-    "va": "0x00120A00",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:10:30",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "AIActionMoveTowards::vfunc_07",
-    "va": "0x00120A00",
-    "bytes": "20/20 B"
-  },
-  {
-    "time": "2026-11-23 20:10:15",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "AIActionCustomLogicalEffect::vfunc_03",
-    "va": "0x00120910",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 20:10:01",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of AIActionSkipIfFail::vfunc_01",
-    "va": "0x00120040",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:09:47",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "AIActionSkipIfFail::vfunc_01",
-    "va": "0x00120040",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:09:32",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0011CB30",
-    "va": "0x0011CB30",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:09:18",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of CScript::Method1<void, const char*>::vfunc_00",
-    "va": "0x0011BC20",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:09:03",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "CScript::Method1<void, const char*>::vfunc_00",
-    "va": "0x0011BC20",
-    "bytes": "20/20 B"
-  },
-  {
-    "time": "2026-11-23 20:08:48",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of CScript::Method1<void, int>::vfunc_00",
-    "va": "0x0011BB60",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:08:34",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "CScript::Method1<void, int>::vfunc_00",
-    "va": "0x0011BB60",
-    "bytes": "20/20 B"
-  },
-  {
-    "time": "2026-11-23 20:08:20",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00119920",
-    "va": "0x00119920",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-23 20:08:06",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00115C20",
-    "va": "0x00115C20",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:07:52",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00115C20",
-    "va": "0x00115C20",
-    "bytes": "20/20 B"
-  },
-  {
-    "time": "2026-11-23 20:07:36",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00106780",
-    "va": "0x00106780",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:07:20",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00106780",
-    "va": "0x00106780",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-23 20:07:04",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000EC800",
-    "va": "0x000EC800",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 20:06:48",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000EC730",
-    "va": "0x000EC730",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:06:32",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000EC710",
-    "va": "0x000EC710",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:06:15",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000EC6F0",
-    "va": "0x000EC6F0",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:05:59",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000EA570",
-    "va": "0x000EA570",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:05:42",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000EA550",
-    "va": "0x000EA550",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:05:26",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of fight::ParamEnum<SoundPlayTrack>::vfunc_06",
-    "va": "0x000E9F80",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:05:10",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "fight::ParamEnum<SoundPlayTrack>::vfunc_06",
-    "va": "0x000E9F80",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 20:04:54",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000E99C0",
-    "va": "0x000E99C0",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:04:40",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000D84C0",
-    "va": "0x000D84C0",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-23 20:04:25",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000D8070",
-    "va": "0x000D8070",
-    "bytes": "21/21 B"
-  },
-  {
-    "time": "2026-11-23 20:04:10",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000D8050",
-    "va": "0x000D8050",
-    "bytes": "19/19 B"
-  },
-  {
-    "time": "2026-11-23 20:03:56",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000CBC70",
-    "va": "0x000CBC70",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:03:41",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000B83A0",
-    "va": "0x000B83A0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:03:26",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000B83A0",
-    "va": "0x000B83A0",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:03:10",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000B8390",
-    "va": "0x000B8390",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:02:57",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000B8390",
-    "va": "0x000B8390",
-    "bytes": "16/16 B"
-  },
-  {
-    "time": "2026-11-23 20:02:42",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of WheelCollisionCalculator::vfunc_00",
-    "va": "0x000B2080",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:02:28",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "WheelCollisionCalculator::vfunc_00",
-    "va": "0x000B2080",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:02:13",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000AB050",
-    "va": "0x000AB050",
-    "bytes": "18/18 B"
-  },
-  {
-    "time": "2026-11-23 20:01:59",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000A82E0",
-    "va": "0x000A82E0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:01:44",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000A82E0",
-    "va": "0x000A82E0",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 20:01:30",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00099AC0",
-    "va": "0x00099AC0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:01:16",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00099AC0",
-    "va": "0x00099AC0",
-    "bytes": "20/20 B"
-  },
-  {
-    "time": "2026-11-23 20:01:01",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00099920",
-    "va": "0x00099920",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:00:47",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00099920",
-    "va": "0x00099920",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 20:00:33",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00093330",
-    "va": "0x00093330",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 20:00:18",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00093320",
-    "va": "0x00093320",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 20:00:04",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00093320",
-    "va": "0x00093320",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 19:59:49",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000930C0",
-    "va": "0x000930C0",
-    "bytes": "13/13 B"
-  },
-  {
-    "time": "2026-11-23 19:59:35",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00077C50",
-    "va": "0x00077C50",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:59:21",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00077C50",
-    "va": "0x00077C50",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 19:59:06",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00073550",
-    "va": "0x00073550",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:58:51",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00073550",
-    "va": "0x00073550",
-    "bytes": "21/21 B"
-  },
-  {
-    "time": "2026-11-23 19:58:37",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of TTagDerefNode::vfunc_04",
-    "va": "0x0006D510",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:58:23",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "TTagDerefNode::vfunc_04",
-    "va": "0x0006D510",
-    "bytes": "8/8 B"
-  },
-  {
-    "time": "2026-11-23 19:58:08",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00063180",
-    "va": "0x00063180",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:57:54",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00063180",
-    "va": "0x00063180",
-    "bytes": "21/21 B"
-  },
-  {
-    "time": "2026-11-23 19:57:39",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00063160",
-    "va": "0x00063160",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:57:25",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00063160",
-    "va": "0x00063160",
-    "bytes": "21/21 B"
-  },
-  {
-    "time": "2026-11-23 19:57:11",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of CementLoadTracker::vfunc_01",
-    "va": "0x00060C80",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:56:56",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "CementLoadTracker::vfunc_01",
-    "va": "0x00060C80",
-    "bytes": "20/20 B"
-  },
-  {
-    "time": "2026-11-23 19:56:42",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "renderer::PlugInRenderable::vfunc_11",
-    "va": "0x00055C20",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 19:56:28",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00053400",
-    "va": "0x00053400",
-    "bytes": "16/16 B"
-  },
-  {
-    "time": "2026-11-23 19:56:14",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of CScript::Method0<void>::vfunc_00",
-    "va": "0x0002D2D0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:55:59",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "CScript::Method0<void>::vfunc_00",
-    "va": "0x0002D2D0",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 19:55:45",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00029420",
-    "va": "0x00029420",
-    "bytes": "21/21 B"
-  },
-  {
-    "time": "2026-11-23 19:55:31",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "audio::WmaDecoderStream::FileBuffer::vfunc_02",
-    "va": "0x00026DA0",
-    "bytes": "19/19 B"
-  },
-  {
-    "time": "2026-11-23 19:55:16",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00025760",
-    "va": "0x00025760",
-    "bytes": "11/11 B"
-  },
-  {
-    "time": "2026-11-23 19:55:01",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00024E20",
-    "va": "0x00024E20",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 19:54:47",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0001EDD0",
-    "va": "0x0001EDD0",
-    "bytes": "20/20 B"
-  },
-  {
-    "time": "2026-11-23 19:54:32",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_0001ED20",
-    "va": "0x0001ED20",
-    "bytes": "20/20 B"
-  },
-  {
-    "time": "2026-11-23 19:54:17",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00018E80",
-    "va": "0x00018E80",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 19:54:03",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_000185A0",
-    "va": "0x000185A0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:53:46",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_000185A0",
-    "va": "0x000185A0",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 19:53:31",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_00013C50",
-    "va": "0x00013C50",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:53:15",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00013C50",
-    "va": "0x00013C50",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 19:52:59",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_00012A40",
-    "va": "0x00012A40",
-    "bytes": "5/5 B"
-  },
-  {
-    "time": "2026-11-23 19:52:44",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001F0F40",
-    "va": "Proto 0x001F0F40",
-    "bytes": "97/97 B"
-  },
-  {
-    "time": "2026-11-23 19:52:28",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001F0BC0",
-    "va": "Proto 0x001F0BC0",
-    "bytes": "48/48 B"
-  },
-  {
-    "time": "2026-11-23 19:52:12",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001F0BA0",
-    "va": "Proto 0x001F0BA0",
-    "bytes": "22/22 B"
-  },
-  {
-    "time": "2026-11-23 19:51:56",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EF910",
-    "va": "Proto 0x001EF910",
-    "bytes": "10/10 B"
-  },
-  {
-    "time": "2026-11-23 19:51:39",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EF8E0",
-    "va": "Proto 0x001EF8E0",
-    "bytes": "39/39 B"
-  },
-  {
-    "time": "2026-11-23 19:51:23",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EF8D0",
-    "va": "Proto 0x001EF8D0",
-    "bytes": "9/9 B"
-  },
-  {
-    "time": "2026-11-23 19:51:07",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001EF820",
-    "va": "Proto 0x001EF820",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:50:51",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EF820",
-    "va": "Proto 0x001EF820",
-    "bytes": "12/12 B"
-  },
-  {
-    "time": "2026-11-23 19:50:34",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001EF1A0",
-    "va": "Proto 0x001EF1A0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:50:18",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EF1A0",
-    "va": "Proto 0x001EF1A0",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 19:50:03",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001EF190",
-    "va": "Proto 0x001EF190",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:49:47",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EF190",
-    "va": "Proto 0x001EF190",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 19:49:31",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EF160",
-    "va": "Proto 0x001EF160",
-    "bytes": "28/28 B"
-  },
-  {
-    "time": "2026-11-23 19:49:16",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EF050",
-    "va": "Proto 0x001EF050",
-    "bytes": "17/17 B"
-  },
-  {
-    "time": "2026-11-23 19:49:00",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001EF040",
-    "va": "Proto 0x001EF040",
-    "bytes": "14/14 B"
-  },
-  {
-    "time": "2026-11-23 19:48:43",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001ED3B0",
-    "va": "Proto 0x001ED3B0",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:48:28",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001ED3B0",
-    "va": "Proto 0x001ED3B0",
+    "symbol": "sub_002F3490",
+    "va": "Proto 0x002F3490",
     "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 19:48:12",
+    "time": "2026-11-24 11:31:51",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001ED370",
-    "va": "Proto 0x001ED370",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-23 19:47:57",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_001ED370",
-    "va": "Proto 0x001ED370",
+    "symbol": "sub_002F3450",
+    "va": "Proto 0x002F3450",
     "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 19:47:41",
+    "time": "2026-11-24 11:31:28",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001ECCC0",
-    "va": "Proto 0x001ECCC0",
-    "bytes": "same code, own addresses"
+    "symbol": "sub_002F3410",
+    "va": "Proto 0x002F3410",
+    "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 19:47:26",
+    "time": "2026-11-24 11:31:04",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001ECCC0",
-    "va": "Proto 0x001ECCC0",
-    "bytes": "18/18 B"
+    "symbol": "sub_002F33D0",
+    "va": "Proto 0x002F33D0",
+    "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 19:47:11",
+    "time": "2026-11-24 11:30:40",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001ECCB0",
-    "va": "Proto 0x001ECCB0",
-    "bytes": "same code, own addresses"
+    "symbol": "sub_002F3390",
+    "va": "Proto 0x002F3390",
+    "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 19:46:56",
+    "time": "2026-11-24 11:30:17",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001ECCB0",
-    "va": "Proto 0x001ECCB0",
-    "bytes": "13/13 B"
+    "symbol": "sub_002F3350",
+    "va": "Proto 0x002F3350",
+    "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 19:46:40",
+    "time": "2026-11-24 11:29:53",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001ECC80",
-    "va": "Proto 0x001ECC80",
-    "bytes": "same code, own addresses"
+    "symbol": "sub_002F3310",
+    "va": "Proto 0x002F3310",
+    "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 19:46:25",
+    "time": "2026-11-24 11:29:30",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001ECC80",
-    "va": "Proto 0x001ECC80",
+    "symbol": "sub_002F32D0",
+    "va": "Proto 0x002F32D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:29:06",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F3290",
+    "va": "Proto 0x002F3290",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:28:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F3250",
+    "va": "Proto 0x002F3250",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:28:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F3210",
+    "va": "Proto 0x002F3210",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:27:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F31D0",
+    "va": "Proto 0x002F31D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:27:31",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F3190",
+    "va": "Proto 0x002F3190",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:27:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F3150",
+    "va": "Proto 0x002F3150",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:26:44",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F3110",
+    "va": "Proto 0x002F3110",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:26:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F30D0",
+    "va": "Proto 0x002F30D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:25:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F3000",
+    "va": "Proto 0x002F3000",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:25:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2F80",
+    "va": "Proto 0x002F2F80",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:25:09",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2EC0",
+    "va": "Proto 0x002F2EC0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:24:45",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2E80",
+    "va": "Proto 0x002F2E80",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:24:21",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2E40",
+    "va": "Proto 0x002F2E40",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:23:58",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2E00",
+    "va": "Proto 0x002F2E00",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:23:34",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2DC0",
+    "va": "Proto 0x002F2DC0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:23:11",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2D80",
+    "va": "Proto 0x002F2D80",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:22:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2D40",
+    "va": "Proto 0x002F2D40",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:22:23",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2CF0",
+    "va": "Proto 0x002F2CF0",
+    "bytes": "68/68 B"
+  },
+  {
+    "time": "2026-11-24 11:22:00",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2CB0",
+    "va": "Proto 0x002F2CB0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:21:36",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2C70",
+    "va": "Proto 0x002F2C70",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:21:13",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2C30",
+    "va": "Proto 0x002F2C30",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:20:49",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2BF0",
+    "va": "Proto 0x002F2BF0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:20:26",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2BB0",
+    "va": "Proto 0x002F2BB0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:20:02",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2B70",
+    "va": "Proto 0x002F2B70",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:19:38",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2B30",
+    "va": "Proto 0x002F2B30",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:19:15",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2AF0",
+    "va": "Proto 0x002F2AF0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:18:51",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2AB0",
+    "va": "Proto 0x002F2AB0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:18:28",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2A70",
+    "va": "Proto 0x002F2A70",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:18:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2A30",
+    "va": "Proto 0x002F2A30",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:17:41",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F29F0",
+    "va": "Proto 0x002F29F0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:17:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F29B0",
+    "va": "Proto 0x002F29B0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:16:53",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2970",
+    "va": "Proto 0x002F2970",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:16:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2930",
+    "va": "Proto 0x002F2930",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:16:06",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F28F0",
+    "va": "Proto 0x002F28F0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:15:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F28B0",
+    "va": "Proto 0x002F28B0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:15:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2880",
+    "va": "Proto 0x002F2880",
+    "bytes": "37/37 B"
+  },
+  {
+    "time": "2026-11-24 11:14:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2840",
+    "va": "Proto 0x002F2840",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:14:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F27C0",
+    "va": "Proto 0x002F27C0",
+    "bytes": "58/58 B"
+  },
+  {
+    "time": "2026-11-24 11:14:09",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2750",
+    "va": "Proto 0x002F2750",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:13:45",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2710",
+    "va": "Proto 0x002F2710",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:13:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F26D0",
+    "va": "Proto 0x002F26D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:12:58",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2690",
+    "va": "Proto 0x002F2690",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:12:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2650",
+    "va": "Proto 0x002F2650",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:11:48",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2610",
+    "va": "Proto 0x002F2610",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:11:25",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F25D0",
+    "va": "Proto 0x002F25D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:11:02",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2590",
+    "va": "Proto 0x002F2590",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:10:38",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2550",
+    "va": "Proto 0x002F2550",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:10:15",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2510",
+    "va": "Proto 0x002F2510",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:09:52",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F24D0",
+    "va": "Proto 0x002F24D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:09:28",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2490",
+    "va": "Proto 0x002F2490",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:09:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2450",
+    "va": "Proto 0x002F2450",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:08:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2410",
+    "va": "Proto 0x002F2410",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:08:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F23D0",
+    "va": "Proto 0x002F23D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:07:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2390",
+    "va": "Proto 0x002F2390",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:07:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2350",
+    "va": "Proto 0x002F2350",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:07:09",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2310",
+    "va": "Proto 0x002F2310",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:06:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F22D0",
+    "va": "Proto 0x002F22D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:06:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2290",
+    "va": "Proto 0x002F2290",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:05:37",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2250",
+    "va": "Proto 0x002F2250",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:05:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2210",
+    "va": "Proto 0x002F2210",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:04:51",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F21D0",
+    "va": "Proto 0x002F21D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:04:28",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2190",
+    "va": "Proto 0x002F2190",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:04:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2150",
+    "va": "Proto 0x002F2150",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:03:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2110",
+    "va": "Proto 0x002F2110",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:03:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F20D0",
+    "va": "Proto 0x002F20D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:02:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2090",
+    "va": "Proto 0x002F2090",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:02:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2050",
+    "va": "Proto 0x002F2050",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:02:09",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F2010",
+    "va": "Proto 0x002F2010",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:01:46",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1FD0",
+    "va": "Proto 0x002F1FD0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:01:24",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1F90",
+    "va": "Proto 0x002F1F90",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:01:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1F50",
+    "va": "Proto 0x002F1F50",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:00:38",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1F10",
+    "va": "Proto 0x002F1F10",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 11:00:15",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1ED0",
+    "va": "Proto 0x002F1ED0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:59:29",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1E90",
+    "va": "Proto 0x002F1E90",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:59:06",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1E50",
+    "va": "Proto 0x002F1E50",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:58:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1E10",
+    "va": "Proto 0x002F1E10",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:58:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1DD0",
+    "va": "Proto 0x002F1DD0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:57:57",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1D90",
+    "va": "Proto 0x002F1D90",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:57:35",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1D50",
+    "va": "Proto 0x002F1D50",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:57:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1D10",
+    "va": "Proto 0x002F1D10",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:56:49",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1CD0",
+    "va": "Proto 0x002F1CD0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:56:26",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1C90",
+    "va": "Proto 0x002F1C90",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:56:03",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1C50",
+    "va": "Proto 0x002F1C50",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:55:40",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1C10",
+    "va": "Proto 0x002F1C10",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:55:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1BD0",
+    "va": "Proto 0x002F1BD0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:54:54",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1B90",
+    "va": "Proto 0x002F1B90",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:54:30",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1B50",
+    "va": "Proto 0x002F1B50",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:54:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1B10",
+    "va": "Proto 0x002F1B10",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:53:44",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1AD0",
+    "va": "Proto 0x002F1AD0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:53:21",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1A90",
+    "va": "Proto 0x002F1A90",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:52:59",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1A50",
+    "va": "Proto 0x002F1A50",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:52:14",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1A10",
+    "va": "Proto 0x002F1A10",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:51:50",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F19D0",
+    "va": "Proto 0x002F19D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:51:27",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1990",
+    "va": "Proto 0x002F1990",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:51:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1950",
+    "va": "Proto 0x002F1950",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:50:41",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1910",
+    "va": "Proto 0x002F1910",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:50:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F18D0",
+    "va": "Proto 0x002F18D0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:49:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1890",
+    "va": "Proto 0x002F1890",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:49:33",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1850",
+    "va": "Proto 0x002F1850",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:49:11",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1810",
+    "va": "Proto 0x002F1810",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:48:48",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1750",
+    "va": "Proto 0x002F1750",
+    "bytes": "11/11 B"
+  },
+  {
+    "time": "2026-11-24 10:48:25",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1580",
+    "va": "Proto 0x002F1580",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:48:03",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1540",
+    "va": "Proto 0x002F1540",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:47:40",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1500",
+    "va": "Proto 0x002F1500",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:47:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F14A0",
+    "va": "Proto 0x002F14A0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:46:32",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1460",
+    "va": "Proto 0x002F1460",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:46:10",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F1420",
+    "va": "Proto 0x002F1420",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:45:47",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F13E0",
+    "va": "Proto 0x002F13E0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:45:25",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F13A0",
+    "va": "Proto 0x002F13A0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:45:02",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F12D0",
+    "va": "Proto 0x002F12D0",
     "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 19:46:09",
+    "time": "2026-11-24 10:44:40",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001E5E10",
-    "va": "Proto 0x001E5E10",
-    "bytes": "same code, own addresses"
+    "symbol": "sub_002F1210",
+    "va": "Proto 0x002F1210",
+    "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 19:45:53",
+    "time": "2026-11-24 10:44:18",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001E5E10",
-    "va": "Proto 0x001E5E10",
-    "bytes": "15/15 B"
+    "symbol": "sub_002F11F0",
+    "va": "Proto 0x002F11F0",
+    "bytes": "26/26 B"
   },
   {
-    "time": "2026-11-23 19:45:38",
+    "time": "2026-11-24 10:43:55",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001E5A10",
-    "va": "Proto 0x001E5A10",
-    "bytes": "same code, own addresses"
+    "symbol": "sub_002F1160",
+    "va": "Proto 0x002F1160",
+    "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 19:45:22",
+    "time": "2026-11-24 10:43:33",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001E5A10",
-    "va": "Proto 0x001E5A10",
-    "bytes": "39/39 B"
+    "symbol": "sub_002F1130",
+    "va": "Proto 0x002F1130",
+    "bytes": "40/40 B"
   },
   {
-    "time": "2026-11-23 19:45:07",
+    "time": "2026-11-24 10:43:11",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001E1630",
-    "va": "Proto 0x001E1630",
-    "bytes": "same code, own addresses"
+    "symbol": "sub_002F10F0",
+    "va": "Proto 0x002F10F0",
+    "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 19:44:51",
+    "time": "2026-11-24 10:42:48",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001E1630",
-    "va": "Proto 0x001E1630",
-    "bytes": "31/31 B"
+    "symbol": "sub_002F10B0",
+    "va": "Proto 0x002F10B0",
+    "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 19:44:36",
+    "time": "2026-11-24 10:42:26",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001E1600",
-    "va": "Proto 0x001E1600",
-    "bytes": "same code, own addresses"
+    "symbol": "sub_002F1070",
+    "va": "Proto 0x002F1070",
+    "bytes": "50/50 B"
   },
   {
-    "time": "2026-11-23 19:44:20",
+    "time": "2026-11-24 10:42:03",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
-    "symbol": "sub_001E1600",
-    "va": "Proto 0x001E1600",
-    "bytes": "43/43 B"
+    "symbol": "sub_002F1030",
+    "va": "Proto 0x002F1030",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:41:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0FF0",
+    "va": "Proto 0x002F0FF0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:40:57",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0FB0",
+    "va": "Proto 0x002F0FB0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:40:35",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0F70",
+    "va": "Proto 0x002F0F70",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:40:12",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0F30",
+    "va": "Proto 0x002F0F30",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:39:50",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0EF0",
+    "va": "Proto 0x002F0EF0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:39:28",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0EB0",
+    "va": "Proto 0x002F0EB0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:39:05",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0E70",
+    "va": "Proto 0x002F0E70",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:38:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0E30",
+    "va": "Proto 0x002F0E30",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:38:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0DF0",
+    "va": "Proto 0x002F0DF0",
+    "bytes": "29/29 B"
+  },
+  {
+    "time": "2026-11-24 10:37:58",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0DD0",
+    "va": "Proto 0x002F0DD0",
+    "bytes": "29/29 B"
+  },
+  {
+    "time": "2026-11-24 10:37:35",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0D90",
+    "va": "Proto 0x002F0D90",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:37:13",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0D50",
+    "va": "Proto 0x002F0D50",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:36:51",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0D10",
+    "va": "Proto 0x002F0D10",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:36:07",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0CD0",
+    "va": "Proto 0x002F0CD0",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:35:45",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0C90",
+    "va": "Proto 0x002F0C90",
+    "bytes": "50/50 B"
+  },
+  {
+    "time": "2026-11-24 10:35:23",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002F0C50",
+    "va": "Proto 0x002F0C50",
+    "bytes": "50/50 B"
   }
 ]
