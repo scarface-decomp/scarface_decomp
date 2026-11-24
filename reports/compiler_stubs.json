@@ -1,0 +1,33 @@
+{
+ "what": "Where the compiler-made start-up and shutdown stubs are (portal/tools/hidden_starts.py): one static initializer per global object that needs one, one atexit stub per global object with a destructor. The site counts the functions from first to last of each apart.",
+ "versions": {
+  "xb": [
+   {
+    "kind": "initializers",
+    "first": "0x00311860",
+    "last": "0x003224A0",
+    "count": 1770
+   },
+   {
+    "kind": "atexit stubs",
+    "first": "0x003224B0",
+    "last": "0x00329430",
+    "count": 497
+   }
+  ],
+  "proto": [
+   {
+    "kind": "initializers",
+    "first": "0x002DFA10",
+    "last": "0x002F0920",
+    "count": 1709
+   },
+   {
+    "kind": "atexit stubs",
+    "first": "0x002F0930",
+    "last": "0x002F8100",
+    "count": 500
+   }
+  ]
+ }
+}
