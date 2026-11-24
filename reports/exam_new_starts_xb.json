@@ -1,2528 +1,3680 @@
 {
- "schema": "exam_new_starts_v1",
- "what": "Examiner, 2026-11-24, from default.xbe only. (1) 'flow_create': the create-function argument (7th, after the subsystem's name string) of the 36 static descriptors built by 0x000EB3A0 (thiscall, ret 0x28, forwards all 10 arguments to 0x000EA890) from __xc initializers; 'known' says whether the start was already in callgraph/registry/extra_function_starts. (2) 'aligned_after_ret': 16-aligned addresses that follow ret/jmp plus int3/nop padding inside a currently known open function, are not the target of any jump in that function, and are not referenced as dwords from inside it (switch tables excluded); referenced_by = call (some call instruction targets it), data (a dword in .text/.rdata/.data outside the function points at it), none.",
- "flow_create": [
-  {
-   "subsystem": "CollisionManagerFlowClient",
-   "create": "0x00016030",
-   "known": true,
-   "verified": true
-  },
-  {
-   "subsystem": "LOSManagerFlowClient",
-   "create": "0x00017B40",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "ControllerFlowClient",
-   "create": "0x0001F220",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "FrontEndFlowClient",
-   "create": "0x00024440",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "MovieFlowClient",
-   "create": "0x00028E50",
-   "known": true,
-   "verified": true
-  },
-  {
-   "subsystem": "PathManagerFlowClient",
-   "create": "0x00038A60",
-   "known": true,
-   "verified": true
-  },
-  {
-   "subsystem": "RenderFlowClient",
-   "create": "0x0004C120",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "ResourceManagerFlowClient",
-   "create": "0x00064C90",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "ScriptSchedulerFlowClient",
-   "create": "0x00068740",
-   "known": true,
-   "verified": true
-  },
-  {
-   "subsystem": "SoundFlowClient",
-   "create": "0x00078EA0",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "StatePropManagerFlowClient",
-   "create": "0x0008C7B0",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "StreamManagerFlowClient",
-   "create": "0x00091A60",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "VarietySlotManager",
-   "create": "0x00096430",
-   "known": true,
-   "verified": true
-  },
-  {
-   "subsystem": "TriggerManagerFlowClient",
-   "create": "0x00097870",
-   "known": true,
-   "verified": true
-  },
-  {
-   "subsystem": "TimeSlicer",
-   "create": "0x0009A9E0",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "SaveGameManagerFlowClient",
-   "create": "0x000C6760",
-   "known": true,
-   "verified": true
-  },
-  {
-   "subsystem": "SubtitleFlowClient",
-   "create": "0x000CB970",
-   "known": true,
-   "verified": true
-  },
-  {
-   "subsystem": "NISManager",
-   "create": "0x000CD800",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "DataBroker",
-   "create": "0x000EB900",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "CopManager",
-   "create": "0x00111D10",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "CoverManager",
-   "create": "0x00112E20",
-   "known": true,
-   "verified": true
-  },
-  {
-   "subsystem": "HenchmanManager",
-   "create": "0x00115360",
-   "known": true,
-   "verified": false
-  },
-  {
-   "subsystem": "HUDManager2",
-   "create": "0x00196EC0",
-   "known": true,
-   "verified": true
-  },
-  {
-   "subsystem": "PoiMarkerManager",
-   "create": "0x001CEF10",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "MetaGameManagerFlowClient",
-   "create": "0x00222300",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "AIManager",
-   "create": "0x00223CE0",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "CVManager",
-   "create": "0x00228D00",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "GameLoadingManager",
-   "create": "0x0022B450",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "GameObjectManager",
-   "create": "0x0022BCF0",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "LoadArbitrator",
-   "create": "0x0022C170",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "PauseManager",
-   "create": "0x0022C7C0",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "PresentationManager",
-   "create": "0x00230020",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "StartupManager",
-   "create": "0x002317A0",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "StateManager",
-   "create": "0x00231EF0",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "TeleportManager",
-   "create": "0x00232850",
-   "known": false,
-   "verified": false
-  },
-  {
-   "subsystem": "TutorialManager",
-   "create": "0x00233210",
-   "known": false,
-   "verified": false
-  }
- ],
- "aligned_after_ret": [
-  {
-   "start": "0x0002E020",
-   "inside": "0x0002DDD0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0004C3B0",
-   "inside": "0x0004C370",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00053460",
-   "inside": "0x00053420",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00062780",
-   "inside": "0x000626D0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000627F0",
-   "inside": "0x000627D0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00062E40",
-   "inside": "0x00062C40",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00064190",
-   "inside": "0x00064180",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00067670",
-   "inside": "0x00067630",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00072470",
-   "inside": "0x00072420",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000766B0",
-   "inside": "0x00076670",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000766C0",
-   "inside": "0x00076670",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00076DA0",
-   "inside": "0x00076C70",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0007E180",
-   "inside": "0x0007E0C0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0007F530",
-   "inside": "0x0007F4E0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00089EE0",
-   "inside": "0x00089EB0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000905B0",
-   "inside": "0x000904E0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00091AF0",
-   "inside": "0x00091A90",
-   "lib": "game",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x000AB880",
-   "inside": "0x000AB840",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000AB890",
-   "inside": "0x000AB840",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000B0760",
-   "inside": "0x000B0180",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000B2070",
-   "inside": "0x000B2050",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000CBCC0",
-   "inside": "0x000CBC90",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000CD800",
-   "inside": "0x000CD740",
-   "lib": "game",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x000CD940",
-   "inside": "0x000CD920",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000D7800",
-   "inside": "0x000D75D0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000DCD10",
-   "inside": "0x000DCCD0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000E2D80",
-   "inside": "0x000E2CF0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000E6E90",
-   "inside": "0x000E6E50",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000EB720",
-   "inside": "0x000EB6C0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000EB740",
-   "inside": "0x000EB6C0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000EB900",
-   "inside": "0x000EB8A0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000EC690",
-   "inside": "0x000EC660",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000EC6B0",
-   "inside": "0x000EC660",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000EC6D0",
-   "inside": "0x000EC660",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x000F6440",
-   "inside": "0x000F6430",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001017F0",
-   "inside": "0x001017C0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0011E0E0",
-   "inside": "0x0011E090",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0012A550",
-   "inside": "0x0012A4E0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0013D0B0",
-   "inside": "0x0013D070",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00145D30",
-   "inside": "0x00145C90",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001467B0",
-   "inside": "0x001465C0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00149970",
-   "inside": "0x001498E0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0014B590",
-   "inside": "0x0014AE10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0015F700",
-   "inside": "0x0015F3C0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001625B0",
-   "inside": "0x00162570",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00163650",
-   "inside": "0x00163620",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0017EBE0",
-   "inside": "0x0017EBB0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001A9C40",
-   "inside": "0x001A9BA0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001AA5B0",
-   "inside": "0x001AA520",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001ABFC0",
-   "inside": "0x001ABB10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001AC330",
-   "inside": "0x001AC270",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001ACCF0",
-   "inside": "0x001ACC10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001AD0E0",
-   "inside": "0x001ACFE0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001AE0F0",
-   "inside": "0x001AE000",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001AE8F0",
-   "inside": "0x001AE8B0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001AECC0",
-   "inside": "0x001AEAC0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001AED80",
-   "inside": "0x001AEAC0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001AF130",
-   "inside": "0x001AF0B0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001AF530",
-   "inside": "0x001AF490",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B07F0",
-   "inside": "0x001B0780",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B1290",
-   "inside": "0x001B1220",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B1410",
-   "inside": "0x001B1380",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B1590",
-   "inside": "0x001B1380",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B1BC0",
-   "inside": "0x001B18E0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B1C30",
-   "inside": "0x001B18E0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B1CA0",
-   "inside": "0x001B18E0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B1D30",
-   "inside": "0x001B18E0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B1E20",
-   "inside": "0x001B18E0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B2970",
-   "inside": "0x001B2660",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B29E0",
-   "inside": "0x001B2660",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B3230",
-   "inside": "0x001B3190",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B35A0",
-   "inside": "0x001B34F0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B3690",
-   "inside": "0x001B34F0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B3710",
-   "inside": "0x001B34F0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B3770",
-   "inside": "0x001B34F0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B9E30",
-   "inside": "0x001B9CA0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001B9FA0",
-   "inside": "0x001B9CA0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001BDD60",
-   "inside": "0x001BDB20",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001BDE80",
-   "inside": "0x001BDB20",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001BDF10",
-   "inside": "0x001BDB20",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001C1A20",
-   "inside": "0x001C1930",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001C2CA0",
-   "inside": "0x001C2C00",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001C5E90",
-   "inside": "0x001C5DA0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001C61C0",
-   "inside": "0x001C5FA0",
-   "lib": "game",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x001C8080",
-   "inside": "0x001C7EF0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001C85B0",
-   "inside": "0x001C8580",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001D06C0",
-   "inside": "0x001D0670",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001D2BC0",
-   "inside": "0x001D2B90",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001D2F40",
-   "inside": "0x001D2F00",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001D4570",
-   "inside": "0x001D4520",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001D6400",
-   "inside": "0x001D6380",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001DE030",
-   "inside": "0x001DCE70",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001E5E60",
-   "inside": "0x001E5E40",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001E6850",
-   "inside": "0x001E5E40",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001E6B10",
-   "inside": "0x001E5E40",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001E6B70",
-   "inside": "0x001E5E40",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001E7000",
-   "inside": "0x001E5E40",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001E7100",
-   "inside": "0x001E5E40",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001E7270",
-   "inside": "0x001E5E40",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001EE490",
-   "inside": "0x001EE3E0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001EEAF0",
-   "inside": "0x001EEAC0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001F32F0",
-   "inside": "0x001F32B0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001F3620",
-   "inside": "0x001F3590",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001F5FD0",
-   "inside": "0x001F5CC0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001F60C0",
-   "inside": "0x001F5CC0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001F8C40",
-   "inside": "0x001F8B80",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001FD7F0",
-   "inside": "0x001FD7B0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x001FDE30",
-   "inside": "0x001FDDF0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002019A0",
-   "inside": "0x00201960",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00203BE0",
-   "inside": "0x00203380",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00208B30",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00208D60",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00208F40",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00208FD0",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00209120",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00209180",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00209250",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002093A0",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00209700",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00209C60",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00209D40",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00209DB0",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00209E10",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00209EE0",
-   "inside": "0x00208B10",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0020F2E0",
-   "inside": "0x0020F260",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00211B70",
-   "inside": "0x00211B40",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00212580",
-   "inside": "0x00212450",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002130A0",
-   "inside": "0x00212FB0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002130F0",
-   "inside": "0x00212FB0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00217A00",
-   "inside": "0x002178F0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00219DD0",
-   "inside": "0x00219C80",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00219EC0",
-   "inside": "0x00219DE0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0021FCF0",
-   "inside": "0x0021FCD0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0021FDA0",
-   "inside": "0x0021FD80",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00220F60",
-   "inside": "0x00220D90",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00222300",
-   "inside": "0x002216B0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002249E0",
-   "inside": "0x00224790",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00225690",
-   "inside": "0x00225340",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002257D0",
-   "inside": "0x002256D0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00225980",
-   "inside": "0x002258B0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002259E0",
-   "inside": "0x002258B0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00228D00",
-   "inside": "0x00228C60",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0022B450",
-   "inside": "0x0022B420",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0022C7C0",
-   "inside": "0x0022C620",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0022CA00",
-   "inside": "0x0022C9C0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0022DFB0",
-   "inside": "0x0022DF30",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0022ECE0",
-   "inside": "0x0022EC20",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0022EE90",
-   "inside": "0x0022EE00",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00230020",
-   "inside": "0x0022FF60",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002317A0",
-   "inside": "0x002315C0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00231EF0",
-   "inside": "0x00231E90",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002320E0",
-   "inside": "0x002320A0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00232850",
-   "inside": "0x00232660",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00232A20",
-   "inside": "0x002329D0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00232A40",
-   "inside": "0x002329D0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00232A60",
-   "inside": "0x002329D0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00232A80",
-   "inside": "0x002329D0",
-   "lib": "game",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00233210",
-   "inside": "0x002331C0",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00235F90",
-   "inside": "0x00235F82",
-   "lib": "lib?",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0023A4F0",
-   "inside": "0x0023A460",
-   "lib": "fight",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0023A650",
-   "inside": "0x0023A5E0",
-   "lib": "fight",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0023DEB0",
-   "inside": "0x0023DDB0",
-   "lib": "fight",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0023DEC0",
-   "inside": "0x0023DDB0",
-   "lib": "fight",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x00241760",
-   "inside": "0x00241720",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002427B0",
-   "inside": "0x00242750",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00242920",
-   "inside": "0x002428E0",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00244390",
-   "inside": "0x00244320",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00248C70",
-   "inside": "0x00248C30",
-   "lib": "frontend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00248D20",
-   "inside": "0x00248C30",
-   "lib": "frontend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00255A80",
-   "inside": "0x00255960",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0025CD00",
-   "inside": "0x0025CBC0",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00260B00",
-   "inside": "0x00260AC0",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00260E50",
-   "inside": "0x00260E20",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00266670",
-   "inside": "0x00266360",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0026D8A0",
-   "inside": "0x0026D690",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00275790",
-   "inside": "0x002755D0",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002757C0",
-   "inside": "0x002755D0",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00278690",
-   "inside": "0x002781B0",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0027D590",
-   "inside": "0x0027D540",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00283830",
-   "inside": "0x00283580",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00283860",
-   "inside": "0x00283580",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00283890",
-   "inside": "0x00283580",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002838C0",
-   "inside": "0x00283580",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002838F0",
-   "inside": "0x00283580",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00283C90",
-   "inside": "0x00283C40",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0028D780",
-   "inside": "0x0028D740",
-   "lib": "frontend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0028E610",
-   "inside": "0x0028E5D0",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0028F7C0",
-   "inside": "0x0028F7A0",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00291430",
-   "inside": "0x00291400",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002914B0",
-   "inside": "0x00291400",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00291800",
-   "inside": "0x00291720",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002919C0",
-   "inside": "0x00291860",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00291B30",
-   "inside": "0x00291A00",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00291B60",
-   "inside": "0x00291A00",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00292DF0",
-   "inside": "0x00292D40",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00295920",
-   "inside": "0x002958C0",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00297130",
-   "inside": "0x00297100",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002990C0",
-   "inside": "0x00298FD0",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029A1D0",
-   "inside": "0x0029A1A0",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029A1F0",
-   "inside": "0x0029A1A0",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029A200",
-   "inside": "0x0029A1A0",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029A220",
-   "inside": "0x0029A1A0",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029A230",
-   "inside": "0x0029A1A0",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029ACA0",
-   "inside": "0x0029AB90",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029ACD0",
-   "inside": "0x0029AB90",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029BA60",
-   "inside": "0x0029B9E0",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029BAB0",
-   "inside": "0x0029BA70",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029BDA0",
-   "inside": "0x0029BAC0",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0029C280",
-   "inside": "0x0029C240",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002A5B30",
-   "inside": "0x002A5AF0",
-   "lib": "drawing",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002A96F0",
-   "inside": "0x002A9610",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002A97B0",
-   "inside": "0x002A9610",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002AC350",
-   "inside": "0x002AC2B0",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002AC3B0",
-   "inside": "0x002AC390",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002AC480",
-   "inside": "0x002AC440",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002AC4C0",
-   "inside": "0x002AC440",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002AC4F0",
-   "inside": "0x002AC440",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002AC520",
-   "inside": "0x002AC440",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002AC610",
-   "inside": "0x002AC5D0",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002AC670",
-   "inside": "0x002AC5D0",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ACC70",
-   "inside": "0x002ACC30",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ACCC0",
-   "inside": "0x002ACC92",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ADD80",
-   "inside": "0x002ADD10",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ADDE0",
-   "inside": "0x002ADD10",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ADE10",
-   "inside": "0x002ADD10",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ADE40",
-   "inside": "0x002ADD10",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ADED0",
-   "inside": "0x002ADD10",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ADF00",
-   "inside": "0x002ADD10",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ADF30",
-   "inside": "0x002ADD10",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ADF60",
-   "inside": "0x002ADD10",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002ADFF0",
-   "inside": "0x002ADD10",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002B0780",
-   "inside": "0x002B0707",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002B3C00",
-   "inside": "0x002B3B10",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002B3D70",
-   "inside": "0x002B3D3A",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002B8600",
-   "inside": "0x002B8580",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002BE480",
-   "inside": "0x002BE240",
-   "lib": "lib?",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C1550",
-   "inside": "0x002C1480",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C15F0",
-   "inside": "0x002C1480",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C1730",
-   "inside": "0x002C1700",
-   "lib": "core",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C2460",
-   "inside": "0x002C2440",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C2480",
-   "inside": "0x002C2440",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C24A0",
-   "inside": "0x002C2440",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C42A0",
-   "inside": "0x002C423A",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C5200",
-   "inside": "0x002C4F90",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C5E80",
-   "inside": "0x002C5C80",
-   "lib": "backend",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C84B0",
-   "inside": "0x002C8395",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002C93E0",
-   "inside": "0x002C9360",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002CF920",
-   "inside": "0x002CF8B0",
-   "lib": "om",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002CF940",
-   "inside": "0x002CF8B0",
-   "lib": "om",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002CFAF0",
-   "inside": "0x002CFAA0",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002D0040",
-   "inside": "0x002CFFD0",
-   "lib": "sound",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002D0090",
-   "inside": "0x002CFFD0",
-   "lib": "sound",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002D00B0",
-   "inside": "0x002CFFD0",
-   "lib": "sound",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002D00E0",
-   "inside": "0x002CFFD0",
-   "lib": "sound",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002D1C60",
-   "inside": "0x002D1A40",
-   "lib": "sound",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002D1D20",
-   "inside": "0x002D1CF0",
-   "lib": "sound",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002D2320",
-   "inside": "0x002D22F0",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002D4E40",
-   "inside": "0x002D4DC0",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002DACA0",
-   "inside": "0x002DAC40",
-   "lib": "sound",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E05C0",
-   "inside": "0x002E04D0",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E1070",
-   "inside": "0x002E1030",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E10C0",
-   "inside": "0x002E1030",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1110",
-   "inside": "0x002E1030",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1610",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E16C0",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1730",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1790",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E17F0",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1840",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1890",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E18E0",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1930",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1990",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E19F0",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1A60",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1AE0",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1B40",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E1B80",
-   "inside": "0x002E1560",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E2840",
-   "inside": "0x002E27B0",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E2FC0",
-   "inside": "0x002E2F50",
-   "lib": "movie",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E3850",
-   "inside": "0x002E3560",
-   "lib": "movie",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E3880",
-   "inside": "0x002E3560",
-   "lib": "movie",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E38A0",
-   "inside": "0x002E3560",
-   "lib": "movie",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E3B40",
-   "inside": "0x002E3A40",
-   "lib": "movie",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E3BB0",
-   "inside": "0x002E3B80",
-   "lib": "movie",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E3E70",
-   "inside": "0x002E3B80",
-   "lib": "movie",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E3EE0",
-   "inside": "0x002E3B80",
-   "lib": "movie",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E3F20",
-   "inside": "0x002E3B80",
-   "lib": "movie",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002E4FC0",
-   "inside": "0x002E4F80",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E7B10",
-   "inside": "0x002E6DA0",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E82A0",
-   "inside": "0x002E7E0D",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002E8A60",
-   "inside": "0x002E84B0",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002EE5C0",
-   "inside": "0x002EE4C0",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002EE8C0",
-   "inside": "0x002EE850",
-   "lib": "physics",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002EF300",
-   "inside": "0x002EF260",
-   "lib": "physics",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002F0D00",
-   "inside": "0x002F0CE0",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F0FD0",
-   "inside": "0x002F0CE0",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F1150",
-   "inside": "0x002F0CE0",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F1240",
-   "inside": "0x002F0CE0",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F1540",
-   "inside": "0x002F0CE0",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F1750",
-   "inside": "0x002F0CE0",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F18B0",
-   "inside": "0x002F0CE0",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F1D50",
-   "inside": "0x002F0CE0",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F6380",
-   "inside": "0x002F6040",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F63F0",
-   "inside": "0x002F6040",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F6460",
-   "inside": "0x002F6040",
-   "lib": "physics",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F68D0",
-   "inside": "0x002F6700",
-   "lib": "physics",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002F6D00",
-   "inside": "0x002F69B0",
-   "lib": "physics",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002F7330",
-   "inside": "0x002F6F30",
-   "lib": "physics",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002F8A10",
-   "inside": "0x002F8970",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F8D80",
-   "inside": "0x002F8C10",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F9090",
-   "inside": "0x002F8C10",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F9630",
-   "inside": "0x002F9440",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002F96D0",
-   "inside": "0x002F9440",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002FA820",
-   "inside": "0x002FA390",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002FB7E0",
-   "inside": "0x002FB460",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FC140",
-   "inside": "0x002FBC01",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FC360",
-   "inside": "0x002FC15D",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FCA70",
-   "inside": "0x002FC9D8",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FCB50",
-   "inside": "0x002FC9D8",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FCDB0",
-   "inside": "0x002FC9D8",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FCFA0",
-   "inside": "0x002FC9D8",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002FD3A0",
-   "inside": "0x002FD289",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FD5B0",
-   "inside": "0x002FD4ED",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x002FD6A0",
-   "inside": "0x002FD4ED",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x002FDB70",
-   "inside": "0x002FDAF1",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FDBD0",
-   "inside": "0x002FDAF1",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FDC50",
-   "inside": "0x002FDAF1",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FDD00",
-   "inside": "0x002FDAF1",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FDE50",
-   "inside": "0x002FDAF1",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FDEC0",
-   "inside": "0x002FDAF1",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FE050",
-   "inside": "0x002FDAF1",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FE5F0",
-   "inside": "0x002FE371",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FF890",
-   "inside": "0x002FF7D3",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FFAB0",
-   "inside": "0x002FF7D3",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x002FFF10",
-   "inside": "0x002FF7D3",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x003027C0",
-   "inside": "0x00301503",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x00302840",
-   "inside": "0x00301503",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x00302960",
-   "inside": "0x00301503",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x00302B40",
-   "inside": "0x00301503",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x00305ED0",
-   "inside": "0x00305D13",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00305FD0",
-   "inside": "0x00305D13",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00306280",
-   "inside": "0x00306061",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x003062F0",
-   "inside": "0x00306061",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x00306DD0",
-   "inside": "0x00306061",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x003074F0",
-   "inside": "0x00306061",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x003075B0",
-   "inside": "0x00306061",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x003084E0",
-   "inside": "0x003081D7",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0030AD50",
-   "inside": "0x0030AC70",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x0030ADC0",
-   "inside": "0x0030AD60",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030AF20",
-   "inside": "0x0030AD60",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030AFB0",
-   "inside": "0x0030AD60",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030B700",
-   "inside": "0x0030AD60",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030C1E0",
-   "inside": "0x0030C160",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030CA40",
-   "inside": "0x0030C160",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030D2C0",
-   "inside": "0x0030C160",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030D690",
-   "inside": "0x0030C160",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030DC00",
-   "inside": "0x0030C160",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030E1B0",
-   "inside": "0x0030C160",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030E830",
-   "inside": "0x0030C160",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030EA20",
-   "inside": "0x0030C160",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030ED90",
-   "inside": "0x0030ECF0",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030EE50",
-   "inside": "0x0030ECF0",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030EF10",
-   "inside": "0x0030ECF0",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030F0F0",
-   "inside": "0x0030ECF0",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030F160",
-   "inside": "0x0030ECF0",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030F560",
-   "inside": "0x0030ECF0",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030FA00",
-   "inside": "0x0030ECF0",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030FAA0",
-   "inside": "0x0030ECF0",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030FB40",
-   "inside": "0x0030ECF0",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x0030FC70",
-   "inside": "0x0030ECF0",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x003100E0",
-   "inside": "0x00310070",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x00310110",
-   "inside": "0x00310070",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x003101F0",
-   "inside": "0x00310070",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x003102D0",
-   "inside": "0x00310070",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x003108D0",
-   "inside": "0x00310070",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x00310D10",
-   "inside": "0x00310907",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x00311050",
-   "inside": "0x00310907",
-   "lib": "ms/other",
-   "referenced_by": "call"
-  },
-  {
-   "start": "0x00311110",
-   "inside": "0x00310907",
-   "lib": "ms/other",
-   "referenced_by": "none"
-  },
-  {
-   "start": "0x003111A0",
-   "inside": "0x00310907",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x00311320",
-   "inside": "0x00311302",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x003113D0",
-   "inside": "0x003113C6",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x003115A0",
-   "inside": "0x0031156D",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  },
-  {
-   "start": "0x00311780",
-   "inside": "0x00311776",
-   "lib": "ms/other",
-   "referenced_by": "data"
-  }
- ]
+"schema": "exam_new_starts_v2",
+"what": "Examiner, 2026-11-24, from default.xbe only. (1) 'flow_create': the create-function argument (7th, after the subsystem's name string) of the 36 static descriptors built by 0x000EB3A0 (thiscall, ret 0x28, forwards all 10 arguments to 0x000EA890) from __xc initializers; 'known' says whether the start was already in callgraph/registry/extra_function_starts. (2) 'aligned_after_ret': 16-aligned addresses that follow ret/jmp plus int3/nop padding inside a currently known open function, are not the target of any jump in that function, and are not referenced as dwords from inside it (switch tables excluded); referenced_by = call (some call instruction targets it), data (a dword in .text/.rdata/.data outside the function points at it), none. v2 (2026-11-24): per-VA fields prev (last non-padding instruction before the start), tail (last non-padding instruction before the next known start) and verdict. Jump tables = every imm32 used as jmp [reg*4+imm32]; entries of those tables are case labels, the tables themselves are data.",
+"flow_create": [
+{
+"subsystem": "CollisionManagerFlowClient",
+"create": "0x00016030",
+"known": true,
+"verified": true
+},
+{
+"subsystem": "LOSManagerFlowClient",
+"create": "0x00017B40",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "ControllerFlowClient",
+"create": "0x0001F220",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "FrontEndFlowClient",
+"create": "0x00024440",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "MovieFlowClient",
+"create": "0x00028E50",
+"known": true,
+"verified": true
+},
+{
+"subsystem": "PathManagerFlowClient",
+"create": "0x00038A60",
+"known": true,
+"verified": true
+},
+{
+"subsystem": "RenderFlowClient",
+"create": "0x0004C120",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "ResourceManagerFlowClient",
+"create": "0x00064C90",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "ScriptSchedulerFlowClient",
+"create": "0x00068740",
+"known": true,
+"verified": true
+},
+{
+"subsystem": "SoundFlowClient",
+"create": "0x00078EA0",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "StatePropManagerFlowClient",
+"create": "0x0008C7B0",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "StreamManagerFlowClient",
+"create": "0x00091A60",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "VarietySlotManager",
+"create": "0x00096430",
+"known": true,
+"verified": true
+},
+{
+"subsystem": "TriggerManagerFlowClient",
+"create": "0x00097870",
+"known": true,
+"verified": true
+},
+{
+"subsystem": "TimeSlicer",
+"create": "0x0009A9E0",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "SaveGameManagerFlowClient",
+"create": "0x000C6760",
+"known": true,
+"verified": true
+},
+{
+"subsystem": "SubtitleFlowClient",
+"create": "0x000CB970",
+"known": true,
+"verified": true
+},
+{
+"subsystem": "NISManager",
+"create": "0x000CD800",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "DataBroker",
+"create": "0x000EB900",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "CopManager",
+"create": "0x00111D10",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "CoverManager",
+"create": "0x00112E20",
+"known": true,
+"verified": true
+},
+{
+"subsystem": "HenchmanManager",
+"create": "0x00115360",
+"known": true,
+"verified": false
+},
+{
+"subsystem": "HUDManager2",
+"create": "0x00196EC0",
+"known": true,
+"verified": true
+},
+{
+"subsystem": "PoiMarkerManager",
+"create": "0x001CEF10",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "MetaGameManagerFlowClient",
+"create": "0x00222300",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "AIManager",
+"create": "0x00223CE0",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "CVManager",
+"create": "0x00228D00",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "GameLoadingManager",
+"create": "0x0022B450",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "GameObjectManager",
+"create": "0x0022BCF0",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "LoadArbitrator",
+"create": "0x0022C170",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "PauseManager",
+"create": "0x0022C7C0",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "PresentationManager",
+"create": "0x00230020",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "StartupManager",
+"create": "0x002317A0",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "StateManager",
+"create": "0x00231EF0",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "TeleportManager",
+"create": "0x00232850",
+"known": false,
+"verified": false
+},
+{
+"subsystem": "TutorialManager",
+"create": "0x00233210",
+"known": false,
+"verified": false
+}
+],
+"aligned_after_ret": [
+{
+"start": "0x0002E020",
+"inside": "0x0002DDD0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x0004C3B0",
+"inside": "0x0004C370",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00053460",
+"inside": "0x00053420",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00062780",
+"inside": "0x000626D0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "mov",
+"verdict": "doubtful: body does not end in ret/jmp (mov)"
+},
+{
+"start": "0x000627F0",
+"inside": "0x000627D0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00062E40",
+"inside": "0x00062C40",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "lea",
+"verdict": "doubtful: body does not end in ret/jmp (lea)"
+},
+{
+"start": "0x00064190",
+"inside": "0x00064180",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00067670",
+"inside": "0x00067630",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00072470",
+"inside": "0x00072420",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "lea",
+"verdict": "doubtful: body does not end in ret/jmp (lea)"
+},
+{
+"start": "0x000766B0",
+"inside": "0x00076670",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000766C0",
+"inside": "0x00076670",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00076DA0",
+"inside": "0x00076C70",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "jmp",
+"verdict": "accept"
+},
+{
+"start": "0x0007E180",
+"inside": "0x0007E0C0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0007F530",
+"inside": "0x0007F4E0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00089EE0",
+"inside": "0x00089EB0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "call",
+"verdict": "accept"
+},
+{
+"start": "0x000905B0",
+"inside": "0x000904E0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00091AF0",
+"inside": "0x00091A90",
+"lib": "game",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000AB880",
+"inside": "0x000AB840",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000AB890",
+"inside": "0x000AB840",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000B0760",
+"inside": "0x000B0180",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "je",
+"verdict": "doubtful: body does not end in ret/jmp (je)"
+},
+{
+"start": "0x000B2070",
+"inside": "0x000B2050",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000CBCC0",
+"inside": "0x000CBC90",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000CD800",
+"inside": "0x000CD740",
+"lib": "game",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000CD940",
+"inside": "0x000CD920",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000D7800",
+"inside": "0x000D75D0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x000DCD10",
+"inside": "0x000DCCD0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000E2D80",
+"inside": "0x000E2CF0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "sub",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x000E6E90",
+"inside": "0x000E6E50",
+"lib": "game",
+"referenced_by": "none",
+"prev": "jmp rel 0x2a6940",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000EB720",
+"inside": "0x000EB6C0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000EB740",
+"inside": "0x000EB6C0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000EB900",
+"inside": "0x000EB8A0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000EC690",
+"inside": "0x000EC660",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000EC6B0",
+"inside": "0x000EC660",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000EC6D0",
+"inside": "0x000EC660",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x000F6440",
+"inside": "0x000F6430",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001017F0",
+"inside": "0x001017C0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0011E0E0",
+"inside": "0x0011E090",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0012A550",
+"inside": "0x0012A4E0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "adc",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x0013D0B0",
+"inside": "0x0013D070",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x00145D30",
+"inside": "0x00145C90",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "fstp",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x001467B0",
+"inside": "0x001465C0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x00149970",
+"inside": "0x001498E0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "arpl",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x0014B590",
+"inside": "0x0014AE10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x0015F700",
+"inside": "0x0015F3C0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "not",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x001625B0",
+"inside": "0x00162570",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "and",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x00163650",
+"inside": "0x00163620",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x0017EBE0",
+"inside": "0x0017EBB0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x001A9C40",
+"inside": "0x001A9BA0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001AA5B0",
+"inside": "0x001AA520",
+"lib": "game",
+"referenced_by": "none",
+"prev": "jmp rel 0x1a9f40",
+"tail": "sbb",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x001ABFC0",
+"inside": "0x001ABB10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001AC330",
+"inside": "0x001AC270",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001ACCF0",
+"inside": "0x001ACC10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001AD0E0",
+"inside": "0x001ACFE0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001AE0F0",
+"inside": "0x001AE000",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001AE8F0",
+"inside": "0x001AE8B0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "jmp rel 0x197b90",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001AECC0",
+"inside": "0x001AEAC0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001AED80",
+"inside": "0x001AEAC0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001AF130",
+"inside": "0x001AF0B0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001AF530",
+"inside": "0x001AF490",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B07F0",
+"inside": "0x001B0780",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B1290",
+"inside": "0x001B1220",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B1410",
+"inside": "0x001B1380",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B1590",
+"inside": "0x001B1380",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B1BC0",
+"inside": "0x001B18E0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B1C30",
+"inside": "0x001B18E0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B1CA0",
+"inside": "0x001B18E0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B1D30",
+"inside": "0x001B18E0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B1E20",
+"inside": "0x001B18E0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "jmp",
+"verdict": "accept"
+},
+{
+"start": "0x001B2970",
+"inside": "0x001B2660",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B29E0",
+"inside": "0x001B2660",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B3230",
+"inside": "0x001B3190",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x001B35A0",
+"inside": "0x001B34F0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B3690",
+"inside": "0x001B34F0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B3710",
+"inside": "0x001B34F0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B3770",
+"inside": "0x001B34F0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B9E30",
+"inside": "0x001B9CA0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001B9FA0",
+"inside": "0x001B9CA0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001BDD60",
+"inside": "0x001BDB20",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001BDE80",
+"inside": "0x001BDB20",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001BDF10",
+"inside": "0x001BDB20",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001C1A20",
+"inside": "0x001C1930",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x001C2CA0",
+"inside": "0x001C2C00",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x001C5E90",
+"inside": "0x001C5DA0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "sbb",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x001C61C0",
+"inside": "0x001C5FA0",
+"lib": "game",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001C8080",
+"inside": "0x001C7EF0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001C85B0",
+"inside": "0x001C8580",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001D06C0",
+"inside": "0x001D0670",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001D2BC0",
+"inside": "0x001D2B90",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001D2F40",
+"inside": "0x001D2F00",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001D4570",
+"inside": "0x001D4520",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001D6400",
+"inside": "0x001D6380",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001DE030",
+"inside": "0x001DCE70",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "jmp",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x001E5E60",
+"inside": "0x001E5E40",
+"lib": "game",
+"referenced_by": "none",
+"prev": "jmp rel 0x99c10",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001E6850",
+"inside": "0x001E5E40",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001E6B10",
+"inside": "0x001E5E40",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001E6B70",
+"inside": "0x001E5E40",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001E7000",
+"inside": "0x001E5E40",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001E7100",
+"inside": "0x001E5E40",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001E7270",
+"inside": "0x001E5E40",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001EE490",
+"inside": "0x001EE3E0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001EEAF0",
+"inside": "0x001EEAC0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001F32F0",
+"inside": "0x001F32B0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001F3620",
+"inside": "0x001F3590",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001F5FD0",
+"inside": "0x001F5CC0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001F60C0",
+"inside": "0x001F5CC0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001F8C40",
+"inside": "0x001F8B80",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001FD7F0",
+"inside": "0x001FD7B0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x001FDE30",
+"inside": "0x001FDDF0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002019A0",
+"inside": "0x00201960",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00203BE0",
+"inside": "0x00203380",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00208B30",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00208D60",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00208F40",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00208FD0",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00209120",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00209180",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00209250",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002093A0",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00209700",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00209C60",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00209D40",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00209DB0",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00209E10",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00209EE0",
+"inside": "0x00208B10",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0020F2E0",
+"inside": "0x0020F260",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00211B70",
+"inside": "0x00211B40",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00212580",
+"inside": "0x00212450",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002130A0",
+"inside": "0x00212FB0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002130F0",
+"inside": "0x00212FB0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00217A00",
+"inside": "0x002178F0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00219DD0",
+"inside": "0x00219C80",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00219EC0",
+"inside": "0x00219DE0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0021FCF0",
+"inside": "0x0021FCD0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0021FDA0",
+"inside": "0x0021FD80",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00220F60",
+"inside": "0x00220D90",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00222300",
+"inside": "0x002216B0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002249E0",
+"inside": "0x00224790",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00225690",
+"inside": "0x00225340",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002257D0",
+"inside": "0x002256D0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00225980",
+"inside": "0x002258B0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002259E0",
+"inside": "0x002258B0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00228D00",
+"inside": "0x00228C60",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0022B450",
+"inside": "0x0022B420",
+"lib": "game",
+"referenced_by": "none",
+"prev": "jmp rel 0x22d8a0",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0022C7C0",
+"inside": "0x0022C620",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0022CA00",
+"inside": "0x0022C9C0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0022DFB0",
+"inside": "0x0022DF30",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0022ECE0",
+"inside": "0x0022EC20",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "and",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x0022EE90",
+"inside": "0x0022EE00",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "and",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x00230020",
+"inside": "0x0022FF60",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002317A0",
+"inside": "0x002315C0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00231EF0",
+"inside": "0x00231E90",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002320E0",
+"inside": "0x002320A0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00232850",
+"inside": "0x00232660",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00232A20",
+"inside": "0x002329D0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00232A40",
+"inside": "0x002329D0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00232A60",
+"inside": "0x002329D0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00232A80",
+"inside": "0x002329D0",
+"lib": "game",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00233210",
+"inside": "0x002331C0",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00235F90",
+"inside": "0x00235F82",
+"lib": "lib?",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0023A4F0",
+"inside": "0x0023A460",
+"lib": "fight",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0023A650",
+"inside": "0x0023A5E0",
+"lib": "fight",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0023DEB0",
+"inside": "0x0023DDB0",
+"lib": "fight",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0023DEC0",
+"inside": "0x0023DDB0",
+"lib": "fight",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "jmp",
+"verdict": "accept"
+},
+{
+"start": "0x00241760",
+"inside": "0x00241720",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002427B0",
+"inside": "0x00242750",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00242920",
+"inside": "0x002428E0",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00244390",
+"inside": "0x00244320",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "jmp",
+"verdict": "accept"
+},
+{
+"start": "0x00248C70",
+"inside": "0x00248C30",
+"lib": "frontend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "jmp",
+"verdict": "accept"
+},
+{
+"start": "0x00248D20",
+"inside": "0x00248C30",
+"lib": "frontend",
+"referenced_by": "none",
+"prev": "jmp rel 0x248cc2",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00255A80",
+"inside": "0x00255960",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0025CD00",
+"inside": "0x0025CBC0",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00260B00",
+"inside": "0x00260AC0",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00260E50",
+"inside": "0x00260E20",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00266670",
+"inside": "0x00266360",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0026D8A0",
+"inside": "0x0026D690",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x00275790",
+"inside": "0x002755D0",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002757C0",
+"inside": "0x002755D0",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00278690",
+"inside": "0x002781B0",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0027D590",
+"inside": "0x0027D540",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00283830",
+"inside": "0x00283580",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00283860",
+"inside": "0x00283580",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00283890",
+"inside": "0x00283580",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002838C0",
+"inside": "0x00283580",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002838F0",
+"inside": "0x00283580",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00283C90",
+"inside": "0x00283C40",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0028D780",
+"inside": "0x0028D740",
+"lib": "frontend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0028E610",
+"inside": "0x0028E5D0",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0028F7C0",
+"inside": "0x0028F7A0",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00291430",
+"inside": "0x00291400",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "jmp",
+"verdict": "accept"
+},
+{
+"start": "0x002914B0",
+"inside": "0x00291400",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "jmp rel 0x244050",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00291800",
+"inside": "0x00291720",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002919C0",
+"inside": "0x00291860",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00291B30",
+"inside": "0x00291A00",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00291B60",
+"inside": "0x00291A00",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00292DF0",
+"inside": "0x00292D40",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00295920",
+"inside": "0x002958C0",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x00297130",
+"inside": "0x00297100",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002990C0",
+"inside": "0x00298FD0",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x0029A1D0",
+"inside": "0x0029A1A0",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0029A1F0",
+"inside": "0x0029A1A0",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0029A200",
+"inside": "0x0029A1A0",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0029A220",
+"inside": "0x0029A1A0",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0029A230",
+"inside": "0x0029A1A0",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0029ACA0",
+"inside": "0x0029AB90",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0029ACD0",
+"inside": "0x0029AB90",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0029BA60",
+"inside": "0x0029B9E0",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0029BAB0",
+"inside": "0x0029BA70",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0029BDA0",
+"inside": "0x0029BAC0",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x0029C280",
+"inside": "0x0029C240",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x002A5B30",
+"inside": "0x002A5AF0",
+"lib": "drawing",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "sub",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x002A96F0",
+"inside": "0x002A9610",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002A97B0",
+"inside": "0x002A9610",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002AC350",
+"inside": "0x002AC2B0",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002AC3B0",
+"inside": "0x002AC390",
+"lib": "core",
+"referenced_by": "none",
+"prev": "jmp indirect dword ptr [edx + 4]",
+"tail": "jmp",
+"verdict": "accept: follows indirect jmp + padding"
+},
+{
+"start": "0x002AC480",
+"inside": "0x002AC440",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002AC4C0",
+"inside": "0x002AC440",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002AC4F0",
+"inside": "0x002AC440",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002AC520",
+"inside": "0x002AC440",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002AC610",
+"inside": "0x002AC5D0",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002AC670",
+"inside": "0x002AC5D0",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002ACC70",
+"inside": "0x002ACC30",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "jmp",
+"verdict": "accept"
+},
+{
+"start": "0x002ACCC0",
+"inside": "0x002ACC92",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002ADD80",
+"inside": "0x002ADD10",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002ADDE0",
+"inside": "0x002ADD10",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002ADE10",
+"inside": "0x002ADD10",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002ADE40",
+"inside": "0x002ADD10",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002ADED0",
+"inside": "0x002ADD10",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002ADF00",
+"inside": "0x002ADD10",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002ADF30",
+"inside": "0x002ADD10",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002ADF60",
+"inside": "0x002ADD10",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002ADFF0",
+"inside": "0x002ADD10",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002B0780",
+"inside": "0x002B0707",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "mov",
+"verdict": "reject: switch-case label (jump-table target)"
+},
+{
+"start": "0x002B3C00",
+"inside": "0x002B3B10",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "jmp rel 0x2b3c03",
+"tail": "mov",
+"verdict": "doubtful: body does not end in ret/jmp (mov)"
+},
+{
+"start": "0x002B3D70",
+"inside": "0x002B3D3A",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "mov",
+"verdict": "doubtful: body does not end in ret/jmp (mov)"
+},
+{
+"start": "0x002B8600",
+"inside": "0x002B8580",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002BE480",
+"inside": "0x002BE240",
+"lib": "lib?",
+"referenced_by": "none",
+"prev": "jmp rel 0x2be31a",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002C1550",
+"inside": "0x002C1480",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002C15F0",
+"inside": "0x002C1480",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002C1730",
+"inside": "0x002C1700",
+"lib": "core",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002C2460",
+"inside": "0x002C2440",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002C2480",
+"inside": "0x002C2440",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002C24A0",
+"inside": "0x002C2440",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002C42A0",
+"inside": "0x002C423A",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002C5200",
+"inside": "0x002C4F90",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002C5E80",
+"inside": "0x002C5C80",
+"lib": "backend",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002C84B0",
+"inside": "0x002C8395",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x002C93E0",
+"inside": "0x002C9360",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "sub",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x002CF920",
+"inside": "0x002CF8B0",
+"lib": "om",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002CF940",
+"inside": "0x002CF8B0",
+"lib": "om",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002CFAF0",
+"inside": "0x002CFAA0",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002D0040",
+"inside": "0x002CFFD0",
+"lib": "sound",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002D0090",
+"inside": "0x002CFFD0",
+"lib": "sound",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002D00B0",
+"inside": "0x002CFFD0",
+"lib": "sound",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002D00E0",
+"inside": "0x002CFFD0",
+"lib": "sound",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002D1C60",
+"inside": "0x002D1A40",
+"lib": "sound",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002D1D20",
+"inside": "0x002D1CF0",
+"lib": "sound",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002D2320",
+"inside": "0x002D22F0",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002D4E40",
+"inside": "0x002D4DC0",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "jmp rel 0x2cfa10",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002DACA0",
+"inside": "0x002DAC40",
+"lib": "sound",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E05C0",
+"inside": "0x002E04D0",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1070",
+"inside": "0x002E1030",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E10C0",
+"inside": "0x002E1030",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1110",
+"inside": "0x002E1030",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1610",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E16C0",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1730",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1790",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E17F0",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1840",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1890",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E18E0",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1930",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1990",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E19F0",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1A60",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1AE0",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1B40",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E1B80",
+"inside": "0x002E1560",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E2840",
+"inside": "0x002E27B0",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E2FC0",
+"inside": "0x002E2F50",
+"lib": "movie",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E3850",
+"inside": "0x002E3560",
+"lib": "movie",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E3880",
+"inside": "0x002E3560",
+"lib": "movie",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E38A0",
+"inside": "0x002E3560",
+"lib": "movie",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E3B40",
+"inside": "0x002E3A40",
+"lib": "movie",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E3BB0",
+"inside": "0x002E3B80",
+"lib": "movie",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E3E70",
+"inside": "0x002E3B80",
+"lib": "movie",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E3EE0",
+"inside": "0x002E3B80",
+"lib": "movie",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E3F20",
+"inside": "0x002E3B80",
+"lib": "movie",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E4FC0",
+"inside": "0x002E4F80",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E7B10",
+"inside": "0x002E6DA0",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "mov",
+"verdict": "doubtful: body does not end in ret/jmp (mov)"
+},
+{
+"start": "0x002E82A0",
+"inside": "0x002E7E0D",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002E8A60",
+"inside": "0x002E84B0",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002EE5C0",
+"inside": "0x002EE4C0",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002EE8C0",
+"inside": "0x002EE850",
+"lib": "physics",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002EF300",
+"inside": "0x002EF260",
+"lib": "physics",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F0D00",
+"inside": "0x002F0CE0",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F0FD0",
+"inside": "0x002F0CE0",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F1150",
+"inside": "0x002F0CE0",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F1240",
+"inside": "0x002F0CE0",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F1540",
+"inside": "0x002F0CE0",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F1750",
+"inside": "0x002F0CE0",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F18B0",
+"inside": "0x002F0CE0",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F1D50",
+"inside": "0x002F0CE0",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F6380",
+"inside": "0x002F6040",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F63F0",
+"inside": "0x002F6040",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F6460",
+"inside": "0x002F6040",
+"lib": "physics",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F68D0",
+"inside": "0x002F6700",
+"lib": "physics",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F6D00",
+"inside": "0x002F69B0",
+"lib": "physics",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F7330",
+"inside": "0x002F6F30",
+"lib": "physics",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F8A10",
+"inside": "0x002F8970",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F8D80",
+"inside": "0x002F8C10",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F9090",
+"inside": "0x002F8C10",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F9630",
+"inside": "0x002F9440",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002F96D0",
+"inside": "0x002F9440",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "accept"
+},
+{
+"start": "0x002FA820",
+"inside": "0x002FA390",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "add",
+"verdict": "reject: jump table data"
+},
+{
+"start": "0x002FB7E0",
+"inside": "0x002FB460",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FC140",
+"inside": "0x002FBC01",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "call",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FC360",
+"inside": "0x002FC15D",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FCA70",
+"inside": "0x002FC9D8",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "jmp rel 0x2fca4c",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FCB50",
+"inside": "0x002FC9D8",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FCDB0",
+"inside": "0x002FC9D8",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FCFA0",
+"inside": "0x002FC9D8",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "jmp indirect dword ptr [ecx*4 + 0x2fd098]",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FD3A0",
+"inside": "0x002FD289",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FD5B0",
+"inside": "0x002FD4ED",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "jmp rel 0x305c50",
+"tail": "call",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FD6A0",
+"inside": "0x002FD4ED",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "call",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FDB70",
+"inside": "0x002FDAF1",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "xor",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FDBD0",
+"inside": "0x002FDAF1",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "xor",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FDC50",
+"inside": "0x002FDAF1",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "xor",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FDD00",
+"inside": "0x002FDAF1",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "xor",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FDE50",
+"inside": "0x002FDAF1",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "xor",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FDEC0",
+"inside": "0x002FDAF1",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "xor",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FE050",
+"inside": "0x002FDAF1",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "xor",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FE5F0",
+"inside": "0x002FE371",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "mov",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FF890",
+"inside": "0x002FF7D3",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FFAB0",
+"inside": "0x002FF7D3",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x002FFF10",
+"inside": "0x002FF7D3",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003027C0",
+"inside": "0x00301503",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00302840",
+"inside": "0x00301503",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00302960",
+"inside": "0x00301503",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00302B40",
+"inside": "0x00301503",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00305ED0",
+"inside": "0x00305D13",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00305FD0",
+"inside": "0x00305D13",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "jmp rel 0x2ffa38",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00306280",
+"inside": "0x00306061",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003062F0",
+"inside": "0x00306061",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00306DD0",
+"inside": "0x00306061",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003074F0",
+"inside": "0x00306061",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "jmp rel 0x307511",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003075B0",
+"inside": "0x00306061",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003084E0",
+"inside": "0x003081D7",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "jmp rel 0x3083af",
+"tail": "mov",
+"verdict": "reject: switch-case label (jump-table target)"
+},
+{
+"start": "0x0030AD50",
+"inside": "0x0030AC70",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030ADC0",
+"inside": "0x0030AD60",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030AF20",
+"inside": "0x0030AD60",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030AFB0",
+"inside": "0x0030AD60",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030B700",
+"inside": "0x0030AD60",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030C1E0",
+"inside": "0x0030C160",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030CA40",
+"inside": "0x0030C160",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030D2C0",
+"inside": "0x0030C160",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030D690",
+"inside": "0x0030C160",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030DC00",
+"inside": "0x0030C160",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030E1B0",
+"inside": "0x0030C160",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030E830",
+"inside": "0x0030C160",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030EA20",
+"inside": "0x0030C160",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030ED90",
+"inside": "0x0030ECF0",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030EE50",
+"inside": "0x0030ECF0",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030EF10",
+"inside": "0x0030ECF0",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030F0F0",
+"inside": "0x0030ECF0",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030F160",
+"inside": "0x0030ECF0",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "jmp rel 0x30e830",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030F560",
+"inside": "0x0030ECF0",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "jmp rel 0x30e830",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030FA00",
+"inside": "0x0030ECF0",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030FAA0",
+"inside": "0x0030ECF0",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030FB40",
+"inside": "0x0030ECF0",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x0030FC70",
+"inside": "0x0030ECF0",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003100E0",
+"inside": "0x00310070",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "mov",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00310110",
+"inside": "0x00310070",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "mov",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003101F0",
+"inside": "0x00310070",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "jmp rel 0x3101dc",
+"tail": "mov",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003102D0",
+"inside": "0x00310070",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "ret",
+"tail": "mov",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003108D0",
+"inside": "0x00310070",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "mov",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00310D10",
+"inside": "0x00310907",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "jmp",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00311050",
+"inside": "0x00310907",
+"lib": "ms/other",
+"referenced_by": "call",
+"prev": "ret",
+"tail": "jmp",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00311110",
+"inside": "0x00310907",
+"lib": "ms/other",
+"referenced_by": "none",
+"prev": "jmp rel 0x2ff988",
+"tail": "jmp",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003111A0",
+"inside": "0x00310907",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "jmp rel 0x343716",
+"tail": "jmp",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00311320",
+"inside": "0x00311302",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "ret",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003113D0",
+"inside": "0x003113C6",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "jmp rel 0x31029a",
+"tail": "jmp",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x003115A0",
+"inside": "0x0031156D",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "jmp rel 0x349952",
+"tail": "ret",
+"verdict": "exclude: MS library range"
+},
+{
+"start": "0x00311780",
+"inside": "0x00311776",
+"lib": "ms/other",
+"referenced_by": "data",
+"prev": "jmp rel 0x31029a",
+"tail": "jmp",
+"verdict": "exclude: MS library range"
+}
+]
 }

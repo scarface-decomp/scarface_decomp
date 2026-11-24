@@ -54,6 +54,10 @@ executable, `.rdata` and `.data` included.
   one of the 20 verified library functions whose bytes depend on the switch matches only without it).
 * No `/GS`: neither Xbox program has the stack-cookie check or loads a cookie in any function, so the
   switch was off (SPEC-013 §5). `/Ob1` changed no verified Xbox function.
+* Link-time code generation: the retail Xbox program was linked with it (SPEC-014 §5.5). A few functions
+  take an argument in EAX, ESI, EDI or EBX, which this compiler only does then. Such a function and its
+  callers cannot be matched by compiling one file; `reports/exam_regarg_xb.json` lists 55 leads (seven
+  are false: already matched from ordinary compiles). Everything else compiles the same without it.
 * No `/EHsc` on Xbox: the game and engine code has no C++ exception frame (no function sets the
   exception list at `fs:[0]`; the 49 exception stubs belong to a Microsoft library), and all 22,626
   verified Xbox functions (11,678 retail, 10,948 prototype) still match with the switch removed. New

@@ -1,0 +1,391 @@
+{
+"schema": "exam_regarg_v1",
+"what": "Examiner, default.xbe: functions that read EAX before writing it AND have a direct caller that loads EAX within 4 instructions before the call: arguments passed in EAX, which MSVC 7.1 only does for link-time code generation (/GL + /LTCG). Heuristic; false positives possible (functions called right after a value-returning call).",
+"functions": [
+{
+"va": "0x00013700",
+"size": 176,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x000179F0",
+"size": 64,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x0001E1F0",
+"size": 64,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 12
+},
+{
+"va": "0x00022720",
+"size": 3,
+"lib": "game",
+"verified": true,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x00025760",
+"size": 11,
+"lib": "game",
+"verified": true,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x00063160",
+"size": 21,
+"lib": "game",
+"verified": true,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x00070C80",
+"size": 96,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 3
+},
+{
+"va": "0x00071430",
+"size": 160,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 3
+},
+{
+"va": "0x00091280",
+"size": 16,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x000A37A0",
+"size": 48,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x000AC390",
+"size": 128,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x000AECA0",
+"size": 96,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x000B30B0",
+"size": 2224,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 3
+},
+{
+"va": "0x000BAEB0",
+"size": 272,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x000C2AE0",
+"size": 31,
+"lib": "game",
+"verified": true,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x000C36C0",
+"size": 176,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x000D2AF0",
+"size": 144,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x0014A270",
+"size": 5,
+"lib": "game",
+"verified": true,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x0016EDE0",
+"size": 608,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x001EA5B0",
+"size": 64,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 3
+},
+{
+"va": "0x001FF650",
+"size": 944,
+"lib": "game",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002533B0",
+"size": 96,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x0025FFA0",
+"size": 288,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x002634F0",
+"size": 112,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x00263600",
+"size": 112,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002636E0",
+"size": 304,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x00278820",
+"size": 48,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x00284950",
+"size": 256,
+"lib": "lib?",
+"verified": false,
+"call_sites_with_eax_load": 5
+},
+{
+"va": "0x00286880",
+"size": 96,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x002872B0",
+"size": 576,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x0028C170",
+"size": 47,
+"lib": "drawing",
+"verified": true,
+"call_sites_with_eax_load": 3
+},
+{
+"va": "0x00291400",
+"size": 48,
+"lib": "lib?",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x00297BC0",
+"size": 160,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x00297C60",
+"size": 416,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x00297E00",
+"size": 320,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002988A0",
+"size": 208,
+"lib": "drawing",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x0029B5A0",
+"size": 112,
+"lib": "backend",
+"verified": false,
+"call_sites_with_eax_load": 4
+},
+{
+"va": "0x0029C240",
+"size": 80,
+"lib": "backend",
+"verified": false,
+"call_sites_with_eax_load": 3
+},
+{
+"va": "0x002AE410",
+"size": 1008,
+"lib": "lib?",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x002AEC00",
+"size": 768,
+"lib": "lib?",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x002B02F0",
+"size": 289,
+"lib": "lib?",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x002B3B10",
+"size": 308,
+"lib": "lib?",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002BFA00",
+"size": 160,
+"lib": "core",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002C6510",
+"size": 144,
+"lib": "ms/other",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x002C65A0",
+"size": 576,
+"lib": "ms/other",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002C6FC0",
+"size": 288,
+"lib": "ms/other",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002D3800",
+"size": 144,
+"lib": "ms/other",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x002D3960",
+"size": 128,
+"lib": "ms/other",
+"verified": false,
+"call_sites_with_eax_load": 2
+},
+{
+"va": "0x002D4040",
+"size": 400,
+"lib": "ms/other",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002DD860",
+"size": 64,
+"lib": "sound",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002DF450",
+"size": 28,
+"lib": "sound",
+"verified": true,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002DF480",
+"size": 96,
+"lib": "sound",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002EDB90",
+"size": 144,
+"lib": "physics",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002EEB90",
+"size": 96,
+"lib": "physics",
+"verified": false,
+"call_sites_with_eax_load": 1
+},
+{
+"va": "0x002F8C10",
+"size": 1152,
+"lib": "ms/other",
+"verified": false,
+"call_sites_with_eax_load": 3
+}
+]
+}

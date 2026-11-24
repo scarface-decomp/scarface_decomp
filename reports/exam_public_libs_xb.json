@@ -1,0 +1,2259 @@
+{
+"schema": "exam_public_libs_v1",
+"what": "Examiner, from default.xbe only: every function in the three C-library regions with its witness strings (text the function references), CRT callees and .rdata tables, so each can be paired with the public libpng 1.2.8 / zlib 1.2.1 source by the implementer. guess = png|zlib|? from the witness text only. 0x3DBC98 = crc table, 0x3DDC98/0x3DE498 = fixed inflate tables, 0x3DAF4C.. = libpng signature and chunk-name arrays.",
+"functions": [
+{
+"va": "0x002B8580",
+"size": 128,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B8600",
+"size": 80,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 0,
+"strings": [
+"Potential overflow in png_zalloc()"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002B8650",
+"size": 5,
+"verified": true,
+"region": "png_A",
+"ret": [],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B8660",
+"size": 25,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 3,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B8680",
+"size": 80,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 26,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B86D0",
+"size": 960,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 10,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B8A90",
+"size": 96,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 3,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B8AF0",
+"size": 8,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B8B00",
+"size": 80,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 3,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B8B50",
+"size": 25,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B8B70",
+"size": 64,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B8BB0",
+"size": 64,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B8BF0",
+"size": 544,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"1.2.8",
+"Application was compiled with png.h from libpng-%.20s",
+"Application  is  running with png.c from libpng-%.20s",
+"Incompatible libpng version in application and library",
+"1.2.1",
+"zlib memory error"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002B8E10",
+"size": 880,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Not a PNG file",
+"PNG file corrupted by ASCII conversion",
+"IHDR",
+"IEND",
+"IDAT",
+"PLTE"
+],
+"rdata_tables": [
+"0x3daf5c",
+"0x3daf6c"
+],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002B9180",
+"size": 80,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Ignoring extra png_read_update_info() call; row buffer not r"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002B91D0",
+"size": 1184,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 3,
+"strings": [
+"Invalid attempt to read row data",
+"IDAT",
+"Not enough image data",
+"Decompression error",
+"Extra compressed data"
+],
+"rdata_tables": [
+"0x3db06c",
+"0x3db088",
+"0x3db08c",
+"0x3db090"
+],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002B9670",
+"size": 656,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9900",
+"size": 192,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 4,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B99C0",
+"size": 27,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 3,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B99E0",
+"size": 23,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 3,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9A00",
+"size": 22,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 3,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9A20",
+"size": 23,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 3,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9A40",
+"size": 23,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9A60",
+"size": 23,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9A80",
+"size": 23,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9AA0",
+"size": 54,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9AE0",
+"size": 115,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9B60",
+"size": 12,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9B70",
+"size": 12,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9B80",
+"size": 12,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9B90",
+"size": 400,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9D20",
+"size": 304,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002B9E50",
+"size": 464,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BA020",
+"size": 80,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BA070",
+"size": 272,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BA180",
+"size": 224,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BA260",
+"size": 656,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BA4F0",
+"size": 352,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BA650",
+"size": 1696,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BACF0",
+"size": 4016,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BBCA0",
+"size": 912,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BC030",
+"size": 544,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BC250",
+"size": 912,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BC5E0",
+"size": 352,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BC740",
+"size": 1616,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BCD90",
+"size": 208,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BCE60",
+"size": 2624,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BD8A0",
+"size": 1120,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"NULL row buffer for row %ld, pass %d",
+"png_do_rgb_to_gray found nongray pixel",
+"png_do_dither returned rowbytes=0"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002BDD00",
+"size": 9,
+"verified": true,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BDD10",
+"size": 96,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BDD70",
+"size": 128,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BDDF0",
+"size": 64,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BDE30",
+"size": 80,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BDE80",
+"size": 560,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BE0B0",
+"size": 208,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002BE180",
+"size": 96,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 31,
+"strings": [
+"Call to NULL read function",
+"Read Error"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002BE1E0",
+"size": 96,
+"verified": false,
+"region": "png_A",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"It's an error to set both read_data_fn and write_data_fn in ",
+"same structure.  Resetting write_data_fn to NULL."
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C6510",
+"size": 144,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"0123456789ABCDEFlibpng error: %s\n"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C65A0",
+"size": 576,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"libpng error no. %s: %s\n",
+"libpng error: %s, offset=%d\n",
+"libpng error: %s\n",
+"libpng warning no. %s: %s\n",
+"libpng warning: %s\n"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C67E0",
+"size": 26,
+"verified": true,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6800",
+"size": 160,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [],
+"direct_callers": 59,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C68A0",
+"size": 80,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 126,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C68F0",
+"size": 48,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [],
+"direct_callers": 3,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6920",
+"size": 48,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6950",
+"size": 128,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C69D0",
+"size": 80,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 5,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6A20",
+"size": 35,
+"verified": true,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6A50",
+"size": 49,
+"verified": true,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6A90",
+"size": 35,
+"verified": true,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6AC0",
+"size": 96,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 22,
+"strings": [
+"Out of Memory!"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C6B20",
+"size": 48,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 82,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6B50",
+"size": 39,
+"verified": true,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 25,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6E60",
+"size": 32,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 14,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6E80",
+"size": 73,
+"verified": true,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 4,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6ED0",
+"size": 208,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6FA0",
+"size": 26,
+"verified": true,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C6FC0",
+"size": 288,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C70E0",
+"size": 4789,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 3,
+"strings": [
+"unknown compression method",
+"invalid window size",
+"incorrect header check",
+"unknown header flags set",
+"header crc mismatch",
+"invalid block type"
+],
+"rdata_tables": [
+"0x3ddc98",
+"0x3de498"
+],
+"crt_calls": [],
+"guess": "zlib"
+},
+{
+"va": "0x002C8395",
+"size": 427,
+"verified": false,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 0,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C8540",
+"size": 72,
+"verified": true,
+"region": "pngerr_zlibA",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C8590",
+"size": 35,
+"verified": true,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 6,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C85C0",
+"size": 48,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 10,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C85F0",
+"size": 128,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C8670",
+"size": 976,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"Not enough memory to decompress chunk.",
+"Not enough memory to decompress chunk..",
+"Not enough memory to decompress chunk",
+"Buffer error in compressed datastream in %s chunk",
+"Data error in compressed datastream in %s chunk",
+"Incomplete compressed datastream in %s chunk"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C8A40",
+"size": 96,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"invalid chunk type"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C8AA0",
+"size": 800,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 6,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C8DC0",
+"size": 740,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [
+"0x3db018"
+],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C90A4",
+"size": 380,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 0,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C9220",
+"size": 320,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002C9360",
+"size": 160,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 0,
+"strings": [
+"Ignoring bad adaptive filter type"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C9400",
+"size": 704,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"Row has too many bytes to allocate in memory."
+],
+"rdata_tables": [
+"0x3daffc",
+"0x3db018",
+"0x3db034",
+"0x3db050"
+],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C96C0",
+"size": 65,
+"verified": true,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"PNG unsigned integer out of range.\n"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C9710",
+"size": 208,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 71,
+"strings": [
+"CRC error"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C97E0",
+"size": 464,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Out of place IHDR",
+"Invalid IHDR chunk",
+"PNG unsigned integer out of range.\n"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C99B0",
+"size": 416,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before PLTE",
+"Invalid PLTE after IDAT",
+"Duplicate PLTE chunk",
+"Ignoring PLTE chunk in grayscale PNG",
+"Invalid palette chunk",
+"Truncating incorrect tRNS chunk length"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C9B50",
+"size": 80,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"No image in file",
+"Incorrect IEND chunk length"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C9BA0",
+"size": 384,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before gAMA",
+"Invalid gAMA after IDAT",
+"Out of place gAMA chunk",
+"Duplicate gAMA chunk",
+"Incorrect gAMA chunk length",
+"Ignoring gAMA chunk with gamma=0"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C9D20",
+"size": 384,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before sBIT",
+"Invalid sBIT after IDAT",
+"Out of place sBIT chunk",
+"Duplicate sBIT chunk",
+"Incorrect sBIT chunk length"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002C9EA0",
+"size": 1312,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before cHRM",
+"Invalid cHRM after IDAT",
+"Missing PLTE before cHRM",
+"Duplicate cHRM chunk",
+"Incorrect cHRM chunk length",
+"Ignoring incorrect cHRM value when sRGB is also present"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CA3C0",
+"size": 496,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before sRGB",
+"Invalid sRGB after IDAT",
+"Out of place sRGB chunk",
+"Duplicate sRGB chunk",
+"Incorrect sRGB chunk length",
+"Unknown sRGB intent"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CA5B0",
+"size": 448,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before iCCP",
+"Invalid iCCP after IDAT",
+"Out of place iCCP chunk",
+"Duplicate iCCP chunk",
+"Malformed iCCP chunk",
+"Ignoring nonzero compression type in iCCP chunk"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CA770",
+"size": 592,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before sPLT",
+"Invalid sPLT after IDAT",
+"malformed sPLT chunk",
+"sPLT chunk has bad length",
+"sPLT chunk too long",
+"sPLT chunk requires too much memory"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CA9C0",
+"size": 349,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before tRNS",
+"Invalid tRNS after IDAT",
+"Duplicate tRNS chunk"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CAB1D",
+"size": 259,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 0,
+"strings": [
+"Missing PLTE before tRNS",
+"Zero length tRNS chunk",
+"Incorrect tRNS chunk length",
+"tRNS chunk not allowed with alpha channel"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CAC20",
+"size": 544,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before bKGD",
+"Invalid bKGD after IDAT",
+"Missing PLTE before bKGD",
+"Duplicate bKGD chunk",
+"Incorrect bKGD chunk length",
+"Incorrect bKGD chunk index value"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CAE40",
+"size": 368,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before hIST",
+"Invalid hIST after IDAT",
+"Missing PLTE before hIST",
+"Duplicate hIST chunk",
+"Incorrect hIST chunk length"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CAFB0",
+"size": 288,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before pHYs",
+"Incorrect pHYs chunk length",
+"Invalid pHYs after IDAT",
+"Duplicate pHYs chunk"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CB0D0",
+"size": 288,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before oFFs",
+"Incorrect oFFs chunk length",
+"Invalid oFFs after IDAT",
+"Duplicate oFFs chunk"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CB1F0",
+"size": 704,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before pCAL",
+"No memory for pCAL purpose.",
+"Invalid pCAL after IDAT",
+"Duplicate pCAL chunk",
+"Invalid pCAL data",
+"Invalid pCAL parameters for equation type"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CB4B0",
+"size": 448,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before sCAL",
+"Out of memory while processing sCAL chunk",
+"Invalid sCAL after IDAT",
+"Duplicate sCAL chunk",
+"malformed width string in sCAL chunk",
+"malformed height string in sCAL chunk"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CB670",
+"size": 256,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Out of place tIME chunk",
+"Incorrect tIME chunk length",
+"Duplicate tIME chunk"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CB770",
+"size": 304,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before tEXt",
+"No memory to process text chunk.",
+"Not enough memory to process text chunk.",
+"Insufficient memory to process text chunk."
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CB8A0",
+"size": 352,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Missing IHDR before zTXt",
+"Out of memory processing zTXt chunk.",
+"Zero length zTXt chunk",
+"Unknown compression type in zTXt chunk",
+"Not enough memory to process zTXt chunk.",
+"Insufficient memory to store zTXt chunk."
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CBA00",
+"size": 352,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"IDAT",
+"unknown critical chunk"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CBB60",
+"size": 768,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 4,
+"strings": [
+"PNG unsigned integer out of range.\n",
+"IDAT",
+"Not enough image data",
+"Decompression Error",
+"Extra compressed data.",
+"Extra compression data"
+],
+"rdata_tables": [
+"0x3db018",
+"0x3db034",
+"0x3db050"
+],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CBE60",
+"size": 544,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CC080",
+"size": 16,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CC090",
+"size": 1,
+"verified": true,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 0,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CC120",
+"size": 60,
+"verified": true,
+"region": "png_zlib_B",
+"ret": [
+"8"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CC350",
+"size": 19,
+"verified": true,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 0,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CC380",
+"size": 1136,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"invalid distance too far back",
+"invalid distance code",
+"invalid literal/length code"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "zlib"
+},
+{
+"va": "0x002CC7F0",
+"size": 1216,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 3,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CCCB0",
+"size": 297,
+"verified": true,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 4,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CCDE0",
+"size": 48,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CCE10",
+"size": 704,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"Ignoring attempt to set chromaticity value exceeding 21474.8",
+"Ignoring attempt to set negative chromaticity value"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CD0D0",
+"size": 560,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"Ignoring attempt to set chromaticity value exceeding 21474.8",
+"Ignoring attempt to set negative chromaticity value"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CD300",
+"size": 144,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"Limiting gamma to 21474.83",
+"Setting gamma=0"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CD390",
+"size": 128,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"Limiting gamma to 21474.83",
+"Setting negative gamma to zero",
+"Setting gamma=0"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CD410",
+"size": 192,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Palette size 0, hIST allocation skipped.",
+"Insufficient memory for hIST chunk data."
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CD4D0",
+"size": 560,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Image width or height is zero in IHDR",
+"image size exceeds user limits in IHDR",
+"Invalid image size in IHDR",
+"Width is too large for libpng to process pixels",
+"Invalid bit depth in IHDR",
+"Invalid color type in IHDR"
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CD700",
+"size": 64,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CD740",
+"size": 464,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Insufficient memory for pCAL purpose.",
+"Insufficient memory for pCAL units.",
+"Insufficient memory for pCAL params.",
+"Insufficient memory for pCAL parameter."
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CD910",
+"size": 64,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CD950",
+"size": 64,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CD990",
+"size": 160,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CDA30",
+"size": 48,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CDA60",
+"size": 224,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CDB40",
+"size": 304,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Insufficient memory to process iCCP chunk.",
+"Insufficient memory to process iCCP profile."
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CDC70",
+"size": 576,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 2,
+"strings": [
+"iTXt chunk not supported."
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CDEB0",
+"size": 49,
+"verified": true,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CDEF0",
+"size": 176,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "?"
+},
+{
+"va": "0x002CDFA0",
+"size": 384,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"No memory for sPLT palettes."
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+},
+{
+"va": "0x002CE120",
+"size": 384,
+"verified": false,
+"region": "png_zlib_B",
+"ret": [
+"0"
+],
+"direct_callers": 1,
+"strings": [
+"Out of memory while processing unknown chunk.",
+"Out of memory processing unknown chunk."
+],
+"rdata_tables": [],
+"crt_calls": [],
+"guess": "png"
+}
+]
+}
