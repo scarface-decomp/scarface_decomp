@@ -1254,7 +1254,7 @@ def clean_what(text) -> str:
 
 
 def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, ported_from: str = "",
-                    write: bool = True, what: str = "") -> None:
+                    write: bool = True, what: str = "", how: str = "") -> None:
     key = task_key(t)
     REGISTRY["entries"][key] = {
         "bin": t["bin"], "va": f"0x{t['fva_int']:08X}", "size": int(t["size"]), "symbol": t["symbol"],
@@ -1266,7 +1266,7 @@ def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, por
     if ported_from:
         REGISTRY["entries"][key]["ported_from"] = ported_from
     if clean_what(what):
-        REGISTRY["entries"][key].update(what=clean_what(what), what_how="human")
+        REGISTRY["entries"][key].update(what=clean_what(what), what_how=DESC.normal_how(how) if how else "human")
     if write:
         save_registry()
 
@@ -3089,7 +3089,8 @@ class Handler(BaseHTTPRequestHandler):
                          best_cpp=code, best_diff_details=res["diff_details"])
                 save_overlay(t)
             if res["verified"] and not already:
-                record_verified(tv, code, user, tool, res, what=clean_what(body.get("what")))
+                record_verified(tv, code, user, tool, res, what=clean_what(body.get("what")),
+                                how=str(body.get("what_how") or ""))
                 if tv is not t:
                     t["match_substr"] = tv.get("match_substr", "")
                 t.update(status="VERIFIED", claimed_by="", claim_expires_at=0)

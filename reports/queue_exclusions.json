@@ -309,6 +309,911 @@
     "why": "x87 math helper shared tail/entry fragment"
    },
    {
+    "va": "0x00311198",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003111A0",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003111AB",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003111B5",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003111BD",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003111C5",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003111CD",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003111D7",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003111DF",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003111E9",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003111F1",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003111F9",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311201",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031120B",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311213",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031121D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311225",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031122F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311237",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031123F",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311249",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311251",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031125C",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311266",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031126E",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311276",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311281",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031128B",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311295",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031129D",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003112A7",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003112AF",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003112BA",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003112C5",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003112D0",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003112DA",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003112E4",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003112EE",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003112F8",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311302",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031130C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311316",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311320",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031132A",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311334",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031133E",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311348",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311352",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031135C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311364",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031136C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311374",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031137E",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311386",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311391",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031139C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003113A7",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003113B2",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003113BC",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003113C6",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003113D0",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003113D8",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003113E2",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003113EA",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003113F5",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003113FF",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311407",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311411",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311419",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311423",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031142B",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311435",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031143D",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311447",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031144F",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311459",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311464",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031146F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311477",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031147F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311487",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031148F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311497",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031149F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003114A7",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003114B1",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003114CA",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003114D4",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003114DC",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003114E4",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003114EC",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003114F4",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003114FE",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311506",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311511",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031151C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311527",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311531",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031153B",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311545",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031154F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311559",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311563",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031156D",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311577",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031157F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031158A",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311595",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003115A0",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003115AB",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003115B5",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003115BF",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003115C9",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003115D3",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003115DB",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003115E9",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003115F3",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003115FB",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311603",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031160D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311615",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031161F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311627",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031162F",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311639",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311641",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031164B",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311655",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031165F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311669",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311673",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031167D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311685",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031168D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311695",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031169D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003116A5",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003116AF",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003116B9",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003116C1",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003116CC",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003116D7",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003116E2",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003116ED",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003116F8",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311702",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031170A",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311712",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031171C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311727",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311732",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031173C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311747",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311752",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311768",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311776",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311780",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311788",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311792",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031179A",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003117A2",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003117AC",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003117B4",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003117BC",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003117C6",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003117CE",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003117D8",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003117E0",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003117EA",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x003117F2",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x003117FC",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311804",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x0031180E",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311818",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311822",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031182C",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x00311836",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031183E",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311846",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x0031184E",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x00311856",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
     "va": "0x00312434",
     "kind": "nonstart",
     "why": "x87 math helper shared tail/entry fragment"
@@ -317,6 +1222,913 @@
     "va": "0x00317881",
     "kind": "nonstart",
     "why": "misaligned decode (first insn js; prev byte 68)"
+   }
+  ],
+  "proto": [
+   {
+    "va": "0x002DF340",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF348",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF353",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF35D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF365",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF36D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF375",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF37F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF387",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF391",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF399",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF3A1",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF3A9",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF3B3",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF3BB",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF3C5",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF3CD",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF3D7",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF3DF",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF3E7",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF3F1",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF3F9",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF404",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF40E",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF416",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF41E",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF429",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF433",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF43D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF445",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF44F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF457",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF462",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF46D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF478",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF482",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF48C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF496",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF4A0",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF4AA",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF4B4",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF4BE",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF4C8",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF4D2",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF4DC",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF4E6",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF4F0",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF4FA",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF504",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF50C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF514",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF51C",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF526",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF52E",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF539",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF544",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF54F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF55A",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF564",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF56E",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF578",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF580",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF58A",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF592",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF59D",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF5A7",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF5AF",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF5B9",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF5C1",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF5CB",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF5D3",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF5DD",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF5E5",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF5EF",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF5F7",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF601",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF60C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF617",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF61F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF627",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF62F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF637",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF63F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF647",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF64F",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF659",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF672",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF67C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF684",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF68C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF694",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF69C",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF6A6",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF6AE",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF6B9",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF6C4",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF6CF",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF6D9",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF6E3",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF6ED",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF6F7",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF701",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF70B",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF715",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF71F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF727",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF732",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF73D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF748",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF753",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF75D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF767",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF771",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF77B",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF783",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF791",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF79B",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF7A3",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF7AB",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF7B5",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF7BD",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF7C7",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF7CF",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF7D7",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF7E1",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF7E9",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF7F3",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF7FD",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF807",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF811",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF81B",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF825",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF82D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF835",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF83D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF845",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF84D",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF857",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF861",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF869",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF874",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF87F",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF88A",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF895",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF8A0",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF8AA",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF8B2",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF8BA",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF8C4",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF8CF",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF8DA",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF8E4",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF8EF",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF8FA",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF910",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF91E",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF928",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF930",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF93A",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF942",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF94A",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF954",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF95C",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF964",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF96E",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF976",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF980",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF988",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF992",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF99A",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF9A4",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF9AC",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF9B6",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF9C0",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF9CA",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF9D4",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   },
+   {
+    "va": "0x002DF9DE",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF9E6",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF9EE",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF9F6",
+    "kind": "nonstart",
+    "why": "unwind funclet or catch block named by a FuncInfo record (part of its parent function)"
+   },
+   {
+    "va": "0x002DF9FE",
+    "kind": "nonstart",
+    "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
    }
   ]
  }

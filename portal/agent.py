@@ -272,7 +272,8 @@ def cmd_describe(args) -> int:
         own = (names.get(k) or {}).get("name")
         print(f"=== {k}  {own or e.get('symbol', '')}  ({e.get('size')} bytes)")
         if k in commands:
-            print(f"  it is the script command {commands[k]} (scripts call it by that name)")
+            print(f"  it is the script command {commands[k]} (scripts call it by that name): "
+                  f'give it "how": "bound"')
         g = graph.get("functions", {}).get(k.split(":", 1)[1], {})
         if g.get("casts"):
             to = list(dict.fromkeys(c[1] if isinstance(c, list) else c for c in g["casts"]))

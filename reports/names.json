@@ -20652,6 +20652,11 @@
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Links the record's namespace (+0x20) under its parent record's with sub_00070520 (classLinkNamespaces, named from the game's own error message) and keeps the parent record at +0x24."
     },
+    "xb:0x00011930": {
+      "name": "content::LoadObject::Release",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Virtual 1 (core::IRefCount's Release) in 398 vtables, every one a class derived from content::LoadObject: if the count (+0x04) is under 2, sets it to 0x8000000 and calls the deleting destructor (virtual 3, with 1); otherwise takes one off."
+    },
     "xb:0x00011F20": {
       "name": "Collidable::~Collidable",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -20791,6 +20796,11 @@
       "name": "Script::SetAnalogDeadZone",
       "by": "the game's own script command table (portal/tools/script_commands.py)",
       "why": "The start-up code at 0x00312280 registers this function as the script command SetAnalogDeadZone (1 argument)."
+    },
+    "xb:0x00021830": {
+      "name": "RefCounted::Release",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Virtual 1 (core::IRefCount's Release) in 135 vtables (FightAction, AICondition, shaders ...): takes one off the count (+0x04) and, when it is under 1, calls the deleting destructor (virtual 3, with 1). RefCounted is a stand-in, as for RefCounted::AddRef (0x000CE340)."
     },
     "xb:0x00021B20": {
       "name": "FightContext::~FightContext",
@@ -21827,6 +21837,16 @@
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Deleting destructor: it ends `if (a1 & 1) sub_00027600(this); return this;` (sub_00027600 is called that way by 498 matched functions), and it is the only function of om::EntityType<GlobalVehicleSound> that does."
     },
+    "xb:0x00066C90": {
+      "name": "CScript::CallTyped",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(object, binding object, argc, argv, result): stores the argument cursor (0x00476408 = [binding+4], 0x0047640C = argv, 0x00476410 = argc) and calls the binding object's first virtual function with (object, result), which converts each argument and calls the bound C++ function."
+    },
+    "xb:0x00066EF0": {
+      "name": "CScript::Functor::Functor",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(binding object, argument count): writes the base vtable 0x003A2110, +0x04 = 0, the argument count (0 when negative) at +0x08 and +0x0A = 0. Every CScript::MethodN / FunctionN helper calls it before writing its own vtable and the bound function at +0x0C."
+    },
     "xb:0x00068380": {
       "name": "ScriptFileObject::~ScriptFileObject",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -21917,20 +21937,50 @@
       "by": "the game's own script command table (portal/tools/script_commands.py)",
       "why": "The start-up code at 0x00313BA0 registers this function as the script command EndScriptSection (1 argument)."
     },
+    "xb:0x00068E40": {
+      "name": "dSprintf",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(buffer, size, format, ...): vsprintf(buffer, format, the arguments); the size is not used."
+    },
+    "xb:0x00068FF0": {
+      "name": "GrowReturnBuffer",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(interpreter state, size): when size is over the capacity (+0x2474), sets the capacity to size + 0x800, allocates that from heap 3, copies the old buffer (+0x2478) over, frees it, and stores the new one."
+    },
+    "xb:0x000694E0": {
+      "name": "GetReturnBuffer",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(size): the interpreter state at [0x00478E60]; when size is over 0x200 grows its buffer (0x00068FF0); returns the buffer pointer at +0x2478. Handlers that return text write it there."
+    },
     "xb:0x0006F9B0": {
       "name": "myTest3",
       "by": "the game's own typed script binding (portal/tools/script_typed.py)",
       "why": "The start-up code at 0x00070ABA registers this function as the typed script command myTest3; the binding object's own class name gives its signature: int myTest3(int)."
+    },
+    "xb:0x0006FB10": {
+      "name": "RegisterTypedFunction",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(name, usage, binding object, fewest, most, extra): GetGlobalNamespace()->AddTypedCommand(StringToKey(name, 0), ...). Every CScript::FunctionN helper ends in it."
     },
     "xb:0x0006FE50": {
       "name": "LookupNamespace",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
       "why": "Takes a name: with none, returns the global namespace (tail-jump to GetGlobalNamespace 0x00072260); otherwise StringToKey(name, 0) (0x000767E0) and tail-jumps to FindOrCreateNamespace (0x00072CD0) with the key. InitializeClassReps (0x00073650) gives every class record's namespace (+0x20) from LookupNamespace(record's class name at +0x14)."
     },
+    "xb:0x00070280": {
+      "name": "RegisterTypedMethod",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(class, name, usage, binding object, fewest, most, extra): the same as RegisterTypedFunction (0x0006FB10) on FindOrCreateNamespace(StringToKey(class, 0)), or the global namespace for no class."
+    },
     "xb:0x00070520": {
       "name": "classLinkNamespaces",
       "by": "the game's own error message",
       "why": "Its failure path passes \"Error: classLinkNamespaces() - %s is already a child of %s - circular link error!\" (0x003A28C0) to 0x0009A2B0. It takes a parent and a child namespace, does nothing if the parent is already an ancestor of the child, reports a circular link if the child is an ancestor of the parent, and otherwise calls the child's ClassLinkTo(parent) (0x00073270). Every ConcreteClassRep<T>::Init calls it with the parent record's +0x20 and its own."
+    },
+    "xb:0x000705F0": {
+      "name": "RegisterConsoleCommands",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Walks the list of command records the start-up code filled (head 0x0047AAB0, next +0x28): finds the record's class namespace (StringToKey + FindOrCreateNamespace, or the global one for no class) and adds its handler under StringToKey(name) with the adder for the slot that is set (+0x00 string, +0x04 int, +0x08 float, +0x0C void, +0x10 bool)."
     },
     "xb:0x00070B30": {
       "name": "Script::isFunction",
@@ -22157,6 +22207,16 @@
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
       "why": "Returns the global at 0x0047B354; LookupNamespace (0x0006FE50) returns it for an empty name."
     },
+    "xb:0x00072270": {
+      "name": "ShutdownNamespaces",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Walks every namespace in the 512 buckets at [0x0047B35C] and every entry on its list (+0x18, next +0x10), releasing each entry's script code (+0x08) with 0x0006E0F0."
+    },
+    "xb:0x00072420": {
+      "name": "Namespace::Lookup",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, key): looks in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364] for an entry of this namespace (+0x0C) with that key (+0x00, next +0x14), then tries the parent (+0x04) and so on up; returns the entry or 0. How a script's call finds its function."
+    },
     "xb:0x000724B0": {
       "name": "Script::DumpNamespaces",
       "by": "the game's own script command table (portal/tools/script_commands.py)",
@@ -22172,10 +22232,70 @@
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
       "why": "Looks a key up in the 512-bucket table at [0x0047B35C] (bucket (key >> 2) & 0x1FF, chained through +0x08, key at +0x00); when it isn't there, returns 0 unless its second argument asks to create one, which it then takes from the namespace pool at [0x0047B358] (virtual 16) and links at the head of its bucket."
     },
+    "xb:0x00072850": {
+      "name": "Namespace::SetCallbackBitInChildren",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, i): ors bit i into the mask (+0x10) of every namespace in the 512 buckets whose parent (+0x04) is this one, and calls itself on each. Namespace::AddScriptFunction (0x00073070) calls it when the new function's key is one of the 36 engine callback keys."
+    },
+    "xb:0x000728B0": {
+      "name": "NamespaceEntry::Execute",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(entry, argc, argv, state): runs the entry by its type (low 5 bits of +0x1A): 0 a script function, through the interpreter (0x000695B0); 1 to 5 a handler (+0x04) called as handler(object, argc, argv), its result turned to text by kind (string as is, int \"%d\", float \"%g\", void \"\", bool \"%d\"); 6 a typed binding object, through CScript::CallTyped (0x00066C90)."
+    },
     "xb:0x00072CD0": {
       "name": "FindOrCreateNamespace",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
       "why": "FindNamespace(key, 1) (0x000727C0): the namespace with that key, made if there is none. LookupNamespace (0x0006FE50) tail-jumps to it."
+    },
+    "xb:0x00072CE0": {
+      "name": "Namespace::RecomputeCallbackMask",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Sets the namespace's 64-bit mask (+0x10) to its parent's (or 0), ors in bit i for each script function entry (type 0) whose key is the i-th of the 36 engine callback keys at 0x0047B2C0, then does the same for every namespace whose parent (+0x04) is this one."
+    },
+    "xb:0x00072D90": {
+      "name": "InitNamespaces",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Sets the script namespaces up: makes the \"Namespace Pool\" (0x28-byte records, at [0x0047B358]) and \"Namespace Entry Pool\" (0x1C-byte, [0x0047B360]) and the two 512-bucket tables ([0x0047B35C], [0x0047B364]), and fills the 36 engine callback keys at 0x0047B2C0 from their names (Initialize, Terminate, OnStateCreated ...)."
+    },
+    "xb:0x00072FE0": {
+      "name": "Namespace::CreateLocalEntry",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, key): returns the namespace's own entry for the key from its list (+0x18, next +0x10), or takes a new one from the entry pool ([0x0047B360], virtual 16), marks its type invalid (+0x1A |= 0x1F), links it at the list head and in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364]."
+    },
+    "xb:0x00073070": {
+      "name": "Namespace::AddScriptFunction",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, key, code, u16): CreateLocalEntry(key), stores the script code (+0x08) and the u16 (+0x18), sets the entry's type to 0, and when the key is one of the 36 engine callback keys (0x0047B2C0) sets that bit in the namespaces below (0x00072850)."
+    },
+    "xb:0x000730F0": {
+      "name": "Namespace::AddStringCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, key, handler, usage, fewest, most): CreateLocalEntry(key), stores the handler (+0x04) and packs type 1 | fewest << 5 | most << 10 into +0x1A; adds one to the change counter at 0x0047B350. Type 1: the handler returns text."
+    },
+    "xb:0x00073130": {
+      "name": "Namespace::AddIntCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 2: the handler returns a whole number."
+    },
+    "xb:0x00073170": {
+      "name": "Namespace::AddVoidCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 4: the handler returns nothing."
+    },
+    "xb:0x000731B0": {
+      "name": "Namespace::AddFloatCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 3: the handler returns a float."
+    },
+    "xb:0x000731F0": {
+      "name": "Namespace::AddBoolCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 5: the handler returns true or false."
+    },
+    "xb:0x00073230": {
+      "name": "Namespace::AddTypedCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, key, usage, binding object, fewest, most): CreateLocalEntry(key), stores the CScript::MethodN / FunctionN binding object (+0x04) and packs type 6 | fewest << 5 | most << 10 into +0x1A."
     },
     "xb:0x00073270": {
       "name": "Namespace::ClassLinkTo",
@@ -22622,6 +22742,11 @@
       "by": "the game's own typed script binding (portal/tools/script_typed.py)",
       "why": "The start-up code at 0x000997CC registers this function as the typed script command VectorScale; the binding object's own class name gives its signature: math::Vector VectorScale(math::Vector, float)."
     },
+    "xb:0x00099BC0": {
+      "name": "dAtob",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Text to true/false: false for no text, empty text, \"false\", \"0\" or \"nil\" (compared without case, _stricmp); true for anything else."
+    },
     "xb:0x0009A9A0": {
       "name": "TimeSlicer::~TimeSlicer",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -22856,6 +22981,16 @@
       "name": "NISPackage::~NISPackage",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Deleting destructor: it ends `if (a1 & 1) sub_00027600(this); return this;` (sub_00027600 is called that way by 498 matched functions), and it is the only function of NISPackage that does."
+    },
+    "xb:0x000CE340": {
+      "name": "RefCounted::AddRef",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "`inc dword [ecx+4]; ret`: virtual 0 (core::IRefCount's AddRef) of 540 classes' vtables, both the content::LoadObject and the pure3d::NonCopyable families. RefCounted is a stand-in for 'whichever class holds the count at +4', not a class in the game's type information."
+    },
+    "xb:0x000CE360": {
+      "name": "RefCounted::GetRefCount",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "`mov eax,[ecx+4]; ret`: virtual 2 (core::IRefCount's count getter) of 511 classes' vtables. RefCounted is a stand-in, as for RefCounted::AddRef (0x000CE340)."
     },
     "xb:0x000CE550": {
       "name": "GameGroupLoader::~GameGroupLoader",
@@ -24206,6 +24341,11 @@
       "name": "ConcreteClassRep<AITask_SharkWander>::Init",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Links the record's namespace (+0x20) under its parent record's with sub_00070520 (classLinkNamespaces, named from the game's own error message) and keeps the parent record at +0x24."
+    },
+    "xb:0x0011B010": {
+      "name": "SemiConcreteClassRep::Create",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Virtual 1 of all four SemiConcreteClassRep<T> vtables (AITask_CodeAbstract, AIActionTreeCreatingTask, AITask_SharkAbstractWithTarget, CameraObject): prints \"Tried to create concrete instance of abstract script object %s\" with the class name (+0x14) and returns 0."
     },
     "xb:0x0011B030": {
       "name": "ConcreteClassRep<AITask_SharkInteractWithSwimmer>::Create",
@@ -36027,6 +36167,21 @@
       "by": "symcov: [XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
       "why": "The same 297 bytes as adler32 in that build (the symcov report compares code with the addresses masked), and the report names no other function for this code; the code around it is zlib 1.2.1 (the program holds its inflate copyright string)."
     },
+    "xb:0x002CF0D0": {
+      "name": "om::Entity::AddRef",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "`inc word [ecx+0x20]; ret`: virtual 0 of om::Entity's vtable and the 15 classes derived from it."
+    },
+    "xb:0x002CF0E0": {
+      "name": "om::Entity::Release",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Virtual 1 of om::Entity's vtable and its 15 derived classes: when the 16-bit count at +0x20 is 1 calls the deleting destructor (virtual 3, with 1), otherwise takes one off."
+    },
+    "xb:0x002CF100": {
+      "name": "om::Entity::GetRefCount",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "`movsx eax, word [ecx+0x20]; ret`: virtual 2 of om::Entity's vtable and its 15 derived classes."
+    },
     "xb:0x002D0EA0": {
       "name": "om::MetaType<audio::SeqEvent>::~MetaType",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -44436,161 +44591,6 @@
       "name": "OHCD_fQueueTransferRequest",
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map",
       "why": "The same 134 bytes as @OHCD_fQueueTransferRequest@8 (xapilib) in that build, addresses apart, and found only once in this program."
-    },
-    "xb:0x00072D90": {
-      "name": "InitNamespaces",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Sets the script namespaces up: makes the \"Namespace Pool\" (0x28-byte records, at [0x0047B358]) and \"Namespace Entry Pool\" (0x1C-byte, [0x0047B360]) and the two 512-bucket tables ([0x0047B35C], [0x0047B364]), and fills the 36 engine callback keys at 0x0047B2C0 from their names (Initialize, Terminate, OnStateCreated ...)."
-    },
-    "xb:0x00072270": {
-      "name": "ShutdownNamespaces",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Walks every namespace in the 512 buckets at [0x0047B35C] and every entry on its list (+0x18, next +0x10), releasing each entry's script code (+0x08) with 0x0006E0F0."
-    },
-    "xb:0x00072FE0": {
-      "name": "Namespace::CreateLocalEntry",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key): returns the namespace's own entry for the key from its list (+0x18, next +0x10), or takes a new one from the entry pool ([0x0047B360], virtual 16), marks its type invalid (+0x1A |= 0x1F), links it at the list head and in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364]."
-    },
-    "xb:0x00072420": {
-      "name": "Namespace::Lookup",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key): looks in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364] for an entry of this namespace (+0x0C) with that key (+0x00, next +0x14), then tries the parent (+0x04) and so on up; returns the entry or 0. How a script's call finds its function."
-    },
-    "xb:0x00072CE0": {
-      "name": "Namespace::RecomputeCallbackMask",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Sets the namespace's 64-bit mask (+0x10) to its parent's (or 0), ors in bit i for each script function entry (type 0) whose key is the i-th of the 36 engine callback keys at 0x0047B2C0, then does the same for every namespace whose parent (+0x04) is this one."
-    },
-    "xb:0x00072850": {
-      "name": "Namespace::SetCallbackBitInChildren",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, i): ors bit i into the mask (+0x10) of every namespace in the 512 buckets whose parent (+0x04) is this one, and calls itself on each. Namespace::AddScriptFunction (0x00073070) calls it when the new function's key is one of the 36 engine callback keys."
-    },
-    "xb:0x000728B0": {
-      "name": "NamespaceEntry::Execute",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(entry, argc, argv, state): runs the entry by its type (low 5 bits of +0x1A): 0 a script function, through the interpreter (0x000695B0); 1 to 5 a handler (+0x04) called as handler(object, argc, argv), its result turned to text by kind (string as is, int \"%d\", float \"%g\", void \"\", bool \"%d\"); 6 a typed binding object, through CScript::CallTyped (0x00066C90)."
-    },
-    "xb:0x00073070": {
-      "name": "Namespace::AddScriptFunction",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key, code, u16): CreateLocalEntry(key), stores the script code (+0x08) and the u16 (+0x18), sets the entry's type to 0, and when the key is one of the 36 engine callback keys (0x0047B2C0) sets that bit in the namespaces below (0x00072850)."
-    },
-    "xb:0x000730F0": {
-      "name": "Namespace::AddStringCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key, handler, usage, fewest, most): CreateLocalEntry(key), stores the handler (+0x04) and packs type 1 | fewest << 5 | most << 10 into +0x1A; adds one to the change counter at 0x0047B350. Type 1: the handler returns text."
-    },
-    "xb:0x00073130": {
-      "name": "Namespace::AddIntCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 2: the handler returns a whole number."
-    },
-    "xb:0x000731B0": {
-      "name": "Namespace::AddFloatCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 3: the handler returns a float."
-    },
-    "xb:0x00073170": {
-      "name": "Namespace::AddVoidCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 4: the handler returns nothing."
-    },
-    "xb:0x000731F0": {
-      "name": "Namespace::AddBoolCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 5: the handler returns true or false."
-    },
-    "xb:0x00073230": {
-      "name": "Namespace::AddTypedCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key, usage, binding object, fewest, most): CreateLocalEntry(key), stores the CScript::MethodN / FunctionN binding object (+0x04) and packs type 6 | fewest << 5 | most << 10 into +0x1A."
-    },
-    "xb:0x000705F0": {
-      "name": "RegisterConsoleCommands",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Walks the list of command records the start-up code filled (head 0x0047AAB0, next +0x28): finds the record's class namespace (StringToKey + FindOrCreateNamespace, or the global one for no class) and adds its handler under StringToKey(name) with the adder for the slot that is set (+0x00 string, +0x04 int, +0x08 float, +0x0C void, +0x10 bool)."
-    },
-    "xb:0x0006FB10": {
-      "name": "RegisterTypedFunction",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(name, usage, binding object, fewest, most, extra): GetGlobalNamespace()->AddTypedCommand(StringToKey(name, 0), ...). Every CScript::FunctionN helper ends in it."
-    },
-    "xb:0x00070280": {
-      "name": "RegisterTypedMethod",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(class, name, usage, binding object, fewest, most, extra): the same as RegisterTypedFunction (0x0006FB10) on FindOrCreateNamespace(StringToKey(class, 0)), or the global namespace for no class."
-    },
-    "xb:0x00066C90": {
-      "name": "CScript::CallTyped",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(object, binding object, argc, argv, result): stores the argument cursor (0x00476408 = [binding+4], 0x0047640C = argv, 0x00476410 = argc) and calls the binding object's first virtual function with (object, result), which converts each argument and calls the bound C++ function."
-    },
-    "xb:0x00066EF0": {
-      "name": "CScript::Functor::Functor",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(binding object, argument count): writes the base vtable 0x003A2110, +0x04 = 0, the argument count (0 when negative) at +0x08 and +0x0A = 0. Every CScript::MethodN / FunctionN helper calls it before writing its own vtable and the bound function at +0x0C."
-    },
-    "xb:0x000694E0": {
-      "name": "GetReturnBuffer",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(size): the interpreter state at [0x00478E60]; when size is over 0x200 grows its buffer (0x00068FF0); returns the buffer pointer at +0x2478. Handlers that return text write it there."
-    },
-    "xb:0x00068FF0": {
-      "name": "GrowReturnBuffer",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(interpreter state, size): when size is over the capacity (+0x2474), sets the capacity to size + 0x800, allocates that from heap 3, copies the old buffer (+0x2478) over, frees it, and stores the new one."
-    },
-    "xb:0x00099BC0": {
-      "name": "dAtob",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Text to true/false: false for no text, empty text, \"false\", \"0\" or \"nil\" (compared without case, _stricmp); true for anything else."
-    },
-    "xb:0x00068E40": {
-      "name": "dSprintf",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(buffer, size, format, ...): vsprintf(buffer, format, the arguments); the size is not used."
-    },
-    "xb:0x0011B010": {
-      "name": "SemiConcreteClassRep::Create",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Virtual 1 of all four SemiConcreteClassRep<T> vtables (AITask_CodeAbstract, AIActionTreeCreatingTask, AITask_SharkAbstractWithTarget, CameraObject): prints \"Tried to create concrete instance of abstract script object %s\" with the class name (+0x14) and returns 0."
-    },
-    "xb:0x00011930": {
-      "name": "content::LoadObject::Release",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Virtual 1 (core::IRefCount's Release) in 398 vtables, every one a class derived from content::LoadObject: if the count (+0x04) is under 2, sets it to 0x8000000 and calls the deleting destructor (virtual 3, with 1); otherwise takes one off."
-    },
-    "xb:0x000CE340": {
-      "name": "RefCounted::AddRef",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "`inc dword [ecx+4]; ret`: virtual 0 (core::IRefCount's AddRef) of 540 classes' vtables, both the content::LoadObject and the pure3d::NonCopyable families. RefCounted is a stand-in for 'whichever class holds the count at +4', not a class in the game's type information."
-    },
-    "xb:0x000CE360": {
-      "name": "RefCounted::GetRefCount",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "`mov eax,[ecx+4]; ret`: virtual 2 (core::IRefCount's count getter) of 511 classes' vtables. RefCounted is a stand-in, as for RefCounted::AddRef (0x000CE340)."
-    },
-    "xb:0x00021830": {
-      "name": "RefCounted::Release",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Virtual 1 (core::IRefCount's Release) in 135 vtables (FightAction, AICondition, shaders ...): takes one off the count (+0x04) and, when it is under 1, calls the deleting destructor (virtual 3, with 1). RefCounted is a stand-in, as for RefCounted::AddRef (0x000CE340)."
-    },
-    "xb:0x002CF0D0": {
-      "name": "om::Entity::AddRef",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "`inc word [ecx+0x20]; ret`: virtual 0 of om::Entity's vtable and the 15 classes derived from it."
-    },
-    "xb:0x002CF0E0": {
-      "name": "om::Entity::Release",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Virtual 1 of om::Entity's vtable and its 15 derived classes: when the 16-bit count at +0x20 is 1 calls the deleting destructor (virtual 3, with 1), otherwise takes one off."
-    },
-    "xb:0x002CF100": {
-      "name": "om::Entity::GetRefCount",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "`movsx eax, word [ecx+0x20]; ret`: virtual 2 of om::Entity's vtable and its 15 derived classes."
     }
   },
   "members": {

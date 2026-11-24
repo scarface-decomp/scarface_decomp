@@ -7,6 +7,8 @@ Where a description came from is kept with it as "what_how":
     shape   produced by a rule from the shape of the code alone (a deleting destructor, a class record
             getter, a create() of the class system ...): right, but boilerplate
     twin    copied from a function with the same bytes in another version of the game
+    bound   a script command's handler: what it is for comes from the name the program registers it
+            under (certain), how it does it from reading its code
 
 Descriptions recorded before "what_how" existed get one worked out here: the first 2,085 written by an AI
 (Nov 22) came from rules, and their sentences are recognisable; everything else counts as "human".
@@ -18,7 +20,7 @@ import re
 from collections import defaultdict
 from typing import Dict, Iterable, Optional
 
-HOWS = ("human", "read", "shape", "twin")
+HOWS = ("human", "read", "bound", "shape", "twin")
 WHAT_MAX = 160
 TWIN_SUFFIX = " (from the {version} twin)"
 
@@ -58,6 +60,8 @@ def normal_how(value) -> str:
         return "read"
     if "twin" in v:
         return "twin"
+    if "bound" in v:
+        return "bound"
     return "human"
 
 
@@ -76,7 +80,7 @@ def problem(what: str) -> Optional[str]:
 
 
 def counts(entries: Iterable[dict], is_ps2=lambda b: False) -> Dict[str, object]:
-    """{"pc", "xb", "proto", "ps2", "total", "how": {human, read, shape, twin}} for described functions.
+    """{"pc", "xb", "proto", "ps2", "total", "how": {human, read, bound, shape, twin}} for described functions.
     "total" and "how" are the released game (PC + Xbox), as everywhere in progress.json."""
     by: Dict[str, int] = defaultdict(int)
     how: Dict[str, int] = {h: 0 for h in HOWS}

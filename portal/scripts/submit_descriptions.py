@@ -7,7 +7,8 @@ Each file is reports/to_submit/descriptions_*.json:
      "descriptions": {"xb:0x00329310": {"what": "One plain sentence, at most 160 characters.",
                                         "how": "read"}, ...}}
 
-"how" says where the sentence came from: "read" (someone read the function and what it calls), "shape" (a
+"how" says where the sentence came from: "read" (someone read the function and what it calls), "bound" (a
+script command's handler: its purpose from the command name the program registers, its workings read), "shape" (a
 rule on the shape of the code alone: destructors, class records), "twin" (copied from the same bytes in
 another version) or "human" (the default). The website counts them apart.
 

@@ -21,8 +21,8 @@ def test_where_a_description_came_from():
                   "Foo::vfunc_03: Returns 0.", "Does nothing (an empty function, e.g. a base-class default)."):
         assert D.how_of({"what": shape, "what_by": ai}) == "shape", shape
     assert D.how_of({"what": "AI condition 'not': true when the condition it wraps is false.", "what_by": ai}) == "read"
-    assert [D.normal_how(x) for x in ("by shape", "read", "", "twin", "whatever")] == \
-        ["shape", "read", "human", "twin", "human"]
+    assert [D.normal_how(x) for x in ("by shape", "read", "", "twin", "whatever", "bound")] == \
+        ["shape", "read", "human", "twin", "human", "bound"]
 
 
 def test_the_quality_gate():
@@ -41,7 +41,7 @@ def test_counts_split_by_version_and_origin():
                {"bin": "xb", "what": ""}]
     c = D.counts(entries)
     assert (c["xb"], c["pc"], c["proto"], c["total"]) == (2, 1, 1, 3)
-    assert c["how"] == {"human": 1, "read": 1, "shape": 1, "twin": 0}          # the released game only
+    assert c["how"] == {"human": 1, "read": 1, "bound": 0, "shape": 1, "twin": 0}          # the released game only
 
 
 def test_twins_take_the_description_only_when_the_code_is_the_same():

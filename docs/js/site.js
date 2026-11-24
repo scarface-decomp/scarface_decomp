@@ -360,7 +360,8 @@
     var des = prog && prog.described;
     $('sb-described').hidden = !(des && des.total);
     if (des && des.total) {
-      var how = des.how || {}, shape = how.shape || 0, twin = how.twin || 0, real = (how.human || 0) + (how.read || 0);
+      var how = des.how || {}, shape = how.shape || 0, twin = how.twin || 0, real = (how.human || 0) + (how.read || 0)
+        + (how.bound || 0);
       $('sb-described').textContent = fmt(des.total) + ' of the rebuilt functions have a one-line description of what they do'
         + (shape || twin ? ': ' + fmt(real) + ' written by someone who read the code, ' + fmt(shape)
           + ' worked out from the shape of the code alone (destructors, class records and the like)'

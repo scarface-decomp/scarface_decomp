@@ -1,0 +1,230 @@
+{
+ "schema": "scarface_descriptions_v1",
+ "by": "Claude (AI) for RRutherrfordd",
+ "descriptions": {
+  "xb:0x00024C30": {
+   "what": "Script command GetCurrentLanguage: copies the game's current language setting into a small result and returns it to the script.",
+   "how": "read"
+  },
+  "xb:0x0002DDB0": {
+   "what": "Script command SetSubZone: tells the script object which subzone of the city it is in, passing the script's argument to the object's own setter.",
+   "how": "read"
+  },
+  "xb:0x0002E0F0": {
+   "what": "Script command GetClass: returns the name of the object's class, read from its class record.",
+   "how": "read"
+  },
+  "xb:0x00070C60": {
+   "what": "Script command ltrim: returns the script's text with the spaces, tabs and line breaks at its start skipped.",
+   "how": "read"
+  },
+  "xb:0x00070F70": {
+   "what": "Script command strlen: returns how many characters the script's text has.",
+   "how": "read"
+  },
+  "xb:0x0008FC60": {
+   "what": "Script command AddMemoryHack: sets aside one 256-byte block of memory, if it has not already.",
+   "how": "read"
+  },
+  "xb:0x0008FC90": {
+   "what": "Script command RemoveMemoryHack: frees the block of memory AddMemoryHack set aside, if there is one.",
+   "how": "read"
+  },
+  "xb:0x000CED60": {
+   "what": "Script command NISIsPlaying: returns whether an in-game cutscene (NIS) is playing right now.",
+   "how": "read"
+  },
+  "xb:0x000EB620": {
+   "what": "Script command ToggleFreezeGame: switches the game's freeze flag on if it was off and off if it was on.",
+   "how": "read"
+  },
+  "xb:0x00178250": {
+   "what": "Script command CharacterObject::IsMainCharacter: returns 1 when the character is the player's main character (Tony), 0 otherwise.",
+   "how": "read"
+  },
+  "xb:0x00179050": {
+   "what": "Script command CharacterObject::GetCharacterTemplate: returns the id of the template the character was made from, or 0 when it has none.",
+   "how": "read"
+  },
+  "xb:0x00020960": {
+   "what": "Script command ActionMap::BindFunction: binds an input in the action map to a script function, from the script's three arguments.",
+   "how": "read"
+  },
+  "xb:0x00024AC0": {
+   "what": "Script command GenerateFormattedNumericString: turns a number from the script into text using the format the script gives.",
+   "how": "read"
+  },
+  "xb:0x00024AF0": {
+   "what": "Script command AllocateMemoryForPMGTextbibles: sets aside memory for the mission text banks, working in heap 5 while it does.",
+   "how": "read"
+  },
+  "xb:0x00024B40": {
+   "what": "Script command SetTextbibleToSpecialLoad: marks a text bank, named by the script, to be loaded the special way the script asks.",
+   "how": "read"
+  },
+  "xb:0x00024BB0": {
+   "what": "Script command GetNumTextbibleEntriesToLoad: returns how many text bank entries are waiting to load in the given slot, or 0 for a negative slot.",
+   "how": "read"
+  },
+  "xb:0x00024D50": {
+   "what": "Script command FEBoxObject::SetTriPosition: sets where a menu box's pointer triangle sits from the two numbers the script passes.",
+   "how": "read"
+  },
+  "xb:0x00024DC0": {
+   "what": "Script command FESpriteObject::SetCurrentItem: picks which picture a menu sprite shows, by the number the script passes.",
+   "how": "read"
+  },
+  "xb:0x00026850": {
+   "what": "Script command Graph::SetMaxNumKeys: sets how many keys (points) a graph can hold, from the script's number.",
+   "how": "read"
+  },
+  "xb:0x0002E040": {
+   "what": "Script command ScriptObject::SetDataField: sets one of the object's named data fields (the name is turned into its key) to the script's value.",
+   "how": "read"
+  },
+  "xb:0x0002E0D0": {
+   "what": "Script command ScriptObject::GetParentGroup: returns the id of the group the object belongs to, or 0 when it is in none.",
+   "how": "read"
+  },
+  "xb:0x00060760": {
+   "what": "Script command ResourceListLoad: starts loading the resource list whose number the script gives.",
+   "how": "read"
+  },
+  "xb:0x00060780": {
+   "what": "Script command ResourceListRemove: unloads the resource list whose number the script gives.",
+   "how": "read"
+  },
+  "xb:0x00060820": {
+   "what": "Script command LoadDZoneInCode: loads an interior's furniture zone (dzone), named by the script.",
+   "how": "read"
+  },
+  "xb:0x00060840": {
+   "what": "Script command LoadAZoneInCode: loads an outdoor pocket zone (azone), named by the script.",
+   "how": "read"
+  },
+  "xb:0x00060880": {
+   "what": "Script command GetResourceId: returns the id of the resource the script names, or -1 when there is no such resource.",
+   "how": "read"
+  },
+  "xb:0x000608A0": {
+   "what": "Script command GetInventoryId: returns the id of the inventory item the script names, or -1 when there is no such item.",
+   "how": "read"
+  },
+  "xb:0x00068A00": {
+   "what": "Script command ExecScript: runs a script file from the script's first two arguments, with an optional third when the script passes one.",
+   "how": "read"
+  },
+  "xb:0x00068D10": {
+   "what": "Script command Cancel: cancels the scheduled script event whose number the script gives.",
+   "how": "read"
+  },
+  "xb:0x00068D30": {
+   "what": "Script command IsEventPending: checks whether the scheduled script event whose number the script gives is still waiting to run.",
+   "how": "read"
+  },
+  "xb:0x00070D60": {
+   "what": "Script command eval: compiles and runs the script text it is given.",
+   "how": "read"
+  },
+  "xb:0x00070D80": {
+   "what": "Script command deleteVariables: removes the global script variables whose names match the pattern the script gives.",
+   "how": "read"
+  },
+  "xb:0x00070E80": {
+   "what": "Script command GetNewObjectParentGroup: returns the id of the group new script objects are put in, or 0 when there is none.",
+   "how": "read"
+  },
+  "xb:0x00070E90": {
+   "what": "Script command GetLastRootObject: returns the id of the last object made at the top of the object tree, or 0 when there is none.",
+   "how": "read"
+  },
+  "xb:0x00077210": {
+   "what": "Script command SoundGetPOIConversationCompleteStatus: checks whether a point-of-interest conversation, by number, has finished.",
+   "how": "read"
+  },
+  "xb:0x0008FB10": {
+   "what": "Script command PushStreamerObjectOfInterest: adds the object whose id the script gives to the ones the world streaming loads around.",
+   "how": "read"
+  },
+  "xb:0x0008FB30": {
+   "what": "Script command PopStreamerObjectOfInterest: takes the object whose id the script gives off the ones the world streaming loads around.",
+   "how": "read"
+  },
+  "xb:0x0008FC40": {
+   "what": "Script command GetSubzoneName: gets the name of the city subzone whose number the script gives.",
+   "how": "read"
+  },
+  "xb:0x000CA030": {
+   "what": "Script command SaveGameController::CanWeSave: asks the save game controller whether saving is allowed now, for the slot number the script gives.",
+   "how": "read"
+  },
+  "xb:0x000CA070": {
+   "what": "Script command SaveGameController::ActivateQueue: starts the save game controller's queued work, from the two numbers the script passes.",
+   "how": "read"
+  },
+  "xb:0x000EB600": {
+   "what": "Script command FreezeGame: freezes or unfreezes the game, by the true or false the script passes.",
+   "how": "read"
+  },
+  "xb:0x000EEB00": {
+   "what": "Script command DBChangeProduct: changes the player's amount of product (drugs) by the number the script gives.",
+   "how": "read"
+  },
+  "xb:0x000EEB20": {
+   "what": "Script command DBChangeVehicleProduct: changes the amount of product carried in the vehicle by the number the script gives.",
+   "how": "read"
+  },
+  "xb:0x000EEB40": {
+   "what": "Script command DBChangeCleanCash: changes the player's clean (banked) cash by the number the script gives.",
+   "how": "read"
+  },
+  "xb:0x000EEB60": {
+   "what": "Script command DBChangeDirtyCash: changes the player's dirty cash by the number the script gives.",
+   "how": "read"
+  },
+  "xb:0x000EEB80": {
+   "what": "Script command DBChangeReputationPoints: changes the player's reputation points, from the two numbers the script passes.",
+   "how": "read"
+  },
+  "xb:0x000EEBF0": {
+   "what": "Script command DBSetTotalSkilledPoints: sets the player's total skill points to the number the script gives.",
+   "how": "read"
+  },
+  "xb:0x000EEC10": {
+   "what": "Script command DBSetTotalMissionPoints: sets the player's total mission points to the number the script gives.",
+   "how": "read"
+  },
+  "xb:0x000EEC30": {
+   "what": "Script command DBSetTotalExoticsPoints: sets the player's total exotics points to the number the script gives.",
+   "how": "read"
+  },
+  "xb:0x000EEC80": {
+   "what": "Script command DBSetReputationLevel: sets the player's reputation level to the number the script gives.",
+   "how": "read"
+  },
+  "xb:0x00115300": {
+   "what": "Script command HenchmanManager_SetFollowTony: turns on or off whether Tony's henchmen follow him, by the true or false the script passes.",
+   "how": "read"
+  },
+  "xb:0x001199E0": {
+   "what": "Script command AIStimulusTable::DefineDefaultOverrideTables: sets up the AI stimulus table's default override tables from the script's argument.",
+   "how": "read"
+  },
+  "xb:0x00119A00": {
+   "what": "Script command AIStimulusTable::DetectsStimulus: makes the AI stimulus table react to the stimulus whose number the script gives.",
+   "how": "read"
+  },
+  "xb:0x00119A20": {
+   "what": "Script command AIStimulusTable::AddBasicEvent: adds a basic event to the AI stimulus table, from the two numbers the script passes.",
+   "how": "read"
+  },
+  "xb:0x0011CED0": {
+   "what": "Script command NME_SetDefinedTunablesCount: sets how many tunable values the NME manager has, from the script's number.",
+   "how": "read"
+  },
+  "xb:0x0011CF00": {
+   "what": "Script command NME_AddDefinedTunables: adds a tunable value to the NME manager, from the script's two arguments.",
+   "how": "read"
+  }
+ }
+}

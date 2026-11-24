@@ -74,7 +74,12 @@ def test_the_waiting_matches_are_well_formed():
     for path in sorted((Path(__file__).resolve().parents[2] / "reports" / "to_submit").glob("*.cpp")):
         fields, _code = S.read_proposal(path.read_text(encoding="utf-8"))
         assert S.task_id(fields) == path.stem, path.name                        # named after its function
-        assert fields.get("what") and len(fields["what"]) <= 160, path.name
+        # a sentence saying what it does, except from the portal's starter code (no AI), which only writes
+        # one when the code's shape says it for certain (and marks it "how: shape")
+        starter = fields.get("tool", "") == "the portal's starter code (no AI)"
+        assert (fields.get("what") or starter) and len(fields.get("what", "")) <= 160, path.name
+        if starter and fields.get("what"):
+            assert fields.get("how") == "shape", path.name
         # where it came from: a spec, or the tool that wrote it (agent.py keep's own rule); a look-alike
         # names the already matched function it copies
         assert fields.get("spec") or fields.get("tool"), path.name

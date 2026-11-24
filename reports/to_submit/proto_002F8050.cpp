@@ -1,0 +1,17 @@
+// bin: proto
+// va: 0x002F8050
+// what: Shutdown code (an atexit stub): destroys one of the game's static objects when the game exits.
+// how: shape
+// tool: the portal's starter code (no AI)
+
+// sub_002F8050 (Proto 0x002F8050, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003B9B1C[];
+extern "C" int DAT_00436E14;
+
+void __cdecl sub_002F8050(void)
+{
+    DAT_00436E14 = (int)DAT_003B9B1C;
+}
