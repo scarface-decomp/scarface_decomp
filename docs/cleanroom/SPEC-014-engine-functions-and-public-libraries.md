@@ -219,3 +219,177 @@ The rest of the 81 functions that score 0.8 or more are in the public libraries 
 * The next entries, if wanted, are the `core::XboxSaveDrive` group (seven functions, 0.80–0.97). It is the
   closest copy and one class.
 * After that come the `pure3d::d3dTexture` group (five).
+
+## 5. Addendum, 2026-11-24: corrections to §1, the allocator's changes, and link-time code generation
+
+**Outside material read for this section:** the 2003 tree's build logs and project files for its PNG,
+zlib and core libraries, and the configuration lines and comments at the top of its allocator source
+file. Everything below about Scarface was read from `default.xbe`.
+
+### 5.1 Corrections to §1
+
+* **Ranges.** §1's ranges were too narrow or too wide. The C-library code sits in three regions:
+
+  | Region | Functions | Open | Holds |
+  | :--- | ---: | ---: | :--- |
+  | 0x2B8580–0x2BE240 | 57 | 40 | libpng: reading, row transforms, default read |
+  | 0x2C6510–0x2C8590 | 23 | 15 | libpng's error and memory functions, then zlib's `inflate` (0x2C70E0, 4,789 B with its switch tables) |
+  | 0x2C8590–0x2CE2A0 | 63 | 56 | the rest of libpng's reading side, with zlib's `inflate_fast` (0x2CC380, 1,136 B), `inflate_table` (0x2CC7F0, 1,216 B) and `adler32` (0x2CCCB0) inside it |
+
+  Engine code lies between them: 0x2BE240–0x2C1B00 is `core::XboxDrive` / `core::XboxSaveDrive`, and
+  0x2C1B00–0x2C6510 is the backend's shaders. `reports/exam_public_libs_xb.json` lists every function
+  of the three regions with the text it references, so each can be paired with the public source.
+* **One libpng, not two.** The `"1.2.8"` at 0x3DAF38 is libpng's own version array, referenced by
+  0x2B8BF0 together with `"Application was compiled with png.h from libpng-%.20s"`. The one at
+  0x3D91D0 is the engine's copy of the header's version string, passed by `pure3d::PNGHandler`'s
+  0x297F40.
+* **The allocator is 15 functions, 0x28E610–0x28F5B0,** not 51; the functions before 0x28E610 are
+  front-end code. Only `core::MemoryDlAllocator` uses it. `core::MemorySmallDlAllocator` (vtable
+  0x3D8974) has its own functions at 0x28FD70–0x291050; its allocate method (0x2901F0) calls 0x2902A0
+  and 0x290380, not 0x28ED30.
+* **Do not expect the 2003 game's library versions.** The 2003 engine carried much older PNG and zlib
+  releases than Scarface's, so nothing about their configuration carries over. Use the public 1.2.8 and
+  1.2.1 releases.
+
+### 5.2 libpng 1.2.8 as built (from Scarface's bytes)
+
+The linker removed every function nothing calls, so absence proves nothing about configuration. What
+is present:
+
+* **Reading only.** No writing-side or progressive-reader text or code is present.
+* **No assembler.** No `emms`, `movq`, `movd` or `cpuid` anywhere in the three regions; the MSVC MMX
+  file is not in the build.
+* **`setjmp` error handling.** 0x2C65A0 (the default error function, with the caller inlined) calls
+  `fprintf` and then `longjmp`; `_setjmp3` is called twice from inside the library.
+* **Console output and error numbers.** The text `"libpng error no. %s: %s\n"`,
+  `"libpng error: %s, offset=%d\n"`, `"libpng error: %s\n"`, `"libpng warning no. %s: %s\n"` and
+  `"libpng warning: %s\n"` (0x3DBC08–0x3DBC6C) is the form the library takes when error numbers are
+  enabled.
+* **Standard I/O reading.** 0x2BE180 holds `"Call to NULL read function"` and `"Read Error"` and calls
+  a C runtime function at 0x2FE32F (not named in the repository; `fread` is the expected one).
+* **Floating-point gamma.** 21 calls to the C runtime's `pow` helper and 31 float-to-integer
+  conversions; `strtod` is called twice.
+* **Memory.** 0x2C6AC0 holds `"Out of Memory!"`; the C runtime's `malloc` and `free` are each called
+  three times from the regions. The 2003 project defined `PNG_USER_MEM_SUPPORTED`; whether Scarface's
+  does was not checked in the bytes, so try it both ways.
+* **Global arrays.** The signature and the chunk names are one block of constants at 0x3DAF4C onwards
+  (`IHDR` 0x3DAF54, `IDAT` 0x3DAF5C, `iCCP` 0x3DAF94, `iTXt` 0x3DAF9C, `sPLT` 0x3DAFCC, `tIME`
+  0x3DAFE4).
+* **Other features.** The MNG-features warning is present (0x3DF934). The zlib-overflow check text
+  `"Potential overflow in png_zalloc()"` is present (0x3DB0D4).
+* **Calling convention.** Every function in the regions returns with a plain `ret`, so the public
+  interface is `__cdecl`.
+
+As a define list: start from the public release's defaults, add
+`PNG_ERROR_NUMBERS_SUPPORTED`, try `PNG_USER_MEM_SUPPORTED` both ways, do not add the MSVC assembler file, and leave the standard-I/O, console,
+`setjmp`, floating-point and global-array defaults on.
+
+### 5.3 zlib 1.2.1 as built
+
+* **Inflate side only.** No deflate text or code.
+* **Fixed tables are constants.** 0x3DDC98 (length table) and 0x3DE498 (distance table), referenced
+  only by `inflate` (0x2C70E0); they are not built at run time.
+* **Gzip headers are supported.** `"header crc mismatch"` (0x3DE688) and `"incorrect length check"`
+  (0x3DE540) are present, and the CRC table is a constant at 0x3DBC98.
+* **`inflate_fast` is C**, not assembler: 0x2CC380, one caller.
+* **Messages present:** `"invalid distance too far back"`, `"invalid window size"`,
+  `"unknown compression method"`, `"incorrect header check"`, `"need dictionary"`.
+
+As a define list: the public release's defaults; no assembler options, no run-time table options.
+
+### 5.4 The allocator: Doug Lea's malloc 2.7.0, changed in five ways
+
+The 2003 engine's copy says version 2.7.0, and Scarface's code agrees with that series: small bins end
+below 0x200, the consolidation threshold on free is 0x10000, and the bin-initialisation loop runs 0x7F
+times. It is compiled **as C++**, inside the core library, not as a C file. Its configuration in 2003:
+alignment 8 on Xbox, no `mmap`, the `dl` name prefix, "cannot trim", no failure action, and `long`
+redefined as `int`. Scarface's copy differs from the public file as follows; each line has its witness.
+
+1. **The state is reached through a global pointer,** not a static structure: 0x4BC2C4, loaded at the
+   top of the main entry (0x28ED6F) and of the free function.
+2. **The alignment is a run-time value,** global 0x4BC2D8. The entry computes the alignment mask and the
+   minimum chunk size from it on every call (0x28ED33–0x28ED46: `align - 1`, inverted; then
+   `(align + 15) & mask`), and the padded request is `request + align + 3`, rounded with the mask.
+3. **The fast bins are reached through a pointer** at state +4, because their number depends on the
+   alignment (0x28ED80: load +4, then index by `size >> 3`, minus 8).
+4. **So the state's layout is:**
+
+   | Offset | Holds |
+   | :--- | :--- |
+   | +0 | fast-size limit and its flag bits |
+   | +4 | pointer to the fast bins |
+   | +8 | top chunk |
+   | +0xC | last remainder |
+   | +0x10 | the bins (the small-bin test reads state + index×8 + 0x14) |
+   | +0x420, +0x428 | set to 0x20000 by the initialiser |
+   | +0x424, +0x430 | set to 0 by the initialiser |
+
+   The default fast limit is 64 (0x28E65B: `align + 0x43`).
+5. **System memory comes from the allocator object's own block.** The step that grows the heap
+   (0x28F1D0, out of line) reads the globals 0x4BC2D0 (a limit it compares against) and 0x4BC2D4 (a
+   pointer to the current break, stored in the object at +0x1C). No operating-system call is made.
+
+Before each use, the owning object copies its members into seven globals. 0x28E790 is that step out
+of line; the methods also expand it inline:
+
+| Global | Loaded from |
+| :--- | :--- |
+| 0x4BC2C4 | object +0x24 (the state) |
+| 0x4BC2C8 | object +0x10 |
+| 0x4BC2D0 | object +0x14 |
+| 0x4BC2CC | object +0x18 |
+| 0x4BC2D4 | the address of object +0x1C |
+| 0x4BC2D8 | object +0x34 (the alignment) |
+| 0x4BC2DC | object +0x20 |
+
+The roles of 0x4BC2C8, 0x4BC2CC and 0x4BC2DC were not examined.
+
+The 15 functions:
+
+| VA | Size | Role |
+| :--- | ---: | :--- |
+| 0x28E610 | (unlisted start) | initialises the state; **its argument arrives in EAX** (see 5.5) |
+| 0x28E690 | 256 | consolidates the fast bins; calls the initialiser the first time |
+| 0x28E790 | 64 | copies the object's members into the seven globals |
+| 0x28E7D0 | 368 | sets the object up from nine arguments; writes the class's two vtables |
+| 0x28E940 | 160 | vtable slot 11; sets the globals and consolidates |
+| 0x28E9E0 | 96 | vtable slot 10; reports usage through four optional output pointers |
+| 0x28EA40, 0x28EA70 | 36, 48 | destructors |
+| 0x28EAB0 | 224 | the public free function, `__cdecl` |
+| 0x28EB90 | 224 | vtable slots 5 and 8; frees a block and updates the counters |
+| 0x28EC70 | 144 | vtable slot 4; allocates, then updates the count (+0x28), bytes in use (+0x2C) and peak (+0x30), and calls 0x28ED00 unless the byte at +0x45 is set |
+| 0x28ED00 | 44 | verified already |
+| 0x28ED30 | 1,184 | the public allocate function, `__cdecl` |
+| 0x28F1D0 | 528 | grows the heap |
+| 0x28F3E0 | 128 | vtable slot 7; aligned allocation |
+| 0x28F460 | 336 | the public aligned-allocate function |
+
+### 5.5 The program was linked with link-time code generation
+
+Some functions receive an argument in EAX, or in ESI, EDI or EBX, which Visual C++ 7.1 does only when
+it generates code at link time (`/GL` when compiling, `/LTCG` when linking). Checked by hand:
+
+| VA | Where | What arrives in a register |
+| :--- | :--- | :--- |
+| 0x28E610 | allocator | the state, in EAX; one caller (0x28E77E) |
+| 0x2C65A0, 0x2C6510 | libpng's error functions | a pointer in EAX |
+| 0x2988A0, 0x298A40 | drawing: pixel converters | EAX and ESI; EAX and EBX |
+| 0x2BFA00 | `core::XboxSaveDrive` range | EAX, with ECX |
+| 0x13700 | game code | EAX, with ECX; two callers |
+
+`reports/exam_regarg_xb.json` lists 55 candidates found by rule (EAX read before it is written, and a
+caller that loads EAX just before the call). The rule is not exact: seven of the 55 are already
+verified from ordinary compiles, so treat the list as leads.
+
+What follows for matching:
+
+* A function with a register argument, and each of its callers, cannot be reproduced by compiling one
+  file to an object file. They need the compiler run with `/GL` and a link step with `/LTCG`, with
+  caller and callee together.
+* Everything else compiles the same with or without it, which is why ordinary compiles match.
+* Under link-time code generation the compiler can expand functions across files. The program still
+  makes 2,010 direct calls from game code to trivial functions of two or three instructions that are
+  neither virtual nor address-taken (for example 0x19120 calls 0x189D0 three times). With the default
+  inlining level those calls would have been expanded, so **game code was built with `/Ob1`**: only
+  functions marked `inline` or defined in their class are expanded. This settles SPEC-013 §3 item 1
+  as likely; a compile of 0x19120 and 0x189D0 in one file under both settings confirms it.

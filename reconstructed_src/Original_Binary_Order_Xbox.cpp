@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11,678 of 22,041 functions matched (52.98%). NOT COMPLETE YET.
-// The 10,363 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 11,678 of 22,052 functions matched (52.96%). NOT COMPLETE YET.
+// The 10,374 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -53438,7 +53438,7 @@ void Class_00089E70::sub_00089E70(bool a1)
 }
 
 // [TODO] 0x00089EB0 StatePropEngine::vfunc_00 (42 B)
-// [TODO] 0x00089F70 sub_00089F70 (682 B)
+// [TODO] 0x00089EE0 sub_00089EE0 (826 B)
 // ============================================================================
 // [VERIFIED] sub_0008A220 (0x0008A220, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -98483,6 +98483,7 @@ void Class_000EB6B0::sub_000EB6B0()
 }
 
 // [TODO] 0x000EB6C0 sub_000EB6C0 (62 B)
+// [TODO] 0x000EB720 sub_000EB720 (31 B)
 // [TODO] 0x000EB740 sub_000EB740 (18 B)
 // [TODO] 0x000EB760 sub_000EB760 (112 B)
 // [TODO] 0x000EB7D0 sub_000EB7D0 (204 B)
@@ -194579,6 +194580,7 @@ bool PromptHUD::vfunc_35(int a1, int a2, int a3)
 // [TODO] 0x001ACA70 sub_001ACA70 (110 B)
 // [TODO] 0x001ACAE0 sub_001ACAE0 (292 B)
 // [TODO] 0x001ACC10 sub_001ACC10 (224 B)
+// [TODO] 0x001ACCF0 sub_001ACCF0 (198 B)
 // ============================================================================
 // [VERIFIED] sub_001ACDC0 (0x001ACDC0, 40 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -196140,6 +196142,7 @@ void VehicleSelectionHUDMenuItem::vfunc_03(int a1)
 }
 
 // [TODO] 0x001AF0B0 BusinessHUD::vfunc_45 (128 B)
+// [TODO] 0x001AF130 sub_001AF130 (90 B)
 // [TODO] 0x001AF190 sub_001AF190 (47 B)
 // [TODO] 0x001AF1C0 sub_001AF1C0 (144 B)
 // [TODO] 0x001AF250 sub_001AF250 (195 B)
@@ -231309,6 +231312,7 @@ void __cdecl sub_001EE3A0(Object* object)
 
 // [TODO] 0x001EE3B0 sub_001EE3B0 (41 B)
 // [TODO] 0x001EE3E0 sub_001EE3E0 (176 B)
+// [TODO] 0x001EE490 sub_001EE490 (161 B)
 // [TODO] 0x001EE540 sub_001EE540 (98 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<StatePropAttachmentObject>::vfunc_01 (0x001EE5B0, 42 B)
@@ -257045,6 +257049,7 @@ Class_00211B00* Class_00211B00::sub_00211B00(int a1, int a2)
 }
 
 // [TODO] 0x00211B40 sub_00211B40 (48 B)
+// [TODO] 0x00211B70 sub_00211B70 (166 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<StatePropPhysicsTemplate>::vfunc_01 (0x00211C20, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -294096,6 +294101,7 @@ Class_00260A80* Class_00260A80::sub_00260A80()
 }
 
 // [TODO] 0x00260AC0 sub_00260AC0 (64 B)
+// [TODO] 0x00260B00 sub_00260B00 (19 B)
 // ============================================================================
 // [VERIFIED] sub_00260B20 (0x00260B20, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -308472,6 +308478,7 @@ void __cdecl sub_00283BD0(int a1)
 
 // [TODO] 0x00283BF0 sub_00283BF0 (78 B)
 // [TODO] 0x00283C40 sub_00283C40 (80 B)
+// [TODO] 0x00283C90 sub_00283C90 (133 B)
 // [TODO] 0x00283D20 sub_00283D20 (87 B)
 // [TODO] 0x00283D80 sub_00283D80 (36 B)
 // ============================================================================
@@ -313794,6 +313801,7 @@ Language* Language::vfunc_03(int a1)
 }
 
 // [TODO] 0x0028E5D0 sub_0028E5D0 (64 B)
+// [TODO] 0x0028E610 sub_0028E610 (114 B)
 // [TODO] 0x0028E690 sub_0028E690 (243 B)
 // [TODO] 0x0028E790 sub_0028E790 (60 B)
 // [TODO] 0x0028E7D0 sub_0028E7D0 (365 B)
@@ -337064,6 +337072,7 @@ InstanceDrive* InstanceDrive::vfunc_03(int a1)
 // [TODO] 0x002AC2B0 sub_002AC2B0 (146 B)
 // [TODO] 0x002AC350 sub_002AC350 (61 B)
 // [TODO] 0x002AC390 core::Drive::vfunc_00 (26 B)
+// [TODO] 0x002AC3B0 sub_002AC3B0 (45 B)
 // [TODO] 0x002AC3E0 sub_002AC3E0 (32 B)
 // [TODO] 0x002AC400 sub_002AC400 (36 B)
 // ============================================================================
@@ -337098,6 +337107,7 @@ void* Class_002AC430::sub_002AC430()
 // [TODO] 0x002AC570 sub_002AC570 (50 B)
 // [TODO] 0x002AC5B0 sub_002AC5B0 (31 B)
 // [TODO] 0x002AC5D0 sub_002AC5D0 (64 B)
+// [TODO] 0x002AC610 sub_002AC610 (84 B)
 // [TODO] 0x002AC670 sub_002AC670 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002AC680 (0x002AC680, 4 B)
@@ -337933,7 +337943,7 @@ void CementLibrary::vfunc_09(int a1, int a2, int a3, int a4, int a5, int a6)
 }
 
 // [TODO] 0x002ACC30 sub_002ACC30 (52 B)
-// [TODO] 0x002ACC92 sub_002ACC92 (33 B)
+// [TODO] 0x002ACC70 sub_002ACC70 (67 B)
 // [TODO] 0x002ACCC0 sub_002ACCC0 (100 B)
 // ============================================================================
 // [VERIFIED] sub_002ACD30 (0x002ACD30, 29 B)
@@ -363119,6 +363129,7 @@ Class_002F7E50* Class_002F7E50::sub_002F7E50()
 // [TODO] 0x002F8A10 sub_002F8A10 (60 B)
 // [TODO] 0x002F8A50 sub_002F8A50 (447 B)
 // [TODO] 0x002F8C10 sub_002F8C10 (368 B)
+// [TODO] 0x002F8D80 sub_002F8D80 (783 B)
 // [TODO] 0x002F9090 sub_002F9090 (944 B)
 // [TODO] 0x002F9440 sub_002F9440 (492 B)
 // [TODO] 0x002F9630 sub_002F9630 (150 B)
