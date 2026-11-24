@@ -44591,6 +44591,61 @@
       "name": "OHCD_fQueueTransferRequest",
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map",
       "why": "The same 134 bytes as @OHCD_fQueueTransferRequest@8 (xapilib) in that build, addresses apart, and found only once in this program."
+    },
+    "xb:0x00251B90": {
+      "name": "CreateMemoryPool",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(out, element size, element count, ?, heap, name, ?, ?): allocates 0x38 bytes from the heap (noting it at 0x0045894C), constructs a core::MemoryPool (0x00251A70), sets it up (0x00251930) with the other arguments, calls its first virtual function, and stores it through out. The Namespace, Trigger, File ... pools are made this way."
+    },
+    "xb:0x00251A70": {
+      "name": "core::MemoryPool::MemoryPool",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Stores core::IMemoryPool's vtable, then core::MemoryPool's (0x003D543C) at +0 and 0x003D5434 at +4 as its last vtable stores, clears its counts, keeps the heap noted at 0x0045894C (+8) and its byte argument (+0x34), and returns this."
+    },
+    "xb:0x00248300": {
+      "name": "core::ControllerSystemXBox::ControllerSystemXBox",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Constructor: its last vtable stores are core::ControllerSystemXBox's at +0 and +4 (after core::IControllerSystem's and core::Object's); CreateControllerSystem (0x00248900) calls it on a new 0x12A8-byte object."
+    },
+    "xb:0x00248900": {
+      "name": "CreateControllerSystem",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Allocates 0x12A8 bytes from the heap it is given, constructs a core::ControllerSystemXBox (0x00248300) in it and keeps it in the global at 0x00493B74 (0 when the allocation fails)."
+    },
+    "xb:0x00247970": {
+      "name": "GetControllerSystem",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Returns the controller system made by CreateControllerSystem (0x00248900): the global at 0x00493B74."
+    },
+    "xb:0x00244530": {
+      "name": "GetHeapAllocator",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Returns the allocator of a heap: the first word of its 16-byte record in the table at 0x00493330 (AllocateFromHeap 0x00244450 allocates through the same pointer)."
+    },
+    "xb:0x00023EC0": {
+      "name": "FindObjectByName",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "FindObject(name, 0) (0x0002B770): the script object with that name, or 0."
+    },
+    "xb:0x0026B2F0": {
+      "name": "pure3d::d3dContext::d3dContext",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Constructor: its last vtable store on the object is pure3d::d3dContext's (0x003D6B9C); it also builds the context's extensions (d3dExtGammaControl, d3dExtReadPixels ...). The only class of the pddiRenderContext family the game builds."
+    },
+    "xb:0x0029B080": {
+      "name": "pure3d::d3dDisplay::d3dDisplay",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Constructor: its last vtable store on the object is pure3d::d3dDisplay's (0x003D9674); called from 0x00292320. The only class of the pddiDisplay family the game builds."
+    },
+    "xb:0x0011D7D0": {
+      "name": "CreateTargetSetManager",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Allocates 0x24 bytes from the heap it is given, stores TargetSetManager's vtable (0x003AE778), constructs its part at +4 (0x0011D770) and keeps it in the global at 0x00489D00 (0 when the allocation fails)."
+    },
+    "xb:0x00115360": {
+      "name": "CreateHenchmanManager",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Allocates 12 bytes from heap 10, stores HenchmanManager's vtable (0x003AD490), +4 = 1 (Tony's henchmen follow him), +8 = 0, and keeps it in the global at 0x004898B8 (0 when the allocation fails)."
     }
   },
   "members": {
@@ -44975,6 +45030,247 @@
         "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
         "why": "16 bits: type (low 5; 0x1F = not set) | fewest arguments << 5 | most << 10, packed by the Namespace::Add...Command functions and checked in NamespaceEntry::Execute (0x000728B0)."
       }
+    },
+    "xb:ScriptObject": {
+      "+0x0C": {
+        "name": "m_nameKey",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "ScriptObject's constructor (0x0002AF60) stores its name key here and, when it is not 0, adds the object to the name dictionary; 0x00168220 compares it with NameKey(\"MainCharacter\")."
+      },
+      "+0x10": {
+        "name": "m_id",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "The object's id: the constructor takes it from 0x0002C9E0, and the typed-command 'o' result (0x00072B9E) and the console's object lookup print it with \"%d\"."
+      },
+      "+0x14": {
+        "name": "m_namespace",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "The object's Namespace*: 0 in the constructor, set later; the console looks the object's methods up through it with Namespace::Lookup (0x00072420)."
+      }
+    }
+  },
+  "data": {
+    "xb:0x0041F0F4": {
+      "name": "g_classRepTableNeedsClearing",
+      "type": "bool",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "RegisterClassRep (0x00073400) clears the class table the first time, when this byte is set, then clears it."
+    },
+    "xb:0x004220D0": {
+      "name": "g_stxRing",
+      "type": "char[8][16]",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "KeyToStxString (0x000766D0) writes each key as stx + 8 letters into the next of these eight buffers, pre-filled with \"stx34567890\"."
+    },
+    "xb:0x00473FC4": {
+      "name": "g_simFieldDictionaryEntryPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"SimFieldDictionary Entry Pool\"."
+    },
+    "xb:0x00473FC8": {
+      "name": "g_simFieldDictionaryPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"SimFieldDictionary Pool\"."
+    },
+    "xb:0x00474B20": {
+      "name": "g_pathManagerHeuristicPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"PathManager Heuristic Pool\"."
+    },
+    "xb:0x00476408": {
+      "name": "g_typedCallDefaults",
+      "type": "void**",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CScript::CallTyped (0x00066C90) stores the binding object's default-argument table ([binding+4]) here for the argument converters."
+    },
+    "xb:0x0047640C": {
+      "name": "g_typedCallArgv",
+      "type": "const char**",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CScript::CallTyped (0x00066C90) stores the call's argument texts here for the argument converters."
+    },
+    "xb:0x00476410": {
+      "name": "g_typedCallArgc",
+      "type": "int",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CScript::CallTyped (0x00066C90) stores the call's argument count here for the argument converters."
+    },
+    "xb:0x00478E60": {
+      "name": "g_interpreterState",
+      "type": "void*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "GetReturnBuffer (0x000694E0) takes the script return buffer from it (+0x2478, capacity +0x2474; 0x247C bytes, made by 0x000694A0)."
+    },
+    "xb:0x0047AAB0": {
+      "name": "g_consoleConstructors",
+      "type": "void*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Head of the list of script command records the start-up code fills (each record's constructor links itself in front, next at +0x28); RegisterConsoleCommands (0x000705F0) walks it."
+    },
+    "xb:0x0047B2C0": {
+      "name": "g_engineCallbackKeys",
+      "type": "unsigned int[36]",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "InitNamespaces (0x00072D90) fills it with NameKey of the 36 engine callback names (Initialize, Terminate, OnStateCreated ...); RecomputeCallbackMask (0x00072CE0) compares entry keys with it."
+    },
+    "xb:0x0047B350": {
+      "name": "g_namespaceChangeCount",
+      "type": "unsigned short",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Every Namespace::Add...Command adds one to it (inc word [0x0047B350]), and so does ClassLinkTo."
+    },
+    "xb:0x0047B354": {
+      "name": "g_globalNamespace",
+      "type": "Namespace*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Returned by GetGlobalNamespace (0x00072260); InitNamespaces (0x00072D90) stores it."
+    },
+    "xb:0x0047B358": {
+      "name": "g_namespacePool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Namespace Pool\"."
+    },
+    "xb:0x0047B35C": {
+      "name": "g_namespaceBuckets",
+      "type": "Namespace**",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The 512-bucket table FindNamespace (0x000727C0) looks keys up in ((key >> 2) & 0x1FF); InitNamespaces allocates it (0x800 bytes, heap 3)."
+    },
+    "xb:0x0047B360": {
+      "name": "g_namespaceEntryPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Namespace Entry Pool\"."
+    },
+    "xb:0x0047B364": {
+      "name": "g_namespaceEntryBuckets",
+      "type": "NamespaceEntry**",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The 512-bucket table Namespace::Lookup (0x00072420) and CreateLocalEntry (0x00072FE0) use, bucket ((namespace key ^ key) >> 2) & 0x1FF."
+    },
+    "xb:0x0047B368": {
+      "name": "g_dictionaryEntryPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Dictionary Entry Pool\"."
+    },
+    "xb:0x0047D7C8": {
+      "name": "g_scriptResultScratch",
+      "type": "char[32]",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "NamespaceEntry::Execute (0x000728B0) prints an int, float or bool result into it with dSprintf (\"%d\", \"%g\") and returns it."
+    },
+    "xb:0x0047D7E8": {
+      "name": "g_classRepTable",
+      "type": "ConcreteClassRep*[127]",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "RegisterClassRep (0x00073400) links each class record into bucket key % 127; InitializeClassReps (0x00073650) walks the 127 buckets."
+    },
+    "xb:0x00480AC4": {
+      "name": "g_stringTableNodePool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"String Table Node Pool\"."
+    },
+    "xb:0x00480ADC": {
+      "name": "g_stxRingNext",
+      "type": "int",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "KeyToStxString's (0x000766D0) index of the next buffer in g_stxRing."
+    },
+    "xb:0x00481B74": {
+      "name": "g_triggerPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Trigger Pool\"."
+    },
+    "xb:0x00481BB4": {
+      "name": "g_hashDictionaryEntryPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Hash Dictionary Entry Pool\"."
+    },
+    "xb:0x004870D0": {
+      "name": "g_nisManager",
+      "type": "NISManager*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "0x000CD800 allocates 0x2A4 bytes from heap 15, constructs a NISManager (0x000CD2A0, vtable 0x003A5E00) and stores it here; NISIsPlaying (0x000CED60) reads its +0x270."
+    },
+    "xb:0x0048782C": {
+      "name": "g_simpleLocoAnimSetPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Simple Loco Anim Set Pool\"."
+    },
+    "xb:0x00487854": {
+      "name": "g_targetAnimSetPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"target Anim Set Pool\"."
+    },
+    "xb:0x004898B8": {
+      "name": "g_henchmanManager",
+      "type": "HenchmanManager*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CreateHenchmanManager (0x00115360) stores the new HenchmanManager here; HenchmanManager_SetFollowTony (0x00115300) sets its +4."
+    },
+    "xb:0x00489D00": {
+      "name": "g_targetSetManager",
+      "type": "TargetSetManager*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CreateTargetSetManager (0x0011D7D0) stores the new TargetSetManager here; TSM_NewTargetSet (0x0011D030) calls through it."
+    },
+    "xb:0x0048A9D8": {
+      "name": "g_mainCharacter",
+      "type": "ScriptObject*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Both stores (0x00163BBF, 0x001682C6) are FindObject(\"MainCharacter\", 0); CharacterObject::IsMainCharacter's script command (0x00178250) compares against it."
+    },
+    "xb:0x0048C23C": {
+      "name": "g_hudManager",
+      "type": "HUDManager2*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "0x00196EC0 stores a new HUDManager2 here (constructor 0x00196A40); ResetLookTutorial and AdvanceTutorialState (0x00195610, 0x00195630) call through it."
+    },
+    "xb:0x00492F00": {
+      "name": "g_d3dContext",
+      "type": "pure3d::d3dContext*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Stored at 0x002557C3 and 0x00255927 from the context's +0xE4; the virtual calls made through it use slots up to 107, which only pure3d::d3dContext of the classes the game builds has (portal/tools/vtypes.py, family-leaf)."
+    },
+    "xb:0x00493330": {
+      "name": "g_heapTable",
+      "type": "void*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "16 bytes per heap id; +0 is the heap's allocator: GetHeapAllocator (0x00244530) returns it, AllocateFromHeap (0x00244450) allocates through it."
+    },
+    "xb:0x00493B74": {
+      "name": "g_controllerSystem",
+      "type": "core::ControllerSystemXBox*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CreateControllerSystem (0x00248900) stores the new controller system here; GetControllerSystem (0x00247970) returns it."
+    },
+    "xb:0x004BDD60": {
+      "name": "g_fileRequestPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"FileRequest\"."
+    },
+    "xb:0x004BDD80": {
+      "name": "g_filePool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"File\"."
+    },
+    "xb:0x004BDDA0": {
+      "name": "g_instanceDrivePool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"InstanceDrive\"."
     }
   }
 }

@@ -18,6 +18,11 @@ own name), then the member's offset in the object:
 The portal's starter code for any function of that class then uses the name instead of m_Field28, and
 portal/scripts/merge_classes.py puts it in the class's merged declaration.
 
+Global data has names too, under "data": a version and the address, with a C++ name and, when it is
+proven, its type (for now only recorded and shown; code still writes the global as DAT_XXXXXXXX):
+
+     "data": {"xb:0x0047B354": {"name": "g_globalNamespace", "type": "Namespace*", "by": "handle", "why": "..."}}
+
 Keys are the registry's: a version (pc, xb, proto, ps2, or a PS2 overlay such as ps2pause) and the function's
 address. Names are C++ names:
 letters, digits and _, parts joined by ::, templates in <>. Add one with a pull request (docs/NAMES.md),
@@ -158,7 +163,42 @@ def problems(data: dict, known: Optional[Dict[str, set]] = None) -> List[str]:
             if other:
                 out.append(f"{where}: {name} is already the name of {other}")
             seen[(b, name)] = key
-    return out + member_problems(data)
+    return out + member_problems(data) + data_problems(data)
+
+
+DATA_NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+
+
+def data_problems(data: dict) -> List[str]:
+    """What is wrong with the "data" section (it may be absent): one name per global per version."""
+    section = data.get("data")
+    if section is None:
+        return []
+    if not isinstance(section, dict):
+        return ["reports/names.json: 'data' must be an object"]
+    out, seen = [], {}
+    for key, info in section.items():
+        where = f"reports/names.json data {key}"
+        if not KEY_RE.match(key):
+            out.append(f"{where}: keys look like xb:0x0047B354 (a version, then 8 upper-case hex digits)")
+            continue
+        if not isinstance(info, dict):
+            out.append(f"{where}: must be an object with name, by and why")
+            continue
+        name = info.get("name")
+        if not isinstance(name, str) or not DATA_NAME_RE.match(name) or name.startswith("DAT_"):
+            out.append(f"{where}: {name!r} isn't a name for a global (letters, digits and _)")
+        elif (key.split(":")[0], name) in seen:
+            out.append(f"{where}: {name} is already the name of {seen[(key.split(':')[0], name)]}")
+        else:
+            seen[(key.split(":")[0], name)] = key
+        if "type" in info and (not isinstance(info["type"], str) or not info["type"].strip()):
+            out.append(f"{where}: 'type' must be a C++ type when it is given")
+        if not isinstance(info.get("by"), str) or not info["by"].strip():
+            out.append(f"{where}: say who worked it out ('by')")
+        if not isinstance(info.get("why"), str) or len(info["why"].strip()) < 10:
+            out.append(f"{where}: say in a sentence what shows it ('why')")
+    return out
 
 
 if __name__ == "__main__":
