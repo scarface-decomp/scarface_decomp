@@ -88,6 +88,73 @@ No log shows a `/G` processor switch or a `/Zp` packing switch.
 Report back, per library address range: which of `/Ob1`, `/Ob2`, `/arch:SSE`, `/EHsc` verified more
 functions than the default list, with counts. The answer goes into this spec.
 
+## 5. Results on Scarface (implementer, 2026-11-23)
+
+Worked from this page, the repository and `default.xbe` only. Script: `portal/scripts/flag_study.py`.
+Each function is put in a library by its class (the call graph, the registry and `reports/names.json`;
+game code is everything below `0x2331C0`); spans are where 90% of that library's verified functions lie.
+The default list is the project's: `/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4`, plus `/arch:SSE` where a
+function's own instructions need it.
+
+**Verified functions** (the 5,570 of 24 bytes or more that have a library; the compiler-made start-up
+and shutdown stubs left out), recompiled from their recorded C++ with one switch changed. "Broke" means it
+matches with its recorded flags and no longer does with the change.
+
+| Library | Span | Verified | `/Ob1` added: broke | `/arch:SSE` toggled: broke | `/EHsc` removed: broke |
+| :--- | :--- | ---: | ---: | ---: | ---: |
+| Game code | 0x0298B0–0x213EA0 | 4,571 | 0 | 306 (305 need it, 1 needs it off) | 0 |
+| Drawing | 0x254DC0–0x2A7280 | 362 | 0 | 7 (all need it off) | 0 |
+| Graphics backend | 0x2640A0–0x2C5470 | 148 | 0 | 6 (all off) | 0 |
+| Core | 0x247BD0–0x2C0030 | 99 | 0 | 2 (all off) | 0 |
+| Math | 0x242EB0–0x244100 | 8 | 0 | 1 (off) | 0 |
+| Front end | 0x248A70–0x28E3C0 | 44 | 0 | 1 (off) | 0 |
+| Physics (`ravenphysics::`) | 0x2E4D00–0x2EEB60 | 39 | 0 | 1 (off) | 0 |
+| Content loading | 0x23FA10–0x240C50 | 19 | 0 | 0 | 0 |
+| `fight::` | 0x239EE0–0x23E8B0 | 55 | 0 | 0 | 0 |
+| `om::` | 0x2CEA90–0x2D04D0 | 19 | 0 | 0 | 0 |
+| Sound (`audio::`) | 0x2D0EA0–0x2DD640 | 197 | 0 | 2 (all off) | 0 |
+| Movie | 0x2E2AD0–0x2E3530 | 9 | 0 | 0 | 0 |
+
+**Failing functions**: every open library function of up to 160 bytes (1,206), and every open game
+function of up to 160 bytes that has x87 float code but none of the instructions that need `/arch:SSE`
+(208), tried with the starter code's candidates under the same four flag sets.
+
+| | Default matches | `/Ob1`: new matches | `/arch:SSE` toggled: new matches (closer / further) | `/EHsc` removed: new matches |
+| :--- | ---: | ---: | ---: | ---: |
+| Libraries (1,206) | 18 | 0 | 0 (14 / 106) | 0 |
+| Game code, float (208) | 0 | 0 | 0 (3 / 10) | 0 |
+
+What this says, per item of §3:
+
+1. and 2. **`/Ob1` against `/Ob2`: no answer from this test.** No verified function in any library changes
+   under `/Ob1`: none of their matched sources depends on the compiler expanding a callee on its own. The
+   starter code calls everything it calls, so it can't show it either. Settling it needs a failing function
+   whose only difference is an expanded callee; none is known yet. (The project's submission rules don't
+   accept `/Ob1` today; that would change only if such a function matches with it.)
+3. **`/arch:SSE` is the game code's switch, not the libraries'.** Every verified library function whose
+   bytes depend on the switch (20 in seven libraries) matches only without it, and 14 of 120 failing
+   library functions whose bytes moved came closer with it. The 2003 table had it on for drawing, backend,
+   core, math, physics and front end: in Scarface it is off there. In game code 305 verified functions need
+   it and one (`0xD8D70`, which passes a `-1.0f` constant and has no float compare) needs it off; the 305
+   are spread through the whole game range, so the game is built with it, perhaps with per-file
+   exceptions. This agrees with what METHODOLOGY.md already says (`cmov` and `fcomi` occur only in game
+   code) and with the verifier's rule (it tries the switch only where a function's instructions need it).
+   Adding it to game functions that don't use SSE-only instructions matched none of 208.
+4. **`/EHsc`: no verified function in any library changes without it**, and no failing one matches
+   without it. Functions whose code depends on it are the few with destructor clean-up; none of those is
+   among the verified library functions yet. Still open; the one unit the project met built without it
+   stays the only case.
+5. **`/GS` is not used.** Neither `default.xbe` nor `game.xbe` holds a stack-cookie check function
+   (`cmp ecx, [cookie]; jne; ret`), any of the C runtime's cookie names, or a cookie load in a prologue;
+   the 11 `cmp ecx, [address]; jne` sequences in `default.xbe` are ordinary compares. Recorded in
+   METHODOLOGY.md; closed.
+
+Side findings. Re-verified with their own flags, 13 verified game functions (all `std::sort`/heap template
+instantiations, e.g. `0x29CE0`) match every byte but call another template instantiation that has no
+address name, so a fresh check marks one call as unchecked; they were recorded before that check was
+strict. The 18 library functions the starter code now matches under the default list (with `__cdecl` for
+`__stdcall` where two clean-ups were merged) are added for recording.
+
 ## 4. Next on the examiner's side
 
 A behaviour spec for the file layer named in §1 (drives, the request queue and its thread, files, the

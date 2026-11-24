@@ -48,6 +48,11 @@ executable, `.rdata` and `.data` included.
   `0x00012450`, `0x000C4380` and `0x0010C1F0` use `cmov` or `fcomi` without any `xmm` and match only with the flag. Functions that use
   none of them are never tried with it. `msvc_verify.flag_options` holds this rule, and the
   portal, `portal/verify.py`, `portal/agent.py` and the re-verifier all use it.
+  By library (SPEC-013 §5, `portal/scripts/flag_study.py`): the game's own code is built with
+  `/arch:SSE` (305 verified functions need it, one needs it off), the engine libraries without it (every
+  one of the 20 verified library functions whose bytes depend on the switch matches only without it).
+* No `/GS`: neither Xbox program has the stack-cookie check or loads a cookie in any function, so the
+  switch was off (SPEC-013 §5). `/Ob1` and removing `/EHsc` changed no verified Xbox function.
 * **decomp.me has the same compiler.** Its `msvc7.1` compiler (platform *Windows (9x/NT)*) gave 100%
   on two functions verified here before the reset, one PC (`CementLibrary::vfunc_05`, 39 B, `/G7`) and one Xbox
   (`sub_0001EF60`, 7 B), checked on 2026-11-08. It compiles as C unless `/TP` is passed, so the
