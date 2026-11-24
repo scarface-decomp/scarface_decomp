@@ -122,6 +122,10 @@ A submission counts only if all of the following hold:
      the name is read back from the decorated symbol (`?Reload@Weapon@@QAEXXZ` is `Weapon::Reload`) and
      the address is checked the same way. Constructors, operators and templates are not read back and
      keep address names;
+   * a call to a function the same file compiles into a section of its own (a template instantiation, or a
+     member the compiler writes itself, such as `operator=`) is checked by its code: the original must
+     hold the same bytes at the called address, linker-filled addresses aside. The linker may have
+     folded several identical functions into that one;
    * one external symbol must mean one address throughout the function.
 
    References that cannot be checked (an ordinary external such as `operator delete`) are counted and
