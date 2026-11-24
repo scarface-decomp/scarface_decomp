@@ -26,6 +26,10 @@ names into reports/names.json for the functions the work queue still calls sub_X
     python portal/tools/script_commands.py --list xb       every command and its function
     python portal/tools/script_commands.py --json          the whole table: reports/script_bindings.json
 
+The record's constructor comes in five kinds, one per kind of value a handler gives back (text, a whole
+number, a number with a fraction, nothing, yes/no); which one a command's start-up code calls is in the
+table as "returns". The commands bound straight to typed C++ functions are read by script_typed.py.
+
 A function gets the name Script::<Command>, or Script::<Class>_<Command> for a class's command: it
 is the script system's handler (it takes the object, a count and the arguments as text), not the class's
 own C++ method of the same name, which it usually calls.
@@ -73,6 +77,7 @@ class Command:
     fewest: int         # arguments, counting the command's own name (and the object, for a class's)
     most: int
     at: int             # where the start-up code registers it
+    returns: str = ""   # what the handler gives back: string, int, float, void or bool ("" when not read)
 
     @property
     def script_name(self) -> str:
@@ -99,11 +104,28 @@ def _text(img: BinaryImage, va: int) -> Optional[str]:
     return s if IDENT.match(s) else None
 
 
+RETURNS = {0x00: "string", 0x04: "int", 0x08: "float", 0x0C: "void", 0x10: "bool"}
+
+
+def returns_of(img: BinaryImage, ctor: int) -> str:
+    """What a command registered through this record constructor gives back. The record has one slot per
+    kind of handler (+0x00 string, +0x04 int, +0x08 float, +0x0C void, +0x10 bool); each of the five
+    constructors differs only in which slot it puts the handler in, as its last store before `ret 0x18`."""
+    body = img.read(ctor, 0x60) or b""
+    end = body.find(b"\xC2\x18\x00")
+    if end >= 3 and body[end - 3:end - 1] == b"\x89\x48":            # mov [eax+N], ecx
+        return RETURNS.get(body[end - 1], "")
+    if end >= 2 and body[end - 2:end] == b"\x89\x08":                # mov [eax], ecx
+        return RETURNS[0]
+    return ""
+
+
 def find(img: BinaryImage) -> List[Command]:
     """Every script command the program registers, in the order its start-up code does."""
     def num(short: Optional[bytes], long: Optional[bytes]) -> int:
         return short[0] if short is not None else struct.unpack("<I", long)[0]
     found: List[Command] = []
+    kinds: Dict[int, str] = {}
     for sec in img.game_code_sections():
         code = img.data[sec.raw:sec.raw + sec.raw_size]
         for m in _STUB.finditer(code):
@@ -120,7 +142,10 @@ def find(img: BinaryImage) -> List[Command]:
             target = img.section_of(handler)
             if target is None or not target.is_code or target.library:
                 continue
-            found.append(Command(cls, name, handler, fewest, most, sec.va + m.start()))
+            ctor = (sec.va + m.end() - 1 + struct.unpack("<i", g[11])[0]) & 0xFFFFFFFF
+            if ctor not in kinds:
+                kinds[ctor] = returns_of(img, ctor)
+            found.append(Command(cls, name, handler, fewest, most, sec.va + m.start(), kinds[ctor]))
     return found
 
 
@@ -216,7 +241,8 @@ def main(argv=None) -> int:
                          "(portal/tools/script_commands.py; the examiner's question E7)", "versions": {}}
         for b, (commands, _new, _counts) in found.items():
             table["versions"][b] = [{"class": c.cls, "name": c.name, "handler": f"0x{c.handler:08X}",
-                                     "fewest": c.fewest, "most": c.most, "registered_at": f"0x{c.at:08X}"}
+                                     "fewest": c.fewest, "most": c.most, "registered_at": f"0x{c.at:08X}",
+                                     "returns": c.returns}
                                     for c in sorted(commands, key=lambda c: (c.cls, c.name.lower(), c.handler))]
         args.json.write_text(json.dumps(table, indent=1) + "\n", encoding="utf-8")
         print(f"{args.json}: " + ", ".join(f"{b} {len(v):,} commands" for b, v in table["versions"].items()))

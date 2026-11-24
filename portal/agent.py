@@ -275,7 +275,8 @@ def cmd_describe(args) -> int:
             print(f"  it is the script command {commands[k]} (scripts call it by that name)")
         g = graph.get("functions", {}).get(k.split(":", 1)[1], {})
         if g.get("casts"):
-            print("  checks objects' class with dynamic_cast to " + ", ".join(g["casts"][:4]))
+            to = list(dict.fromkeys(c[1] if isinstance(c, list) else c for c in g["casts"]))
+            print("  checks objects' class with dynamic_cast to " + ", ".join(to[:4]))
         for ck, name, what in calls[:12]:
             print(f"  calls {name}" + (f": {what}" if what else "") + ("" if name.startswith("sub_") else f"  ({ck})"))
         cls = e.get("symbol", "").rsplit("::", 1)[0] if "::" in e.get("symbol", "") else ""
