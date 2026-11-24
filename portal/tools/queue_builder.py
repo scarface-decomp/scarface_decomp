@@ -25,7 +25,7 @@ from typing import Dict, List, Optional, Set, Tuple
 
 import lookalikes
 import ps2_overlay
-from msvc_verify import decorated_hint
+from msvc_verify import decorated_hint, has_eh_frame
 from sf_binaries import (BinaryImage, Extent, collect_call_targets, function_extent, not_compiled_reason,
                          settle_overlaps)
 
@@ -36,7 +36,11 @@ PC_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 # Only this part of the retail PC .text is stored as plaintext (the rest is not readable code),
 # so PC tasks are limited to it. Same bounds as the original index builder.
 PC_PLAINTEXT = (0x006DDC00, 0x0072EADC)
-XB_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+# The Xbox builds have no C++ exception frames in the game or engine code (examiner, round Q32-Q43;
+# every verified Xbox function still matches without /EHsc), so /EHsc is only given to a function
+# whose bytes show a frame (has_eh_frame).
+XB_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /Zp4"
+XB_EH_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 # The April 20, 2006 Xbox prototype (game.xbe, optional): unreleased code. Its functions are queued,
 # verified and saved like the others, and counted on their own row. About half of them have the same
 # machine code as a retail Xbox function, so look-alike porting fills those in as retail is matched.
@@ -235,7 +239,8 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
                 known_functions: Optional[List[dict]] = None,
                 extra_starts: Optional[Dict[str, List[str]]] = None,
                 library: Optional[Dict[str, List[str]]] = None) -> List[dict]:
-    """known_functions: [{bin, va, size, symbol, match}] whose start and size were proven earlier by an
+    """verified_keys: the registry's keys, or {key: size} so a verified function keeps its matched size.
+    known_functions: [{bin, va, size, symbol, match}] whose start and size were proven earlier by an
     exact byte match (reports/known_functions.json). They are always queued, with that size, even where
     the scanner alone would not find them (tiny stubs, starts inside padding).
     extra_starts: {bin: ["0x...", ...]} starts that calls and vtables do not reveal
@@ -280,6 +285,11 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
             e = function_extent(img, va, known)
             if va in kf:
                 e = Extent(va, int(kf[va]["size"]), True, "size proven by an earlier exact match",
+                           has_jump_table=e.has_jump_table if e.ok else False)
+            elif isinstance(verified_keys, dict) and verified_keys.get(f"{b}:0x{va:08X}"):
+                # a verified function's size is its match's; the scanner alone can run on past its end
+                # (a short function before padding) and hide the functions that follow
+                e = Extent(va, int(verified_keys[f"{b}:0x{va:08X}"]), True, "size proven by its verified match",
                            has_jump_table=e.has_jump_table if e.ok else False)
             if b == "pc" and e.ok and va + e.size > PC_PLAINTEXT[1]:
                 continue
@@ -335,7 +345,7 @@ def build_queue(binaries: Dict[str, Path], old_queue: Optional[List[dict]] = Non
                 "va": f"{LANES[b][2]}0x{va:08X}",
                 "fva_int": va,
                 "size": e.size,
-                "flags": PC_FLAGS if b == "pc" else XB_FLAGS,
+                "flags": PC_FLAGS if b == "pc" else (XB_EH_FLAGS if has_eh_frame(img.read(va, e.size)) else XB_FLAGS),
                 "status": "UNCLAIMED",
                 "claimed_by": "",
                 "hint": hint,
@@ -485,7 +495,8 @@ def main() -> int:
             binaries[o.bin] = p
     old = json.loads(out.read_text(encoding="utf-8")) if out.exists() else None
     reg_path = root / "reports" / "verified_registry.json"
-    verified = set(json.loads(reg_path.read_text(encoding="utf-8")).get("entries", {})) if reg_path.exists() else set()
+    entries = json.loads(reg_path.read_text(encoding="utf-8")).get("entries", {}) if reg_path.exists() else {}
+    verified = {k: int(e.get("size") or 0) for k, e in entries.items()}
     tasks = build_queue(binaries, old, verified, progress=print, **seed_data(root))
     tmp = out.with_suffix(".tmp")
     tmp.write_text(json.dumps(tasks, indent=1), encoding="utf-8")

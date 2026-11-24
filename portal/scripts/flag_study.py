@@ -25,7 +25,7 @@ sys.path.insert(0, str(ROOT / "portal")); sys.path.insert(0, str(ROOT / "portal"
 import agent as A  # noqa: E402
 import msvc_verify as MV  # noqa: E402
 
-GAME_END = 0x002331C0
+GAME_END = 0x002335F0  # examiner Q38: 0x233340 is still game code
 STUBS = (0x00311860, 0x00329430)          # static initializers and atexit stubs: compiler-made, left out
 SSE = "/arch:SSE"
 

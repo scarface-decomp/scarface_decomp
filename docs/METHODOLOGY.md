@@ -36,7 +36,8 @@ executable, `.rdata` and `.data` included.
   If medium or large Xbox functions refuse to match, test them with the XDK compiler (if you have it
   lawfully; it is not redistributable), with `/O1`, and look for signs of link-time code generation,
   such as functions that take arguments in registers other than `ecx`.
-* Default flags for every target: `/nologo /c /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4`.
+* Default flags: `/nologo /c /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4` on PC; the same without `/EHsc` on the
+  two Xbox programs (see the `/EHsc` note below).
 * PC only: when `/G6` does not match, the same code is tried with `/G7`. Before the reset, 14 of the 155 verified PC
   functions needed `/G7`. Xbox code is checked with `/G6` only (see the notes in section 5). The
   registry stores the flags that matched.
@@ -52,7 +53,12 @@ executable, `.rdata` and `.data` included.
   `/arch:SSE` (305 verified functions need it, one needs it off), the engine libraries without it (every
   one of the 20 verified library functions whose bytes depend on the switch matches only without it).
 * No `/GS`: neither Xbox program has the stack-cookie check or loads a cookie in any function, so the
-  switch was off (SPEC-013 §5). `/Ob1` and removing `/EHsc` changed no verified Xbox function.
+  switch was off (SPEC-013 §5). `/Ob1` changed no verified Xbox function.
+* No `/EHsc` on Xbox: the game and engine code has no C++ exception frame (no function sets the
+  exception list at `fs:[0]`; the 49 exception stubs belong to a Microsoft library), and all 22,626
+  verified Xbox functions (11,678 retail, 10,948 prototype) still match with the switch removed. New
+  Xbox tasks are queued without it; a function whose bytes do show a frame keeps it. Tasks queued
+  earlier are also tried without it.
 * **decomp.me has the same compiler.** Its `msvc7.1` compiler (platform *Windows (9x/NT)*) gave 100%
   on two functions verified here before the reset, one PC (`CementLibrary::vfunc_05`, 39 B, `/G7`) and one Xbox
   (`sub_0001EF60`, 7 B), checked on 2026-11-08. It compiles as C unless `/TP` is passed, so the

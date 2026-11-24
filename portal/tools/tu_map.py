@@ -32,7 +32,7 @@ import hidden_starts as H  # noqa: E402
 from sf_binaries import BinaryImage  # noqa: E402
 
 ROOT = HERE.parent.parent
-GAME_END = 0x002331C0           # below this the game's own code; above it the libraries (frame-pointer map, Q10)
+GAME_END = 0x002335F0           # below this the game's own code; above it the libraries (frame-pointer map Q10; moved past 0x233340, Q38)
 
 
 def anchors(md, img, s: int, bss: Tuple[int, int]) -> Tuple[Optional[int], List[int]]:

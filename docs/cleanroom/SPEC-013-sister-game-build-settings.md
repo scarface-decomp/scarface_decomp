@@ -144,6 +144,9 @@ What this says, per item of §3:
    without it. Functions whose code depends on it are the few with destructor clean-up; none of those is
    among the verified library functions yet. Still open; the one unit the project met built without it
    stays the only case.
+   **Closed 2026-11-24** (examiner's round Q32–Q43, re-checked): no game or engine function sets up an
+   exception frame, and every verified Xbox function, retail and prototype, matches with `/EHsc`
+   removed. The Xbox default list no longer has it.
 5. **`/GS` is not used.** Neither `default.xbe` nor `game.xbe` holds a stack-cookie check function
    (`cmp ecx, [cookie]; jne; ret`), any of the C runtime's cookie names, or a cookie load in a prologue;
    the 11 `cmp ecx, [address]; jne` sequences in `default.xbe` are ordinary compares. Recorded in

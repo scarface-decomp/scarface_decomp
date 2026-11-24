@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 780 of 1,515 functions matched (51.49%). NOT COMPLETE YET.
-// The 735 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 780 of 1,514 functions matched (51.52%). NOT COMPLETE YET.
+// The 734 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -7920,7 +7920,6 @@ void CementLibrary::vfunc_09(int a1, int a2, int a3, int a4, int a5, int a6)
 
 }
 
-// [TODO] 0x006E68C9 sub_006E68C9 (26 B)
 // [TODO] 0x006E68F0 sub_006E68F0 (54 B)
 // ============================================================================
 // [VERIFIED] sub_006E69F0 (0x006E69F0, 29 B)

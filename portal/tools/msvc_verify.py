@@ -741,6 +741,19 @@ def uses_sse(target: Optional[bytes]) -> bool:
                for insn in md.disasm(bytes(target), 0))
 
 
+# The C++ exception frame the compiler writes under /EHsc when a function has an object to destroy
+# while unwinding: it reads and replaces the exception list at fs:[0]. A function without one compiles
+# the same with or without /EHsc unless the source has such an object, so /EHsc stays off unless the
+# function's bytes show a frame (examiner, round Q32-Q43: none in the Xbox game or engine code).
+EH_FRAME = re.compile(rb"\x64(?:[\xA1\xA3]|[\x89\x8B][\x05\x0D\x15\x1D\x25\x2D\x35\x3D])\x00\x00\x00\x00")
+
+
+def has_eh_frame(target: Optional[bytes]) -> bool:
+    """True when the function's bytes read or set the exception list at fs:[0] (mov r32, fs:[0] or
+    mov fs:[0], r32)."""
+    return bool(target) and EH_FRAME.search(bytes(target)) is not None
+
+
 def verify_line_options(text: str) -> Dict[str, str]:
     """--match and --flags from a '// verify: python portal/verify.py ...' line at the top of a file: a file
     whose function can't be picked by its own name (a template instantiation, a compiler helper) or that
@@ -776,12 +789,16 @@ def flag_options(bin_name: str, flags: str, target: Optional[bytes] = None) -> L
     PC also tries /G7, because a few PC functions only match with it. The Xbox builds (retail and
     prototype) also try /arch:SSE when the function's own instructions show it (uses_sse): parts of
     the game were built for the console's Pentium III that way, and the compiler never writes those
-    instructions without it. The portal, the command-line checks and the re-verifier all use this."""
+    instructions without it. They also try without /EHsc when the function has no exception frame
+    (has_eh_frame): the Xbox code was built without it. The portal, the command-line checks and the
+    re-verifier all use this."""
     opts = [flags]
     if bin_name == "pc" and "/G6" in flags:
         opts.append(flags.replace("/G6", "/G7"))
     if bin_name in ("xb", "proto") and "/arch:" not in flags and uses_sse(target):
         opts.append(flags + " " + SSE_FLAG)
+    if bin_name in ("xb", "proto") and " /EHsc" in flags and target and not has_eh_frame(target):
+        opts += [o.replace(" /EHsc", "") for o in list(opts)]       # queues built before /EHsc was dropped
     return opts
 
 

@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11,678 of 21,717 functions matched (53.77%). NOT COMPLETE YET.
-// The 10,039 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 11,678 of 22,041 functions matched (52.98%). NOT COMPLETE YET.
+// The 10,363 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -29041,6 +29041,7 @@ void Class_0004C330::sub_0004C330(int a1)
 }
 
 // [TODO] 0x0004C370 sub_0004C370 (58 B)
+// [TODO] 0x0004C3B0 sub_0004C3B0 (4 B)
 // ============================================================================
 // [VERIFIED] sub_0004C3C0 (0x0004C3C0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -31486,6 +31487,7 @@ void Class_00053410::sub_00053410()
 }
 
 // [TODO] 0x00053420 sub_00053420 (53 B)
+// [TODO] 0x00053460 sub_00053460 (15 B)
 // ============================================================================
 // [VERIFIED] renderer::InstancePrimitive::vfunc_07 (0x00053470, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -36418,6 +36420,7 @@ int __cdecl sub_000608A0(int a1, int a2, int a3)
     return r_eax;
 }
 
+// [TODO] 0x000608C0 sub_000608C0 (38 B)
 // [TODO] 0x000608F0 DecisionTreeFileHandler::vfunc_04 (577 B)
 // ============================================================================
 // [VERIFIED] sub_00060B40 (0x00060B40, 6 B)
@@ -36927,6 +36930,7 @@ L_2E:
 
 // [TODO] 0x000619C0 sub_000619C0 (35 B)
 // [TODO] 0x000619F0 sub_000619F0 (708 B)
+// [TODO] 0x00061CC0 sub_00061CC0 (79 B)
 // ============================================================================
 // [VERIFIED] LoadSet::vfunc_03 (0x00061D10, 80 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -37178,12 +37182,15 @@ void __cdecl sub_00062570(void)
 // [TODO] 0x00062590 sub_00062590 (203 B)
 // [TODO] 0x00062660 sub_00062660 (104 B)
 // [TODO] 0x000626D0 sub_000626D0 (161 B)
+// [TODO] 0x00062780 sub_00062780 (105 B)
+// [TODO] 0x000627F0 sub_000627F0 (170 B)
 // [TODO] 0x000628A0 sub_000628A0 (117 B)
 // [TODO] 0x00062920 sub_00062920 (235 B)
 // [TODO] 0x00062A10 sub_00062A10 (245 B)
 // [TODO] 0x00062B10 sub_00062B10 (118 B)
 // [TODO] 0x00062B90 sub_00062B90 (166 B)
 // [TODO] 0x00062C40 sub_00062C40 (508 B)
+// [TODO] 0x00062E50 sub_00062E50 (402 B)
 // [TODO] 0x00062FF0 sub_00062FF0 (305 B)
 // [TODO] 0x00063130 sub_00063130 (36 B)
 // ============================================================================
@@ -37509,6 +37516,7 @@ void __cdecl sub_00063BA0(int a1, int a2)
     sub_00063A60(a1, a2);
 }
 
+// [TODO] 0x00063BC0 sub_00063BC0 (64 B)
 // [TODO] 0x00063C00 sub_00063C00 (163 B)
 // ============================================================================
 // [VERIFIED] sub_00063CB0 (0x00063CB0, 9 B)
@@ -37580,6 +37588,8 @@ void __cdecl sub_00064140(int a1, int a2)
     }
 }
 
+// [TODO] 0x00064180 sub_00064180 (7 B)
+// [TODO] 0x00064190 sub_00064190 (23 B)
 // [TODO] 0x000641B0 sub_000641B0 (138 B)
 // [TODO] 0x00064240 sub_00064240 (112 B)
 // [TODO] 0x000642B0 sub_000642B0 (77 B)
@@ -40950,6 +40960,7 @@ template <> void content::LoadInventory::DynamicCaster<ScriptFileObject>::vfunc_
 // [TODO] 0x000674B0 sub_000674B0 (145 B)
 // [TODO] 0x00067550 sub_00067550 (219 B)
 // [TODO] 0x00067630 sub_00067630 (55 B)
+// [TODO] 0x00067670 sub_00067670 (8 B)
 // [TODO] 0x00067680 sub_00067680 (181 B)
 // [TODO] 0x00067740 sub_00067740 (99 B)
 // [TODO] 0x000677B0 sub_000677B0 (604 B)
@@ -45419,6 +45430,8 @@ Stream* Stream::vfunc_00(int a1)
 
 // [TODO] 0x00076620 MemStream::vfunc_08 (79 B)
 // [TODO] 0x00076670 MemStream::vfunc_07 (52 B)
+// [TODO] 0x000766B0 sub_000766B0 (8 B)
+// [TODO] 0x000766C0 sub_000766C0 (8 B)
 // [TODO] 0x000766D0 sub_000766D0 (138 B)
 // [TODO] 0x00076760 sub_00076760 (113 B)
 // [TODO] 0x000767E0 sub_000767E0 (49 B)
@@ -45432,6 +45445,7 @@ Stream* Stream::vfunc_00(int a1)
 // [TODO] 0x00076A70 sub_00076A70 (120 B)
 // [TODO] 0x00076AF0 sub_00076AF0 (375 B)
 // [TODO] 0x00076C70 sub_00076C70 (294 B)
+// [TODO] 0x00076DA0 sub_00076DA0 (11 B)
 // ============================================================================
 // [VERIFIED] sub_00076DB0 (0x00076DB0, 53 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -48075,6 +48089,7 @@ int Class_0007DF60::sub_0007DF60(int a1, int a2)
 // [TODO] 0x0007E010 sub_0007E010 (92 B)
 // [TODO] 0x0007E070 sub_0007E070 (69 B)
 // [TODO] 0x0007E0C0 sub_0007E0C0 (190 B)
+// [TODO] 0x0007E180 sub_0007E180 (15 B)
 // [TODO] 0x0007E190 CompletedConversationsTracker::vfunc_00 (25 B)
 // [TODO] 0x0007E1B0 sub_0007E1B0 (97 B)
 // ============================================================================
@@ -48243,6 +48258,7 @@ Object* __cdecl sub_0007F120(void)
 // [TODO] 0x0007F3D0 sub_0007F3D0 (147 B)
 // [TODO] 0x0007F470 sub_0007F470 (103 B)
 // [TODO] 0x0007F4E0 sub_0007F4E0 (68 B)
+// [TODO] 0x0007F530 sub_0007F530 (86 B)
 // [TODO] 0x0007F590 sub_0007F590 (102 B)
 // ============================================================================
 // [VERIFIED] sub_0007F600 (0x0007F600, 203 B)
@@ -54266,6 +54282,7 @@ void Class_0008FB50::sub_0008FB50()
     sub_000905E0();
 }
 
+// [TODO] 0x0008FB60 sub_0008FB60 (93 B)
 // ============================================================================
 // [VERIFIED] sub_0008FBC0 (0x0008FBC0, 15 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -54502,6 +54519,7 @@ void __cdecl sub_0008FC90(void)
 }
 
 // [TODO] 0x0008FCB0 sub_0008FCB0 (39 B)
+// [TODO] 0x0008FCE0 sub_0008FCE0 (85 B)
 // ============================================================================
 // [VERIFIED] sub_0008FD40 (0x0008FD40, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -54908,6 +54926,7 @@ int __cdecl sub_000904C0(bool a1)
 }
 
 // [TODO] 0x000904E0 sub_000904E0 (206 B)
+// [TODO] 0x000905B0 sub_000905B0 (15 B)
 // ============================================================================
 // [VERIFIED] sub_000905C0 (0x000905C0, 17 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -54936,6 +54955,7 @@ void __cdecl sub_000905D0(void)
 {
 }
 
+// [TODO] 0x000905F0 sub_000905F0 (4 B)
 // [TODO] 0x00090600 sub_00090600 (96 B)
 // ============================================================================
 // [VERIFIED] sub_00090660 (0x00090660, 6 B)
@@ -55105,6 +55125,7 @@ L_37:
 // [TODO] 0x000918C0 StreamManagerFlowClient::vfunc_03 (412 B)
 // [TODO] 0x00091A60 sub_00091A60 (41 B)
 // [TODO] 0x00091A90 sub_00091A90 (95 B)
+// [TODO] 0x00091AF0 sub_00091AF0 (78 B)
 // ============================================================================
 // [VERIFIED] sub_00091B40 (0x00091B40, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -67343,6 +67364,8 @@ float __cdecl sub_000AB830(void)
 }
 
 // [TODO] 0x000AB840 sub_000AB840 (61 B)
+// [TODO] 0x000AB880 sub_000AB880 (13 B)
+// [TODO] 0x000AB890 sub_000AB890 (13 B)
 // ============================================================================
 // [VERIFIED] sub_000AB8A0 (0x000AB8A0, 7 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -68239,6 +68262,7 @@ VehicleLocomotion* VehicleLocomotion::vfunc_00(int a1)
 // [TODO] 0x000B1CE0 sub_000B1CE0 (772 B)
 // [TODO] 0x000B1FF0 sub_000B1FF0 (81 B)
 // [TODO] 0x000B2050 PlaneCollisionCalculator::vfunc_00 (23 B)
+// [TODO] 0x000B2070 sub_000B2070 (7 B)
 // ============================================================================
 // [VERIFIED] WheelCollisionCalculator::vfunc_00 (0x000B2080, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -77625,6 +77649,7 @@ void Class_000CA860::sub_000CA860()
 }
 
 // [TODO] 0x000CA8E0 sub_000CA8E0 (129 B)
+// [TODO] 0x000CA970 sub_000CA970 (95 B)
 // ============================================================================
 // [VERIFIED] sub_000CA9D0 (0x000CA9D0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -78047,6 +78072,7 @@ bool Class_000CBC70::sub_000CBC70()
 }
 
 // [TODO] 0x000CBC90 sub_000CBC90 (42 B)
+// [TODO] 0x000CBCC0 sub_000CBCC0 (34 B)
 // ============================================================================
 // [VERIFIED] sub_000CBCF0 (0x000CBCF0, 50 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -78316,6 +78342,7 @@ void Class_000CD5A0::sub_000CD5A0()
 
 // [TODO] 0x000CD660 NISManager::vfunc_02 (215 B)
 // [TODO] 0x000CD740 NISManager::vfunc_03 (180 B)
+// [TODO] 0x000CD800 sub_000CD800 (40 B)
 // ============================================================================
 // [VERIFIED] NISManager::vfunc_00 (0x000CD830, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -78426,6 +78453,7 @@ int NISPackage::vfunc_02()
 
 // [TODO] 0x000CD900 sub_000CD900 (26 B)
 // [TODO] 0x000CD920 sub_000CD920 (29 B)
+// [TODO] 0x000CD940 sub_000CD940 (35 B)
 // [TODO] 0x000CD970 sub_000CD970 (105 B)
 // ============================================================================
 // [VERIFIED] sub_000CD9E0 (0x000CD9E0, 91 B)
@@ -83841,6 +83869,7 @@ float Class_000DC610::sub_000DC610()
 // [TODO] 0x000DC970 sub_000DC970 (769 B)
 // [TODO] 0x000DCC80 sub_000DCC80 (74 B)
 // [TODO] 0x000DCCD0 sub_000DCCD0 (57 B)
+// [TODO] 0x000DCD10 sub_000DCD10 (10 B)
 // ============================================================================
 // [VERIFIED] sub_000DCD20 (0x000DCD20, 86 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4 /arch:SSE
@@ -91997,6 +92026,7 @@ void __cdecl sub_000E6D40(void)
 
 // [TODO] 0x000E6D80 sub_000E6D80 (195 B)
 // [TODO] 0x000E6E50 sub_000E6E50 (50 B)
+// [TODO] 0x000E6E90 sub_000E6E90 (49 B)
 // ============================================================================
 // [VERIFIED] TargetAnimationSet::vfunc_03 (0x000E6ED0, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -98453,9 +98483,11 @@ void Class_000EB6B0::sub_000EB6B0()
 }
 
 // [TODO] 0x000EB6C0 sub_000EB6C0 (62 B)
+// [TODO] 0x000EB740 sub_000EB740 (18 B)
 // [TODO] 0x000EB760 sub_000EB760 (112 B)
 // [TODO] 0x000EB7D0 sub_000EB7D0 (204 B)
 // [TODO] 0x000EB8A0 sub_000EB8A0 (93 B)
+// [TODO] 0x000EB900 sub_000EB900 (37 B)
 // [TODO] 0x000EB930 sub_000EB930 (203 B)
 // [TODO] 0x000EBA00 sub_000EBA00 (166 B)
 // ============================================================================
@@ -98990,6 +99022,9 @@ int __cdecl sub_000EC630(void)
 }
 
 // [TODO] 0x000EC660 sub_000EC660 (44 B)
+// [TODO] 0x000EC690 sub_000EC690 (17 B)
+// [TODO] 0x000EC6B0 sub_000EC6B0 (17 B)
+// [TODO] 0x000EC6D0 sub_000EC6D0 (17 B)
 // ============================================================================
 // [VERIFIED] sub_000EC6F0 (0x000EC6F0, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -104149,6 +104184,7 @@ AIBehavior* AIBehavior::vfunc_01(int a1)
 // [TODO] 0x001014C0 sub_001014C0 (473 B)
 // [TODO] 0x001016A0 sub_001016A0 (277 B)
 // [TODO] 0x001017C0 sub_001017C0 (41 B)
+// [TODO] 0x001017F0 sub_001017F0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_00101800 (0x00101800, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -121510,6 +121546,7 @@ public:
 AIFullStimulusMonitor::AIFullStimulusMonitor() {}                  // building one is what makes the compiler write its tables and the thunk
 
 // [TODO] 0x0011E090 sub_0011E090 (67 B)
+// [TODO] 0x0011E0E0 sub_0011E0E0 (42 B)
 // [TODO] 0x0011E110 AIFullStimulusMonitor::vfunc_00 (98 B)
 // ============================================================================
 // [VERIFIED] sub_0011E180 (0x0011E180, 13 B)
@@ -193823,6 +193860,7 @@ void __cdecl sub_001A94F0(int a1)
 // [TODO] 0x001A9AC0 sub_001A9AC0 (96 B)
 // [TODO] 0x001A9B20 sub_001A9B20 (125 B)
 // [TODO] 0x001A9BA0 sub_001A9BA0 (158 B)
+// [TODO] 0x001A9C40 sub_001A9C40 (116 B)
 // [TODO] 0x001A9CC0 sub_001A9CC0 (242 B)
 // [TODO] 0x001A9DC0 sub_001A9DC0 (297 B)
 // ============================================================================
@@ -194112,6 +194150,7 @@ GOPoint* GOPoint::vfunc_01(int a1)
 }
 
 // [TODO] 0x001ABB10 sub_001ABB10 (1190 B)
+// [TODO] 0x001ABFC0 sub_001ABFC0 (26 B)
 // [TODO] 0x001ABFE0 sub_001ABFE0 (151 B)
 // ============================================================================
 // [VERIFIED] PromptHUD::vfunc_00 (0x001AC080, 6 B)
@@ -194340,6 +194379,7 @@ L_27:
 
 // [TODO] 0x001AC230 sub_001AC230 (60 B)
 // [TODO] 0x001AC270 sub_001AC270 (184 B)
+// [TODO] 0x001AC330 sub_001AC330 (221 B)
 // ============================================================================
 // [VERIFIED] PromptHUD::vfunc_01 (0x001AC410, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -194920,6 +194960,7 @@ L_16:
 
 // [TODO] 0x001ACF60 MissionFailHUD::vfunc_00 (114 B)
 // [TODO] 0x001ACFE0 sub_001ACFE0 (242 B)
+// [TODO] 0x001AD0E0 sub_001AD0E0 (236 B)
 // [TODO] 0x001AD1D0 sub_001AD1D0 (115 B)
 // ============================================================================
 // [VERIFIED] MissionFailHUD::vfunc_00 (0x001AD250, 6 B)
@@ -195671,6 +195712,7 @@ void Class_001ADEC0::sub_001ADEC0()
 
 // [TODO] 0x001ADF50 sub_001ADF50 (169 B)
 // [TODO] 0x001AE000 DrugWarsHUD::vfunc_45 (232 B)
+// [TODO] 0x001AE0F0 sub_001AE0F0 (90 B)
 // [TODO] 0x001AE150 sub_001AE150 (119 B)
 // [TODO] 0x001AE1D0 sub_001AE1D0 (376 B)
 // [TODO] 0x001AE350 sub_001AE350 (284 B)
@@ -195896,6 +195938,7 @@ L_1C:
 }
 
 // [TODO] 0x001AE8B0 sub_001AE8B0 (62 B)
+// [TODO] 0x001AE8F0 sub_001AE8F0 (75 B)
 // [TODO] 0x001AE940 ViceCopHUD::ViceCopHUDMenuItem::vfunc_05 (121 B)
 // [TODO] 0x001AE9C0 ViceCopHUD::ViceCopHUDMenuItem::vfunc_01 (80 B)
 // [TODO] 0x001AEA10 ViceCopHUD::ViceCopHUDMenuItem::vfunc_02 (80 B)
@@ -195944,6 +195987,8 @@ void ViceCopHUDMenuItem::vfunc_04(int a1)
 
 // [TODO] 0x001AEA80 VehicleSelectionHUD::vfunc_47 (57 B)
 // [TODO] 0x001AEAC0 sub_001AEAC0 (499 B)
+// [TODO] 0x001AECC0 sub_001AECC0 (184 B)
+// [TODO] 0x001AED80 sub_001AED80 (66 B)
 // [TODO] 0x001AEDD0 sub_001AEDD0 (474 B)
 // [TODO] 0x001AEFB0 sub_001AEFB0 (136 B)
 // ============================================================================
@@ -196103,6 +196148,7 @@ void VehicleSelectionHUDMenuItem::vfunc_03(int a1)
 // [TODO] 0x001AF3D0 BusinessHUD::HenchmenMenuItem::vfunc_02 (82 B)
 // [TODO] 0x001AF430 sub_001AF430 (87 B)
 // [TODO] 0x001AF490 BusinessDetailHUD::vfunc_45 (148 B)
+// [TODO] 0x001AF530 sub_001AF530 (143 B)
 // ============================================================================
 // [VERIFIED] sub_001AF5C0 (0x001AF5C0, 78 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -196276,6 +196322,7 @@ DrugWarsHUDFrontMenuItem* DrugWarsHUDFrontMenuItem::vfunc_00(int a1)
 
 // [TODO] 0x001B0710 DrugWarsHUD::DrugWarsHUDFrontMenuItem::vfunc_01 (102 B)
 // [TODO] 0x001B0780 DrugWarsHUD::DrugWarsHUDFrontMenuItem::vfunc_02 (102 B)
+// [TODO] 0x001B07F0 sub_001B07F0 (289 B)
 // [TODO] 0x001B0920 sub_001B0920 (297 B)
 // ============================================================================
 // [VERIFIED] ViceCopHUD::ViceCopHUDMenuItem::vfunc_00 (0x001B0A50, 90 B)
@@ -196499,6 +196546,7 @@ bool VehicleSelectionHUD::vfunc_45(int a1)
 // [TODO] 0x001B11B0 VehicleSelectionHUD::vfunc_00 (98 B)
 // [TODO] 0x001B11C3 sub_001B11C3 (79 B)
 // [TODO] 0x001B1220 VehicleSelectionHUD::vfunc_01 (98 B)
+// [TODO] 0x001B1290 sub_001B1290 (64 B)
 // ============================================================================
 // [VERIFIED] VehicleSelectionHUD::VehicleSelectionHUDMenuItem::vfunc_00 (0x001B12D0, 70 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -196550,6 +196598,8 @@ VehicleSelectionHUDMenuItem* VehicleSelectionHUDMenuItem::vfunc_00(int a1)
 
 // [TODO] 0x001B1320 VehicleSelectionHUD::VehicleSelectionHUDMenuItem::vfunc_01 (84 B)
 // [TODO] 0x001B1380 VehicleSelectionHUD::VehicleSelectionHUDMenuItem::vfunc_02 (132 B)
+// [TODO] 0x001B1410 sub_001B1410 (371 B)
+// [TODO] 0x001B1590 sub_001B1590 (73 B)
 // [TODO] 0x001B15E0 sub_001B15E0 (301 B)
 // ============================================================================
 // [VERIFIED] BusinessHUD::BusinessHUDMenuItem::vfunc_00 (0x001B1710, 70 B)
@@ -196652,6 +196702,11 @@ HenchmenMenuItem* HenchmenMenuItem::vfunc_00(int a1)
 
 // [TODO] 0x001B1860 BusinessDetailHUD::vfunc_44 (113 B)
 // [TODO] 0x001B18E0 DrugWarsHUD::vfunc_44 (732 B)
+// [TODO] 0x001B1BC0 sub_001B1BC0 (107 B)
+// [TODO] 0x001B1C30 sub_001B1C30 (107 B)
+// [TODO] 0x001B1CA0 sub_001B1CA0 (142 B)
+// [TODO] 0x001B1D30 sub_001B1D30 (238 B)
+// [TODO] 0x001B1E20 sub_001B1E20 (199 B)
 // [TODO] 0x001B1EF0 ViceCopHUD::vfunc_44 (858 B)
 // ============================================================================
 // [VERIFIED] ViceCopHUD::vfunc_02 (0x001B2250, 11 B)
@@ -196759,6 +196814,8 @@ void DrugWarsHUD::vfunc_01()
 }
 
 // [TODO] 0x001B2660 BusinessHUD::vfunc_44 (769 B)
+// [TODO] 0x001B2970 sub_001B2970 (105 B)
+// [TODO] 0x001B29E0 sub_001B29E0 (105 B)
 // ============================================================================
 // [VERIFIED] sub_001B2A50 (0x001B2A50, 91 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -197171,6 +197228,10 @@ void Class_001B3020::sub_001B3020()
 // [TODO] 0x001B3300 sub_001B3300 (352 B)
 // [TODO] 0x001B3460 PimpYourMansionHUD::PimpHUDMenuItem::vfunc_05 (131 B)
 // [TODO] 0x001B34F0 EmpireHUD::vfunc_45 (174 B)
+// [TODO] 0x001B35A0 sub_001B35A0 (228 B)
+// [TODO] 0x001B3690 sub_001B3690 (116 B)
+// [TODO] 0x001B3710 sub_001B3710 (90 B)
+// [TODO] 0x001B3770 sub_001B3770 (205 B)
 // [TODO] 0x001B3840 sub_001B3840 (130 B)
 // [TODO] 0x001B38D0 sub_001B38D0 (414 B)
 // [TODO] 0x001B3A70 sub_001B3A70 (88 B)
@@ -198501,6 +198562,8 @@ bool SatPhoneWeaponHUD::vfunc_44(int a1)
 // [TODO] 0x001B99B0 SatPhoneWeaponHUD::vfunc_62 (216 B)
 // [TODO] 0x001B9A90 sub_001B9A90 (517 B)
 // [TODO] 0x001B9CA0 sub_001B9CA0 (389 B)
+// [TODO] 0x001B9E30 sub_001B9E30 (362 B)
+// [TODO] 0x001B9FA0 sub_001B9FA0 (715 B)
 // ============================================================================
 // [VERIFIED] sub_001BA270 (0x001BA270, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -201185,6 +201248,9 @@ int __cdecl sub_001BD740(int a1, int a2, int a3)
 // [TODO] 0x001BD770 sub_001BD770 (422 B)
 // [TODO] 0x001BD920 sub_001BD920 (498 B)
 // [TODO] 0x001BDB20 sub_001BDB20 (573 B)
+// [TODO] 0x001BDD60 sub_001BDD60 (280 B)
+// [TODO] 0x001BDE80 sub_001BDE80 (132 B)
+// [TODO] 0x001BDF10 sub_001BDF10 (84 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<HUDMeterWithIcon>::vfunc_01 (0x001BDF70, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -203996,6 +204062,10 @@ void __cdecl sub_001BF8D0(Object* object)
     object->sub_001C1DA0();
 }
 
+// [TODO] 0x001BF8E0 sub_001BF8E0 (153 B)
+// [TODO] 0x001BF980 sub_001BF980 (43 B)
+// [TODO] 0x001BF9B0 sub_001BF9B0 (199 B)
+// [TODO] 0x001BFA80 sub_001BFA80 (225 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<TeleportHUD>::vfunc_01 (0x001BFB70, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -204068,6 +204138,7 @@ template <> void ConcreteClassRep<TeleportHUD>::vfunc_02()
     DAT_0043668C = 22;
 }
 
+// [TODO] 0x001BFBD0 sub_001BFBD0 (58 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<ViceCopHUD>::vfunc_01 (0x001BFC10, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -205325,6 +205396,7 @@ L_4F:
     ;
 }
 
+// [TODO] 0x001C1DA0 sub_001C1DA0 (43 B)
 // [TODO] 0x001C1DD0 sub_001C1DD0 (184 B)
 // [TODO] 0x001C1E90 sub_001C1E90 (97 B)
 // ============================================================================
@@ -208319,6 +208391,7 @@ void Class_001C5EC0::sub_001C5EC0()
 
 // [TODO] 0x001C5F00 sub_001C5F00 (150 B)
 // [TODO] 0x001C5FA0 sub_001C5FA0 (540 B)
+// [TODO] 0x001C61C0 sub_001C61C0 (126 B)
 // [TODO] 0x001C6240 sub_001C6240 (282 B)
 // [TODO] 0x001C6360 LoadPackage::vfunc_01 (140 B)
 // ============================================================================
@@ -209154,6 +209227,7 @@ L_39:
 // [TODO] 0x001C7E40 sub_001C7E40 (110 B)
 // [TODO] 0x001C7EB0 sub_001C7EB0 (61 B)
 // [TODO] 0x001C7EF0 sub_001C7EF0 (391 B)
+// [TODO] 0x001C8080 sub_001C8080 (25 B)
 // ============================================================================
 // [VERIFIED] sub_001C80A0 (0x001C80A0, 56 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -209301,6 +209375,18 @@ void* MissionStage::vfunc_00()
 // [TODO] 0x001C8250 MissionStage::vfunc_01 (76 B)
 // [TODO] 0x001C82A0 sub_001C82A0 (101 B)
 // [TODO] 0x001C8310 sub_001C8310 (230 B)
+// [TODO] 0x001C8400 sub_001C8400 (33 B)
+// [TODO] 0x001C8430 sub_001C8430 (33 B)
+// [TODO] 0x001C8460 sub_001C8460 (20 B)
+// [TODO] 0x001C8480 sub_001C8480 (39 B)
+// [TODO] 0x001C84B0 sub_001C84B0 (20 B)
+// [TODO] 0x001C84D0 sub_001C84D0 (20 B)
+// [TODO] 0x001C84F0 sub_001C84F0 (47 B)
+// [TODO] 0x001C8520 sub_001C8520 (31 B)
+// [TODO] 0x001C8540 sub_001C8540 (11 B)
+// [TODO] 0x001C8550 sub_001C8550 (35 B)
+// [TODO] 0x001C8580 sub_001C8580 (33 B)
+// [TODO] 0x001C85B0 sub_001C85B0 (224 B)
 // ============================================================================
 // [VERIFIED] sub_001C8690 (0x001C8690, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -214095,6 +214181,7 @@ PoiMarkerManager* PoiMarkerManager::vfunc_00(int a1)
     return this;
 }
 
+// [TODO] 0x001CEF10 sub_001CEF10 (94 B)
 // ============================================================================
 // [VERIFIED] sub_001CF010 (0x001CF010, 29 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -214532,6 +214619,7 @@ void* __cdecl sub_001D0640(int a1, int a2)
 }
 
 // [TODO] 0x001D0670 sub_001D0670 (65 B)
+// [TODO] 0x001D06C0 sub_001D06C0 (43 B)
 // [TODO] 0x001D06F0 sub_001D06F0 (36 B)
 // [TODO] 0x001D0720 sub_001D0720 (40 B)
 // [TODO] 0x001D0750 sub_001D0750 (40 B)
@@ -215404,6 +215492,7 @@ template <> int ConcreteClassRep<ParticleEffectObject>::vfunc_01()
 
 // [TODO] 0x001D2B50 ConcreteClassRep<ParticleEffectObject>::vfunc_02 (64 B)
 // [TODO] 0x001D2B90 sub_001D2B90 (35 B)
+// [TODO] 0x001D2BC0 sub_001D2BC0 (675 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<RainObject>::vfunc_01 (0x001D2E70, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -215519,6 +215608,7 @@ template <> int ConcreteClassRep<ShadowObject>::vfunc_01()
 }
 
 // [TODO] 0x001D2F00 ConcreteClassRep<ShadowObject>::vfunc_02 (61 B)
+// [TODO] 0x001D2F40 sub_001D2F40 (1132 B)
 // [TODO] 0x001D33B0 sub_001D33B0 (35 B)
 // [TODO] 0x001D33E0 sub_001D33E0 (35 B)
 // [TODO] 0x001D3410 sub_001D3410 (63 B)
@@ -216393,6 +216483,7 @@ int Class_001D4280::sub_001D4280(int a1)
 // [TODO] 0x001D42B0 sub_001D42B0 (172 B)
 // [TODO] 0x001D4360 TraceFireObject::vfunc_04 (442 B)
 // [TODO] 0x001D4520 TraceFireObject::vfunc_05 (76 B)
+// [TODO] 0x001D4570 sub_001D4570 (265 B)
 // ============================================================================
 // [VERIFIED] sub_001D4680 (0x001D4680, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -216717,6 +216808,7 @@ int __cdecl sub_001D5630(void)
 // [TODO] 0x001D56A0 sub_001D56A0 (51 B)
 // [TODO] 0x001D56E0 sub_001D56E0 (130 B)
 // [TODO] 0x001D5770 sub_001D5770 (26 B)
+// [TODO] 0x001D5790 sub_001D5790 (46 B)
 // ============================================================================
 // [VERIFIED] sub_001D57C0 (0x001D57C0, 15 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -216804,6 +216896,7 @@ L_4E:
 // [TODO] 0x001D5D60 sub_001D5D60 (53 B)
 // [TODO] 0x001D5DA0 sub_001D5DA0 (1498 B)
 // [TODO] 0x001D6380 sub_001D6380 (126 B)
+// [TODO] 0x001D6400 sub_001D6400 (134 B)
 // ============================================================================
 // [VERIFIED] sub_001D6490 (0x001D6490, 120 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -217658,6 +217751,7 @@ void __cdecl sub_001D7570(int a1, int a2, int a3)
     *(unsigned char*)(a1 + 61) = sub_00099BC0(*(int*)(a3 + 8));
 }
 
+// [TODO] 0x001D7590 sub_001D7590 (19 B)
 // ============================================================================
 // [VERIFIED] sub_001D75B0 (0x001D75B0, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -217680,6 +217774,11 @@ void __cdecl sub_001D75B0(int a1, int a2, int a3)
     *(unsigned char*)(a1 + 60) = sub_00099BC0(*(int*)(a3 + 8));
 }
 
+// [TODO] 0x001D75D0 sub_001D75D0 (47 B)
+// [TODO] 0x001D7600 sub_001D7600 (53 B)
+// [TODO] 0x001D7640 sub_001D7640 (47 B)
+// [TODO] 0x001D7670 sub_001D7670 (53 B)
+// [TODO] 0x001D76B0 sub_001D76B0 (48 B)
 // ============================================================================
 // [VERIFIED] sub_001D76E0 (0x001D76E0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -217693,6 +217792,7 @@ void __cdecl sub_001D76E0(void)
 {
 }
 
+// [TODO] 0x001D76F0 sub_001D76F0 (48 B)
 // ============================================================================
 // [VERIFIED] sub_001D7720 (0x001D7720, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -218855,6 +218955,7 @@ void* TapePlayer::vfunc_00()
     return DAT_0043BA00;
 }
 
+// [TODO] 0x001D8160 sub_001D8160 (74 B)
 // ============================================================================
 // [VERIFIED] sub_001D81B0 (0x001D81B0, 54 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -225255,6 +225356,13 @@ L_4C:
 // [TODO] 0x001E5DF0 sub_001E5DF0 (27 B)
 // [TODO] 0x001E5E10 sub_001E5E10 (33 B)
 // [TODO] 0x001E5E40 sub_001E5E40 (27 B)
+// [TODO] 0x001E5E60 sub_001E5E60 (2534 B)
+// [TODO] 0x001E6850 sub_001E6850 (698 B)
+// [TODO] 0x001E6B10 sub_001E6B10 (94 B)
+// [TODO] 0x001E6B70 sub_001E6B70 (1154 B)
+// [TODO] 0x001E7000 sub_001E7000 (245 B)
+// [TODO] 0x001E7100 sub_001E7100 (361 B)
+// [TODO] 0x001E7270 sub_001E7270 (94 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<SpawnObject>::vfunc_01 (0x001E72D0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -231159,6 +231267,12 @@ void __cdecl sub_001EE200(int a1, int a2, int a3)
     ((Object*)a1)->sub_001EEF70(*(int*)(a3 + 8));
 }
 
+// [TODO] 0x001EE220 sub_001EE220 (27 B)
+// [TODO] 0x001EE240 sub_001EE240 (10 B)
+// [TODO] 0x001EE250 sub_001EE250 (38 B)
+// [TODO] 0x001EE280 sub_001EE280 (35 B)
+// [TODO] 0x001EE2B0 sub_001EE2B0 (37 B)
+// [TODO] 0x001EE2E0 sub_001EE2E0 (35 B)
 // ============================================================================
 // [VERIFIED] sub_001EE310 (0x001EE310, 9 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -231175,6 +231289,8 @@ void __cdecl sub_001EE310(Object* object)
     object->sub_001EEEC0();
 }
 
+// [TODO] 0x001EE320 sub_001EE320 (50 B)
+// [TODO] 0x001EE360 sub_001EE360 (50 B)
 // ============================================================================
 // [VERIFIED] sub_001EE3A0 (0x001EE3A0, 9 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -231191,6 +231307,9 @@ void __cdecl sub_001EE3A0(Object* object)
     object->sub_001F0610();
 }
 
+// [TODO] 0x001EE3B0 sub_001EE3B0 (41 B)
+// [TODO] 0x001EE3E0 sub_001EE3E0 (176 B)
+// [TODO] 0x001EE540 sub_001EE540 (98 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<StatePropAttachmentObject>::vfunc_01 (0x001EE5B0, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -231601,6 +231720,7 @@ template <> void ConcreteClassRep<VehicleWeaponStateProp>::vfunc_02()
     DAT_0043E7F8 = (int)DAT_0043EA88;
 }
 
+// [TODO] 0x001EE880 sub_001EE880 (36 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<WeaponPickup>::vfunc_01 (0x001EE8B0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -231825,6 +231945,11 @@ void __cdecl sub_001EEA70(int a1, int a2, int a3)
     ((Object*)a1)->sub_001F34A0(sub_002FC43E(*(int*)(a3 + 8)));
 }
 
+// [TODO] 0x001EEA90 sub_001EEA90 (27 B)
+// [TODO] 0x001EEAC0 sub_001EEAC0 (45 B)
+// [TODO] 0x001EEAF0 sub_001EEAF0 (75 B)
+// [TODO] 0x001EEB40 sub_001EEB40 (22 B)
+// [TODO] 0x001EEB60 sub_001EEB60 (102 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<WeaponStateProp>::vfunc_01 (0x001EEBD0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -235153,6 +235278,7 @@ L_2C:
 }
 
 // [TODO] 0x001F32B0 sub_001F32B0 (56 B)
+// [TODO] 0x001F32F0 sub_001F32F0 (293 B)
 // ============================================================================
 // [VERIFIED] sub_001F3420 (0x001F3420, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -235296,6 +235422,7 @@ void* MountedWeaponStateProp::vfunc_00()
 }
 
 // [TODO] 0x001F3590 MountedWeaponStateProp::vfunc_04 (131 B)
+// [TODO] 0x001F3620 sub_001F3620 (25 B)
 // [TODO] 0x001F3640 sub_001F3640 (141 B)
 // [TODO] 0x001F36D0 sub_001F36D0 (472 B)
 // [TODO] 0x001F38B0 sub_001F38B0 (201 B)
@@ -235627,6 +235754,8 @@ void MeleeWeaponStateProp::vfunc_73(int a1)
 // [TODO] 0x001F5C10 MountedWeaponStateProp::vfunc_72 (64 B)
 // [TODO] 0x001F5C50 sub_001F5C50 (100 B)
 // [TODO] 0x001F5CC0 MountedWeaponStateProp::vfunc_09 (781 B)
+// [TODO] 0x001F5FD0 sub_001F5FD0 (236 B)
+// [TODO] 0x001F60C0 sub_001F60C0 (184 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<TargetingHUDUpdater>::vfunc_01 (0x001F6180, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -236860,6 +236989,7 @@ void __cdecl sub_001F8B60(void)
 }
 
 // [TODO] 0x001F8B80 sub_001F8B80 (185 B)
+// [TODO] 0x001F8C40 sub_001F8C40 (180 B)
 // [TODO] 0x001F8D00 sub_001F8D00 (410 B)
 // [TODO] 0x001F8EA0 sub_001F8EA0 (320 B)
 // [TODO] 0x001F8FE0 sub_001F8FE0 (234 B)
@@ -239324,6 +239454,7 @@ template <> int ConcreteClassRep<SkidmarkTemplate>::vfunc_01()
 }
 
 // [TODO] 0x001FD7B0 ConcreteClassRep<SkidmarkTemplate>::vfunc_02 (58 B)
+// [TODO] 0x001FD7F0 sub_001FD7F0 (111 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<RainTemplate>::vfunc_01 (0x001FD860, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -239815,6 +239946,7 @@ template <> int ConcreteClassRep<WakeTemplate>::vfunc_01()
 }
 
 // [TODO] 0x001FDDF0 ConcreteClassRep<WakeTemplate>::vfunc_02 (58 B)
+// [TODO] 0x001FDE30 sub_001FDE30 (1705 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<WeaponDecalTemplate>::vfunc_01 (0x001FE4E0, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -243296,6 +243428,7 @@ template <> int ConcreteClassRep<AirplaneArtTemplate>::vfunc_01()
 }
 
 // [TODO] 0x00201960 ConcreteClassRep<AirplaneArtTemplate>::vfunc_02 (61 B)
+// [TODO] 0x002019A0 sub_002019A0 (1924 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<AirplanePhysicsTemplate>::vfunc_01 (0x00202130, 45 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -243672,6 +243805,7 @@ template <> void ConcreteClassRep<RandomWaterObjectTemplate>::vfunc_02()
 }
 
 // [TODO] 0x00203380 WakeObject::vfunc_01 (2137 B)
+// [TODO] 0x00203BE0 sub_00203BE0 (166 B)
 // [TODO] 0x00203C90 sub_00203C90 (60 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<BoatPhysicsTemplate>::vfunc_01 (0x00203CD0, 45 B)
@@ -246584,6 +246718,20 @@ template <> void ConcreteClassRep<VehicleZoneEffectProperties>::vfunc_02()
 }
 
 // [TODO] 0x00208B10 sub_00208B10 (17 B)
+// [TODO] 0x00208B30 sub_00208B30 (549 B)
+// [TODO] 0x00208D60 sub_00208D60 (468 B)
+// [TODO] 0x00208F40 sub_00208F40 (140 B)
+// [TODO] 0x00208FD0 sub_00208FD0 (334 B)
+// [TODO] 0x00209120 sub_00209120 (85 B)
+// [TODO] 0x00209180 sub_00209180 (195 B)
+// [TODO] 0x00209250 sub_00209250 (331 B)
+// [TODO] 0x002093A0 sub_002093A0 (854 B)
+// [TODO] 0x00209700 sub_00209700 (1368 B)
+// [TODO] 0x00209C60 sub_00209C60 (221 B)
+// [TODO] 0x00209D40 sub_00209D40 (111 B)
+// [TODO] 0x00209DB0 sub_00209DB0 (85 B)
+// [TODO] 0x00209E10 sub_00209E10 (195 B)
+// [TODO] 0x00209EE0 sub_00209EE0 (876 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<VehicleLightsTemplate>::vfunc_01 (0x0020A250, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -254343,6 +254491,7 @@ VehicleTemplate* VehicleTemplate::vfunc_01(int a1)
 }
 
 // [TODO] 0x0020F260 AirplaneTemplate::vfunc_11 (113 B)
+// [TODO] 0x0020F2E0 sub_0020F2E0 (81 B)
 // ============================================================================
 // [VERIFIED] VehicleDamageProperties::vfunc_01 (0x0020F340, 46 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -257677,6 +257826,7 @@ EffectCollectionTemplate* EffectCollectionTemplate::vfunc_01(int a1)
 
 // [TODO] 0x00212410 EffectCollectionTemplate::vfunc_10 (64 B)
 // [TODO] 0x00212450 MortarTemplate::vfunc_10 (297 B)
+// [TODO] 0x00212580 sub_00212580 (140 B)
 // ============================================================================
 // [VERIFIED] ConcreteClassRep<TimerObject>::vfunc_01 (0x00212610, 42 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -258794,6 +258944,8 @@ void MissionTriggerObject::vfunc_29(int a1)
 }
 
 // [TODO] 0x00212FB0 TriggerVolumeObject::vfunc_04 (226 B)
+// [TODO] 0x002130A0 sub_002130A0 (79 B)
+// [TODO] 0x002130F0 sub_002130F0 (62 B)
 // [TODO] 0x00213130 sub_00213130 (171 B)
 // [TODO] 0x002131E0 sub_002131E0 (102 B)
 // ============================================================================
@@ -263627,6 +263779,7 @@ bool Class_00217740::sub_00217740()
 // [TODO] 0x00217840 sub_00217840 (63 B)
 // [TODO] 0x00217880 VehicleWorldCollisionBroker::vfunc_00 (100 B)
 // [TODO] 0x002178F0 sub_002178F0 (267 B)
+// [TODO] 0x00217A00 sub_00217A00 (63 B)
 // ============================================================================
 // [VERIFIED] sub_00217A40 (0x00217A40, 85 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -264890,7 +265043,9 @@ L_9B:
 // [TODO] 0x00219B10 ActiveWheeledVehicleObject::vfunc_03 (231 B)
 // [TODO] 0x00219C00 sub_00219C00 (126 B)
 // [TODO] 0x00219C80 sub_00219C80 (323 B)
+// [TODO] 0x00219DD0 sub_00219DD0 (11 B)
 // [TODO] 0x00219DE0 sub_00219DE0 (223 B)
+// [TODO] 0x00219EC0 sub_00219EC0 (416 B)
 // [TODO] 0x0021A060 sub_0021A060 (677 B)
 // ============================================================================
 // [VERIFIED] sub_0021A310 (0x0021A310, 56 B)
@@ -268771,6 +268926,7 @@ void* __cdecl sub_0021FC40(void)
 // [TODO] 0x0021FC80 sub_0021FC80 (37 B)
 // [TODO] 0x0021FCB0 sub_0021FCB0 (25 B)
 // [TODO] 0x0021FCD0 sub_0021FCD0 (25 B)
+// [TODO] 0x0021FCF0 sub_0021FCF0 (8 B)
 // ============================================================================
 // [VERIFIED] sub_0021FD00 (0x0021FD00, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -268817,6 +268973,7 @@ bool __cdecl sub_0021FD20()
 }
 
 // [TODO] 0x0021FD80 sub_0021FD80 (24 B)
+// [TODO] 0x0021FDA0 sub_0021FDA0 (466 B)
 // ============================================================================
 // [VERIFIED] MetaGameManager::MetaGameManagerFlowClient::vfunc_00 (0x0021FF80, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -269094,6 +269251,7 @@ L_06:
 }
 
 // [TODO] 0x00220D90 sub_00220D90 (461 B)
+// [TODO] 0x00220F60 sub_00220F60 (152 B)
 // [TODO] 0x00221000 sub_00221000 (102 B)
 // [TODO] 0x00221070 sub_00221070 (223 B)
 // [TODO] 0x00221150 sub_00221150 (350 B)
@@ -269101,6 +269259,7 @@ L_06:
 // [TODO] 0x00221650 sub_00221650 (55 B)
 // [TODO] 0x00221690 sub_00221690 (28 B)
 // [TODO] 0x002216B0 sub_002216B0 (3052 B)
+// [TODO] 0x00222300 sub_00222300 (86 B)
 // [TODO] 0x00222360 MetaGameManager::MetaGameManagerFlowClient::vfunc_02 (152 B)
 // [TODO] 0x00222400 sub_00222400 (469 B)
 // [TODO] 0x002225E0 sub_002225E0 (180 B)
@@ -270537,6 +270696,7 @@ AIManager* AIManager::vfunc_00(int a1)
     return this;
 }
 
+// [TODO] 0x00223CE0 sub_00223CE0 (37 B)
 // [TODO] 0x00223D10 sub_00223D10 (16 B)
 // ============================================================================
 // [VERIFIED] sub_00223D20 (0x00223D20, 3 B)
@@ -271325,6 +271485,7 @@ bool Class_00224440::sub_00224440(int a1)
 // [TODO] 0x00224530 sub_00224530 (67 B)
 // [TODO] 0x00224580 sub_00224580 (519 B)
 // [TODO] 0x00224790 sub_00224790 (589 B)
+// [TODO] 0x002249E0 sub_002249E0 (64 B)
 // ============================================================================
 // [VERIFIED] sub_00224A20 (0x00224A20, 44 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -271462,7 +271623,9 @@ void Class_00224A60::sub_00224A60()
 // [TODO] 0x00224E70 sub_00224E70 (965 B)
 // [TODO] 0x00225240 sub_00225240 (248 B)
 // [TODO] 0x00225340 sub_00225340 (846 B)
+// [TODO] 0x00225690 sub_00225690 (56 B)
 // [TODO] 0x002256D0 sub_002256D0 (246 B)
+// [TODO] 0x002257D0 sub_002257D0 (59 B)
 // ============================================================================
 // [VERIFIED] sub_00225810 (0x00225810, 145 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -271591,6 +271754,8 @@ L_54:
 }
 
 // [TODO] 0x002258B0 CVManager::vfunc_01 (204 B)
+// [TODO] 0x00225980 sub_00225980 (84 B)
+// [TODO] 0x002259E0 sub_002259E0 (89 B)
 // [TODO] 0x00225A40 sub_00225A40 (128 B)
 // [TODO] 0x00225AC0 sub_00225AC0 (179 B)
 // [TODO] 0x00225B80 sub_00225B80 (577 B)
@@ -271935,6 +272100,7 @@ void Class_00228550::sub_00228550()
 // [TODO] 0x00228AA0 sub_00228AA0 (317 B)
 // [TODO] 0x00228BE0 sub_00228BE0 (122 B)
 // [TODO] 0x00228C60 sub_00228C60 (148 B)
+// [TODO] 0x00228D00 sub_00228D00 (87 B)
 // ============================================================================
 // [VERIFIED] CVManager::vfunc_00 (0x00228D60, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -272075,6 +272241,7 @@ void __stdcall sub_0022B410(int a1, int a2)
 }
 
 // [TODO] 0x0022B420 sub_0022B420 (34 B)
+// [TODO] 0x0022B450 sub_0022B450 (77 B)
 // ============================================================================
 // [VERIFIED] sub_0022B4A0 (0x0022B4A0, 426 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -272329,6 +272496,7 @@ GameObjectManager* GameObjectManager::vfunc_00(int a1)
     return this;
 }
 
+// [TODO] 0x0022BCF0 sub_0022BCF0 (37 B)
 // [TODO] 0x0022BD20 sub_0022BD20 (277 B)
 // [TODO] 0x0022BE40 sub_0022BE40 (61 B)
 // [TODO] 0x0022BE80 sub_0022BE80 (61 B)
@@ -272399,6 +272567,7 @@ LoadArbitrator* LoadArbitrator::vfunc_00(int a1)
     return this;
 }
 
+// [TODO] 0x0022C170 sub_0022C170 (62 B)
 // ============================================================================
 // [VERIFIED] sub_0022C1B0 (0x0022C1B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -272631,6 +272800,7 @@ int __cdecl sub_0022C300(void)
 
 // [TODO] 0x0022C320 PauseManager::vfunc_01 (766 B)
 // [TODO] 0x0022C620 PauseManager::vfunc_03 (401 B)
+// [TODO] 0x0022C7C0 sub_0022C7C0 (37 B)
 // [TODO] 0x0022C7F0 sub_0022C7F0 (69 B)
 // ============================================================================
 // [VERIFIED] sub_0022C840 (0x0022C840, 21 B)
@@ -272878,6 +273048,7 @@ int Class_0022C960::sub_0022C960(int a1, bool a2)
 }
 
 // [TODO] 0x0022C9C0 sub_0022C9C0 (63 B)
+// [TODO] 0x0022CA00 sub_0022CA00 (56 B)
 // ============================================================================
 // [VERIFIED] sub_0022CA40 (0x0022CA40, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -273790,6 +273961,7 @@ void MiniGamePresentationState::vfunc_10()
 
 // [TODO] 0x0022DDF0 MiniGamePresentationState::vfunc_12 (316 B)
 // [TODO] 0x0022DF30 TutorialPresentationState::vfunc_12 (125 B)
+// [TODO] 0x0022DFB0 sub_0022DFB0 (84 B)
 // [TODO] 0x0022E010 sub_0022E010 (330 B)
 // [TODO] 0x0022E160 sub_0022E160 (49 B)
 // ============================================================================
@@ -274330,6 +274502,7 @@ void __cdecl sub_0022F6A0(bool a1)
 // [TODO] 0x0022FD20 sub_0022FD20 (426 B)
 // [TODO] 0x0022FED0 sub_0022FED0 (129 B)
 // [TODO] 0x0022FF60 sub_0022FF60 (191 B)
+// [TODO] 0x00230020 sub_00230020 (57 B)
 // ============================================================================
 // [VERIFIED] PresentationManager::vfunc_00 (0x00230060, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -275322,6 +275495,9 @@ void __cdecl sub_00231190(void)
     ((Object*)DAT_004928FC)->sub_002320E0();
 }
 
+// [TODO] 0x002311A0 sub_002311A0 (298 B)
+// [TODO] 0x002312D0 sub_002312D0 (298 B)
+// [TODO] 0x00231400 sub_00231400 (53 B)
 // ============================================================================
 // [VERIFIED] sub_00231440 (0x00231440, 17 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -275400,6 +275576,7 @@ StartupManager* StartupManager::vfunc_00(int a1)
 }
 
 // [TODO] 0x002315C0 sub_002315C0 (471 B)
+// [TODO] 0x002317A0 sub_002317A0 (41 B)
 // [TODO] 0x002317D0 StartupManager::vfunc_02 (1095 B)
 // ============================================================================
 // [VERIFIED] sub_00231C20 (0x00231C20, 9 B)
@@ -275455,6 +275632,7 @@ StateManager* StateManager::vfunc_00(int a1)
 // [TODO] 0x00231DA0 sub_00231DA0 (121 B)
 // [TODO] 0x00231E20 sub_00231E20 (102 B)
 // [TODO] 0x00231E90 sub_00231E90 (85 B)
+// [TODO] 0x00231EF0 sub_00231EF0 (88 B)
 // [TODO] 0x00231F50 StateManager::vfunc_02 (219 B)
 // ============================================================================
 // [VERIFIED] sub_00232030 (0x00232030, 106 B)
@@ -275497,6 +275675,7 @@ L_67:
 }
 
 // [TODO] 0x002320A0 sub_002320A0 (63 B)
+// [TODO] 0x002320E0 sub_002320E0 (53 B)
 // [TODO] 0x00232120 sub_00232120 (232 B)
 // ============================================================================
 // [VERIFIED] TeleportManager::vfunc_00 (0x00232210, 64 B)
@@ -275543,8 +275722,13 @@ TeleportManager* TeleportManager::vfunc_00(int a1)
 // [TODO] 0x00232250 sub_00232250 (311 B)
 // [TODO] 0x00232390 sub_00232390 (718 B)
 // [TODO] 0x00232660 sub_00232660 (489 B)
+// [TODO] 0x00232850 sub_00232850 (44 B)
 // [TODO] 0x00232880 sub_00232880 (323 B)
 // [TODO] 0x002329D0 TeleportManager::vfunc_02 (74 B)
+// [TODO] 0x00232A20 sub_00232A20 (30 B)
+// [TODO] 0x00232A40 sub_00232A40 (29 B)
+// [TODO] 0x00232A60 sub_00232A60 (18 B)
+// [TODO] 0x00232A80 sub_00232A80 (25 B)
 // [TODO] 0x00232AA0 sub_00232AA0 (219 B)
 // [TODO] 0x00232B80 sub_00232B80 (168 B)
 // [TODO] 0x00232C30 TutorialManager::vfunc_02 (540 B)
@@ -275672,6 +275856,7 @@ TutorialManager* TutorialManager::vfunc_00(int a1)
 
 // [TODO] 0x00233080 sub_00233080 (313 B)
 // [TODO] 0x002331C0 TutorialManager::vfunc_00 (66 B)
+// [TODO] 0x00233210 sub_00233210 (41 B)
 // [TODO] 0x00233240 sub_00233240 (72 B)
 // ============================================================================
 // [VERIFIED] sub_00233290 (0x00233290, 38 B)
@@ -276502,6 +276687,7 @@ void Class_00239FD0::sub_00239FD0()
 // [TODO] 0x0023A3D0 sub_0023A3D0 (93 B)
 // [TODO] 0x0023A430 sub_0023A430 (37 B)
 // [TODO] 0x0023A460 sub_0023A460 (137 B)
+// [TODO] 0x0023A4F0 sub_0023A4F0 (102 B)
 // [TODO] 0x0023A560 sub_0023A560 (34 B)
 // ============================================================================
 // [VERIFIED] sub_0023A590 (0x0023A590, 66 B)
@@ -276555,6 +276741,7 @@ void Class_0023A590::sub_0023A590(int a1, int a2, int a3)
 }
 
 // [TODO] 0x0023A5E0 sub_0023A5E0 (101 B)
+// [TODO] 0x0023A650 sub_0023A650 (69 B)
 // [TODO] 0x0023A6A0 sub_0023A6A0 (104 B)
 // [TODO] 0x0023A710 sub_0023A710 (158 B)
 // [TODO] 0x0023A7B0 sub_0023A7B0 (203 B)
@@ -278075,6 +278262,8 @@ Bank* Bank::vfunc_03(unsigned int flags)
 // [TODO] 0x0023DCE0 fight::Bank::vfunc_11 (81 B)
 // [TODO] 0x0023DD40 fight::Bank::vfunc_12 (98 B)
 // [TODO] 0x0023DDB0 fight::Bank::vfunc_13 (254 B)
+// [TODO] 0x0023DEB0 sub_0023DEB0 (15 B)
+// [TODO] 0x0023DEC0 sub_0023DEC0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_0023DED0 (0x0023DED0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -281465,6 +281654,7 @@ void __cdecl sub_00241690(void)
 
 // [TODO] 0x002416C0 sub_002416C0 (85 B)
 // [TODO] 0x00241720 sub_00241720 (59 B)
+// [TODO] 0x00241760 sub_00241760 (8 B)
 // [TODO] 0x00241770 sub_00241770 (28 B)
 // ============================================================================
 // [VERIFIED] sub_00241790 (0x00241790, 38 B)
@@ -282031,9 +282221,11 @@ void Class_00242650::sub_00242650()
 
 // [TODO] 0x00242660 sub_00242660 (232 B)
 // [TODO] 0x00242750 sub_00242750 (91 B)
+// [TODO] 0x002427B0 sub_002427B0 (41 B)
 // [TODO] 0x002427E0 sub_002427E0 (124 B)
 // [TODO] 0x00242860 sub_00242860 (126 B)
 // [TODO] 0x002428E0 sub_002428E0 (51 B)
+// [TODO] 0x00242920 sub_00242920 (7 B)
 // [TODO] 0x00242930 sub_00242930 (45 B)
 // [TODO] 0x00242960 sub_00242960 (62 B)
 // [TODO] 0x002429A0 sub_002429A0 (99 B)
@@ -282803,6 +282995,7 @@ void Class_00244280::sub_00244280(int a1, int a2)
 
 // [TODO] 0x002442A0 sub_002442A0 (114 B)
 // [TODO] 0x00244320 sub_00244320 (99 B)
+// [TODO] 0x00244390 sub_00244390 (88 B)
 // ============================================================================
 // [VERIFIED] sub_002443F0 (0x002443F0, 17 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -285249,6 +285442,8 @@ Class_00248C00* Class_00248C00::sub_00248C00(unsigned int flags)
 #pragma optimize("", on)
 
 // [TODO] 0x00248C30 pure3d::frontend::Drawable::vfunc_13 (63 B)
+// [TODO] 0x00248C70 sub_00248C70 (163 B)
+// [TODO] 0x00248D20 sub_00248D20 (18 B)
 // ============================================================================
 // [VERIFIED] sub_00248D40 (0x00248D40, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -289346,6 +289541,7 @@ int Class_002557A0::sub_002557A0(int a1)
 
 // [TODO] 0x002557F0 sub_002557F0 (356 B)
 // [TODO] 0x00255960 sub_00255960 (274 B)
+// [TODO] 0x00255A80 sub_00255A80 (122 B)
 // ============================================================================
 // [VERIFIED] sub_00255B00 (0x00255B00, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -291094,6 +291290,7 @@ int Class_0025C7E0::sub_0025C7E0()
 // [TODO] 0x0025CB00 sub_0025CB00 (63 B)
 // [TODO] 0x0025CB40 sub_0025CB40 (121 B)
 // [TODO] 0x0025CBC0 sub_0025CBC0 (312 B)
+// [TODO] 0x0025CD00 sub_0025CD00 (60 B)
 // [TODO] 0x0025CD40 sub_0025CD40 (167 B)
 // [TODO] 0x0025CDF0 sub_0025CDF0 (230 B)
 // ============================================================================
@@ -294200,6 +294397,7 @@ void Class_00260E00::sub_00260E00(int a1)
 }
 
 // [TODO] 0x00260E20 sub_00260E20 (39 B)
+// [TODO] 0x00260E50 sub_00260E50 (39 B)
 // ============================================================================
 // [VERIFIED] sub_00260E80 (0x00260E80, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -298234,6 +298432,7 @@ void d3dContext::vfunc_104(int a1)
 }
 
 // [TODO] 0x00266360 pure3d::d3dExtSuperScreenShot::vfunc_01 (774 B)
+// [TODO] 0x00266670 sub_00266670 (74 B)
 // [TODO] 0x002666C0 pure3d::d3dExtInstancing::vfunc_03 (227 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dExtInstancing::vfunc_05 (0x002667B0, 62 B)
@@ -303393,6 +303592,8 @@ int Class_00275230::sub_00275230(int a1)
 // [TODO] 0x002753B0 sub_002753B0 (90 B)
 // [TODO] 0x00275410 sub_00275410 (436 B)
 // [TODO] 0x002755D0 sub_002755D0 (442 B)
+// [TODO] 0x00275790 sub_00275790 (39 B)
+// [TODO] 0x002757C0 sub_002757C0 (34 B)
 // ============================================================================
 // [VERIFIED] pure3d::AnimationMemoryBlock::vfunc_03 (0x002757F0, 62 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -304687,6 +304888,7 @@ int PolySkin::vfunc_30(int a1)
 
 // [TODO] 0x00278170 pure3d::PolySkinLoader::vfunc_03 (59 B)
 // [TODO] 0x002781B0 pure3d::PolySkinLoader::vfunc_06 (1241 B)
+// [TODO] 0x00278690 sub_00278690 (37 B)
 // [TODO] 0x002786C0 sub_002786C0 (41 B)
 // ============================================================================
 // [VERIFIED] sub_002786F0 (0x002786F0, 31 B)
@@ -305621,6 +305823,7 @@ Class_0027D520* Class_0027D520::sub_0027D520()
 }
 
 // [TODO] 0x0027D540 pure3d::ImageFont::vfunc_03 (79 B)
+// [TODO] 0x0027D590 sub_0027D590 (40 B)
 // [TODO] 0x0027D5C0 pure3d::TextureFont::vfunc_12 (73 B)
 // [TODO] 0x0027D610 pure3d::TextureFont::vfunc_13 (127 B)
 // ============================================================================
@@ -308036,6 +308239,11 @@ d3dVehicleShader* d3dVehicleShader::vfunc_03(unsigned int flags)
 
 // [TODO] 0x00283420 pure3d::d3dVehicleShader::vfunc_14 (348 B)
 // [TODO] 0x00283580 pure3d::d3dVehicleShader::vfunc_24 (679 B)
+// [TODO] 0x00283830 sub_00283830 (47 B)
+// [TODO] 0x00283860 sub_00283860 (47 B)
+// [TODO] 0x00283890 sub_00283890 (47 B)
+// [TODO] 0x002838C0 sub_002838C0 (47 B)
+// [TODO] 0x002838F0 sub_002838F0 (78 B)
 // [TODO] 0x00283940 sub_00283940 (76 B)
 // [TODO] 0x00283990 sub_00283990 (57 B)
 // [TODO] 0x002839D0 sub_002839D0 (130 B)
@@ -313091,6 +313299,7 @@ Screen* Screen::vfunc_03(int a1)
 
 // [TODO] 0x0028D5E0 pure3d::frontend::Screen::vfunc_11 (339 B)
 // [TODO] 0x0028D740 pure3d::frontend::Screen::vfunc_08 (55 B)
+// [TODO] 0x0028D780 sub_0028D780 (80 B)
 // [TODO] 0x0028D7D0 pure3d::frontend::Page::vfunc_11 (90 B)
 // ============================================================================
 // [VERIFIED] pure3d::frontend::Page::vfunc_08 (0x0028D830, 52 B)
@@ -313702,6 +313911,7 @@ L_29:
 // [TODO] 0x0028F750 sub_0028F750 (27 B)
 // [TODO] 0x0028F770 sub_0028F770 (34 B)
 // [TODO] 0x0028F7A0 sub_0028F7A0 (25 B)
+// [TODO] 0x0028F7C0 sub_0028F7C0 (120 B)
 // [TODO] 0x0028F840 sub_0028F840 (773 B)
 // [TODO] 0x0028FB50 sub_0028FB50 (60 B)
 // [TODO] 0x0028FB90 sub_0028FB90 (346 B)
@@ -313891,6 +314101,8 @@ MemorySmallDlAllocator::MemorySmallDlAllocator() {}                  // building
 // [TODO] 0x002910F0 sub_002910F0 (517 B)
 // [TODO] 0x00291300 sub_00291300 (246 B)
 // [TODO] 0x00291400 sub_00291400 (40 B)
+// [TODO] 0x00291430 sub_00291430 (123 B)
+// [TODO] 0x002914B0 sub_002914B0 (117 B)
 // [TODO] 0x00291530 sub_00291530 (47 B)
 // ============================================================================
 // [VERIFIED] sub_00291560 (0x00291560, 6 B)
@@ -313967,8 +314179,12 @@ L_AF:
 
 // [TODO] 0x002916A0 sub_002916A0 (119 B)
 // [TODO] 0x00291720 sub_00291720 (221 B)
+// [TODO] 0x00291800 sub_00291800 (89 B)
 // [TODO] 0x00291860 sub_00291860 (348 B)
+// [TODO] 0x002919C0 sub_002919C0 (62 B)
 // [TODO] 0x00291A00 sub_00291A00 (290 B)
+// [TODO] 0x00291B30 sub_00291B30 (42 B)
+// [TODO] 0x00291B60 sub_00291B60 (298 B)
 // [TODO] 0x00291C90 sub_00291C90 (55 B)
 // ============================================================================
 // [VERIFIED] pure3d::ParticleController::vfunc_08 (0x00291CD0, 19 B)
@@ -315817,6 +316033,7 @@ BoneMatrixList* BoneMatrixList::vfunc_03(bool a1)
 }
 
 // [TODO] 0x00292D40 sub_00292D40 (167 B)
+// [TODO] 0x00292DF0 sub_00292DF0 (122 B)
 // ============================================================================
 // [VERIFIED] sub_00292E70 (0x00292E70, 89 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -316284,6 +316501,7 @@ int SpriteParticleEmitter::vfunc_17()
 
 // [TODO] 0x00295800 sub_00295800 (191 B)
 // [TODO] 0x002958C0 sub_002958C0 (87 B)
+// [TODO] 0x00295920 sub_00295920 (58 B)
 // [TODO] 0x00295960 sub_00295960 (213 B)
 // ============================================================================
 // [VERIFIED] sub_00295A40 (0x00295A40, 94 B)
@@ -316703,6 +316921,7 @@ void xboxOceanRenderer::vfunc_04(int a1, int a2, int a3)
 }
 
 // [TODO] 0x00297100 sub_00297100 (41 B)
+// [TODO] 0x00297130 sub_00297130 (564 B)
 // [TODO] 0x00297370 sub_00297370 (1747 B)
 // [TODO] 0x00297A50 pure3d::xboxOceanRenderer::vfunc_05 (81 B)
 // ============================================================================
@@ -317579,6 +317798,11 @@ d3dTexture* d3dTexture::vfunc_03(unsigned int flags)
 }
 
 // [TODO] 0x0029A1A0 pure3d::d3dVehicleShader::vfunc_21 (41 B)
+// [TODO] 0x0029A1D0 sub_0029A1D0 (18 B)
+// [TODO] 0x0029A1F0 sub_0029A1F0 (13 B)
+// [TODO] 0x0029A200 sub_0029A200 (20 B)
+// [TODO] 0x0029A220 sub_0029A220 (13 B)
+// [TODO] 0x0029A230 sub_0029A230 (18 B)
 // [TODO] 0x0029A250 sub_0029A250 (143 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dShader::vfunc_23 (0x0029A2E0, 6 B)
@@ -318277,6 +318501,8 @@ int d3dDisplay::vfunc_17(int a1, int a2, int a3)
 }
 
 // [TODO] 0x0029AB90 sub_0029AB90 (263 B)
+// [TODO] 0x0029ACA0 sub_0029ACA0 (40 B)
+// [TODO] 0x0029ACD0 sub_0029ACD0 (335 B)
 // [TODO] 0x0029AE20 sub_0029AE20 (203 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dDisplay::vfunc_18 (0x0029AEF0, 7 B)
@@ -318580,8 +318806,11 @@ d3dDisplay* d3dDisplay::vfunc_03(int a1)
 // [TODO] 0x0029B670 sub_0029B670 (731 B)
 // [TODO] 0x0029B950 sub_0029B950 (135 B)
 // [TODO] 0x0029B9E0 sub_0029B9E0 (121 B)
+// [TODO] 0x0029BA60 sub_0029BA60 (7 B)
 // [TODO] 0x0029BA70 sub_0029BA70 (53 B)
+// [TODO] 0x0029BAB0 sub_0029BAB0 (9 B)
 // [TODO] 0x0029BAC0 sub_0029BAC0 (723 B)
+// [TODO] 0x0029BDA0 sub_0029BDA0 (150 B)
 // ============================================================================
 // [VERIFIED] sub_0029BE40 (0x0029BE40, 43 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -332124,6 +332353,8 @@ void CollisionBehaviourTypeGroup::vfunc_10()
 // [TODO] 0x002A9430 sub_002A9430 (232 B)
 // [TODO] 0x002A95A0 sub_002A95A0 (103 B)
 // [TODO] 0x002A9610 sub_002A9610 (210 B)
+// [TODO] 0x002A96F0 sub_002A96F0 (178 B)
+// [TODO] 0x002A97B0 sub_002A97B0 (129 B)
 // [TODO] 0x002A9840 sub_002A9840 (50 B)
 // ============================================================================
 // [VERIFIED] sub_002A9880 (0x002A9880, 44 B)
@@ -336831,6 +337062,7 @@ InstanceDrive* InstanceDrive::vfunc_03(int a1)
 // [TODO] 0x002AC1E0 sub_002AC1E0 (24 B)
 // [TODO] 0x002AC200 sub_002AC200 (163 B)
 // [TODO] 0x002AC2B0 sub_002AC2B0 (146 B)
+// [TODO] 0x002AC350 sub_002AC350 (61 B)
 // [TODO] 0x002AC390 core::Drive::vfunc_00 (26 B)
 // [TODO] 0x002AC3E0 sub_002AC3E0 (32 B)
 // [TODO] 0x002AC400 sub_002AC400 (36 B)
@@ -336858,10 +337090,15 @@ void* Class_002AC430::sub_002AC430()
 }
 
 // [TODO] 0x002AC440 sub_002AC440 (58 B)
+// [TODO] 0x002AC480 sub_002AC480 (55 B)
+// [TODO] 0x002AC4C0 sub_002AC4C0 (37 B)
+// [TODO] 0x002AC4F0 sub_002AC4F0 (40 B)
+// [TODO] 0x002AC520 sub_002AC520 (33 B)
 // [TODO] 0x002AC550 sub_002AC550 (29 B)
 // [TODO] 0x002AC570 sub_002AC570 (50 B)
 // [TODO] 0x002AC5B0 sub_002AC5B0 (31 B)
 // [TODO] 0x002AC5D0 sub_002AC5D0 (64 B)
+// [TODO] 0x002AC670 sub_002AC670 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002AC680 (0x002AC680, 4 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -337697,6 +337934,7 @@ void CementLibrary::vfunc_09(int a1, int a2, int a3, int a4, int a5, int a6)
 
 // [TODO] 0x002ACC30 sub_002ACC30 (52 B)
 // [TODO] 0x002ACC92 sub_002ACC92 (33 B)
+// [TODO] 0x002ACCC0 sub_002ACCC0 (100 B)
 // ============================================================================
 // [VERIFIED] sub_002ACD30 (0x002ACD30, 29 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -338930,6 +339168,15 @@ d3dPrimBuffer* d3dPrimBuffer::vfunc_03(int a1)
 }
 
 // [TODO] 0x002ADD10 sub_002ADD10 (106 B)
+// [TODO] 0x002ADD80 sub_002ADD80 (37 B)
+// [TODO] 0x002ADDE0 sub_002ADDE0 (37 B)
+// [TODO] 0x002ADE10 sub_002ADE10 (37 B)
+// [TODO] 0x002ADE40 sub_002ADE40 (37 B)
+// [TODO] 0x002ADED0 sub_002ADED0 (37 B)
+// [TODO] 0x002ADF00 sub_002ADF00 (37 B)
+// [TODO] 0x002ADF30 sub_002ADF30 (37 B)
+// [TODO] 0x002ADF60 sub_002ADF60 (37 B)
+// [TODO] 0x002ADFF0 sub_002ADFF0 (37 B)
 // [TODO] 0x002AE020 sub_002AE020 (282 B)
 // ============================================================================
 // [VERIFIED] sub_002AE140 (0x002AE140, 20 B)
@@ -339519,6 +339766,7 @@ void Class_002B7A20::sub_002B7A20(int a1)
 // [TODO] 0x002B7AF0 sub_002B7AF0 (581 B)
 // [TODO] 0x002B7D40 sub_002B7D40 (2104 B)
 // [TODO] 0x002B8580 sub_002B8580 (123 B)
+// [TODO] 0x002B8600 sub_002B8600 (79 B)
 // ============================================================================
 // [VERIFIED] sub_002B8650 (0x002B8650, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -339914,6 +340162,7 @@ int __cdecl sub_002BDD00(int a1)
 // [TODO] 0x002BE180 sub_002BE180 (32 B)
 // [TODO] 0x002BE1E0 sub_002BE1E0 (83 B)
 // [TODO] 0x002BE240 sub_002BE240 (571 B)
+// [TODO] 0x002BE480 sub_002BE480 (29 B)
 // [TODO] 0x002BE4A0 sub_002BE4A0 (470 B)
 // ============================================================================
 // [VERIFIED] sub_002BE680 (0x002BE680, 28 B)
@@ -341396,9 +341645,12 @@ void DriveThread::vfunc_01()
 }
 
 // [TODO] 0x002C1480 sub_002C1480 (203 B)
+// [TODO] 0x002C1550 sub_002C1550 (154 B)
+// [TODO] 0x002C15F0 sub_002C15F0 (39 B)
 // [TODO] 0x002C1620 sub_002C1620 (124 B)
 // [TODO] 0x002C16A0 sub_002C16A0 (96 B)
 // [TODO] 0x002C1700 sub_002C1700 (43 B)
+// [TODO] 0x002C1730 sub_002C1730 (48 B)
 // ============================================================================
 // [VERIFIED] sub_002C1760 (0x002C1760, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -342351,6 +342603,9 @@ void* d3dLayeredShader::vfunc_04()
 }
 
 // [TODO] 0x002C2440 pure3d::d3dLayeredShader::vfunc_23 (18 B)
+// [TODO] 0x002C2460 sub_002C2460 (21 B)
+// [TODO] 0x002C2480 sub_002C2480 (21 B)
+// [TODO] 0x002C24A0 sub_002C24A0 (21 B)
 // [TODO] 0x002C24C0 sub_002C24C0 (1165 B)
 // [TODO] 0x002C2950 pure3d::d3dLayeredShader::vfunc_12 (62 B)
 // ============================================================================
@@ -343205,6 +343460,7 @@ void* d3dSimpleCBVLitShader::vfunc_04()
 
 // [TODO] 0x002C3EB0 sub_002C3EB0 (999 B)
 // [TODO] 0x002C423A sub_002C423A (93 B)
+// [TODO] 0x002C42A0 sub_002C42A0 (21 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dSimpleCBVLitShader::vfunc_13 (0x002C42C0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -343640,6 +343896,7 @@ d3dCharacterShader* d3dCharacterShader::vfunc_03(int a1)
 }
 
 // [TODO] 0x002C4F90 pure3d::d3dCharacterShader::vfunc_14 (619 B)
+// [TODO] 0x002C5200 sub_002C5200 (487 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dCharacterShader::vfunc_24 (0x002C53F0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -344458,6 +344715,7 @@ d3dShader* d3dShader::vfunc_03(unsigned int flags)
 }
 
 // [TODO] 0x002C5C80 pure3d::d3dVertexFadeShader::vfunc_14 (501 B)
+// [TODO] 0x002C5E80 sub_002C5E80 (635 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dVertexFadeShader::vfunc_24 (0x002C6100, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -346056,6 +346314,8 @@ void __cdecl sub_002CF8A0(int a1)
 }
 
 // [TODO] 0x002CF8B0 GlobalVehicleSound::vfunc_04 (109 B)
+// [TODO] 0x002CF920 sub_002CF920 (22 B)
+// [TODO] 0x002CF940 sub_002CF940 (16 B)
 // ============================================================================
 // [VERIFIED] sub_002CF950 (0x002CF950, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -346172,6 +346432,7 @@ Allocator* Allocator::vfunc_00(int a1)
 }
 
 // [TODO] 0x002CFAA0 sub_002CFAA0 (75 B)
+// [TODO] 0x002CFAF0 sub_002CFAF0 (57 B)
 // ============================================================================
 // [VERIFIED] audio::Sequence::vfunc_12 (0x002CFB30, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -346381,6 +346642,10 @@ L_39:
 
 // [TODO] 0x002CFF40 sub_002CFF40 (143 B)
 // [TODO] 0x002CFFD0 audio::Sequence::vfunc_06 (110 B)
+// [TODO] 0x002D0040 sub_002D0040 (30 B)
+// [TODO] 0x002D0090 sub_002D0090 (21 B)
+// [TODO] 0x002D00B0 sub_002D00B0 (40 B)
+// [TODO] 0x002D00E0 sub_002D00E0 (23 B)
 // ============================================================================
 // [VERIFIED] sub_002D0100 (0x002D0100, 25 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -348144,6 +348409,7 @@ bool __cdecl sub_002D1740(bool a1)
 // [TODO] 0x002D1840 sub_002D1840 (208 B)
 // [TODO] 0x002D1910 sub_002D1910 (292 B)
 // [TODO] 0x002D1A40 sub_002D1A40 (540 B)
+// [TODO] 0x002D1C60 sub_002D1C60 (84 B)
 // ============================================================================
 // [VERIFIED] om::MetaType<audio::LayerTemplate>::vfunc_00 (0x002D1CC0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -348180,6 +348446,7 @@ template <> om::MetaType<audio::LayerTemplate>* om::MetaType<audio::LayerTemplat
 }
 
 // [TODO] 0x002D1CF0 audio::LayerTemplate::vfunc_06 (45 B)
+// [TODO] 0x002D1D20 sub_002D1D20 (99 B)
 // ============================================================================
 // [VERIFIED] audio::LayerTemplate::vfunc_12 (0x002D1D90, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -348480,6 +348747,7 @@ void StreamPlayerAllocator::vfunc_01(int a1, int a2)
 }
 
 // [TODO] 0x002D22F0 sub_002D22F0 (41 B)
+// [TODO] 0x002D2320 sub_002D2320 (40 B)
 // [TODO] 0x002D2350 sub_002D2350 (18 B)
 // [TODO] 0x002D2370 sub_002D2370 (123 B)
 // [TODO] 0x002D23F0 sub_002D23F0 (311 B)
@@ -349160,6 +349428,7 @@ int Class_002D4D50::sub_002D4D50(int a1)
 
 // [TODO] 0x002D4D90 sub_002D4D90 (47 B)
 // [TODO] 0x002D4DC0 sub_002D4DC0 (114 B)
+// [TODO] 0x002D4E40 sub_002D4E40 (201 B)
 // [TODO] 0x002D4F80 sub_002D4F80 (178 B)
 // ============================================================================
 // [VERIFIED] om::SparksHeap::vfunc_00 (0x002D5040, 14 B)
@@ -354709,6 +354978,7 @@ SeqActionChannelVolumes* SeqActionChannelVolumes::vfunc_00(int a1)
 }
 
 // [TODO] 0x002DAC40 sub_002DAC40 (83 B)
+// [TODO] 0x002DACA0 sub_002DACA0 (93 B)
 // ============================================================================
 // [VERIFIED] audio::SeqEventChannelVolumes::vfunc_03 (0x002DAD00, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -358892,6 +359162,7 @@ void __cdecl sub_002E0360(int a1)
 // [TODO] 0x002E0420 sub_002E0420 (101 B)
 // [TODO] 0x002E0490 sub_002E0490 (50 B)
 // [TODO] 0x002E04D0 sub_002E04D0 (234 B)
+// [TODO] 0x002E05C0 sub_002E05C0 (50 B)
 // [TODO] 0x002E0600 sub_002E0600 (9 B)
 // [TODO] 0x002E0610 sub_002E0610 (29 B)
 // [TODO] 0x002E0630 sub_002E0630 (221 B)
@@ -359240,12 +359511,30 @@ void Class_002E0FA0::sub_002E0FA0()
 
 // [TODO] 0x002E0FB0 sub_002E0FB0 (118 B)
 // [TODO] 0x002E1030 sub_002E1030 (58 B)
+// [TODO] 0x002E1070 sub_002E1070 (66 B)
+// [TODO] 0x002E10C0 sub_002E10C0 (66 B)
+// [TODO] 0x002E1110 sub_002E1110 (66 B)
 // [TODO] 0x002E1160 sub_002E1160 (47 B)
 // [TODO] 0x002E1190 sub_002E1190 (126 B)
 // [TODO] 0x002E1210 sub_002E1210 (217 B)
 // [TODO] 0x002E12F0 sub_002E12F0 (120 B)
 // [TODO] 0x002E1370 sub_002E1370 (490 B)
 // [TODO] 0x002E1560 sub_002E1560 (168 B)
+// [TODO] 0x002E1610 sub_002E1610 (172 B)
+// [TODO] 0x002E16C0 sub_002E16C0 (108 B)
+// [TODO] 0x002E1730 sub_002E1730 (95 B)
+// [TODO] 0x002E1790 sub_002E1790 (95 B)
+// [TODO] 0x002E17F0 sub_002E17F0 (67 B)
+// [TODO] 0x002E1840 sub_002E1840 (67 B)
+// [TODO] 0x002E1890 sub_002E1890 (67 B)
+// [TODO] 0x002E18E0 sub_002E18E0 (67 B)
+// [TODO] 0x002E1930 sub_002E1930 (83 B)
+// [TODO] 0x002E1990 sub_002E1990 (83 B)
+// [TODO] 0x002E19F0 sub_002E19F0 (107 B)
+// [TODO] 0x002E1A60 sub_002E1A60 (122 B)
+// [TODO] 0x002E1AE0 sub_002E1AE0 (83 B)
+// [TODO] 0x002E1B40 sub_002E1B40 (61 B)
+// [TODO] 0x002E1B80 sub_002E1B80 (111 B)
 // ============================================================================
 // [VERIFIED] sub_002E1BF0 (0x002E1BF0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -359445,6 +359734,7 @@ L_25:
 // [TODO] 0x002E26B0 sub_002E26B0 (104 B)
 // [TODO] 0x002E2720 sub_002E2720 (131 B)
 // [TODO] 0x002E27B0 sub_002E27B0 (139 B)
+// [TODO] 0x002E2840 sub_002E2840 (47 B)
 // ============================================================================
 // [VERIFIED] sub_002E2870 (0x002E2870, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -359996,6 +360286,7 @@ PlayerBink::PlayerBink() {}                  // building one is what makes the c
 }
 
 // [TODO] 0x002E2F50 sub_002E2F50 (102 B)
+// [TODO] 0x002E2FC0 sub_002E2FC0 (37 B)
 // ============================================================================
 // [VERIFIED] movie::PlayerBink::vfunc_03 (0x002E2FF0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -360187,8 +360478,16 @@ RenderStrategyBink* RenderStrategyBink::vfunc_03(int a1)
 }
 
 // [TODO] 0x002E3560 movie::RenderStrategyBink::vfunc_07 (737 B)
+// [TODO] 0x002E3850 sub_002E3850 (34 B)
+// [TODO] 0x002E3880 sub_002E3880 (27 B)
+// [TODO] 0x002E38A0 sub_002E38A0 (406 B)
 // [TODO] 0x002E3A40 sub_002E3A40 (249 B)
+// [TODO] 0x002E3B40 sub_002E3B40 (49 B)
 // [TODO] 0x002E3B80 sub_002E3B80 (36 B)
+// [TODO] 0x002E3BB0 sub_002E3BB0 (691 B)
+// [TODO] 0x002E3E70 sub_002E3E70 (21 B)
+// [TODO] 0x002E3EE0 sub_002E3EE0 (57 B)
+// [TODO] 0x002E3F20 sub_002E3F20 (107 B)
 // [TODO] 0x002E3F90 movie::BinkCallback::vfunc_04 (217 B)
 // ============================================================================
 // [VERIFIED] movie::BinkCallback::vfunc_03 (0x002E4070, 8 B)
@@ -360410,6 +360709,7 @@ void Class_002E4D00::sub_002E4D00()
 // [TODO] 0x002E4E80 sub_002E4E80 (91 B)
 // [TODO] 0x002E4EE0 sub_002E4EE0 (159 B)
 // [TODO] 0x002E4F80 sub_002E4F80 (57 B)
+// [TODO] 0x002E4FC0 sub_002E4FC0 (45 B)
 // [TODO] 0x002E4FF0 sub_002E4FF0 (418 B)
 // [TODO] 0x002E51A0 sub_002E51A0 (388 B)
 // [TODO] 0x002E5330 sub_002E5330 (42 B)
@@ -360422,8 +360722,10 @@ void Class_002E4D00::sub_002E4D00()
 // [TODO] 0x002E67C0 sub_002E67C0 (624 B)
 // [TODO] 0x002E6A30 sub_002E6A30 (877 B)
 // [TODO] 0x002E6DA0 sub_002E6DA0 (3434 B)
-// [TODO] 0x002E7E0D sub_002E7E0D (1164 B)
+// [TODO] 0x002E7B10 sub_002E7B10 (1929 B)
+// [TODO] 0x002E82A0 sub_002E82A0 (527 B)
 // [TODO] 0x002E84B0 sub_002E84B0 (1455 B)
+// [TODO] 0x002E8A60 sub_002E8A60 (1006 B)
 // ============================================================================
 // [VERIFIED] sub_002E8E50 (0x002E8E50, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -362225,6 +362527,7 @@ Class_002EDB70* Class_002EDB70::sub_002EDB70()
 // [TODO] 0x002EE3E0 sub_002EE3E0 (50 B)
 // [TODO] 0x002EE420 sub_002EE420 (158 B)
 // [TODO] 0x002EE4C0 sub_002EE4C0 (246 B)
+// [TODO] 0x002EE5C0 sub_002EE5C0 (64 B)
 // [TODO] 0x002EE600 sub_002EE600 (105 B)
 // ============================================================================
 // [VERIFIED] sub_002EE670 (0x002EE670, 19 B)
@@ -362341,6 +362644,7 @@ void Class_002EE800::sub_002EE800()
 }
 
 // [TODO] 0x002EE850 sub_002EE850 (101 B)
+// [TODO] 0x002EE8C0 sub_002EE8C0 (539 B)
 // [TODO] 0x002EEAE0 sub_002EEAE0 (51 B)
 // ============================================================================
 // [VERIFIED] sub_002EEB20 (0x002EEB20, 53 B)
@@ -362494,6 +362798,7 @@ int Class_002EF1A0::sub_002EF1A0(int a1)
 // [TODO] 0x002EF1D0 sub_002EF1D0 (62 B)
 // [TODO] 0x002EF210 sub_002EF210 (80 B)
 // [TODO] 0x002EF260 sub_002EF260 (151 B)
+// [TODO] 0x002EF300 sub_002EF300 (59 B)
 // ============================================================================
 // [VERIFIED] sub_002EF340 (0x002EF340, 16 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -362653,6 +362958,14 @@ void __cdecl sub_002F0AF0(void)
 // [TODO] 0x002F0CA0 sub_002F0CA0 (29 B)
 // [TODO] 0x002F0CC0 sub_002F0CC0 (29 B)
 // [TODO] 0x002F0CE0 sub_002F0CE0 (29 B)
+// [TODO] 0x002F0D00 sub_002F0D00 (719 B)
+// [TODO] 0x002F0FD0 sub_002F0FD0 (379 B)
+// [TODO] 0x002F1150 sub_002F1150 (227 B)
+// [TODO] 0x002F1240 sub_002F1240 (758 B)
+// [TODO] 0x002F1540 sub_002F1540 (519 B)
+// [TODO] 0x002F1750 sub_002F1750 (345 B)
+// [TODO] 0x002F18B0 sub_002F18B0 (1170 B)
+// [TODO] 0x002F1D50 sub_002F1D50 (487 B)
 // [TODO] 0x002F1F40 sub_002F1F40 (116 B)
 // [TODO] 0x002F1FC0 sub_002F1FC0 (166 B)
 // [TODO] 0x002F2070 sub_002F2070 (869 B)
@@ -362669,6 +362982,9 @@ void __cdecl sub_002F0AF0(void)
 // [TODO] 0x002F5B00 sub_002F5B00 (349 B)
 // [TODO] 0x002F5C60 sub_002F5C60 (992 B)
 // [TODO] 0x002F6040 sub_002F6040 (823 B)
+// [TODO] 0x002F6380 sub_002F6380 (102 B)
+// [TODO] 0x002F63F0 sub_002F63F0 (102 B)
+// [TODO] 0x002F6460 sub_002F6460 (110 B)
 // [TODO] 0x002F64D0 sub_002F64D0 (137 B)
 // ============================================================================
 // [VERIFIED] sub_002F6560 (0x002F6560, 11 B)
@@ -362719,9 +363035,12 @@ int __cdecl sub_002F6570(void)
 // [TODO] 0x002F6600 sub_002F6600 (119 B)
 // [TODO] 0x002F6680 sub_002F6680 (127 B)
 // [TODO] 0x002F6700 sub_002F6700 (449 B)
+// [TODO] 0x002F68D0 sub_002F68D0 (10 B)
 // [TODO] 0x002F68E0 sub_002F68E0 (194 B)
 // [TODO] 0x002F69B0 sub_002F69B0 (836 B)
+// [TODO] 0x002F6D00 sub_002F6D00 (551 B)
 // [TODO] 0x002F6F30 sub_002F6F30 (1019 B)
+// [TODO] 0x002F7330 sub_002F7330 (404 B)
 // [TODO] 0x002F74D0 sub_002F74D0 (66 B)
 // [TODO] 0x002F7520 sub_002F7520 (42 B)
 // [TODO] 0x002F7550 sub_002F7550 (1232 B)
@@ -362797,9 +363116,13 @@ Class_002F7E50* Class_002F7E50::sub_002F7E50()
 // [TODO] 0x002F8390 sub_002F8390 (876 B)
 // [TODO] 0x002F8700 sub_002F8700 (616 B)
 // [TODO] 0x002F8970 sub_002F8970 (151 B)
+// [TODO] 0x002F8A10 sub_002F8A10 (60 B)
 // [TODO] 0x002F8A50 sub_002F8A50 (447 B)
 // [TODO] 0x002F8C10 sub_002F8C10 (368 B)
+// [TODO] 0x002F9090 sub_002F9090 (944 B)
 // [TODO] 0x002F9440 sub_002F9440 (492 B)
+// [TODO] 0x002F9630 sub_002F9630 (150 B)
+// [TODO] 0x002F96D0 sub_002F96D0 (57 B)
 // [TODO] 0x002F9710 sub_002F9710 (384 B)
 // [TODO] 0x002F9890 sub_002F9890 (192 B)
 // [TODO] 0x002F9950 sub_002F9950 (124 B)
@@ -363492,6 +363815,7 @@ void __stdcall sub_0030AC40(int a1)
 }
 
 // [TODO] 0x0030AC70 sub_0030AC70 (213 B)
+// [TODO] 0x0030AD50 sub_0030AD50 (6 B)
 // [TODO] 0x0030AD60 sub_0030AD60 (93 B)
 // [TODO] 0x0030BF00 sub_0030BF00 (219 B)
 // [TODO] 0x0030BFE0 sub_0030BFE0 (303 B)
