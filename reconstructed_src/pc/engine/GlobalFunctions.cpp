@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (290 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (291 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 290 of 749 functions matched (38.72%). NOT COMPLETE YET.
-// The 459 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 291 of 749 functions matched (38.85%). NOT COMPLETE YET.
+// The 458 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -7499,6 +7499,35 @@ Class_006FF3A0* Class_006FF3A0::sub_006FF3A0()
     m_Field18 = 0;
     m_Field1C = 0;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006FF570 (0x006FF570, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002E0FA0 (0x002E0FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006FF570
+// what: Passes this object to sub_006F2A40 on the global object DAT_0085D568.
+// tool: Gemini 4 Neon
+
+struct GlobalObj_0085D568
+{
+    void sub_006F2A40(void* arg);
+};
+
+extern "C" GlobalObj_0085D568 DAT_0085D568;
+
+class Class_006FF570
+{
+public:
+    void sub_006FF570();
+};
+
+void Class_006FF570::sub_006FF570()
+{
+    DAT_0085D568.sub_006F2A40(this);
 }
 
 // ============================================================================

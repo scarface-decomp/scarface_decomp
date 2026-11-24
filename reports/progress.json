@@ -1,29 +1,29 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-23 15:35:50",
+  "updated_at": "2026-11-23 20:44:40",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
-    "pc": 777,
-    "xb": 9193,
-    "proto": 8299,
+    "pc": 780,
+    "xb": 9546,
+    "proto": 8820,
     "ps2": 0,
-    "total": 9970,
-    "bytes": 364515,
+    "total": 10326,
+    "bytes": 370795,
     "ps2_bytes": 0
   },
   "readable": {
     "pc": 0,
-    "xb": 20,
-    "proto": 8,
+    "xb": 23,
+    "proto": 10,
     "ps2": 0,
-    "total": 20
+    "total": 23
   },
   "source": {
     "member_functions": {
-      "pc": 487,
-      "xb": 4320,
-      "proto": 4312,
-      "total": 4807
+      "pc": 489,
+      "xb": 4370,
+      "proto": 4342,
+      "total": 4859
     },
     "shared_class": {
       "pc": 159,
@@ -33,19 +33,19 @@
     },
     "named": {
       "pc": 1,
-      "xb": 2079,
-      "proto": 1786,
-      "total": 2080
+      "xb": 2326,
+      "proto": 2257,
+      "total": 2327
     }
   },
   "described": {
     "pc": 60,
-    "xb": 2508,
+    "xb": 2614,
     "proto": 314,
     "ps2": 0,
-    "total": 2568,
+    "total": 2674,
     "how": {
-      "human": 327,
+      "human": 433,
       "read": 169,
       "bound": 0,
       "shape": 2041,
@@ -53,29 +53,29 @@
     }
   },
   "size_buckets": {
-    "1-9 B": 1986,
-    "10-19 B": 1548,
-    "20-39 B": 2912,
-    "40-79 B": 2674,
-    "80+ B": 850
+    "1-9 B": 2090,
+    "10-19 B": 1675,
+    "20-39 B": 3013,
+    "40-79 B": 2696,
+    "80+ B": 852
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 12763,
-    "NoahBPeterson": 5400,
-    "lemiur": 106
+    "RRutherrfordd (Founder)": 13633,
+    "NoahBPeterson": 5405,
+    "lemiur": 108
   },
   "unattributed": 0,
   "queue": {
-    "pc": 738,
-    "xb": 12567,
-    "proto": 12418,
+    "pc": 735,
+    "xb": 12214,
+    "proto": 11897,
     "ps2": 24297,
-    "total": 13305,
+    "total": 12949,
     "tiers": {
-      "TIER_1_QUICK": 514,
-      "TIER_2_SMALL": 2420,
-      "TIER_3_MEDIUM": 2843,
-      "TIER_4_LARGE": 7528
+      "TIER_1_QUICK": 283,
+      "TIER_2_SMALL": 2319,
+      "TIER_3_MEDIUM": 2821,
+      "TIER_4_LARGE": 7526
     }
   },
   "good_first": [
@@ -89,21 +89,21 @@
       "kind": "group"
     },
     {
-      "id": "xb_00024B30",
-      "bin": "xb",
-      "va": "0x00024B30",
-      "symbol": "sub_00024B30",
-      "size": 5,
-      "why": "matching it also matches its 106 look-alikes",
-      "kind": "group"
-    },
-    {
       "id": "xb_00098BE0",
       "bin": "xb",
       "va": "0x00098BE0",
       "symbol": "sub_00098BE0",
       "size": 6,
       "why": "matching it also matches its 4 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002FD289",
+      "bin": "xb",
+      "va": "0x002FD289",
+      "symbol": "sub_002FD289",
+      "size": 8,
+      "why": "matching it also matches its 3 look-alikes",
       "kind": "group"
     },
     {
@@ -116,40 +116,22 @@
       "kind": "named"
     },
     {
-      "id": "xb_0006D510",
-      "bin": "xb",
-      "va": "0x0006D510",
-      "symbol": "TTagDerefNode::vfunc_04",
-      "size": 8,
+      "id": "pc_006E6F50",
+      "bin": "pc",
+      "va": "PC 0x006E6F50",
+      "symbol": "core::CementLibrary::vfunc_03",
+      "size": 13,
       "why": "the game's class information names it",
       "kind": "named"
     },
     {
-      "id": "xb_00197070",
+      "id": "xb_001B73A0",
       "bin": "xb",
-      "va": "0x00197070",
-      "symbol": "GenericMenuClient::vfunc_01",
-      "size": 8,
+      "va": "0x001B73A0",
+      "symbol": "LockerWeaponHUD::vfunc_04",
+      "size": 14,
       "why": "the game's class information names it",
       "kind": "named"
-    },
-    {
-      "id": "xb_002FD289",
-      "bin": "xb",
-      "va": "0x002FD289",
-      "symbol": "sub_002FD289",
-      "size": 8,
-      "why": "matching it also matches its 3 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_001BC810",
-      "bin": "xb",
-      "va": "0x001BC810",
-      "symbol": "sub_001BC810",
-      "size": 9,
-      "why": "matching it also matches its 96 look-alikes",
-      "kind": "group"
     },
     {
       "id": "xb_002E0600",
@@ -167,6 +149,24 @@
       "symbol": "sub_006E4610",
       "size": 9,
       "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_00313540",
+      "bin": "xb",
+      "va": "0x00313540",
+      "symbol": "sub_00313540",
+      "size": 10,
+      "why": "matching it also matches its 123 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_0015C6C0",
+      "bin": "xb",
+      "va": "0x0015C6C0",
+      "symbol": "sub_0015C6C0",
+      "size": 10,
+      "why": "matching it also matches its 3 look-alikes",
       "kind": "group"
     }
   ]

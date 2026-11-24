@@ -1,17 +1,19 @@
 # Clean-room work
 
-Some useful research on Scarface was done by people who had leaked source code open while they worked.
-Its *code* and *names* can't come into this project ([PROVENANCE.md](PROVENANCE.md)). What the research
-found out about the game's files and behaviour can, through a
+Some useful material can't come into this project: leaked source code, debug symbols, and research done
+by people who had them open while they worked. Its *code* and *names* stay out
+([PROVENANCE.md](PROVENANCE.md)). What it shows about the game's files and behaviour can come in, whatever
+the material is, through a
 [clean-room](https://en.wikipedia.org/wiki/Clean-room_design) process: the knowledge crosses over as a
 written description, and the code is written fresh by someone who never saw the original.
 
-**What this does and doesn't cover.** The clean room here is this one path: outside research done beside
-leaked source, reaching the project only as specs. It does not make the project as a whole a clean-room
+**What this does and doesn't cover.** The clean room here is this one path: outside material, read by an
+examiner, reaching the project only as specs ("outside research" below means any such material). It does not make the project as a whole a clean-room
 reimplementation. A matching decompilation reads the original program: the game's own machine code is the
 reference every function is checked against. So the claim the project makes is narrower and should be
-worded that way: **no leaked source code is used, nor anything written beside it; you need your own copy
-of the game.** Don't describe the decompilation itself as "clean room".
+worded that way: **no leaked source code is in the repository, nor any code or name taken from it or
+from anything written beside it; what examiners learned from such material comes in only as reviewed
+specs; you need your own copy of the game.** Don't describe the decompilation itself as "clean room".
 
 ## Names from another game's build
 
@@ -22,8 +24,9 @@ November 2026 the project takes virtual functions' names from that map where the
 
 * **What is read:** the map file and the prototype's program, from the founder's own copy of the disc. They
   are a build's own by-products, not source code. Neither file is in this repository.
-* **What is not:** *Hit & Run*'s source code, which has leaked, is not used, and must not be consulted to
-  check, complete or correct a name from the map.
+* **What is not:** *Hit & Run*'s source code, which has leaked, is not a source of names: it must not be
+  consulted to check, complete or correct a name from the map. Like any outside material it may be read
+  only by an examiner, under the roles below, and that reading goes in the record.
 * **What it gives:** names only, each recorded in `reports/names.json` with the class and slot it came
   from. No code, layouts or behaviour are taken from it.
 
@@ -75,6 +78,8 @@ for anything it covers. Say which side you are on in your pull request.
 | [SPEC-009](cleanroom/SPEC-009-texture-anims-prop-states-cutscene-text.md): texture animations (`TEX`); a prop state's animation settings, its clock and the effect's start time; cutscene faces of people other than Tony; where an in-engine cutscene's lines are and how they are timed and cut into captions; text bibles; corrections to SPEC-005 §1.3 and §2.1 and to FORMATS.md; 38 Xbox functions in [function_guide.json](function_guide.json) | Claude (AI assistant) for RRutherrfordd, 2026-11-18, answering the implementer's six questions | the research covers almost none of this: it names the `TEX` animation type, lays out the prop-state chunks and guesses at the effect's last float, and its naming of the third prop-state word proved wrong. Everything was read from the user's own US PC files (the 16 texture animations and their mesh pieces, every prop state in `packages/z04`, 189 cutscene scripts, 27,511 subtitle files, all 140 text bibles, `NIS_03_sheffield/static.p3d` and `tonynisHawaiian.p3d`) and from `default.xbe` (the texture controller and how it is bound, the prop's state update, the frame stepping, the effect timing, the subtitle script call and caption cutting, the text bible reader and look-up, the expression mixer reader) | 2026-11-18: no code and no names from the research; identifiers are class names from the Xbox program's run-time type information, the work queue's function names, text in the game files (file, mesh, shader, texture, animation and slider names, script keywords and calls, the program's own warning text), chunk ids, numbers and English words; the only six-word runs shared with the research are the game's own file names and paths | to be written by a separate Claude chat that has never read the research, given only this repository |
 | [SPEC-010](cleanroom/SPEC-010-cutscene-effects-particles-grips.md): where effects are defined; the particle system chunk `0x1580C`, its emitters, generators and curves; `NISCharacterEffect` (types, source direction, how long), `NISWeaponFire` (muzzle flash, casings, tracers, `IsSecondaryWeapon`), blood and bullet marks, `NISFade`, a scene prop before its first key, two-handed grips; 51 Xbox functions in [function_guide.json](function_guide.json) | Claude (AI assistant) for RRutherrfordd, 2026-11-19, answering the implementer's seven questions | the research has next to nothing on particles or cutscene effects. Read from the user's own US PC files (`packages/z04/Common.p3d`'s 123 particle systems and its effect composites, the template and effects scripts, `guns.p3d`, the 189 cutscene scripts, `NIS_100_office_politics`, character skeletons) and from `default.xbe` (the particle loaders and update, the cutscene effect, fire and fade actions, the effects object) | 2026-11-19: no code and no names from the research; identifiers are class names from the Xbox program's run-time type information, the work queue's function names, the game's own script and file text, chunk ids, numbers and English words | to be written by a separate Claude chat that has never read the research, given only this repository |
 | [SPEC-011](cleanroom/SPEC-011-streaming-frame-controllers.md): which stream trigger applies (its height as a prism, one sticky trigger, the trigger that gives way), loading and unloading; the frame controller chunk, its cycle modes and types; corrections to SPEC-001 §4.2 and SPEC-005 §1.4; 16 Xbox functions in [function_guide.json](function_guide.json) | Claude (AI assistant) for RRutherrfordd, 2026-11-19, answering the implementer's first and fourth questions of that day | not from the research: read from `default.xbe` (the stream trigger loader, test and choice, the package marks; the frame controller loader, handler and advance) and the PC files at hand | 2026-11-19: no code and no names from the research; identifiers are class names from the Xbox program's run-time type information, the work queue's function names, the game's own file text, chunk ids, numbers and English words | to be written by a separate Claude chat that has never read the research, given only this repository |
+| [SPEC-012](cleanroom/SPEC-012-ps2-class-records.md): the PS2 program's class records (name, ancestor list), its virtual tables and how an object points at them; what that gives the PS2 pairing | Claude (AI assistant) for RRutherrfordd, 2026-11-23 | the same research's PS2 notes (`re/notes/ps2.md`, which describe the European program); they said the records exist and where to look. Every layout, count and address read from the founder's own US `SLUS_211.11` (2,723 records, 2,293 main tables, the 7,274 places code builds a table's address) and `default.xbe` (class-name comparison) | 2026-11-23, by the examiner: no code and no names from the research; identifiers are class names stored as text in the PS2 program and in the Xbox program's run-time type information, the repository's file names, addresses, numbers and English words; no six words in a row match the notes. Not yet read by a second reviewer | to be written by a separate Claude chat that has never read the research, given only this repository |
+| [SPEC-013](cleanroom/SPEC-013-sister-game-build-settings.md): how the 2003 sister game's Xbox release build was compiled, library by library, as leads to test; which of Scarface's classes still have an ancestor in that engine | Claude (AI assistant) for RRutherrfordd, 2026-11-23 | **leaked source, read directly:** the development tree of *The Simpsons: Hit & Run* on the founder's computer. For this spec its Xbox project files and release build logs, and two scripted counts over its source text (class declarations, text literals); no function body. Its maps, symbol files and objects were listed, not opened. Counts checked against `reports/classes.json` and `default.xbe` | 2026-11-23, by the examiner: no code and no names from the tree; identifiers are Scarface's own class and namespace names from run-time type information, Microsoft's public compiler switches, text stored in `default.xbe`, numbers and English words. Not yet read by a second reviewer | to be tested by a separate Claude chat that has never seen the tree, given only this repository |
 
 Text in the game files that SPEC-001 names, for the first person who checks it on their own copy:
 `MiamiSunShape`, `MiamiFillShape`, `MiamiAmbientShape`, `MiamiBuildingAmbientShape`, `zone_lights`,

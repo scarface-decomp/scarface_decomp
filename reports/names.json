@@ -1550,7 +1550,7 @@
     "proto:0x00068CB0": {
       "name": "Namespace::ClassLinkTo",
       "by": "the portal's Xbox to prototype pairing (portal/tools/pairing.py)",
-      "why": "Paired by shape with the Xbox's 0x00073270 (Namespace::ClassLinkTo), and what the prototype's classLinkNamespaces (0x000660D0) calls."
+      "why": "Paired by shape with the Xbox's 0x00073270 (Namespace::ClassLinkTo), and what the prototype's classLinkNamespaces (0x000660D0) calls. The name follows the published Torque engine's Namespace::classLinkTo (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "proto:0x0006B1C0": {
       "name": "MemStream::~MemStream",
@@ -20902,6 +20902,11 @@
       "by": "the game's own typed script binding (portal/tools/script_typed.py)",
       "why": "The start-up code at 0x000253F4 registers this function as the typed script command IsTextbibleKey; the binding object's own class name gives its signature: bool IsTextbibleKey(char*)."
     },
+    "xb:0x00023EC0": {
+      "name": "FindObjectByName",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "FindObject(name, 0) (0x0002B770): the script object with that name, or 0."
+    },
     "xb:0x000240F0": {
       "name": "FEGroupObject::~FEGroupObject",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -21940,7 +21945,7 @@
     "xb:0x00068E40": {
       "name": "dSprintf",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(buffer, size, format, ...): vsprintf(buffer, format, the arguments); the size is not used."
+      "why": "(buffer, size, format, ...): vsprintf(buffer, format, the arguments); the size is not used. The name follows the published Torque engine's dSprintf (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x00068FF0": {
       "name": "GrowReturnBuffer",
@@ -21950,7 +21955,7 @@
     "xb:0x000694E0": {
       "name": "GetReturnBuffer",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(size): the interpreter state at [0x00478E60]; when size is over 0x200 grows its buffer (0x00068FF0); returns the buffer pointer at +0x2478. Handlers that return text write it there."
+      "why": "(size): the interpreter state at [0x00478E60]; when size is over 0x200 grows its buffer (0x00068FF0); returns the buffer pointer at +0x2478. Handlers that return text write it there. The name follows the published Torque engine's Con::getReturnBuffer (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x0006F9B0": {
       "name": "myTest3",
@@ -22215,7 +22220,7 @@
     "xb:0x00072420": {
       "name": "Namespace::Lookup",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key): looks in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364] for an entry of this namespace (+0x0C) with that key (+0x00, next +0x14), then tries the parent (+0x04) and so on up; returns the entry or 0. How a script's call finds its function."
+      "why": "thiscall(namespace, key): looks in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364] for an entry of this namespace (+0x0C) with that key (+0x00, next +0x14), then tries the parent (+0x04) and so on up; returns the entry or 0. How a script's call finds its function. The name follows the published Torque engine's Namespace::lookup (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x000724B0": {
       "name": "Script::DumpNamespaces",
@@ -22240,7 +22245,7 @@
     "xb:0x000728B0": {
       "name": "NamespaceEntry::Execute",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(entry, argc, argv, state): runs the entry by its type (low 5 bits of +0x1A): 0 a script function, through the interpreter (0x000695B0); 1 to 5 a handler (+0x04) called as handler(object, argc, argv), its result turned to text by kind (string as is, int \"%d\", float \"%g\", void \"\", bool \"%d\"); 6 a typed binding object, through CScript::CallTyped (0x00066C90)."
+      "why": "thiscall(entry, argc, argv, state): runs the entry by its type (low 5 bits of +0x1A): 0 a script function, through the interpreter (0x000695B0); 1 to 5 a handler (+0x04) called as handler(object, argc, argv), its result turned to text by kind (string as is, int \"%d\", float \"%g\", void \"\", bool \"%d\"); 6 a typed binding object, through CScript::CallTyped (0x00066C90). The name follows the published Torque engine's Namespace::Entry::execute (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x00072CD0": {
       "name": "FindOrCreateNamespace",
@@ -22260,7 +22265,7 @@
     "xb:0x00072FE0": {
       "name": "Namespace::CreateLocalEntry",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key): returns the namespace's own entry for the key from its list (+0x18, next +0x10), or takes a new one from the entry pool ([0x0047B360], virtual 16), marks its type invalid (+0x1A |= 0x1F), links it at the list head and in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364]."
+      "why": "thiscall(namespace, key): returns the namespace's own entry for the key from its list (+0x18, next +0x10), or takes a new one from the entry pool ([0x0047B360], virtual 16), marks its type invalid (+0x1A |= 0x1F), links it at the list head and in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364]. The name follows the published Torque engine's Namespace::createLocalEntry (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x00073070": {
       "name": "Namespace::AddScriptFunction",
@@ -22300,7 +22305,7 @@
     "xb:0x00073270": {
       "name": "Namespace::ClassLinkTo",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "What classLinkNamespaces (0x00070520) calls on the child with the parent: skips the child's own chain of the same name (+0x00), and if its parent (+0x04) is another one, drops one reference on the old parent (u16 at +0x24) and releases it at zero, then stores the new parent at +0x04, calls 0x00072CE0 and adds a reference to the new parent."
+      "why": "What classLinkNamespaces (0x00070520) calls on the child with the parent: skips the child's own chain of the same name (+0x00), and if its parent (+0x04) is another one, drops one reference on the old parent (u16 at +0x24) and releases it at zero, then stores the new parent at +0x04, calls 0x00072CE0 and adds a reference to the new parent. The name follows the published Torque engine's Namespace::classLinkTo (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x00073400": {
       "name": "RegisterClassRep",
@@ -22745,7 +22750,7 @@
     "xb:0x00099BC0": {
       "name": "dAtob",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Text to true/false: false for no text, empty text, \"false\", \"0\" or \"nil\" (compared without case, _stricmp); true for anything else."
+      "why": "Text to true/false: false for no text, empty text, \"false\", \"0\" or \"nil\" (compared without case, _stricmp); true for anything else. The name follows the published Torque engine's dAtob (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
     },
     "xb:0x0009A9A0": {
       "name": "TimeSlicer::~TimeSlicer",
@@ -24117,6 +24122,11 @@
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Deleting destructor: it ends `if (a1 & 1) sub_00027600(this); return this;` (sub_00027600 is called that way by 498 matched functions), and it is the only function of HenchmanManager that does."
     },
+    "xb:0x00115360": {
+      "name": "CreateHenchmanManager",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Allocates 12 bytes from heap 10, stores HenchmanManager's vtable (0x003AD490), +4 = 1 (Tony's henchmen follow him), +8 = 0, and keeps it in the global at 0x004898B8 (0 when the allocation fails)."
+    },
     "xb:0x00115FA0": {
       "name": "PathGroup::GetClassRep",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -24826,6 +24836,11 @@
       "name": "TargetSetManager::~TargetSetManager",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Deleting destructor: it ends `if (a1 & 1) sub_00027600(this); return this;` (sub_00027600 is called that way by 498 matched functions), and it is the only function of TargetSetManager that does."
+    },
+    "xb:0x0011D7D0": {
+      "name": "CreateTargetSetManager",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Allocates 0x24 bytes from the heap it is given, stores TargetSetManager's vtable (0x003AE778), constructs its part at +4 (0x0011D770) and keeps it in the global at 0x00489D00 (0 when the allocation fails)."
     },
     "xb:0x0011DEC0": {
       "name": "AIStimulusDetector::~AIStimulusDetector",
@@ -35782,10 +35797,30 @@
       "by": "Read from the code (Claude (AI), for RRutherrfordd)",
       "why": "Takes a heap number and a size: calls the allocate slot (vfunc_04) of entry number heap of the table at 0x00493330 (16 bytes each) with the size, and when that fails calls the out-of-memory callback stored at 0x00493B58."
     },
+    "xb:0x00244530": {
+      "name": "GetHeapAllocator",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Returns the allocator of a heap: the first word of its 16-byte record in the table at 0x00493330 (AllocateFromHeap 0x00244450 allocates through the same pointer)."
+    },
     "xb:0x002445E0": {
       "name": "FreeMemory",
       "by": "Read from the code (Claude (AI), for RRutherrfordd)",
       "why": "Finds the heap that owns the block (trying the one it found last, 0x00493B60, first), remembers it, and calls that heap's free on the block."
+    },
+    "xb:0x00247970": {
+      "name": "GetControllerSystem",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Returns the controller system made by CreateControllerSystem (0x00248900): the global at 0x00493B74."
+    },
+    "xb:0x00248300": {
+      "name": "core::ControllerSystemXBox::ControllerSystemXBox",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Constructor: its last vtable stores are core::ControllerSystemXBox's at +0 and +4 (after core::IControllerSystem's and core::Object's); CreateControllerSystem (0x00248900) calls it on a new 0x12A8-byte object."
+    },
+    "xb:0x00248900": {
+      "name": "CreateControllerSystem",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Allocates 0x12A8 bytes from the heap it is given, constructs a core::ControllerSystemXBox (0x00248300) in it and keeps it in the global at 0x00493B74 (0 when the allocation fails)."
     },
     "xb:0x0024AAD0": {
       "name": "pure3d::VectorCamera::Update",
@@ -35796,6 +35831,16 @@
       "name": "HashArchiveName",
       "by": "the clean-room spec docs/cleanroom/SPEC-004-xbox-functions.md (a name the implementer chose from its description)",
       "why": "SPEC-004 section 1.2: the hash an .rcf archive's directory is sorted by, of a path with one leading backslash skipped (rcf.name_hash). Matched."
+    },
+    "xb:0x00251A70": {
+      "name": "core::MemoryPool::MemoryPool",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Stores core::IMemoryPool's vtable, then core::MemoryPool's (0x003D543C) at +0 and 0x003D5434 at +4 as its last vtable stores, clears its counts, keeps the heap noted at 0x0045894C (+8) and its byte argument (+0x34), and returns this."
+    },
+    "xb:0x00251B90": {
+      "name": "CreateMemoryPool",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(out, element size, element count, ?, heap, name, ?, ?): allocates 0x38 bytes from the heap (noting it at 0x0045894C), constructs a core::MemoryPool (0x00251A70), sets it up (0x00251930) with the other arguments, calls its first virtual function, and stores it through out. The Namespace, Trigger, File ... pools are made this way."
     },
     "xb:0x0025FD50": {
       "name": "pure3d::Light::Activate",
@@ -35886,6 +35931,11 @@
       "name": "pure3d::Image8::GetPaletteEntry",
       "by": "the Hit & Run prototype's linker map",
       "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImage8 is this game's pure3d::Image8: after their base class (tImage there with 11 slots, pure3d::Image here with 15), each has 8 slots of its own. Slot 15 of tImage8 is GetPaletteEntry in that map, which lines up with slot 19 here."
+    },
+    "xb:0x0026B2F0": {
+      "name": "pure3d::d3dContext::d3dContext",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Constructor: its last vtable store on the object is pure3d::d3dContext's (0x003D6B9C); it also builds the context's extensions (d3dExtGammaControl, d3dExtReadPixels ...). The only class of the pddiRenderContext family the game builds."
     },
     "xb:0x0026CF70": {
       "name": "GangNestSpawnObject::GetTotalToSpawnCount",
@@ -36106,6 +36156,11 @@
       "name": "Shader::SetBLMD",
       "by": "the clean-room spec docs/cleanroom/SPEC-004-xbox-functions.md (a name the implementer chose from its description)",
       "why": "SPEC-004 section 2.1: a shader's BLMD setter (named after the game data's parameter), reached through its kind's table of settings; it keeps the value and calls sub_0029A2F0. Matched."
+    },
+    "xb:0x0029B080": {
+      "name": "pure3d::d3dDisplay::d3dDisplay",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Constructor: its last vtable store on the object is pure3d::d3dDisplay's (0x003D9674); called from 0x00292320. The only class of the pddiDisplay family the game builds."
     },
     "xb:0x0029E590": {
       "name": "pure3d::pddiDevice::SetMessageCallback",
@@ -44591,61 +44646,6 @@
       "name": "OHCD_fQueueTransferRequest",
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map",
       "why": "The same 134 bytes as @OHCD_fQueueTransferRequest@8 (xapilib) in that build, addresses apart, and found only once in this program."
-    },
-    "xb:0x00251B90": {
-      "name": "CreateMemoryPool",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(out, element size, element count, ?, heap, name, ?, ?): allocates 0x38 bytes from the heap (noting it at 0x0045894C), constructs a core::MemoryPool (0x00251A70), sets it up (0x00251930) with the other arguments, calls its first virtual function, and stores it through out. The Namespace, Trigger, File ... pools are made this way."
-    },
-    "xb:0x00251A70": {
-      "name": "core::MemoryPool::MemoryPool",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Stores core::IMemoryPool's vtable, then core::MemoryPool's (0x003D543C) at +0 and 0x003D5434 at +4 as its last vtable stores, clears its counts, keeps the heap noted at 0x0045894C (+8) and its byte argument (+0x34), and returns this."
-    },
-    "xb:0x00248300": {
-      "name": "core::ControllerSystemXBox::ControllerSystemXBox",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Constructor: its last vtable stores are core::ControllerSystemXBox's at +0 and +4 (after core::IControllerSystem's and core::Object's); CreateControllerSystem (0x00248900) calls it on a new 0x12A8-byte object."
-    },
-    "xb:0x00248900": {
-      "name": "CreateControllerSystem",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Allocates 0x12A8 bytes from the heap it is given, constructs a core::ControllerSystemXBox (0x00248300) in it and keeps it in the global at 0x00493B74 (0 when the allocation fails)."
-    },
-    "xb:0x00247970": {
-      "name": "GetControllerSystem",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Returns the controller system made by CreateControllerSystem (0x00248900): the global at 0x00493B74."
-    },
-    "xb:0x00244530": {
-      "name": "GetHeapAllocator",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Returns the allocator of a heap: the first word of its 16-byte record in the table at 0x00493330 (AllocateFromHeap 0x00244450 allocates through the same pointer)."
-    },
-    "xb:0x00023EC0": {
-      "name": "FindObjectByName",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "FindObject(name, 0) (0x0002B770): the script object with that name, or 0."
-    },
-    "xb:0x0026B2F0": {
-      "name": "pure3d::d3dContext::d3dContext",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Constructor: its last vtable store on the object is pure3d::d3dContext's (0x003D6B9C); it also builds the context's extensions (d3dExtGammaControl, d3dExtReadPixels ...). The only class of the pddiRenderContext family the game builds."
-    },
-    "xb:0x0029B080": {
-      "name": "pure3d::d3dDisplay::d3dDisplay",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Constructor: its last vtable store on the object is pure3d::d3dDisplay's (0x003D9674); called from 0x00292320. The only class of the pddiDisplay family the game builds."
-    },
-    "xb:0x0011D7D0": {
-      "name": "CreateTargetSetManager",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Allocates 0x24 bytes from the heap it is given, stores TargetSetManager's vtable (0x003AE778), constructs its part at +4 (0x0011D770) and keeps it in the global at 0x00489D00 (0 when the allocation fails)."
-    },
-    "xb:0x00115360": {
-      "name": "CreateHenchmanManager",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Allocates 12 bytes from heap 10, stores HenchmanManager's vtable (0x003AD490), +4 = 1 (Tony's henchmen follow him), +8 = 0, and keeps it in the global at 0x004898B8 (0 when the allocation fails)."
     }
   },
   "members": {

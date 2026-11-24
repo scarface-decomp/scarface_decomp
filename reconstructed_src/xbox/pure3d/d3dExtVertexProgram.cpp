@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtVertexProgram.cpp (4 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, pure3d/d3dExtVertexProgram.cpp (5 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 4 of 8 functions matched (50.00%). NOT COMPLETE YET.
-// The 4 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 5 of 8 functions matched (62.50%). NOT COMPLETE YET.
+// The 3 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -128,6 +128,40 @@ public:
 void d3dExtVertexProgram::vfunc_08(int a1, int a2)
 {
     ((Object*)a1)->vfunc_21(a2);
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] pure3d::d3dExtVertexProgram::vfunc_01 (0x00268260, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// What it does: Forwards two arguments to sub_0029BDA0 on the object at *(m_Field04 + 0x2D4).
+// ============================================================================
+// bin: xb
+// va: 0x00268260
+// what: Forwards two arguments to sub_0029BDA0 on the object at *(m_Field04 + 0x2D4).
+// tool: Gemini 4 Neon
+
+#pragma optimize("y", off)
+
+struct Object_00268260
+{
+    void sub_0029BDA0(int a1, int a2);
+};
+
+namespace pure3d {
+
+class d3dExtVertexProgram
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01(int a1, int a2);
+    int m_Field04; // +0x04
+};
+
+void d3dExtVertexProgram::vfunc_01(int a1, int a2)
+{
+    ((Object_00268260*)*(int*)(m_Field04 + 0x2D4))->sub_0029BDA0(a1, a2);
 }
 
 }

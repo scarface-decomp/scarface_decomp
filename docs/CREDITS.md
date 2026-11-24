@@ -52,6 +52,18 @@ authors are credited in the commit history. Thank you.
   [Torque2D](https://github.com/TorqueGameEngines/Torque2D) (`astNodes.cc`, `compiler.cc`, MIT
   licence), the open-source descendant of the engine Scarface's script compiler came from. It was read
   to get the order of the string, number and name tables right; the Python compiler here is new code.
+* For the names of a few script-system functions: the published Torque engine (the
+  [Torque Game Engine](https://github.com/TorqueGameEngines/Torque3D) family, MIT licence, GarageGames),
+  whose console system the game's own descends from. What each function does was read from the game's
+  machine code; where the game's function is recognisably Torque's, it carries Torque's name
+  (`dAtob`, `dSprintf`, `Namespace::createLocalEntry`, `Namespace::Entry::execute`, `Namespace::lookup`,
+  `Namespace::classLinkTo`, `Con::getReturnBuffer`), and its entry in `reports/names.json` says so.
+  `classLinkNamespaces` is in the game's own error text.
+* [scarface-p3d](https://github.com/aap/scarface-p3d) by aap (MIT licence) and the research notes kept
+  with an extended copy of it. Its author worked with leaked source open, so none of its code or names is
+  used: it is read only by clean-room examiners, and what it showed about the game's files and behaviour
+  reached the project as the specs in `docs/cleanroom/`, each checked on the game's own files
+  ([CLEAN_ROOM.md](CLEAN_ROOM.md)).
 * The fonts of the website and the portal: [Anton](https://github.com/googlefonts/AntonFont) (The Anton
   Project Authors), [Josefin Sans](https://github.com/ThomasJockin/JosefinSansFont-master) (The Josefin
   Sans Project Authors) and Marcellus (Brian J. Bonislawsky, Astigmatic), each under the SIL Open Font

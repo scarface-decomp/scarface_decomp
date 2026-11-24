@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 777 of 1,515 functions matched (51.29%). NOT COMPLETE YET.
-// The 738 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 780 of 1,515 functions matched (51.49%). NOT COMPLETE YET.
+// The 735 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -7647,8 +7647,88 @@ SafeRefCount* SafeRefCount::vfunc_02(int a1)
 // [TODO] 0x006E6530 core::Drive::vfunc_03 (88 B)
 // [TODO] 0x006E6590 core::Drive::vfunc_04 (257 B)
 // [TODO] 0x006E66A0 sub_006E66A0 (103 B)
-// [TODO] 0x006E6710 core::CementLibrary::vfunc_00 (11 B)
-// [TODO] 0x006E6720 core::CementLibrary::vfunc_01 (12 B)
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_00 (0x006E6710, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::CementLibrary::vfunc_00 (0x002ACA40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E6710
+// what: Calls virtual method slot 0 on the subobject at +0x04 of the pointer at +0x0C.
+// tool: Gemini 4 Neon
+
+struct SubObject04
+{
+    virtual void vfunc_00();
+    void Call00() { vfunc_00(); }
+};
+
+struct Field0C
+{
+    int m_Field00;
+    SubObject04 m_Field04; // +0x04
+};
+
+namespace core {
+
+class CementLibrary
+{
+public:
+    virtual void vfunc_00();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void CementLibrary::vfunc_00()
+{
+    m_Field0C->m_Field04.Call00();
+}
+
+}
+
+// ============================================================================
+// [VERIFIED] core::CementLibrary::vfunc_01 (0x006E6720, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::CementLibrary::vfunc_01 (0x002ACA50), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E6720
+// what: Calls virtual method slot 1 on the subobject at +0x04 of the pointer at +0x0C.
+// tool: Gemini 4 Neon
+
+struct SubObject04
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    void Call01() { vfunc_01(); }
+};
+
+struct Field0C
+{
+    int m_Field00;
+    SubObject04 m_Field04; // +0x04
+};
+
+namespace core {
+
+class CementLibrary
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    char m_pad04[0x8];
+    Field0C* m_Field0C; // +0x0C
+};
+
+void CementLibrary::vfunc_01()
+{
+    m_Field0C->m_Field04.Call01();
+}
+
+}
+
 // ============================================================================
 // [VERIFIED] core::CementLibrary::vfunc_05 (0x006E6730, 39 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
@@ -23754,7 +23834,35 @@ Class_006FF3A0* Class_006FF3A0::sub_006FF3A0()
 // [TODO] 0x006FF3F0 sub_006FF3F0 (154 B)
 // [TODO] 0x006FF490 om::TRbTree<om::PointerUid, 0>::Comp<om::PointerUid, 0, unsigned __int64>::vfunc_00 (61 B)
 // [TODO] 0x006FF4D0 sub_006FF4D0 (155 B)
-// [TODO] 0x006FF570 sub_006FF570 (12 B)
+// ============================================================================
+// [VERIFIED] sub_006FF570 (0x006FF570, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_002E0FA0 (0x002E0FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006FF570
+// what: Passes this object to sub_006F2A40 on the global object DAT_0085D568.
+// tool: Gemini 4 Neon
+
+struct GlobalObj_0085D568
+{
+    void sub_006F2A40(void* arg);
+};
+
+extern "C" GlobalObj_0085D568 DAT_0085D568;
+
+class Class_006FF570
+{
+public:
+    void sub_006FF570();
+};
+
+void Class_006FF570::sub_006FF570()
+{
+    DAT_0085D568.sub_006F2A40(this);
+}
+
 // [TODO] 0x006FF580 sub_006FF580 (118 B)
 // [TODO] 0x006FF600 sub_006FF600 (58 B)
 // [TODO] 0x006FF700 sub_006FF700 (49 B)
