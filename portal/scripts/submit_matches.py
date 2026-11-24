@@ -35,7 +35,7 @@ from typing import Dict, Optional, Tuple
 
 ROOT = Path(__file__).resolve().parents[2]
 FOLDER = ROOT / "reports" / "to_submit"
-HEADER = re.compile(r"^//\s*(bin|va|what|spec|tool)\s*:\s*(.*?)\s*$", re.I)
+HEADER = re.compile(r"^//\s*(bin|va|what|how|spec|tool)\s*:\s*(.*?)\s*$", re.I)
 
 
 def read_proposal(text: str) -> Tuple[Dict[str, str], str]:
@@ -109,6 +109,7 @@ def submit(base: str, user: str, pin: str, path: Path) -> Tuple[bool, str]:
         return False, "couldn't claim it: " + str(claim.get("error"))
     res = call(base, "/api/verify", {"user": user, "pin": pin, "id": tid, "cpp_code": code,
                                      "tool_used": fields.get("tool", "")[:120], "what": fields.get("what", "")[:160],
+                                     "what_how": fields.get("how", ""),
                                      **verify_options(text)})
     if res.get("verified"):
         return True, f"verified, {res.get('total_bytes')} bytes"

@@ -20652,6 +20652,11 @@
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Links the record's namespace (+0x20) under its parent record's with sub_00070520 (classLinkNamespaces, named from the game's own error message) and keeps the parent record at +0x24."
     },
+    "xb:0x00011930": {
+      "name": "content::LoadObject::Release",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Virtual 1 (core::IRefCount's Release) in 398 vtables, every one a class derived from content::LoadObject: if the count (+0x04) is under 2, sets it to 0x8000000 and calls the deleting destructor (virtual 3, with 1); otherwise takes one off."
+    },
     "xb:0x00011F20": {
       "name": "Collidable::~Collidable",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -20792,6 +20797,11 @@
       "by": "the game's own script command table (portal/tools/script_commands.py)",
       "why": "The start-up code at 0x00312280 registers this function as the script command SetAnalogDeadZone (1 argument)."
     },
+    "xb:0x00021830": {
+      "name": "RefCounted::Release",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Virtual 1 (core::IRefCount's Release) in 135 vtables (FightAction, AICondition, shaders ...): takes one off the count (+0x04) and, when it is under 1, calls the deleting destructor (virtual 3, with 1). RefCounted is a stand-in, as for RefCounted::AddRef (0x000CE340)."
+    },
     "xb:0x00021B20": {
       "name": "FightContext::~FightContext",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -20891,6 +20901,11 @@
       "name": "IsTextbibleKey",
       "by": "the game's own typed script binding (portal/tools/script_typed.py)",
       "why": "The start-up code at 0x000253F4 registers this function as the typed script command IsTextbibleKey; the binding object's own class name gives its signature: bool IsTextbibleKey(char*)."
+    },
+    "xb:0x00023EC0": {
+      "name": "FindObjectByName",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "FindObject(name, 0) (0x0002B770): the script object with that name, or 0."
     },
     "xb:0x000240F0": {
       "name": "FEGroupObject::~FEGroupObject",
@@ -21827,6 +21842,16 @@
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Deleting destructor: it ends `if (a1 & 1) sub_00027600(this); return this;` (sub_00027600 is called that way by 498 matched functions), and it is the only function of om::EntityType<GlobalVehicleSound> that does."
     },
+    "xb:0x00066C90": {
+      "name": "CScript::CallTyped",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(object, binding object, argc, argv, result): stores the argument cursor (0x00476408 = [binding+4], 0x0047640C = argv, 0x00476410 = argc) and calls the binding object's first virtual function with (object, result), which converts each argument and calls the bound C++ function."
+    },
+    "xb:0x00066EF0": {
+      "name": "CScript::Functor::Functor",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(binding object, argument count): writes the base vtable 0x003A2110, +0x04 = 0, the argument count (0 when negative) at +0x08 and +0x0A = 0. Every CScript::MethodN / FunctionN helper calls it before writing its own vtable and the bound function at +0x0C."
+    },
     "xb:0x00068380": {
       "name": "ScriptFileObject::~ScriptFileObject",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -21917,20 +21942,50 @@
       "by": "the game's own script command table (portal/tools/script_commands.py)",
       "why": "The start-up code at 0x00313BA0 registers this function as the script command EndScriptSection (1 argument)."
     },
+    "xb:0x00068E40": {
+      "name": "dSprintf",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(buffer, size, format, ...): vsprintf(buffer, format, the arguments); the size is not used. The name follows the published Torque engine's dSprintf (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
+    },
+    "xb:0x00068FF0": {
+      "name": "GrowReturnBuffer",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(interpreter state, size): when size is over the capacity (+0x2474), sets the capacity to size + 0x800, allocates that from heap 3, copies the old buffer (+0x2478) over, frees it, and stores the new one."
+    },
+    "xb:0x000694E0": {
+      "name": "GetReturnBuffer",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(size): the interpreter state at [0x00478E60]; when size is over 0x200 grows its buffer (0x00068FF0); returns the buffer pointer at +0x2478. Handlers that return text write it there. The name follows the published Torque engine's Con::getReturnBuffer (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
+    },
     "xb:0x0006F9B0": {
       "name": "myTest3",
       "by": "the game's own typed script binding (portal/tools/script_typed.py)",
       "why": "The start-up code at 0x00070ABA registers this function as the typed script command myTest3; the binding object's own class name gives its signature: int myTest3(int)."
+    },
+    "xb:0x0006FB10": {
+      "name": "RegisterTypedFunction",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(name, usage, binding object, fewest, most, extra): GetGlobalNamespace()->AddTypedCommand(StringToKey(name, 0), ...). Every CScript::FunctionN helper ends in it."
     },
     "xb:0x0006FE50": {
       "name": "LookupNamespace",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
       "why": "Takes a name: with none, returns the global namespace (tail-jump to GetGlobalNamespace 0x00072260); otherwise StringToKey(name, 0) (0x000767E0) and tail-jumps to FindOrCreateNamespace (0x00072CD0) with the key. InitializeClassReps (0x00073650) gives every class record's namespace (+0x20) from LookupNamespace(record's class name at +0x14)."
     },
+    "xb:0x00070280": {
+      "name": "RegisterTypedMethod",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(class, name, usage, binding object, fewest, most, extra): the same as RegisterTypedFunction (0x0006FB10) on FindOrCreateNamespace(StringToKey(class, 0)), or the global namespace for no class."
+    },
     "xb:0x00070520": {
       "name": "classLinkNamespaces",
       "by": "the game's own error message",
       "why": "Its failure path passes \"Error: classLinkNamespaces() - %s is already a child of %s - circular link error!\" (0x003A28C0) to 0x0009A2B0. It takes a parent and a child namespace, does nothing if the parent is already an ancestor of the child, reports a circular link if the child is an ancestor of the parent, and otherwise calls the child's ClassLinkTo(parent) (0x00073270). Every ConcreteClassRep<T>::Init calls it with the parent record's +0x20 and its own."
+    },
+    "xb:0x000705F0": {
+      "name": "RegisterConsoleCommands",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Walks the list of command records the start-up code filled (head 0x0047AAB0, next +0x28): finds the record's class namespace (StringToKey + FindOrCreateNamespace, or the global one for no class) and adds its handler under StringToKey(name) with the adder for the slot that is set (+0x00 string, +0x04 int, +0x08 float, +0x0C void, +0x10 bool)."
     },
     "xb:0x00070B30": {
       "name": "Script::isFunction",
@@ -22157,6 +22212,16 @@
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
       "why": "Returns the global at 0x0047B354; LookupNamespace (0x0006FE50) returns it for an empty name."
     },
+    "xb:0x00072270": {
+      "name": "ShutdownNamespaces",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Walks every namespace in the 512 buckets at [0x0047B35C] and every entry on its list (+0x18, next +0x10), releasing each entry's script code (+0x08) with 0x0006E0F0."
+    },
+    "xb:0x00072420": {
+      "name": "Namespace::Lookup",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, key): looks in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364] for an entry of this namespace (+0x0C) with that key (+0x00, next +0x14), then tries the parent (+0x04) and so on up; returns the entry or 0. How a script's call finds its function. The name follows the published Torque engine's Namespace::lookup (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
+    },
     "xb:0x000724B0": {
       "name": "Script::DumpNamespaces",
       "by": "the game's own script command table (portal/tools/script_commands.py)",
@@ -22172,10 +22237,70 @@
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
       "why": "Looks a key up in the 512-bucket table at [0x0047B35C] (bucket (key >> 2) & 0x1FF, chained through +0x08, key at +0x00); when it isn't there, returns 0 unless its second argument asks to create one, which it then takes from the namespace pool at [0x0047B358] (virtual 16) and links at the head of its bucket."
     },
+    "xb:0x00072850": {
+      "name": "Namespace::SetCallbackBitInChildren",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, i): ors bit i into the mask (+0x10) of every namespace in the 512 buckets whose parent (+0x04) is this one, and calls itself on each. Namespace::AddScriptFunction (0x00073070) calls it when the new function's key is one of the 36 engine callback keys."
+    },
+    "xb:0x000728B0": {
+      "name": "NamespaceEntry::Execute",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(entry, argc, argv, state): runs the entry by its type (low 5 bits of +0x1A): 0 a script function, through the interpreter (0x000695B0); 1 to 5 a handler (+0x04) called as handler(object, argc, argv), its result turned to text by kind (string as is, int \"%d\", float \"%g\", void \"\", bool \"%d\"); 6 a typed binding object, through CScript::CallTyped (0x00066C90). The name follows the published Torque engine's Namespace::Entry::execute (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
+    },
     "xb:0x00072CD0": {
       "name": "FindOrCreateNamespace",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
       "why": "FindNamespace(key, 1) (0x000727C0): the namespace with that key, made if there is none. LookupNamespace (0x0006FE50) tail-jumps to it."
+    },
+    "xb:0x00072CE0": {
+      "name": "Namespace::RecomputeCallbackMask",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Sets the namespace's 64-bit mask (+0x10) to its parent's (or 0), ors in bit i for each script function entry (type 0) whose key is the i-th of the 36 engine callback keys at 0x0047B2C0, then does the same for every namespace whose parent (+0x04) is this one."
+    },
+    "xb:0x00072D90": {
+      "name": "InitNamespaces",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Sets the script namespaces up: makes the \"Namespace Pool\" (0x28-byte records, at [0x0047B358]) and \"Namespace Entry Pool\" (0x1C-byte, [0x0047B360]) and the two 512-bucket tables ([0x0047B35C], [0x0047B364]), and fills the 36 engine callback keys at 0x0047B2C0 from their names (Initialize, Terminate, OnStateCreated ...)."
+    },
+    "xb:0x00072FE0": {
+      "name": "Namespace::CreateLocalEntry",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, key): returns the namespace's own entry for the key from its list (+0x18, next +0x10), or takes a new one from the entry pool ([0x0047B360], virtual 16), marks its type invalid (+0x1A |= 0x1F), links it at the list head and in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364]. The name follows the published Torque engine's Namespace::createLocalEntry (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
+    },
+    "xb:0x00073070": {
+      "name": "Namespace::AddScriptFunction",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, key, code, u16): CreateLocalEntry(key), stores the script code (+0x08) and the u16 (+0x18), sets the entry's type to 0, and when the key is one of the 36 engine callback keys (0x0047B2C0) sets that bit in the namespaces below (0x00072850)."
+    },
+    "xb:0x000730F0": {
+      "name": "Namespace::AddStringCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, key, handler, usage, fewest, most): CreateLocalEntry(key), stores the handler (+0x04) and packs type 1 | fewest << 5 | most << 10 into +0x1A; adds one to the change counter at 0x0047B350. Type 1: the handler returns text."
+    },
+    "xb:0x00073130": {
+      "name": "Namespace::AddIntCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 2: the handler returns a whole number."
+    },
+    "xb:0x00073170": {
+      "name": "Namespace::AddVoidCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 4: the handler returns nothing."
+    },
+    "xb:0x000731B0": {
+      "name": "Namespace::AddFloatCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 3: the handler returns a float."
+    },
+    "xb:0x000731F0": {
+      "name": "Namespace::AddBoolCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 5: the handler returns true or false."
+    },
+    "xb:0x00073230": {
+      "name": "Namespace::AddTypedCommand",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "thiscall(namespace, key, usage, binding object, fewest, most): CreateLocalEntry(key), stores the CScript::MethodN / FunctionN binding object (+0x04) and packs type 6 | fewest << 5 | most << 10 into +0x1A."
     },
     "xb:0x00073270": {
       "name": "Namespace::ClassLinkTo",
@@ -22622,6 +22747,11 @@
       "by": "the game's own typed script binding (portal/tools/script_typed.py)",
       "why": "The start-up code at 0x000997CC registers this function as the typed script command VectorScale; the binding object's own class name gives its signature: math::Vector VectorScale(math::Vector, float)."
     },
+    "xb:0x00099BC0": {
+      "name": "dAtob",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Text to true/false: false for no text, empty text, \"false\", \"0\" or \"nil\" (compared without case, _stricmp); true for anything else. The name follows the published Torque engine's dAtob (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
+    },
     "xb:0x0009A9A0": {
       "name": "TimeSlicer::~TimeSlicer",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -22856,6 +22986,16 @@
       "name": "NISPackage::~NISPackage",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Deleting destructor: it ends `if (a1 & 1) sub_00027600(this); return this;` (sub_00027600 is called that way by 498 matched functions), and it is the only function of NISPackage that does."
+    },
+    "xb:0x000CE340": {
+      "name": "RefCounted::AddRef",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "`inc dword [ecx+4]; ret`: virtual 0 (core::IRefCount's AddRef) of 540 classes' vtables, both the content::LoadObject and the pure3d::NonCopyable families. RefCounted is a stand-in for 'whichever class holds the count at +4', not a class in the game's type information."
+    },
+    "xb:0x000CE360": {
+      "name": "RefCounted::GetRefCount",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "`mov eax,[ecx+4]; ret`: virtual 2 (core::IRefCount's count getter) of 511 classes' vtables. RefCounted is a stand-in, as for RefCounted::AddRef (0x000CE340)."
     },
     "xb:0x000CE550": {
       "name": "GameGroupLoader::~GameGroupLoader",
@@ -23982,6 +24122,11 @@
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Deleting destructor: it ends `if (a1 & 1) sub_00027600(this); return this;` (sub_00027600 is called that way by 498 matched functions), and it is the only function of HenchmanManager that does."
     },
+    "xb:0x00115360": {
+      "name": "CreateHenchmanManager",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Allocates 12 bytes from heap 10, stores HenchmanManager's vtable (0x003AD490), +4 = 1 (Tony's henchmen follow him), +8 = 0, and keeps it in the global at 0x004898B8 (0 when the allocation fails)."
+    },
     "xb:0x00115FA0": {
       "name": "PathGroup::GetClassRep",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -24206,6 +24351,11 @@
       "name": "ConcreteClassRep<AITask_SharkWander>::Init",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Links the record's namespace (+0x20) under its parent record's with sub_00070520 (classLinkNamespaces, named from the game's own error message) and keeps the parent record at +0x24."
+    },
+    "xb:0x0011B010": {
+      "name": "SemiConcreteClassRep::Create",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Virtual 1 of all four SemiConcreteClassRep<T> vtables (AITask_CodeAbstract, AIActionTreeCreatingTask, AITask_SharkAbstractWithTarget, CameraObject): prints \"Tried to create concrete instance of abstract script object %s\" with the class name (+0x14) and returns 0."
     },
     "xb:0x0011B030": {
       "name": "ConcreteClassRep<AITask_SharkInteractWithSwimmer>::Create",
@@ -24686,6 +24836,11 @@
       "name": "TargetSetManager::~TargetSetManager",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Deleting destructor: it ends `if (a1 & 1) sub_00027600(this); return this;` (sub_00027600 is called that way by 498 matched functions), and it is the only function of TargetSetManager that does."
+    },
+    "xb:0x0011D7D0": {
+      "name": "CreateTargetSetManager",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Allocates 0x24 bytes from the heap it is given, stores TargetSetManager's vtable (0x003AE778), constructs its part at +4 (0x0011D770) and keeps it in the global at 0x00489D00 (0 when the allocation fails)."
     },
     "xb:0x0011DEC0": {
       "name": "AIStimulusDetector::~AIStimulusDetector",
@@ -35642,10 +35797,30 @@
       "by": "Read from the code (Claude (AI), for RRutherrfordd)",
       "why": "Takes a heap number and a size: calls the allocate slot (vfunc_04) of entry number heap of the table at 0x00493330 (16 bytes each) with the size, and when that fails calls the out-of-memory callback stored at 0x00493B58."
     },
+    "xb:0x00244530": {
+      "name": "GetHeapAllocator",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Returns the allocator of a heap: the first word of its 16-byte record in the table at 0x00493330 (AllocateFromHeap 0x00244450 allocates through the same pointer)."
+    },
     "xb:0x002445E0": {
       "name": "FreeMemory",
       "by": "Read from the code (Claude (AI), for RRutherrfordd)",
       "why": "Finds the heap that owns the block (trying the one it found last, 0x00493B60, first), remembers it, and calls that heap's free on the block."
+    },
+    "xb:0x00247970": {
+      "name": "GetControllerSystem",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Returns the controller system made by CreateControllerSystem (0x00248900): the global at 0x00493B74."
+    },
+    "xb:0x00248300": {
+      "name": "core::ControllerSystemXBox::ControllerSystemXBox",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Constructor: its last vtable stores are core::ControllerSystemXBox's at +0 and +4 (after core::IControllerSystem's and core::Object's); CreateControllerSystem (0x00248900) calls it on a new 0x12A8-byte object."
+    },
+    "xb:0x00248900": {
+      "name": "CreateControllerSystem",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Allocates 0x12A8 bytes from the heap it is given, constructs a core::ControllerSystemXBox (0x00248300) in it and keeps it in the global at 0x00493B74 (0 when the allocation fails)."
     },
     "xb:0x0024AAD0": {
       "name": "pure3d::VectorCamera::Update",
@@ -35656,6 +35831,16 @@
       "name": "HashArchiveName",
       "by": "the clean-room spec docs/cleanroom/SPEC-004-xbox-functions.md (a name the implementer chose from its description)",
       "why": "SPEC-004 section 1.2: the hash an .rcf archive's directory is sorted by, of a path with one leading backslash skipped (rcf.name_hash). Matched."
+    },
+    "xb:0x00251A70": {
+      "name": "core::MemoryPool::MemoryPool",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Stores core::IMemoryPool's vtable, then core::MemoryPool's (0x003D543C) at +0 and 0x003D5434 at +4 as its last vtable stores, clears its counts, keeps the heap noted at 0x0045894C (+8) and its byte argument (+0x34), and returns this."
+    },
+    "xb:0x00251B90": {
+      "name": "CreateMemoryPool",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "(out, element size, element count, ?, heap, name, ?, ?): allocates 0x38 bytes from the heap (noting it at 0x0045894C), constructs a core::MemoryPool (0x00251A70), sets it up (0x00251930) with the other arguments, calls its first virtual function, and stores it through out. The Namespace, Trigger, File ... pools are made this way."
     },
     "xb:0x0025FD50": {
       "name": "pure3d::Light::Activate",
@@ -35746,6 +35931,11 @@
       "name": "pure3d::Image8::GetPaletteEntry",
       "by": "the Hit & Run prototype's linker map",
       "why": "Hit & Run's 10 July 2003 PS2 prototype has a linker map (SRR2.MAP). Its class tImage8 is this game's pure3d::Image8: after their base class (tImage there with 11 slots, pure3d::Image here with 15), each has 8 slots of its own. Slot 15 of tImage8 is GetPaletteEntry in that map, which lines up with slot 19 here."
+    },
+    "xb:0x0026B2F0": {
+      "name": "pure3d::d3dContext::d3dContext",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Constructor: its last vtable store on the object is pure3d::d3dContext's (0x003D6B9C); it also builds the context's extensions (d3dExtGammaControl, d3dExtReadPixels ...). The only class of the pddiRenderContext family the game builds."
     },
     "xb:0x0026CF70": {
       "name": "GangNestSpawnObject::GetTotalToSpawnCount",
@@ -35967,6 +36157,11 @@
       "by": "the clean-room spec docs/cleanroom/SPEC-004-xbox-functions.md (a name the implementer chose from its description)",
       "why": "SPEC-004 section 2.1: a shader's BLMD setter (named after the game data's parameter), reached through its kind's table of settings; it keeps the value and calls sub_0029A2F0. Matched."
     },
+    "xb:0x0029B080": {
+      "name": "pure3d::d3dDisplay::d3dDisplay",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Constructor: its last vtable store on the object is pure3d::d3dDisplay's (0x003D9674); called from 0x00292320. The only class of the pddiDisplay family the game builds."
+    },
     "xb:0x0029E590": {
       "name": "pure3d::pddiDevice::SetMessageCallback",
       "by": "the Hit & Run prototype's linker map",
@@ -36026,6 +36221,21 @@
       "name": "adler32",
       "by": "symcov: [XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
       "why": "The same 297 bytes as adler32 in that build (the symcov report compares code with the addresses masked), and the report names no other function for this code; the code around it is zlib 1.2.1 (the program holds its inflate copyright string)."
+    },
+    "xb:0x002CF0D0": {
+      "name": "om::Entity::AddRef",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "`inc word [ecx+0x20]; ret`: virtual 0 of om::Entity's vtable and the 15 classes derived from it."
+    },
+    "xb:0x002CF0E0": {
+      "name": "om::Entity::Release",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Virtual 1 of om::Entity's vtable and its 15 derived classes: when the 16-bit count at +0x20 is 1 calls the deleting destructor (virtual 3, with 1), otherwise takes one off."
+    },
+    "xb:0x002CF100": {
+      "name": "om::Entity::GetRefCount",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "`movsx eax, word [ecx+0x20]; ret`: virtual 2 of om::Entity's vtable and its 15 derived classes."
     },
     "xb:0x002D0EA0": {
       "name": "om::MetaType<audio::SeqEvent>::~MetaType",
@@ -44436,161 +44646,6 @@
       "name": "OHCD_fQueueTransferRequest",
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map",
       "why": "The same 134 bytes as @OHCD_fQueueTransferRequest@8 (xapilib) in that build, addresses apart, and found only once in this program."
-    },
-    "xb:0x00072D90": {
-      "name": "InitNamespaces",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Sets the script namespaces up: makes the \"Namespace Pool\" (0x28-byte records, at [0x0047B358]) and \"Namespace Entry Pool\" (0x1C-byte, [0x0047B360]) and the two 512-bucket tables ([0x0047B35C], [0x0047B364]), and fills the 36 engine callback keys at 0x0047B2C0 from their names (Initialize, Terminate, OnStateCreated ...)."
-    },
-    "xb:0x00072270": {
-      "name": "ShutdownNamespaces",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Walks every namespace in the 512 buckets at [0x0047B35C] and every entry on its list (+0x18, next +0x10), releasing each entry's script code (+0x08) with 0x0006E0F0."
-    },
-    "xb:0x00072FE0": {
-      "name": "Namespace::CreateLocalEntry",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key): returns the namespace's own entry for the key from its list (+0x18, next +0x10), or takes a new one from the entry pool ([0x0047B360], virtual 16), marks its type invalid (+0x1A |= 0x1F), links it at the list head and in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364]. The name follows the published Torque engine's Namespace::createLocalEntry (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
-    },
-    "xb:0x00072420": {
-      "name": "Namespace::Lookup",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key): looks in bucket ((namespace key ^ key) >> 2) & 0x1FF of [0x0047B364] for an entry of this namespace (+0x0C) with that key (+0x00, next +0x14), then tries the parent (+0x04) and so on up; returns the entry or 0. How a script's call finds its function. The name follows the published Torque engine's Namespace::lookup (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
-    },
-    "xb:0x00072CE0": {
-      "name": "Namespace::RecomputeCallbackMask",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Sets the namespace's 64-bit mask (+0x10) to its parent's (or 0), ors in bit i for each script function entry (type 0) whose key is the i-th of the 36 engine callback keys at 0x0047B2C0, then does the same for every namespace whose parent (+0x04) is this one."
-    },
-    "xb:0x00072850": {
-      "name": "Namespace::SetCallbackBitInChildren",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, i): ors bit i into the mask (+0x10) of every namespace in the 512 buckets whose parent (+0x04) is this one, and calls itself on each. Namespace::AddScriptFunction (0x00073070) calls it when the new function's key is one of the 36 engine callback keys."
-    },
-    "xb:0x000728B0": {
-      "name": "NamespaceEntry::Execute",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(entry, argc, argv, state): runs the entry by its type (low 5 bits of +0x1A): 0 a script function, through the interpreter (0x000695B0); 1 to 5 a handler (+0x04) called as handler(object, argc, argv), its result turned to text by kind (string as is, int \"%d\", float \"%g\", void \"\", bool \"%d\"); 6 a typed binding object, through CScript::CallTyped (0x00066C90). The name follows the published Torque engine's Namespace::Entry::execute (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
-    },
-    "xb:0x00073070": {
-      "name": "Namespace::AddScriptFunction",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key, code, u16): CreateLocalEntry(key), stores the script code (+0x08) and the u16 (+0x18), sets the entry's type to 0, and when the key is one of the 36 engine callback keys (0x0047B2C0) sets that bit in the namespaces below (0x00072850)."
-    },
-    "xb:0x000730F0": {
-      "name": "Namespace::AddStringCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key, handler, usage, fewest, most): CreateLocalEntry(key), stores the handler (+0x04) and packs type 1 | fewest << 5 | most << 10 into +0x1A; adds one to the change counter at 0x0047B350. Type 1: the handler returns text."
-    },
-    "xb:0x00073130": {
-      "name": "Namespace::AddIntCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 2: the handler returns a whole number."
-    },
-    "xb:0x000731B0": {
-      "name": "Namespace::AddFloatCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 3: the handler returns a float."
-    },
-    "xb:0x00073170": {
-      "name": "Namespace::AddVoidCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 4: the handler returns nothing."
-    },
-    "xb:0x000731F0": {
-      "name": "Namespace::AddBoolCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "The same as Namespace::AddStringCommand (0x000730F0) with type 5: the handler returns true or false."
-    },
-    "xb:0x00073230": {
-      "name": "Namespace::AddTypedCommand",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(namespace, key, usage, binding object, fewest, most): CreateLocalEntry(key), stores the CScript::MethodN / FunctionN binding object (+0x04) and packs type 6 | fewest << 5 | most << 10 into +0x1A."
-    },
-    "xb:0x000705F0": {
-      "name": "RegisterConsoleCommands",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Walks the list of command records the start-up code filled (head 0x0047AAB0, next +0x28): finds the record's class namespace (StringToKey + FindOrCreateNamespace, or the global one for no class) and adds its handler under StringToKey(name) with the adder for the slot that is set (+0x00 string, +0x04 int, +0x08 float, +0x0C void, +0x10 bool)."
-    },
-    "xb:0x0006FB10": {
-      "name": "RegisterTypedFunction",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(name, usage, binding object, fewest, most, extra): GetGlobalNamespace()->AddTypedCommand(StringToKey(name, 0), ...). Every CScript::FunctionN helper ends in it."
-    },
-    "xb:0x00070280": {
-      "name": "RegisterTypedMethod",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(class, name, usage, binding object, fewest, most, extra): the same as RegisterTypedFunction (0x0006FB10) on FindOrCreateNamespace(StringToKey(class, 0)), or the global namespace for no class."
-    },
-    "xb:0x00066C90": {
-      "name": "CScript::CallTyped",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(object, binding object, argc, argv, result): stores the argument cursor (0x00476408 = [binding+4], 0x0047640C = argv, 0x00476410 = argc) and calls the binding object's first virtual function with (object, result), which converts each argument and calls the bound C++ function."
-    },
-    "xb:0x00066EF0": {
-      "name": "CScript::Functor::Functor",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(binding object, argument count): writes the base vtable 0x003A2110, +0x04 = 0, the argument count (0 when negative) at +0x08 and +0x0A = 0. Every CScript::MethodN / FunctionN helper calls it before writing its own vtable and the bound function at +0x0C."
-    },
-    "xb:0x000694E0": {
-      "name": "GetReturnBuffer",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(size): the interpreter state at [0x00478E60]; when size is over 0x200 grows its buffer (0x00068FF0); returns the buffer pointer at +0x2478. Handlers that return text write it there. The name follows the published Torque engine's Con::getReturnBuffer (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
-    },
-    "xb:0x00068FF0": {
-      "name": "GrowReturnBuffer",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "thiscall(interpreter state, size): when size is over the capacity (+0x2474), sets the capacity to size + 0x800, allocates that from heap 3, copies the old buffer (+0x2478) over, frees it, and stores the new one."
-    },
-    "xb:0x00099BC0": {
-      "name": "dAtob",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Text to true/false: false for no text, empty text, \"false\", \"0\" or \"nil\" (compared without case, _stricmp); true for anything else. The name follows the published Torque engine's dAtob (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
-    },
-    "xb:0x00068E40": {
-      "name": "dSprintf",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "(buffer, size, format, ...): vsprintf(buffer, format, the arguments); the size is not used. The name follows the published Torque engine's dSprintf (MIT licence), the engine the game's script system descends from; what the function does was read from the game."
-    },
-    "xb:0x0011B010": {
-      "name": "SemiConcreteClassRep::Create",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Virtual 1 of all four SemiConcreteClassRep<T> vtables (AITask_CodeAbstract, AIActionTreeCreatingTask, AITask_SharkAbstractWithTarget, CameraObject): prints \"Tried to create concrete instance of abstract script object %s\" with the class name (+0x14) and returns 0."
-    },
-    "xb:0x00011930": {
-      "name": "content::LoadObject::Release",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Virtual 1 (core::IRefCount's Release) in 398 vtables, every one a class derived from content::LoadObject: if the count (+0x04) is under 2, sets it to 0x8000000 and calls the deleting destructor (virtual 3, with 1); otherwise takes one off."
-    },
-    "xb:0x000CE340": {
-      "name": "RefCounted::AddRef",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "`inc dword [ecx+4]; ret`: virtual 0 (core::IRefCount's AddRef) of 540 classes' vtables, both the content::LoadObject and the pure3d::NonCopyable families. RefCounted is a stand-in for 'whichever class holds the count at +4', not a class in the game's type information."
-    },
-    "xb:0x000CE360": {
-      "name": "RefCounted::GetRefCount",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "`mov eax,[ecx+4]; ret`: virtual 2 (core::IRefCount's count getter) of 511 classes' vtables. RefCounted is a stand-in, as for RefCounted::AddRef (0x000CE340)."
-    },
-    "xb:0x00021830": {
-      "name": "RefCounted::Release",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Virtual 1 (core::IRefCount's Release) in 135 vtables (FightAction, AICondition, shaders ...): takes one off the count (+0x04) and, when it is under 1, calls the deleting destructor (virtual 3, with 1). RefCounted is a stand-in, as for RefCounted::AddRef (0x000CE340)."
-    },
-    "xb:0x002CF0D0": {
-      "name": "om::Entity::AddRef",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "`inc word [ecx+0x20]; ret`: virtual 0 of om::Entity's vtable and the 15 classes derived from it."
-    },
-    "xb:0x002CF0E0": {
-      "name": "om::Entity::Release",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "Virtual 1 of om::Entity's vtable and its 15 derived classes: when the 16-bit count at +0x20 is 1 calls the deleting destructor (virtual 3, with 1), otherwise takes one off."
-    },
-    "xb:0x002CF100": {
-      "name": "om::Entity::GetRefCount",
-      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
-      "why": "`movsx eax, word [ecx+0x20]; ret`: virtual 2 of om::Entity's vtable and its 15 derived classes."
     }
   },
   "members": {
@@ -44975,6 +45030,247 @@
         "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
         "why": "16 bits: type (low 5; 0x1F = not set) | fewest arguments << 5 | most << 10, packed by the Namespace::Add...Command functions and checked in NamespaceEntry::Execute (0x000728B0)."
       }
+    },
+    "xb:ScriptObject": {
+      "+0x0C": {
+        "name": "m_nameKey",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "ScriptObject's constructor (0x0002AF60) stores its name key here and, when it is not 0, adds the object to the name dictionary; 0x00168220 compares it with NameKey(\"MainCharacter\")."
+      },
+      "+0x10": {
+        "name": "m_id",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "The object's id: the constructor takes it from 0x0002C9E0, and the typed-command 'o' result (0x00072B9E) and the console's object lookup print it with \"%d\"."
+      },
+      "+0x14": {
+        "name": "m_namespace",
+        "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+        "why": "The object's Namespace*: 0 in the constructor, set later; the console looks the object's methods up through it with Namespace::Lookup (0x00072420)."
+      }
+    }
+  },
+  "data": {
+    "xb:0x0041F0F4": {
+      "name": "g_classRepTableNeedsClearing",
+      "type": "bool",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "RegisterClassRep (0x00073400) clears the class table the first time, when this byte is set, then clears it."
+    },
+    "xb:0x004220D0": {
+      "name": "g_stxRing",
+      "type": "char[8][16]",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "KeyToStxString (0x000766D0) writes each key as stx + 8 letters into the next of these eight buffers, pre-filled with \"stx34567890\"."
+    },
+    "xb:0x00473FC4": {
+      "name": "g_simFieldDictionaryEntryPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"SimFieldDictionary Entry Pool\"."
+    },
+    "xb:0x00473FC8": {
+      "name": "g_simFieldDictionaryPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"SimFieldDictionary Pool\"."
+    },
+    "xb:0x00474B20": {
+      "name": "g_pathManagerHeuristicPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"PathManager Heuristic Pool\"."
+    },
+    "xb:0x00476408": {
+      "name": "g_typedCallDefaults",
+      "type": "void**",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CScript::CallTyped (0x00066C90) stores the binding object's default-argument table ([binding+4]) here for the argument converters."
+    },
+    "xb:0x0047640C": {
+      "name": "g_typedCallArgv",
+      "type": "const char**",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CScript::CallTyped (0x00066C90) stores the call's argument texts here for the argument converters."
+    },
+    "xb:0x00476410": {
+      "name": "g_typedCallArgc",
+      "type": "int",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CScript::CallTyped (0x00066C90) stores the call's argument count here for the argument converters."
+    },
+    "xb:0x00478E60": {
+      "name": "g_interpreterState",
+      "type": "void*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "GetReturnBuffer (0x000694E0) takes the script return buffer from it (+0x2478, capacity +0x2474; 0x247C bytes, made by 0x000694A0)."
+    },
+    "xb:0x0047AAB0": {
+      "name": "g_consoleConstructors",
+      "type": "void*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Head of the list of script command records the start-up code fills (each record's constructor links itself in front, next at +0x28); RegisterConsoleCommands (0x000705F0) walks it."
+    },
+    "xb:0x0047B2C0": {
+      "name": "g_engineCallbackKeys",
+      "type": "unsigned int[36]",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "InitNamespaces (0x00072D90) fills it with NameKey of the 36 engine callback names (Initialize, Terminate, OnStateCreated ...); RecomputeCallbackMask (0x00072CE0) compares entry keys with it."
+    },
+    "xb:0x0047B350": {
+      "name": "g_namespaceChangeCount",
+      "type": "unsigned short",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Every Namespace::Add...Command adds one to it (inc word [0x0047B350]), and so does ClassLinkTo."
+    },
+    "xb:0x0047B354": {
+      "name": "g_globalNamespace",
+      "type": "Namespace*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Returned by GetGlobalNamespace (0x00072260); InitNamespaces (0x00072D90) stores it."
+    },
+    "xb:0x0047B358": {
+      "name": "g_namespacePool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Namespace Pool\"."
+    },
+    "xb:0x0047B35C": {
+      "name": "g_namespaceBuckets",
+      "type": "Namespace**",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The 512-bucket table FindNamespace (0x000727C0) looks keys up in ((key >> 2) & 0x1FF); InitNamespaces allocates it (0x800 bytes, heap 3)."
+    },
+    "xb:0x0047B360": {
+      "name": "g_namespaceEntryPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Namespace Entry Pool\"."
+    },
+    "xb:0x0047B364": {
+      "name": "g_namespaceEntryBuckets",
+      "type": "NamespaceEntry**",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "The 512-bucket table Namespace::Lookup (0x00072420) and CreateLocalEntry (0x00072FE0) use, bucket ((namespace key ^ key) >> 2) & 0x1FF."
+    },
+    "xb:0x0047B368": {
+      "name": "g_dictionaryEntryPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Dictionary Entry Pool\"."
+    },
+    "xb:0x0047D7C8": {
+      "name": "g_scriptResultScratch",
+      "type": "char[32]",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "NamespaceEntry::Execute (0x000728B0) prints an int, float or bool result into it with dSprintf (\"%d\", \"%g\") and returns it."
+    },
+    "xb:0x0047D7E8": {
+      "name": "g_classRepTable",
+      "type": "ConcreteClassRep*[127]",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "RegisterClassRep (0x00073400) links each class record into bucket key % 127; InitializeClassReps (0x00073650) walks the 127 buckets."
+    },
+    "xb:0x00480AC4": {
+      "name": "g_stringTableNodePool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"String Table Node Pool\"."
+    },
+    "xb:0x00480ADC": {
+      "name": "g_stxRingNext",
+      "type": "int",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "KeyToStxString's (0x000766D0) index of the next buffer in g_stxRing."
+    },
+    "xb:0x00481B74": {
+      "name": "g_triggerPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Trigger Pool\"."
+    },
+    "xb:0x00481BB4": {
+      "name": "g_hashDictionaryEntryPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Hash Dictionary Entry Pool\"."
+    },
+    "xb:0x004870D0": {
+      "name": "g_nisManager",
+      "type": "NISManager*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "0x000CD800 allocates 0x2A4 bytes from heap 15, constructs a NISManager (0x000CD2A0, vtable 0x003A5E00) and stores it here; NISIsPlaying (0x000CED60) reads its +0x270."
+    },
+    "xb:0x0048782C": {
+      "name": "g_simpleLocoAnimSetPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"Simple Loco Anim Set Pool\"."
+    },
+    "xb:0x00487854": {
+      "name": "g_targetAnimSetPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"target Anim Set Pool\"."
+    },
+    "xb:0x004898B8": {
+      "name": "g_henchmanManager",
+      "type": "HenchmanManager*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CreateHenchmanManager (0x00115360) stores the new HenchmanManager here; HenchmanManager_SetFollowTony (0x00115300) sets its +4."
+    },
+    "xb:0x00489D00": {
+      "name": "g_targetSetManager",
+      "type": "TargetSetManager*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CreateTargetSetManager (0x0011D7D0) stores the new TargetSetManager here; TSM_NewTargetSet (0x0011D030) calls through it."
+    },
+    "xb:0x0048A9D8": {
+      "name": "g_mainCharacter",
+      "type": "ScriptObject*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Both stores (0x00163BBF, 0x001682C6) are FindObject(\"MainCharacter\", 0); CharacterObject::IsMainCharacter's script command (0x00178250) compares against it."
+    },
+    "xb:0x0048C23C": {
+      "name": "g_hudManager",
+      "type": "HUDManager2*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "0x00196EC0 stores a new HUDManager2 here (constructor 0x00196A40); ResetLookTutorial and AdvanceTutorialState (0x00195610, 0x00195630) call through it."
+    },
+    "xb:0x00492F00": {
+      "name": "g_d3dContext",
+      "type": "pure3d::d3dContext*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "Stored at 0x002557C3 and 0x00255927 from the context's +0xE4; the virtual calls made through it use slots up to 107, which only pure3d::d3dContext of the classes the game builds has (portal/tools/vtypes.py, family-leaf)."
+    },
+    "xb:0x00493330": {
+      "name": "g_heapTable",
+      "type": "void*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "16 bytes per heap id; +0 is the heap's allocator: GetHeapAllocator (0x00244530) returns it, AllocateFromHeap (0x00244450) allocates through it."
+    },
+    "xb:0x00493B74": {
+      "name": "g_controllerSystem",
+      "type": "core::ControllerSystemXBox*",
+      "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
+      "why": "CreateControllerSystem (0x00248900) stores the new controller system here; GetControllerSystem (0x00247970) returns it."
+    },
+    "xb:0x004BDD60": {
+      "name": "g_fileRequestPool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"FileRequest\"."
+    },
+    "xb:0x004BDD80": {
+      "name": "g_filePool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"File\"."
+    },
+    "xb:0x004BDDA0": {
+      "name": "g_instanceDrivePool",
+      "type": "core::MemoryPool*",
+      "by": "the game's own pool name, passed to CreateMemoryPool (portal/tools/vtypes.py types it)",
+      "why": "Made by CreateMemoryPool (0x00251B90), which stores the new pool through this address; the call names it \"InstanceDrive\"."
     }
   }
 }

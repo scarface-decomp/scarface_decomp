@@ -1,0 +1,282 @@
+{
+ "schema": "scarface_descriptions_v1",
+ "by": "Claude (AI) for RRutherrfordd",
+ "descriptions": {
+  "xb:0x001786B0": {
+   "what": "Script command CharacterObject::FadeAndDelete: starts the character fading out (calling its own fade with 500.0) and then marks it to be removed.",
+   "how": "read"
+  },
+  "xb:0x001787A0": {
+   "what": "Script command CharacterObject::SetSpawnUsage: passes the script's number to the character's own spawn usage setter.",
+   "how": "read"
+  },
+  "xb:0x0002D4F0": {
+   "what": "Script command GameSet::Add: looks up the object the script names and adds it to the set; returns false when there is no such object.",
+   "how": "read"
+  },
+  "xb:0x00072760": {
+   "what": "Script command backtrace: adds up the lengths of the names of the script functions now running and gets an empty text buffer that size; it prints nothing.",
+   "how": "read"
+  },
+  "xb:0x0011CF20": {
+   "what": "Script command NME_SetAIDef: gives the NME manager an AI definition, from the script's number and two texts.",
+   "how": "read"
+  },
+  "xb:0x0011CF50": {
+   "what": "Script command NME_SetWeaponPickerWeights: gives the NME manager the weapon picking weights, from the script's text.",
+   "how": "read"
+  },
+  "xb:0x0011CF70": {
+   "what": "Script command PickElementFromWeightedStringList: returns the element picked from the weighted list of texts the script gives.",
+   "how": "read"
+  },
+  "xb:0x0015C780": {
+   "what": "Script command CameraObject::SetActionMap: gives the camera its action map, which the script passes as an object number or an object's name.",
+   "how": "read"
+  },
+  "xb:0x0015CEE0": {
+   "what": "Script command GenericCharacterCamera::SnapToObject: looks up the object the script names, snaps the camera to it and returns its id, or 0 if there is none.",
+   "how": "read"
+  },
+  "xb:0x0015CF20": {
+   "what": "Script command GenericCharacterCamera::SetActionMap: looks up the action map the script names, gives it to the camera and returns its id, or 0 if none.",
+   "how": "read"
+  },
+  "xb:0x0015D320": {
+   "what": "Script command NISCamera::SetCameraAnimation: gives the cutscene camera the animation the script names.",
+   "how": "read"
+  },
+  "xb:0x001614C0": {
+   "what": "Script command SetCharacterContextsEnabled: stores the script's true or false in the game-wide switch for character contexts.",
+   "how": "read"
+  },
+  "xb:0x0016E150": {
+   "what": "Script command SetFitnessHenchmen: stores the script's true or false in the game-wide fitness henchmen switch.",
+   "how": "read"
+  },
+  "xb:0x00178000": {
+   "what": "Script command CharacterObject::BeKickedOutOfCar: asks the character's part at +744 to throw the character out of the car; does nothing without a character.",
+   "how": "read"
+  },
+  "xb:0x00178020": {
+   "what": "Script command CharacterObject::CreateSplash: asks the character's part at +744 to make a water splash, and returns true.",
+   "how": "read"
+  },
+  "xb:0x00178060": {
+   "what": "Script command CharacterObject::InitializeOpenDoorTimer: asks the character's part at +744 to start its open-door timer, and returns true.",
+   "how": "read"
+  },
+  "xb:0x00178080": {
+   "what": "Script command CharacterObject::InitializeCloseDoorTimer: asks the character's part at +744 to start its close-door timer, and returns true.",
+   "how": "read"
+  },
+  "xb:0x001780B0": {
+   "what": "Script command CharacterObject::HasSample: asks the character about the sample the script names.",
+   "how": "read"
+  },
+  "xb:0x001781A0": {
+   "what": "Script command CharacterObject::EnterVehicleLowLevel: passes the script's number (the vehicle) to the character's own enter-vehicle function.",
+   "how": "read"
+  },
+  "xb:0x00178230": {
+   "what": "Script command CharacterObject::InfiniteAmmo: turns the character's infinite ammo flag (at +728) on or off, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x00178270": {
+   "what": "Script command CharacterObject::IsCharacterInDangerousVehicleState: returns 1 when the character's own check says so, 0 otherwise or with no character.",
+   "how": "read"
+  },
+  "xb:0x001783B0": {
+   "what": "Script command CharacterObject::RemoveWeaponFromInventory: takes the weapon whose number the script gives out of the character's inventory, if above 0.",
+   "how": "read"
+  },
+  "xb:0x00178440": {
+   "what": "Script command CharacterObject::SetDisabled: turns the character's disabled flag (at +668) on or off, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x001784A0": {
+   "what": "Script command CharacterObject::AddHealth: adds the script's number to the character's health through the character's own function.",
+   "how": "read"
+  },
+  "xb:0x001784C0": {
+   "what": "Script command CharacterObject::FireWeapon: when the character has a weapon in hand, tells that weapon to fire.",
+   "how": "read"
+  },
+  "xb:0x00178750": {
+   "what": "Script command CharacterObject::SetAmbientCollision: calls the character's ambient collision setter with 0; does nothing without a character.",
+   "how": "read"
+  },
+  "xb:0x00178810": {
+   "what": "Script command CharacterObject::IsWithinTimeOfDayParameters: passes the script's number to the character's own time-of-day check.",
+   "how": "read"
+  },
+  "xb:0x00178830": {
+   "what": "Script command CharacterObject::SetTimeOfDayParameters: gives the character its time-of-day limits, from the two numbers the script passes.",
+   "how": "read"
+  },
+  "xb:0x00178EE0": {
+   "what": "Script command CharacterObject::GetCurrentWeapon: returns the id of the weapon in the character's hand, or the weapon id stored at +716 when the hand is empty.",
+   "how": "read"
+  },
+  "xb:0x00178F00": {
+   "what": "Script command CharacterObject::GetCurrentDrawnWeapon: returns the id of the weapon in the character's hand, or 0 when there is none.",
+   "how": "read"
+  },
+  "xb:0x00179DE0": {
+   "what": "Script command ScriptCharacter::SetNeedsMissionManagerHooks: turns the character's flag at +1072 on or off, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x0017A6B0": {
+   "what": "Script command InventoryBox::GetCountOfType: asks the inventory box how many it holds of the item type whose number the script gives.",
+   "how": "read"
+  },
+  "xb:0x0017A6D0": {
+   "what": "Script command InventoryBox::GetMaxCountOfType: asks the inventory box the most it can hold of the item type whose number the script gives.",
+   "how": "read"
+  },
+  "xb:0x0017A6F0": {
+   "what": "Script command InventoryBox::PRIVATE_INV_ADD: adds to the inventory box, from the script's number, text and second number.",
+   "how": "read"
+  },
+  "xb:0x0017A720": {
+   "what": "Script command InventoryBox::GetWeightOfType: asks the inventory box the weight of the item type whose number the script gives.",
+   "how": "read"
+  },
+  "xb:0x0017A740": {
+   "what": "Script command InventoryBox::GetWeightCapacity: asks the inventory box how much weight it can carry, passing the script's number.",
+   "how": "read"
+  },
+  "xb:0x0017A760": {
+   "what": "Script command InventoryBox::GetInventoryType: returns the id of the inventory box's item type at the position the script gives, or 0 when there is none.",
+   "how": "read"
+  },
+  "xb:0x0017AA30": {
+   "what": "Script command InventoryOwner::GetCountInInventory: asks the owner's inventory how many it holds of the item the script names.",
+   "how": "read"
+  },
+  "xb:0x0003D780": {
+   "what": "Script command RoadGraph_ShowRaceHUD: turns two race display flags of the road graph manager on or off together, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x0003D7B0": {
+   "what": "Script command RoadGraph_SetArrivedAtDestinationCallback: remembers the script function to call when the destination is reached.",
+   "how": "read"
+  },
+  "xb:0x0003D7D0": {
+   "what": "Script command RoadGraph_SetLapCompletedCallback: remembers the script function to call when a lap is completed.",
+   "how": "read"
+  },
+  "xb:0x0003D920": {
+   "what": "Script command DisplayExteriors_Enable: turns the drawing of exteriors on or off, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x0003D940": {
+   "what": "Script command DisplayInteriors_Enable: turns the drawing of interiors on or off, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x0003D960": {
+   "what": "Script command TimeOfDay_Enable: turns the time of day system on or off, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x0003D980": {
+   "what": "Script command Widescreen_Enable: turns widescreen on or off, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x0003D9B0": {
+   "what": "Script command HDTV_Enable: turns HDTV mode on or off, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x000771B0": {
+   "what": "Script command SoundGetCharacterPoiIndex: returns the sound system's point-of-interest index for the character the script names.",
+   "how": "read"
+  },
+  "xb:0x000771E0": {
+   "what": "Script command SoundSetPOIConversationCompleteStatus: marks a point-of-interest conversation, by number, as finished or not, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x00077270": {
+   "what": "Script command SoundDisableMusic: turns the music off or back on, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x00077290": {
+   "what": "Script command SoundDisableAmbience: turns the ambient sounds off or back on, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x000772B0": {
+   "what": "Script command SoundDisableClips: turns sound clips off or back on, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x000CA050": {
+   "what": "Script command SaveGameController::SetMissionStatus: tells the save game controller whether a mission is under way, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x000CA670": {
+   "what": "Script command SubtitleManager_QueingFMVSubtitles: passes the opposite of the script's true or false to the subtitle manager's switch.",
+   "how": "read"
+  },
+  "xb:0x000CA770": {
+   "what": "Script command SubtitleManager_SetIsSubtitleEnabled: turns subtitles on or off, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x00119930": {
+   "what": "Script command SetAIAttacksEnabled: turns AI attacks on or off for the whole game, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x0011CF90": {
+   "what": "Script command NME_SetTunables: looks up the object the script names and gives it to the NME manager as its tunables; does nothing if there is none.",
+   "how": "read"
+  },
+  "xb:0x0011D000": {
+   "what": "Script command NME_CreateInitialWeapon: looks up the object the script names and has the NME manager create the initial weapon from it.",
+   "how": "read"
+  },
+  "xb:0x0011D030": {
+   "what": "Script command TSM_NewTargetSet: starts a new target set in the target set manager, named by the script's text.",
+   "how": "read"
+  },
+  "xb:0x00178040": {
+   "what": "Script command CharacterObject::CreateBloodPool: asks the blood pool manager, when there is one, to make a pool for the character, and returns true.",
+   "how": "read"
+  },
+  "xb:0x00178760": {
+   "what": "Script command CharacterObject::IsWallCoverAvailable: returns the cover system's answer to whether wall cover is available.",
+   "how": "read"
+  },
+  "xb:0x001787D0": {
+   "what": "Script command CharacterObject::SetIsShoveable: sets whether the character can be shoved, by the script's true or false.",
+   "how": "read"
+  },
+  "xb:0x00178E10": {
+   "what": "Script command CharacterObject::SetActionMap: gives the character its action map, which the script passes as an object number or an object's name.",
+   "how": "read"
+  },
+  "xb:0x00195610": {
+   "what": "Script command ResetLookTutorial: finds item 56 in the manager at 0x0048C23C and, when it is there, resets it.",
+   "how": "read"
+  },
+  "xb:0x00195630": {
+   "what": "Script command AdvanceTutorialState: finds item 56 in the manager at 0x0048C23C and, when it is there, moves it to its next state.",
+   "how": "read"
+  },
+  "xb:0x000689A0": {
+   "what": "Script command RemoveCodeBlock: copies the script file name it is given, turns it into the game's own form, and removes that file's compiled code.",
+   "how": "read"
+  },
+  "xb:0x000689D0": {
+   "what": "Script command CodeBlockExists: copies the script file name it is given, turns it into the game's own form, and checks whether its compiled code is loaded.",
+   "how": "read"
+  },
+  "xb:0x0015C550": {
+   "what": "Script command CameraManager::SetFinishedCallback: when the script gives a non-empty text, registers it as the script code to run when the camera finishes.",
+   "how": "read"
+  },
+  "xb:0x001782B0": {
+   "what": "Script command CharacterObject::DetachObject: detaches an object from the character, given as a number or as the name of the place it is attached.",
+   "how": "read"
+  },
+  "xb:0x00178300": {
+   "what": "Script command CharacterObject::GetAttachedObject: asks the character for an attached object, given as a number or as the name of the place it is attached.",
+   "how": "read"
+  }
+ }
+}

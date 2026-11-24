@@ -25,7 +25,10 @@ The start-up code registers each one through a helper per signature:
 So the program itself says: this address is CharacterObject::SetIsMeleeAttacking, and these are its
 return and argument types. This also reads the two kinds of text-argument handlers that only pass the
 call on: `mov ecx,[esp+4]; jmp F` (F is the class's method of that name) and
-`mov ecx,[esp+4]; mov eax,[ecx]; jmp [eax+N]` (the command is that virtual function of the class).
+`mov ecx,[esp+4]; mov eax,[ecx]; jmp [eax+N]` (the command is that virtual function of the class), and the
+default argument values the start-up code installs on some typed commands right after registering them
+(found again by class and name, FindTypedFunctor; a small allocation per argument, stored in the binding
+object's table at +4).
 
     python portal/tools/script_typed.py                  what it finds in binaries/
     python portal/tools/script_typed.py --write          add the names to reports/names.json
@@ -366,6 +369,106 @@ def prototype(r: dict) -> str:
     return f"{r['ret']} {q}{r['name']}({', '.join(r['args'])})"
 
 
+# ---------------------------------------------------------------------------- default arguments
+
+def find_functor_lookup(im: Image, functions: Dict[int, dict]) -> Optional[int]:
+    """The function that finds a typed command's binding object by class and name (FindTypedFunctor):
+    by its name in reports/names.json, else the function called right after registrations whose result's
+    +8 byte (the argument count) is compared at once."""
+    try:
+        names = json.loads((ROOT / "reports" / "names.json").read_text(encoding="utf-8"))["names"]
+    except (OSError, ValueError, KeyError):
+        names = {}
+    for k, v in names.items():
+        if v.get("name") == "FindTypedFunctor" and k.split(":")[0] in ("xb", "proto"):
+            va = int(k.split(":")[1], 16)
+            if va in functions:
+                return va
+    seen: Dict[int, int] = {}
+    for base, code in im.code_sections():
+        at = code.find(b"\x80\x7E\x08")                     # cmp byte ptr [esi+8], N
+        while at >= 0:
+            # ... call F; mov esi, eax; add esp, 8; test esi, esi; je ..; cmp byte [esi+8], N
+            for back in range(14, 22):
+                p = at - back
+                if p >= 0 and code[p] == 0xE8 and code[p + 5:p + 7] == b"\x8B\xF0":
+                    t = (base + p + 5 + struct.unpack_from("<i", code, p + 1)[0]) & 0xFFFFFFFF
+                    if t in functions:
+                        seen[t] = seen.get(t, 0) + 1
+            at = code.find(b"\x80\x7E\x08", at + 1)
+    best = max(seen.items(), key=lambda kv: kv[1], default=(None, 0))
+    return best[0] if best[1] >= 3 else None
+
+
+def defaults(img: BinaryImage, functions: Dict[int, dict]) -> List[dict]:
+    """[{at, cls, name, arg, value, text}] for the default argument values the start-up code installs on a
+    typed command right after registering it: FindTypedFunctor(class, name), then for each argument k a
+    small allocation whose value is stored and put in the binding object's table (+4) at k * 4."""
+    from capstone import CS_ARCH_X86, CS_MODE_32, Cs
+    md = Cs(CS_ARCH_X86, CS_MODE_32)
+    im = Image(img, functions)
+    look = find_functor_lookup(im, functions)
+    if look is None:
+        return []
+    sites = [c for c, _ in _calls_to(im, [look])]
+    pushed = pushes_before(im, md, sites)
+    out = []
+    for site in sorted(sites):
+        a = pushed.get(site) or []
+        if len(a) < 2 or a[0] is None or a[1] is None:
+            continue
+        cls, name = (im.text(a[0]) if a[0] else ""), im.text(a[1])
+        if name is None or cls is None:
+            continue
+        reg: Dict[str, Tuple[str, int]] = {"eax": ("functor", 0)}
+        consts: Dict[str, int] = {}
+        for i in md.disasm(img.read(site + 5, 0x200) or b"", site + 5):
+            m, ops = i.mnemonic, [o.strip() for o in i.op_str.split(",")] if i.op_str else []
+            if m in ("ret", "int3"):
+                break
+            if m == "push" and ops and ops[0].startswith("0x") and im.text(int(ops[0], 16)) == "":
+                break                                        # the next registration starts (its empty help text)
+            if len(ops) == 2 and m == "mov":
+                d, src = ops
+                mm = re.fullmatch(r"(?:dword|byte|word) ptr \[(\w+)(?: \+ (0x[0-9a-f]+|\d+))?\]", src)
+                md_ = re.fullmatch(r"(byte|word|dword) ptr \[(\w+)(?: \+ (0x[0-9a-f]+|\d+))?\]", d)
+                if d in REGS and src in reg:
+                    reg[d] = reg[src]
+                elif d in REGS and re.fullmatch(r"0x[0-9a-f]+|\d+", src):
+                    consts[d] = int(src, 0)
+                    reg.pop(d, None)
+                elif d in REGS and mm and mm.group(1) in reg:
+                    off = int(mm.group(2), 0) if mm.group(2) else 0
+                    kind, k = reg[mm.group(1)]
+                    if kind == "functor" and off == 4:
+                        reg[d] = ("table", 0)
+                    elif kind == "table":
+                        reg[d] = ("slot", off // 4)
+                    else:
+                        reg.pop(d, None)
+                elif md_ and md_.group(2) in reg and reg[md_.group(2)][0] == "slot":
+                    off = int(md_.group(3), 0) if md_.group(3) else 0
+                    v = int(src, 0) if re.fullmatch(r"0x[0-9a-f]+|\d+", src) else consts.get(src)
+                    if off == 0 and v is not None:
+                        k = reg[md_.group(2)][1]
+                        text = im.text(v) if im.data(v) else None
+                        out.append({"at": site, "cls": cls, "name": name, "arg": k, "size": md_.group(1),
+                                    "value": v, "text": text})
+                elif d in REGS:
+                    reg.pop(d, None)
+                    consts.pop(d, None)
+            elif m == "call":
+                for r in ("eax", "ecx", "edx"):
+                    if reg.get(r, ("",))[0] != "functor":
+                        reg.pop(r, None)
+                if ops and ops[0].startswith("0x") and int(ops[0], 16) == look:
+                    break
+            elif ops and ops[0] in REGS and m not in ("cmp", "test", "push"):
+                reg.pop(ops[0], None)
+                consts.pop(ops[0], None)
+    return out
+
+
 # ---------------------------------------------------------------------------- handlers that only forward
 
 def forwards(img: BinaryImage, functions: Dict[int, dict], commands: List["SC.Command"]) -> List[dict]:
@@ -417,7 +520,8 @@ def forwards(img: BinaryImage, functions: Dict[int, dict], commands: List["SC.Co
 
 # ---------------------------------------------------------------------------- names
 
-def names_for(rows: List[dict], fwd: List[dict], functions: Dict[int, dict], b: str) -> Dict[str, dict]:
+def names_for(rows: List[dict], fwd: List[dict], functions: Dict[int, dict], b: str,
+              img: Optional[BinaryImage] = None) -> Dict[str, dict]:
     """reports/names.json entries: Class::Name for each bound function the queue has without its own name.
     A function bound under several names takes the first; the others are listed."""
     out: Dict[str, dict] = {}
@@ -425,6 +529,15 @@ def names_for(rows: List[dict], fwd: List[dict], functions: Dict[int, dict], b: 
     by_fn: Dict[int, List[dict]] = {}
     for r in rows:
         by_fn.setdefault(r["fn"], []).append(r)
+    # a bound address that is only `jmp F` passes the call on to F (recorded in the table, and F listed as a
+    # start); F keeps no name from this, since a tail call can go to a member's or another class's function
+    if img is not None:
+        for fn, group in list(by_fn.items()):
+            b5 = img.read(fn, 5) or b""
+            if b5[:1] == b"\xE9":
+                t = (fn + 5 + struct.unpack("<i", b5[1:])[0]) & 0xFFFFFFFF
+                for r in group:
+                    r["thunk_to"] = t       # F may be another class's function (a member's): not named after it
     for fn in sorted(by_fn):
         f = functions.get(fn)
         if f is None or not SC.DEFAULT.match(str(f.get("symbol", "")).split("::")[-1]):
@@ -493,9 +606,12 @@ def scan(bin_dir: Path, recon_dir: Path) -> Dict[str, dict]:
         funcs = known.get(b, {})
         rows, problems = find(img, funcs)
         fwd = forwards(img, funcs, SC.find(img))
+        dflt = defaults(img, funcs)
         cmds = SC.find(img)
+        names = names_for(rows, fwd, funcs, b, img)            # also marks the bound jmp thunks
         starts = {r["fn"] for r in rows} | {r["target"] for r in fwd} | {c.handler for c in cmds}
-        out[b] = {"rows": rows, "problems": problems, "forwards": fwd, "names": names_for(rows, fwd, funcs, b),
+        starts |= {r["thunk_to"] for r in rows if r.get("thunk_to")}
+        out[b] = {"rows": rows, "problems": problems, "forwards": fwd, "defaults": dflt, "names": names,
                   "new_starts": sorted(s for s in starts if s not in funcs)}
     return out
 
@@ -521,9 +637,13 @@ def table(found: Dict[str, dict]) -> dict:
                  "the call on (portal/tools/script_typed.py; the examiner's round Q4-Q13).", "versions": {}}
     for b, d in found.items():
         t["versions"][b] = {
-            "typed": [{"class": r["cls"], "name": r["name"], "function": h(r["fn"]), "prototype": prototype(r),
+            "typed": [dict({"class": r["cls"], "name": r["name"], "function": h(r["fn"]), "prototype": prototype(r),
                        "returns": r["ret"], "arguments": r["args"], "fewest": r["fewest"], "most": r["most"],
-                       "registered_at": h(r["at"]), "functor": r["functor"]}
+                       "registered_at": h(r["at"]), "functor": r["functor"]},
+                           **({"defaults": {str(x["arg"]): (x["text"] if x["text"] is not None else x["value"])
+                                            for x in d["defaults"] if (x["cls"], x["name"]) == (r["cls"], r["name"])}}
+                              if any((x["cls"], x["name"]) == (r["cls"], r["name"]) for x in d["defaults"]) else {}),
+                           **({"thunk_to": h(r["thunk_to"])} if r.get("thunk_to") else {}))
                       for r in sorted(d["rows"], key=lambda r: (r["cls"], r["name"].lower(), r["at"]))],
             "forwards": [dict({"class": r["cls"], "name": r["name"], "handler": h(r["handler"]),
                                "function": h(r["target"]), "how": r["how"]},

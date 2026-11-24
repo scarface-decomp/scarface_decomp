@@ -14,6 +14,9 @@ For every function (the registry's and the queue's):
     base  a base-class part of this (lea ecx,[this+N], N a base's place from the class hierarchy): that
           part's vtable in this class
     ctor  an object whose vtable the function itself just stored (mov [reg], vtable)
+    global the object a pointer global holds, when its class is proven (portal/tools/vtypes.py: one
+          constructor's result stored, a factory's out-parameter, or the only built class with that
+          many virtual functions); listed under "typed_globals" with the rule and its evidence
   A function's class is the class whose vtable holds it (the most basic one, when several do), or the
   class its name in reports/names.json or the registry gives.
 - unresolved: calls through a register or memory that these rules can't tell.
@@ -185,7 +188,10 @@ def _mem(op: str) -> Optional[Tuple[str, int]]:
 
 
 def analyse(md, img: Img, rt: Rtti, start: int, size: int, cls: Optional[str], starts: Set[int],
-            td_names: Dict[int, str], dyn_cast: Optional[int] = None) -> dict:
+            td_names: Dict[int, str], dyn_cast: Optional[int] = None,
+            typed: Optional[Dict[int, int]] = None) -> dict:
+    """typed: {pointer global: the vtable of the class its object is proven to be} (vtypes.py)."""
+    typed = typed or {}
     code = img.img.read(start, size) or b""
     ins = list(md.disasm(code, start))
     targets = {int(i.op_str, 16) for i in ins if i.mnemonic.startswith("j") and i.op_str.startswith("0x")}
@@ -290,7 +296,10 @@ def analyse(md, img: Img, rt: Rtti, start: int, size: int, cls: Optional[str], s
                 if vt is not None:
                     new = ("vt", vt, "own" if off == 0 else "base")
             elif obj[0] == "obj" and _mem(src)[1] == 0:
-                new = ("vt", obj[1], "ctor")
+                new = ("vt", obj[1], obj[2] if len(obj) > 2 else "ctor")
+        elif m == "mov" and src and re.fullmatch(r"dword ptr \[0x[0-9a-f]+\]", src) and \
+                int(src[11:-1], 16) in typed:
+            new = ("obj", typed[int(src[11:-1], 16)], "global")
         if new is None:
             st.pop(dst, None)
         else:
@@ -372,14 +381,19 @@ def class_names(b: str = "xb") -> Dict[int, str]:
     return out
 
 
-def dynamic_cast_address(b: str = "xb") -> Optional[int]:
-    """Where __RTDynamicCast is, by its name in reports/names.json."""
+def named_address(b: str, name: str) -> Optional[int]:
+    """Where the function reports/names.json calls name is."""
     try:
         names = json.loads((ROOT / "reports" / "names.json").read_text())["names"]
     except (OSError, ValueError, KeyError):
         return None
     return next((int(k.split(":")[1], 16) for k, v in names.items()
-                 if k.startswith(b + ":") and v.get("name") == "__RTDynamicCast"), None)
+                 if k.startswith(b + ":") and v.get("name") == name), None)
+
+
+def dynamic_cast_address(b: str = "xb") -> Optional[int]:
+    """Where __RTDynamicCast is, by its name in reports/names.json."""
+    return named_address(b, "__RTDynamicCast")
 
 
 def build(image, b: str = "xb") -> Tuple[dict, dict]:
@@ -415,6 +429,10 @@ def build(image, b: str = "xb") -> Tuple[dict, dict]:
                 thunk[f] = t
                 adjust[f] = delta
     dyn_cast = dynamic_cast_address(b)
+    import vtypes
+    fx = vtypes.Facts(md, img, rt, funcs, named_address(b, "OperatorDelete"))
+    typed_globals, built = vtypes.all_typed_globals(fx)
+    typed_vt = {g: rt.of_class[(c, 0)] for g, (c, _r, _e) in typed_globals.items() if (c, 0) in rt.of_class}
 
     def through(t):
         seen = set()
@@ -428,7 +446,7 @@ def build(image, b: str = "xb") -> Tuple[dict, dict]:
         if f in thunk:
             continue
         cls = by_vtable.get(f) or (by_name.get(f) if by_name.get(f) in known else None)
-        a = analyse(md, img, rt, f, size, cls, starts, td_names, dyn_cast)
+        a = analyse(md, img, rt, f, size, cls, starts, td_names, dyn_cast, typed_vt)
         row = {}
         calls = list(dict.fromkeys(through(t) for t in a["calls"] if t in starts and through(t) != f))
         if calls:
@@ -461,7 +479,10 @@ def build(image, b: str = "xb") -> Tuple[dict, dict]:
         "vtables": len(rt.vtables), "classes": len(rt.bases),
         "edges_direct": sum(len(v.get("calls", [])) for v in out.values()),
         "edges_virtual": {how: sum(1 for v in out.values() for _, h in v.get("virtual", []) if h == how)
-                          for how in ("own", "base", "ctor")},
+                          for how in ("own", "base", "ctor", "global")},
+        "instantiated_classes": len(built),
+        "typed_globals": {f"0x{g:08X}": {"class": c, "rule": r, "evidence": e}
+                          for g, (c, r, e) in sorted(typed_globals.items())},
         "unresolved": sum(v.get("unresolved", 0) for v in out.values()),
         "functions": out,
         "order": [[f"0x{f:08X}" for f in comp] for comp in order],
@@ -471,10 +492,12 @@ def build(image, b: str = "xb") -> Tuple[dict, dict]:
 
 def write(graph: dict, path: Path) -> None:
     """One function (and one component) per line."""
-    head = {k: v for k, v in graph.items() if k not in ("functions", "order", "thunks", "adjustors")}
+    head = {k: v for k, v in graph.items() if k not in ("functions", "order", "thunks", "adjustors", "typed_globals")}
     text = json.dumps(head, indent=1)[:-2] + ",\n"
     text += ' "thunks": ' + json.dumps(graph["thunks"]) + ",\n"
     text += ' "adjustors": ' + json.dumps(graph.get("adjustors", {})) + ",\n"
+    text += ' "typed_globals": {\n' + ",\n".join(f"  {json.dumps(k)}: {json.dumps(v)}"
+                                                  for k, v in graph.get("typed_globals", {}).items()) + "\n },\n"
     text += ' "functions": {\n' + ",\n".join(f" {json.dumps(k)}: {json.dumps(v)}" for k, v in graph["functions"].items())
     text += "\n },\n \"order\": [\n" + ",\n".join(" " + json.dumps(c) for c in graph["order"]) + "\n ]\n}\n"
     path.write_text(text, newline="\n")

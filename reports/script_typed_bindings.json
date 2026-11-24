@@ -241,7 +241,8 @@
      "fewest": 1,
      "most": 1,
      "registered_at": "0x00188B70",
-     "functor": ".?AV?$Function0@X@CScript@@"
+     "functor": ".?AV?$Function0@X@CScript@@",
+     "thunk_to": "0x00188230"
     },
     {
      "class": "",
@@ -293,7 +294,10 @@
      "fewest": 1,
      "most": 2,
      "registered_at": "0x00070ABA",
-     "functor": ".?AV?$Function1@HH@CScript@@"
+     "functor": ".?AV?$Function1@HH@CScript@@",
+     "defaults": {
+      "0": 17
+     }
     },
     {
      "class": "",
@@ -374,7 +378,8 @@
      "fewest": 1,
      "most": 1,
      "registered_at": "0x00188B8D",
-     "functor": ".?AV?$Function0@X@CScript@@"
+     "functor": ".?AV?$Function0@X@CScript@@",
+     "thunk_to": "0x001880B0"
     },
     {
      "class": "",
@@ -673,7 +678,11 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x0011A7F0",
-     "functor": ".?AV?$Method2@X_N_N@CScript@@"
+     "functor": ".?AV?$Method2@X_N_N@CScript@@",
+     "defaults": {
+      "0": 1,
+      "1": 1
+     }
     },
     {
      "class": "AIBehavior",
@@ -688,7 +697,10 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x0011A761",
-     "functor": ".?AV?$Method2@X_N_N@CScript@@"
+     "functor": ".?AV?$Method2@X_N_N@CScript@@",
+     "defaults": {
+      "0": 1
+     }
     },
     {
      "class": "AIBehavior",
@@ -802,7 +814,10 @@
      "fewest": 2,
      "most": 3,
      "registered_at": "0x0013766D",
-     "functor": ".?AV?$Method1@XW4EExitVehicleParam@@@CScript@@"
+     "functor": ".?AV?$Method1@XW4EExitVehicleParam@@@CScript@@",
+     "defaults": {
+      "0": 8
+     }
     },
     {
      "class": "AICommandSequencer",
@@ -1075,7 +1090,10 @@
      "fewest": 4,
      "most": 5,
      "registered_at": "0x001379A3",
-     "functor": ".?AV?$Method3@XPBDM_N@CScript@@"
+     "functor": ".?AV?$Method3@XPBDM_N@CScript@@",
+     "defaults": {
+      "2": 1
+     }
     },
     {
      "class": "AICommandSequencer",
@@ -1178,7 +1196,10 @@
      "fewest": 3,
      "most": 4,
      "registered_at": "0x00137AFF",
-     "functor": ".?AV?$Method2@X_N_N@CScript@@"
+     "functor": ".?AV?$Method2@X_N_N@CScript@@",
+     "defaults": {
+      "1": 1
+     }
     },
     {
      "class": "AICommandSequencer",
@@ -1654,7 +1675,10 @@
      "fewest": 4,
      "most": 5,
      "registered_at": "0x0013801D",
-     "functor": ".?AV?$Method3@XIPBDPBD@CScript@@"
+     "functor": ".?AV?$Method3@XIPBDPBD@CScript@@",
+     "defaults": {
+      "2": "-1"
+     }
     },
     {
      "class": "AICommandSequencer",
@@ -2229,7 +2253,8 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x00179C49",
-     "functor": ".?AV?$Method0@PAVScriptObject@@@CScript@@"
+     "functor": ".?AV?$Method0@PAVScriptObject@@@CScript@@",
+     "thunk_to": "0x00165700"
     },
     {
      "class": "CharacterObject",
@@ -2294,7 +2319,8 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x00179666",
-     "functor": ".?AV?$Method0@_N@CScript@@"
+     "functor": ".?AV?$Method0@_N@CScript@@",
+     "thunk_to": "0x001641A0"
     },
     {
      "class": "CharacterObject",
@@ -2815,7 +2841,8 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x001C9D4B",
-     "functor": ".?AV?$Method0@X@CScript@@"
+     "functor": ".?AV?$Method0@X@CScript@@",
+     "thunk_to": "0x000499B0"
     },
     {
      "class": "EnvironmentObject",
@@ -2827,7 +2854,8 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x001C9D26",
-     "functor": ".?AV?$Method0@X@CScript@@"
+     "functor": ".?AV?$Method0@X@CScript@@",
+     "thunk_to": "0x00049980"
     },
     {
      "class": "FireObject",
@@ -4519,7 +4547,8 @@
      "fewest": 1,
      "most": 1,
      "registered_at": "0x00166A23",
-     "functor": ".?AV?$Function0@X@CScript@@"
+     "functor": ".?AV?$Function0@X@CScript@@",
+     "thunk_to": "0x001660E0"
     },
     {
      "class": "",
@@ -4571,7 +4600,10 @@
      "fewest": 1,
      "most": 2,
      "registered_at": "0x0006672A",
-     "functor": ".?AV?$Function1@HH@CScript@@"
+     "functor": ".?AV?$Function1@HH@CScript@@",
+     "defaults": {
+      "0": 17
+     }
     },
     {
      "class": "",
@@ -4652,7 +4684,8 @@
      "fewest": 1,
      "most": 1,
      "registered_at": "0x00166A40",
-     "functor": ".?AV?$Function0@X@CScript@@"
+     "functor": ".?AV?$Function0@X@CScript@@",
+     "thunk_to": "0x00165F60"
     },
     {
      "class": "",
@@ -4877,7 +4910,10 @@
      "fewest": 2,
      "most": 3,
      "registered_at": "0x000FF8A9",
-     "functor": ".?AV?$Method1@X_N@CScript@@"
+     "functor": ".?AV?$Method1@X_N@CScript@@",
+     "defaults": {
+      "0": 1
+     }
     },
     {
      "class": "AIBehavior",
@@ -5082,7 +5118,11 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x000FF7DF",
-     "functor": ".?AV?$Method2@X_N_N@CScript@@"
+     "functor": ".?AV?$Method2@X_N_N@CScript@@",
+     "defaults": {
+      "0": 1,
+      "1": 1
+     }
     },
     {
      "class": "AIBehavior",
@@ -5097,7 +5137,10 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x000FF750",
-     "functor": ".?AV?$Method2@X_N_N@CScript@@"
+     "functor": ".?AV?$Method2@X_N_N@CScript@@",
+     "defaults": {
+      "0": 1
+     }
     },
     {
      "class": "AIBehavior",
@@ -5211,7 +5254,10 @@
      "fewest": 2,
      "most": 3,
      "registered_at": "0x0011C777",
-     "functor": ".?AV?$Method1@XW4EExitVehicleParam@@@CScript@@"
+     "functor": ".?AV?$Method1@XW4EExitVehicleParam@@@CScript@@",
+     "defaults": {
+      "0": 8
+     }
     },
     {
      "class": "AICommandSequencer",
@@ -5583,7 +5629,10 @@
      "fewest": 4,
      "most": 5,
      "registered_at": "0x0011CB7C",
-     "functor": ".?AV?$Method3@XPBDM_N@CScript@@"
+     "functor": ".?AV?$Method3@XPBDM_N@CScript@@",
+     "defaults": {
+      "2": 1
+     }
     },
     {
      "class": "AICommandSequencer",
@@ -5702,7 +5751,10 @@
      "fewest": 3,
      "most": 4,
      "registered_at": "0x0011CCFA",
-     "functor": ".?AV?$Method2@X_N_N@CScript@@"
+     "functor": ".?AV?$Method2@X_N_N@CScript@@",
+     "defaults": {
+      "1": 1
+     }
     },
     {
      "class": "AICommandSequencer",
@@ -6976,7 +7028,8 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x00159B6B",
-     "functor": ".?AV?$Method0@PAVScriptObject@@@CScript@@"
+     "functor": ".?AV?$Method0@PAVScriptObject@@@CScript@@",
+     "thunk_to": "0x00148E30"
     },
     {
      "class": "CharacterObject",
@@ -7053,7 +7106,8 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x00159507",
-     "functor": ".?AV?$Method0@_N@CScript@@"
+     "functor": ".?AV?$Method0@_N@CScript@@",
+     "thunk_to": "0x00147E40"
     },
     {
      "class": "CharacterObject",
@@ -7569,7 +7623,8 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x001934CE",
-     "functor": ".?AV?$Method0@X@CScript@@"
+     "functor": ".?AV?$Method0@X@CScript@@",
+     "thunk_to": "0x000424A0"
     },
     {
      "class": "EnvironmentObject",
@@ -7581,7 +7636,8 @@
      "fewest": 2,
      "most": 2,
      "registered_at": "0x001934AC",
-     "functor": ".?AV?$Method0@X@CScript@@"
+     "functor": ".?AV?$Method0@X@CScript@@",
+     "thunk_to": "0x00042470"
     },
     {
      "class": "FightBettingHUD",
@@ -8011,7 +8067,8 @@
      "fewest": 4,
      "most": 4,
      "registered_at": "0x000FCABC",
-     "functor": ".?AV?$Method2@PAVScriptObject@@II@CScript@@"
+     "functor": ".?AV?$Method2@PAVScriptObject@@II@CScript@@",
+     "thunk_to": "0x000FC500"
     },
     {
      "class": "PathGroup",

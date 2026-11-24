@@ -33,9 +33,9 @@
     },
     "named": {
       "pc": 1,
-      "xb": 2319,
+      "xb": 2326,
       "proto": 2257,
-      "total": 2320
+      "total": 2327
     }
   },
   "described": {
@@ -47,6 +47,7 @@
     "how": {
       "human": 433,
       "read": 169,
+      "bound": 0,
       "shape": 2041,
       "twin": 31
     }
@@ -66,18 +67,27 @@
   "unattributed": 0,
   "queue": {
     "pc": 735,
-    "xb": 10415,
-    "proto": 9685,
+    "xb": 12214,
+    "proto": 11897,
     "ps2": 24297,
-    "total": 11150,
+    "total": 12949,
     "tiers": {
-      "TIER_1_QUICK": 209,
-      "TIER_2_SMALL": 1159,
-      "TIER_3_MEDIUM": 2315,
-      "TIER_4_LARGE": 7467
+      "TIER_1_QUICK": 283,
+      "TIER_2_SMALL": 2319,
+      "TIER_3_MEDIUM": 2821,
+      "TIER_4_LARGE": 7526
     }
   },
   "good_first": [
+    {
+      "id": "xb_003225B0",
+      "bin": "xb",
+      "va": "0x003225B0",
+      "symbol": "sub_003225B0",
+      "size": 1,
+      "why": "matching it also matches its 12 look-alikes",
+      "kind": "group"
+    },
     {
       "id": "xb_00098BE0",
       "bin": "xb",
@@ -94,15 +104,6 @@
       "symbol": "sub_002FD289",
       "size": 8,
       "why": "matching it also matches its 3 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_002E0600",
-      "bin": "xb",
-      "va": "0x002E0600",
-      "symbol": "sub_002E0600",
-      "size": 9,
-      "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     },
     {
@@ -133,6 +134,15 @@
       "kind": "named"
     },
     {
+      "id": "xb_002E0600",
+      "bin": "xb",
+      "va": "0x002E0600",
+      "symbol": "sub_002E0600",
+      "size": 9,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
       "id": "pc_006E4610",
       "bin": "pc",
       "va": "PC 0x006E4610",
@@ -142,12 +152,12 @@
       "kind": "group"
     },
     {
-      "id": "xb_003111AB",
+      "id": "xb_00313540",
       "bin": "xb",
-      "va": "0x003111AB",
-      "symbol": "sub_003111AB",
+      "va": "0x00313540",
+      "symbol": "sub_00313540",
       "size": 10,
-      "why": "matching it also matches its 47 look-alikes",
+      "why": "matching it also matches its 123 look-alikes",
       "kind": "group"
     },
     {
@@ -157,15 +167,6 @@
       "symbol": "sub_0015C6C0",
       "size": 10,
       "why": "matching it also matches its 3 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_002FE371",
-      "bin": "xb",
-      "va": "0x002FE371",
-      "symbol": "sub_002FE371",
-      "size": 10,
-      "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     }
   ]
