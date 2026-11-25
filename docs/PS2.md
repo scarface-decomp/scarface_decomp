@@ -61,6 +61,35 @@ the portal checks it against your `SLUS_211.11` as above. The portal answers onl
 (by their `Origin`), and only with the C++ and assembly of the function you are working on. Leave the
 tab open while you work; the dialog closes by itself once it is connected.
 
+## The PS2 easy pass
+
+    python portal/scripts/ps2_easy_pass.py
+
+has the portal try its own starter code on the open PS2 functions and record every exact match under
+your handle, with no AI and no typing. Connect your decomp.me tab first (the three steps above) and leave
+it open. Smallest functions first, it tries:
+
+* **C++ written from two or three instructions** (`portal/tools/ps2_shapes.py`): an empty function, one
+  that returns or stores a member of its object, one that returns a constant, its object, or a global.
+  About 3,000 of the PS2 game's functions have one of these shapes.
+* **A matched look-alike's C++**, with this function's addresses.
+* **The matched Xbox function's C++**, for a PS2 function paired with one, when that code names no
+  address (Xbox addresses would be wrong here).
+
+Each is compiled and checked like any submission; nothing counts unless the game's compiler gives back
+the same bytes with every address checked.
+
+decomp.me is a free service shared by many projects, so the pass is a light user of it on purpose:
+
+* every compile goes through one scratch (compiling saves nothing there), so no scratches pile up;
+* the same text is never compiled twice: the object is kept and reused, so the 600 empty functions cost
+  one compile;
+* real compiles are two seconds apart, and a run stops after 400 of them. Run it again later to go on
+  from where it stopped (`SCARFACE_PS2_EASY_PAUSE` and `SCARFACE_PS2_EASY_MAX` change the two numbers;
+  please don't make it heavier).
+
+When your decomp.me tab is connected, the portal's own Compile & Verify uses it by itself too.
+
 ## How the compiler was worked out
 
 The program says `MW MIPS C Compiler (2.4.1.01)` in its `.comment` section, but five different builds write
@@ -150,6 +179,8 @@ writes each as an ELF file that opens at its load address; open it next to `SLUS
 | `portal/tools/ps2_mips.py` | MIPS R5900 decoder and disassembler (GNU syntax) |
 | `portal/tools/ps2_binary.py` | reading the program, finding functions, address fields, listings for decomp.me |
 | `portal/tools/ps2_overlay.py` | the front-end overlays: their headers, which build fits, ELF files for Ghidra and IDA |
+| `portal/tools/ps2_shapes.py` | C++ for the smallest functions, written from their instructions |
+| `portal/scripts/ps2_easy_pass.py` | runs the PS2 easy pass on your portal |
 | `portal/tools/ps2_pairing.py` | pairing PS2 functions with Xbox ones (text and virtual tables) |
 | `portal/tools/ps2_verify.py` | reading the compiler's objects, the byte and address checks, compiling here or on decomp.me |
 | `portal/verify.py --bin ps2` | the same check from the command line (`--scratch SLUG` to compile through a given scratch) |

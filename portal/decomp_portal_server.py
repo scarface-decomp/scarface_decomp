@@ -69,6 +69,7 @@ import registry_outputs as RO  # noqa: E402
 from registry_outputs import write_outputs  # noqa: E402
 from sf_binaries import BinaryImage  # noqa: E402
 import ps2_binary as PB  # noqa: E402
+import ps2_shapes as PSH  # noqa: E402
 import ps2_overlay as PO  # noqa: E402
 import ps2_verify as PV  # noqa: E402
 from cpp_policy import check_genuine_cpp, format_violations  # noqa: E402
@@ -1120,11 +1121,12 @@ PS2_UNREACHABLE = ("PS2 functions are compiled on decomp.me (the game's PS2 comp
                    "follow the steps that just opened. ({why})")
 
 
-def ps2_job(t: dict, cpp_code: str) -> dict:
+def ps2_job(t: dict, cpp_code: str, through: str = "") -> dict:
     """What the page's decomp.me connection has to do for a PS2 compile: make the function's scratch if it
-    has none, then compile the C++ there and send back the object."""
+    has none, then compile the C++ there and send back the object. through: a scratch to compile in
+    instead (compiling saves nothing there, so one scratch can serve any number of functions)."""
     src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
-    job = {"slug": t.get("decompme_slug", ""),
+    job = {"slug": through or t.get("decompme_slug", ""),
            "compile": {"compiler": PV.COMPILER, "compiler_flags": PV.FLAGS, "source_code": src.replace("\r\n", "\n"),
                        "context": ctx.replace("\r\n", "\n"), "include_objects": True}}
     if not job["slug"]:
@@ -1132,7 +1134,68 @@ def ps2_job(t: dict, cpp_code: str) -> dict:
     return job
 
 
-def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "") -> dict:
+# Objects the PS2 compiler has made this session, by what was compiled: the same text gives the same object,
+# so thousands of two-instruction functions of the same shape cost decomp.me one compile, not thousands.
+PS2_OBJECTS: Dict[str, bytes] = {}
+PS2_OBJECTS_MAX = 4000
+PS2_DIRECT = {"blocked": False}          # decomp.me turned this program away once: go through the tab from then on
+
+
+def _ps2_key(src: str, ctx: str) -> str:
+    return hashlib.sha256("\0".join((PV.COMPILER, PV.FLAGS, ctx, src)).encode("utf-8", "replace")).hexdigest()
+
+
+def ps2_compile(t: dict, cpp_code: str, through: str = "", bridge_only: bool = False) -> dict:
+    """Compile for the PS2 by whatever way works here: an object already made from the same text, the
+    compiler on this computer, decomp.me directly, or the person's connected decomp.me tab.
+    {ok, object, output, slug?, cached?} | {ok: False, compiler_error} | {ok: False, error, unreachable: True}."""
+    src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
+    src, ctx = src.replace("\r\n", "\n"), ctx.replace("\r\n", "\n")
+    key = _ps2_key(src, ctx)
+    if key in PS2_OBJECTS:
+        return {"ok": True, "object": PS2_OBJECTS[key], "output": "", "cached": True}
+
+    def keep(res: dict) -> dict:
+        if res.get("ok") and res.get("object"):
+            if len(PS2_OBJECTS) >= PS2_OBJECTS_MAX:
+                PS2_OBJECTS.clear()
+            PS2_OBJECTS[key] = res["object"]
+        return res
+
+    if PV.local_compiler() is not None and not bridge_only:
+        res = PV.compile_locally(src, ctx)
+        if res.get("ok") or res.get("compiler_error") is not None:
+            return keep(res)                               # otherwise it could not run here (no licence, say)
+    slug = through or t.get("decompme_slug", "")
+    if not PS2_DIRECT["blocked"] and not bridge_only:
+        if not slug:
+            made = PV.create_scratch(ps2_scratch_fields(t, cpp_code))
+            if made.get("ok"):
+                slug = made["slug"]
+            elif made.get("unreachable"):
+                PS2_DIRECT["blocked"] = True
+        if slug and not PS2_DIRECT["blocked"]:
+            res = PV.compile_on_decompme(slug, src, ctx)
+            if res.get("ok") or res.get("compiler_error") is not None:
+                return keep(dict(res, slug=slug))
+            if res.get("unreachable"):
+                PS2_DIRECT["blocked"] = True
+    if not BRIDGE.connected():
+        return {"ok": False, "unreachable": True, "error": "decomp.me turns this program away, and no decomp.me tab is connected"}
+    r = BRIDGE.run(ps2_job(t, cpp_code, through=slug))
+    if not r.get("ok"):
+        return {"ok": False, "unreachable": True, "error": r.get("error") or "the decomp.me tab could not do it"}
+    if not r.get("success") or not r.get("right_object"):
+        return {"ok": False, "compiler_error": r.get("compiler_output") or "The compiler did not produce an object.",
+                "slug": r.get("slug", "")}
+    try:
+        obj = base64.b64decode(r["right_object"])
+    except (ValueError, TypeError):
+        return {"ok": False, "unreachable": True, "error": "the decomp.me tab sent an object that could not be read"}
+    return keep({"ok": True, "object": obj, "output": r.get("compiler_output", ""), "slug": r.get("slug", "")})
+
+
+def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "", through: str = "") -> dict:
     """Compile on decomp.me with the PS2 compiler, then compare the object with the game here. The object
     comes either from here (when this computer can reach decomp.me's API) or from the page, which compiled
     it through decomp.me in the browser (object_b64)."""
@@ -1154,25 +1217,12 @@ def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "")
         except (ValueError, TypeError):
             return {"ok": False, "compiler_error": "The page sent an object that could not be read."}
     else:
-        res = None
-        if PV.local_compiler() is not None:               # the game's compiler on this computer: no decomp.me
-            src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
-            res = PV.compile_locally(src, ctx)
-            if not res.get("ok") and res.get("compiler_error") is None:
-                res = None                                # it could not run here (no licence, say): decomp.me
-    if res is None:
-        slug = t.get("decompme_slug", "")
-        if not slug:
-            made = PV.create_scratch(ps2_scratch_fields(t, cpp_code))
-            if not made.get("ok"):
-                return {"ok": False, "compiler_unavailable": True, "need_browser": True, "job": ps2_job(t, cpp_code),
-                        "compiler_error": PS2_UNREACHABLE.format(why=made.get("error", ""))}
-            slug = made["slug"]
+        res = ps2_compile(t, cpp_code, through=through)
+        got = res.get("slug", "")
+        if got and not through and _SLUG_RE.match(got) and got != t.get("decompme_slug"):
             with STATE_LOCK:
-                t["decompme_slug"] = slug
+                t["decompme_slug"] = got
                 save_overlay(t)
-        src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
-        res = PV.compile_on_decompme(slug, src, ctx)
     if not res.get("ok"):
         if res.get("compiler_error") is not None:
             return {"ok": False, "compiler_error": res["compiler_error"]}
@@ -1639,6 +1689,147 @@ def start_easy_pass(user: str) -> dict:
         EASY.update(running=True, stop=False, total=0, tried=0, matched=0, by=user, last="")
         threading.Thread(target=easy_pass, args=(user,), name="easy-pass", daemon=True).start()
     return dict(easy_status(), ok=True)
+
+
+# --------------------------------------------------------------------------- the PS2 easy pass
+# The same idea for the PS2 game, through decomp.me: the smallest functions get C++ written from their two
+# or three instructions (tools/ps2_shapes.py), a function whose look-alike is matched gets that code with its
+# own addresses, and a function paired with a matched Xbox one gets the Xbox C++ when it names no address.
+# Every compile goes through one scratch on decomp.me (compiling saves nothing there), an object already
+# made from the same text is reused, and real compiles are spaced out and capped: decomp.me is a shared,
+# free service, and this must stay a light user of it.
+PS2_EASY_TOOL = "the portal's starter code for PS2 (no AI)"
+PS2_EASY_VERSION = 1
+PS2_EASY_JSON = PRIVATE_DIR / "ps2_easy_pass.json"        # the scratch compiled through, and what was tried (gitignored)
+PS2_EASY_PAUSE = float(os.environ.get("SCARFACE_PS2_EASY_PAUSE", "2"))     # seconds between real compiles
+PS2_EASY_MAX = int(os.environ.get("SCARFACE_PS2_EASY_MAX", "400"))         # real compiles a run
+PS2EASY: dict = {"running": False, "stop": False, "total": 0, "tried": 0, "matched": 0, "compiles": 0, "by": "", "last": ""}
+_ADDRESS_NAME = re.compile(r"\b(?:sub|DAT|func|D|g)_[0-9A-Fa-f]{8}\b")
+# Visual C++ words in C++ that came from the Xbox game; CodeWarrior has no use for them.
+PS2_PRELUDE = "#define __cdecl\n#define __stdcall\n#define __fastcall\n#define __thiscall\n"
+
+
+def ps2_easy_status() -> dict:
+    return dict({k: PS2EASY[k] for k in ("running", "total", "tried", "matched", "compiles", "by", "last")},
+                connected=BRIDGE.connected())
+
+
+def ps2_easy_codes(t: dict) -> List[str]:
+    """What to try on a PS2 function, the likeliest first."""
+    img, tb = image_for(t["bin"]), target_bytes(t)
+    if img is None or not tb:
+        return []
+    out: List[str] = []
+    if len(tb) in (8, 12):
+        out += PSH.sources(struct.unpack(f"<{len(tb) // 4}I", tb), t["fva_int"], getattr(img, "gp", 0))
+    with STATE_LOCK:
+        out.append(lookalike_starter(t)[0])
+        twin = counterpart_starter(t)[0]
+    if twin and not _ADDRESS_NAME.search(twin):            # the Xbox addresses would be wrong here
+        out.append(PS2_PRELUDE + twin)
+    seen, codes = set(), []
+    for code in out:
+        if code.strip() and code.strip() not in seen:
+            seen.add(code.strip())
+            codes.append(code)
+    return codes
+
+
+def ps2_easy_pass(user: str) -> dict:
+    state = read_json(PS2_EASY_JSON, {}) if PS2_EASY_JSON.exists() else {}
+    tried = state.setdefault("tried", {})
+    with STATE_LOCK:
+        targets = [t for t in ALL_TASKS if PO.is_ps2(t["bin"]) and t["status"] != "VERIFIED"
+                   and not _held_by_someone_else(t, user) and tried.get(task_key(t)) != PS2_EASY_VERSION]
+    targets.sort(key=lambda t: (int(t["size"]), t["fva_int"]))
+    PS2EASY.update(total=len(targets), tried=0, matched=0, compiles=0, by=user, last="")
+    unsaved = 0
+
+    def remember() -> None:
+        try:
+            write_json(PS2_EASY_JSON, state)
+        except OSError:
+            pass
+
+    try:
+        for t in targets:
+            if PS2EASY["stop"]:
+                break
+            if PS2EASY["compiles"] >= PS2_EASY_MAX:
+                PS2EASY["last"] = (f"Stopped after {PS2_EASY_MAX} compiles on decomp.me, to stay a light user of it. "
+                                   "Run it again later to go on.")
+                break
+            codes = ps2_easy_codes(t)
+            if not codes:
+                continue                                   # nothing to try yet: not counted, not remembered
+            hit, unavailable = None, False
+            for code in codes:
+                key = _ps2_key(*[x.replace("\r\n", "\n") for x in DME._inline_project_includes(code, [INCLUDE_DIR])])
+                real = key not in PS2_OBJECTS
+                res = run_verify_ps2(t, code, through=state.get("slug", ""))
+                if res.get("compiler_unavailable"):
+                    unavailable = True
+                    break
+                if real:
+                    PS2EASY["compiles"] += 1
+                    if not state.get("slug") and _SLUG_RE.match(t.get("decompme_slug", "") or ""):
+                        state["slug"] = t["decompme_slug"]         # every later compile goes through this scratch
+                    time.sleep(PS2_EASY_PAUSE)
+                if res.get("ok") and res.get("verified") and not res.get("reloc_unverified"):
+                    hit = (code, res)
+                    break
+                if PS2EASY["stop"] or PS2EASY["compiles"] >= PS2_EASY_MAX:
+                    break
+            if unavailable:
+                PS2EASY["last"] = ("Your decomp.me tab isn't connected, so the pass stopped. Open decomp.me, click the "
+                                   "Scarface bookmark there, and start it again.")
+                break
+            PS2EASY["tried"] += 1
+            if not hit:
+                if not PS2EASY["stop"] and PS2EASY["compiles"] < PS2_EASY_MAX:
+                    tried[task_key(t)] = PS2_EASY_VERSION
+                continue
+            with STATE_LOCK:
+                if t["status"] == "VERIFIED" or _held_by_someone_else(t, user):
+                    continue
+                record_verified(t, hit[0], user, PS2_EASY_TOOL, hit[1], write=False)
+                t.update(status="VERIFIED", claimed_by="", claim_expires_at=0)
+                save_overlay(t)
+                PS2EASY["matched"] += 1
+                PS2EASY["last"] = f"{t['symbol']} ({t['va']}, {t['size']} bytes)"
+                unsaved += 1
+                if unsaved >= 25:
+                    save_registry()
+                    remember()
+                    unsaved = 0
+    finally:
+        with STATE_LOCK:
+            if unsaved:
+                save_registry()
+            remember()
+            if PS2EASY["matched"]:
+                append_audit({"time": stamp(), "user": user, "action": "VERIFIED",
+                              "symbol": f"{PS2EASY['matched']} PS2 function(s) from the portal's starter code", "va": "",
+                              "bytes": "PS2 easy pass, no AI"})
+                print(f"[+] PS2 easy pass by {user}: {PS2EASY['matched']} matched of {PS2EASY['tried']} tried, "
+                      f"{PS2EASY['compiles']} compiles on decomp.me -> {len(REGISTRY['entries'])} total")
+            PS2EASY.update(running=False, stop=False)
+    return ps2_easy_status()
+
+
+def start_ps2_easy_pass(user: str) -> dict:
+    with _EASY_START:
+        if PS2EASY["running"]:
+            return dict(ps2_easy_status(), ok=True)
+        if image_for("ps2") is None:
+            return {"ok": False, "error": "binaries/SLUS_211.11 is missing, so there is nothing to compare against."}
+        if PV.local_compiler() is None and not BRIDGE.connected():
+            return {"ok": False, "not_connected": True,
+                    "error": "Your decomp.me tab isn't connected. Open decomp.me, click the Scarface bookmark in that "
+                             "tab (docs/PS2.md has the steps), and start again."}
+        PS2EASY.update(running=True, stop=False, total=0, tried=0, matched=0, compiles=0, by=user, last="")
+        threading.Thread(target=ps2_easy_pass, args=(user,), name="ps2-easy-pass", daemon=True).start()
+    return dict(ps2_easy_status(), ok=True)
 
 
 # =========================================================================== #
@@ -2954,7 +3145,7 @@ class Handler(BaseHTTPRequestHandler):
             "/api/verify": self.post_verify, "/api/fast-synthesize": self.post_synth, "/api/ai-proxy": self.post_ai,
             "/api/git-sync": self.post_git, "/api/upload-script": self.post_upload,
             "/api/submit": self.post_submit, "/api/import-submission": self.post_import,
-            "/api/decompme": self.post_decompme, "/api/easy-pass": self.post_easy_pass, "/api/name": self.post_name,
+            "/api/decompme": self.post_decompme, "/api/easy-pass": self.post_easy_pass, "/api/ps2-easy-pass": self.post_ps2_easy_pass, "/api/name": self.post_name,
             "/api/game-files/start": self.post_game_files_start, "/api/game-files/stop": self.post_game_files_stop,
             "/api/game-files/blender": self.post_game_files_blender,
             "/api/game-files/blender-stop": self.post_game_files_blender_stop,
@@ -3014,6 +3205,19 @@ class Handler(BaseHTTPRequestHandler):
                 EASY["stop"] = True
             return self._json(dict(easy_status(), ok=True))
         return self._json(start_easy_pass(user))
+
+    def post_ps2_easy_pass(self, body):
+        """Start, stop or ask about the PS2 easy pass (the portal's own starter code, through decomp.me)."""
+        user = self._auth(body)
+        if not user:
+            return
+        if body.get("status"):
+            return self._json(dict(ps2_easy_status(), ok=True))
+        if body.get("stop"):
+            if PS2EASY["running"]:
+                PS2EASY["stop"] = True
+            return self._json(dict(ps2_easy_status(), ok=True))
+        return self._json(start_ps2_easy_pass(user))
 
     def post_login(self, body):
         ok, msg = authenticate(body.get("user", ""), body.get("pin", ""))

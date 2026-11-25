@@ -1,0 +1,196 @@
+"""The PS2 easy pass: C++ written from the smallest functions' instructions, compiled through decomp.me (the
+person's tab), with each compiled object reused and decomp.me used lightly."""
+import base64
+import importlib
+import json
+import sys
+
+import pytest
+
+from conftest import PORTAL
+
+import ps2_shapes as PSH
+
+sys.path.insert(0, str(PORTAL))
+server = importlib.import_module("decomp_portal_server")
+
+JR_RA = 0x03E00008
+
+
+# --------------------------------------------------------------------------- C++ from two or three instructions
+
+def test_empty_function_and_member_getters():
+    assert PSH.sources((JR_RA, 0)) == ["// Does nothing.\nvoid Nothing()\n{\n}\n"]
+    (as_int, as_unsigned) = PSH.sources((JR_RA, 0x8C8200D0))            # lw v0, 0xD0(a0)
+    assert "char m_pad00[0xD0];" in as_int and "int m_FieldD0; // +0xD0" in as_int and "return m_FieldD0;" in as_int
+    assert "unsigned int Object::Get()" in as_unsigned
+    first = PSH.sources((JR_RA, 0x8C820000))[0]                         # lw v0, 0(a0): no padding before it
+    assert "m_pad" not in first and "int m_Field0; // +0x0" in first
+    assert "float Object::Get()" in PSH.sources((JR_RA, 0xC4800008))[0]    # lwc1 f0, 8(a0)
+    assert [("unsigned char" in s, "bool" in s) for s in PSH.sources((JR_RA, 0x90820004))] == [(True, False), (False, True)]
+    assert "short Object::Get()" in PSH.sources((JR_RA, 0x84820002))[0]    # lh v0, 2(a0)
+
+
+def test_setters_constants_and_this():
+    assert "void Object::Set(int value)" in PSH.sources((JR_RA, 0xAC850010))[0]       # sw a1, 0x10(a0)
+    assert "void Object::Set(float value)" in PSH.sources((JR_RA, 0xE48C0010))[0]     # swc1 f12, 0x10(a0)
+    assert "return &m_Field20;" in PSH.sources((JR_RA, 0x24820020))[0]                # addiu v0, a0, 0x20
+    assert "return this;" in PSH.sources((JR_RA, 0x0080102D))[0]                      # daddu v0, a0, zero
+    assert "return 0;" in PSH.sources((JR_RA, 0x0000102D))[0]
+    yes = PSH.sources((JR_RA, 0x24020001))                                            # li v0, 1
+    assert "return 1;" in yes[0] and "return true;" in yes[1]
+    assert "return -1;" in PSH.sources((JR_RA, 0x2402FFFF))[0]
+
+
+def test_globals_are_named_for_their_addresses():
+    by_gp = PSH.sources((JR_RA, 0x8F828010), gp=0x0080E170)             # lw v0, -0x7FF0(gp)
+    assert "extern int D_00806180;" in by_gp[0] and "return D_00806180;" in by_gp[0]
+    assert PSH.sources((JR_RA, 0x8F828010)) == []                       # no small-data pointer known: no guess
+    as_array, plain = PSH.sources((0x3C020080, JR_RA, 0x8C428920))      # lui v0, 0x80; jr ra; lw v0, -0x76E0(v0)
+    assert "extern int D_007F8920[];" in as_array and "return D_007F8920[0];" in as_array
+    assert "extern int D_007F8920;" in plain
+    assert "extern char D_00800010[];" in PSH.sources((0x3C020080, JR_RA, 0x24420010))[0]
+
+
+def test_other_code_gets_no_guess():
+    assert PSH.sources((JR_RA, 0x8CA20000)) == []                       # lw v0, 0(a1): not a member of its object
+    assert PSH.sources((0x27BDFFF0, JR_RA, 0x27BD0010)) == []
+    assert PSH.sources((JR_RA, 0, 0, 0)) == []
+
+
+def test_shape_text_passes_the_source_policy():
+    from msvc_verify import check_genuine_cpp
+    for words in ((JR_RA, 0), (JR_RA, 0x8C8200D0), (JR_RA, 0xAC850010), (0x3C020080, JR_RA, 0x8C428920)):
+        for text in PSH.sources(words, gp=0x0080E170):
+            assert check_genuine_cpp(text) == []
+    assert check_genuine_cpp(server.PS2_PRELUDE + "int f() { return 1; }\n") == []
+
+
+# --------------------------------------------------------------------------- compiling through the tab, once per text
+
+class FakeBridge:
+    def __init__(self, answer, connected=True):
+        self.answer, self.is_connected, self.jobs = answer, connected, []
+
+    def connected(self):
+        return self.is_connected
+
+    def run(self, job, timeout=None):
+        self.jobs.append(job)
+        return dict(self.answer)
+
+
+@pytest.fixture
+def through_tab(monkeypatch):
+    monkeypatch.setattr(server.PV, "local_compiler", lambda: None)
+    monkeypatch.setitem(server.PS2_DIRECT, "blocked", True)
+    monkeypatch.setattr(server, "PS2_OBJECTS", {})
+
+    def use(answer, connected=True):
+        b = FakeBridge(answer, connected)
+        monkeypatch.setattr(server, "BRIDGE", b)
+        return b
+    return use
+
+
+TASK = {"id": "ps2_0037E020", "bin": "ps2", "symbol": "func_0037E020", "va": "PS2 0x0037E020", "fva_int": 0x0037E020,
+        "size": 8, "status": "UNCLAIMED", "claimed_by": "", "flags": "-O3 -lang c++ -str readonly"}
+
+
+def test_the_tab_compiles_and_the_object_is_reused(through_tab):
+    b = through_tab({"ok": True, "success": True, "right_object": base64.b64encode(b"\x7fELFobject").decode(), "slug": "abcde"})
+    res = server.ps2_compile(dict(TASK), "int f() { return 1; }\r\n", through="abcde")
+    assert res["ok"] and res["object"] == b"\x7fELFobject" and res["slug"] == "abcde" and not res.get("cached")
+    job = b.jobs[0]
+    assert job["slug"] == "abcde" and "create" not in job                    # compiled in the shared scratch
+    assert job["compile"]["compiler"] == server.PV.COMPILER and job["compile"]["source_code"] == "int f() { return 1; }"
+    again = server.ps2_compile(dict(TASK), "int f() { return 1; }\n", through="abcde")
+    assert again["ok"] and again["cached"] and len(b.jobs) == 1               # the same text: decomp.me is not asked again
+    other = server.ps2_compile(dict(TASK), "int f() { return 2; }\n", through="abcde")
+    assert other["ok"] and len(b.jobs) == 2
+
+
+def test_compiler_errors_and_a_missing_tab_are_told_apart(through_tab):
+    through_tab({"ok": True, "success": False, "compiler_output": "code.c:1: undefined identifier", "slug": "abcde"})
+    res = server.ps2_compile(dict(TASK), "int f() { return g; }", through="abcde")
+    assert not res["ok"] and "undefined identifier" in res["compiler_error"]
+    b = through_tab({"ok": True}, connected=False)
+    res = server.ps2_compile(dict(TASK), "int f() { return 3; }", through="abcde")
+    assert not res["ok"] and res["unreachable"] and "compiler_error" not in res and b.jobs == []
+    through_tab({"ok": False, "error": "your decomp.me tab didn't answer in time"})
+    res = server.ps2_compile(dict(TASK), "int f() { return 4; }", through="abcde")
+    assert not res["ok"] and res["unreachable"] and "answer in time" in res["error"]
+
+
+# --------------------------------------------------------------------------- the pass
+
+def key_of(code):
+    """The key the pass looks a compiled object up by."""
+    return server._ps2_key(*server.DME._inline_project_includes(code, [server.INCLUDE_DIR]))
+
+
+@pytest.fixture
+def pass_env(monkeypatch, tmp_path):
+    tasks = [dict(TASK), dict(TASK, id="ps2_0037E030", fva_int=0x0037E030, va="PS2 0x0037E030", symbol="func_0037E030"),
+             dict(TASK, id="xb_00011000", bin="xb", fva_int=0x11000)]
+    recorded, calls = [], []
+    monkeypatch.setattr(server, "ALL_TASKS", tasks)
+    monkeypatch.setattr(server, "PS2_EASY_JSON", tmp_path / "ps2_easy_pass.json")
+    monkeypatch.setattr(server, "PS2_EASY_PAUSE", 0)
+    monkeypatch.setattr(server, "PS2_OBJECTS", {})
+    monkeypatch.setattr(server, "ps2_easy_codes", lambda t: ["// first\nint a();\n", "// second\nint b();\n"])
+    monkeypatch.setattr(server, "_held_by_someone_else", lambda t, user: False)
+    monkeypatch.setattr(server, "record_verified", lambda t, code, user, tool, res, **k: recorded.append((t["id"], code, user, tool)))
+    for name in ("save_overlay", "save_registry", "append_audit"):
+        monkeypatch.setattr(server, name, lambda *a, **k: None)
+    monkeypatch.setitem(server.PS2EASY, "stop", False)
+    return tasks, recorded, calls
+
+
+def test_pass_records_matches_and_remembers_what_it_tried(pass_env, monkeypatch):
+    tasks, recorded, calls = pass_env
+
+    def verify(t, code, object_b64="", slug="", through=""):
+        calls.append((t["id"], code.split("\n")[0], through))
+        server.PS2_OBJECTS[key_of(code)] = b"o"          # as a real compile would leave it
+        t["decompme_slug"] = "abcde"
+        ok = t["id"] == "ps2_0037E020" and "second" in code
+        return {"ok": True, "verified": ok, "reloc_unverified": 0}
+    monkeypatch.setattr(server, "run_verify_ps2", verify)
+    st = server.ps2_easy_pass("Alice")
+    assert recorded == [("ps2_0037E020", "// second\nint b();\n", "Alice", server.PS2_EASY_TOOL)]
+    assert tasks[0]["status"] == "VERIFIED" and tasks[1]["status"] == "UNCLAIMED" and tasks[2]["status"] == "UNCLAIMED"
+    assert st["matched"] == 1 and st["tried"] == 2 and st["compiles"] == 2 and not st["running"]
+    assert [c[0] for c in calls] == ["ps2_0037E020", "ps2_0037E020", "ps2_0037E030", "ps2_0037E030"]   # never the Xbox one
+    assert calls[0][2] == "" and calls[1][2] == "abcde"                    # the first scratch made serves every later compile
+    state = json.loads(server.PS2_EASY_JSON.read_text(encoding="utf-8"))
+    assert state["slug"] == "abcde" and state["tried"] == {"ps2:0x0037E030": server.PS2_EASY_VERSION}
+    calls.clear()
+    st = server.ps2_easy_pass("Alice")                                     # again: nothing left that wasn't tried
+    assert calls == [] and st["total"] == 0
+
+
+def test_pass_stops_when_the_tab_is_gone_and_at_its_cap(pass_env, monkeypatch):
+    tasks, recorded, calls = pass_env
+    monkeypatch.setattr(server, "run_verify_ps2", lambda t, code, **k: {"ok": False, "compiler_unavailable": True})
+    st = server.ps2_easy_pass("Alice")
+    assert "decomp.me tab isn't connected" in st["last"] and st["tried"] == 0 and recorded == []
+    assert json.loads(server.PS2_EASY_JSON.read_text(encoding="utf-8"))["tried"] == {}     # nothing counted as tried
+
+    def verify(t, code, **k):
+        server.PS2_OBJECTS[key_of(code)] = b"o"
+        return {"ok": True, "verified": False}
+    monkeypatch.setattr(server, "run_verify_ps2", verify)
+    monkeypatch.setattr(server, "PS2_EASY_MAX", 1)
+    st = server.ps2_easy_pass("Alice")
+    assert st["compiles"] == 1 and "light user" in st["last"]
+    assert json.loads(server.PS2_EASY_JSON.read_text(encoding="utf-8"))["tried"] == {}     # cut short: tried again next run
+
+
+def test_pass_will_not_start_without_a_way_to_compile(monkeypatch):
+    monkeypatch.setattr(server, "image_for", lambda b: object())
+    monkeypatch.setattr(server.PV, "local_compiler", lambda: None)
+    monkeypatch.setattr(server, "BRIDGE", FakeBridge({}, connected=False))
+    monkeypatch.setitem(server.PS2EASY, "running", False)
+    res = server.start_ps2_easy_pass("Alice")
+    assert not res["ok"] and res["not_connected"] and "bookmark" in res["error"]
