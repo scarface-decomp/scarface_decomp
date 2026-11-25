@@ -2,7 +2,7 @@
 """
 C++ for the smallest PS2 functions, written from their instructions.
 
-Thousands of PS2 functions are two or three instructions: an empty function, a function that returns
+Thousands of PS2 functions are two to four instructions: an empty function, a function that returns
 one member of its object, one that stores its argument in a member, one that returns a constant or a
 global. Their source can only be a line or two, so it is written here from the instructions themselves
 and then compiled and checked like any other submission: nothing counts unless the game's compiler
@@ -124,11 +124,146 @@ def _three(words: Tuple[int, ...]) -> List[str]:
     return []
 
 
+# ---- three and four instructions ---------------------------------------------------------------------------
+
+SIZES = {"char": 1, "signed char": 1, "unsigned char": 1, "bool": 1, "short": 2, "unsigned short": 2}
+V1, A2 = 3, 6
+MOVE_V0_A0 = (0x0080102D, 0x00801021, 0x00801025)
+
+
+def _class(members: List[Tuple[int, str]], method: str, extra: str = "") -> str:
+    """A class with these (offset, type) members, padded to their places, and one method."""
+    lines, at = [], 0
+    for off, typ in sorted(set(members)):
+        if off > at:
+            lines.append(f"    char m_pad{at:02X}[0x{off - at:X}];")
+        lines.append(f"    {typ} m_Field{off:X}; // +0x{off:X}")
+        at = off + SIZES.get(typ, 4)
+    return extra + "class Object\n{\npublic:\n    " + method + ";\n" + "\n".join(lines) + "\n};\n\n"
+
+
+def _store(w: int):
+    """(type, what, offset, base register, source) for sb/sh/sw/swc1, else None."""
+    op, rs, rt, imm = _fields(w)
+    if op in STORES:
+        return STORES[op][0], STORES[op][1], _s16(imm), rs, ("r", rt)
+    if op == 0x39:
+        return "float", "a float", _s16(imm), rs, ("f", rt)
+    return None
+
+
+def _float_text(bits: int) -> str:
+    import struct
+    v = struct.unpack("<f", struct.pack("<I", bits & 0xFFFFFFFF))[0]
+    text = repr(v)
+    if "e" not in text and "." not in text:
+        text += ".0"
+    return text + "f"
+
+
+def _three_more(words: Tuple[int, ...], gp: int) -> List[str]:
+    """One instruction, jr ra, one instruction in the delay slot."""
+    w0, w2 = words[0], words[2]
+    if words[1] != JR_RA:
+        return []
+    if w0 == 0x44800000 and w2 == NOP:                                     # mtc1 zero, f0
+        return ["// Returns 0.0.\nfloat Zero()\n{\n    return 0.0f;\n}\n"]
+    op0, rs0, rt0, imm0 = _fields(w0)
+    op2, rs2, rt2, imm2 = _fields(w2)
+    st0, st2 = _store(w0), _store(w2)
+    # store the argument, return a constant
+    if st0 and st0[3] == A0 and st0[4] in (("r", A1), ("f", F12)) and st0[2] >= 0 and op2 == 0x09 and rs2 == 0 and rt2 == V0:
+        typ, what, off = st0[0], st0[1], st0[2]
+        n = _s16(imm2)
+        rets = [("bool", "true")] if n == 1 else []
+        rets.append(("int", str(n)))
+        return [f"// Stores its argument as {what} at +0x{off:X} of its object and returns {val}.\n"
+                + _class([(off, typ)], f"{ret} Set({typ} value)")
+                + f"{ret} Object::Set({typ} value)\n{{\n    m_Field{off:X} = value;\n    return {val};\n}}\n" for ret, val in rets]
+    # store a constant
+    if op0 == 0x09 and rs0 == 0 and rt0 == V1 and st2 and st2[4] == ("r", V1) and st2[0] != "float":
+        typ, what, off, n = st2[0], st2[1], st2[2], _s16(imm0)
+        if st2[3] == A0 and off >= 0:
+            types = [typ] + (["bool"] if typ == "char" and n in (0, 1) else [])
+            return [f"// Sets the member at +0x{off:X} of its object to {n}.\n" + _class([(off, t)], "void Set()")
+                    + f"void Object::Set()\n{{\n    m_Field{off:X} = {('true' if n else 'false') if t == 'bool' else n};\n}}\n" for t in types]
+        if st2[3] == GP and gp:
+            name = f"D_{(gp + off) & 0xFFFFFFFF:08X}"
+            return [f"// Sets the global {name} to {n}.\nextern {typ} {name};\n\nvoid Set()\n{{\n    {name} = {n};\n}}\n"]
+    # a member of the object a member points to
+    if op0 == 0x23 and rt0 == V0 and rs2 == V0 and (op2 in LOADS and rt2 == V0 or op2 == 0x31 and rt2 == F0):
+        typ, what = ("float", "the float") if op2 == 0x31 else LOADS[op2]
+        off0, off2 = _s16(imm0), _s16(imm2)
+        inner = (f"struct Inner\n{{\n" + (f"    char m_pad00[0x{off2:X}];\n" if off2 else "")
+                 + f"    {typ} m_Field{off2:X}; // +0x{off2:X}\n}};\n\n")
+        if off2 < 0:
+            return []
+        if rs0 == A0 and off0 >= 0:
+            return [f"// Returns {what} at +0x{off2:X} of the object its member at +0x{off0:X} points to.\n"
+                    + _class([(off0, "Inner*")], f"{typ} Get()", inner)
+                    + f"{typ} Object::Get()\n{{\n    return m_Field{off0:X}->m_Field{off2:X};\n}}\n"]
+        if rs0 == GP and gp:
+            name = f"D_{(gp + off0) & 0xFFFFFFFF:08X}"
+            return [f"// Returns {what} at +0x{off2:X} of the object the global {name} points to.\n" + inner
+                    + f"extern Inner* {name};\n\n{typ} Get()\n{{\n    return {name}->m_Field{off2:X};\n}}\n"]
+    # is a member not zero?
+    if rs0 == A0 and rt0 == V0 and op0 in (0x23, 0x24) and w2 == 0x0002102B and _s16(imm0) >= 0:      # sltu v0, zero, v0
+        typ, off = ("int" if op0 == 0x23 else "unsigned char"), _s16(imm0)
+        return [f"// Says whether the member at +0x{off:X} of its object is not zero.\n" + _class([(off, typ)], "bool IsSet()")
+                + f"bool Object::IsSet()\n{{\n    return m_Field{off:X} != 0;\n}}\n"]
+    # a 32-bit constant
+    if op0 == 0x0F and rs0 == 0 and rt0 == V0 and op2 == 0x0D and rs2 == V0 and rt2 == V0:
+        n = (imm0 << 16) | imm2
+        return [f"// Returns 0x{n:08X}.\nunsigned int Number()\n{{\n    return 0x{n:08X};\n}}\n",
+                f"// Returns 0x{n:08X}.\nint Number()\n{{\n    return 0x{n:08X};\n}}\n"]
+    # two stores
+    if st0 and st2 and st0[3] == A0 and st2[3] == A0 and st0[2] >= 0 and st2[2] >= 0 and st0[2] != st2[2]:
+        a, b = (st0[2], st0[0]), (st2[2], st2[0])
+        if st0[4] == ("r", 0) and st2[4] == ("r", 0):
+            head = f"// Sets the members at +0x{a[0]:X} and +0x{b[0]:X} of its object to zero.\n" + _class([a, b], "void Clear()")
+            first, second = f"    m_Field{a[0]:X} = 0;\n", f"    m_Field{b[0]:X} = 0;\n"
+            return [head + "void Object::Clear()\n{\n" + x + y + "}\n" for x, y in ((first, second), (second, first))]
+        if st0[4] == ("r", A1) and st2[4] == ("r", A2):
+            return [f"// Stores its two arguments at +0x{a[0]:X} and +0x{b[0]:X} of its object.\n"
+                    + _class([a, b], f"void Set({a[1]} first, {b[1]} second)")
+                    + f"void Object::Set({a[1]} first, {b[1]} second)\n{{\n    m_Field{a[0]:X} = first;\n    m_Field{b[0]:X} = second;\n}}\n"]
+    # clear a member and return the object
+    if st0 and st0[3] == A0 and st0[4] == ("r", 0) and st0[2] >= 0 and w2 in MOVE_V0_A0:
+        off, typ = st0[2], st0[0]
+        return [f"// Sets the member at +0x{off:X} of its object to zero and returns the object.\n"
+                + _class([(off, typ)], "Object* Clear()")
+                + f"Object* Object::Clear()\n{{\n    m_Field{off:X} = 0;\n    return this;\n}}\n"]
+    return []
+
+
+def _four(words: Tuple[int, ...], gp: int) -> List[str]:
+    w0, w1, w2, w3 = words
+    op0, rs0, rt0, imm0 = _fields(w0)
+    if op0 == 0x0F and rs0 == 0 and rt0 == V0 and w1 == 0x44820000 and w2 == JR_RA and w3 == NOP:     # lui v0; mtc1 v0, f0
+        text = _float_text(imm0 << 16)
+        return [f"// Returns {text[:-1]}.\nfloat Number()\n{{\n    return {text};\n}}\n"]
+    op1, rs1, rt1, imm1 = _fields(w1)
+    op3, rs3, rt3, imm3 = _fields(w3)
+    if (op0 == 0x23 and rt0 == V1 and op1 == 0x09 and rs1 == V1 and rt1 == V1 and w2 == JR_RA
+            and op3 == 0x2B and rt3 == V1 and rs3 == rs0 and imm3 == imm0):                           # lw; addiu; jr ra; sw
+        off, n = _s16(imm0), _s16(imm1)
+        change = f"+= {n}" if n >= 0 else f"-= {-n}"
+        if rs0 == A0 and off >= 0:
+            return [f"// Adds {n} to the member at +0x{off:X} of its object.\n" + _class([(off, "int")], "void Step()")
+                    + f"void Object::Step()\n{{\n    m_Field{off:X} {change};\n}}\n"]
+        if rs0 == GP and gp:
+            name = f"D_{(gp + off) & 0xFFFFFFFF:08X}"
+            return [f"// Adds {n} to the global {name}.\nextern int {name};\n\nvoid Step()\n{{\n    {name} {change};\n}}\n"]
+    return []
+
+
 def sources(words: Tuple[int, ...], va: int = 0, gp: int = 0) -> List[str]:
     """C++ to try for a function made of these instructions, the likeliest first."""
     words = tuple(words)
     if len(words) == 2 and words[0] == JR_RA:
         return _two(words, gp)
     if len(words) == 3:
-        return _three(words)
+        return _three(words) or _three_more(words, gp)
+    if len(words) == 4:
+        return _four(words, gp)
     return []
