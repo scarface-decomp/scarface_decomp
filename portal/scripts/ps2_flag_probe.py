@@ -24,10 +24,10 @@ The first two questions came from the first PS2 easy-pass runs (November 2026):
 The game does both everywhere (1,772 functions end in such a jump, in every part of the code; the examiner's
 census, November 2026), so the answer is one build or one setting for the whole game.
 
-Without arguments the probe runs the current round (ROUND, below): 32 compiles that ask whether the 3.0 line
-of builds, which do store the float first, could be the game's compiler after all, and whether a `#pragma` or
-another way of writing it changes the lane's own build, and what the easy pass's first jump shape compiles to. `--sweep` runs the first two questions with the lane's
-build and 16 other settings; `--all-builds` adds the other 22 builds with the lane's flags.
+Without arguments the probe runs the current round (ROUND, below): 33 compiles that ask which 3.0.1 build keeps
+the source's order and still fills its delay slots when the scheduler is off. `--sweep` runs the first two
+questions with the lane's build and 16 other settings; `--all-builds` adds the other 22 builds with the lane's
+flags.
 
 It asks for your handle and PIN (the PIN isn't shown, stored or printed).
 """
@@ -81,52 +81,38 @@ BUILT_IN = [
     (0x00392940, "a float stored, then 1 returned (the game stores first)", FLOAT_STORE),
 ]
 
-# The round of 25 November 2026. The float store comes first only in the 3.0 line of builds (3.0.3, 3.0 builds 38,
-# 50 and 52), which were ruled out because they "never write madda.s chains". But every build has a setting
-# called usefloatacc, so that may only have been their default. Three questions, one compile a line:
-#   1. do the 3.0-line builds make the jump and the store-first order with the lane's flags?
-#   2. do they write the game's multiply-accumulate chain (0x0066DFF0, a dot product) with a setting turned on?
-#   3. does a setting or another way of writing it make the lane's own build store the float first?
+# The round that follows the one of 25 November 2026 (docs/PS2.md has what that one showed). Three things the
+# lane's build gets wrong all look like one cause, the instruction scheduler: the game keeps the order the
+# source has (float store before the return value; each pair of float loads next to its multiply) and still
+# fills its delay slots. On build 103, `#pragma schedule off` keeps the order but leaves the delay slot empty.
+# So: which 3.0.1 build keeps the order AND fills the slot with the scheduler off? One compile a line.
+#   1. the float store with `#pragma schedule off`, on every other 3.0.1 build;
+#   2. the dot product (0x0066DFF0) with `#pragma schedule off`, on every 3.0.1 build;
+#   3. a jump after reading a global (0x0038EC30: the game uses $at for the address, build 103 uses $v0), on the
+#      3.0-line builds, with the scheduler off, and with the global as a member of a larger object.
 OLD_LINE = ["mwcps2-3.0.3-020716", "mwcps2-3.0b38-030307", "mwcps2-3.0b50-030527", "mwcps2-3.0b52-030722"]
+NEW_LINE = [b for b in BUILDS if "-3.0.1b" in b]                # 3.0.1 builds 44 to 210
+SCHEDULE_OFF = "#pragma schedule off\n\n"
+READ_GLOBAL = ('extern int D_0081DFE8[];\nextern "C" void func_0047EEF0(int);\n\n'
+               "void Forward()\n{\n    func_0047EEF0(D_0081DFE8[0]);\n}\n")
 
 
 def on(builds: list) -> list:
     return [{"compiler": b, "flags": LANE_FLAGS} for b in builds]
 
 
-def pragma(*names: str) -> str:
-    return "".join(f"#pragma {n}\n" for n in names) + "\n"
-
-
-ROUND = (
-    [(0x003EB610, "the jump, on the 3.0-line builds", TAIL_CALL, on(OLD_LINE)),
-     (0x00392940, "the float store, on the 3.0-line builds", FLOAT_STORE, on(OLD_LINE)),
-     (0x0066DFF0, "a dot product (the game writes mula.s, madda.s, madd.s)", DOT,
-      on([LANE_COMPILER, "mwcps2-3.0.1b87-031208"] + OLD_LINE))]
-    + [(0x0066DFF0, f"the dot product with #pragma {' and '.join(n)}", pragma(*n) + DOT, on(OLD_LINE[2:]))
-       for n in (("usefloatacc on",), ("fastmath on",), ("usefloatacc on", "fastmath on"))]
-    + [(0x00392940, f"the float store with #pragma {n}", pragma(n) + FLOAT_STORE, on([LANE_COMPILER]))
-       for n in ("schedule off", "peephole off", "usefloatacc off", "fastmath on", "memoryrewrite off",
-                 "conditional_move off")]
-    + [(0x00392940, "the float store, returning int", FLOAT_CLASS % "int"
-        + "int Object::Set(float value)\n{\n    m_FieldC = value;\n    return 1;\n}\n", on([LANE_COMPILER])),
-       (0x00392940, "the float store, written as one expression", FLOAT_CLASS % "bool"
-        + "bool Object::Set(float value)\n{\n    return (m_FieldC = value, true);\n}\n", on([LANE_COMPILER])),
-       (0x00392940, "the float store, as a plain function", "struct Object\n{\n    char m_pad00[0xC];\n    float m_FieldC;\n};\n\n"
-        "int Set(Object* object, float value)\n{\n    object->m_FieldC = value;\n    return 1;\n}\n", on([LANE_COMPILER]))]
-    # 4. The easy pass's first run with exceptions off: the jump shape it tried first (a global read from its
-    #    full address, then the jump) failed four times. What does that text compile to? And two other ways.
-    + [(0x0038EC30, "a jump after reading a global, as the easy pass writes it",
-        'extern int D_0081DFE8[];\nextern "C" void func_0047EEF0(int);\n\n'
-        "void Forward()\n{\n    func_0047EEF0(D_0081DFE8[0]);\n}\n", on([LANE_COMPILER])),
-       (0x0038EC30, "that jump, with the global as a pointer to an object",
-        'struct Manager;\nextern Manager* D_0081DFE8;\nextern "C" void func_0047EEF0(Manager*);\n\n'
-        "void Forward()\n{\n    func_0047EEF0(D_0081DFE8);\n}\n", on([LANE_COMPILER])),
-       (0x0037DBF0, "a jump passing the object, one of its members and a zero",
-        'extern "C" void func_0039A050(void*, int, int);\n\n'
-        "class Object\n{\npublic:\n    void Forward();\n    char m_pad00[0xD0];\n    int m_FieldD0; // +0xD0\n};\n\n"
-        "void Object::Forward()\n{\n    func_0039A050(this, m_FieldD0, 0);\n}\n", on([LANE_COMPILER]))]
-)
+ROUND = [
+    (0x00392940, "the float store with #pragma schedule off", SCHEDULE_OFF + FLOAT_STORE,
+     on([b for b in NEW_LINE if b != LANE_COMPILER])),
+    (0x0066DFF0, "the dot product with #pragma schedule off", SCHEDULE_OFF + DOT, on(NEW_LINE)),
+    (0x0038EC30, "a jump after reading a global, on the 3.0-line builds", READ_GLOBAL, on(OLD_LINE)),
+    (0x0038EC30, "that jump with #pragma schedule off", SCHEDULE_OFF + READ_GLOBAL,
+     on([LANE_COMPILER, "mwcps2-3.0.1b87-031208", "mwcps2-3.0.1b95-040309"])),
+    (0x0038EC30, "that jump, with the global as the first member of a larger object",
+     'struct Manager\n{\n    int m_Field0;\n    int m_Rest[3];\n};\n\nextern Manager D_0081DFE8;\n'
+     'extern "C" void func_0047EEF0(int);\n\nvoid Forward()\n{\n    func_0047EEF0(D_0081DFE8.m_Field0);\n}\n',
+     on([LANE_COMPILER])),
+]
 
 
 def call(base: str, path: str, body: dict) -> dict:
