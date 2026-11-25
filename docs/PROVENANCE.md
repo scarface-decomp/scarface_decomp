@@ -17,6 +17,10 @@ which were never on any disc.
   the code does.
 * **Public, licensed material:** open-source libraries the game links against (with their license
   kept), public documentation and published research, credited in the pull request or commit.
+* **Published tools and research about the game,** including work whose author had leaked source at
+  hand (*scarface-p3d*, the ToolKit). Anyone may read them. What they say counts only where the game
+  agrees; they are credited in [CREDITS.md](CREDITS.md); code is copied only where its licence allows,
+  with the licence kept (a project with no licence may be learned from, not copied).
 * **Other discs and kits you hold your own copy of:** prototype, review and retail builds of this game
   or another one, and development kits with their libraries and manuals. Whatever such a disc or kit
   carries may be read and used by whoever holds it: its programs, the type names and text inside them,
@@ -44,8 +48,8 @@ If you are unsure where something came from, leave it out and ask in an issue.
 
 ## Studying leaked material: the clean room
 
-Leaked source, leaked symbol files, and research that was done with them at hand may still be studied.
-Their code and names stay out of the project. What it shows about the game's files and behaviour may come in only through the clean-room
+Leaked source and leaked symbol files may still be studied. Their code and names stay out of the
+project. What it shows about the game's files and behaviour may come in only through the clean-room
 process in [CLEAN_ROOM.md](CLEAN_ROOM.md): someone who read it (the examiner) writes a spec in their own
 words (no code, no names from it), with every statement something that can be checked on a copy of the
 game; the spec is reviewed; and someone who has never read the material writes the code from the spec and

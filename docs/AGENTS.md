@@ -94,8 +94,10 @@ Some of this knowledge came from outside research done next to the game's leaked
 project only as the specs in [docs/cleanroom](cleanroom), written in their own words, so the code written
 from them is independent. If you write code from the specs:
 
-* don't open or search for the outside research (`scarface-p3d`, its notes or name lists) or any leaked
-  source, and don't paste in code from them;
+* don't open or search for leaked source or leaked symbol files, and don't paste in code from them.
+  Since 25 November 2026 the published research itself (`scarface-p3d`, its notes and name lists, and
+  tools built on it) is open to read: check it against the game, credit it, and copy code only where
+  its licence allows;
 * choose your own names; take names only from this repository, the game's own text and the class names in
   its run-time type information;
 * note in your pull request which spec you worked from, so [CLEAN_ROOM.md](CLEAN_ROOM.md) can record it.

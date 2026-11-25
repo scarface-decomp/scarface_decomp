@@ -9,8 +9,11 @@ A person can start you with one sentence: **"Read AGENTS.md in this repository a
 ## Rules (these come first)
 
 1. **No leaked source code.** Never read, search for or use the leaked source of this game or of other
-   games on the same engine, or tools and name lists written beside it. If a file or web page looks like
-   it is that, stop reading it and tell the person.
+   games on the same engine, or leaked symbol files. If a file or web page looks like it is that, stop
+   reading it and tell the person. Published tools and research about the game are a different thing
+   and are open to you, even where their authors worked with leaked source at hand (`scarface-p3d`, the
+   ToolKit): read them, check what they say against the game, credit them, and copy code only where
+   its licence allows ([docs/PROVENANCE.md](docs/PROVENANCE.md)).
 2. **No game files in the repository.** Never commit, upload or paste the game's files, or bytes of them
    beyond what `portal/agent.py packet` prints for the one function you are working on.
 3. **Real C++ only.** No inline assembly, no `__declspec(naked)`, no emitted bytes, no hard-coded

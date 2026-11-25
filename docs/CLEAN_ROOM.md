@@ -1,8 +1,7 @@
 # Clean-room work
 
-Some useful material can't come into this project: leaked source code, leaked symbol files, and research
-done by people who had them open while they worked. Its *code* and *names* stay out
-([PROVENANCE.md](PROVENANCE.md)). What it shows about the game's files and behaviour can come in, whatever
+Some useful material can't come into this project: leaked source code and leaked symbol files. Their
+*code* and *names* stay out ([PROVENANCE.md](PROVENANCE.md)). What it shows about the game's files and behaviour can come in, whatever
 the material is, through a
 [clean-room](https://en.wikipedia.org/wiki/Clean-room_design) process: the knowledge crosses over as a
 written description, and the code is written fresh by someone who never saw the original.
@@ -11,14 +10,24 @@ written description, and the code is written fresh by someone who never saw the 
 examiner, reaching the project only as specs ("outside research" below means any such material). It does not make the project as a whole a clean-room
 reimplementation. A matching decompilation reads the original program: the game's own machine code is the
 reference every function is checked against. So the claim the project makes is narrower and should be
-worded that way: **no leaked source code is in the repository, nor any code or name taken from it or
-from anything written beside it; what examiners learned from such material comes in only as reviewed
-specs; you need your own copy of the game.** Don't describe the decompilation itself as "clean room".
+worded that way: **no leaked source code is in the repository, nor any code or name taken from it; what
+examiners learned from leaked material comes in only as reviewed specs; published research whose authors
+had leaked source at hand is read, checked against the game and credited; you need your own copy of the
+game.** Don't describe the decompilation itself as "clean room".
 
 **What is not behind the wall.** Anything a contributor holds their own copy of: the game, prototype and
 review builds, other games, development kits and manuals, and whatever those discs carry, linker maps
 included. Anyone may read those directly, implementers too ([PROVENANCE.md](PROVENANCE.md)). The wall is
 for leaked source and leaked symbol files only.
+
+**Published research, since 25 November 2026.** Until that date the project also kept published
+research behind the wall when its author had worked with leaked source open: *scarface-p3d* by aap and
+the notes kept with it. Specs SPEC-001 to SPEC-012 were written under that rule, and the record below
+shows it. From that date such research, and tools built on it, may be read by anyone, implementers
+included. What it says is checked against the game; it is credited in [CREDITS.md](CREDITS.md); its
+code is copied only where its licence allows; and a name from it is recorded with its source in
+`reports/names.json`. In the roles below, "outside research" now means leaked source and leaked symbol
+files.
 
 ## Other builds the project reads
 

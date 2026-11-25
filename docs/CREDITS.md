@@ -70,10 +70,11 @@ authors are credited in the commit history. Thank you.
   `Namespace::classLinkTo`, `Con::getReturnBuffer`), and its entry in `reports/names.json` says so.
   `classLinkNamespaces` is in the game's own error text.
 * [scarface-p3d](https://github.com/aap/scarface-p3d) by aap (MIT licence) and the research notes kept
-  with an extended copy of it. Its author worked with leaked source open, so none of its code or names is
-  used: it is read only by clean-room examiners, and what it showed about the game's files and behaviour
-  reached the project as the specs in `docs/cleanroom/`, each checked on the game's own files
-  ([CLEAN_ROOM.md](CLEAN_ROOM.md)).
+  with an extended copy of it. Its author worked with leaked source open. Until 25 November 2026 it was
+  read only by clean-room examiners, and what it showed about the game's files and behaviour reached the
+  project as the specs in `docs/cleanroom/`, each checked on the game's own files
+  ([CLEAN_ROOM.md](CLEAN_ROOM.md)). Since that date any contributor may read it; anything taken from it
+  is checked against the game and named here.
 * The fonts of the website and the portal: [Anton](https://github.com/googlefonts/AntonFont) (The Anton
   Project Authors), [Josefin Sans](https://github.com/ThomasJockin/JosefinSansFont-master) (The Josefin
   Sans Project Authors) and Marcellus (Brian J. Bonislawsky, Astigmatic), each under the SIL Open Font

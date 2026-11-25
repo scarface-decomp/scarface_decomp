@@ -4,7 +4,7 @@ What is still wrong or unfinished, written so someone new can pick one thing and
 what is wrong, how to see it, and what "done" looks like. The numbers are from 13 November 2026.
 
 Before you start: read [CONTRIBUTING.md](CONTRIBUTING.md) and [PROVENANCE.md](PROVENANCE.md). You need your
-own copy of the game. Nothing here may come from leaked source code or from tools written beside it, and no
+own copy of the game. Nothing here may come from leaked source code or leaked symbol files, and no
 game files go into the repository. Say in [Discord](https://discord.gg/azvrtGBvau) what you are taking so
 two people don't do the same thing.
 
