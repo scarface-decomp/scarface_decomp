@@ -44646,6 +44646,61 @@
       "name": "OHCD_fQueueTransferRequest",
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map",
       "why": "The same 134 bytes as @OHCD_fQueueTransferRequest@8 (xapilib) in that build, addresses apart, and found only once in this program."
+    },
+    "xb:0x002C70E0": {
+      "name": "inflate",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for inflate."
+    },
+    "xb:0x002CC7F0": {
+      "name": "inflate_table",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for inflate_table."
+    },
+    "xb:0x002CC380": {
+      "name": "inflate_fast",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for inflate_fast."
+    },
+    "xb:0x002CC350": {
+      "name": "zcalloc",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for zcalloc."
+    },
+    "xb:0x002CC370": {
+      "name": "zcfree",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for zcfree."
+    },
+    "xb:0x002C6E80": {
+      "name": "inflateReset",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for inflateReset."
+    },
+    "xb:0x002C6ED0": {
+      "name": "inflateInit2_",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for inflateInit2_."
+    },
+    "xb:0x002C6FA0": {
+      "name": "inflateInit_",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for inflateInit_."
+    },
+    "xb:0x002C8540": {
+      "name": "inflateEnd",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for inflateEnd."
+    },
+    "xb:0x002C6E60": {
+      "name": "crc32",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for crc32."
+    },
+    "xb:0x002C6B80": {
+      "name": "crc32_little",
+      "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
+      "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for crc32_little."
     }
   },
   "members": {

@@ -34,9 +34,9 @@
     },
     "named": {
       "pc": 1,
-      "xb": 2335,
+      "xb": 2339,
       "proto": 2263,
-      "total": 2336
+      "total": 2340
     }
   },
   "described": {
@@ -68,17 +68,17 @@
   "unattributed": 0,
   "queue": {
     "pc": 734,
-    "xb": 10374,
+    "xb": 10375,
     "proto": 9769,
     "ps2": 24297,
-    "total": 11108,
+    "total": 11109,
     "tiers": {
-      "TIER_1_QUICK": 207,
+      "TIER_1_QUICK": 208,
       "TIER_2_SMALL": 839,
       "TIER_3_MEDIUM": 2412,
       "TIER_4_LARGE": 7650
     },
-    "bytes": 2629118,
+    "bytes": 2629579,
     "stubs": 101
   },
   "good_first": [

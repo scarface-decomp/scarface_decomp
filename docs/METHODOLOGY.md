@@ -54,6 +54,14 @@ executable, `.rdata` and `.data` included.
   one of the 20 verified library functions whose bytes depend on the switch matches only without it).
 * No `/GS`: neither Xbox program has the stack-cookie check or loads a cookie in any function, so the
   switch was off (SPEC-013 §5). `/Ob1` changed no verified Xbox function.
+* Public C libraries inside the engine (zlib, libpng) are matched from their published source, kept
+  unchanged under `reconstructed_src/include/`, compiled as C: a submission may add `/TC` to the
+  function's flags. zlib 1.2.1's whole decompression side matches this way with
+  `/TC /O2 /Ot /Oy /G6 /Gd /Zp4`.
+* Register arguments do not by themselves show link-time code generation: with `/O2` this compiler
+  already passes arguments in registers to a `static` function whose address is never taken. zlib's
+  `crc32` (0x002C6E60) and its static helper (0x002C6B80, arguments in EAX, ECX and EDX) match from an
+  ordinary single-file compile.
 * Link-time code generation: the retail Xbox program was linked with it (SPEC-014 §5.5). A few functions
   take an argument in EAX, ESI, EDI or EBX, which this compiler only does then. Such a function and its
   callers cannot be matched by compiling one file; `reports/exam_regarg_xb.json` lists 55 leads (seven

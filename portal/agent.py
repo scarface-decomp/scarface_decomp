@@ -551,7 +551,7 @@ def main(argv=None) -> int:
         p.add_argument("file")
         p.add_argument("--match", default="", help="part of the target's compiled symbol (a template "
                        "instantiation, a compiler helper), when the file's own name can't pick it")
-        p.add_argument("--flags", default="", help="the function's own flags, fewer of them, or /arch:SSE "
+        p.add_argument("--flags", default="", help="the function's own flags, fewer of them, /arch:SSE or /TC (a C library) "
                        "(e.g. a unit built without /EHsc)")
         p.set_defaults(fn=fn)
     args = ap.parse_args(argv)

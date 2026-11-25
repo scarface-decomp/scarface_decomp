@@ -29,6 +29,11 @@
     "why": "inside extent of 0x2397e9"
    },
    {
+    "va": "0x002C8395",
+    "kind": "nonstart",
+    "why": "not a function start: the end of zlib's inflate (0x002C70E0, 5,204 bytes with its switch tables), which matches the public source as one function"
+   },
+   {
     "va": "0x002FCDB0",
     "kind": "library",
     "why": "Byte for byte (addresses masked) _memcpy from LIBCMT:memcpy.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
