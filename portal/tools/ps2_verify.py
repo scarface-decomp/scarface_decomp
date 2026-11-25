@@ -4,8 +4,8 @@ Verify a PS2 function: compile the C++ with the game's compiler on decomp.me, th
 with the game's own bytes here, on your computer.
 
 The PS2 game was built with Metrowerks CodeWarrior for PS2 3.0.1 (build 87 to 103, 2004; see
-docs/PS2.md for how that was worked out). That compiler can't be shared or installed here, but
-decomp.me runs it: `mwcps2-3.0.1b103-040528`, flags `-O3 -lang c++ -str readonly`. decomp.me sends back the object
+docs/PS2.md for how that was worked out). The project doesn't ship that compiler. With a copy in
+portal/tools/mwcps2/ (portal/scripts/setup_mwcps2.py) it runs here; otherwise decomp.me runs it: `mwcps2-3.0.1b103-040528`, flags `-O3 -lang c++ -str readonly`. decomp.me sends back the object
 file it built, and this module checks it the same way portal/tools/msvc_verify.py checks a PC or
 Xbox object:
 
@@ -19,7 +19,8 @@ Xbox object:
 
     parse_object(data) -> ElfObject
     compare(target, fn, obj, fn_va, img) -> dict      (the same fields as the PC verifier)
-    compile_on_decompme(slug, source, context) -> (object bytes, compiler output)
+    compile_locally(source, context) -> {ok, object, output}        (the compiler on this computer)
+    compile_on_decompme(slug, source, context) -> the same, from decomp.me
 """
 
 from __future__ import annotations
@@ -27,10 +28,14 @@ from __future__ import annotations
 import base64
 import json
 import os
+import shutil
 import struct
+import subprocess
+import tempfile
 import urllib.error
 import urllib.request
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 from ps2_binary import address_named
@@ -365,6 +370,64 @@ def create_scratch(fields: dict, base_url: str = DECOMPME_URL) -> dict:
     token = data.get("claim_token")
     return {"ok": True, "slug": slug, "url": url, "claim_url": f"{url}/claim?token={token}" if token else url,
             "score": data.get("score"), "max_score": data.get("max_score")}
+
+
+# ---- the same compiler on this computer ---------------------------------------------------------------------
+#
+# mwccps2.exe is a Windows command-line program. With a copy of the game's build in portal/tools/mwcps2/
+# (portal/scripts/setup_mwcps2.py fetches the one decomp.me uses; SCARFACE_MWCPS2 names another folder),
+# a PS2 function is compiled here in about a second, with no decomp.me tab. The command is decomp.me's own.
+
+LOCAL_DIR = Path(__file__).resolve().parent / "mwcps2"
+LOCAL_EXE = "mwccps2.exe"
+LOCAL_TIMEOUT = 60
+
+
+def local_compiler() -> Optional[Path]:
+    """The folder holding mwccps2.exe on this computer, or None."""
+    for d in (os.environ.get("SCARFACE_MWCPS2"), LOCAL_DIR):
+        if d and (Path(d) / LOCAL_EXE).is_file():
+            return Path(d)
+    return None
+
+
+def _local_runner(exe: Path) -> Optional[List[str]]:
+    """How to start a Windows program here: by itself on Windows, through wibo or Wine elsewhere."""
+    if os.name == "nt":
+        return [str(exe)]
+    import msvc_verify as MV
+    wibo = MV._wibo()
+    if wibo:
+        return [wibo, str(exe)]
+    wine = shutil.which("wine")
+    return [wine, str(exe)] if wine else None
+
+
+def compile_locally(source: str, context: str = "", compiler_dir: Optional[Path] = None) -> dict:
+    """Compile with the copy of the game's compiler on this computer. The same answer as
+    compile_on_decompme: {ok, object (bytes), output} or {ok: False, compiler_error | error}."""
+    d = compiler_dir or local_compiler()
+    if d is None:
+        return {"ok": False, "error": "The PS2 compiler is not on this computer (portal/scripts/setup_mwcps2.py)."}
+    runner = _local_runner(Path(d) / LOCAL_EXE)
+    if runner is None:
+        return {"ok": False, "error": "mwccps2.exe is a Windows program; install wibo "
+                                      "(portal/scripts/setup_wibo.py) or Wine to run it on this system."}
+    text = (context.replace("\r\n", "\n") + "\n" if context.strip() else "") + source.replace("\r\n", "\n")
+    with tempfile.TemporaryDirectory(prefix="scarface_ps2_") as tmp:
+        (Path(tmp) / "candidate.cpp").write_text(text, encoding="utf-8")
+        cmd = runner + ["-c"] + FLAGS.split() + ["-nostdinc", "-stderr", "candidate.cpp", "-o", "candidate.o"]
+        try:
+            p = subprocess.run(cmd, cwd=tmp, capture_output=True, timeout=LOCAL_TIMEOUT)
+        except subprocess.TimeoutExpired:
+            return {"ok": False, "compiler_error": f"The compiler did not finish in {LOCAL_TIMEOUT} seconds."}
+        except OSError as e:
+            return {"ok": False, "error": f"Could not start the PS2 compiler ({e})."}
+        out = (p.stdout + p.stderr).decode("utf-8", "replace").replace(tmp, "").strip()
+        obj = Path(tmp) / "candidate.o"
+        if p.returncode != 0 or not obj.is_file() or obj.stat().st_size == 0:
+            return {"ok": False, "compiler_error": out or "The compiler did not produce an object."}
+        return {"ok": True, "object": obj.read_bytes(), "output": out}
 
 
 def compile_on_decompme(slug: str, source: str, context: str = "", base_url: str = DECOMPME_URL) -> dict:
