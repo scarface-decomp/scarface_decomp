@@ -6,8 +6,9 @@ the material is, through a
 [clean-room](https://en.wikipedia.org/wiki/Clean-room_design) process: the knowledge crosses over as a
 written description, and the code is written fresh by someone who never saw the original.
 
-**What this does and doesn't cover.** The clean room here is this one path: outside material, read by an
-examiner, reaching the project only as specs ("outside research" below means any such material). It does not make the project as a whole a clean-room
+**What this does and doesn't cover.** The clean room here is this one path: leaked material, read by an
+examiner, reaching the project only as specs ("outside research" below means leaked source and leaked
+symbol files; until 25 November 2026 it also meant published research written with them at hand). It does not make the project as a whole a clean-room
 reimplementation. A matching decompilation reads the original program: the game's own machine code is the
 reference every function is checked against. So the claim the project makes is narrower and should be
 worded that way: **no leaked source code is in the repository, nor any code or name taken from it; what
@@ -70,8 +71,9 @@ take their names from that map where their bytes are found exactly once in Scarf
 * **Reviewer.** Checks the spec before anyone builds from it: no code, no names that only the outside
   research has (compare every identifier against the repository and against the research's name lists),
   nothing copied word for word. Records the result below.
-* **Implementer.** Builds from the spec, the repository and their own copy of the game, and **never opens
-  the outside research** (not its code, notes or name lists). If the spec is unclear or wrong, the
+* **Implementer.** Builds from the spec, the repository, their own copy of the game and published research,
+  and **never opens the outside research** (leaked source, leaked symbol files, or anything built from
+  them such as a leaked tree's build outputs). If the spec is unclear or wrong, the
   implementer checks the game files or asks the examiner a question in an issue. The answer goes into
   the spec, so the record stays complete.
 

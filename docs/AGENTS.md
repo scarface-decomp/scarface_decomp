@@ -90,14 +90,16 @@ spec in the same pull request.
 
 ### The clean-room rule
 
-Some of this knowledge came from outside research done next to the game's leaked source. It reaches the
-project only as the specs in [docs/cleanroom](cleanroom), written in their own words, so the code written
-from them is independent. If you write code from the specs:
+Some of this knowledge came from research done next to the game's leaked source. Until 25 November 2026 it
+reached the project only as the specs in [docs/cleanroom](cleanroom), written in their own words. Leaked
+source and leaked symbol files still reach it only that way. If you write code from the specs:
 
 * don't open or search for leaked source or leaked symbol files, and don't paste in code from them.
   Since 25 November 2026 the published research itself (`scarface-p3d`, its notes and name lists, and
   tools built on it) is open to read: check it against the game, credit it, and copy code only where
   its licence allows;
-* choose your own names; take names only from this repository, the game's own text and the class names in
-  its run-time type information;
+* choose your own names, or take them from this repository, the game's own text and the class names in its
+  run-time type information. A name from published research is allowed once you have checked it against the
+  code: record it in `reports/names.json` with the research as its source (`by`, `why`) and name the
+  research in [CREDITS.md](CREDITS.md). Never a name from leaked source or leaked symbol files;
 * note in your pull request which spec you worked from, so [CLEAN_ROOM.md](CLEAN_ROOM.md) can record it.

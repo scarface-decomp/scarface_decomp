@@ -7,7 +7,7 @@
 
 AI assistants: start with docs/AGENTS.md. It covers how to match functions through the local portal, where
 the file formats and the clean-room specs are, the open work, and the rules (US game files only; plain C++;
-the clean-room rule for outside research).
+the clean-room rule for leaked source; published research is read, checked and credited).
 
 ## Docs
 
