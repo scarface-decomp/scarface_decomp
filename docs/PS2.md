@@ -119,10 +119,30 @@ one compiler build or one setting for the whole game.
 
 The probe compiles one function's C++ through your decomp.me tab with other builds or flags and prints how
 close each gets, with the compiled instruction words. It records nothing. Run without arguments it asks
-those two questions with all 23 CodeWarrior for PS2 builds decomp.me has (lane flags), then with the lane's
-build and 11 other settings (`-O2` to `-O4`, speed and space). Give it a file and `--va`, with `--compiler`
+those two questions with the lane's build and 16 other settings (`-O2` to `-O4`, speed and space,
+instruction scheduling and the peephole pass off, C++ exceptions and RTTI off); `--all-builds` adds the
+other 22 CodeWarrior for PS2 builds decomp.me has, with the lane's flags. Give it a file and `--va`, with `--compiler`
 and `--flags`, for your own. Only decomp.me's PS2 builds and optimisation words are accepted, one compile
 per line, two seconds apart.
+
+### What the first run showed (25 November 2026)
+
+All 23 builds with the lane's flags, then build 103 with `-O2` to `-O4`, speed, space and `-inline auto`:
+
+| Question | Result |
+| :--- | :--- |
+| The call that should be a jump (`0x003EB610`) | No build and no setting made the jump. Every one wrote an ordinary call with a 16-byte frame (32 bytes; 40 at `-O2`). |
+| The float store that should come first (`0x00392940`) | Eight builds match: 2.3, 3.0, 3.0.1 (January 2002), 3.0.3, and 3.0 builds 22, 38, 50 and 52. Every 3.0.1 build from 44 on, the lane's among them, puts the store in the delay slot at `-O3` and `-O4`, and at `-O2` leaves the delay slot empty. |
+
+So the builds that keep the store first are the ones the table below rules out (they never write `madda.s`
+chains), and the builds that write those chains move the store. No build decomp.me has does both with these
+flags, which leaves a setting that hasn't been tried, or a build decomp.me doesn't have.
+
+The compiler's own help text says what to try. It lists what optimisation level 3 adds: "instruction
+scheduling, tail call optimization". The jump is that tail call optimisation, so something in the test
+turns it off; C++ exceptions are the first suspect, because a function that may have to be unwound keeps its
+frame, and the lane's flags leave them on. The store moving into the delay slot is the scheduler at work,
+and `-opt noschedule` turns it off. The probe's default list now has both.
 
 ## How the compiler was worked out
 

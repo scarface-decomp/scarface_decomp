@@ -10,8 +10,9 @@ with several optimisation settings, and say how close each gets to the game's by
 
 The portal must be running and your decomp.me tab connected (docs/PS2.md). Nothing is recorded: a probe
 only compiles and compares. It is light on decomp.me: one compile per line, two seconds apart, and a text
-already compiled with the same build and flags is not compiled again. Without arguments it tries all 23
-builds with the lane's flags, then the lane's build with 11 other settings: 34 compiles a function.
+already compiled with the same build and flags is not compiled again. Without arguments it tries the
+lane's build with its own flags and 16 other settings: 17 compiles a function. `--all-builds` adds the
+other 22 builds with the lane's flags.
 
 The two built-in questions come from the first PS2 easy-pass runs (November 2026):
 
@@ -38,8 +39,15 @@ from pathlib import Path
 
 TAIL = " -lang c++ -str readonly"
 LANE_COMPILER, LANE_FLAGS = "mwcps2-3.0.1b103-040528", "-O3" + TAIL
+# Optimisation levels, then what the compiler's own help says level 3 adds ("instruction scheduling, tail call
+# optimization") switched one at a time, and C++ exceptions off (a function that may have to be unwound keeps
+# its frame, so it can't end in a jump).
 FLAG_SETS = [o + TAIL for o in ("-O3,p", "-O3,s", "-O4", "-O4,p", "-O4,s", "-O2", "-O2,p", "-O3 -opt speed",
-                                "-O3 -opt space", "-O4,p -inline auto", "-O3 -schedule off")]
+                                "-O3 -opt space", "-O4,p -inline auto")]
+FLAG_SETS += ["-O3" + TAIL + x for x in (" -Cpp_exceptions off", " -Cpp_exceptions off -RTTI off",
+                                         " -opt noschedule", " -opt nopeephole",
+                                         " -Cpp_exceptions off -opt noschedule")]
+FLAG_SETS += ["-O4,p" + TAIL + " -Cpp_exceptions off"]
 # Every CodeWarrior for PS2 build decomp.me has, oldest first (the same list as portal/tools/ps2_verify.py BUILDS).
 BUILDS = ["mwcps2-2.3-991202", "mwcps2-2.3.3-000906", "mwcps2-2.4-001213", "mwcps2-3.0-011126", "mwcps2-3.0.1-020123",
           "mwcps2-3.0.3-020716", "mwcps2-3.0b22-020926", "mwcps2-3.0b38-030307", "mwcps2-3.0.1b44-030325",
@@ -50,11 +58,11 @@ BUILDS = ["mwcps2-2.3-991202", "mwcps2-2.3.3-000906", "mwcps2-2.4-001213", "mwcp
 CHUNK = 12                    # the portal takes at most this many compiles a call
 
 
-def default_tries() -> list:
-    """Every build with the lane's flags (is the compiler right?), then the lane's build with other
-    optimisation settings (are the flags right?)."""
-    return ([{"compiler": b, "flags": LANE_FLAGS} for b in BUILDS]
-            + [{"compiler": LANE_COMPILER, "flags": f} for f in FLAG_SETS])
+def default_tries(all_builds: bool = False) -> list:
+    """The lane's build with its own flags and with every other setting (are the flags right?); with
+    all_builds, every other build with the lane's flags first (is the compiler right?)."""
+    builds = [{"compiler": b, "flags": LANE_FLAGS} for b in BUILDS if b != LANE_COMPILER] if all_builds else []
+    return builds + [{"compiler": LANE_COMPILER, "flags": f} for f in [LANE_FLAGS] + FLAG_SETS]
 
 
 BUILT_IN = [
@@ -126,6 +134,8 @@ def main() -> int:
     ap.add_argument("--va", help="the PS2 function's address, with a file")
     ap.add_argument("--flags", action="append", help="a flag set to try (repeatable)")
     ap.add_argument("--compiler", action="append", help="a build to try, e.g. mwcps2-3.0.1b87-031208 (repeatable)")
+    ap.add_argument("--all-builds", action="store_true",
+                    help="also try every other CodeWarrior build with the lane's flags (22 more compiles a function)")
     ap.add_argument("--portal", default="http://127.0.0.1:8085", help="where your portal is running")
     args = ap.parse_args()
     if bool(args.file) != bool(args.va):
@@ -134,7 +144,7 @@ def main() -> int:
     if args.flags or args.compiler:
         tries = [{"compiler": c, "flags": f} for c in (args.compiler or [LANE_COMPILER]) for f in (args.flags or [LANE_FLAGS])]
     else:
-        tries = default_tries()
+        tries = default_tries(args.all_builds)
     user = input("Your handle: ").strip()
     creds = {"user": user, "pin": getpass.getpass("Your PIN (not shown): ")}
     n = len(tries) * len(cases)

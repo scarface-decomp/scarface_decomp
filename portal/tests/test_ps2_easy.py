@@ -385,7 +385,12 @@ def test_the_probes_own_lists_are_ones_the_portal_accepts():
     spec.loader.exec_module(P)
     assert tuple(P.BUILDS) == server.PV.BUILDS and P.LANE_COMPILER == server.PV.COMPILER and P.LANE_FLAGS == server.PV.FLAGS
     tries = P.default_tries()
-    assert len(tries) == 34 and all(x["compiler"] in server.PV.BUILDS and server.PV.probe_flags_ok(x["flags"]) for x in tries)
+    assert len(tries) == 17 and {x["compiler"] for x in tries} == {P.LANE_COMPILER} and tries[0]["flags"] == P.LANE_FLAGS
+    every = P.default_tries(all_builds=True)
+    assert len(every) == 39 and len({(x["compiler"], x["flags"]) for x in every}) == 39
+    assert all(x["compiler"] in server.PV.BUILDS and server.PV.probe_flags_ok(x["flags"]) for x in every)
+    assert server.PV.probe_flags_ok("-O3 -opt noschedule") and not server.PV.probe_flags_ok("-O3 -schedule off")
+    assert not server.PV.probe_flags_ok("-O3 -o x.o") and not server.PV.probe_flags_ok("-O3 -prefix a.h")
     assert P.CHUNK <= server.PS2_PROBE_MAX
     assert P.words("F0 FF BD 27 08 00 E0 03") == "27BDFFF0 03E00008"
 

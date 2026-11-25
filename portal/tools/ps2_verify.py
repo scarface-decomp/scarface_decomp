@@ -49,7 +49,7 @@ FLAGS = "-O3 -lang c++ -str readonly"
 # optimisation settings than FLAGS, as the Xbox game's libraries were.
 PROBE_WORDS = re.compile(r"^(?:-O[0-4](?:,[ps])?|-opt|speed|space|level=[0-4]|-lang|c\+\+|c|-str|readonly|reuse|pool|"
                          r"-inline|on|off|auto|deferred|-fp|single|-sdatathreshold|\d{1,3}|-RTTI|-Cpp_exceptions|"
-                         r"-schedule|-peephole)$")
+                         r"schedule|noschedule|peephole|nopeephole)$")
 
 
 # The CodeWarrior for PS2 builds decomp.me has, oldest first. A probe may name any of them: which build made
