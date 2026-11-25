@@ -113,15 +113,17 @@ def check_ps2(args) -> int:
         print(format_violations(bad))
         return 1
     slug = args.scratch
-    if not slug:
+    local = PV.local_compiler() if not slug else None
+    if local is None and not slug:
         made = PV.create_scratch(PV.scratch_fields(f"Scarface (PS2) func_{va:08X}", PB.function_asm(img, va, size), code))
         if not made.get("ok"):
             print(made.get("error"))
             return 2
         slug = made["slug"]
         print(f"Created {made['url']}")
-    print(f"{PV.COMPILER} on decomp.me, flags {PV.FLAGS}\nTarget {b}:0x{va:08X}, {size} bytes")
-    res = PV.compile_on_decompme(slug, code)
+    where = f"on this computer ({local})" if local is not None else "on decomp.me"
+    print(f"{PV.COMPILER} {where}, flags {PV.FLAGS}\nTarget {b}:0x{va:08X}, {size} bytes")
+    res = PV.compile_locally(code) if local is not None else PV.compile_on_decompme(slug, code)
     if not res.get("ok"):
         print("\n" + (res.get("compiler_error") or res.get("error") or "compile failed"))
         return 1

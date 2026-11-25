@@ -54,3 +54,5 @@ work/
 
 # The campaign tools' binaries (tools/build.bat)
 build/
+# The PS2 compiler, fetched by portal/scripts/setup_mwcps2.py (not ours to ship)
+portal/tools/mwcps2/

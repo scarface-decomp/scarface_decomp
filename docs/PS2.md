@@ -7,13 +7,14 @@ progress row and its own way of being checked.
 
 ## How a PS2 function is checked
 
-The compiler can't be shared or installed here, but decomp.me runs it:
+The project doesn't ship the compiler. decomp.me runs it, and you can also put a copy on your own
+computer (below), which is faster and needs no browser tab:
 
 | | |
 | :--- | :--- |
 | Compiler | Metrowerks CodeWarrior for PS2, 3.0.1 build 103 (`mwcps2-3.0.1b103-040528` on decomp.me) |
 | Flags | `-O3 -lang c++ -str readonly` |
-| Where it runs | decomp.me, through its compile endpoint (nothing is saved there by checking) |
+| Where it runs | on your computer when the compiler is in `portal/tools/mwcps2/`; otherwise decomp.me, through its compile endpoint (nothing is saved there by checking) |
 | Where it is checked | the portal on your computer, against your own `binaries/SLUS_211.11` |
 
 The portal sends your C++ to decomp.me, gets back the object file the PS2 compiler made, and compares
@@ -32,6 +33,23 @@ one. The portal's starting point for every PS2 function already declares them th
 
 The decomp.me button opens the function as a scratch there (target written as assembly), with the same
 compiler and flags. Its score is a helper: the portal's Compile & Verify is the check that counts.
+
+### The compiler on your own computer
+
+    python portal/scripts/setup_mwcps2.py
+
+downloads the build decomp.me compiles with (`mwcps2-3.0.1b103-040528`, from the decompme/compilers
+release on GitHub), checks its SHA-256 and unpacks it into `portal/tools/mwcps2/`. That folder is not
+part of the repository. Restart the portal, and every PS2 Compile & Verify (and
+`portal/verify.py --bin ps2`) compiles here, with decomp.me's own command line and the same flags, in
+about a second. Nothing else changes: the object is checked against your `SLUS_211.11` by the same rules.
+
+`mwccps2.exe` is a Windows program: Windows runs it by itself, Linux through wibo
+(`portal/scripts/setup_wibo.py`), macOS through Wine. `SCARFACE_MWCPS2` names another folder if you keep
+the same build somewhere else.
+
+CodeWarrior is a commercial product of Metrowerks (now NXP). The project does not ship it; fetching a copy
+is each contributor's own decision, and without one PS2 compiles go through decomp.me as described next.
 
 ### decomp.me goes through your browser
 
@@ -140,6 +158,7 @@ writes each as an ELF file that opens at its load address; open it next to `SLUS
 | `portal/tools/ps2_binary.py` | reading the program, finding functions, address fields, listings for decomp.me |
 | `portal/tools/ps2_overlay.py` | the front-end overlays: their headers, which build fits, ELF files for Ghidra and IDA |
 | `portal/tools/ps2_pairing.py` | pairing PS2 functions with Xbox ones (text and virtual tables) |
-| `portal/tools/ps2_verify.py` | reading decomp.me's objects, the byte and address checks, decomp.me calls |
+| `portal/tools/ps2_verify.py` | reading the compiler's objects, the byte and address checks, compiling here or on decomp.me |
+| `portal/scripts/setup_mwcps2.py` | fetches the compiler into `portal/tools/mwcps2/` |
 | `portal/verify.py --bin ps2` | the same check from the command line (`--scratch SLUG` to compile through a given scratch) |
 | `reconstructed_src/Original_Binary_Order_PS2.cpp` | every PS2 function in address order, matched ones as their C++ |

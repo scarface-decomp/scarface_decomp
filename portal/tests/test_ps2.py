@@ -6,6 +6,7 @@ import json
 import shutil
 import struct
 import subprocess
+import sys
 import zipfile
 
 import pytest
@@ -465,3 +466,78 @@ def test_portal_reads_an_overlay_with_the_program(tmp_path, monkeypatch):
     monkeypatch.setattr(server, "_IMAGES", {})
     monkeypatch.setitem(server.BINARIES, "ps2", tmp_path / "missing")
     assert server.image_for("ps2pause") is None                 # no program, no overlay
+
+
+# ---- the compiler on this computer ---------------------------------------------------------------------------
+
+def _stand_in_compiler(tmp_path, body):
+    """A folder that looks like the compiler's, and a runner that runs a Python script in its place (the
+    real mwccps2.exe is not ours to ship, so the tests don't have it)."""
+    d = tmp_path / "mwcps2"
+    d.mkdir()
+    (d / PV.LOCAL_EXE).write_text("stand-in", encoding="utf-8")
+    script = tmp_path / "cc.py"
+    script.write_text("import sys, pathlib\nargs = sys.argv[1:]\n" + body, encoding="utf-8")
+    return d, [sys.executable, str(script)]
+
+
+def test_local_compiler_is_found_only_when_its_program_is_there(tmp_path, monkeypatch):
+    monkeypatch.setattr(PV, "LOCAL_DIR", tmp_path / "none")
+    monkeypatch.delenv("SCARFACE_MWCPS2", raising=False)
+    assert PV.local_compiler() is None
+    assert not PV.compile_locally("int f() { return 1; }")["ok"]
+    d, _ = _stand_in_compiler(tmp_path, "")
+    monkeypatch.setenv("SCARFACE_MWCPS2", str(d))
+    assert PV.local_compiler() == d
+    monkeypatch.setenv("SCARFACE_MWCPS2", str(tmp_path / "empty"))
+    monkeypatch.setattr(PV, "LOCAL_DIR", d)
+    assert PV.local_compiler() == d
+
+
+def test_local_compile_uses_decompmes_command_and_returns_the_object(tmp_path, monkeypatch):
+    name = "gp"
+    fixture = tmp_path / "fixture.o"
+    fixture.write_bytes(base64.b64decode(FIX[name]))
+    log = tmp_path / "args.txt"
+    d, runner = _stand_in_compiler(tmp_path, (
+        f"pathlib.Path({str(log)!r}).write_text('\\n'.join(args) + '\\n---\\n' + pathlib.Path(args[args.index('-stderr') + 1]).read_text())\n"
+        f"pathlib.Path(args[args.index('-o') + 1]).write_bytes(pathlib.Path({str(fixture)!r}).read_bytes())\n"))
+    monkeypatch.setattr(PV, "_local_runner", lambda exe: runner)
+    res = PV.compile_locally("int f() { return g; }\r\n", "extern int g;", compiler_dir=d)
+    assert res["ok"] and res["object"] == fixture.read_bytes()
+    args, text = log.read_text().split("\n---\n")
+    assert args.split("\n") == ["-c"] + PV.FLAGS.split() + ["-nostdinc", "-stderr", "candidate.cpp", "-o", "candidate.o"]
+    assert text == "extern int g;\nint f() { return g; }\n"                 # the context first, Unix line ends
+    assert PV.parse_object(res["object"]).sections                         # and it reads as the game's kind of object
+
+
+def test_local_compile_reports_the_compilers_own_errors(tmp_path, monkeypatch):
+    d, runner = _stand_in_compiler(tmp_path, "sys.stderr.write('candidate.cpp:1: undefined identifier g')\nsys.exit(1)\n")
+    monkeypatch.setattr(PV, "_local_runner", lambda exe: runner)
+    res = PV.compile_locally("int f() { return g; }", compiler_dir=d)
+    assert not res["ok"] and "undefined identifier" in res["compiler_error"]
+    monkeypatch.setattr(PV, "_local_runner", lambda exe: None)              # nothing here can run a Windows program
+    res = PV.compile_locally("int f() { return 1; }", compiler_dir=d)
+    assert not res["ok"] and "compiler_error" not in res and "wibo" in res["error"]
+
+
+def test_setup_unpacks_only_plain_files(tmp_path):
+    import importlib.util, io, tarfile
+    spec = importlib.util.spec_from_file_location("setup_mwcps2", PORTAL / "scripts" / "setup_mwcps2.py")
+    S = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(S)
+
+    def archive(entries):
+        buf = io.BytesIO()
+        with tarfile.open(fileobj=buf, mode="w:gz") as tar:
+            for n, data in entries:
+                info = tarfile.TarInfo(n)
+                info.size = len(data)
+                tar.addfile(info, io.BytesIO(data))
+        return buf.getvalue()
+
+    assert S.unpack(archive([("./mwccps2.exe", b"MZ"), ("LMGR326B.DLL", b"x")]), tmp_path / "a") == ["mwccps2.exe", "LMGR326B.DLL"]
+    assert (tmp_path / "a" / "mwccps2.exe").read_bytes() == b"MZ"
+    with pytest.raises(ValueError):
+        S.unpack(archive([("../evil.exe", b"x")]), tmp_path / "b")
+    assert not (tmp_path / "b").exists() and not (tmp_path / "evil.exe").exists()
