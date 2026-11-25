@@ -117,11 +117,7 @@ flags already match, and every float-store-then-return-1 function has the store 
 one compiler build or one setting for the whole game.
 
 The probe compiles one function's C++ through your decomp.me tab with other builds or flags and prints how
-close each gets, with the compiled instruction words. It records nothing. Run without arguments it asks
-those two questions with the lane's build and 16 other settings (`-O2` to `-O4`, speed and space,
-instruction scheduling and the peephole pass off, RTTI off, and the flags as they were with exceptions
-on); `--all-builds` adds the
-other 22 CodeWarrior for PS2 builds decomp.me has, with the lane's flags. Give it a file and `--va`, with `--compiler`
+close each gets, with the compiled instruction words. It records nothing. Give it a file and `--va`, with `--compiler`
 and `--flags`, for your own. Only decomp.me's PS2 builds and optimisation words are accepted, one compile
 per line, two seconds apart.
 
@@ -152,9 +148,40 @@ nothing there). The game was built with C++ exceptions off, and since 25 Novembe
 * The easy pass tries every open function again with the new flags, the two families that end in a jump
   among them.
 
-**The second question is open.** With exceptions off the float store still goes into the delay slot. That
-is the scheduler's doing, so `-opt noschedule` is the next thing the probe tries by default, alone and with
-`-RTTI off` and `-O4,p`.
+**The second question is open.** With exceptions off the float store still goes into the delay slot, and
+the third run showed it does so with every setting tried: `-O3` and `-O4` with speed, space and inlining,
+RTTI off, and the scheduler or the peephole pass turned off (`-opt noschedule`, `-opt nopeephole`), which
+gave the same bytes as leaving them on. The jump, meanwhile, matched with every `-O3` and `-O4` setting once
+exceptions were off, and with none at `-O2`.
+
+### The round the probe runs now
+
+Run without arguments, the probe asks whether the table below was right to rule out the 3.0 line of builds
+(3.0.3 and 3.0 builds 38, 50 and 52), the only ones that store the float first:
+
+* Every build from 2.4 on has a setting named `usefloatacc` ("use the float accumulator", which is what a
+  `madda.s` chain does) and, from 3.0 on, one named `fastmath`. So "never writes `madda.s`" may only be
+  those builds' default. The round compiles a dot product the game writes as `mula.s`, `madda.s`, `madd.s`
+  (`0x0066DFF0`) on the 3.0-line builds, plain and with `#pragma usefloatacc on` and `#pragma fastmath on`.
+* It compiles the jump and the float store on those builds with the lane's flags.
+* It tries the float store on the lane's own build with six `#pragma` settings and written three other ways.
+
+* It compiles the first jump shape the easy pass tried, which did not match (below), as the pass writes it
+  and two other ways.
+
+That is 32 compiles. `--sweep` runs the earlier two questions with every optimisation setting again.
+
+### The easy pass's first run with exceptions off
+
+377 functions matched in 400 compiles, all of them the 12- and 16-byte shapes left over from the earlier
+runs. No jump matched, and that was the trial rule, not the flags. The pass took "ends in a jump" for one
+family and gave it six tries; in address order those went to two functions it has no code for and four of
+one shape (a global read from its full address, then the jump: `lui $at; j; lw $a0`), all of which failed.
+The shape the probe had proved, two small-data addresses and a jump (45 functions), was never reached.
+
+Each way of writing a jump is now a family of its own (ten of them, 145 functions), with its own six tries,
+and a function the pass has no code for is on no trial. Another 114 three-instruction jumps pass constants,
+zeros and arguments the pass does not write yet.
 
 ## How the compiler was worked out
 

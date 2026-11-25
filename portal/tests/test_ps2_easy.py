@@ -276,7 +276,13 @@ def test_tail_call_shapes():
     text = PSH.sources((0x3C040079, 0x0810E1A4, 0x24845890), 0x00398F90, gp)[0]     # lui a0; j; addiu a0, a0, lo
     assert "extern char D_00795890[];" in text and "func_00438690(D_00795890);" in text
     assert PSH.sources((0x2785ADE4, 0x081B8C40, 0), 0x003EB610, gp) == []           # only a1 set: not this shape
-    assert PSH.family((0x2784ADE0, 0x081B8C40, 0x2785ADE4)) == "tail call" and PSH.family((JR_RA, 0)) == ""
+    assert PSH.family((0x2784ADE0, 0x081B8C40, 0x2785ADE4)) == "tail call (addiu a0,gp; addiu a1,gp)"
+    assert PSH.family((JR_RA, 0)) == ""
+    # Each way of writing it is a family of its own, so four failures of one do not stop the others:
+    assert PSH.family((0x3C010082, 0x0811FBBC, 0x8C24DFE8)) == "tail call (lui at; lw a0,at)"
+    # A jump no shape writes code for is on no trial (0x0037DBF0: lw a1,0xD0(a0); j; daddu a2,zero,zero):
+    assert PSH.sources((0x8C8500D0, 0x080E6814, 0x0000302D), 0x0037DBF0, 0x810000) == []
+    assert PSH.family((0x8C8500D0, 0x080E6814, 0x0000302D)) == ""
 
 
 def test_virtual_forward_shapes():
@@ -443,3 +449,21 @@ def test_the_lane_compiles_with_exceptions_off():
     import queue_builder
     assert queue_builder.PS2_FLAGS == server.PV.FLAGS
     assert server.PS2_EASY_VERSION == 4                  # every open function is tried again with the new flags
+
+
+def test_the_probes_round_is_one_the_portal_takes():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ps2_flag_probe", PORTAL / "scripts" / "ps2_flag_probe.py")
+    P = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(P)
+    tries = [x for _, _, _, ts in P.ROUND for x in ts]
+    assert len(tries) == 32 and all(x["compiler"] in server.PV.BUILDS and x["flags"] == server.PV.FLAGS for x in tries)
+    assert {va for va, _, _, _ in P.ROUND} == {0x003EB610, 0x00392940, 0x0066DFF0, 0x0038EC30, 0x0037DBF0}
+    easy = PSH.sources((0x3C010082, 0x0811FBBC, 0x8C24DFE8), 0x0038EC30, 0x80E170)[0]
+    asked = next(code for va, what, code, _ in P.ROUND if "as the easy pass writes it" in what)
+    assert asked.strip() == easy.split("\n", 1)[1].strip()          # the pass's own text, without its comment line
+    for _, what, code, _ in P.ROUND:
+        assert not server.check_genuine_cpp(code), what           # a #pragma that sets an optimisation is allowed
+    whats = [what for _, what, _, _ in P.ROUND]
+    assert len(set(whats)) == len(whats)                              # the closing list tells the cases apart by these
+    assert P.pragma("usefloatacc on", "fastmath on") == "#pragma usefloatacc on\n#pragma fastmath on\n\n"

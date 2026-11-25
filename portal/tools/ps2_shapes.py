@@ -407,14 +407,34 @@ def _virtual_forward(words: Tuple[int, ...]) -> List[str]:
     return out
 
 
+_REG = {0: "zero", 1: "at", 2: "v0", 3: "v1", 4: "a0", 5: "a1", 6: "a2", 7: "a3", 25: "t9", 28: "gp"}
+
+
+def _pattern(w: int) -> str:
+    """One instruction without its numbers ('addiu a0,gp'), so functions written the same way share a name."""
+    if w == NOP:
+        return "nop"
+    op, rs, rt, _imm = _fields(w)
+    reg = lambda r: _REG.get(r, f"r{r}")
+    if op == 0 and (w & 0x7FF) in (0x2D, 0x21, 0x25):                 # daddu/addu/or rd, rs, rt: a move
+        rd = (w >> 11) & 31
+        return f"move {reg(rd)},{reg(rs if rs else rt)}"
+    names = {0x09: "addiu", 0x0D: "ori", 0x0F: "lui", 0x23: "lw", 0x20: "lb", 0x24: "lbu", 0x21: "lh", 0x25: "lhu", 0x31: "lwc1"}
+    if op in names:
+        return f"{names[op]} {reg(rt)}" + ("" if op == 0x0F else f",{reg(rs)}")
+    return f"op{op:02X}"
+
+
 def family(words: Tuple[int, ...]) -> str:
-    """'' for the shapes that have matched from the first night on; a name for a family still on trial (the
-    pass stops trying a family that has not matched once in its first few tries)."""
+    """'' for the shapes that have matched from the first night on, and for a function no shape here writes
+    code for; otherwise the name of the family on trial it belongs to. A family is one way of writing it (the
+    instructions without their numbers), so each gets its own trial: the pass stops trying a family that has
+    not matched once in its first few tries, and one family failing says nothing about the next."""
     words = tuple(words)
     if len(words) == 3 and (words[1] >> 26) == 0x02:
-        return "tail call"
+        return f"tail call ({_pattern(words[0])}; {_pattern(words[2])})" if _tail_call(words, 0, 0x10000) else ""
     if len(words) in (4, 5) and words[-2] == JR_T9:
-        return "virtual forward"
+        return ("virtual forward" + (" through a member" if len(words) == 5 else "")) if _virtual_forward(words) else ""
     return ""
 
 
