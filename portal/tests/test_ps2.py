@@ -521,23 +521,11 @@ def test_local_compile_reports_the_compilers_own_errors(tmp_path, monkeypatch):
     assert not res["ok"] and "compiler_error" not in res and "wibo" in res["error"]
 
 
-def test_setup_unpacks_only_plain_files(tmp_path):
-    import importlib.util, io, tarfile
-    spec = importlib.util.spec_from_file_location("setup_mwcps2", PORTAL / "scripts" / "setup_mwcps2.py")
-    S = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(S)
-
-    def archive(entries):
-        buf = io.BytesIO()
-        with tarfile.open(fileobj=buf, mode="w:gz") as tar:
-            for n, data in entries:
-                info = tarfile.TarInfo(n)
-                info.size = len(data)
-                tar.addfile(info, io.BytesIO(data))
-        return buf.getvalue()
-
-    assert S.unpack(archive([("./mwccps2.exe", b"MZ"), ("LMGR326B.DLL", b"x")]), tmp_path / "a") == ["mwccps2.exe", "LMGR326B.DLL"]
-    assert (tmp_path / "a" / "mwccps2.exe").read_bytes() == b"MZ"
-    with pytest.raises(ValueError):
-        S.unpack(archive([("../evil.exe", b"x")]), tmp_path / "b")
-    assert not (tmp_path / "b").exists() and not (tmp_path / "evil.exe").exists()
+def test_a_refused_licence_is_not_a_fault_in_the_code(tmp_path, monkeypatch):
+    """CodeWarrior checks for a licence when it starts. Without one the compile is refused: that is reported
+    as 'could not run here' (no compiler_error), so the portal goes on to decomp.me."""
+    d, runner = _stand_in_compiler(tmp_path, (
+        "print('### mwccps2.exe Driver Error:\\n#   License check failed: Cannot find license file')\nsys.exit(1)\n"))
+    monkeypatch.setattr(PV, "_local_runner", lambda exe: runner)
+    res = PV.compile_locally("int f() { return 1; }", compiler_dir=d)
+    assert not res["ok"] and res.get("no_licence") and "compiler_error" not in res and "licence" in res["error"]

@@ -1153,12 +1153,14 @@ def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "")
             res = {"ok": True, "object": base64.b64decode(object_b64), "output": ""}
         except (ValueError, TypeError):
             return {"ok": False, "compiler_error": "The page sent an object that could not be read."}
-    elif PV.local_compiler() is not None:                 # the game's compiler on this computer: no decomp.me
-        src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
-        res = PV.compile_locally(src, ctx)
-        if not res.get("ok") and res.get("compiler_error") is None:
-            return {"ok": False, "compiler_unavailable": True, "compiler_error": res.get("error", "")}
     else:
+        res = None
+        if PV.local_compiler() is not None:               # the game's compiler on this computer: no decomp.me
+            src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
+            res = PV.compile_locally(src, ctx)
+            if not res.get("ok") and res.get("compiler_error") is None:
+                res = None                                # it could not run here (no licence, say): decomp.me
+    if res is None:
         slug = t.get("decompme_slug", "")
         if not slug:
             made = PV.create_scratch(ps2_scratch_fields(t, cpp_code))

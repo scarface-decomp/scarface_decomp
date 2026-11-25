@@ -124,6 +124,14 @@ def check_ps2(args) -> int:
     where = f"on this computer ({local})" if local is not None else "on decomp.me"
     print(f"{PV.COMPILER} {where}, flags {PV.FLAGS}\nTarget {b}:0x{va:08X}, {size} bytes")
     res = PV.compile_locally(code) if local is not None else PV.compile_on_decompme(slug, code)
+    if local is not None and not res.get("ok") and res.get("compiler_error") is None:
+        print(f"{res.get('error')}\nGoing through decomp.me instead.")      # it could not run here (no licence, say)
+        made = PV.create_scratch(PV.scratch_fields(f"Scarface (PS2) func_{va:08X}", PB.function_asm(img, va, size), code))
+        if not made.get("ok"):
+            print(made.get("error"))
+            return 2
+        print(f"Created {made['url']}")
+        res = PV.compile_on_decompme(made["slug"], code)
     if not res.get("ok"):
         print("\n" + (res.get("compiler_error") or res.get("error") or "compile failed"))
         return 1

@@ -4,8 +4,8 @@ Verify a PS2 function: compile the C++ with the game's compiler on decomp.me, th
 with the game's own bytes here, on your computer.
 
 The PS2 game was built with Metrowerks CodeWarrior for PS2 3.0.1 (build 87 to 103, 2004; see
-docs/PS2.md for how that was worked out). The project doesn't ship that compiler. With a copy in
-portal/tools/mwcps2/ (portal/scripts/setup_mwcps2.py) it runs here; otherwise decomp.me runs it: `mwcps2-3.0.1b103-040528`, flags `-O3 -lang c++ -str readonly`. decomp.me sends back the object
+docs/PS2.md for how that was worked out). The project doesn't ship that compiler. A licensed copy in
+portal/tools/mwcps2/ runs here; otherwise decomp.me runs it: `mwcps2-3.0.1b103-040528`, flags `-O3 -lang c++ -str readonly`. decomp.me sends back the object
 file it built, and this module checks it the same way portal/tools/msvc_verify.py checks a PC or
 Xbox object:
 
@@ -374,9 +374,11 @@ def create_scratch(fields: dict, base_url: str = DECOMPME_URL) -> dict:
 
 # ---- the same compiler on this computer ---------------------------------------------------------------------
 #
-# mwccps2.exe is a Windows command-line program. With a copy of the game's build in portal/tools/mwcps2/
-# (portal/scripts/setup_mwcps2.py fetches the one decomp.me uses; SCARFACE_MWCPS2 names another folder),
-# a PS2 function is compiled here in about a second, with no decomp.me tab. The command is decomp.me's own.
+# mwccps2.exe is a Windows command-line program, and a commercial one: it checks for a CodeWarrior licence
+# when it starts. If you hold one, put your copy of the game's build (3.0.1 build 103) in
+# portal/tools/mwcps2/ (or name its folder in SCARFACE_MWCPS2) and a PS2 function is compiled here in about
+# a second, with decomp.me's own command line. Without a licence the compile is refused, and the portal
+# goes on to decomp.me as if the compiler were not here.
 
 LOCAL_DIR = Path(__file__).resolve().parent / "mwcps2"
 LOCAL_EXE = "mwccps2.exe"
@@ -408,7 +410,7 @@ def compile_locally(source: str, context: str = "", compiler_dir: Optional[Path]
     compile_on_decompme: {ok, object (bytes), output} or {ok: False, compiler_error | error}."""
     d = compiler_dir or local_compiler()
     if d is None:
-        return {"ok": False, "error": "The PS2 compiler is not on this computer (portal/scripts/setup_mwcps2.py)."}
+        return {"ok": False, "error": "The PS2 compiler is not on this computer."}
     runner = _local_runner(Path(d) / LOCAL_EXE)
     if runner is None:
         return {"ok": False, "error": "mwccps2.exe is a Windows program; install wibo "
@@ -425,6 +427,10 @@ def compile_locally(source: str, context: str = "", compiler_dir: Optional[Path]
             return {"ok": False, "error": f"Could not start the PS2 compiler ({e})."}
         out = (p.stdout + p.stderr).decode("utf-8", "replace").replace(tmp, "").strip()
         obj = Path(tmp) / "candidate.o"
+        if "License check failed" in out:              # CodeWarrior's own licence check: not a fault in the C++
+            return {"ok": False, "no_licence": True,
+                    "error": "The PS2 compiler on this computer asks for a CodeWarrior licence and found none "
+                             "(LM_LICENSE_FILE names the licence file)."}
         if p.returncode != 0 or not obj.is_file() or obj.stat().st_size == 0:
             return {"ok": False, "compiler_error": out or "The compiler did not produce an object."}
         return {"ok": True, "object": obj.read_bytes(), "output": out}
