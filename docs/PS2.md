@@ -179,17 +179,49 @@ What that adds up to:
 * `-opt noschedule` on the command line changed nothing where `#pragma schedule off` did, so the flag is
   not the pragma.
 
-### The round the probe runs now
+### What the fifth run showed (25 November 2026)
 
-Run without arguments, the probe asks which 3.0.1 build keeps the source's order and still fills the delay
-slot with the scheduler off (33 compiles):
+33 compiles: `#pragma schedule off` on every 3.0.1 build, and the global-then-jump shape on the 3.0 line.
 
-* the float store with `#pragma schedule off` on the other twelve 3.0.1 builds (44 to 210);
-* the dot product with `#pragma schedule off` on all thirteen;
-* the jump after reading a global: on the 3.0-line builds, with the scheduler off on builds 87, 95 and 103,
-  and with the global as the first member of a larger object.
+| Question | Result |
+| :--- | :--- |
+| The float store with the scheduler off, 3.0.1 builds 44 to 210 | All twelve: store first, delay slot empty (16 bytes). No 3.0.1 build fills the slot with its scheduler off. |
+| The dot product with the scheduler off, builds 44 to 75 | Each pair of loads next to its multiply, as the game has them, but `mul.s`, `mul.s`, `adda.s`, `madd.s` and the second term first (48 bytes; 28 of 40). |
+| The dot product with the scheduler off, builds 87 to 210 | The right three multiplies, but all six loads still first, and the delay slot empty (44 bytes; 9 of 40). |
+| A jump after reading a global (`0x0038EC30`) on 3.0.3 and 3.0 builds 38, 50, 52 | **All four match**: they use `$at` for the address, as the game does. |
+| That jump on builds 87, 95, 103 with the scheduler off, or with the global as a member of a larger object | `$v0` for the address every time. |
 
-`--sweep` runs the first two questions with every optimisation setting again.
+### Where the compiler question stands
+
+No build decomp.me has makes all of what the game has:
+
+| What the game's code has | 3.0 line (3.0.3, 3.0 builds 38 to 52) | 3.0.1 builds 44 to 75 | 3.0.1 builds 87 to 210 |
+| :--- | :--- | :--- | :--- |
+| A last call turned into a jump (exceptions off) | yes | not tried | yes |
+| A float store kept before the return value, with the delay slot filled | yes | no | no |
+| `$at` for an address used once | yes | not tried | no |
+| A sum of three products as `mula.s`, `madda.s`, `madd.s` | no | no | yes |
+| Each pair of float loads next to its multiply | no | only with the scheduler off | no |
+
+The first three rows are how the 3.0 line orders instructions and picks registers; the fourth is float code
+that first appears in the 3.0.1 line between build 75 (September 2003) and build 87 (December 2003). The
+game was built in 2006. The likeliest reading is a build decomp.me does not have: one that orders and
+allocates like the 3.0 line and has the later float code. That is a reading of five test functions, not a
+census, and the examiner's round (Q55 to Q67) is checking it against the whole program.
+
+What this means for the lane today: build 103 with exceptions off gives the game's bytes for the small
+functions matched so far, and will not for float-heavy code or for the shapes in the first three rows.
+
+### Checking another build against what is matched
+
+    python portal/scripts/ps2_flag_probe.py --recheck
+
+compiles 30 functions that are already matched (one for each way of writing one: half the commonest ways,
+half the largest functions) with the last 3.0-line build (3.0 build 52) and with the lane's own, and says
+how many each gives back. It answers two things: whether build 52 also makes the small functions, which
+would make it the better build for everything but float code; and whether the matches recorded before
+exceptions were turned off still come out the same. `--compiler` names other builds; a number after
+`--recheck` changes the 30.
 
 ### The easy pass's first run with exceptions off
 

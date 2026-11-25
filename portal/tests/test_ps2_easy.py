@@ -466,3 +466,26 @@ def test_the_probes_round_is_one_the_portal_takes():
     assert len(set(whats)) == len(whats)                              # the closing list tells the cases apart by these
     easy = PSH.sources((0x3C010082, 0x0811FBBC, 0x8C24DFE8), 0x0038EC30, 0x80E170)[0]
     assert P.READ_GLOBAL.strip() == easy.split("\n", 1)[1].strip()   # the pass's own text, without its comment line
+
+
+def test_the_probe_can_recheck_what_is_already_matched(tmp_path):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ps2_flag_probe", PORTAL / "scripts" / "ps2_flag_probe.py")
+    P = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(P)
+    getter = "// Returns a member.\nint Object::Get()\n{\n    return m_Field%X; // +0x%X\n}\n"
+    entries = {f"ps2:0x{0x400000 + 16 * i:08X}": {"bin": "ps2", "va": f"0x{0x400000 + 16 * i:08X}", "size": 8,
+                                                 "code": getter % (4 * i, 4 * i)} for i in range(5)}
+    entries["ps2:0x00500000"] = {"bin": "ps2", "va": "0x00500000", "size": 40, "code": "float Dot()\n{\n    return 1.0f;\n}\n"}
+    entries["ps2pause:0x00845500"] = {"bin": "ps2pause", "va": "0x00845500", "size": 8, "code": "void Overlay()\n{\n}\n"}
+    entries["xb:0x00011F20"] = {"bin": "xb", "va": "0x00011F20", "size": 8, "code": "void Xbox()\n{\n}\n"}
+    reg = tmp_path / "registry.json"
+    reg.write_text(json.dumps({"entries": entries}))
+    assert P.shape_of(getter % (4, 4)) == P.shape_of(getter % (0x1C, 0x1C)) != P.shape_of("void Other()\n{\n}\n")
+    cases = P.recheck_cases(4, ["mwcps2-3.0b52-030722", P.LANE_COMPILER], reg)
+    assert [va for va, _, _, _ in cases] == [0x00400000, 0x00500000]         # one for each way; the main program only
+    assert "5 written this way" in cases[0][1] and [x["compiler"] for x in cases[0][3]] == ["mwcps2-3.0b52-030722", P.LANE_COMPILER]
+    assert all(x["flags"] == P.LANE_FLAGS for _, _, _, tries in cases for x in tries)
+    lines = P.recheck_summary({"mwcps2-3.0b52-030722": [1, 2, ["0x00500000"]], P.LANE_COMPILER: [2, 2, []]})
+    assert "3.0b52-030722" in lines[1] and "1 of 2" in lines[1] and "not for 0x00500000" in lines[1]
+    assert "2 of 2" in lines[2] and "not for" not in lines[2]
