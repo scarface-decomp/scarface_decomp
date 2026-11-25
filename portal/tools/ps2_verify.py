@@ -52,6 +52,16 @@ PROBE_WORDS = re.compile(r"^(?:-O[0-4](?:,[ps])?|-opt|speed|space|level=[0-4]|-l
                          r"-schedule|-peephole)$")
 
 
+# The CodeWarrior for PS2 builds decomp.me has, oldest first. A probe may name any of them: which build made
+# the game was worked out from its code (docs/PS2.md), and a probe is how that gets checked again.
+BUILDS = ("mwcps2-2.3-991202", "mwcps2-2.3.3-000906", "mwcps2-2.4-001213", "mwcps2-3.0-011126", "mwcps2-3.0.1-020123",
+          "mwcps2-3.0.3-020716", "mwcps2-3.0b22-020926", "mwcps2-3.0b38-030307", "mwcps2-3.0.1b44-030325",
+          "mwcps2-3.0.1b51-030512", "mwcps2-3.0b50-030527", "mwcps2-3.0b52-030722", "mwcps2-3.0.1b74-030811",
+          "mwcps2-3.0.1b75-030916", "mwcps2-3.0.1b87-031208", "mwcps2-3.0.1b95-040309", "mwcps2-3.0.1b103-040528",
+          "mwcps2-3.0.1b119-040914", "mwcps2-3.0.1b145-050209", "mwcps2-3.0.1b151-050317", "mwcps2-3.0.1b198-051011",
+          "mwcps2-3.0.1b205-051227", "mwcps2-3.0.1b210-060308")
+
+
 def probe_flags_ok(flags: str) -> bool:
     words = str(flags).split()
     return 0 < len(words) <= 16 and all(PROBE_WORDS.match(w) for w in words)
@@ -451,10 +461,10 @@ def compile_locally(source: str, context: str = "", compiler_dir: Optional[Path]
 
 
 def compile_on_decompme(slug: str, source: str, context: str = "", base_url: str = DECOMPME_URL,
-                        flags: str = "") -> dict:
+                        flags: str = "", compiler: str = "") -> dict:
     """Compile with the game's compiler on decomp.me, without saving anything there.
     {ok, object (bytes), output} or {ok: False, error, unreachable?, compiler_error?}."""
-    body = {"compiler": COMPILER, "compiler_flags": flags or FLAGS, "source_code": source.replace("\r\n", "\n"),
+    body = {"compiler": compiler or COMPILER, "compiler_flags": flags or FLAGS, "source_code": source.replace("\r\n", "\n"),
             "context": context.replace("\r\n", "\n"), "include_objects": True}
     try:
         st, data, raw = _post_json(f"{base_url}/api/scratch/{slug}/compile", body)

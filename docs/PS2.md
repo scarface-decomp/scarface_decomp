@@ -109,11 +109,17 @@ the lane's flags do not reproduce (first easy-pass runs, November 2026):
 * a float stored and then 1 returned, where the game stores first (`0x00392940`: the compiler puts the
   store in the delay slot; the same source with an integer store matches).
 
-The probe compiles one function's C++ with a list of flag sets through your decomp.me tab and prints how
+The examiner's census of the program shows both are how the whole game was built, not one part of it:
+1,772 functions end in such a jump, in every part of the game's code and next to functions the lane's
+flags already match, and every float-store-then-return-1 function has the store first. So the answer is
+one compiler build or one setting for the whole game.
+
+The probe compiles one function's C++ through your decomp.me tab with other builds or flags and prints how
 close each gets, with the compiled instruction words. It records nothing. Run without arguments it asks
-those two questions with twelve usual settings (`-O2` to `-O4`, speed and space); give it a file, `--va`
-and `--flags` for your own. Only optimisation words are accepted as flags, one compile per flag set, two
-seconds apart, twelve sets a call.
+those two questions with all 23 CodeWarrior for PS2 builds decomp.me has (lane flags), then with the lane's
+build and 11 other settings (`-O2` to `-O4`, speed and space). Give it a file and `--va`, with `--compiler`
+and `--flags`, for your own. Only decomp.me's PS2 builds and optimisation words are accepted, one compile
+per line, two seconds apart.
 
 ## How the compiler was worked out
 

@@ -332,7 +332,7 @@ class FakeRequest:
         self.sent = (code, data)
 
 
-def test_probe_tries_each_flag_set_and_records_nothing(monkeypatch, tmp_path):
+def test_probe_tries_each_build_and_flag_set_and_records_nothing(monkeypatch, tmp_path):
     seen, recorded = [], []
     monkeypatch.setattr(server, "TASK_BY_ID", {"ps2_0037E020": dict(TASK), "xb_00011000": dict(TASK, bin="xb")})
     monkeypatch.setattr(server, "PS2_EASY_JSON", tmp_path / "none.json")
@@ -340,26 +340,29 @@ def test_probe_tries_each_flag_set_and_records_nothing(monkeypatch, tmp_path):
     monkeypatch.setattr(server, "PS2_OBJECTS", {})
     monkeypatch.setattr(server, "record_verified", lambda *a, **k: recorded.append(a))
 
-    def verify(t, code, through="", flags="", **k):
-        seen.append(flags)
+    def verify(t, code, through="", flags="", compiler="", **k):
+        seen.append((compiler, flags))
         if "-O2" in flags:
             return {"ok": False, "compiler_error": "code.c:1: something"}
-        exact = "-O4,p" in flags
+        exact = "b87" in compiler
         return {"ok": True, "bytes_exact": exact, "verified": exact, "reloc_unverified": 0, "matched_bytes": 12 if exact else 1,
                 "total_bytes": 12, "compiled_size": 12 if exact else 32, "compiled_hex": "08 00 E0 03"}
     monkeypatch.setattr(server, "run_verify_ps2", verify)
-    sets = ["-O3 -lang c++ -str readonly", "-O4,p -lang c++ -str readonly", "-O2 -lang c++ -str readonly"]
+    lane = "-O3 -lang c++ -str readonly"
+    tries = [{"flags": lane}, {"compiler": "mwcps2-3.0.1b87-031208", "flags": lane}, {"flags": "-O2 -lang c++ -str readonly"}]
     r = FakeRequest()
-    server.Handler.post_ps2_probe(r, {"user": "Alice", "id": "ps2_0037E020", "cpp_code": "void f() {}\n", "flag_sets": sets})
+    server.Handler.post_ps2_probe(r, {"user": "Alice", "id": "ps2_0037E020", "cpp_code": "void f() {}\n", "tries": tries})
     code, data = r.sent
-    assert code == 200 and data["ok"] and seen == sets and recorded == []
+    assert code == 200 and data["ok"] and recorded == []
+    assert seen == [(server.PV.COMPILER, lane), ("mwcps2-3.0.1b87-031208", lane), (server.PV.COMPILER, "-O2 -lang c++ -str readonly")]
     assert [(x["compiled"], x["exact"], x["verified"]) for x in data["rows"]] == [(True, False, False), (True, True, True), (False, False, False)]
-    assert data["rows"][1]["compiled_hex"] == "08 00 E0 03" and "something" in data["rows"][2]["error"]
+    assert data["rows"][1]["compiler"] == "mwcps2-3.0.1b87-031208" and "something" in data["rows"][2]["error"]
 
-    for body, want in (({"id": "xb_00011000", "cpp_code": "x", "flag_sets": sets}, 404),          # not a PS2 function
-                       ({"id": "ps2_0037E020", "cpp_code": "x", "flag_sets": ["-O3 -I /etc"]}, 400),
-                       ({"id": "ps2_0037E020", "cpp_code": "x", "flag_sets": ["-O3"] * 13}, 400),
-                       ({"id": "ps2_0037E020", "cpp_code": "", "flag_sets": sets}, 400)):
+    for body, want in (({"id": "xb_00011000", "cpp_code": "x", "tries": tries}, 404),              # not a PS2 function
+                       ({"id": "ps2_0037E020", "cpp_code": "x", "tries": [{"flags": "-O3 -I /etc"}]}, 400),
+                       ({"id": "ps2_0037E020", "cpp_code": "x", "tries": [{"compiler": "gcc-evil", "flags": lane}]}, 400),
+                       ({"id": "ps2_0037E020", "cpp_code": "x", "tries": [{"flags": lane}] * 13}, 400),
+                       ({"id": "ps2_0037E020", "cpp_code": "", "tries": tries}, 400)):
         r = FakeRequest()
         server.Handler.post_ps2_probe(r, dict(body, user="Alice"))
         assert r.sent[0] == want and not r.sent[1]["ok"]
@@ -371,8 +374,20 @@ def test_probe_stops_when_the_tab_is_gone(monkeypatch, tmp_path):
     monkeypatch.setattr(server, "run_verify_ps2", lambda *a, **k: {"ok": False, "compiler_unavailable": True})
     r = FakeRequest()
     server.Handler.post_ps2_probe(r, {"user": "Alice", "id": "ps2_0037E020", "cpp_code": "void f() {}",
-                                     "flag_sets": ["-O3 -lang c++ -str readonly"]})
+                                     "tries": [{"flags": "-O3 -lang c++ -str readonly"}]})
     assert not r.sent[1]["ok"] and r.sent[1]["not_connected"] and r.sent[1]["rows"] == []
+
+
+def test_the_probes_own_lists_are_ones_the_portal_accepts():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ps2_flag_probe", PORTAL / "scripts" / "ps2_flag_probe.py")
+    P = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(P)
+    assert tuple(P.BUILDS) == server.PV.BUILDS and P.LANE_COMPILER == server.PV.COMPILER and P.LANE_FLAGS == server.PV.FLAGS
+    tries = P.default_tries()
+    assert len(tries) == 34 and all(x["compiler"] in server.PV.BUILDS and server.PV.probe_flags_ok(x["flags"]) for x in tries)
+    assert P.CHUNK <= server.PS2_PROBE_MAX
+    assert P.words("F0 FF BD 27 08 00 E0 03") == "27BDFFF0 03E00008"
 
 
 def test_flags_are_part_of_what_a_compiled_object_is_kept_under(through_tab):
@@ -384,3 +399,5 @@ def test_flags_are_part_of_what_a_compiled_object_is_kept_under(through_tab):
     assert b.jobs[1]["compile"]["compiler_flags"] == "-O4,p -lang c++ -str readonly"
     server.ps2_compile(dict(TASK), "int f() { return 1; }", through="abcde", flags="-O4,p -lang c++ -str readonly")
     assert len(b.jobs) == 2
+    server.ps2_compile(dict(TASK), "int f() { return 1; }", through="abcde", compiler="mwcps2-3.0.1b87-031208")
+    assert len(b.jobs) == 3 and b.jobs[2]["compile"]["compiler"] == "mwcps2-3.0.1b87-031208"      # another build too
