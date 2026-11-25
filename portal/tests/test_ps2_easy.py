@@ -307,3 +307,97 @@ def test_a_family_on_trial_is_dropped_when_it_never_matches(pass_env, monkeypatc
     assert "tail call" in st["last"] and "left alone" in st["last"]
     tried = json.loads(server.PS2_EASY_JSON.read_text(encoding="utf-8"))["tried"]
     assert len(tried) == server.PS2_FAMILY_TRIES                # the rest were not touched: tried again when the shape is fixed
+
+
+# --------------------------------------------------------------------------- probing other optimisation flags
+
+def test_only_optimisation_words_may_be_probed():
+    PV = server.PV
+    for good in ("-O4,p -lang c++ -str readonly", "-O3 -opt speed -lang c++ -str readonly", "-O2 -lang c -str readonly",
+                 "-O3 -inline auto -sdatathreshold 8"):
+        assert PV.probe_flags_ok(good), good
+    for bad in ("", "-O3 -I /etc", "-O3 -o out.o", "-prefix evil.h", "-O3 -D X=1", "-O3 ; rm", "-O9"):
+        assert not PV.probe_flags_ok(bad), bad
+
+
+class FakeRequest:
+    """Enough of the portal's request handler to call one of its POST methods."""
+    def __init__(self):
+        self.sent = None
+
+    def _auth(self, body):
+        return body.get("user")
+
+    def _json(self, data, code=200):
+        self.sent = (code, data)
+
+
+def test_probe_tries_each_build_and_flag_set_and_records_nothing(monkeypatch, tmp_path):
+    seen, recorded = [], []
+    monkeypatch.setattr(server, "TASK_BY_ID", {"ps2_0037E020": dict(TASK), "xb_00011000": dict(TASK, bin="xb")})
+    monkeypatch.setattr(server, "PS2_EASY_JSON", tmp_path / "none.json")
+    monkeypatch.setattr(server, "PS2_EASY_PAUSE", 0)
+    monkeypatch.setattr(server, "PS2_OBJECTS", {})
+    monkeypatch.setattr(server, "record_verified", lambda *a, **k: recorded.append(a))
+
+    def verify(t, code, through="", flags="", compiler="", **k):
+        seen.append((compiler, flags))
+        if "-O2" in flags:
+            return {"ok": False, "compiler_error": "code.c:1: something"}
+        exact = "b87" in compiler
+        return {"ok": True, "bytes_exact": exact, "verified": exact, "reloc_unverified": 0, "matched_bytes": 12 if exact else 1,
+                "total_bytes": 12, "compiled_size": 12 if exact else 32, "compiled_hex": "08 00 E0 03"}
+    monkeypatch.setattr(server, "run_verify_ps2", verify)
+    lane = "-O3 -lang c++ -str readonly"
+    tries = [{"flags": lane}, {"compiler": "mwcps2-3.0.1b87-031208", "flags": lane}, {"flags": "-O2 -lang c++ -str readonly"}]
+    r = FakeRequest()
+    server.Handler.post_ps2_probe(r, {"user": "Alice", "id": "ps2_0037E020", "cpp_code": "void f() {}\n", "tries": tries})
+    code, data = r.sent
+    assert code == 200 and data["ok"] and recorded == []
+    assert seen == [(server.PV.COMPILER, lane), ("mwcps2-3.0.1b87-031208", lane), (server.PV.COMPILER, "-O2 -lang c++ -str readonly")]
+    assert [(x["compiled"], x["exact"], x["verified"]) for x in data["rows"]] == [(True, False, False), (True, True, True), (False, False, False)]
+    assert data["rows"][1]["compiler"] == "mwcps2-3.0.1b87-031208" and "something" in data["rows"][2]["error"]
+
+    for body, want in (({"id": "xb_00011000", "cpp_code": "x", "tries": tries}, 404),              # not a PS2 function
+                       ({"id": "ps2_0037E020", "cpp_code": "x", "tries": [{"flags": "-O3 -I /etc"}]}, 400),
+                       ({"id": "ps2_0037E020", "cpp_code": "x", "tries": [{"compiler": "gcc-evil", "flags": lane}]}, 400),
+                       ({"id": "ps2_0037E020", "cpp_code": "x", "tries": [{"flags": lane}] * 13}, 400),
+                       ({"id": "ps2_0037E020", "cpp_code": "", "tries": tries}, 400)):
+        r = FakeRequest()
+        server.Handler.post_ps2_probe(r, dict(body, user="Alice"))
+        assert r.sent[0] == want and not r.sent[1]["ok"]
+
+
+def test_probe_stops_when_the_tab_is_gone(monkeypatch, tmp_path):
+    monkeypatch.setattr(server, "TASK_BY_ID", {"ps2_0037E020": dict(TASK)})
+    monkeypatch.setattr(server, "PS2_EASY_JSON", tmp_path / "none.json")
+    monkeypatch.setattr(server, "run_verify_ps2", lambda *a, **k: {"ok": False, "compiler_unavailable": True})
+    r = FakeRequest()
+    server.Handler.post_ps2_probe(r, {"user": "Alice", "id": "ps2_0037E020", "cpp_code": "void f() {}",
+                                     "tries": [{"flags": "-O3 -lang c++ -str readonly"}]})
+    assert not r.sent[1]["ok"] and r.sent[1]["not_connected"] and r.sent[1]["rows"] == []
+
+
+def test_the_probes_own_lists_are_ones_the_portal_accepts():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ps2_flag_probe", PORTAL / "scripts" / "ps2_flag_probe.py")
+    P = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(P)
+    assert tuple(P.BUILDS) == server.PV.BUILDS and P.LANE_COMPILER == server.PV.COMPILER and P.LANE_FLAGS == server.PV.FLAGS
+    tries = P.default_tries()
+    assert len(tries) == 34 and all(x["compiler"] in server.PV.BUILDS and server.PV.probe_flags_ok(x["flags"]) for x in tries)
+    assert P.CHUNK <= server.PS2_PROBE_MAX
+    assert P.words("F0 FF BD 27 08 00 E0 03") == "27BDFFF0 03E00008"
+
+
+def test_flags_are_part_of_what_a_compiled_object_is_kept_under(through_tab):
+    b = through_tab({"ok": True, "success": True, "right_object": base64.b64encode(b"\x7fELFo").decode(), "slug": "abcde"})
+    server.ps2_compile(dict(TASK), "int f() { return 1; }", through="abcde")
+    server.ps2_compile(dict(TASK), "int f() { return 1; }", through="abcde", flags="-O4,p -lang c++ -str readonly")
+    assert len(b.jobs) == 2                                     # other flags: another compile, not the kept object
+    assert b.jobs[0]["compile"]["compiler_flags"] == server.PV.FLAGS
+    assert b.jobs[1]["compile"]["compiler_flags"] == "-O4,p -lang c++ -str readonly"
+    server.ps2_compile(dict(TASK), "int f() { return 1; }", through="abcde", flags="-O4,p -lang c++ -str readonly")
+    assert len(b.jobs) == 2
+    server.ps2_compile(dict(TASK), "int f() { return 1; }", through="abcde", compiler="mwcps2-3.0.1b87-031208")
+    assert len(b.jobs) == 3 and b.jobs[2]["compile"]["compiler"] == "mwcps2-3.0.1b87-031208"      # another build too

@@ -96,6 +96,31 @@ After the portal restarts, or while the decomp.me tab is in the background, the 
 minute to let the tab ask the portal again. The pass waits for it (75 seconds) before it gives up, and
 goes on by itself when the tab comes back. Keeping the tab in a window of its own, in view, avoids the wait.
 
+## Probing other optimisation flags
+
+    python portal/scripts/ps2_flag_probe.py
+
+The lane's flags (`-O3 -lang c++ -str readonly`) match the smallest functions everywhere, but parts of the
+game may have been built with other optimisation settings, as the Xbox game's libraries were. Two things
+the lane's flags do not reproduce (first easy-pass runs, November 2026):
+
+* a call as a function's last statement that the game turns into a jump (`0x003EB610`: the compiler makes
+  an ordinary call with a stack frame, 32 bytes against the game's 12, with or without `#pragma tailcall on`);
+* a float stored and then 1 returned, where the game stores first (`0x00392940`: the compiler puts the
+  store in the delay slot; the same source with an integer store matches).
+
+The examiner's census of the program shows both are how the whole game was built, not one part of it:
+1,772 functions end in such a jump, in every part of the game's code and next to functions the lane's
+flags already match, and every float-store-then-return-1 function has the store first. So the answer is
+one compiler build or one setting for the whole game.
+
+The probe compiles one function's C++ through your decomp.me tab with other builds or flags and prints how
+close each gets, with the compiled instruction words. It records nothing. Run without arguments it asks
+those two questions with all 23 CodeWarrior for PS2 builds decomp.me has (lane flags), then with the lane's
+build and 11 other settings (`-O2` to `-O4`, speed and space). Give it a file and `--va`, with `--compiler`
+and `--flags`, for your own. Only decomp.me's PS2 builds and optimisation words are accepted, one compile
+per line, two seconds apart.
+
 ## How the compiler was worked out
 
 The program says `MW MIPS C Compiler (2.4.1.01)` in its `.comment` section, but five different builds write
@@ -190,6 +215,7 @@ writes each as an ELF file that opens at its load address; open it next to `SLUS
 | `portal/tools/ps2_overlay.py` | the front-end overlays: their headers, which build fits, ELF files for Ghidra and IDA |
 | `portal/tools/ps2_shapes.py` | C++ for the smallest functions, written from their instructions |
 | `portal/scripts/ps2_easy_pass.py` | runs the PS2 easy pass on your portal |
+| `portal/scripts/ps2_flag_probe.py` | tries other optimisation flags on one function |
 | `portal/tools/ps2_pairing.py` | pairing PS2 functions with Xbox ones (text and virtual tables) |
 | `portal/tools/ps2_verify.py` | reading the compiler's objects, the byte and address checks, compiling here or on decomp.me |
 | `portal/verify.py --bin ps2` | the same check from the command line (`--scratch SLUG` to compile through a given scratch) |

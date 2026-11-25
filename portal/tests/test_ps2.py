@@ -352,14 +352,14 @@ def test_portal_verifies_a_ps2_function_through_decomp_me(monkeypatch, tmp_path)
     monkeypatch.setattr(server, "save_overlay", lambda t: None)
     monkeypatch.setattr(PB, "function_asm", lambda *a, **k: "glabel func_00390320\n")
     monkeypatch.setattr(PV, "create_scratch", lambda fields: {"ok": True, "slug": "S1", "url": "u", "claim_url": "u"})
-    monkeypatch.setattr(PV, "compile_on_decompme", lambda slug, src, ctx="": {"ok": True, "object": base64.b64decode(FIX["gp"]), "output": ""})
+    monkeypatch.setattr(PV, "compile_on_decompme", lambda slug, src, ctx="", **k: {"ok": True, "object": base64.b64decode(FIX["gp"]), "output": ""})
     t = {"id": "ps2_00390320", "bin": "ps2", "fva_int": 0x00390320, "size": 8, "symbol": "func_00390320",
          "va": "PS2 0x00390320", "flags": PV.FLAGS}
     res = server.run_verify(t, 'extern unsigned char D_00808920;\nextern "C" unsigned char func_00390320() { return D_00808920; }\n')
     assert res["ok"] and res["verified"] and res["reloc_checked"] == 1 and t["decompme_slug"] == "S1"
     asm = server.run_verify(t, 'void f() { __asm__("nop"); }')
     assert not asm["ok"] and asm.get("policy_violation")
-    monkeypatch.setattr(PV, "compile_on_decompme", lambda slug, src, ctx="": {"ok": False, "unreachable": True, "error": "403"})
+    monkeypatch.setattr(PV, "compile_on_decompme", lambda slug, src, ctx="", **k: {"ok": False, "unreachable": True, "error": "403"})
     down = server.run_verify(t, "int x;")
     assert not down["ok"] and down["compiler_unavailable"] and "decomp.me" in down["compiler_error"]
 
