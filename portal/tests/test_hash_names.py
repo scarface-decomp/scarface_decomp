@@ -61,3 +61,36 @@ def test_data_files_are_certain_and_short_executable_words_are_not(tmp_path):
     assert by["PauseGetCreditsLine"]["certain"] and by["PauseGetCreditsLine"]["source"] == "default.xbe"
     assert by["mad"]["source"] == "default.xbe" and not by["mad"]["certain"]
     assert H.key("Initialize") == 0xAC0E9D3E
+
+
+def test_renumberings_keep_the_width_and_try_plain_numbers():
+    r = H.renumberings("S02_01")
+    assert "S02_03" in r and "S10_01" in r and "S02_01" not in r
+    assert "S2_01" not in r and "S02_3" not in r          # a number written with a leading zero keeps its width
+    r = H.renumberings("Wave10Driver1")
+    assert "Wave9Driver1" in r and "Wave09Driver1" in r and "Wave10Driver7" in r
+    assert H.renumberings("NoNumber") == [] and H.renumberings("Hash12345") == []
+    assert len(r) == len(set(r))
+
+
+def test_renumbered_finds_the_rest_of_a_run_and_goes_on_from_what_it_finds():
+    wanted = {H.key("S02_03"), H.key("S10_03"), H.key("Other_1")}
+    hits, tries = H.renumbered(["S02_01"], wanted)
+    assert hits == {H.key("S02_03"): ["S02_03"], H.key("S10_03"): ["S10_03"]}     # S10_03 by way of S02_03
+    assert tries > 0
+    assert H.renumbered(["S02_01"], wanted, rounds=1)[0] == {H.key("S02_03"): ["S02_03"]}
+
+
+def test_build_marks_renumbered_names_as_not_certain(tmp_path):
+    import torque_script as TS
+    (tmp_path / "default.xbe").write_bytes(b"\0MissionSlot_01\0")
+    cso = tmp_path / "a.cso"
+    cso.write_bytes(TS.compile_text("MissionSlot_01(); MissionSlot_02();"))
+    t = H.build(tmp_path, [cso], compound=False)
+    by = {v["names"][0]["text"]: v["names"][0] for v in t["keys"].values()}
+    assert by["MissionSlot_01"]["certain"]
+    assert by["MissionSlot_02"] == {"text": "MissionSlot_02", "fold": True, "source": H.RENUMBERED, "certain": False}
+    assert "renumbered_chance_hits" in t
+    off = H.build(tmp_path, [cso], compound=False, renumber=False)
+    assert "MissionSlot_02" not in {v["names"][0]["text"] for v in off["keys"].values()}
+    assert H.best(t) == {H.key("MissionSlot_01"): "MissionSlot_01"}

@@ -78,6 +78,45 @@ fields and functions such as `FindObject`, `MainCharacter`, `%count`. The rest, 
 scripts made up themselves, stay as their hash; they compile to the same bytes. Better word lists
 are welcome.
 
+`python portal/tools/hash_names.py binaries/` goes further and writes `reports/hash_names.json`: it also
+reads the other game files that hold names as text, the script commands and class fields the program
+registers, and the project's own names. Then it makes up texts and keeps the ones that land on a key:
+two known words joined, and a known name with another number in it (the scripters numbered missions,
+waves and slots in runs, and only part of a run is spelled out in the game's data: `S02_01` is there,
+so `S02_03` and `S10_01` are tried). Made-up texts are marked as not certain, and the report says how
+many of them to expect by chance. That names 9,529 of the 15,177 keys the scripts of the retail games
+and the prototype use.
+
+Gangsta Team's [RCF explorer](https://gangsta-team.github.io/web-rcf-explorer/) has a word list of its
+own for these keys. It was compared with ours on 25 November 2026: every one of the 4,031 keys both
+name has the same text. It names 154 keys we don't (sound locations, front triggers, door groups),
+none of them a text found in the game files the tool reads. Those names are not in this repository:
+the list has no licence file and doesn't say where its texts come from, and
+[PROVENANCE.md](PROVENANCE.md) asks for both. If they are names of objects in the game's own `.p3d`
+and sound files, which the tool doesn't read for names yet, reading those is the way to get them from
+your own copy.
+
+### Script commands only the PC game has
+
+The Xbox game registers 820 script commands (`reports/script_bindings.json`). Gangsta Team's
+[natives list](https://gangsta-team.github.io/website/#/documentation/game/natives) for the PC game
+(public domain) has all 820, with the same class, name and return type and, but for
+`GameSimObject::SetInvincible` (3 arguments on the Xbox, 3 or 4 on the PC), the same argument counts.
+It also has 34 the Xbox game doesn't register, the PC's own settings and input:
+
+* display: `ChangeResolution`, `SaveResolutionChangeToRegistry`, `GetDisplayWidth`, `GetDisplayHeight`,
+  `ChangeMSAA`, `GetMSAA`, `GetMaxMSAACaps`, `ChangeBrightness`, `GetBrightness`, `SetAnisValue`,
+  `GetAnisotropicValue`, `SetTrilinear`, `IsTrilinearEnabled`, `SetDrawDistance`, `GetDrawDistance`,
+  `GetVideoCardLevel`, `EnableSFX`, `SFXEnabled`;
+* keys and mouse: `ApplyEventInputChanges`, `UpdateInputPoint`, `GetInputPointByName`,
+  `GetInputPointByLogicalName`, `GetDisplayNameByInputPoint`, `GetPhysicalOverride`,
+  `ClearPhysicalOverride`, `SetMouseSensitivityLevel`, `GetMouseSensitivityLevel`, `SetIsLeftHand`,
+  `GetIsLeftHand`, `ActionMap::BindCommandNoOverride`, `PauseMenuPageControllerConfig::Input`;
+* others: `call`, `CanLegendBeUnshown`, `ResetLastDriveError`.
+
+Their functions are in the part of `Scarface.exe` that can't be read from the file
+([GAME_VERSIONS.md](GAME_VERSIONS.md)), so none of them is in the work queue.
+
 ### `.dtr`: the AI decision trees
 
 `ai/common.dtr` (the engine's `DecisionTreeFileHandler`) is a tree of 319 nodes. Each leaf runs an
