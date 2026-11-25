@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay ModalsOverlayf.bin (business screens), loaded at 0x845480, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2 of 124 functions matched (1.61%). NOT COMPLETE YET.
-// The 122 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 4 of 124 functions matched (3.23%). NOT COMPLETE YET.
+// The 120 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -55,7 +55,24 @@ extern "C" void func_00845F30() {
 // [TODO] 0x00848260 func_00848260 (76 B)
 // [TODO] 0x008482B0 func_008482B0 (304 B)
 // [TODO] 0x008483E0 func_008483E0 (304 B)
-// [TODO] 0x00848510 func_00848510 (8 B)
+// ============================================================================
+// [VERIFIED] func_00848510 (0x00848510, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x5 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x5];
+    char m_Field5; // +0x5
+};
+
+void Object::Set(char value)
+{
+    m_Field5 = value;
+}
+
 // [TODO] 0x00848520 func_00848520 (180 B)
 // [TODO] 0x008485E0 func_008485E0 (180 B)
 // [TODO] 0x008486A0 DrugWarsHUD::DrugWarsHUDFrontMenuItem::vfunc_05 (228 B)
@@ -154,6 +171,23 @@ extern "C" void func_00849950() {
 // [TODO] 0x0084CD10 func_0084CD10 (208 B)
 // [TODO] 0x0084CDE0 func_0084CDE0 (240 B)
 // [TODO] 0x0084CED0 func_0084CED0 (112 B)
-// [TODO] 0x0084CF40 func_0084CF40 (8 B)
+// ============================================================================
+// [VERIFIED] func_0084CF40 (0x0084CF40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x5 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x5];
+    char m_Field5; // +0x5
+};
+
+void Object::Set(char value)
+{
+    m_Field5 = value;
+}
+
 // [TODO] 0x0084CF50 func_0084CF50 (96 B)
 // [TODO] 0x0084CFB0 func_0084CFB0 (112 B)

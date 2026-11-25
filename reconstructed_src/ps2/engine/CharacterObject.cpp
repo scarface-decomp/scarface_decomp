@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/CharacterObject.cpp (5 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/CharacterObject.cpp (6 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 5 of 61 functions matched (8.20%). NOT COMPLETE YET.
-// The 56 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6 of 61 functions matched (9.84%). NOT COMPLETE YET.
+// The 55 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -25,6 +25,18 @@ public:
 void Object::Set(char value)
 {
     m_Field451 = value;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x00396150, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B930.
+extern char D_0080B930[];
+
+char* Get()
+{
+    return D_0080B930;
 }
 
 // ============================================================================

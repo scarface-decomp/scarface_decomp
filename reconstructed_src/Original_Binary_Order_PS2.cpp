@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 1,570 of 23,567 functions matched (6.66%). NOT COMPLETE YET.
-// The 21,997 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 2,551 of 23,567 functions matched (10.82%). NOT COMPLETE YET.
+// The 21,016 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -96,8 +96,30 @@ extern "C" void func_0037AB00() {
 // [TODO] 0x0037AC40 func_0037AC40 (64 B)
 // [TODO] 0x0037AC80 func_0037AC80 (60 B)
 // [TODO] 0x0037ACC0 func_0037ACC0 (60 B)
-// [TODO] 0x0037AD00 func_0037AD00 (12 B)
-// [TODO] 0x0037AD10 func_0037AD10 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037AD00 (0x0037AD00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0078C920.
+extern char D_0078C920[];
+
+char* Get()
+{
+    return D_0078C920;
+}
+
+// ============================================================================
+// [VERIFIED] func_0037AD10 (0x0037AD10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0078C920.
+extern char D_0078C920[];
+
+char* Get()
+{
+    return D_0078C920;
+}
+
 // ============================================================================
 // [VERIFIED] func_0037AD20 (0x0037AD20, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -222,7 +244,18 @@ extern "C" void func_0037ADA0() {
 extern "C" void func_0037ADB0() {
 }
 
-// [TODO] 0x0037ADC0 func_0037ADC0 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037ADC0 (0x0037ADC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0078C920.
+extern char D_0078C920[];
+
+char* Get()
+{
+    return D_0078C920;
+}
+
 // ============================================================================
 // [VERIFIED] func_0037ADD0 (0x0037ADD0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -300,8 +333,30 @@ extern "C" void func_0037AE20() {
 
 // [TODO] 0x0037AE30 func_0037AE30 (164 B)
 // [TODO] 0x0037AEE0 func_0037AEE0 (164 B)
-// [TODO] 0x0037AF90 func_0037AF90 (12 B)
-// [TODO] 0x0037AFA0 func_0037AFA0 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037AF90 (0x0037AF90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0037AF90.
+extern char D_0037AF90[];
+
+char* Get()
+{
+    return D_0037AF90;
+}
+
+// ============================================================================
+// [VERIFIED] func_0037AFA0 (0x0037AFA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0037AF90.
+extern char D_0037AF90[];
+
+char* Get()
+{
+    return D_0037AF90;
+}
+
 // [TODO] 0x0037AFB0 func_0037AFB0 (44 B)
 // [TODO] 0x0037AFE0 func_0037AFE0 (44 B)
 // [TODO] 0x0037B010 func_0037B010 (64 B)
@@ -384,7 +439,18 @@ int Zero()
 // [TODO] 0x0037C390 func_0037C390 (16 B)
 // [TODO] 0x0037C3A0 func_0037C3A0 (60 B)
 // [TODO] 0x0037C3E0 func_0037C3E0 (780 B)
-// [TODO] 0x0037C6F0 func_0037C6F0 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037C6F0 (0x0037C6F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0037C6E0.
+extern char D_0037C6E0[];
+
+char* Get()
+{
+    return D_0037C6E0;
+}
+
 // [TODO] 0x0037C700 func_0037C700 (60 B)
 // [TODO] 0x0037C740 func_0037C740 (104 B)
 // [TODO] 0x0037C7B0 func_0037C7B0 (120 B)
@@ -403,7 +469,18 @@ int Zero()
 // [TODO] 0x0037CD60 func_0037CD60 (96 B)
 // [TODO] 0x0037CDC0 func_0037CDC0 (96 B)
 // [TODO] 0x0037CE20 func_0037CE20 (112 B)
-// [TODO] 0x0037CE90 func_0037CE90 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037CE90 (0x0037CE90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B720.
+extern char D_0080B720[];
+
+char* Get()
+{
+    return D_0080B720;
+}
+
 // [TODO] 0x0037CEA0 func_0037CEA0 (28 B)
 // [TODO] 0x0037CEC0 func_0037CEC0 (52 B)
 // ============================================================================
@@ -532,14 +609,69 @@ int Zero()
 }
 
 // [TODO] 0x0037CFD0 func_0037CFD0 (112 B)
-// [TODO] 0x0037D040 func_0037D040 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037D040 (0x0037D040, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B760.
+extern char D_0080B760[];
+
+char* Get()
+{
+    return D_0080B760;
+}
+
 // [TODO] 0x0037D050 func_0037D050 (112 B)
-// [TODO] 0x0037D0C0 func_0037D0C0 (12 B)
-// [TODO] 0x0037D0D0 func_0037D0D0 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037D0C0 (0x0037D0C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B7A0.
+extern char D_0080B7A0[];
+
+char* Get()
+{
+    return D_0080B7A0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0037D0D0 (0x0037D0D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B6A0.
+extern char D_0080B6A0[];
+
+char* Get()
+{
+    return D_0080B6A0;
+}
+
 // [TODO] 0x0037D0E0 func_0037D0E0 (96 B)
-// [TODO] 0x0037D140 func_0037D140 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037D140 (0x0037D140, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B6E0.
+extern char D_0080B6E0[];
+
+char* Get()
+{
+    return D_0080B6E0;
+}
+
 // [TODO] 0x0037D150 func_0037D150 (112 B)
-// [TODO] 0x0037D1C0 func_0037D1C0 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037D1C0 (0x0037D1C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B860.
+extern char D_0080B860[];
+
+char* Get()
+{
+    return D_0080B860;
+}
+
 // [TODO] 0x0037D1D0 func_0037D1D0 (156 B)
 // [TODO] 0x0037D270 func_0037D270 (52 B)
 // [TODO] 0x0037D2B0 func_0037D2B0 (144 B)
@@ -601,7 +733,18 @@ int Number()
     return 1;
 }
 
-// [TODO] 0x0037D5E0 func_0037D5E0 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037D5E0 (0x0037D5E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B660.
+extern char D_0080B660[];
+
+char* Get()
+{
+    return D_0080B660;
+}
+
 // [TODO] 0x0037D5F0 func_0037D5F0 (68 B)
 // [TODO] 0x0037D640 func_0037D640 (8 B)
 // [TODO] 0x0037D650 func_0037D650 (96 B)
@@ -865,8 +1008,30 @@ Object* Object::Get()
 // [TODO] 0x0037EFC0 func_0037EFC0 (60 B)
 // [TODO] 0x0037F000 func_0037F000 (60 B)
 // [TODO] 0x0037F040 func_0037F040 (60 B)
-// [TODO] 0x0037F080 func_0037F080 (12 B)
-// [TODO] 0x0037F090 func_0037F090 (12 B)
+// ============================================================================
+// [VERIFIED] func_0037F080 (0x0037F080, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0037F080.
+extern char D_0037F080[];
+
+char* Get()
+{
+    return D_0037F080;
+}
+
+// ============================================================================
+// [VERIFIED] func_0037F090 (0x0037F090, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0037F080.
+extern char D_0037F080[];
+
+char* Get()
+{
+    return D_0037F080;
+}
+
 // [TODO] 0x0037F0A0 func_0037F0A0 (72 B)
 // [TODO] 0x0037F0F0 func_0037F0F0 (56 B)
 // [TODO] 0x0037F130 func_0037F130 (72 B)
@@ -917,7 +1082,18 @@ int Zero()
 // [TODO] 0x0037FF90 func_0037FF90 (68 B)
 // [TODO] 0x0037FFE0 func_0037FFE0 (68 B)
 // [TODO] 0x00380030 func_00380030 (96 B)
-// [TODO] 0x00380090 func_00380090 (12 B)
+// ============================================================================
+// [VERIFIED] func_00380090 (0x00380090, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BB90.
+extern char D_0080BB90[];
+
+char* Get()
+{
+    return D_0080BB90;
+}
+
 // ============================================================================
 // [VERIFIED] func_003800A0 (0x003800A0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -1142,8 +1318,30 @@ int Object::Get()
 // [TODO] 0x00381080 func_00381080 (384 B)
 // [TODO] 0x00381200 func_00381200 (708 B)
 // [TODO] 0x003814D0 func_003814D0 (60 B)
-// [TODO] 0x00381510 func_00381510 (12 B)
-// [TODO] 0x00381520 func_00381520 (12 B)
+// ============================================================================
+// [VERIFIED] func_00381510 (0x00381510, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00381510.
+extern char D_00381510[];
+
+char* Get()
+{
+    return D_00381510;
+}
+
+// ============================================================================
+// [VERIFIED] func_00381520 (0x00381520, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00381510.
+extern char D_00381510[];
+
+char* Get()
+{
+    return D_00381510;
+}
+
 // [TODO] 0x00381530 func_00381530 (72 B)
 // [TODO] 0x00381580 func_00381580 (80 B)
 // [TODO] 0x003815D0 func_003815D0 (156 B)
@@ -1381,9 +1579,37 @@ extern "C" void func_00383D70() {
 // [TODO] 0x00385D50 func_00385D50 (188 B)
 // [TODO] 0x00385E10 func_00385E10 (68 B)
 // [TODO] 0x00385E60 func_00385E60 (108 B)
-// [TODO] 0x00385ED0 func_00385ED0 (12 B)
+// ============================================================================
+// [VERIFIED] func_00385ED0 (0x00385ED0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D310.
+extern char D_0080D310[];
+
+char* Get()
+{
+    return D_0080D310;
+}
+
 // [TODO] 0x00385EE0 func_00385EE0 (136 B)
-// [TODO] 0x00385F70 func_00385F70 (12 B)
+// ============================================================================
+// [VERIFIED] func_00385F70 (0x00385F70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x22 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x22];
+    char m_Field22; // +0x22
+};
+
+void Object::Set()
+{
+    m_Field22 = 1;
+}
+
 // [TODO] 0x00385F80 func_00385F80 (8 B)
 // [TODO] 0x00385F90 func_00385F90 (16 B)
 // ============================================================================
@@ -1528,7 +1754,18 @@ int Zero()
     return 0;
 }
 
-// [TODO] 0x00386080 func_00386080 (12 B)
+// ============================================================================
+// [VERIFIED] func_00386080 (0x00386080, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D2D0.
+extern char D_0080D2D0[];
+
+char* Get()
+{
+    return D_0080D2D0;
+}
+
 // ============================================================================
 // [VERIFIED] func_00386090 (0x00386090, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -2134,7 +2371,18 @@ unsigned char Get()
 // [TODO] 0x003905F0 func_003905F0 (216 B)
 // [TODO] 0x003906D0 func_003906D0 (500 B)
 // [TODO] 0x003908D0 func_003908D0 (8 B)
-// [TODO] 0x003908E0 func_003908E0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003908E0 (0x003908E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00808918 to 1.
+extern char D_00808918;
+
+void Set()
+{
+    D_00808918 = 1;
+}
+
 // [TODO] 0x003908F0 func_003908F0 (16 B)
 // [TODO] 0x00390900 func_00390900 (156 B)
 // ============================================================================
@@ -2194,9 +2442,31 @@ unsigned char Get()
     return D_00808990;
 }
 
-// [TODO] 0x00390B80 func_00390B80 (12 B)
+// ============================================================================
+// [VERIFIED] func_00390B80 (0x00390B80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00808990 to 1.
+extern char D_00808990;
+
+void Set()
+{
+    D_00808990 = 1;
+}
+
 // [TODO] 0x00390B90 func_00390B90 (8 B)
-// [TODO] 0x00390BA0 func_00390BA0 (12 B)
+// ============================================================================
+// [VERIFIED] func_00390BA0 (0x00390BA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00808988 to 1.
+extern char D_00808988;
+
+void Set()
+{
+    D_00808988 = 1;
+}
+
 // ============================================================================
 // [VERIFIED] func_00390BB0 (0x00390BB0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -2212,8 +2482,30 @@ extern "C" void func_00390BB0() {
 
 // [TODO] 0x00390BC0 func_00390BC0 (32 B)
 // [TODO] 0x00390BE0 func_00390BE0 (16 B)
-// [TODO] 0x00390BF0 func_00390BF0 (12 B)
-// [TODO] 0x00390C00 func_00390C00 (12 B)
+// ============================================================================
+// [VERIFIED] func_00390BF0 (0x00390BF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00808980 to 1.
+extern char D_00808980;
+
+void Set()
+{
+    D_00808980 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00390C00 (0x00390C00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_0080897C to 1.
+extern char D_0080897C;
+
+void Set()
+{
+    D_0080897C = 1;
+}
+
 // [TODO] 0x00390C10 func_00390C10 (8 B)
 // ============================================================================
 // [VERIFIED] func_00390C20 (0x00390C20, 8 B)
@@ -2242,13 +2534,68 @@ unsigned char Get()
 }
 
 // [TODO] 0x00390C70 func_00390C70 (20 B)
-// [TODO] 0x00390C90 func_00390C90 (12 B)
-// [TODO] 0x00390CA0 func_00390CA0 (12 B)
+// ============================================================================
+// [VERIFIED] func_00390C90 (0x00390C90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00808960 to 1.
+extern char D_00808960;
+
+void Set()
+{
+    D_00808960 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00390CA0 (0x00390CA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_0080895C to 1.
+extern char D_0080895C;
+
+void Set()
+{
+    D_0080895C = 1;
+}
+
 // [TODO] 0x00390CB0 func_00390CB0 (16 B)
-// [TODO] 0x00390CC0 func_00390CC0 (12 B)
-// [TODO] 0x00390CD0 func_00390CD0 (12 B)
+// ============================================================================
+// [VERIFIED] func_00390CC0 (0x00390CC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00808958 to 1.
+extern char D_00808958;
+
+void Set()
+{
+    D_00808958 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00390CD0 (0x00390CD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00808954 to 1.
+extern char D_00808954;
+
+void Set()
+{
+    D_00808954 = 1;
+}
+
 // [TODO] 0x00390CE0 func_00390CE0 (16 B)
-// [TODO] 0x00390CF0 func_00390CF0 (12 B)
+// ============================================================================
+// [VERIFIED] func_00390CF0 (0x00390CF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00808950 to 1.
+extern char D_00808950;
+
+void Set()
+{
+    D_00808950 = 1;
+}
+
 // [TODO] 0x00390D00 func_00390D00 (84 B)
 // ============================================================================
 // [VERIFIED] func_00390D60 (0x00390D60, 8 B)
@@ -2567,7 +2914,16 @@ int Object::Get()
 
 // [TODO] 0x00392C10 func_00392C10 (12 B)
 // [TODO] 0x00392C20 func_00392C20 (16 B)
-// [TODO] 0x00392C30 func_00392C30 (12 B)
+// ============================================================================
+// [VERIFIED] func_00392C30 (0x00392C30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.0.
+float Zero()
+{
+    return 0.0f;
+}
+
 // [TODO] 0x00392C40 func_00392C40 (96 B)
 // [TODO] 0x00392CA0 func_00392CA0 (52 B)
 // ============================================================================
@@ -2843,10 +3199,28 @@ int Get()
 // [TODO] 0x00394A10 func_00394A10 (100 B)
 // [TODO] 0x00394A80 func_00394A80 (100 B)
 // [TODO] 0x00394AF0 func_00394AF0 (96 B)
-// [TODO] 0x00394B50 func_00394B50 (12 B)
+// ============================================================================
+// [VERIFIED] func_00394B50 (0x00394B50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.0.
+float Zero()
+{
+    return 0.0f;
+}
+
 // [TODO] 0x00394B60 func_00394B60 (16 B)
 // [TODO] 0x00394B70 func_00394B70 (96 B)
-// [TODO] 0x00394BD0 func_00394BD0 (12 B)
+// ============================================================================
+// [VERIFIED] func_00394BD0 (0x00394BD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.0.
+float Zero()
+{
+    return 0.0f;
+}
+
 // [TODO] 0x00394BE0 func_00394BE0 (16 B)
 // [TODO] 0x00394BF0 func_00394BF0 (44 B)
 // [TODO] 0x00394C20 func_00394C20 (44 B)
@@ -2932,7 +3306,18 @@ int Get()
 // [TODO] 0x00396090 func_00396090 (52 B)
 // [TODO] 0x003960D0 func_003960D0 (32 B)
 // [TODO] 0x003960F0 func_003960F0 (96 B)
-// [TODO] 0x00396150 CharacterObject::vfunc_00 (12 B)
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x00396150, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B930.
+extern char D_0080B930[];
+
+char* Get()
+{
+    return D_0080B930;
+}
+
 // ============================================================================
 // [VERIFIED] func_00396160 (0x00396160, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -3046,7 +3431,24 @@ unsigned char Object::Get()
     return m_FieldA4;
 }
 
-// [TODO] 0x003961F0 func_003961F0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003961F0 (0x003961F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0xB0 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0xB0];
+    unsigned char m_FieldB0; // +0xB0
+};
+
+bool Object::IsSet()
+{
+    return m_FieldB0 != 0;
+}
+
 // [TODO] 0x00396200 func_00396200 (324 B)
 // [TODO] 0x00396350 func_00396350 (132 B)
 // [TODO] 0x003963E0 func_003963E0 (352 B)
@@ -3092,7 +3494,26 @@ void Object::Set(int value)
 }
 
 // [TODO] 0x00396950 func_00396950 (120 B)
-// [TODO] 0x003969D0 func_003969D0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003969D0 (0x003969D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its two arguments at +0x43C and +0x43D of its object.
+class Object
+{
+public:
+    void Set(char first, char second);
+    char m_pad00[0x43C];
+    char m_Field43C; // +0x43C
+    char m_Field43D; // +0x43D
+};
+
+void Object::Set(char first, char second)
+{
+    m_Field43C = first;
+    m_Field43D = second;
+}
+
 // [TODO] 0x003969E0 func_003969E0 (16 B)
 // [TODO] 0x003969F0 func_003969F0 (32 B)
 // [TODO] 0x00396A10 func_00396A10 (16 B)
@@ -3126,7 +3547,24 @@ void Object::Set(char value)
 
 // [TODO] 0x00396E30 func_00396E30 (84 B)
 // [TODO] 0x00396E90 func_00396E90 (80 B)
-// [TODO] 0x00396EE0 func_00396EE0 (12 B)
+// ============================================================================
+// [VERIFIED] func_00396EE0 (0x00396EE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x3F8 of its object to -1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x3F8];
+    char m_Field3F8; // +0x3F8
+};
+
+void Object::Set()
+{
+    m_Field3F8 = -1;
+}
+
 // [TODO] 0x00396EF0 func_00396EF0 (24 B)
 // ============================================================================
 // [VERIFIED] func_00396F10 (0x00396F10, 8 B)
@@ -3164,7 +3602,24 @@ void Object::Set(char value)
     m_Field190 = value;
 }
 
-// [TODO] 0x00396F30 func_00396F30 (12 B)
+// ============================================================================
+// [VERIFIED] func_00396F30 (0x00396F30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x18C of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x18C];
+    int m_Field18C; // +0x18C
+};
+
+bool Object::IsSet()
+{
+    return m_Field18C != 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_00396F40 (0x00396F40, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -3474,7 +3929,18 @@ float Object::Get()
 // [TODO] 0x00397BA0 func_00397BA0 (208 B)
 // [TODO] 0x00397C70 func_00397C70 (16 B)
 // [TODO] 0x00397C80 func_00397C80 (232 B)
-// [TODO] 0x00397D70 func_00397D70 (12 B)
+// ============================================================================
+// [VERIFIED] func_00397D70 (0x00397D70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00832060.
+extern char D_00832060[];
+
+char* Get()
+{
+    return D_00832060;
+}
+
 // [TODO] 0x00397D80 func_00397D80 (72 B)
 // [TODO] 0x00397DD0 func_00397DD0 (36 B)
 // [TODO] 0x00397E00 func_00397E00 (496 B)
@@ -3698,7 +4164,24 @@ int Zero()
 // [TODO] 0x003990A0 func_003990A0 (148 B)
 // [TODO] 0x00399140 func_00399140 (8 B)
 // [TODO] 0x00399150 func_00399150 (8 B)
-// [TODO] 0x00399160 func_00399160 (12 B)
+// ============================================================================
+// [VERIFIED] func_00399160 (0x00399160, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x310 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x310];
+    int m_Field310; // +0x310
+};
+
+bool Object::IsSet()
+{
+    return m_Field310 != 0;
+}
+
 // [TODO] 0x00399170 func_00399170 (52 B)
 // [TODO] 0x003991B0 func_003991B0 (48 B)
 // [TODO] 0x003991E0 func_003991E0 (40 B)
@@ -3873,7 +4356,24 @@ int Object::Get()
 // [TODO] 0x0039A410 func_0039A410 (1092 B)
 // [TODO] 0x0039A860 func_0039A860 (8 B)
 // [TODO] 0x0039A870 func_0039A870 (16 B)
-// [TODO] 0x0039A880 func_0039A880 (12 B)
+// ============================================================================
+// [VERIFIED] func_0039A880 (0x0039A880, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x2C8 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x2C8];
+    int m_Field2C8; // +0x2C8
+};
+
+bool Object::IsSet()
+{
+    return m_Field2C8 != 0;
+}
+
 // [TODO] 0x0039A890 func_0039A890 (16 B)
 // [TODO] 0x0039A8A0 func_0039A8A0 (8 B)
 // [TODO] 0x0039A8B0 func_0039A8B0 (324 B)
@@ -3975,7 +4475,30 @@ void Object::Set(char value)
 // [TODO] 0x0039BCE0 func_0039BCE0 (40 B)
 // [TODO] 0x0039BD10 func_0039BD10 (8 B)
 // [TODO] 0x0039BD20 func_0039BD20 (8 B)
-// [TODO] 0x0039BD30 func_0039BD30 (12 B)
+// ============================================================================
+// [VERIFIED] func_0039BD30 (0x0039BD30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x64 of the object its member at +0xD8 points to.
+struct Inner
+{
+    char m_pad00[0x64];
+    int m_Field64; // +0x64
+};
+
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xD8];
+    Inner* m_FieldD8; // +0xD8
+};
+
+int Object::Get()
+{
+    return m_FieldD8->m_Field64;
+}
+
 // [TODO] 0x0039BD40 func_0039BD40 (272 B)
 // [TODO] 0x0039BE50 func_0039BE50 (64 B)
 // [TODO] 0x0039BE90 func_0039BE90 (180 B)
@@ -4193,7 +4716,30 @@ int Object::Get()
 // [TODO] 0x003A1FC0 func_003A1FC0 (164 B)
 // [TODO] 0x003A2070 CharacterObject::vfunc_64 (124 B)
 // [TODO] 0x003A20F0 func_003A20F0 (8 B)
-// [TODO] 0x003A2100 func_003A2100 (12 B)
+// ============================================================================
+// [VERIFIED] func_003A2100 (0x003A2100, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x178 of the object its member at +0x1D0 points to.
+struct Inner
+{
+    char m_pad00[0x178];
+    int m_Field178; // +0x178
+};
+
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x1D0];
+    Inner* m_Field1D0; // +0x1D0
+};
+
+int Object::Get()
+{
+    return m_Field1D0->m_Field178;
+}
+
 // [TODO] 0x003A2110 func_003A2110 (36 B)
 // [TODO] 0x003A2140 func_003A2140 (452 B)
 // [TODO] 0x003A2310 func_003A2310 (180 B)
@@ -4294,7 +4840,18 @@ extern "C" void func_003A2D00() {
 // [TODO] 0x003A3C30 func_003A3C30 (48 B)
 // [TODO] 0x003A3C60 func_003A3C60 (148 B)
 // [TODO] 0x003A3D00 func_003A3D00 (116 B)
-// [TODO] 0x003A3D80 func_003A3D80 (12 B)
+// ============================================================================
+// [VERIFIED] func_003A3D80 (0x003A3D80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00832240.
+extern char D_00832240[];
+
+char* Get()
+{
+    return D_00832240;
+}
+
 // ============================================================================
 // [VERIFIED] func_003A3D90 (0x003A3D90, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -4440,7 +4997,24 @@ Object* Object::Get()
 // [TODO] 0x003A4010 func_003A4010 (60 B)
 // [TODO] 0x003A4050 func_003A4050 (60 B)
 // [TODO] 0x003A4090 func_003A4090 (16 B)
-// [TODO] 0x003A40A0 func_003A40A0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003A40A0 (0x003A40A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0xB8 of its object to 99.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0xB8];
+    char m_FieldB8; // +0xB8
+};
+
+void Object::Set()
+{
+    m_FieldB8 = 99;
+}
+
 // [TODO] 0x003A40B0 func_003A40B0 (32 B)
 // [TODO] 0x003A40D0 func_003A40D0 (32 B)
 // [TODO] 0x003A40F0 func_003A40F0 (40 B)
@@ -4458,11 +5032,44 @@ Object* Object::Get()
 // [TODO] 0x003A45D0 func_003A45D0 (8 B)
 // [TODO] 0x003A45E0 func_003A45E0 (16 B)
 // [TODO] 0x003A45F0 func_003A45F0 (16 B)
-// [TODO] 0x003A4600 func_003A4600 (12 B)
+// ============================================================================
+// [VERIFIED] func_003A4600 (0x003A4600, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x4 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+bool Object::IsSet()
+{
+    return m_Field4 != 0;
+}
+
 // [TODO] 0x003A4610 func_003A4610 (8 B)
 // [TODO] 0x003A4620 func_003A4620 (124 B)
 // [TODO] 0x003A46A0 func_003A46A0 (628 B)
-// [TODO] 0x003A4920 func_003A4920 (12 B)
+// ============================================================================
+// [VERIFIED] func_003A4920 (0x003A4920, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_Field0; // +0x0
+};
+
+void Object::Set()
+{
+    m_Field0 = 1;
+}
+
 // [TODO] 0x003A4930 func_003A4930 (68 B)
 // [TODO] 0x003A4980 func_003A4980 (16 B)
 // [TODO] 0x003A4990 func_003A4990 (68 B)
@@ -4481,7 +5088,18 @@ Object* Object::Get()
 // [TODO] 0x003A4E10 func_003A4E10 (96 B)
 // [TODO] 0x003A4E70 func_003A4E70 (68 B)
 // [TODO] 0x003A4EC0 func_003A4EC0 (192 B)
-// [TODO] 0x003A4F80 func_003A4F80 (12 B)
+// ============================================================================
+// [VERIFIED] func_003A4F80 (0x003A4F80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BA70.
+extern char D_0080BA70[];
+
+char* Get()
+{
+    return D_0080BA70;
+}
+
 // [TODO] 0x003A4F90 func_003A4F90 (48 B)
 // [TODO] 0x003A4FC0 func_003A4FC0 (508 B)
 // [TODO] 0x003A51C0 func_003A51C0 (112 B)
@@ -4505,13 +5123,79 @@ Object* Object::Get()
 // [TODO] 0x003A57D0 func_003A57D0 (116 B)
 // [TODO] 0x003A5850 func_003A5850 (368 B)
 // [TODO] 0x003A59C0 func_003A59C0 (272 B)
-// [TODO] 0x003A5AD0 func_003A5AD0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003A5AD0 (0x003A5AD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831C60.
+extern char D_00831C60[];
+
+char* Get()
+{
+    return D_00831C60;
+}
+
 // [TODO] 0x003A5AE0 func_003A5AE0 (96 B)
-// [TODO] 0x003A5B40 func_003A5B40 (12 B)
-// [TODO] 0x003A5B50 func_003A5B50 (12 B)
-// [TODO] 0x003A5B60 func_003A5B60 (12 B)
-// [TODO] 0x003A5B70 func_003A5B70 (12 B)
-// [TODO] 0x003A5B80 func_003A5B80 (12 B)
+// ============================================================================
+// [VERIFIED] func_003A5B40 (0x003A5B40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BAB0.
+extern char D_0080BAB0[];
+
+char* Get()
+{
+    return D_0080BAB0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003A5B50 (0x003A5B50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BA30.
+extern char D_0080BA30[];
+
+char* Get()
+{
+    return D_0080BA30;
+}
+
+// ============================================================================
+// [VERIFIED] func_003A5B60 (0x003A5B60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B9F0.
+extern char D_0080B9F0[];
+
+char* Get()
+{
+    return D_0080B9F0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003A5B70 (0x003A5B70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B9B0.
+extern char D_0080B9B0[];
+
+char* Get()
+{
+    return D_0080B9B0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003A5B80 (0x003A5B80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B970.
+extern char D_0080B970[];
+
+char* Get()
+{
+    return D_0080B970;
+}
+
 // [TODO] 0x003A5B90 func_003A5B90 (76 B)
 // [TODO] 0x003A5BE0 func_003A5BE0 (56 B)
 // [TODO] 0x003A5C20 func_003A5C20 (52 B)
@@ -4544,7 +5228,26 @@ int Object::Get()
 // [TODO] 0x003A61F0 func_003A61F0 (36 B)
 // [TODO] 0x003A6220 func_003A6220 (60 B)
 // [TODO] 0x003A6260 func_003A6260 (40 B)
-// [TODO] 0x003A6290 func_003A6290 (12 B)
+// ============================================================================
+// [VERIFIED] func_003A6290 (0x003A6290, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the members at +0x4 and +0x0 of its object to zero.
+class Object
+{
+public:
+    void Clear();
+    short m_Field0; // +0x0
+    char m_pad02[0x2];
+    int m_Field4; // +0x4
+};
+
+void Object::Clear()
+{
+    m_Field4 = 0;
+    m_Field0 = 0;
+}
+
 // [TODO] 0x003A62A0 func_003A62A0 (40 B)
 // [TODO] 0x003A62D0 func_003A62D0 (80 B)
 // [TODO] 0x003A6320 func_003A6320 (772 B)
@@ -4660,7 +5363,24 @@ float Object::Get()
 
 // [TODO] 0x003AB170 func_003AB170 (32 B)
 // [TODO] 0x003AB190 func_003AB190 (92 B)
-// [TODO] 0x003AB1F0 func_003AB1F0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003AB1F0 (0x003AB1F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x14 of its object to 2.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x14];
+    char m_Field14; // +0x14
+};
+
+void Object::Set()
+{
+    m_Field14 = 2;
+}
+
 // [TODO] 0x003AB200 func_003AB200 (788 B)
 // [TODO] 0x003AB520 func_003AB520 (160 B)
 // [TODO] 0x003AB5C0 func_003AB5C0 (120 B)
@@ -5112,7 +5832,18 @@ int* Object::Get()
 // [TODO] 0x003B6720 func_003B6720 (224 B)
 // [TODO] 0x003B6800 func_003B6800 (12 B)
 // [TODO] 0x003B6810 func_003B6810 (32 B)
-// [TODO] 0x003B6830 func_003B6830 (12 B)
+// ============================================================================
+// [VERIFIED] func_003B6830 (0x003B6830, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BB50.
+extern char D_0080BB50[];
+
+char* Get()
+{
+    return D_0080BB50;
+}
+
 // ============================================================================
 // [VERIFIED] func_003B6840 (0x003B6840, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -5145,9 +5876,42 @@ int Zero()
 // [TODO] 0x003B6FA0 func_003B6FA0 (144 B)
 // [TODO] 0x003B7030 func_003B7030 (132 B)
 // [TODO] 0x003B70C0 func_003B70C0 (96 B)
-// [TODO] 0x003B7120 func_003B7120 (12 B)
-// [TODO] 0x003B7130 func_003B7130 (12 B)
-// [TODO] 0x003B7140 func_003B7140 (12 B)
+// ============================================================================
+// [VERIFIED] func_003B7120 (0x003B7120, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_008319E0.
+extern char D_008319E0[];
+
+char* Get()
+{
+    return D_008319E0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003B7130 (0x003B7130, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BB10.
+extern char D_0080BB10[];
+
+char* Get()
+{
+    return D_0080BB10;
+}
+
+// ============================================================================
+// [VERIFIED] func_003B7140 (0x003B7140, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BC10.
+extern char D_0080BC10[];
+
+char* Get()
+{
+    return D_0080BC10;
+}
+
 // ============================================================================
 // [VERIFIED] func_003B7150 (0x003B7150, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -5394,7 +6158,18 @@ short Object::Get()
 // [TODO] 0x003BB4F0 func_003BB4F0 (148 B)
 // [TODO] 0x003BB590 func_003BB590 (132 B)
 // [TODO] 0x003BB620 func_003BB620 (88 B)
-// [TODO] 0x003BB680 func_003BB680 (12 B)
+// ============================================================================
+// [VERIFIED] func_003BB680 (0x003BB680, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BBD0.
+extern char D_0080BBD0[];
+
+char* Get()
+{
+    return D_0080BBD0;
+}
+
 // ============================================================================
 // [VERIFIED] func_003BB690 (0x003BB690, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -5413,7 +6188,24 @@ Object* Object::Get()
 
 // [TODO] 0x003BB6A0 func_003BB6A0 (60 B)
 // [TODO] 0x003BB6E0 func_003BB6E0 (208 B)
-// [TODO] 0x003BB7B0 func_003BB7B0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003BB7B0 (0x003BB7B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
+}
+
 // [TODO] 0x003BB7C0 func_003BB7C0 (8 B)
 // [TODO] 0x003BB7D0 func_003BB7D0 (8 B)
 // [TODO] 0x003BB7E0 func_003BB7E0 (8 B)
@@ -5469,7 +6261,18 @@ float Object::Get()
     return m_FieldD0;
 }
 
-// [TODO] 0x003BB880 AirplaneObject::vfunc_00 (12 B)
+// ============================================================================
+// [VERIFIED] AirplaneObject::vfunc_00 (0x003BB880, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BC60.
+extern char D_0080BC60[];
+
+char* Get()
+{
+    return D_0080BC60;
+}
+
 // [TODO] 0x003BB890 AirplaneObject::vfunc_51 (32 B)
 // ============================================================================
 // [VERIFIED] func_003BB8B0 (0x003BB8B0, 8 B)
@@ -5870,7 +6673,18 @@ Object* Object::Get()
 
 // [TODO] 0x003C14B0 func_003C14B0 (60 B)
 // [TODO] 0x003C14F0 func_003C14F0 (60 B)
-// [TODO] 0x003C1530 func_003C1530 (12 B)
+// ============================================================================
+// [VERIFIED] func_003C1530 (0x003C1530, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BCB0.
+extern char D_0080BCB0[];
+
+char* Get()
+{
+    return D_0080BCB0;
+}
+
 // ============================================================================
 // [VERIFIED] func_003C1540 (0x003C1540, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -5921,18 +6735,51 @@ extern "C" void func_003C1890() {
 // [TODO] 0x003C1B40 func_003C1B40 (156 B)
 // [TODO] 0x003C1BE0 func_003C1BE0 (64 B)
 // [TODO] 0x003C1C20 func_003C1C20 (96 B)
-// [TODO] 0x003C1C80 func_003C1C80 (12 B)
+// ============================================================================
+// [VERIFIED] func_003C1C80 (0x003C1C80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BCF0.
+extern char D_0080BCF0[];
+
+char* Get()
+{
+    return D_0080BCF0;
+}
+
 // [TODO] 0x003C1C90 func_003C1C90 (272 B)
 // [TODO] 0x003C1DA0 func_003C1DA0 (56 B)
 // [TODO] 0x003C1DE0 func_003C1DE0 (96 B)
 // [TODO] 0x003C1E40 func_003C1E40 (56 B)
-// [TODO] 0x003C1E80 func_003C1E80 (12 B)
+// ============================================================================
+// [VERIFIED] func_003C1E80 (0x003C1E80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BD30.
+extern char D_0080BD30[];
+
+char* Get()
+{
+    return D_0080BD30;
+}
+
 // [TODO] 0x003C1E90 func_003C1E90 (16 B)
 // [TODO] 0x003C1EA0 func_003C1EA0 (20 B)
 // [TODO] 0x003C1EC0 func_003C1EC0 (8 B)
 // [TODO] 0x003C1ED0 func_003C1ED0 (112 B)
 // [TODO] 0x003C1F40 func_003C1F40 (84 B)
-// [TODO] 0x003C1FA0 AirplaneObject::vfunc_00 (12 B)
+// ============================================================================
+// [VERIFIED] AirplaneObject::vfunc_00 (0x003C1FA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BE10.
+extern char D_0080BE10[];
+
+char* Get()
+{
+    return D_0080BE10;
+}
+
 // [TODO] 0x003C1FB0 AirplaneObject::vfunc_74 (64 B)
 // [TODO] 0x003C1FF0 func_003C1FF0 (20 B)
 // [TODO] 0x003C2010 func_003C2010 (116 B)
@@ -5964,7 +6811,18 @@ int Zero()
     return 0;
 }
 
-// [TODO] 0x003C2D50 AirplaneObject::vfunc_00 (12 B)
+// ============================================================================
+// [VERIFIED] AirplaneObject::vfunc_00 (0x003C2D50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BD80.
+extern char D_0080BD80[];
+
+char* Get()
+{
+    return D_0080BD80;
+}
+
 // [TODO] 0x003C2D60 func_003C2D60 (196 B)
 // [TODO] 0x003C2E30 AirplaneObject::vfunc_74 (64 B)
 // [TODO] 0x003C2E70 AirplaneObject::vfunc_65 (196 B)
@@ -6018,7 +6876,18 @@ int Number()
     return 1;
 }
 
-// [TODO] 0x003C4450 AirplaneObject::vfunc_00 (12 B)
+// ============================================================================
+// [VERIFIED] AirplaneObject::vfunc_00 (0x003C4450, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BDD0.
+extern char D_0080BDD0[];
+
+char* Get()
+{
+    return D_0080BDD0;
+}
+
 // [TODO] 0x003C4460 AirplaneObject::vfunc_74 (64 B)
 // [TODO] 0x003C44A0 AirplaneObject::vfunc_01 (96 B)
 // [TODO] 0x003C4500 func_003C4500 (60 B)
@@ -6046,7 +6915,18 @@ int Number()
 // [TODO] 0x003C5BC0 func_003C5BC0 (188 B)
 // [TODO] 0x003C5C80 func_003C5C80 (24 B)
 // [TODO] 0x003C5CA0 func_003C5CA0 (8 B)
-// [TODO] 0x003C5CB0 func_003C5CB0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003C5CB0 (0x003C5CB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00808D0C to 1.
+extern char D_00808D0C;
+
+void Set()
+{
+    D_00808D0C = 1;
+}
+
 // [TODO] 0x003C5CC0 func_003C5CC0 (160 B)
 // [TODO] 0x003C5D60 func_003C5D60 (56 B)
 // [TODO] 0x003C5DA0 func_003C5DA0 (256 B)
@@ -6164,7 +7044,18 @@ int Get()
     return D_00808CE0;
 }
 
-// [TODO] 0x003C6920 func_003C6920 (12 B)
+// ============================================================================
+// [VERIFIED] func_003C6920 (0x003C6920, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BE50.
+extern char D_0080BE50[];
+
+char* Get()
+{
+    return D_0080BE50;
+}
+
 // ============================================================================
 // [VERIFIED] func_003C6930 (0x003C6930, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -6278,13 +7169,52 @@ extern "C" void func_003C6FA0() {
 // [TODO] 0x003C7CD0 ActiveWheeledVehicleObject::vfunc_16 (116 B)
 // [TODO] 0x003C7D50 ActiveAirplaneObject::vfunc_17 (200 B)
 // [TODO] 0x003C7E20 ActiveAirplaneObject::vfunc_16 (124 B)
-// [TODO] 0x003C7EA0 func_003C7EA0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003C7EA0 (0x003C7EA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BE90.
+extern char D_0080BE90[];
+
+char* Get()
+{
+    return D_0080BE90;
+}
+
 // [TODO] 0x003C7EB0 func_003C7EB0 (8 B)
-// [TODO] 0x003C7EC0 func_003C7EC0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003C7EC0 (0x003C7EC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x22 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x22];
+    char m_Field22; // +0x22
+};
+
+void Object::Set()
+{
+    m_Field22 = 1;
+}
+
 // [TODO] 0x003C7ED0 func_003C7ED0 (8 B)
 // [TODO] 0x003C7EE0 func_003C7EE0 (112 B)
 // [TODO] 0x003C7F50 func_003C7F50 (84 B)
-// [TODO] 0x003C7FB0 func_003C7FB0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003C7FB0 (0x003C7FB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BED0.
+extern char D_0080BED0[];
+
+char* Get()
+{
+    return D_0080BED0;
+}
+
 // ============================================================================
 // [VERIFIED] func_003C7FC0 (0x003C7FC0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -6351,14 +7281,53 @@ unsigned char Get()
 // [TODO] 0x003C8E70 func_003C8E70 (1860 B)
 // [TODO] 0x003C95C0 func_003C95C0 (8 B)
 // [TODO] 0x003C95D0 func_003C95D0 (64 B)
-// [TODO] 0x003C9610 func_003C9610 (12 B)
+// ============================================================================
+// [VERIFIED] func_003C9610 (0x003C9610, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C500.
+extern char D_0080C500[];
+
+char* Get()
+{
+    return D_0080C500;
+}
+
 // [TODO] 0x003C9620 func_003C9620 (100 B)
 // [TODO] 0x003C9690 func_003C9690 (8 B)
 // [TODO] 0x003C96A0 func_003C96A0 (8 B)
 // [TODO] 0x003C96B0 func_003C96B0 (96 B)
 // [TODO] 0x003C9710 func_003C9710 (84 B)
-// [TODO] 0x003C9770 func_003C9770 (12 B)
-// [TODO] 0x003C9780 func_003C9780 (12 B)
+// ============================================================================
+// [VERIFIED] func_003C9770 (0x003C9770, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C540.
+extern char D_0080C540[];
+
+char* Get()
+{
+    return D_0080C540;
+}
+
+// ============================================================================
+// [VERIFIED] func_003C9780 (0x003C9780, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x134 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x134];
+    char m_Field134; // +0x134
+};
+
+void Object::Set()
+{
+    m_Field134 = 1;
+}
+
 // [TODO] 0x003C9790 func_003C9790 (16 B)
 // [TODO] 0x003C97A0 func_003C97A0 (8 B)
 // [TODO] 0x003C97B0 func_003C97B0 (200 B)
@@ -6473,18 +7442,68 @@ void Object::Set(float value)
 // [TODO] 0x003CAB30 func_003CAB30 (104 B)
 // [TODO] 0x003CABA0 func_003CABA0 (348 B)
 // [TODO] 0x003CAD00 func_003CAD00 (60 B)
-// [TODO] 0x003CAD40 func_003CAD40 (12 B)
-// [TODO] 0x003CAD50 func_003CAD50 (12 B)
+// ============================================================================
+// [VERIFIED] func_003CAD40 (0x003CAD40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_003CAD50 (0x003CAD50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C580.
+extern char D_0080C580[];
+
+char* Get()
+{
+    return D_0080C580;
+}
+
 // [TODO] 0x003CAD60 func_003CAD60 (8 B)
 // [TODO] 0x003CAD70 func_003CAD70 (60 B)
 // [TODO] 0x003CADB0 func_003CADB0 (8 B)
 // [TODO] 0x003CADC0 func_003CADC0 (112 B)
 // [TODO] 0x003CAE30 func_003CAE30 (92 B)
-// [TODO] 0x003CAE90 func_003CAE90 (12 B)
+// ============================================================================
+// [VERIFIED] func_003CAE90 (0x003CAE90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C5C0.
+extern char D_0080C5C0[];
+
+char* Get()
+{
+    return D_0080C5C0;
+}
+
 // [TODO] 0x003CAEA0 func_003CAEA0 (72 B)
 // [TODO] 0x003CAEF0 func_003CAEF0 (112 B)
 // [TODO] 0x003CAF60 func_003CAF60 (60 B)
-// [TODO] 0x003CAFA0 func_003CAFA0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003CAFA0 (0x003CAFA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B8E0.
+extern char D_0080B8E0[];
+
+char* Get()
+{
+    return D_0080B8E0;
+}
+
 // [TODO] 0x003CAFB0 func_003CAFB0 (112 B)
 // [TODO] 0x003CB020 func_003CB020 (124 B)
 // [TODO] 0x003CB0A0 func_003CB0A0 (100 B)
@@ -6569,13 +7588,57 @@ extern "C" void func_003CCAE0() {
 }
 
 // [TODO] 0x003CCAF0 func_003CCAF0 (128 B)
-// [TODO] 0x003CCB70 func_003CCB70 (12 B)
-// [TODO] 0x003CCB80 func_003CCB80 (12 B)
-// [TODO] 0x003CCB90 func_003CCB90 (12 B)
+// ============================================================================
+// [VERIFIED] func_003CCB70 (0x003CCB70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B8A0.
+extern char D_0080B8A0[];
+
+char* Get()
+{
+    return D_0080B8A0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003CCB80 (0x003CCB80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B820.
+extern char D_0080B820[];
+
+char* Get()
+{
+    return D_0080B820;
+}
+
+// ============================================================================
+// [VERIFIED] func_003CCB90 (0x003CCB90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B7E0.
+extern char D_0080B7E0[];
+
+char* Get()
+{
+    return D_0080B7E0;
+}
+
 // [TODO] 0x003CCBA0 func_003CCBA0 (76 B)
 // [TODO] 0x003CCBF0 func_003CCBF0 (8 B)
 // [TODO] 0x003CCC00 func_003CCC00 (76 B)
-// [TODO] 0x003CCC50 func_003CCC50 (12 B)
+// ============================================================================
+// [VERIFIED] func_003CCC50 (0x003CCC50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C690.
+extern char D_0080C690[];
+
+char* Get()
+{
+    return D_0080C690;
+}
+
 // ============================================================================
 // [VERIFIED] func_003CCC60 (0x003CCC60, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -6627,7 +7690,24 @@ int Zero()
 }
 
 // [TODO] 0x003CCCB0 func_003CCCB0 (212 B)
-// [TODO] 0x003CCD90 func_003CCD90 (12 B)
+// ============================================================================
+// [VERIFIED] func_003CCD90 (0x003CCD90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x1B4 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x1B4];
+    int m_Field1B4; // +0x1B4
+};
+
+bool Object::IsSet()
+{
+    return m_Field1B4 != 0;
+}
+
 // [TODO] 0x003CCDA0 func_003CCDA0 (88 B)
 // ============================================================================
 // [VERIFIED] func_003CCE00 (0x003CCE00, 8 B)
@@ -6717,17 +7797,178 @@ int Object::Get()
     return m_Field168;
 }
 
-// [TODO] 0x003CE520 func_003CE520 (12 B)
+// ============================================================================
+// [VERIFIED] func_003CE520 (0x003CE520, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x3E of the object its member at +0x174 points to.
+struct Inner
+{
+    char m_pad00[0x3E];
+    unsigned char m_Field3E; // +0x3E
+};
+
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x174];
+    Inner* m_Field174; // +0x174
+};
+
+unsigned char Object::Get()
+{
+    return m_Field174->m_Field3E;
+}
+
 // [TODO] 0x003CE530 func_003CE530 (48 B)
 // [TODO] 0x003CE560 func_003CE560 (44 B)
 // [TODO] 0x003CE590 func_003CE590 (96 B)
 // [TODO] 0x003CE5F0 func_003CE5F0 (96 B)
-// [TODO] 0x003CE650 func_003CE650 (12 B)
-// [TODO] 0x003CE660 func_003CE660 (12 B)
-// [TODO] 0x003CE670 func_003CE670 (12 B)
-// [TODO] 0x003CE680 func_003CE680 (12 B)
-// [TODO] 0x003CE690 func_003CE690 (12 B)
-// [TODO] 0x003CE6A0 func_003CE6A0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003CE650 (0x003CE650, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x60 of the object its member at +0x174 points to.
+struct Inner
+{
+    char m_pad00[0x60];
+    float m_Field60; // +0x60
+};
+
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x174];
+    Inner* m_Field174; // +0x174
+};
+
+float Object::Get()
+{
+    return m_Field174->m_Field60;
+}
+
+// ============================================================================
+// [VERIFIED] func_003CE660 (0x003CE660, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x60 of the object its member at +0x174 points to.
+struct Inner
+{
+    char m_pad00[0x60];
+    float m_Field60; // +0x60
+};
+
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x174];
+    Inner* m_Field174; // +0x174
+};
+
+float Object::Get()
+{
+    return m_Field174->m_Field60;
+}
+
+// ============================================================================
+// [VERIFIED] func_003CE670 (0x003CE670, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x5C of the object its member at +0x174 points to.
+struct Inner
+{
+    char m_pad00[0x5C];
+    float m_Field5C; // +0x5C
+};
+
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x174];
+    Inner* m_Field174; // +0x174
+};
+
+float Object::Get()
+{
+    return m_Field174->m_Field5C;
+}
+
+// ============================================================================
+// [VERIFIED] func_003CE680 (0x003CE680, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x58 of the object its member at +0x174 points to.
+struct Inner
+{
+    char m_pad00[0x58];
+    float m_Field58; // +0x58
+};
+
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x174];
+    Inner* m_Field174; // +0x174
+};
+
+float Object::Get()
+{
+    return m_Field174->m_Field58;
+}
+
+// ============================================================================
+// [VERIFIED] func_003CE690 (0x003CE690, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x54 of the object its member at +0x174 points to.
+struct Inner
+{
+    char m_pad00[0x54];
+    float m_Field54; // +0x54
+};
+
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x174];
+    Inner* m_Field174; // +0x174
+};
+
+float Object::Get()
+{
+    return m_Field174->m_Field54;
+}
+
+// ============================================================================
+// [VERIFIED] func_003CE6A0 (0x003CE6A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x50 of the object its member at +0x174 points to.
+struct Inner
+{
+    char m_pad00[0x50];
+    float m_Field50; // +0x50
+};
+
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x174];
+    Inner* m_Field174; // +0x174
+};
+
+float Object::Get()
+{
+    return m_Field174->m_Field50;
+}
+
 // [TODO] 0x003CE6B0 func_003CE6B0 (56 B)
 // [TODO] 0x003CE6F0 func_003CE6F0 (312 B)
 // [TODO] 0x003CE830 func_003CE830 (32 B)
@@ -6749,7 +7990,30 @@ int Object::Get()
     return m_Field174;
 }
 
-// [TODO] 0x003CE860 func_003CE860 (12 B)
+// ============================================================================
+// [VERIFIED] func_003CE860 (0x003CE860, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x3A of the object its member at +0x174 points to.
+struct Inner
+{
+    char m_pad00[0x3A];
+    unsigned char m_Field3A; // +0x3A
+};
+
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x174];
+    Inner* m_Field174; // +0x174
+};
+
+unsigned char Object::Get()
+{
+    return m_Field174->m_Field3A;
+}
+
 // [TODO] 0x003CE870 func_003CE870 (24 B)
 // [TODO] 0x003CE890 func_003CE890 (24 B)
 // [TODO] 0x003CE8B0 func_003CE8B0 (24 B)
@@ -6810,9 +8074,31 @@ int Object::Get()
 // [TODO] 0x003D0780 func_003D0780 (132 B)
 // [TODO] 0x003D0810 func_003D0810 (424 B)
 // [TODO] 0x003D09C0 func_003D09C0 (240 B)
-// [TODO] 0x003D0AB0 func_003D0AB0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003D0AB0 (0x003D0AB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C650.
+extern char D_0080C650[];
+
+char* Get()
+{
+    return D_0080C650;
+}
+
 // [TODO] 0x003D0AC0 func_003D0AC0 (60 B)
-// [TODO] 0x003D0B00 func_003D0B00 (12 B)
+// ============================================================================
+// [VERIFIED] func_003D0B00 (0x003D0B00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C6E0.
+extern char D_0080C6E0[];
+
+char* Get()
+{
+    return D_0080C6E0;
+}
+
 // [TODO] 0x003D0B10 func_003D0B10 (92 B)
 // [TODO] 0x003D0B70 func_003D0B70 (124 B)
 // [TODO] 0x003D0BF0 func_003D0BF0 (136 B)
@@ -30873,7 +32159,24 @@ void Object::Set(char value)
     m_Field4 = value;
 }
 
-// [TODO] 0x005A4640 func_005A4640 (8 B)
+// ============================================================================
+// [VERIFIED] func_005A4640 (0x005A4640, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x4 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x4];
+    unsigned char m_Field4; // +0x4
+};
+
+unsigned char Object::Get()
+{
+    return m_Field4;
+}
+
 // [TODO] 0x005A4650 func_005A4650 (56 B)
 // ============================================================================
 // [VERIFIED] func_005A4690 (0x005A4690, 8 B)
@@ -31044,7 +32347,16 @@ extern "C" void func_005A6850() {
 // [TODO] 0x005A6EA0 func_005A6EA0 (208 B)
 // [TODO] 0x005A6F70 func_005A6F70 (52 B)
 // [TODO] 0x005A6FB0 func_005A6FB0 (48 B)
-// [TODO] 0x005A6FE0 func_005A6FE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005A6FE0 (0x005A6FE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005A6FF0 func_005A6FF0 (48 B)
 // [TODO] 0x005A7020 func_005A7020 (120 B)
 // [TODO] 0x005A70A0 func_005A70A0 (32 B)
@@ -31191,9 +32503,27 @@ extern "C" void func_005A6850() {
 // [TODO] 0x005AA830 func_005AA830 (308 B)
 // [TODO] 0x005AA970 func_005AA970 (104 B)
 // [TODO] 0x005AA9E0 func_005AA9E0 (100 B)
-// [TODO] 0x005AAA50 func_005AAA50 (8 B)
+// ============================================================================
+// [VERIFIED] func_005AAA50 (0x005AAA50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005AAA60 func_005AAA60 (452 B)
-// [TODO] 0x005AAC30 func_005AAC30 (8 B)
+// ============================================================================
+// [VERIFIED] func_005AAC30 (0x005AAC30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005AAC40 func_005AAC40 (280 B)
 // ============================================================================
 // [VERIFIED] func_005AAD60 (0x005AAD60, 8 B)
@@ -31222,11 +32552,47 @@ extern "C" void func_005AAD70() {
 }
 
 // [TODO] 0x005AAD80 func_005AAD80 (296 B)
-// [TODO] 0x005AAEB0 func_005AAEB0 (8 B)
-// [TODO] 0x005AAEC0 func_005AAEC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005AAEB0 (0x005AAEB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005AAEC0 (0x005AAEC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005AAED0 func_005AAED0 (288 B)
-// [TODO] 0x005AAFF0 func_005AAFF0 (8 B)
-// [TODO] 0x005AB000 func_005AB000 (8 B)
+// ============================================================================
+// [VERIFIED] func_005AAFF0 (0x005AAFF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005AB000 (0x005AB000, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005AB010 func_005AB010 (208 B)
 // ============================================================================
 // [VERIFIED] func_005AB0E0 (0x005AB0E0, 8 B)
@@ -31282,8 +32648,26 @@ extern "C" void func_005AB3B0() {
 }
 
 // [TODO] 0x005AB3C0 func_005AB3C0 (236 B)
-// [TODO] 0x005AB4B0 func_005AB4B0 (8 B)
-// [TODO] 0x005AB4C0 func_005AB4C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005AB4B0 (0x005AB4B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005AB4C0 (0x005AB4C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005AB4D0 func_005AB4D0 (304 B)
 // ============================================================================
 // [VERIFIED] func_005AB600 (0x005AB600, 8 B)
@@ -31319,7 +32703,24 @@ extern "C" void func_005AB610() {
 // [TODO] 0x005AB910 func_005AB910 (8 B)
 // [TODO] 0x005AB920 func_005AB920 (48 B)
 // [TODO] 0x005AB950 func_005AB950 (8 B)
-// [TODO] 0x005AB960 func_005AB960 (8 B)
+// ============================================================================
+// [VERIFIED] func_005AB960 (0x005AB960, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x5C7 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x5C7];
+    unsigned char m_Field5C7; // +0x5C7
+};
+
+unsigned char Object::Get()
+{
+    return m_Field5C7;
+}
+
 // [TODO] 0x005AB970 func_005AB970 (84 B)
 // [TODO] 0x005AB9D0 func_005AB9D0 (48 B)
 // [TODO] 0x005ABA00 func_005ABA00 (64 B)
@@ -31537,7 +32938,18 @@ extern "C" void func_005AB610() {
 // [TODO] 0x005B2140 func_005B2140 (68 B)
 // [TODO] 0x005B2190 func_005B2190 (228 B)
 // [TODO] 0x005B2280 func_005B2280 (48 B)
-// [TODO] 0x005B22B0 func_005B22B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B22B0 (0x005B22B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080A418.
+extern int D_0080A418;
+
+int Get()
+{
+    return D_0080A418;
+}
+
 // [TODO] 0x005B22C0 func_005B22C0 (136 B)
 // [TODO] 0x005B2350 func_005B2350 (140 B)
 // [TODO] 0x005B23E0 func_005B23E0 (12 B)
@@ -31565,22 +32977,71 @@ extern "C" void func_005AB610() {
 // [TODO] 0x005B6900 func_005B6900 (68 B)
 // [TODO] 0x005B6950 func_005B6950 (52 B)
 // [TODO] 0x005B6990 func_005B6990 (16 B)
-// [TODO] 0x005B69A0 func_005B69A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B69A0 (0x005B69A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x0 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    int m_Field0; // +0x0
+};
+
+void Object::Set(int value)
+{
+    m_Field0 = value;
+}
+
 // [TODO] 0x005B69B0 func_005B69B0 (8 B)
 // [TODO] 0x005B69C0 func_005B69C0 (108 B)
 // [TODO] 0x005B6A30 func_005B6A30 (32 B)
 // [TODO] 0x005B6A50 func_005B6A50 (12 B)
 // [TODO] 0x005B6A60 func_005B6A60 (20 B)
-// [TODO] 0x005B6A80 func_005B6A80 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B6A80 (0x005B6A80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x005B6A90 func_005B6A90 (352 B)
 // [TODO] 0x005B6BF0 AITask_TauntTony::vfunc_00 (12 B)
-// [TODO] 0x005B6C00 func_005B6C00 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B6C00 (0x005B6C00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005B6C10 func_005B6C10 (36 B)
 // [TODO] 0x005B6C40 func_005B6C40 (88 B)
 // [TODO] 0x005B6CA0 func_005B6CA0 (88 B)
 // [TODO] 0x005B6D00 AITask_TauntTony::vfunc_48 (1144 B)
 // [TODO] 0x005B7180 AITask_TauntTony::vfunc_47 (72 B)
-// [TODO] 0x005B71D0 func_005B71D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B71D0 (0x005B71D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005B71E0 func_005B71E0 (76 B)
 // [TODO] 0x005B7230 func_005B7230 (156 B)
 // [TODO] 0x005B72D0 func_005B72D0 (180 B)
@@ -31593,7 +33054,16 @@ extern "C" void func_005AB610() {
 // [TODO] 0x005B7890 AITask_CarjackingResponse::vfunc_48 (556 B)
 // [TODO] 0x005B7AC0 func_005B7AC0 (72 B)
 // [TODO] 0x005B7B10 func_005B7B10 (44 B)
-// [TODO] 0x005B7B40 func_005B7B40 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B7B40 (0x005B7B40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005B7B50 func_005B7B50 (88 B)
 // ============================================================================
 // [VERIFIED] func_005B7BB0 (0x005B7BB0, 8 B)
@@ -31609,10 +33079,46 @@ extern "C" void func_005B7BB0() {
 }
 
 // [TODO] 0x005B7BC0 func_005B7BC0 (136 B)
-// [TODO] 0x005B7C50 func_005B7C50 (8 B)
-// [TODO] 0x005B7C60 func_005B7C60 (8 B)
-// [TODO] 0x005B7C70 func_005B7C70 (8 B)
-// [TODO] 0x005B7C80 func_005B7C80 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B7C50 (0x005B7C50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B7C60 (0x005B7C60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B7C70 (0x005B7C70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B7C80 (0x005B7C80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // ============================================================================
 // [VERIFIED] func_005B7C90 (0x005B7C90, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -31651,9 +33157,36 @@ extern "C" void func_005B7C90() {
 // [TODO] 0x005B84B0 func_005B84B0 (36 B)
 // [TODO] 0x005B84E0 func_005B84E0 (28 B)
 // [TODO] 0x005B8500 func_005B8500 (764 B)
-// [TODO] 0x005B8800 func_005B8800 (8 B)
-// [TODO] 0x005B8810 func_005B8810 (8 B)
-// [TODO] 0x005B8820 func_005B8820 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B8800 (0x005B8800, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B8810 (0x005B8810, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 500.
+int Number()
+{
+    return 500;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B8820 (0x005B8820, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 500.
+int Number()
+{
+    return 500;
+}
+
 // [TODO] 0x005B8830 func_005B8830 (8 B)
 // [TODO] 0x005B8840 func_005B8840 (12 B)
 // [TODO] 0x005B8850 func_005B8850 (12 B)
@@ -31666,15 +33199,87 @@ extern "C" void func_005B7C90() {
 // [TODO] 0x005B8BD0 func_005B8BD0 (120 B)
 // [TODO] 0x005B8C50 func_005B8C50 (12 B)
 // [TODO] 0x005B8C60 AISimpleAnimAndDialogueReaction::vfunc_48 (740 B)
-// [TODO] 0x005B8F50 func_005B8F50 (8 B)
-// [TODO] 0x005B8F60 func_005B8F60 (8 B)
-// [TODO] 0x005B8F70 func_005B8F70 (8 B)
-// [TODO] 0x005B8F80 func_005B8F80 (8 B)
-// [TODO] 0x005B8F90 func_005B8F90 (8 B)
-// [TODO] 0x005B8FA0 func_005B8FA0 (8 B)
-// [TODO] 0x005B8FB0 func_005B8FB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B8F50 (0x005B8F50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B8F60 (0x005B8F60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B8F70 (0x005B8F70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B8F80 (0x005B8F80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B8F90 (0x005B8F90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B8FA0 (0x005B8FA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005B8FB0 (0x005B8FB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005B8FC0 func_005B8FC0 (200 B)
-// [TODO] 0x005B9090 func_005B9090 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B9090 (0x005B9090, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005B90A0 func_005B90A0 (60 B)
 // ============================================================================
 // [VERIFIED] func_005B90E0 (0x005B90E0, 8 B)
@@ -31693,7 +33298,16 @@ extern "C" void func_005B90E0() {
 // [TODO] 0x005B9130 func_005B9130 (88 B)
 // [TODO] 0x005B9190 func_005B9190 (256 B)
 // [TODO] 0x005B9290 func_005B9290 (72 B)
-// [TODO] 0x005B92E0 func_005B92E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B92E0 (0x005B92E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005B92F0 func_005B92F0 (240 B)
 // [TODO] 0x005B93E0 func_005B93E0 (48 B)
 // [TODO] 0x005B9410 AITask_RecognizeTony::vfunc_45 (336 B)
@@ -31705,7 +33319,16 @@ extern "C" void func_005B90E0() {
 // [TODO] 0x005B9640 func_005B9640 (72 B)
 // [TODO] 0x005B9690 AITask_PossibleMildInterest::vfunc_48 (164 B)
 // [TODO] 0x005B9740 func_005B9740 (72 B)
-// [TODO] 0x005B9790 func_005B9790 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B9790 (0x005B9790, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005B97A0 func_005B97A0 (80 B)
 // [TODO] 0x005B97F0 func_005B97F0 (352 B)
 // ============================================================================
@@ -31732,7 +33355,16 @@ extern "C" void func_005B9950() {
 // [TODO] 0x005B9CB0 func_005B9CB0 (144 B)
 // [TODO] 0x005B9D40 AITask_Cower::vfunc_48 (324 B)
 // [TODO] 0x005B9E90 func_005B9E90 (72 B)
-// [TODO] 0x005B9EE0 func_005B9EE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005B9EE0 (0x005B9EE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005B9EF0 func_005B9EF0 (176 B)
 // ============================================================================
 // [VERIFIED] func_005B9FA0 (0x005B9FA0, 8 B)
@@ -31778,11 +33410,29 @@ extern "C" void func_005BA4E0() {
 // [TODO] 0x005BA5C0 func_005BA5C0 (56 B)
 // [TODO] 0x005BA600 func_005BA600 (80 B)
 // [TODO] 0x005BA650 func_005BA650 (8 B)
-// [TODO] 0x005BA660 func_005BA660 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BA660 (0x005BA660, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005BA670 func_005BA670 (288 B)
 // [TODO] 0x005BA790 func_005BA790 (72 B)
 // [TODO] 0x005BA7E0 func_005BA7E0 (8 B)
-// [TODO] 0x005BA7F0 func_005BA7F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BA7F0 (0x005BA7F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005BA800 func_005BA800 (172 B)
 // ============================================================================
 // [VERIFIED] func_005BA8B0 (0x005BA8B0, 8 B)
@@ -31803,10 +33453,36 @@ extern "C" void func_005BA8B0() {
 // [TODO] 0x005BA970 func_005BA970 (80 B)
 // [TODO] 0x005BA9C0 func_005BA9C0 (44 B)
 // [TODO] 0x005BA9F0 func_005BA9F0 (8 B)
-// [TODO] 0x005BAA00 func_005BAA00 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BAA00 (0x005BAA00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x74 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x74];
+    unsigned char m_Field74; // +0x74
+};
+
+unsigned char Object::Get()
+{
+    return m_Field74;
+}
+
 // [TODO] 0x005BAA10 func_005BAA10 (456 B)
 // [TODO] 0x005BABE0 func_005BABE0 (72 B)
-// [TODO] 0x005BAC30 func_005BAC30 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BAC30 (0x005BAC30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005BAC40 func_005BAC40 (72 B)
 // [TODO] 0x005BAC90 AITask_ReactToDangerReaction::vfunc_45 (12 B)
 // ============================================================================
@@ -31823,9 +33499,35 @@ extern "C" void func_005BACA0() {
 }
 
 // [TODO] 0x005BACB0 func_005BACB0 (124 B)
-// [TODO] 0x005BAD30 func_005BAD30 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BAD30 (0x005BAD30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 10000.
+int Number()
+{
+    return 10000;
+}
+
 // [TODO] 0x005BAD40 func_005BAD40 (28 B)
-// [TODO] 0x005BAD60 func_005BAD60 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BAD60 (0x005BAD60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x164 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x164];
+    int m_Field164; // +0x164
+};
+
+int* Object::Get()
+{
+    return &m_Field164;
+}
+
 // [TODO] 0x005BAD70 func_005BAD70 (60 B)
 // [TODO] 0x005BADB0 func_005BADB0 (368 B)
 // [TODO] 0x005BAF20 func_005BAF20 (20 B)
@@ -31852,22 +33554,58 @@ extern "C" void func_005BACA0() {
 // [TODO] 0x005BBAA0 func_005BBAA0 (96 B)
 // [TODO] 0x005BBB00 func_005BBB00 (8 B)
 // [TODO] 0x005BBB10 AITask_ProvokeAnotherPed::vfunc_53 (132 B)
-// [TODO] 0x005BBBA0 func_005BBBA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BBBA0 (0x005BBBA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 3000.
+int Number()
+{
+    return 3000;
+}
+
 // [TODO] 0x005BBBB0 func_005BBBB0 (120 B)
 // [TODO] 0x005BBC30 func_005BBC30 (12 B)
 // [TODO] 0x005BBC40 func_005BBC40 (72 B)
 // [TODO] 0x005BBC90 func_005BBC90 (72 B)
 // [TODO] 0x005BBCE0 func_005BBCE0 (12 B)
-// [TODO] 0x005BBCF0 func_005BBCF0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BBCF0 (0x005BBCF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 28.
+int Number()
+{
+    return 28;
+}
+
 // [TODO] 0x005BBD00 func_005BBD00 (8 B)
-// [TODO] 0x005BBD10 func_005BBD10 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BBD10 (0x005BBD10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1500.
+int Number()
+{
+    return 1500;
+}
+
 // [TODO] 0x005BBD20 func_005BBD20 (8 B)
 // [TODO] 0x005BBD30 func_005BBD30 (84 B)
 // [TODO] 0x005BBD90 func_005BBD90 (12 B)
 // [TODO] 0x005BBDA0 func_005BBDA0 (72 B)
 // [TODO] 0x005BBDF0 func_005BBDF0 (72 B)
 // [TODO] 0x005BBE40 func_005BBE40 (12 B)
-// [TODO] 0x005BBE50 func_005BBE50 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BBE50 (0x005BBE50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 24.
+int Number()
+{
+    return 24;
+}
+
 // [TODO] 0x005BBE60 func_005BBE60 (64 B)
 // [TODO] 0x005BBEA0 func_005BBEA0 (8 B)
 // [TODO] 0x005BBEB0 func_005BBEB0 (68 B)
@@ -31875,7 +33613,16 @@ extern "C" void func_005BACA0() {
 // [TODO] 0x005BC0C0 func_005BC0C0 (8 B)
 // [TODO] 0x005BC0D0 func_005BC0D0 (20 B)
 // [TODO] 0x005BC0F0 func_005BC0F0 (664 B)
-// [TODO] 0x005BC390 func_005BC390 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BC390 (0x005BC390, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005BC3A0 func_005BC3A0 (16 B)
 // [TODO] 0x005BC3B0 func_005BC3B0 (192 B)
 // [TODO] 0x005BC470 func_005BC470 (68 B)
@@ -31894,9 +33641,36 @@ extern "C" void func_005BACA0() {
 // [TODO] 0x005BCA40 func_005BCA40 (56 B)
 // [TODO] 0x005BCA80 func_005BCA80 (100 B)
 // [TODO] 0x005BCAF0 AITask_ForcedIntimidation::vfunc_48 (276 B)
-// [TODO] 0x005BCC10 func_005BCC10 (8 B)
-// [TODO] 0x005BCC20 func_005BCC20 (8 B)
-// [TODO] 0x005BCC30 func_005BCC30 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BCC10 (0x005BCC10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005BCC20 (0x005BCC20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005BCC30 (0x005BCC30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005BCC40 func_005BCC40 (8 B)
 // [TODO] 0x005BCC50 func_005BCC50 (76 B)
 // [TODO] 0x005BCCA0 func_005BCCA0 (12 B)
@@ -31907,10 +33681,28 @@ extern "C" void func_005BACA0() {
 // [TODO] 0x005BD180 func_005BD180 (84 B)
 // [TODO] 0x005BD1E0 func_005BD1E0 (48 B)
 // [TODO] 0x005BD210 func_005BD210 (8 B)
-// [TODO] 0x005BD220 func_005BD220 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BD220 (0x005BD220, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005BD230 func_005BD230 (72 B)
 // [TODO] 0x005BD280 AITask_RunToAssistCorpse::vfunc_48 (496 B)
-// [TODO] 0x005BD470 func_005BD470 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BD470 (0x005BD470, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005BD480 func_005BD480 (104 B)
 // [TODO] 0x005BD4F0 func_005BD4F0 (72 B)
 // [TODO] 0x005BD540 func_005BD540 (160 B)
@@ -31918,7 +33710,16 @@ extern "C" void func_005BACA0() {
 // [TODO] 0x005BD620 func_005BD620 (84 B)
 // [TODO] 0x005BD680 func_005BD680 (48 B)
 // [TODO] 0x005BD6B0 func_005BD6B0 (8 B)
-// [TODO] 0x005BD6C0 func_005BD6C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BD6C0 (0x005BD6C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005BD6D0 func_005BD6D0 (84 B)
 // [TODO] 0x005BD730 func_005BD730 (132 B)
 // [TODO] 0x005BD7C0 func_005BD7C0 (12 B)
@@ -31964,7 +33765,24 @@ extern "C" void func_005BD8D0() {
 // [TODO] 0x005BE410 func_005BE410 (36 B)
 // [TODO] 0x005BE440 func_005BE440 (384 B)
 // [TODO] 0x005BE5C0 func_005BE5C0 (72 B)
-// [TODO] 0x005BE610 func_005BE610 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BE610 (0x005BE610, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4C];
+    int m_Field4C; // +0x4C
+};
+
+int Object::Get()
+{
+    return m_Field4C;
+}
+
 // [TODO] 0x005BE620 func_005BE620 (108 B)
 // [TODO] 0x005BE690 func_005BE690 (176 B)
 // [TODO] 0x005BE740 func_005BE740 (88 B)
@@ -31983,21 +33801,65 @@ extern "C" void func_005BD8D0() {
 // [TODO] 0x005BF050 func_005BF050 (204 B)
 // [TODO] 0x005BF120 func_005BF120 (20 B)
 // [TODO] 0x005BF140 func_005BF140 (8 B)
-// [TODO] 0x005BF150 func_005BF150 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BF150 (0x005BF150, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0xCF of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0xCF];
+    unsigned char m_FieldCF; // +0xCF
+};
+
+unsigned char Object::Get()
+{
+    return m_FieldCF;
+}
+
 // [TODO] 0x005BF160 func_005BF160 (292 B)
 // [TODO] 0x005BF290 func_005BF290 (60 B)
 // [TODO] 0x005BF2D0 func_005BF2D0 (192 B)
 // [TODO] 0x005BF390 func_005BF390 (852 B)
-// [TODO] 0x005BF6F0 func_005BF6F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BF6F0 (0x005BF6F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005BF700 func_005BF700 (420 B)
 // [TODO] 0x005BF8B0 func_005BF8B0 (416 B)
-// [TODO] 0x005BFA50 func_005BFA50 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BFA50 (0x005BFA50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005BFA60 func_005BFA60 (8 B)
 // [TODO] 0x005BFA70 func_005BFA70 (148 B)
 // [TODO] 0x005BFB10 AITask_BumpReflex::vfunc_48 (412 B)
 // [TODO] 0x005BFCB0 func_005BFCB0 (72 B)
 // [TODO] 0x005BFD00 func_005BFD00 (8 B)
-// [TODO] 0x005BFD10 func_005BFD10 (8 B)
+// ============================================================================
+// [VERIFIED] func_005BFD10 (0x005BFD10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005BFD20 func_005BFD20 (332 B)
 // [TODO] 0x005BFE70 func_005BFE70 (16 B)
 // ============================================================================
@@ -32017,7 +33879,16 @@ extern "C" void func_005BFE80() {
 // [TODO] 0x005BFF00 func_005BFF00 (436 B)
 // [TODO] 0x005C00C0 AITask_NearlyHitByCar::vfunc_48 (432 B)
 // [TODO] 0x005C0270 func_005C0270 (72 B)
-// [TODO] 0x005C02C0 func_005C02C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C02C0 (0x005C02C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C02D0 func_005C02D0 (60 B)
 // [TODO] 0x005C0310 func_005C0310 (16 B)
 // ============================================================================
@@ -32038,12 +33909,30 @@ extern "C" void func_005C0320() {
 // [TODO] 0x005C04E0 func_005C04E0 (16 B)
 // [TODO] 0x005C04F0 func_005C04F0 (96 B)
 // [TODO] 0x005C0550 func_005C0550 (8 B)
-// [TODO] 0x005C0560 func_005C0560 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C0560 (0x005C0560, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C0570 func_005C0570 (168 B)
 // [TODO] 0x005C0620 AITask_AvoidIncomingCar::vfunc_00 (176 B)
 // [TODO] 0x005C06D0 AITask_AvoidIncomingCar::vfunc_48 (672 B)
 // [TODO] 0x005C0970 func_005C0970 (72 B)
-// [TODO] 0x005C09C0 func_005C09C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C09C0 (0x005C09C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C09D0 func_005C09D0 (792 B)
 // [TODO] 0x005C0CF0 func_005C0CF0 (132 B)
 // [TODO] 0x005C0D80 func_005C0D80 (20 B)
@@ -32069,88 +33958,331 @@ extern "C" void func_005C0DF0() {
 // [TODO] 0x005C0FB0 func_005C0FB0 (88 B)
 // [TODO] 0x005C1010 func_005C1010 (364 B)
 // [TODO] 0x005C1180 func_005C1180 (12 B)
-// [TODO] 0x005C1190 func_005C1190 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C1190 (0x005C1190, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C11A0 func_005C11A0 (160 B)
 // [TODO] 0x005C1240 func_005C1240 (12 B)
-// [TODO] 0x005C1250 func_005C1250 (8 B)
-// [TODO] 0x005C1260 func_005C1260 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C1250 (0x005C1250, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C1260 (0x005C1260, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C1270 func_005C1270 (160 B)
 // [TODO] 0x005C1310 func_005C1310 (12 B)
-// [TODO] 0x005C1320 func_005C1320 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C1320 (0x005C1320, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C1330 func_005C1330 (172 B)
 // [TODO] 0x005C13E0 func_005C13E0 (12 B)
-// [TODO] 0x005C13F0 func_005C13F0 (8 B)
-// [TODO] 0x005C1400 func_005C1400 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C13F0 (0x005C13F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C1400 (0x005C1400, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C1410 func_005C1410 (272 B)
 // [TODO] 0x005C1520 func_005C1520 (12 B)
-// [TODO] 0x005C1530 func_005C1530 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C1530 (0x005C1530, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C1540 func_005C1540 (352 B)
 // [TODO] 0x005C16A0 func_005C16A0 (12 B)
-// [TODO] 0x005C16B0 func_005C16B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C16B0 (0x005C16B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C16C0 func_005C16C0 (376 B)
 // [TODO] 0x005C1840 func_005C1840 (12 B)
-// [TODO] 0x005C1850 func_005C1850 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C1850 (0x005C1850, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C1860 func_005C1860 (16 B)
 // [TODO] 0x005C1870 func_005C1870 (376 B)
 // [TODO] 0x005C19F0 func_005C19F0 (12 B)
-// [TODO] 0x005C1A00 func_005C1A00 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C1A00 (0x005C1A00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C1A10 func_005C1A10 (16 B)
 // [TODO] 0x005C1A20 func_005C1A20 (364 B)
 // [TODO] 0x005C1B90 func_005C1B90 (12 B)
-// [TODO] 0x005C1BA0 func_005C1BA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C1BA0 (0x005C1BA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C1BB0 func_005C1BB0 (16 B)
 // [TODO] 0x005C1BC0 func_005C1BC0 (296 B)
 // [TODO] 0x005C1CF0 func_005C1CF0 (12 B)
-// [TODO] 0x005C1D00 func_005C1D00 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C1D00 (0x005C1D00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C1D10 func_005C1D10 (16 B)
 // [TODO] 0x005C1D20 func_005C1D20 (292 B)
 // [TODO] 0x005C1E50 func_005C1E50 (12 B)
-// [TODO] 0x005C1E60 func_005C1E60 (8 B)
-// [TODO] 0x005C1E70 func_005C1E70 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C1E60 (0x005C1E60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C1E70 (0x005C1E70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C1E80 func_005C1E80 (12 B)
-// [TODO] 0x005C1E90 func_005C1E90 (8 B)
-// [TODO] 0x005C1EA0 func_005C1EA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C1E90 (0x005C1E90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C1EA0 (0x005C1EA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C1EB0 func_005C1EB0 (392 B)
 // [TODO] 0x005C2040 func_005C2040 (136 B)
 // [TODO] 0x005C20D0 func_005C20D0 (312 B)
 // [TODO] 0x005C2210 func_005C2210 (12 B)
-// [TODO] 0x005C2220 func_005C2220 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C2220 (0x005C2220, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C2230 func_005C2230 (8 B)
 // [TODO] 0x005C2240 func_005C2240 (16 B)
 // [TODO] 0x005C2250 func_005C2250 (16 B)
-// [TODO] 0x005C2260 func_005C2260 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C2260 (0x005C2260, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C2270 func_005C2270 (136 B)
 // [TODO] 0x005C2300 func_005C2300 (12 B)
-// [TODO] 0x005C2310 func_005C2310 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C2310 (0x005C2310, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C2320 func_005C2320 (8 B)
 // [TODO] 0x005C2330 func_005C2330 (136 B)
 // [TODO] 0x005C23C0 func_005C23C0 (284 B)
 // [TODO] 0x005C24E0 func_005C24E0 (12 B)
-// [TODO] 0x005C24F0 func_005C24F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C24F0 (0x005C24F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C2500 func_005C2500 (256 B)
 // [TODO] 0x005C2600 func_005C2600 (12 B)
-// [TODO] 0x005C2610 func_005C2610 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C2610 (0x005C2610, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C2620 func_005C2620 (284 B)
 // [TODO] 0x005C2740 func_005C2740 (12 B)
-// [TODO] 0x005C2750 func_005C2750 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C2750 (0x005C2750, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C2760 func_005C2760 (16 B)
 // [TODO] 0x005C2770 func_005C2770 (284 B)
 // [TODO] 0x005C2890 func_005C2890 (12 B)
-// [TODO] 0x005C28A0 func_005C28A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C28A0 (0x005C28A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C28B0 func_005C28B0 (16 B)
 // [TODO] 0x005C28C0 func_005C28C0 (376 B)
 // [TODO] 0x005C2A40 func_005C2A40 (12 B)
-// [TODO] 0x005C2A50 func_005C2A50 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C2A50 (0x005C2A50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C2A60 func_005C2A60 (16 B)
 // [TODO] 0x005C2A70 func_005C2A70 (352 B)
 // [TODO] 0x005C2BD0 func_005C2BD0 (12 B)
-// [TODO] 0x005C2BE0 func_005C2BE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C2BE0 (0x005C2BE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C2BF0 func_005C2BF0 (352 B)
 // [TODO] 0x005C2D50 func_005C2D50 (12 B)
-// [TODO] 0x005C2D60 func_005C2D60 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C2D60 (0x005C2D60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C2D70 func_005C2D70 (376 B)
 // [TODO] 0x005C2EF0 func_005C2EF0 (12 B)
-// [TODO] 0x005C2F00 func_005C2F00 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C2F00 (0x005C2F00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C2F10 func_005C2F10 (92 B)
 // [TODO] 0x005C2F70 func_005C2F70 (8 B)
 // [TODO] 0x005C2F80 func_005C2F80 (8 B)
@@ -32209,7 +34341,16 @@ extern "C" void func_005C0DF0() {
 extern "C" void func_005C3230() {
 }
 
-// [TODO] 0x005C3240 func_005C3240 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C3240 (0x005C3240, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C3250 func_005C3250 (16 B)
 // ============================================================================
 // [VERIFIED] func_005C3260 (0x005C3260, 8 B)
@@ -32224,7 +34365,16 @@ extern "C" void func_005C3230() {
 extern "C" void func_005C3260() {
 }
 
-// [TODO] 0x005C3270 func_005C3270 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C3270 (0x005C3270, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 13.
+int Number()
+{
+    return 13;
+}
+
 // [TODO] 0x005C3280 func_005C3280 (152 B)
 // [TODO] 0x005C3320 func_005C3320 (16 B)
 // ============================================================================
@@ -32242,14 +34392,32 @@ extern "C" void func_005C3330() {
 
 // [TODO] 0x005C3340 func_005C3340 (96 B)
 // [TODO] 0x005C33A0 func_005C33A0 (68 B)
-// [TODO] 0x005C33F0 func_005C33F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C33F0 (0x005C33F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C3400 func_005C3400 (104 B)
 // [TODO] 0x005C3470 func_005C3470 (80 B)
 // [TODO] 0x005C34C0 func_005C34C0 (544 B)
 // [TODO] 0x005C36E0 func_005C36E0 (36 B)
 // [TODO] 0x005C3710 func_005C3710 (60 B)
 // [TODO] 0x005C3750 func_005C3750 (104 B)
-// [TODO] 0x005C37C0 func_005C37C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C37C0 (0x005C37C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 13.
+int Number()
+{
+    return 13;
+}
+
 // [TODO] 0x005C37D0 func_005C37D0 (416 B)
 // [TODO] 0x005C3970 func_005C3970 (16 B)
 // [TODO] 0x005C3980 func_005C3980 (16 B)
@@ -32257,7 +34425,24 @@ extern "C" void func_005C3330() {
 // [TODO] 0x005C39C0 func_005C39C0 (60 B)
 // [TODO] 0x005C3A00 func_005C3A00 (8 B)
 // [TODO] 0x005C3A10 func_005C3A10 (104 B)
-// [TODO] 0x005C3A80 func_005C3A80 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C3A80 (0x005C3A80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
 // [TODO] 0x005C3A90 func_005C3A90 (188 B)
 // [TODO] 0x005C3B50 func_005C3B50 (16 B)
 // [TODO] 0x005C3B60 func_005C3B60 (24 B)
@@ -32265,7 +34450,16 @@ extern "C" void func_005C3330() {
 // [TODO] 0x005C3C40 func_005C3C40 (88 B)
 // [TODO] 0x005C3CA0 func_005C3CA0 (60 B)
 // [TODO] 0x005C3CE0 func_005C3CE0 (104 B)
-// [TODO] 0x005C3D50 func_005C3D50 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C3D50 (0x005C3D50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 13.
+int Number()
+{
+    return 13;
+}
+
 // [TODO] 0x005C3D60 func_005C3D60 (184 B)
 // [TODO] 0x005C3E20 func_005C3E20 (16 B)
 // [TODO] 0x005C3E30 func_005C3E30 (16 B)
@@ -32280,7 +34474,24 @@ extern "C" void func_005C3330() {
 // [TODO] 0x005C41C0 func_005C41C0 (56 B)
 // [TODO] 0x005C4200 func_005C4200 (256 B)
 // [TODO] 0x005C4300 func_005C4300 (8 B)
-// [TODO] 0x005C4310 func_005C4310 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C4310 (0x005C4310, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
 // [TODO] 0x005C4320 func_005C4320 (84 B)
 // [TODO] 0x005C4380 func_005C4380 (56 B)
 // [TODO] 0x005C43C0 func_005C43C0 (40 B)
@@ -32301,7 +34512,16 @@ extern "C" void func_005C3330() {
 // [TODO] 0x005C4B30 func_005C4B30 (300 B)
 // [TODO] 0x005C4C60 func_005C4C60 (52 B)
 // [TODO] 0x005C4CA0 func_005C4CA0 (184 B)
-// [TODO] 0x005C4D60 func_005C4D60 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C4D60 (0x005C4D60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C4D70 func_005C4D70 (16 B)
 // [TODO] 0x005C4D80 func_005C4D80 (44 B)
 // [TODO] 0x005C4DB0 func_005C4DB0 (12 B)
@@ -32366,7 +34586,16 @@ extern "C" void func_005C53D0() {
 extern "C" void func_005C53E0() {
 }
 
-// [TODO] 0x005C53F0 func_005C53F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C53F0 (0x005C53F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C5400 func_005C5400 (16 B)
 // ============================================================================
 // [VERIFIED] func_005C5410 (0x005C5410, 8 B)
@@ -32486,11 +34715,56 @@ extern "C" void func_005C54A0() {
 extern "C" void func_005C54B0() {
 }
 
-// [TODO] 0x005C54C0 func_005C54C0 (8 B)
-// [TODO] 0x005C54D0 func_005C54D0 (8 B)
-// [TODO] 0x005C54E0 func_005C54E0 (8 B)
-// [TODO] 0x005C54F0 func_005C54F0 (8 B)
-// [TODO] 0x005C5500 func_005C5500 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C54C0 (0x005C54C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C54D0 (0x005C54D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C54E0 (0x005C54E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C54F0 (0x005C54F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C5500 (0x005C5500, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C5510 func_005C5510 (180 B)
 // [TODO] 0x005C55D0 func_005C55D0 (88 B)
 // [TODO] 0x005C5630 func_005C5630 (88 B)
@@ -32526,7 +34800,24 @@ extern "C" void func_005C54B0() {
 // [TODO] 0x005C6620 func_005C6620 (96 B)
 // [TODO] 0x005C6680 func_005C6680 (112 B)
 // [TODO] 0x005C66F0 func_005C66F0 (240 B)
-// [TODO] 0x005C67E0 func_005C67E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C67E0 (0x005C67E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
 // ============================================================================
 // [VERIFIED] func_005C67F0 (0x005C67F0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -32601,7 +34892,18 @@ extern "C" void func_005C6860() {
 // [TODO] 0x005C7AA0 func_005C7AA0 (120 B)
 // [TODO] 0x005C7B20 func_005C7B20 (120 B)
 // [TODO] 0x005C7BA0 func_005C7BA0 (320 B)
-// [TODO] 0x005C7CE0 func_005C7CE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C7CE0 (0x005C7CE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080A66C.
+extern int D_0080A66C;
+
+int Get()
+{
+    return D_0080A66C;
+}
+
 // [TODO] 0x005C7CF0 func_005C7CF0 (52 B)
 // [TODO] 0x005C7D30 func_005C7D30 (44 B)
 // [TODO] 0x005C7D60 func_005C7D60 (68 B)
@@ -32613,7 +34915,16 @@ extern "C" void func_005C6860() {
 // [TODO] 0x005C7FD0 func_005C7FD0 (188 B)
 // [TODO] 0x005C8090 func_005C8090 (272 B)
 // [TODO] 0x005C81A0 func_005C81A0 (12 B)
-// [TODO] 0x005C81B0 func_005C81B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C81B0 (0x005C81B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_005C81C0 (0x005C81C0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -32630,9 +34941,35 @@ extern "C" void func_005C81C0() {
 // [TODO] 0x005C81D0 func_005C81D0 (16 B)
 // [TODO] 0x005C81E0 func_005C81E0 (8 B)
 // [TODO] 0x005C81F0 func_005C81F0 (20 B)
-// [TODO] 0x005C8210 func_005C8210 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C8210 (0x005C8210, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 200.
+int Number()
+{
+    return 200;
+}
+
 // [TODO] 0x005C8220 func_005C8220 (12 B)
-// [TODO] 0x005C8230 func_005C8230 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C8230 (0x005C8230, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x5C of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x5C];
+    int m_Field5C; // +0x5C
+};
+
+int* Object::Get()
+{
+    return &m_Field5C;
+}
+
 // [TODO] 0x005C8240 func_005C8240 (88 B)
 // [TODO] 0x005C82A0 func_005C82A0 (256 B)
 // [TODO] 0x005C83A0 func_005C83A0 (8 B)
@@ -32642,9 +34979,35 @@ extern "C" void func_005C81C0() {
 // [TODO] 0x005C8510 func_005C8510 (516 B)
 // [TODO] 0x005C8720 func_005C8720 (72 B)
 // [TODO] 0x005C8770 func_005C8770 (20 B)
-// [TODO] 0x005C8790 func_005C8790 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C8790 (0x005C8790, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 300.
+int Number()
+{
+    return 300;
+}
+
 // [TODO] 0x005C87A0 func_005C87A0 (12 B)
-// [TODO] 0x005C87B0 func_005C87B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C87B0 (0x005C87B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x5C of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x5C];
+    int m_Field5C; // +0x5C
+};
+
+int* Object::Get()
+{
+    return &m_Field5C;
+}
+
 // [TODO] 0x005C87C0 func_005C87C0 (96 B)
 // [TODO] 0x005C8820 func_005C8820 (8 B)
 // [TODO] 0x005C8830 func_005C8830 (12 B)
@@ -32676,7 +35039,16 @@ extern "C" void func_005C8F60() {
 // [TODO] 0x005C8F70 func_005C8F70 (96 B)
 // [TODO] 0x005C8FD0 func_005C8FD0 (72 B)
 // [TODO] 0x005C9020 func_005C9020 (208 B)
-// [TODO] 0x005C90F0 func_005C90F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C90F0 (0x005C90F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 100.
+int Number()
+{
+    return 100;
+}
+
 // ============================================================================
 // [VERIFIED] func_005C9100 (0x005C9100, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -32710,7 +35082,16 @@ extern "C" void func_005C9110() {
 // [TODO] 0x005C92F0 func_005C92F0 (12 B)
 // [TODO] 0x005C9300 func_005C9300 (256 B)
 // [TODO] 0x005C9400 func_005C9400 (12 B)
-// [TODO] 0x005C9410 func_005C9410 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C9410 (0x005C9410, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C9420 func_005C9420 (20 B)
 // [TODO] 0x005C9440 func_005C9440 (20 B)
 // [TODO] 0x005C9460 func_005C9460 (20 B)
@@ -32720,7 +35101,16 @@ extern "C" void func_005C9110() {
 // [TODO] 0x005C9610 func_005C9610 (68 B)
 // [TODO] 0x005C9660 func_005C9660 (100 B)
 // [TODO] 0x005C96D0 func_005C96D0 (12 B)
-// [TODO] 0x005C96E0 func_005C96E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C96E0 (0x005C96E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005C96F0 func_005C96F0 (40 B)
 // [TODO] 0x005C9720 func_005C9720 (92 B)
 // [TODO] 0x005C9780 func_005C9780 (60 B)
@@ -32735,12 +35125,47 @@ extern "C" void func_005C9110() {
 // [TODO] 0x005C9C40 func_005C9C40 (12 B)
 // [TODO] 0x005C9C50 func_005C9C50 (36 B)
 // [TODO] 0x005C9C80 func_005C9C80 (12 B)
-// [TODO] 0x005C9C90 func_005C9C90 (8 B)
+// ============================================================================
+// [VERIFIED] func_005C9C90 (0x005C9C90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005C9CA0 func_005C9CA0 (1740 B)
-// [TODO] 0x005CA370 func_005CA370 (8 B)
+// ============================================================================
+// [VERIFIED] func_005CA370 (0x005CA370, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005CA380 func_005CA380 (16 B)
 // [TODO] 0x005CA390 func_005CA390 (68 B)
-// [TODO] 0x005CA3E0 func_005CA3E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005CA3E0 (0x005CA3E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x005CA3F0 func_005CA3F0 (120 B)
 // [TODO] 0x005CA470 func_005CA470 (92 B)
 // [TODO] 0x005CA4D0 func_005CA4D0 (480 B)
@@ -32753,14 +35178,48 @@ extern "C" void func_005C9110() {
 // [TODO] 0x005CAB30 func_005CAB30 (80 B)
 // [TODO] 0x005CAB80 func_005CAB80 (116 B)
 // [TODO] 0x005CAC00 func_005CAC00 (16 B)
-// [TODO] 0x005CAC10 func_005CAC10 (8 B)
+// ============================================================================
+// [VERIFIED] func_005CAC10 (0x005CAC10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x18 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+void Object::Set(float value)
+{
+    m_Field18 = value;
+}
+
 // [TODO] 0x005CAC20 func_005CAC20 (68 B)
 // [TODO] 0x005CAC70 func_005CAC70 (80 B)
 // [TODO] 0x005CACC0 func_005CACC0 (12 B)
 // [TODO] 0x005CACD0 func_005CACD0 (52 B)
 // [TODO] 0x005CAD10 func_005CAD10 (96 B)
 // [TODO] 0x005CAD70 func_005CAD70 (52 B)
-// [TODO] 0x005CADB0 func_005CADB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005CADB0 (0x005CADB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x40 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x40];
+    int m_Field40; // +0x40
+};
+
+int Object::Get()
+{
+    return m_Field40;
+}
+
 // [TODO] 0x005CADC0 func_005CADC0 (80 B)
 // [TODO] 0x005CAE10 func_005CAE10 (96 B)
 // [TODO] 0x005CAE70 func_005CAE70 (60 B)
@@ -32806,14 +35265,69 @@ extern "C" void func_005C9110() {
 // [TODO] 0x005CD000 func_005CD000 (772 B)
 // [TODO] 0x005CD310 func_005CD310 (140 B)
 // [TODO] 0x005CD3A0 func_005CD3A0 (72 B)
-// [TODO] 0x005CD3F0 func_005CD3F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005CD3F0 (0x005CD3F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080A698.
+extern int D_0080A698;
+
+int Get()
+{
+    return D_0080A698;
+}
+
 // [TODO] 0x005CD400 func_005CD400 (64 B)
-// [TODO] 0x005CD440 func_005CD440 (8 B)
+// ============================================================================
+// [VERIFIED] func_005CD440 (0x005CD440, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
 // [TODO] 0x005CD450 func_005CD450 (76 B)
 // [TODO] 0x005CD4A0 func_005CD4A0 (80 B)
-// [TODO] 0x005CD4F0 func_005CD4F0 (8 B)
-// [TODO] 0x005CD500 func_005CD500 (8 B)
-// [TODO] 0x005CD510 func_005CD510 (8 B)
+// ============================================================================
+// [VERIFIED] func_005CD4F0 (0x005CD4F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005CD500 (0x005CD500, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005CD510 (0x005CD510, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005CD520 func_005CD520 (116 B)
 // [TODO] 0x005CD5A0 func_005CD5A0 (412 B)
 // [TODO] 0x005CD740 func_005CD740 (108 B)
@@ -32941,11 +35455,56 @@ extern "C" void func_005CD9A0() {
 extern "C" void func_005CD9B0() {
 }
 
-// [TODO] 0x005CD9C0 func_005CD9C0 (8 B)
-// [TODO] 0x005CD9D0 func_005CD9D0 (8 B)
-// [TODO] 0x005CD9E0 func_005CD9E0 (8 B)
-// [TODO] 0x005CD9F0 func_005CD9F0 (8 B)
-// [TODO] 0x005CDA00 func_005CDA00 (8 B)
+// ============================================================================
+// [VERIFIED] func_005CD9C0 (0x005CD9C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005CD9D0 (0x005CD9D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005CD9E0 (0x005CD9E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005CD9F0 (0x005CD9F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005CDA00 (0x005CDA00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005CDA10 func_005CDA10 (136 B)
 // [TODO] 0x005CDAA0 func_005CDAA0 (108 B)
 // [TODO] 0x005CDB10 func_005CDB10 (96 B)
@@ -32982,16 +35541,101 @@ extern "C" void func_005CDCD0() {
 // [TODO] 0x005CE130 func_005CE130 (148 B)
 // [TODO] 0x005CE1D0 func_005CE1D0 (132 B)
 // [TODO] 0x005CE260 func_005CE260 (336 B)
-// [TODO] 0x005CE3B0 func_005CE3B0 (8 B)
-// [TODO] 0x005CE3C0 func_005CE3C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005CE3B0 (0x005CE3B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x44 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x44];
+    int m_Field44; // +0x44
+};
+
+void Object::Set(int value)
+{
+    m_Field44 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_005CE3C0 (0x005CE3C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x44 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x44];
+    int m_Field44; // +0x44
+};
+
+int Object::Get()
+{
+    return m_Field44;
+}
+
 // [TODO] 0x005CE3D0 func_005CE3D0 (96 B)
 // [TODO] 0x005CE430 func_005CE430 (88 B)
 // [TODO] 0x005CE490 func_005CE490 (12 B)
 // [TODO] 0x005CE4A0 func_005CE4A0 (52 B)
 // [TODO] 0x005CE4E0 func_005CE4E0 (52 B)
-// [TODO] 0x005CE520 func_005CE520 (8 B)
-// [TODO] 0x005CE530 func_005CE530 (8 B)
-// [TODO] 0x005CE540 func_005CE540 (8 B)
+// ============================================================================
+// [VERIFIED] func_005CE520 (0x005CE520, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8C];
+    int m_Field8C; // +0x8C
+};
+
+int Object::Get()
+{
+    return m_Field8C;
+}
+
+// ============================================================================
+// [VERIFIED] func_005CE530 (0x005CE530, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4C];
+    int m_Field4C; // +0x4C
+};
+
+int Object::Get()
+{
+    return m_Field4C;
+}
+
+// ============================================================================
+// [VERIFIED] func_005CE540 (0x005CE540, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x48 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x48];
+    int m_Field48; // +0x48
+};
+
+int Object::Get()
+{
+    return m_Field48;
+}
+
 // [TODO] 0x005CE550 func_005CE550 (48 B)
 // [TODO] 0x005CE580 func_005CE580 (72 B)
 // [TODO] 0x005CE5D0 func_005CE5D0 (120 B)
@@ -33075,9 +35719,35 @@ extern "C" void func_005CDCD0() {
 // [TODO] 0x005D13D0 func_005D13D0 (64 B)
 // [TODO] 0x005D1410 func_005D1410 (92 B)
 // [TODO] 0x005D1470 func_005D1470 (140 B)
-// [TODO] 0x005D1500 func_005D1500 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D1500 (0x005D1500, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x005D1510 func_005D1510 (276 B)
-// [TODO] 0x005D1630 func_005D1630 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D1630 (0x005D1630, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005D1640 func_005D1640 (96 B)
 // [TODO] 0x005D16A0 func_005D16A0 (16 B)
 // [TODO] 0x005D16B0 func_005D16B0 (92 B)
@@ -33087,20 +35757,56 @@ extern "C" void func_005CDCD0() {
 // [TODO] 0x005D1AF0 func_005D1AF0 (92 B)
 // [TODO] 0x005D1B50 func_005D1B50 (324 B)
 // [TODO] 0x005D1CA0 func_005D1CA0 (12 B)
-// [TODO] 0x005D1CB0 func_005D1CB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D1CB0 (0x005D1CB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005D1CC0 func_005D1CC0 (16 B)
 // [TODO] 0x005D1CD0 func_005D1CD0 (20 B)
 // [TODO] 0x005D1CF0 func_005D1CF0 (8 B)
-// [TODO] 0x005D1D00 func_005D1D00 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D1D00 (0x005D1D00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005D1D10 func_005D1D10 (20 B)
 // [TODO] 0x005D1D30 func_005D1D30 (20 B)
-// [TODO] 0x005D1D50 func_005D1D50 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D1D50 (0x005D1D50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 2.
+int Number()
+{
+    return 2;
+}
+
 // [TODO] 0x005D1D60 AITask_DealerWarnTony::vfunc_52 (440 B)
 // [TODO] 0x005D1F20 func_005D1F20 (72 B)
 // [TODO] 0x005D1F70 func_005D1F70 (8 B)
 // [TODO] 0x005D1F80 func_005D1F80 (88 B)
 // [TODO] 0x005D1FE0 func_005D1FE0 (284 B)
-// [TODO] 0x005D2100 func_005D2100 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D2100 (0x005D2100, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005D2110 AITask_DealerAttractTony::vfunc_52 (272 B)
 // [TODO] 0x005D2220 func_005D2220 (72 B)
 // [TODO] 0x005D2270 func_005D2270 (72 B)
@@ -33132,11 +35838,57 @@ extern "C" void func_005D2520() {
 // [TODO] 0x005D2700 func_005D2700 (8 B)
 // [TODO] 0x005D2710 func_005D2710 (8 B)
 // [TODO] 0x005D2720 func_005D2720 (72 B)
-// [TODO] 0x005D2770 func_005D2770 (8 B)
-// [TODO] 0x005D2780 func_005D2780 (8 B)
-// [TODO] 0x005D2790 func_005D2790 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D2770 (0x005D2770, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x4 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int* Object::Get()
+{
+    return &m_Field4;
+}
+
+// ============================================================================
+// [VERIFIED] func_005D2780 (0x005D2780, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080A6D4.
+extern int D_0080A6D4;
+
+int Get()
+{
+    return D_0080A6D4;
+}
+
+// ============================================================================
+// [VERIFIED] func_005D2790 (0x005D2790, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005D27A0 func_005D27A0 (204 B)
-// [TODO] 0x005D2870 func_005D2870 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D2870 (0x005D2870, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005D2880 func_005D2880 (40 B)
 // [TODO] 0x005D28B0 func_005D28B0 (128 B)
 // [TODO] 0x005D2930 func_005D2930 (148 B)
@@ -33185,8 +35937,26 @@ extern "C" void func_005D2FE0() {
 extern "C" void func_005D2FF0() {
 }
 
-// [TODO] 0x005D3000 func_005D3000 (8 B)
-// [TODO] 0x005D3010 func_005D3010 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D3000 (0x005D3000, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005D3010 (0x005D3010, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // ============================================================================
 // [VERIFIED] func_005D3020 (0x005D3020, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -33224,12 +35994,63 @@ extern "C" void func_005D3030() {
 // [TODO] 0x005D38D0 func_005D38D0 (776 B)
 // [TODO] 0x005D3BE0 func_005D3BE0 (204 B)
 // [TODO] 0x005D3CB0 func_005D3CB0 (1712 B)
-// [TODO] 0x005D4360 func_005D4360 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D4360 (0x005D4360, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x124 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x124];
+    int m_Field124; // +0x124
+};
+
+void Object::Set(int value)
+{
+    m_Field124 = value;
+}
+
 // [TODO] 0x005D4370 func_005D4370 (36 B)
 // [TODO] 0x005D43A0 func_005D43A0 (116 B)
 // [TODO] 0x005D4420 func_005D4420 (36 B)
-// [TODO] 0x005D4450 func_005D4450 (8 B)
-// [TODO] 0x005D4460 func_005D4460 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D4450 (0x005D4450, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10C];
+    int m_Field10C; // +0x10C
+};
+
+int Object::Get()
+{
+    return m_Field10C;
+}
+
+// ============================================================================
+// [VERIFIED] func_005D4460 (0x005D4460, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x108 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x108];
+    int m_Field108; // +0x108
+};
+
+int Object::Get()
+{
+    return m_Field108;
+}
+
 // [TODO] 0x005D4470 func_005D4470 (72 B)
 // [TODO] 0x005D44C0 func_005D44C0 (176 B)
 // [TODO] 0x005D4570 func_005D4570 (100 B)
@@ -33252,8 +36073,26 @@ extern "C" void func_005D3030() {
 // [TODO] 0x005D6320 func_005D6320 (96 B)
 // [TODO] 0x005D6380 func_005D6380 (68 B)
 // [TODO] 0x005D63D0 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005D63E0 func_005D63E0 (8 B)
-// [TODO] 0x005D63F0 func_005D63F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D63E0 (0x005D63E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005D63F0 (0x005D63F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // ============================================================================
 // [VERIFIED] func_005D6400 (0x005D6400, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -33371,13 +36210,58 @@ extern "C" void func_005D68E0() {
 // [TODO] 0x005D7140 func_005D7140 (712 B)
 // [TODO] 0x005D7410 func_005D7410 (76 B)
 // [TODO] 0x005D7460 func_005D7460 (32 B)
-// [TODO] 0x005D7480 func_005D7480 (8 B)
-// [TODO] 0x005D7490 func_005D7490 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D7480 (0x005D7480, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x20 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+int* Object::Get()
+{
+    return &m_Field20;
+}
+
+// ============================================================================
+// [VERIFIED] func_005D7490 (0x005D7490, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x10 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int* Object::Get()
+{
+    return &m_Field10;
+}
+
 // [TODO] 0x005D74A0 func_005D74A0 (40 B)
 // [TODO] 0x005D74D0 func_005D74D0 (76 B)
 // [TODO] 0x005D7520 WeaponStreamingClient::vfunc_04 (168 B)
 // [TODO] 0x005D75D0 func_005D75D0 (24 B)
-// [TODO] 0x005D75F0 func_005D75F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D75F0 (0x005D75F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080A6F0.
+extern int D_0080A6F0;
+
+int Get()
+{
+    return D_0080A6F0;
+}
+
 // [TODO] 0x005D7600 func_005D7600 (316 B)
 // [TODO] 0x005D7740 func_005D7740 (16 B)
 // [TODO] 0x005D7750 func_005D7750 (252 B)
@@ -33392,7 +36276,24 @@ extern "C" void func_005D68E0() {
 // [TODO] 0x005D7C20 func_005D7C20 (148 B)
 // [TODO] 0x005D7CC0 func_005D7CC0 (52 B)
 // [TODO] 0x005D7D00 func_005D7D00 (64 B)
-// [TODO] 0x005D7D40 func_005D7D40 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D7D40 (0x005D7D40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+void Object::Set(int value)
+{
+    m_Field4 = value;
+}
+
 // ============================================================================
 // [VERIFIED] func_005D7D50 (0x005D7D50, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -33406,7 +36307,24 @@ extern "C" void func_005D68E0() {
 extern "C" void func_005D7D50() {
 }
 
-// [TODO] 0x005D7D60 func_005D7D60 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D7D60 (0x005D7D60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x1C of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x1C];
+    unsigned char m_Field1C; // +0x1C
+};
+
+unsigned char Object::Get()
+{
+    return m_Field1C;
+}
+
 // [TODO] 0x005D7D70 func_005D7D70 (100 B)
 // [TODO] 0x005D7DE0 func_005D7DE0 (28 B)
 // [TODO] 0x005D7E00 func_005D7E00 (84 B)
@@ -33416,7 +36334,24 @@ extern "C" void func_005D7D50() {
 // [TODO] 0x005D7F80 func_005D7F80 (88 B)
 // [TODO] 0x005D7FE0 func_005D7FE0 (212 B)
 // [TODO] 0x005D80C0 func_005D80C0 (12 B)
-// [TODO] 0x005D80D0 func_005D80D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D80D0 (0x005D80D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x2C of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x2C];
+    char m_Field2C; // +0x2C
+};
+
+void Object::Set(char value)
+{
+    m_Field2C = value;
+}
+
 // [TODO] 0x005D80E0 func_005D80E0 (72 B)
 // [TODO] 0x005D8130 func_005D8130 (136 B)
 // [TODO] 0x005D81C0 func_005D81C0 (228 B)
@@ -33433,7 +36368,24 @@ extern "C" void func_005D7D50() {
 // [TODO] 0x005D9050 func_005D9050 (20 B)
 // [TODO] 0x005D9070 func_005D9070 (16 B)
 // [TODO] 0x005D9080 func_005D9080 (196 B)
-// [TODO] 0x005D9150 func_005D9150 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D9150 (0x005D9150, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x24 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x24];
+    int m_Field24; // +0x24
+};
+
+int Object::Get()
+{
+    return m_Field24;
+}
+
 // [TODO] 0x005D9160 func_005D9160 (76 B)
 // [TODO] 0x005D91B0 func_005D91B0 (12 B)
 // [TODO] 0x005D91C0 func_005D91C0 (36 B)
@@ -33448,13 +36400,47 @@ extern "C" void func_005D7D50() {
 // [TODO] 0x005D94F0 func_005D94F0 (40 B)
 // [TODO] 0x005D9520 func_005D9520 (104 B)
 // [TODO] 0x005D9590 func_005D9590 (96 B)
-// [TODO] 0x005D95F0 func_005D95F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D95F0 (0x005D95F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x5 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x5];
+    char m_Field5; // +0x5
+};
+
+void Object::Set(char value)
+{
+    m_Field5 = value;
+}
+
 // [TODO] 0x005D9600 func_005D9600 (88 B)
 // [TODO] 0x005D9660 func_005D9660 (88 B)
 // [TODO] 0x005D96C0 func_005D96C0 (88 B)
 // [TODO] 0x005D9720 func_005D9720 (168 B)
 // [TODO] 0x005D97D0 func_005D97D0 (100 B)
-// [TODO] 0x005D9840 func_005D9840 (8 B)
+// ============================================================================
+// [VERIFIED] func_005D9840 (0x005D9840, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x1C4 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x1C4];
+    int m_Field1C4; // +0x1C4
+};
+
+void Object::Set(int value)
+{
+    m_Field1C4 = value;
+}
+
 // [TODO] 0x005D9850 func_005D9850 (248 B)
 // [TODO] 0x005D9950 func_005D9950 (68 B)
 // [TODO] 0x005D99A0 func_005D99A0 (68 B)
@@ -33475,14 +36461,42 @@ extern "C" void func_005D7D50() {
 // [TODO] 0x005DA1C0 ExoticsHUD2::vfunc_54 (184 B)
 // [TODO] 0x005DA280 InvSelectionHUD::vfunc_29 (84 B)
 // [TODO] 0x005DA2E0 ExoticsHUD2::vfunc_04 (52 B)
-// [TODO] 0x005DA320 func_005DA320 (8 B)
+// ============================================================================
+// [VERIFIED] func_005DA320 (0x005DA320, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080A6F8.
+extern int D_0080A6F8;
+
+int Get()
+{
+    return D_0080A6F8;
+}
+
 // [TODO] 0x005DA330 ExoticsHUD2::vfunc_01 (156 B)
 // [TODO] 0x005DA3D0 func_005DA3D0 (120 B)
 // [TODO] 0x005DA450 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005DA460 ExoticsHUD2::vfunc_57 (8 B)
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_57 (0x005DA460, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Does nothing.
+void Nothing()
+{
+}
+
 // [TODO] 0x005DA470 func_005DA470 (8 B)
 // [TODO] 0x005DA480 func_005DA480 (8 B)
-// [TODO] 0x005DA490 func_005DA490 (8 B)
+// ============================================================================
+// [VERIFIED] func_005DA490 (0x005DA490, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 4.
+int Number()
+{
+    return 4;
+}
+
 // [TODO] 0x005DA4A0 func_005DA4A0 (8 B)
 // [TODO] 0x005DA4B0 func_005DA4B0 (72 B)
 // [TODO] 0x005DA500 func_005DA500 (8 B)
@@ -33529,8 +36543,25 @@ extern "C" void func_005D7D50() {
 // [TODO] 0x005DB5B0 func_005DB5B0 (96 B)
 // [TODO] 0x005DB610 func_005DB610 (68 B)
 // [TODO] 0x005DB660 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005DB670 func_005DB670 (8 B)
-// [TODO] 0x005DB680 ExoticsHUD2::vfunc_57 (8 B)
+// ============================================================================
+// [VERIFIED] func_005DB670 (0x005DB670, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_57 (0x005DB680, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Does nothing.
+void Nothing()
+{
+}
+
 // [TODO] 0x005DB690 func_005DB690 (16 B)
 // [TODO] 0x005DB6A0 func_005DB6A0 (56 B)
 // [TODO] 0x005DB6E0 func_005DB6E0 (8 B)
@@ -33600,13 +36631,40 @@ extern "C" void func_005DD780() {
 // [TODO] 0x005DE0A0 func_005DE0A0 (260 B)
 // [TODO] 0x005DE1B0 func_005DE1B0 (60 B)
 // [TODO] 0x005DE1F0 func_005DE1F0 (1088 B)
-// [TODO] 0x005DE630 func_005DE630 (8 B)
+// ============================================================================
+// [VERIFIED] func_005DE630 (0x005DE630, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005DE640 func_005DE640 (1076 B)
-// [TODO] 0x005DEA80 func_005DEA80 (8 B)
+// ============================================================================
+// [VERIFIED] func_005DEA80 (0x005DEA80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005DEA90 func_005DEA90 (192 B)
 // [TODO] 0x005DEB50 func_005DEB50 (148 B)
 // [TODO] 0x005DEBF0 func_005DEBF0 (172 B)
-// [TODO] 0x005DECA0 func_005DECA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005DECA0 (0x005DECA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // ============================================================================
 // [VERIFIED] func_005DECB0 (0x005DECB0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -33620,7 +36678,16 @@ extern "C" void func_005DD780() {
 extern "C" void func_005DECB0() {
 }
 
-// [TODO] 0x005DECC0 func_005DECC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005DECC0 (0x005DECC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005DECD0 func_005DECD0 (460 B)
 // [TODO] 0x005DEEA0 func_005DEEA0 (304 B)
 // [TODO] 0x005DEFD0 func_005DEFD0 (72 B)
@@ -33662,7 +36729,16 @@ extern "C" void func_005DECB0() {
 // [TODO] 0x005E1750 func_005E1750 (108 B)
 // [TODO] 0x005E17C0 func_005E17C0 (188 B)
 // [TODO] 0x005E1880 MapHUD2::ActivateMaxiMap (976 B)
-// [TODO] 0x005E1C50 func_005E1C50 (8 B)
+// ============================================================================
+// [VERIFIED] func_005E1C50 (0x005E1C50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005E1C60 ExoticsHUD2::vfunc_31 (72 B)
 // [TODO] 0x005E1CB0 ExoticsHUD2::vfunc_30 (8 B)
 // [TODO] 0x005E1CC0 func_005E1CC0 (776 B)
@@ -33705,7 +36781,18 @@ extern "C" void func_005DECB0() {
 // [TODO] 0x005E3B40 func_005E3B40 (160 B)
 // [TODO] 0x005E3BE0 func_005E3BE0 (16 B)
 // [TODO] 0x005E3BF0 func_005E3BF0 (364 B)
-// [TODO] 0x005E3D60 func_005E3D60 (8 B)
+// ============================================================================
+// [VERIFIED] func_005E3D60 (0x005E3D60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080A768.
+extern int D_0080A768;
+
+int Get()
+{
+    return D_0080A768;
+}
+
 // [TODO] 0x005E3D70 func_005E3D70 (12 B)
 // [TODO] 0x005E3D80 func_005E3D80 (16 B)
 // [TODO] 0x005E3D90 func_005E3D90 (264 B)
@@ -33734,7 +36821,15 @@ extern "C" void func_005DECB0() {
 // [TODO] 0x005E57E0 func_005E57E0 (68 B)
 // [TODO] 0x005E5830 ExoticsHUD2::vfunc_01 (96 B)
 // [TODO] 0x005E5890 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005E58A0 ExoticsHUD2::vfunc_57 (8 B)
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_57 (0x005E58A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Does nothing.
+void Nothing()
+{
+}
+
 // [TODO] 0x005E58B0 func_005E58B0 (88 B)
 // [TODO] 0x005E5910 ExoticsHUD2::vfunc_35 (12 B)
 // [TODO] 0x005E5920 ExoticsHUD2::vfunc_37 (144 B)
@@ -33771,7 +36866,24 @@ extern "C" void func_005DECB0() {
 // [TODO] 0x005E63D0 func_005E63D0 (200 B)
 // [TODO] 0x005E64A0 func_005E64A0 (28 B)
 // [TODO] 0x005E64C0 func_005E64C0 (48 B)
-// [TODO] 0x005E64F0 func_005E64F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005E64F0 (0x005E64F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x40 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x40];
+    char m_Field40; // +0x40
+};
+
+void Object::Set(char value)
+{
+    m_Field40 = value;
+}
+
 // [TODO] 0x005E6500 func_005E6500 (8 B)
 // [TODO] 0x005E6510 func_005E6510 (128 B)
 // [TODO] 0x005E6590 func_005E6590 (152 B)
@@ -33789,8 +36901,26 @@ extern "C" void func_005DECB0() {
 // [TODO] 0x005E7D90 func_005E7D90 (68 B)
 // [TODO] 0x005E7DE0 ExoticsHUD2::vfunc_01 (108 B)
 // [TODO] 0x005E7E50 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005E7E60 func_005E7E60 (8 B)
-// [TODO] 0x005E7E70 func_005E7E70 (8 B)
+// ============================================================================
+// [VERIFIED] func_005E7E60 (0x005E7E60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005E7E70 (0x005E7E70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005E7E80 BusinessDetailHUD::vfunc_36 (120 B)
 // [TODO] 0x005E7F00 func_005E7F00 (60 B)
 // [TODO] 0x005E7F40 ExoticsHUD2::vfunc_35 (168 B)
@@ -33807,8 +36937,26 @@ extern "C" void func_005DECB0() {
 // [TODO] 0x005E83A0 func_005E83A0 (132 B)
 // [TODO] 0x005E8430 ExoticsHUD2::vfunc_01 (120 B)
 // [TODO] 0x005E84B0 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005E84C0 func_005E84C0 (8 B)
-// [TODO] 0x005E84D0 func_005E84D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005E84C0 (0x005E84C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005E84D0 (0x005E84D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005E84E0 func_005E84E0 (8 B)
 // [TODO] 0x005E84F0 func_005E84F0 (8 B)
 // [TODO] 0x005E8500 func_005E8500 (8 B)
@@ -33830,7 +36978,24 @@ extern "C" void func_005DECB0() {
 // [TODO] 0x005E8C20 func_005E8C20 (332 B)
 // [TODO] 0x005E8D70 func_005E8D70 (68 B)
 // [TODO] 0x005E8DC0 func_005E8DC0 (56 B)
-// [TODO] 0x005E8E00 func_005E8E00 (8 B)
+// ============================================================================
+// [VERIFIED] func_005E8E00 (0x005E8E00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x40 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x40];
+    float m_Field40; // +0x40
+};
+
+void Object::Set(float value)
+{
+    m_Field40 = value;
+}
+
 // [TODO] 0x005E8E10 func_005E8E10 (20 B)
 // [TODO] 0x005E8E30 func_005E8E30 (192 B)
 // [TODO] 0x005E8EF0 GenericScroller::vfunc_01 (1952 B)
@@ -33871,7 +37036,24 @@ extern "C" void func_005E9A90() {
 // [TODO] 0x005EA170 func_005EA170 (184 B)
 // [TODO] 0x005EA230 func_005EA230 (184 B)
 // [TODO] 0x005EA2F0 func_005EA2F0 (232 B)
-// [TODO] 0x005EA3E0 func_005EA3E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005EA3E0 (0x005EA3E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x18 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int* Object::Get()
+{
+    return &m_Field18;
+}
+
 // [TODO] 0x005EA3F0 func_005EA3F0 (36 B)
 // [TODO] 0x005EA420 func_005EA420 (328 B)
 // [TODO] 0x005EA570 func_005EA570 (128 B)
@@ -33945,12 +37127,63 @@ extern "C" void func_005EA8C0() {
 // [TODO] 0x005EAC80 func_005EAC80 (220 B)
 // [TODO] 0x005EAD60 func_005EAD60 (100 B)
 // [TODO] 0x005EADD0 func_005EADD0 (16 B)
-// [TODO] 0x005EADE0 func_005EADE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005EADE0 (0x005EADE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x4 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x4];
+    char m_Field4; // +0x4
+};
+
+void Object::Set(char value)
+{
+    m_Field4 = value;
+}
+
 // [TODO] 0x005EADF0 func_005EADF0 (20 B)
 // [TODO] 0x005EAE10 func_005EAE10 (144 B)
 // [TODO] 0x005EAEA0 func_005EAEA0 (88 B)
-// [TODO] 0x005EAF00 func_005EAF00 (8 B)
-// [TODO] 0x005EAF10 func_005EAF10 (8 B)
+// ============================================================================
+// [VERIFIED] func_005EAF00 (0x005EAF00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x4 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x4];
+    char m_Field4; // +0x4
+};
+
+void Object::Set(char value)
+{
+    m_Field4 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_005EAF10 (0x005EAF10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x4 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x4];
+    unsigned char m_Field4; // +0x4
+};
+
+unsigned char Object::Get()
+{
+    return m_Field4;
+}
+
 // [TODO] 0x005EAF20 func_005EAF20 (28 B)
 // [TODO] 0x005EAF40 func_005EAF40 (12 B)
 // [TODO] 0x005EAF50 func_005EAF50 (8 B)
@@ -33966,7 +37199,24 @@ extern "C" void func_005EA8C0() {
 // [TODO] 0x005EB420 func_005EB420 (40 B)
 // [TODO] 0x005EB450 func_005EB450 (68 B)
 // [TODO] 0x005EB4A0 func_005EB4A0 (32 B)
-// [TODO] 0x005EB4C0 func_005EB4C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005EB4C0 (0x005EB4C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x24 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x24];
+    int m_Field24; // +0x24
+};
+
+int* Object::Get()
+{
+    return &m_Field24;
+}
+
 // [TODO] 0x005EB4D0 func_005EB4D0 (56 B)
 // [TODO] 0x005EB510 func_005EB510 (36 B)
 // [TODO] 0x005EB540 func_005EB540 (36 B)
@@ -33977,7 +37227,24 @@ extern "C" void func_005EA8C0() {
 // [TODO] 0x005EBDC0 func_005EBDC0 (156 B)
 // [TODO] 0x005EBE60 func_005EBE60 (12 B)
 // [TODO] 0x005EBE70 func_005EBE70 (32 B)
-// [TODO] 0x005EBE90 func_005EBE90 (8 B)
+// ============================================================================
+// [VERIFIED] func_005EBE90 (0x005EBE90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x58 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x58];
+    int m_Field58; // +0x58
+};
+
+int Object::Get()
+{
+    return m_Field58;
+}
+
 // [TODO] 0x005EBEA0 func_005EBEA0 (244 B)
 // [TODO] 0x005EBFA0 func_005EBFA0 (16 B)
 // [TODO] 0x005EBFB0 func_005EBFB0 (32 B)
@@ -33989,9 +37256,43 @@ extern "C" void func_005EA8C0() {
 // [TODO] 0x005EC4D0 func_005EC4D0 (96 B)
 // [TODO] 0x005EC530 func_005EC530 (228 B)
 // [TODO] 0x005EC620 func_005EC620 (12 B)
-// [TODO] 0x005EC630 func_005EC630 (8 B)
+// ============================================================================
+// [VERIFIED] func_005EC630 (0x005EC630, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x44 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x44];
+    float m_Field44; // +0x44
+};
+
+float Object::Get()
+{
+    return m_Field44;
+}
+
 // [TODO] 0x005EC640 func_005EC640 (84 B)
-// [TODO] 0x005EC6A0 func_005EC6A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005EC6A0 (0x005EC6A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x40 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x40];
+    int m_Field40; // +0x40
+};
+
+int Object::Get()
+{
+    return m_Field40;
+}
+
 // ============================================================================
 // [VERIFIED] func_005EC6B0 (0x005EC6B0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -34045,8 +37346,26 @@ extern "C" void func_005EC6D0() {
 // [TODO] 0x005ECBA0 func_005ECBA0 (68 B)
 // [TODO] 0x005ECBF0 ExoticsHUD2::vfunc_01 (136 B)
 // [TODO] 0x005ECC80 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005ECC90 func_005ECC90 (8 B)
-// [TODO] 0x005ECCA0 func_005ECCA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005ECC90 (0x005ECC90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005ECCA0 (0x005ECCA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005ECCB0 func_005ECCB0 (72 B)
 // [TODO] 0x005ECD00 ExoticsHUD2::vfunc_35 (168 B)
 // [TODO] 0x005ECDB0 ExoticsHUD2::vfunc_54 (216 B)
@@ -34064,8 +37383,26 @@ extern "C" void func_005EC6D0() {
 // [TODO] 0x005ED310 func_005ED310 (96 B)
 // [TODO] 0x005ED370 func_005ED370 (68 B)
 // [TODO] 0x005ED3C0 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005ED3D0 func_005ED3D0 (8 B)
-// [TODO] 0x005ED3E0 func_005ED3E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005ED3D0 (0x005ED3D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005ED3E0 (0x005ED3E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005ED3F0 func_005ED3F0 (704 B)
 // [TODO] 0x005ED6B0 func_005ED6B0 (28 B)
 // [TODO] 0x005ED6D0 func_005ED6D0 (92 B)
@@ -34085,8 +37422,26 @@ extern "C" void func_005EC6D0() {
 // [TODO] 0x005EDD60 func_005EDD60 (96 B)
 // [TODO] 0x005EDDC0 func_005EDDC0 (68 B)
 // [TODO] 0x005EDE10 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005EDE20 func_005EDE20 (8 B)
-// [TODO] 0x005EDE30 func_005EDE30 (8 B)
+// ============================================================================
+// [VERIFIED] func_005EDE20 (0x005EDE20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005EDE30 (0x005EDE30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005EDE40 func_005EDE40 (48 B)
 // [TODO] 0x005EDE70 ExoticsHUD2::vfunc_36 (80 B)
 // [TODO] 0x005EDEC0 ExoticsHUD2::vfunc_35 (168 B)
@@ -34136,7 +37491,24 @@ extern "C" void func_005EC6D0() {
 // [TODO] 0x005EF960 func_005EF960 (68 B)
 // [TODO] 0x005EF9B0 func_005EF9B0 (588 B)
 // [TODO] 0x005EFC00 func_005EFC00 (68 B)
-// [TODO] 0x005EFC50 func_005EFC50 (8 B)
+// ============================================================================
+// [VERIFIED] func_005EFC50 (0x005EFC50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Set(int value)
+{
+    m_FieldC = value;
+}
+
 // [TODO] 0x005EFC60 func_005EFC60 (24 B)
 // [TODO] 0x005EFC80 func_005EFC80 (36 B)
 // [TODO] 0x005EFCB0 func_005EFCB0 (24 B)
@@ -34151,14 +37523,57 @@ extern "C" void func_005EC6D0() {
 // [TODO] 0x005F0060 func_005F0060 (556 B)
 // [TODO] 0x005F0290 func_005F0290 (336 B)
 // [TODO] 0x005F03E0 func_005F03E0 (168 B)
-// [TODO] 0x005F0490 func_005F0490 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F0490 (0x005F0490, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005F04A0 func_005F04A0 (120 B)
-// [TODO] 0x005F0520 func_005F0520 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F0520 (0x005F0520, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Set(int value)
+{
+    m_FieldC = value;
+}
+
 // [TODO] 0x005F0530 func_005F0530 (56 B)
 // [TODO] 0x005F0570 func_005F0570 (56 B)
 // [TODO] 0x005F05B0 func_005F05B0 (56 B)
 // [TODO] 0x005F05F0 func_005F05F0 (112 B)
-// [TODO] 0x005F0660 func_005F0660 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F0660 (0x005F0660, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x28 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x28];
+    unsigned char m_Field28; // +0x28
+};
+
+unsigned char Object::Get()
+{
+    return m_Field28;
+}
+
 // [TODO] 0x005F0670 func_005F0670 (292 B)
 // [TODO] 0x005F07A0 func_005F07A0 (68 B)
 // [TODO] 0x005F07F0 func_005F07F0 (96 B)
@@ -34167,7 +37582,24 @@ extern "C" void func_005EC6D0() {
 // [TODO] 0x005F09E0 func_005F09E0 (92 B)
 // [TODO] 0x005F0A40 func_005F0A40 (124 B)
 // [TODO] 0x005F0AC0 func_005F0AC0 (92 B)
-// [TODO] 0x005F0B20 func_005F0B20 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F0B20 (0x005F0B20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x20 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x20];
+    unsigned char m_Field20; // +0x20
+};
+
+unsigned char Object::Get()
+{
+    return m_Field20;
+}
+
 // [TODO] 0x005F0B30 func_005F0B30 (8 B)
 // [TODO] 0x005F0B40 func_005F0B40 (36 B)
 // [TODO] 0x005F0B70 func_005F0B70 (120 B)
@@ -34178,10 +37610,44 @@ extern "C" void func_005EC6D0() {
 // [TODO] 0x005F0D90 func_005F0D90 (92 B)
 // [TODO] 0x005F0DF0 func_005F0DF0 (104 B)
 // [TODO] 0x005F0E60 func_005F0E60 (76 B)
-// [TODO] 0x005F0EB0 func_005F0EB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F0EB0 (0x005F0EB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x8 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x8];
+    float m_Field8; // +0x8
+};
+
+float Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x005F0EC0 func_005F0EC0 (40 B)
 // [TODO] 0x005F0EF0 func_005F0EF0 (96 B)
-// [TODO] 0x005F0F50 func_005F0F50 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F0F50 (0x005F0F50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x4 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x4];
+    float m_Field4; // +0x4
+};
+
+float Object::Get()
+{
+    return m_Field4;
+}
+
 // [TODO] 0x005F0F60 func_005F0F60 (96 B)
 // [TODO] 0x005F0FC0 func_005F0FC0 (76 B)
 // [TODO] 0x005F1010 func_005F1010 (28 B)
@@ -34219,7 +37685,22 @@ extern "C" void func_005F1030() {
 // [TODO] 0x005F2410 func_005F2410 (276 B)
 // [TODO] 0x005F2530 func_005F2530 (236 B)
 // [TODO] 0x005F2620 func_005F2620 (528 B)
-// [TODO] 0x005F2830 func_005F2830 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F2830 (0x005F2830, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x005F2840 func_005F2840 (200 B)
 // [TODO] 0x005F2910 func_005F2910 (332 B)
 // [TODO] 0x005F2A60 func_005F2A60 (116 B)
@@ -34241,11 +37722,62 @@ extern "C" void func_005F1030() {
 // [TODO] 0x005F3660 func_005F3660 (84 B)
 // [TODO] 0x005F36C0 func_005F36C0 (48 B)
 // [TODO] 0x005F36F0 func_005F36F0 (96 B)
-// [TODO] 0x005F3750 func_005F3750 (8 B)
-// [TODO] 0x005F3760 func_005F3760 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F3750 (0x005F3750, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_005F3760 (0x005F3760, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x005F3770 func_005F3770 (20 B)
 // [TODO] 0x005F3790 func_005F3790 (168 B)
-// [TODO] 0x005F3840 func_005F3840 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F3840 (0x005F3840, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x14 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x14];
+    unsigned char m_Field14; // +0x14
+};
+
+unsigned char Object::Get()
+{
+    return m_Field14;
+}
+
 // [TODO] 0x005F3850 NumericTextField::vfunc_01 (552 B)
 // [TODO] 0x005F3A80 func_005F3A80 (76 B)
 // [TODO] 0x005F3AD0 func_005F3AD0 (92 B)
@@ -34260,9 +37792,36 @@ extern "C" void func_005F1030() {
 // [TODO] 0x005F4060 func_005F4060 (96 B)
 // [TODO] 0x005F40C0 func_005F40C0 (68 B)
 // [TODO] 0x005F4110 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005F4120 func_005F4120 (8 B)
-// [TODO] 0x005F4130 func_005F4130 (8 B)
-// [TODO] 0x005F4140 func_005F4140 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F4120 (0x005F4120, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005F4130 (0x005F4130, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005F4140 (0x005F4140, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005F4150 func_005F4150 (112 B)
 // [TODO] 0x005F41C0 func_005F41C0 (112 B)
 // [TODO] 0x005F4230 func_005F4230 (116 B)
@@ -34301,8 +37860,26 @@ extern "C" void func_005F1030() {
 // [TODO] 0x005F5D20 func_005F5D20 (96 B)
 // [TODO] 0x005F5D80 func_005F5D80 (68 B)
 // [TODO] 0x005F5DD0 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005F5DE0 func_005F5DE0 (8 B)
-// [TODO] 0x005F5DF0 func_005F5DF0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F5DE0 (0x005F5DE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005F5DF0 (0x005F5DF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005F5E00 func_005F5E00 (40 B)
 // [TODO] 0x005F5E30 ExoticsHUD2::vfunc_54 (160 B)
 // [TODO] 0x005F5ED0 ExoticsHUD2::vfunc_37 (8 B)
@@ -34323,7 +37900,18 @@ extern "C" void func_005F1030() {
 // [TODO] 0x005F6450 func_005F6450 (64 B)
 // [TODO] 0x005F6490 func_005F6490 (88 B)
 // [TODO] 0x005F64F0 func_005F64F0 (16 B)
-// [TODO] 0x005F6500 func_005F6500 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F6500 (0x005F6500, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00807F14.
+extern int D_00807F14;
+
+int Get()
+{
+    return D_00807F14;
+}
+
 // [TODO] 0x005F6510 func_005F6510 (16 B)
 // [TODO] 0x005F6520 func_005F6520 (16 B)
 // [TODO] 0x005F6530 func_005F6530 (168 B)
@@ -34333,10 +37921,48 @@ extern "C" void func_005F1030() {
 // [TODO] 0x005F66E0 func_005F66E0 (96 B)
 // [TODO] 0x005F6740 func_005F6740 (68 B)
 // [TODO] 0x005F6790 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005F67A0 func_005F67A0 (8 B)
-// [TODO] 0x005F67B0 func_005F67B0 (8 B)
-// [TODO] 0x005F67C0 func_005F67C0 (8 B)
-// [TODO] 0x005F67D0 func_005F67D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F67A0 (0x005F67A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005F67B0 (0x005F67B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005F67C0 (0x005F67C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00807F14.
+extern int D_00807F14;
+
+int Get()
+{
+    return D_00807F14;
+}
+
+// ============================================================================
+// [VERIFIED] func_005F67D0 (0x005F67D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x005F67E0 func_005F67E0 (944 B)
 // [TODO] 0x005F6B90 HUDTapePlayer::vfunc_61 (188 B)
 // [TODO] 0x005F6C50 func_005F6C50 (736 B)
@@ -34346,7 +37972,18 @@ extern "C" void func_005F1030() {
 // [TODO] 0x005F78E0 func_005F78E0 (292 B)
 // [TODO] 0x005F7A10 func_005F7A10 (24 B)
 // [TODO] 0x005F7A30 func_005F7A30 (8 B)
-// [TODO] 0x005F7A40 func_005F7A40 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F7A40 (0x005F7A40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte kept in the global D_0080A880.
+extern unsigned char D_0080A880;
+
+unsigned char Get()
+{
+    return D_0080A880;
+}
+
 // [TODO] 0x005F7A50 func_005F7A50 (100 B)
 // [TODO] 0x005F7AC0 func_005F7AC0 (84 B)
 // [TODO] 0x005F7B20 ExoticsHUD2::vfunc_35 (244 B)
@@ -34377,12 +38014,63 @@ extern "C" void func_005F80E0() {
 // [TODO] 0x005F8170 func_005F8170 (8 B)
 // [TODO] 0x005F8180 func_005F8180 (8 B)
 // [TODO] 0x005F8190 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005F81A0 func_005F81A0 (8 B)
-// [TODO] 0x005F81B0 func_005F81B0 (8 B)
-// [TODO] 0x005F81C0 func_005F81C0 (8 B)
-// [TODO] 0x005F81D0 ExoticsHUD2::vfunc_50 (8 B)
-// [TODO] 0x005F81E0 ExoticsHUD2::vfunc_51 (8 B)
-// [TODO] 0x005F81F0 ExoticsHUD2::vfunc_57 (8 B)
+// ============================================================================
+// [VERIFIED] func_005F81A0 (0x005F81A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005F81B0 (0x005F81B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005F81C0 (0x005F81C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_50 (0x005F81D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Does nothing.
+void Nothing()
+{
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_51 (0x005F81E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Does nothing.
+void Nothing()
+{
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_57 (0x005F81F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Does nothing.
+void Nothing()
+{
+}
+
 // [TODO] 0x005F8200 func_005F8200 (76 B)
 // [TODO] 0x005F8250 func_005F8250 (120 B)
 // [TODO] 0x005F82D0 func_005F82D0 (32 B)
@@ -34424,14 +38112,46 @@ extern "C" void func_005F80E0() {
 // [TODO] 0x005FA940 func_005FA940 (760 B)
 // [TODO] 0x005FAC40 func_005FAC40 (52 B)
 // [TODO] 0x005FAC80 func_005FAC80 (56 B)
-// [TODO] 0x005FACC0 func_005FACC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_005FACC0 (0x005FACC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x005FACD0 func_005FACD0 (12 B)
 // [TODO] 0x005FACE0 func_005FACE0 (72 B)
 // [TODO] 0x005FAD30 SpawnTriggerObject::vfunc_04 (388 B)
 // [TODO] 0x005FAEC0 func_005FAEC0 (124 B)
 // [TODO] 0x005FAF40 func_005FAF40 (56 B)
 // [TODO] 0x005FAF80 func_005FAF80 (12 B)
-// [TODO] 0x005FAF90 func_005FAF90 (8 B)
+// ============================================================================
+// [VERIFIED] func_005FAF90 (0x005FAF90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x210 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x210];
+    unsigned char m_Field210; // +0x210
+};
+
+unsigned char Object::Get()
+{
+    return m_Field210;
+}
+
 // [TODO] 0x005FAFA0 func_005FAFA0 (8 B)
 // [TODO] 0x005FAFB0 func_005FAFB0 (8 B)
 // [TODO] 0x005FAFC0 func_005FAFC0 (8 B)
@@ -34483,7 +38203,24 @@ extern "C" void func_005FB0B0() {
 // [TODO] 0x005FBDA0 func_005FBDA0 (68 B)
 // [TODO] 0x005FBDF0 func_005FBDF0 (32 B)
 // [TODO] 0x005FBE10 func_005FBE10 (68 B)
-// [TODO] 0x005FBE60 func_005FBE60 (8 B)
+// ============================================================================
+// [VERIFIED] func_005FBE60 (0x005FBE60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0xC4 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0xC4];
+    float m_FieldC4; // +0xC4
+};
+
+void Object::Set(float value)
+{
+    m_FieldC4 = value;
+}
+
 // [TODO] 0x005FBE70 func_005FBE70 (52 B)
 // [TODO] 0x005FBEB0 func_005FBEB0 (32 B)
 // [TODO] 0x005FBED0 func_005FBED0 (68 B)
@@ -34510,8 +38247,38 @@ extern "C" void func_005FB0B0() {
 // [TODO] 0x005FC8F0 func_005FC8F0 (164 B)
 // [TODO] 0x005FC9A0 func_005FC9A0 (116 B)
 // [TODO] 0x005FCA20 func_005FCA20 (332 B)
-// [TODO] 0x005FCB70 func_005FCB70 (8 B)
-// [TODO] 0x005FCB80 func_005FCB80 (8 B)
+// ============================================================================
+// [VERIFIED] func_005FCB70 (0x005FCB70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_005FCB80 (0x005FCB80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x005FCB90 func_005FCB90 (120 B)
 // [TODO] 0x005FCC10 func_005FCC10 (112 B)
 // [TODO] 0x005FCC80 func_005FCC80 (368 B)
@@ -34532,7 +38299,23 @@ extern "C" void func_005FB0B0() {
 // [TODO] 0x005FDAD0 func_005FDAD0 (392 B)
 // [TODO] 0x005FDC60 func_005FDC60 (64 B)
 // [TODO] 0x005FDCA0 func_005FDCA0 (112 B)
-// [TODO] 0x005FDD10 func_005FDD10 (8 B)
+// ============================================================================
+// [VERIFIED] func_005FDD10 (0x005FDD10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x0 of its object.
+class Object
+{
+public:
+    int Get();
+    int m_Field0; // +0x0
+};
+
+int Object::Get()
+{
+    return m_Field0;
+}
+
 // [TODO] 0x005FDD20 func_005FDD20 (16 B)
 // [TODO] 0x005FDD30 func_005FDD30 (164 B)
 // [TODO] 0x005FDDE0 func_005FDDE0 (388 B)
@@ -34547,14 +38330,32 @@ extern "C" void func_005FB0B0() {
 // [TODO] 0x005FE3E0 func_005FE3E0 (32 B)
 // [TODO] 0x005FE400 func_005FE400 (256 B)
 // [TODO] 0x005FE500 func_005FE500 (12 B)
-// [TODO] 0x005FE510 func_005FE510 (8 B)
+// ============================================================================
+// [VERIFIED] func_005FE510 (0x005FE510, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x005FE520 func_005FE520 (436 B)
 // [TODO] 0x005FE6E0 func_005FE6E0 (304 B)
 // [TODO] 0x005FE810 func_005FE810 (508 B)
 // [TODO] 0x005FEA10 func_005FEA10 (508 B)
 // [TODO] 0x005FEC10 func_005FEC10 (144 B)
 // [TODO] 0x005FECA0 func_005FECA0 (600 B)
-// [TODO] 0x005FEF00 func_005FEF00 (8 B)
+// ============================================================================
+// [VERIFIED] func_005FEF00 (0x005FEF00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 100.
+int Number()
+{
+    return 100;
+}
+
 // ============================================================================
 // [VERIFIED] func_005FEF10 (0x005FEF10, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -34574,7 +38375,15 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x005FF080 func_005FF080 (96 B)
 // [TODO] 0x005FF0E0 func_005FF0E0 (68 B)
 // [TODO] 0x005FF130 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x005FF140 ExoticsHUD2::vfunc_57 (8 B)
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_57 (0x005FF140, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Does nothing.
+void Nothing()
+{
+}
+
 // [TODO] 0x005FF150 ExoticsHUD2::vfunc_45 (8 B)
 // [TODO] 0x005FF160 ExoticsHUD2::vfunc_44 (136 B)
 // [TODO] 0x005FF1F0 HUDImageDisplay::vfunc_61 (188 B)
@@ -34663,10 +38472,43 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x00601C10 func_00601C10 (8 B)
 // [TODO] 0x00601C20 func_00601C20 (80 B)
 // [TODO] 0x00601C70 func_00601C70 (228 B)
-// [TODO] 0x00601D60 func_00601D60 (8 B)
+// ============================================================================
+// [VERIFIED] func_00601D60 (0x00601D60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte kept in the global D_0080A8E8.
+extern unsigned char D_0080A8E8;
+
+unsigned char Get()
+{
+    return D_0080A8E8;
+}
+
 // [TODO] 0x00601D70 func_00601D70 (12 B)
-// [TODO] 0x00601D80 func_00601D80 (8 B)
-// [TODO] 0x00601D90 func_00601D90 (8 B)
+// ============================================================================
+// [VERIFIED] func_00601D80 (0x00601D80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte kept in the global D_0080A8F0.
+extern unsigned char D_0080A8F0;
+
+unsigned char Get()
+{
+    return D_0080A8F0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00601D90 (0x00601D90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte kept in the global D_0080A8EC.
+extern unsigned char D_0080A8EC;
+
+unsigned char Get()
+{
+    return D_0080A8EC;
+}
+
 // [TODO] 0x00601DA0 func_00601DA0 (584 B)
 // [TODO] 0x00601FF0 func_00601FF0 (184 B)
 // [TODO] 0x006020B0 func_006020B0 (48 B)
@@ -34692,7 +38534,24 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x00603050 func_00603050 (452 B)
 // [TODO] 0x00603220 func_00603220 (172 B)
 // [TODO] 0x006032D0 func_006032D0 (24 B)
-// [TODO] 0x006032F0 func_006032F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006032F0 (0x006032F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x2A of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x2A];
+    unsigned char m_Field2A; // +0x2A
+};
+
+unsigned char Object::Get()
+{
+    return m_Field2A;
+}
+
 // [TODO] 0x00603300 func_00603300 (8 B)
 // [TODO] 0x00603310 func_00603310 (8 B)
 // [TODO] 0x00603320 func_00603320 (112 B)
@@ -34705,8 +38564,26 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x00603620 func_00603620 (68 B)
 // [TODO] 0x00603670 func_00603670 (36 B)
 // [TODO] 0x006036A0 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x006036B0 func_006036B0 (8 B)
-// [TODO] 0x006036C0 func_006036C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006036B0 (0x006036B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006036C0 (0x006036C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006036D0 ExoticsHUD2::vfunc_54 (340 B)
 // [TODO] 0x00603830 ExoticsHUD2::vfunc_04 (8 B)
 // [TODO] 0x00603840 GenericWeaponHUD::vfunc_29 (456 B)
@@ -34750,8 +38627,26 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x006046A0 func_006046A0 (68 B)
 // [TODO] 0x006046F0 ExoticsHUD2::vfunc_01 (120 B)
 // [TODO] 0x00604770 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x00604780 func_00604780 (8 B)
-// [TODO] 0x00604790 func_00604790 (8 B)
+// ============================================================================
+// [VERIFIED] func_00604780 (0x00604780, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00604790 (0x00604790, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006047A0 func_006047A0 (48 B)
 // [TODO] 0x006047D0 ExoticsHUD2::vfunc_36 (8 B)
 // [TODO] 0x006047E0 ExoticsHUD2::vfunc_35 (168 B)
@@ -34765,8 +38660,25 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x00604A60 func_00604A60 (96 B)
 // [TODO] 0x00604AC0 func_00604AC0 (68 B)
 // [TODO] 0x00604B10 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x00604B20 func_00604B20 (8 B)
-// [TODO] 0x00604B30 ExoticsHUD2::vfunc_57 (8 B)
+// ============================================================================
+// [VERIFIED] func_00604B20 (0x00604B20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_57 (0x00604B30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Does nothing.
+void Nothing()
+{
+}
+
 // [TODO] 0x00604B40 func_00604B40 (104 B)
 // [TODO] 0x00604BB0 func_00604BB0 (900 B)
 // [TODO] 0x00604F40 func_00604F40 (256 B)
@@ -34783,9 +38695,36 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x00605770 func_00605770 (96 B)
 // [TODO] 0x006057D0 func_006057D0 (68 B)
 // [TODO] 0x00605820 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x00605830 func_00605830 (8 B)
-// [TODO] 0x00605840 func_00605840 (8 B)
-// [TODO] 0x00605850 func_00605850 (8 B)
+// ============================================================================
+// [VERIFIED] func_00605830 (0x00605830, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00605840 (0x00605840, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00605850 (0x00605850, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00605860 func_00605860 (484 B)
 // [TODO] 0x00605A50 func_00605A50 (280 B)
 // [TODO] 0x00605B70 func_00605B70 (80 B)
@@ -34831,7 +38770,24 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x006072A0 func_006072A0 (256 B)
 // [TODO] 0x006073A0 func_006073A0 (204 B)
 // [TODO] 0x00607470 func_00607470 (560 B)
-// [TODO] 0x006076A0 func_006076A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006076A0 (0x006076A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x34 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x34];
+    unsigned char m_Field34; // +0x34
+};
+
+unsigned char Object::Get()
+{
+    return m_Field34;
+}
+
 // [TODO] 0x006076B0 func_006076B0 (104 B)
 // [TODO] 0x00607720 func_00607720 (88 B)
 // [TODO] 0x00607780 func_00607780 (552 B)
@@ -34847,8 +38803,26 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x00607D80 func_00607D80 (96 B)
 // [TODO] 0x00607DE0 func_00607DE0 (68 B)
 // [TODO] 0x00607E30 ExoticsHUD2::vfunc_00 (12 B)
-// [TODO] 0x00607E40 func_00607E40 (8 B)
-// [TODO] 0x00607E50 func_00607E50 (8 B)
+// ============================================================================
+// [VERIFIED] func_00607E40 (0x00607E40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00607E50 (0x00607E50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00607E60 func_00607E60 (24 B)
 // [TODO] 0x00607E80 ExoticsHUD2::vfunc_45 (136 B)
 // [TODO] 0x00607F10 LaunderCashHUD::vfunc_44 (668 B)
@@ -34872,10 +38846,32 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x00608D70 func_00608D70 (8 B)
 // [TODO] 0x00608D80 func_00608D80 (8 B)
 // [TODO] 0x00608D90 func_00608D90 (12 B)
-// [TODO] 0x00608DA0 func_00608DA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00608DA0 (0x00608DA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte kept in the global D_0080A958.
+extern unsigned char D_0080A958;
+
+unsigned char Get()
+{
+    return D_0080A958;
+}
+
 // [TODO] 0x00608DB0 func_00608DB0 (56 B)
 // [TODO] 0x00608DF0 func_00608DF0 (92 B)
-// [TODO] 0x00608E50 func_00608E50 (8 B)
+// ============================================================================
+// [VERIFIED] func_00608E50 (0x00608E50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00807F6C.
+extern int D_00807F6C;
+
+int Get()
+{
+    return D_00807F6C;
+}
+
 // [TODO] 0x00608E60 func_00608E60 (8 B)
 // [TODO] 0x00608E70 func_00608E70 (52 B)
 // [TODO] 0x00608EB0 func_00608EB0 (92 B)
@@ -34915,8 +38911,40 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x0060AB90 func_0060AB90 (72 B)
 // [TODO] 0x0060ABE0 func_0060ABE0 (1236 B)
 // [TODO] 0x0060B0C0 func_0060B0C0 (68 B)
-// [TODO] 0x0060B110 func_0060B110 (8 B)
-// [TODO] 0x0060B120 func_0060B120 (8 B)
+// ============================================================================
+// [VERIFIED] func_0060B110 (0x0060B110, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_0060B120 (0x0060B120, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 16-bit number at +0x44 of its object.
+class Object
+{
+public:
+    void Set(short value);
+    char m_pad00[0x44];
+    short m_Field44; // +0x44
+};
+
+void Object::Set(short value)
+{
+    m_Field44 = value;
+}
+
 // [TODO] 0x0060B130 func_0060B130 (56 B)
 // [TODO] 0x0060B170 func_0060B170 (1200 B)
 // [TODO] 0x0060B620 func_0060B620 (276 B)
@@ -34953,7 +38981,22 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x0060C230 func_0060C230 (12 B)
 // [TODO] 0x0060C240 func_0060C240 (52 B)
 // [TODO] 0x0060C280 func_0060C280 (52 B)
-// [TODO] 0x0060C2C0 func_0060C2C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0060C2C0 (0x0060C2C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x0060C2D0 func_0060C2D0 (96 B)
 // [TODO] 0x0060C330 func_0060C330 (92 B)
 // [TODO] 0x0060C390 func_0060C390 (100 B)
@@ -34978,16 +39021,58 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x0060D4A0 func_0060D4A0 (120 B)
 // [TODO] 0x0060D520 func_0060D520 (108 B)
 // [TODO] 0x0060D590 func_0060D590 (108 B)
-// [TODO] 0x0060D600 func_0060D600 (8 B)
+// ============================================================================
+// [VERIFIED] func_0060D600 (0x0060D600, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x0060D610 func_0060D610 (36 B)
 // [TODO] 0x0060D640 func_0060D640 (36 B)
 // [TODO] 0x0060D670 func_0060D670 (40 B)
 // [TODO] 0x0060D6A0 func_0060D6A0 (40 B)
-// [TODO] 0x0060D6D0 func_0060D6D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0060D6D0 (0x0060D6D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x0060D6E0 func_0060D6E0 (12 B)
-// [TODO] 0x0060D6F0 func_0060D6F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0060D6F0 (0x0060D6F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x0060D700 func_0060D700 (236 B)
-// [TODO] 0x0060D7F0 func_0060D7F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0060D7F0 (0x0060D7F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x0060D800 func_0060D800 (96 B)
 // [TODO] 0x0060D860 func_0060D860 (80 B)
 // [TODO] 0x0060D8B0 func_0060D8B0 (100 B)
@@ -35025,7 +39110,24 @@ extern "C" void func_005FEF10() {
 // [TODO] 0x0060E810 func_0060E810 (36 B)
 // [TODO] 0x0060E840 func_0060E840 (252 B)
 // [TODO] 0x0060E940 func_0060E940 (88 B)
-// [TODO] 0x0060E9A0 func_0060E9A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0060E9A0 (0x0060E9A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x56E of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x56E];
+    char m_Field56E; // +0x56E
+};
+
+void Object::Set(char value)
+{
+    m_Field56E = value;
+}
+
 // [TODO] 0x0060E9B0 func_0060E9B0 (144 B)
 // [TODO] 0x0060EA40 func_0060EA40 (56 B)
 // [TODO] 0x0060EA80 func_0060EA80 (96 B)
@@ -35207,11 +39309,44 @@ extern "C" void func_00610260() {
 // [TODO] 0x00611650 func_00611650 (84 B)
 // [TODO] 0x006116B0 func_006116B0 (84 B)
 // [TODO] 0x00611710 func_00611710 (56 B)
-// [TODO] 0x00611750 func_00611750 (8 B)
+// ============================================================================
+// [VERIFIED] func_00611750 (0x00611750, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x34 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+};
+
+int* Object::Get()
+{
+    return &m_Field34;
+}
+
 // [TODO] 0x00611760 func_00611760 (88 B)
 // [TODO] 0x006117C0 func_006117C0 (84 B)
 // [TODO] 0x00611820 func_00611820 (72 B)
-// [TODO] 0x00611870 func_00611870 (8 B)
+// ============================================================================
+// [VERIFIED] func_00611870 (0x00611870, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x0 of its object.
+class Object
+{
+public:
+    int Get();
+    int m_Field0; // +0x0
+};
+
+int Object::Get()
+{
+    return m_Field0;
+}
+
 // [TODO] 0x00611880 func_00611880 (28 B)
 // [TODO] 0x006118A0 func_006118A0 (148 B)
 // [TODO] 0x00611940 func_00611940 (88 B)
@@ -35247,7 +39382,24 @@ extern "C" void func_00610260() {
 // [TODO] 0x00612A50 func_00612A50 (400 B)
 // [TODO] 0x00612BE0 func_00612BE0 (68 B)
 // [TODO] 0x00612C30 func_00612C30 (60 B)
-// [TODO] 0x00612C70 func_00612C70 (8 B)
+// ============================================================================
+// [VERIFIED] func_00612C70 (0x00612C70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a 16-bit number at +0x38 of its object.
+class Object
+{
+public:
+    short Get();
+    char m_pad00[0x38];
+    short m_Field38; // +0x38
+};
+
+short Object::Get()
+{
+    return m_Field38;
+}
+
 // [TODO] 0x00612C80 func_00612C80 (96 B)
 // [TODO] 0x00612CE0 func_00612CE0 (112 B)
 // [TODO] 0x00612D50 func_00612D50 (592 B)
@@ -35412,11 +39564,56 @@ extern "C" void func_00613E80() {
 extern "C" void func_00613E90() {
 }
 
-// [TODO] 0x00613EA0 func_00613EA0 (8 B)
-// [TODO] 0x00613EB0 func_00613EB0 (8 B)
-// [TODO] 0x00613EC0 func_00613EC0 (8 B)
-// [TODO] 0x00613ED0 func_00613ED0 (8 B)
-// [TODO] 0x00613EE0 func_00613EE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00613EA0 (0x00613EA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00613EB0 (0x00613EB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00613EC0 (0x00613EC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00613ED0 (0x00613ED0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00613EE0 (0x00613EE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00613EF0 func_00613EF0 (120 B)
 // [TODO] 0x00613F70 func_00613F70 (96 B)
 // [TODO] 0x00613FD0 func_00613FD0 (68 B)
@@ -35554,8 +39751,38 @@ extern "C" void func_006156B0() {
 // [TODO] 0x00616B20 func_00616B20 (116 B)
 // [TODO] 0x00616BA0 func_00616BA0 (36 B)
 // [TODO] 0x00616BD0 func_00616BD0 (56 B)
-// [TODO] 0x00616C10 func_00616C10 (8 B)
-// [TODO] 0x00616C20 func_00616C20 (8 B)
+// ============================================================================
+// [VERIFIED] func_00616C10 (0x00616C10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_00616C20 (0x00616C20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00616C30 func_00616C30 (52 B)
 // [TODO] 0x00616C70 func_00616C70 (52 B)
 // [TODO] 0x00616CB0 func_00616CB0 (72 B)
@@ -35586,7 +39813,22 @@ extern "C" void func_006156B0() {
 // [TODO] 0x006177A0 func_006177A0 (12 B)
 // [TODO] 0x006177B0 func_006177B0 (96 B)
 // [TODO] 0x00617810 func_00617810 (12 B)
-// [TODO] 0x00617820 func_00617820 (8 B)
+// ============================================================================
+// [VERIFIED] func_00617820 (0x00617820, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00617830 func_00617830 (92 B)
 // ============================================================================
 // [VERIFIED] func_00617890 (0x00617890, 8 B)
@@ -35656,7 +39898,24 @@ extern "C" void func_00617890() {
 // [TODO] 0x00619660 func_00619660 (112 B)
 // [TODO] 0x006196D0 func_006196D0 (212 B)
 // [TODO] 0x006197B0 func_006197B0 (96 B)
-// [TODO] 0x00619810 func_00619810 (8 B)
+// ============================================================================
+// [VERIFIED] func_00619810 (0x00619810, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x00619820 func_00619820 (88 B)
 // [TODO] 0x00619880 func_00619880 (108 B)
 // [TODO] 0x006198F0 func_006198F0 (32 B)
@@ -35671,8 +39930,42 @@ extern "C" void func_00617890() {
 // [TODO] 0x00619F40 func_00619F40 (88 B)
 // [TODO] 0x00619FA0 func_00619FA0 (104 B)
 // [TODO] 0x0061A010 func_0061A010 (260 B)
-// [TODO] 0x0061A120 func_0061A120 (8 B)
-// [TODO] 0x0061A130 func_0061A130 (8 B)
+// ============================================================================
+// [VERIFIED] func_0061A120 (0x0061A120, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+void Object::Set(int value)
+{
+    m_Field4 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0061A130 (0x0061A130, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
 // [TODO] 0x0061A140 func_0061A140 (60 B)
 // [TODO] 0x0061A180 func_0061A180 (96 B)
 // [TODO] 0x0061A1E0 func_0061A1E0 (604 B)
@@ -35699,15 +39992,83 @@ extern "C" void func_00617890() {
 // [TODO] 0x0061AE60 func_0061AE60 (164 B)
 // [TODO] 0x0061AF10 func_0061AF10 (240 B)
 // [TODO] 0x0061B000 func_0061B000 (208 B)
-// [TODO] 0x0061B0D0 func_0061B0D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0061B0D0 (0x0061B0D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x20 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+int* Object::Get()
+{
+    return &m_Field20;
+}
+
 // [TODO] 0x0061B0E0 func_0061B0E0 (12 B)
-// [TODO] 0x0061B0F0 func_0061B0F0 (8 B)
-// [TODO] 0x0061B100 func_0061B100 (8 B)
+// ============================================================================
+// [VERIFIED] func_0061B0F0 (0x0061B0F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
+// ============================================================================
+// [VERIFIED] func_0061B100 (0x0061B100, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x14 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Object::Get()
+{
+    return m_Field14;
+}
+
 // [TODO] 0x0061B110 func_0061B110 (36 B)
 // [TODO] 0x0061B140 func_0061B140 (96 B)
 // [TODO] 0x0061B1A0 func_0061B1A0 (120 B)
 // [TODO] 0x0061B220 func_0061B220 (96 B)
-// [TODO] 0x0061B280 func_0061B280 (8 B)
+// ============================================================================
+// [VERIFIED] func_0061B280 (0x0061B280, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x1C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+};
+
+int Object::Get()
+{
+    return m_Field1C;
+}
+
 // [TODO] 0x0061B290 func_0061B290 (188 B)
 // [TODO] 0x0061B350 func_0061B350 (128 B)
 // [TODO] 0x0061B3D0 func_0061B3D0 (28 B)
@@ -35722,8 +40083,42 @@ extern "C" void func_00617890() {
 // [TODO] 0x0061B790 func_0061B790 (120 B)
 // [TODO] 0x0061B810 func_0061B810 (76 B)
 // [TODO] 0x0061B860 func_0061B860 (168 B)
-// [TODO] 0x0061B910 func_0061B910 (8 B)
-// [TODO] 0x0061B920 func_0061B920 (8 B)
+// ============================================================================
+// [VERIFIED] func_0061B910 (0x0061B910, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x14 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Object::Get()
+{
+    return m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_0061B920 (0x0061B920, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
 // [TODO] 0x0061B930 func_0061B930 (44 B)
 // [TODO] 0x0061B960 func_0061B960 (144 B)
 // [TODO] 0x0061B9F0 func_0061B9F0 (316 B)
@@ -35750,7 +40145,24 @@ extern "C" void func_00617890() {
 // [TODO] 0x0061CC50 func_0061CC50 (204 B)
 // [TODO] 0x0061CD20 func_0061CD20 (104 B)
 // [TODO] 0x0061CD90 func_0061CD90 (20 B)
-// [TODO] 0x0061CDB0 func_0061CDB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0061CDB0 (0x0061CDB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x284 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x284];
+    int m_Field284; // +0x284
+};
+
+int Object::Get()
+{
+    return m_Field284;
+}
+
 // ============================================================================
 // [VERIFIED] func_0061CDC0 (0x0061CDC0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -35812,7 +40224,22 @@ extern "C" void func_0061CDC0() {
 // [TODO] 0x0061ECF0 func_0061ECF0 (140 B)
 // [TODO] 0x0061ED80 func_0061ED80 (396 B)
 // [TODO] 0x0061EF10 func_0061EF10 (152 B)
-// [TODO] 0x0061EFB0 func_0061EFB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0061EFB0 (0x0061EFB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x0061EFC0 func_0061EFC0 (112 B)
 // [TODO] 0x0061F030 func_0061F030 (132 B)
 // [TODO] 0x0061F0C0 func_0061F0C0 (76 B)
@@ -35883,16 +40310,61 @@ extern "C" void func_0061CDC0() {
 // [TODO] 0x006254A0 func_006254A0 (64 B)
 // [TODO] 0x006254E0 func_006254E0 (28 B)
 // [TODO] 0x00625500 func_00625500 (52 B)
-// [TODO] 0x00625540 func_00625540 (8 B)
+// ============================================================================
+// [VERIFIED] func_00625540 (0x00625540, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x00625550 func_00625550 (200 B)
 // [TODO] 0x00625620 func_00625620 (40 B)
 // [TODO] 0x00625650 func_00625650 (140 B)
 // [TODO] 0x006256E0 func_006256E0 (68 B)
 // [TODO] 0x00625730 func_00625730 (16 B)
-// [TODO] 0x00625740 func_00625740 (8 B)
+// ============================================================================
+// [VERIFIED] func_00625740 (0x00625740, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AA88.
+extern int D_0080AA88;
+
+int Get()
+{
+    return D_0080AA88;
+}
+
 // [TODO] 0x00625750 func_00625750 (132 B)
 // [TODO] 0x006257E0 func_006257E0 (96 B)
-// [TODO] 0x00625840 func_00625840 (8 B)
+// ============================================================================
+// [VERIFIED] func_00625840 (0x00625840, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x00625850 func_00625850 (108 B)
 // [TODO] 0x006258C0 func_006258C0 (96 B)
 // [TODO] 0x00625920 func_00625920 (216 B)
@@ -35902,8 +40374,34 @@ extern "C" void func_0061CDC0() {
 // [TODO] 0x00625EC0 func_00625EC0 (208 B)
 // [TODO] 0x00625F90 func_00625F90 (16 B)
 // [TODO] 0x00625FA0 func_00625FA0 (76 B)
-// [TODO] 0x00625FF0 func_00625FF0 (8 B)
-// [TODO] 0x00626000 func_00626000 (8 B)
+// ============================================================================
+// [VERIFIED] func_00625FF0 (0x00625FF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_00626000 (0x00626000, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_00626010 (0x00626010, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -35917,7 +40415,16 @@ extern "C" void func_0061CDC0() {
 extern "C" void func_00626010() {
 }
 
-// [TODO] 0x00626020 func_00626020 (8 B)
+// ============================================================================
+// [VERIFIED] func_00626020 (0x00626020, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_00626030 (0x00626030, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -35942,17 +40449,102 @@ extern "C" void func_00626030() {
 // [TODO] 0x00626750 func_00626750 (140 B)
 // [TODO] 0x006267E0 func_006267E0 (180 B)
 // [TODO] 0x006268A0 func_006268A0 (220 B)
-// [TODO] 0x00626980 func_00626980 (8 B)
+// ============================================================================
+// [VERIFIED] func_00626980 (0x00626980, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x2C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x2C];
+    int m_Field2C; // +0x2C
+};
+
+int Object::Get()
+{
+    return m_Field2C;
+}
+
 // [TODO] 0x00626990 func_00626990 (80 B)
-// [TODO] 0x006269E0 func_006269E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006269E0 (0x006269E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x58 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x58];
+    int m_Field58; // +0x58
+};
+
+int Object::Get()
+{
+    return m_Field58;
+}
+
 // [TODO] 0x006269F0 func_006269F0 (216 B)
 // [TODO] 0x00626AD0 func_00626AD0 (8 B)
 // [TODO] 0x00626AE0 func_00626AE0 (664 B)
 // [TODO] 0x00626D80 func_00626D80 (76 B)
-// [TODO] 0x00626DD0 func_00626DD0 (8 B)
-// [TODO] 0x00626DE0 func_00626DE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00626DD0 (0x00626DD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x2C of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x2C];
+    int m_Field2C; // +0x2C
+};
+
+void Object::Set(int value)
+{
+    m_Field2C = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00626DE0 (0x00626DE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x60 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x60];
+    int m_Field60; // +0x60
+};
+
+void Object::Set(int value)
+{
+    m_Field60 = value;
+}
+
 // [TODO] 0x00626DF0 func_00626DF0 (48 B)
-// [TODO] 0x00626E20 func_00626E20 (8 B)
+// ============================================================================
+// [VERIFIED] func_00626E20 (0x00626E20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x00626E30 func_00626E30 (76 B)
 // [TODO] 0x00626E80 func_00626E80 (16 B)
 // [TODO] 0x00626E90 func_00626E90 (8 B)
@@ -35976,9 +40568,60 @@ extern "C" void func_00626030() {
 // [TODO] 0x00627690 func_00627690 (172 B)
 // [TODO] 0x00627740 func_00627740 (88 B)
 // [TODO] 0x006277A0 func_006277A0 (164 B)
-// [TODO] 0x00627850 func_00627850 (8 B)
-// [TODO] 0x00627860 func_00627860 (8 B)
-// [TODO] 0x00627870 func_00627870 (8 B)
+// ============================================================================
+// [VERIFIED] func_00627850 (0x00627850, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x144 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x144];
+    float m_Field144; // +0x144
+};
+
+void Object::Set(float value)
+{
+    m_Field144 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00627860 (0x00627860, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x144 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x144];
+    float m_Field144; // +0x144
+};
+
+float Object::Get()
+{
+    return m_Field144;
+}
+
+// ============================================================================
+// [VERIFIED] func_00627870 (0x00627870, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x13C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x13C];
+    int m_Field13C; // +0x13C
+};
+
+int Object::Get()
+{
+    return m_Field13C;
+}
+
 // [TODO] 0x00627880 func_00627880 (60 B)
 // [TODO] 0x006278C0 func_006278C0 (20 B)
 // [TODO] 0x006278E0 func_006278E0 (20 B)
@@ -35991,7 +40634,24 @@ extern "C" void func_00626030() {
 // [TODO] 0x00628480 func_00628480 (8 B)
 // [TODO] 0x00628490 func_00628490 (8 B)
 // [TODO] 0x006284A0 func_006284A0 (40 B)
-// [TODO] 0x006284D0 func_006284D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006284D0 (0x006284D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x006284E0 func_006284E0 (76 B)
 // [TODO] 0x00628530 func_00628530 (16 B)
 // [TODO] 0x00628540 func_00628540 (20 B)
@@ -36012,21 +40672,147 @@ extern "C" void func_00626030() {
 // [TODO] 0x00628860 func_00628860 (356 B)
 // [TODO] 0x006289D0 func_006289D0 (236 B)
 // [TODO] 0x00628AC0 func_00628AC0 (624 B)
-// [TODO] 0x00628D30 func_00628D30 (8 B)
+// ============================================================================
+// [VERIFIED] func_00628D30 (0x00628D30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x428 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x428];
+    int m_Field428; // +0x428
+};
+
+int Object::Get()
+{
+    return m_Field428;
+}
+
 // [TODO] 0x00628D40 func_00628D40 (316 B)
 // [TODO] 0x00628E80 func_00628E80 (92 B)
 // [TODO] 0x00628EE0 func_00628EE0 (1016 B)
 // [TODO] 0x006292E0 func_006292E0 (144 B)
-// [TODO] 0x00629370 func_00629370 (8 B)
-// [TODO] 0x00629380 func_00629380 (8 B)
-// [TODO] 0x00629390 func_00629390 (8 B)
-// [TODO] 0x006293A0 func_006293A0 (8 B)
-// [TODO] 0x006293B0 func_006293B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00629370 (0x00629370, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_00629380 (0x00629380, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00629390 (0x00629390, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x14 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Object::Get()
+{
+    return m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_006293A0 (0x006293A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
+// ============================================================================
+// [VERIFIED] func_006293B0 (0x006293B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x1C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+};
+
+int Object::Get()
+{
+    return m_Field1C;
+}
+
 // [TODO] 0x006293C0 func_006293C0 (32 B)
 // [TODO] 0x006293E0 func_006293E0 (12 B)
 // [TODO] 0x006293F0 func_006293F0 (24 B)
-// [TODO] 0x00629410 func_00629410 (8 B)
-// [TODO] 0x00629420 func_00629420 (8 B)
+// ============================================================================
+// [VERIFIED] func_00629410 (0x00629410, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00629420 (0x00629420, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00629430 func_00629430 (64 B)
 // [TODO] 0x00629470 func_00629470 (96 B)
 // [TODO] 0x006294D0 func_006294D0 (416 B)
@@ -36037,8 +40823,42 @@ extern "C" void func_00626030() {
 // [TODO] 0x00629EB0 func_00629EB0 (868 B)
 // [TODO] 0x0062A220 func_0062A220 (1560 B)
 // [TODO] 0x0062A840 func_0062A840 (260 B)
-// [TODO] 0x0062A950 func_0062A950 (8 B)
-// [TODO] 0x0062A960 func_0062A960 (8 B)
+// ============================================================================
+// [VERIFIED] func_0062A950 (0x0062A950, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x58 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x58];
+    int m_Field58; // +0x58
+};
+
+int Object::Get()
+{
+    return m_Field58;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062A960 (0x0062A960, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x44 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x44];
+    int m_Field44; // +0x44
+};
+
+int Object::Get()
+{
+    return m_Field44;
+}
+
 // [TODO] 0x0062A970 func_0062A970 (76 B)
 // [TODO] 0x0062A9C0 func_0062A9C0 (40 B)
 // [TODO] 0x0062A9F0 func_0062A9F0 (40 B)
@@ -36048,7 +40868,22 @@ extern "C" void func_00626030() {
 // [TODO] 0x0062AC50 func_0062AC50 (304 B)
 // [TODO] 0x0062AD80 func_0062AD80 (176 B)
 // [TODO] 0x0062AE30 func_0062AE30 (72 B)
-// [TODO] 0x0062AE80 func_0062AE80 (8 B)
+// ============================================================================
+// [VERIFIED] func_0062AE80 (0x0062AE80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x0062AE90 func_0062AE90 (104 B)
 // [TODO] 0x0062AF00 func_0062AF00 (56 B)
 // [TODO] 0x0062AF40 func_0062AF40 (96 B)
@@ -36064,14 +40899,99 @@ extern "C" void func_00626030() {
 // [TODO] 0x0062B2A0 func_0062B2A0 (1020 B)
 // [TODO] 0x0062B6A0 func_0062B6A0 (628 B)
 // [TODO] 0x0062B920 func_0062B920 (820 B)
-// [TODO] 0x0062BC60 func_0062BC60 (8 B)
-// [TODO] 0x0062BC70 func_0062BC70 (8 B)
+// ============================================================================
+// [VERIFIED] func_0062BC60 (0x0062BC60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x21 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x21];
+    char m_Field21; // +0x21
+};
+
+void Object::Set(char value)
+{
+    m_Field21 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062BC70 (0x0062BC70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x21 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x21];
+    unsigned char m_Field21; // +0x21
+};
+
+unsigned char Object::Get()
+{
+    return m_Field21;
+}
+
 // [TODO] 0x0062BC80 func_0062BC80 (12 B)
-// [TODO] 0x0062BC90 func_0062BC90 (8 B)
-// [TODO] 0x0062BCA0 func_0062BCA0 (8 B)
-// [TODO] 0x0062BCB0 func_0062BCB0 (8 B)
-// [TODO] 0x0062BCC0 func_0062BCC0 (8 B)
-// [TODO] 0x0062BCD0 func_0062BCD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0062BC90 (0x0062BC90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062BCA0 (0x0062BCA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 16.
+int Number()
+{
+    return 16;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062BCB0 (0x0062BCB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062BCC0 (0x0062BCC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062BCD0 (0x0062BCD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 8.
+int Number()
+{
+    return 8;
+}
+
 // ============================================================================
 // [VERIFIED] func_0062BCE0 (0x0062BCE0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -36119,16 +41039,135 @@ extern "C" void func_0062C3F0() {
 // [TODO] 0x0062CE80 func_0062CE80 (92 B)
 // [TODO] 0x0062CEE0 func_0062CEE0 (2392 B)
 // [TODO] 0x0062D840 func_0062D840 (144 B)
-// [TODO] 0x0062D8D0 func_0062D8D0 (8 B)
-// [TODO] 0x0062D8E0 func_0062D8E0 (8 B)
-// [TODO] 0x0062D8F0 func_0062D8F0 (8 B)
-// [TODO] 0x0062D900 func_0062D900 (8 B)
-// [TODO] 0x0062D910 func_0062D910 (8 B)
+// ============================================================================
+// [VERIFIED] func_0062D8D0 (0x0062D8D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0xC of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0xC];
+    float m_FieldC; // +0xC
+};
+
+float Object::Get()
+{
+    return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062D8E0 (0x0062D8E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x10 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+float Object::Get()
+{
+    return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062D8F0 (0x0062D8F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x14 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x14];
+    float m_Field14; // +0x14
+};
+
+float Object::Get()
+{
+    return m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062D900 (0x0062D900, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x18 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+float Object::Get()
+{
+    return m_Field18;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062D910 (0x0062D910, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x1C of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+float Object::Get()
+{
+    return m_Field1C;
+}
+
 // [TODO] 0x0062D920 func_0062D920 (44 B)
 // [TODO] 0x0062D950 func_0062D950 (12 B)
 // [TODO] 0x0062D960 func_0062D960 (24 B)
-// [TODO] 0x0062D980 func_0062D980 (8 B)
-// [TODO] 0x0062D990 func_0062D990 (8 B)
+// ============================================================================
+// [VERIFIED] func_0062D980 (0x0062D980, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x24 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x24];
+    int m_Field24; // +0x24
+};
+
+int Object::Get()
+{
+    return m_Field24;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062D990 (0x0062D990, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x28 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+int Object::Get()
+{
+    return m_Field28;
+}
+
 // [TODO] 0x0062D9A0 func_0062D9A0 (96 B)
 // [TODO] 0x0062DA00 func_0062DA00 (56 B)
 // [TODO] 0x0062DA40 func_0062DA40 (52 B)
@@ -36154,14 +41193,86 @@ extern "C" void func_0062DC30() {
 // [TODO] 0x0062DEA0 func_0062DEA0 (16 B)
 // [TODO] 0x0062DEB0 func_0062DEB0 (12 B)
 // [TODO] 0x0062DEC0 func_0062DEC0 (156 B)
-// [TODO] 0x0062DF60 func_0062DF60 (8 B)
-// [TODO] 0x0062DF70 func_0062DF70 (8 B)
-// [TODO] 0x0062DF80 func_0062DF80 (8 B)
-// [TODO] 0x0062DF90 func_0062DF90 (8 B)
-// [TODO] 0x0062DFA0 func_0062DFA0 (8 B)
-// [TODO] 0x0062DFB0 func_0062DFB0 (8 B)
-// [TODO] 0x0062DFC0 func_0062DFC0 (8 B)
-// [TODO] 0x0062DFD0 func_0062DFD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0062DF60 (0x0062DF60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062DF70 (0x0062DF70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062DF80 (0x0062DF80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062DF90 (0x0062DF90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062DFA0 (0x0062DFA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062DFB0 (0x0062DFB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062DFC0 (0x0062DFC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0062DFD0 (0x0062DFD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_0062DFE0 (0x0062DFE0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -36314,11 +41425,39 @@ extern "C" void func_006322A0() {
 // [TODO] 0x00633520 func_00633520 (24 B)
 // [TODO] 0x00633540 func_00633540 (560 B)
 // [TODO] 0x00633770 func_00633770 (1640 B)
-// [TODO] 0x00633DE0 func_00633DE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00633DE0 (0x00633DE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x1E0 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x1E0];
+    int m_Field1E0; // +0x1E0
+};
+
+void Object::Set(int value)
+{
+    m_Field1E0 = value;
+}
+
 // [TODO] 0x00633DF0 func_00633DF0 (224 B)
 // [TODO] 0x00633ED0 func_00633ED0 (156 B)
 // [TODO] 0x00633F70 func_00633F70 (440 B)
-// [TODO] 0x00634130 func_00634130 (8 B)
+// ============================================================================
+// [VERIFIED] func_00634130 (0x00634130, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AAE0.
+extern int D_0080AAE0;
+
+int Get()
+{
+    return D_0080AAE0;
+}
+
 // [TODO] 0x00634140 func_00634140 (12 B)
 // [TODO] 0x00634150 func_00634150 (8 B)
 // [TODO] 0x00634160 func_00634160 (36 B)
@@ -36328,7 +41467,18 @@ extern "C" void func_006322A0() {
 // [TODO] 0x00634380 func_00634380 (96 B)
 // [TODO] 0x006343E0 func_006343E0 (392 B)
 // [TODO] 0x00634570 func_00634570 (104 B)
-// [TODO] 0x006345E0 func_006345E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006345E0 (0x006345E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00807FFC.
+extern int D_00807FFC;
+
+int Get()
+{
+    return D_00807FFC;
+}
+
 // [TODO] 0x006345F0 func_006345F0 (1460 B)
 // [TODO] 0x00634BB0 func_00634BB0 (2084 B)
 // [TODO] 0x006353E0 func_006353E0 (1512 B)
@@ -36401,21 +41551,116 @@ extern "C" void func_006322A0() {
 // [TODO] 0x0063C550 func_0063C550 (84 B)
 // [TODO] 0x0063C5B0 func_0063C5B0 (8 B)
 // [TODO] 0x0063C5C0 func_0063C5C0 (1320 B)
-// [TODO] 0x0063CAF0 func_0063CAF0 (8 B)
-// [TODO] 0x0063CB00 func_0063CB00 (8 B)
+// ============================================================================
+// [VERIFIED] func_0063CAF0 (0x0063CAF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x60 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x60];
+    int m_Field60; // +0x60
+};
+
+int Object::Get()
+{
+    return m_Field60;
+}
+
+// ============================================================================
+// [VERIFIED] func_0063CB00 (0x0063CB00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x5C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x5C];
+    int m_Field5C; // +0x5C
+};
+
+int Object::Get()
+{
+    return m_Field5C;
+}
+
 // [TODO] 0x0063CB10 func_0063CB10 (12376 B)
 // [TODO] 0x0063FB70 func_0063FB70 (144 B)
 // [TODO] 0x0063FC00 func_0063FC00 (40 B)
 // [TODO] 0x0063FC30 func_0063FC30 (28 B)
-// [TODO] 0x0063FC50 func_0063FC50 (8 B)
+// ============================================================================
+// [VERIFIED] func_0063FC50 (0x0063FC50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x0 of its object.
+class Object
+{
+public:
+    int Get();
+    int m_Field0; // +0x0
+};
+
+int Object::Get()
+{
+    return m_Field0;
+}
+
 // [TODO] 0x0063FC60 func_0063FC60 (20 B)
 // [TODO] 0x0063FC80 func_0063FC80 (32 B)
 // [TODO] 0x0063FCA0 func_0063FCA0 (20 B)
-// [TODO] 0x0063FCC0 func_0063FCC0 (8 B)
-// [TODO] 0x0063FCD0 func_0063FCD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0063FCC0 (0x0063FCC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_0063FCD0 (0x0063FCD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AACC.
+extern int D_0080AACC;
+
+int Get()
+{
+    return D_0080AACC;
+}
+
 // [TODO] 0x0063FCE0 func_0063FCE0 (1036 B)
 // [TODO] 0x006400F0 func_006400F0 (2460 B)
-// [TODO] 0x00640A90 func_00640A90 (8 B)
+// ============================================================================
+// [VERIFIED] func_00640A90 (0x00640A90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x434 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x434];
+    float m_Field434; // +0x434
+};
+
+float Object::Get()
+{
+    return m_Field434;
+}
+
 // [TODO] 0x00640AA0 func_00640AA0 (12 B)
 // [TODO] 0x00640AB0 func_00640AB0 (12 B)
 // [TODO] 0x00640AC0 func_00640AC0 (912 B)
@@ -36433,7 +41678,24 @@ extern "C" void func_006322A0() {
 // [TODO] 0x00642030 func_00642030 (8 B)
 // [TODO] 0x00642040 func_00642040 (8 B)
 // [TODO] 0x00642050 func_00642050 (108 B)
-// [TODO] 0x006420C0 func_006420C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006420C0 (0x006420C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x441 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x441];
+    char m_Field441; // +0x441
+};
+
+void Object::Set(char value)
+{
+    m_Field441 = value;
+}
+
 // [TODO] 0x006420D0 func_006420D0 (308 B)
 // [TODO] 0x00642210 func_00642210 (56 B)
 // [TODO] 0x00642250 func_00642250 (800 B)
@@ -36472,9 +41734,29 @@ extern "C" void func_006322A0() {
 extern "C" void func_00643BD0() {
 }
 
-// [TODO] 0x00643BE0 func_00643BE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00643BE0 (0x00643BE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00643BF0 func_00643BF0 (108 B)
-// [TODO] 0x00643C60 func_00643C60 (8 B)
+// ============================================================================
+// [VERIFIED] func_00643C60 (0x00643C60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00807FFC.
+extern int D_00807FFC;
+
+int Get()
+{
+    return D_00807FFC;
+}
+
 // [TODO] 0x00643C70 func_00643C70 (12 B)
 // [TODO] 0x00643C80 func_00643C80 (52 B)
 // [TODO] 0x00643CC0 func_00643CC0 (104 B)
@@ -36563,10 +41845,46 @@ extern "C" void func_00644280() {
 
 // [TODO] 0x00644290 func_00644290 (20 B)
 // [TODO] 0x006442B0 func_006442B0 (20 B)
-// [TODO] 0x006442D0 func_006442D0 (8 B)
-// [TODO] 0x006442E0 func_006442E0 (8 B)
-// [TODO] 0x006442F0 func_006442F0 (8 B)
-// [TODO] 0x00644300 func_00644300 (8 B)
+// ============================================================================
+// [VERIFIED] func_006442D0 (0x006442D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006442E0 (0x006442E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006442F0 (0x006442F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00644300 (0x00644300, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00644310 func_00644310 (36 B)
 // [TODO] 0x00644340 func_00644340 (16 B)
 // [TODO] 0x00644350 func_00644350 (64 B)
@@ -36793,7 +42111,16 @@ extern "C" void func_00645560() {
 }
 
 // [TODO] 0x00645570 func_00645570 (12 B)
-// [TODO] 0x00645580 func_00645580 (8 B)
+// ============================================================================
+// [VERIFIED] func_00645580 (0x00645580, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_00645590 (0x00645590, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -36847,8 +42174,26 @@ extern "C" void func_006455C0() {
 }
 
 // [TODO] 0x006455D0 func_006455D0 (52 B)
-// [TODO] 0x00645610 func_00645610 (8 B)
-// [TODO] 0x00645620 func_00645620 (8 B)
+// ============================================================================
+// [VERIFIED] func_00645610 (0x00645610, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 4.
+int Number()
+{
+    return 4;
+}
+
+// ============================================================================
+// [VERIFIED] func_00645620 (0x00645620, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 256.
+int Number()
+{
+    return 256;
+}
+
 // ============================================================================
 // [VERIFIED] func_00645630 (0x00645630, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -36875,9 +42220,44 @@ extern "C" void func_00645630() {
 extern "C" void func_00645640() {
 }
 
-// [TODO] 0x00645650 func_00645650 (8 B)
-// [TODO] 0x00645660 func_00645660 (8 B)
-// [TODO] 0x00645670 func_00645670 (8 B)
+// ============================================================================
+// [VERIFIED] func_00645650 (0x00645650, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x228 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x228];
+    char m_Field228; // +0x228
+};
+
+void Object::Set(char value)
+{
+    m_Field228 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00645660 (0x00645660, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00645670 (0x00645670, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_00645680 (0x00645680, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -36910,13 +42290,47 @@ extern "C" void func_006456A0() {
 // [TODO] 0x00645870 func_00645870 (96 B)
 // [TODO] 0x006458D0 func_006458D0 (112 B)
 // [TODO] 0x00645940 func_00645940 (36 B)
-// [TODO] 0x00645970 func_00645970 (8 B)
+// ============================================================================
+// [VERIFIED] func_00645970 (0x00645970, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Set(int value)
+{
+    m_FieldC = value;
+}
+
 // [TODO] 0x00645980 func_00645980 (44 B)
 // [TODO] 0x006459B0 func_006459B0 (236 B)
 // [TODO] 0x00645AA0 func_00645AA0 (196 B)
 // [TODO] 0x00645B70 func_00645B70 (12 B)
 // [TODO] 0x00645B80 func_00645B80 (76 B)
-// [TODO] 0x00645BD0 func_00645BD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00645BD0 (0x00645BD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // ============================================================================
 // [VERIFIED] func_00645BE0 (0x00645BE0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -36935,31 +42349,198 @@ extern "C" void func_00645BE0() {
 // [TODO] 0x00645D30 func_00645D30 (128 B)
 // [TODO] 0x00645DB0 func_00645DB0 (236 B)
 // [TODO] 0x00645EA0 func_00645EA0 (344 B)
-// [TODO] 0x00646000 func_00646000 (8 B)
+// ============================================================================
+// [VERIFIED] func_00646000 (0x00646000, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00646010 func_00646010 (1488 B)
 // [TODO] 0x006465E0 func_006465E0 (2144 B)
 // [TODO] 0x00646E40 func_00646E40 (68 B)
 // [TODO] 0x00646E90 func_00646E90 (36 B)
 // [TODO] 0x00646EC0 func_00646EC0 (8 B)
 // [TODO] 0x00646ED0 func_00646ED0 (264 B)
-// [TODO] 0x00646FE0 func_00646FE0 (8 B)
-// [TODO] 0x00646FF0 func_00646FF0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00646FE0 (0x00646FE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0xE4 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0xE4];
+    int m_FieldE4; // +0xE4
+};
+
+int* Object::Get()
+{
+    return &m_FieldE4;
+}
+
+// ============================================================================
+// [VERIFIED] func_00646FF0 (0x00646FF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0xE8 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0xE8];
+    float m_FieldE8; // +0xE8
+};
+
+float Object::Get()
+{
+    return m_FieldE8;
+}
+
 // [TODO] 0x00647000 func_00647000 (28 B)
 // [TODO] 0x00647020 func_00647020 (28 B)
 // [TODO] 0x00647040 func_00647040 (36 B)
-// [TODO] 0x00647070 func_00647070 (8 B)
-// [TODO] 0x00647080 func_00647080 (8 B)
-// [TODO] 0x00647090 func_00647090 (8 B)
-// [TODO] 0x006470A0 func_006470A0 (8 B)
-// [TODO] 0x006470B0 func_006470B0 (8 B)
-// [TODO] 0x006470C0 func_006470C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00647070 (0x00647070, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00647080 (0x00647080, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00647090 (0x00647090, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x68 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x68];
+    int m_Field68; // +0x68
+};
+
+int Object::Get()
+{
+    return m_Field68;
+}
+
+// ============================================================================
+// [VERIFIED] func_006470A0 (0x006470A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006470B0 (0x006470B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006470C0 (0x006470C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006470D0 func_006470D0 (16 B)
-// [TODO] 0x006470E0 func_006470E0 (8 B)
-// [TODO] 0x006470F0 func_006470F0 (8 B)
-// [TODO] 0x00647100 func_00647100 (8 B)
-// [TODO] 0x00647110 func_00647110 (8 B)
-// [TODO] 0x00647120 func_00647120 (8 B)
-// [TODO] 0x00647130 func_00647130 (8 B)
+// ============================================================================
+// [VERIFIED] func_006470E0 (0x006470E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0xE0 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0xE0];
+    unsigned char m_FieldE0; // +0xE0
+};
+
+unsigned char Object::Get()
+{
+    return m_FieldE0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006470F0 (0x006470F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00647100 (0x00647100, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00647110 (0x00647110, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00647120 (0x00647120, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00647130 (0x00647130, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // ============================================================================
 // [VERIFIED] func_00647140 (0x00647140, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -37022,7 +42603,16 @@ extern "C" void func_0064D2D0() {
 }
 
 // [TODO] 0x0064D2E0 func_0064D2E0 (648 B)
-// [TODO] 0x0064D570 func_0064D570 (8 B)
+// ============================================================================
+// [VERIFIED] func_0064D570 (0x0064D570, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_0064D580 (0x0064D580, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -37090,7 +42680,16 @@ extern "C" void func_0064D5F0() {
 extern "C" void func_0064D600() {
 }
 
-// [TODO] 0x0064D610 func_0064D610 (8 B)
+// ============================================================================
+// [VERIFIED] func_0064D610 (0x0064D610, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x0064D620 func_0064D620 (20 B)
 // [TODO] 0x0064D640 func_0064D640 (120 B)
 // [TODO] 0x0064D6C0 func_0064D6C0 (132 B)
@@ -37262,7 +42861,16 @@ extern "C" void func_0064DDF0() {
 // [TODO] 0x0064E270 func_0064E270 (12 B)
 // [TODO] 0x0064E280 func_0064E280 (12 B)
 // [TODO] 0x0064E290 func_0064E290 (20 B)
-// [TODO] 0x0064E2B0 func_0064E2B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0064E2B0 (0x0064E2B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 16.
+int Number()
+{
+    return 16;
+}
+
 // ============================================================================
 // [VERIFIED] func_0064E2C0 (0x0064E2C0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -37321,13 +42929,132 @@ extern "C" void func_0064E2C0() {
 // [TODO] 0x00652420 func_00652420 (936 B)
 // [TODO] 0x006527D0 func_006527D0 (120 B)
 // [TODO] 0x00652850 func_00652850 (264 B)
-// [TODO] 0x00652960 func_00652960 (8 B)
-// [TODO] 0x00652970 func_00652970 (8 B)
-// [TODO] 0x00652980 func_00652980 (8 B)
-// [TODO] 0x00652990 func_00652990 (8 B)
-// [TODO] 0x006529A0 func_006529A0 (8 B)
-// [TODO] 0x006529B0 func_006529B0 (8 B)
-// [TODO] 0x006529C0 func_006529C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00652960 (0x00652960, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
+// ============================================================================
+// [VERIFIED] func_00652970 (0x00652970, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns an unsigned 16-bit number at +0xC of its object.
+class Object
+{
+public:
+    unsigned short Get();
+    char m_pad00[0xC];
+    unsigned short m_FieldC; // +0xC
+};
+
+unsigned short Object::Get()
+{
+    return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_00652980 (0x00652980, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns an unsigned 16-bit number at +0xE of its object.
+class Object
+{
+public:
+    unsigned short Get();
+    char m_pad00[0xE];
+    unsigned short m_FieldE; // +0xE
+};
+
+unsigned short Object::Get()
+{
+    return m_FieldE;
+}
+
+// ============================================================================
+// [VERIFIED] func_00652990 (0x00652990, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x14 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x14];
+    unsigned char m_Field14; // +0x14
+};
+
+unsigned char Object::Get()
+{
+    return m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_006529A0 (0x006529A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x16 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x16];
+    unsigned char m_Field16; // +0x16
+};
+
+unsigned char Object::Get()
+{
+    return m_Field16;
+}
+
+// ============================================================================
+// [VERIFIED] func_006529B0 (0x006529B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x15 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x15];
+    unsigned char m_Field15; // +0x15
+};
+
+unsigned char Object::Get()
+{
+    return m_Field15;
+}
+
+// ============================================================================
+// [VERIFIED] func_006529C0 (0x006529C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns an unsigned 16-bit number at +0x10 of its object.
+class Object
+{
+public:
+    unsigned short Get();
+    char m_pad00[0x10];
+    unsigned short m_Field10; // +0x10
+};
+
+unsigned short Object::Get()
+{
+    return m_Field10;
+}
+
 // ============================================================================
 // [VERIFIED] func_006529D0 (0x006529D0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -37341,7 +43068,16 @@ extern "C" void func_0064E2C0() {
 extern "C" void func_006529D0() {
 }
 
-// [TODO] 0x006529E0 func_006529E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006529E0 (0x006529E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_006529F0 (0x006529F0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -37401,7 +43137,24 @@ extern "C" void func_00652A20() {
 // [TODO] 0x006531D0 func_006531D0 (256 B)
 // [TODO] 0x006532D0 func_006532D0 (344 B)
 // [TODO] 0x00653430 func_00653430 (356 B)
-// [TODO] 0x006535A0 func_006535A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006535A0 (0x006535A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x114 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x114];
+    int m_Field114; // +0x114
+};
+
+int Object::Get()
+{
+    return m_Field114;
+}
+
 // [TODO] 0x006535B0 func_006535B0 (1544 B)
 // [TODO] 0x00653BC0 func_00653BC0 (2092 B)
 // [TODO] 0x006543F0 func_006543F0 (396 B)
@@ -37418,10 +43171,44 @@ extern "C" void func_00652A20() {
 // [TODO] 0x00657130 func_00657130 (96 B)
 // [TODO] 0x00657190 func_00657190 (96 B)
 // [TODO] 0x006571F0 func_006571F0 (132 B)
-// [TODO] 0x00657280 func_00657280 (8 B)
+// ============================================================================
+// [VERIFIED] func_00657280 (0x00657280, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x51 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x51];
+    char m_Field51; // +0x51
+};
+
+void Object::Set(char value)
+{
+    m_Field51 = value;
+}
+
 // [TODO] 0x00657290 func_00657290 (1256 B)
 // [TODO] 0x00657780 func_00657780 (14684 B)
-// [TODO] 0x0065B0E0 func_0065B0E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0065B0E0 (0x0065B0E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x90 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x90];
+    char m_Field90; // +0x90
+};
+
+void Object::Set(char value)
+{
+    m_Field90 = value;
+}
+
 // [TODO] 0x0065B0F0 func_0065B0F0 (2444 B)
 // [TODO] 0x0065BA80 func_0065BA80 (17056 B)
 // [TODO] 0x0065FD20 func_0065FD20 (1116 B)
@@ -37446,8 +43233,32 @@ extern "C" void func_00661430() {
 }
 
 // [TODO] 0x00661440 func_00661440 (28 B)
-// [TODO] 0x00661460 func_00661460 (8 B)
-// [TODO] 0x00661470 func_00661470 (8 B)
+// ============================================================================
+// [VERIFIED] func_00661460 (0x00661460, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00661470 (0x00661470, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00661480 func_00661480 (76 B)
 // [TODO] 0x006614D0 func_006614D0 (96 B)
 // [TODO] 0x00661530 func_00661530 (96 B)
@@ -37463,14 +43274,99 @@ extern "C" void func_00661430() {
 // [TODO] 0x006618F0 func_006618F0 (28 B)
 // [TODO] 0x00661910 func_00661910 (16 B)
 // [TODO] 0x00661920 func_00661920 (24 B)
-// [TODO] 0x00661940 func_00661940 (8 B)
-// [TODO] 0x00661950 func_00661950 (8 B)
+// ============================================================================
+// [VERIFIED] func_00661940 (0x00661940, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x28 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+void Object::Set(int value)
+{
+    m_Field28 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00661950 (0x00661950, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x28 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+int Object::Get()
+{
+    return m_Field28;
+}
+
 // [TODO] 0x00661960 func_00661960 (108 B)
-// [TODO] 0x006619D0 func_006619D0 (8 B)
-// [TODO] 0x006619E0 func_006619E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006619D0 (0x006619D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x2C of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x2C];
+    int m_Field2C; // +0x2C
+};
+
+int* Object::Get()
+{
+    return &m_Field2C;
+}
+
+// ============================================================================
+// [VERIFIED] func_006619E0 (0x006619E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x38 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x38];
+    int m_Field38; // +0x38
+};
+
+int* Object::Get()
+{
+    return &m_Field38;
+}
+
 // [TODO] 0x006619F0 func_006619F0 (212 B)
 // [TODO] 0x00661AD0 func_00661AD0 (820 B)
-// [TODO] 0x00661E10 func_00661E10 (8 B)
+// ============================================================================
+// [VERIFIED] func_00661E10 (0x00661E10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x4C of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x4C];
+    int m_Field4C; // +0x4C
+};
+
+void Object::Set(int value)
+{
+    m_Field4C = value;
+}
+
 // [TODO] 0x00661E20 func_00661E20 (48 B)
 // [TODO] 0x00661E50 func_00661E50 (80 B)
 // [TODO] 0x00661EA0 func_00661EA0 (80 B)
@@ -37478,7 +43374,16 @@ extern "C" void func_00661430() {
 // [TODO] 0x00661FD0 func_00661FD0 (192 B)
 // [TODO] 0x00662090 func_00662090 (252 B)
 // [TODO] 0x00662190 func_00662190 (20 B)
-// [TODO] 0x006621B0 func_006621B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006621B0 (0x006621B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006621C0 func_006621C0 (92 B)
 // [TODO] 0x00662220 func_00662220 (144 B)
 // [TODO] 0x006622B0 func_006622B0 (1784 B)
@@ -37521,7 +43426,22 @@ extern "C" void func_00663130() {
 // [TODO] 0x00664CC0 func_00664CC0 (120 B)
 // [TODO] 0x00664D40 func_00664D40 (204 B)
 // [TODO] 0x00664E10 func_00664E10 (204 B)
-// [TODO] 0x00664EE0 func_00664EE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00664EE0 (0x00664EE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00664EF0 func_00664EF0 (116 B)
 // [TODO] 0x00664F70 func_00664F70 (148 B)
 // [TODO] 0x00665010 func_00665010 (424 B)
@@ -37542,7 +43462,24 @@ extern "C" void func_00663130() {
 // [TODO] 0x00665440 func_00665440 (44 B)
 // [TODO] 0x00665470 func_00665470 (12 B)
 // [TODO] 0x00665480 func_00665480 (96 B)
-// [TODO] 0x006654E0 func_006654E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006654E0 (0x006654E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x24 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x24];
+    int m_Field24; // +0x24
+};
+
+void Object::Set(int value)
+{
+    m_Field24 = value;
+}
+
 // [TODO] 0x006654F0 func_006654F0 (404 B)
 // [TODO] 0x00665690 func_00665690 (136 B)
 // [TODO] 0x00665720 func_00665720 (336 B)
@@ -37581,7 +43518,22 @@ extern "C" void func_00665880() {
 // [TODO] 0x00665A90 func_00665A90 (32 B)
 // [TODO] 0x00665AB0 func_00665AB0 (28 B)
 // [TODO] 0x00665AD0 func_00665AD0 (260 B)
-// [TODO] 0x00665BE0 func_00665BE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00665BE0 (0x00665BE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00665BF0 func_00665BF0 (68 B)
 // [TODO] 0x00665C40 func_00665C40 (116 B)
 // [TODO] 0x00665CC0 func_00665CC0 (24 B)
@@ -37594,13 +43546,48 @@ extern "C" void func_00665880() {
 // [TODO] 0x00666060 func_00666060 (260 B)
 // [TODO] 0x00666170 func_00666170 (132 B)
 // [TODO] 0x00666200 func_00666200 (56 B)
-// [TODO] 0x00666240 func_00666240 (8 B)
-// [TODO] 0x00666250 func_00666250 (8 B)
+// ============================================================================
+// [VERIFIED] func_00666240 (0x00666240, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00666250 (0x00666250, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x48 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x48];
+    char m_Field48; // +0x48
+};
+
+void Object::Set(char value)
+{
+    m_Field48 = value;
+}
+
 // [TODO] 0x00666260 func_00666260 (180 B)
 // [TODO] 0x00666320 func_00666320 (220 B)
 // [TODO] 0x00666400 func_00666400 (628 B)
 // [TODO] 0x00666680 func_00666680 (744 B)
-// [TODO] 0x00666970 func_00666970 (8 B)
+// ============================================================================
+// [VERIFIED] func_00666970 (0x00666970, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00666980 func_00666980 (1456 B)
 // [TODO] 0x00666F30 func_00666F30 (3576 B)
 // [TODO] 0x00667D30 func_00667D30 (112 B)
@@ -37646,8 +43633,38 @@ extern "C" void func_00667DC0() {
 // [TODO] 0x00667DD0 func_00667DD0 (496 B)
 // [TODO] 0x00667FC0 func_00667FC0 (540 B)
 // [TODO] 0x006681E0 func_006681E0 (1128 B)
-// [TODO] 0x00668650 func_00668650 (8 B)
-// [TODO] 0x00668660 func_00668660 (8 B)
+// ============================================================================
+// [VERIFIED] func_00668650 (0x00668650, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_00668660 (0x00668660, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00668670 func_00668670 (164 B)
 // [TODO] 0x00668720 func_00668720 (80 B)
 // [TODO] 0x00668770 func_00668770 (184 B)
@@ -37664,7 +43681,16 @@ extern "C" void func_00667DC0() {
 // [TODO] 0x00669E50 func_00669E50 (44 B)
 // [TODO] 0x00669E80 func_00669E80 (144 B)
 // [TODO] 0x00669F10 func_00669F10 (144 B)
-// [TODO] 0x00669FA0 func_00669FA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00669FA0 (0x00669FA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 32.
+int Number()
+{
+    return 32;
+}
+
 // ============================================================================
 // [VERIFIED] func_00669FB0 (0x00669FB0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -37678,10 +43704,46 @@ extern "C" void func_00667DC0() {
 extern "C" void func_00669FB0() {
 }
 
-// [TODO] 0x00669FC0 func_00669FC0 (8 B)
-// [TODO] 0x00669FD0 func_00669FD0 (8 B)
-// [TODO] 0x00669FE0 func_00669FE0 (8 B)
-// [TODO] 0x00669FF0 func_00669FF0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00669FC0 (0x00669FC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00669FD0 (0x00669FD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00669FE0 (0x00669FE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00669FF0 (0x00669FF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_0066A000 (0x0066A000, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -37744,10 +43806,78 @@ extern "C" void func_0066A490() {
 extern "C" void func_0066A4A0() {
 }
 
-// [TODO] 0x0066A4B0 func_0066A4B0 (8 B)
-// [TODO] 0x0066A4C0 func_0066A4C0 (8 B)
-// [TODO] 0x0066A4D0 func_0066A4D0 (8 B)
-// [TODO] 0x0066A4E0 func_0066A4E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0066A4B0 (0x0066A4B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x1C of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+float Object::Get()
+{
+    return m_Field1C;
+}
+
+// ============================================================================
+// [VERIFIED] func_0066A4C0 (0x0066A4C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x20 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+float Object::Get()
+{
+    return m_Field20;
+}
+
+// ============================================================================
+// [VERIFIED] func_0066A4D0 (0x0066A4D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x1C of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+void Object::Set(float value)
+{
+    m_Field1C = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0066A4E0 (0x0066A4E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x20 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+void Object::Set(float value)
+{
+    m_Field20 = value;
+}
+
 // [TODO] 0x0066A4F0 func_0066A4F0 (244 B)
 // [TODO] 0x0066A5F0 func_0066A5F0 (84 B)
 // [TODO] 0x0066A650 func_0066A650 (60 B)
@@ -37799,21 +43929,88 @@ extern "C" void func_0066A4A0() {
 // [TODO] 0x0066C030 func_0066C030 (124 B)
 // [TODO] 0x0066C0B0 func_0066C0B0 (188 B)
 // [TODO] 0x0066C170 func_0066C170 (164 B)
-// [TODO] 0x0066C220 func_0066C220 (8 B)
-// [TODO] 0x0066C230 func_0066C230 (8 B)
+// ============================================================================
+// [VERIFIED] func_0066C220 (0x0066C220, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+void Object::Set(int value)
+{
+    m_Field18 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0066C230 (0x0066C230, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
 // [TODO] 0x0066C240 func_0066C240 (1644 B)
 // [TODO] 0x0066C8B0 func_0066C8B0 (640 B)
 // [TODO] 0x0066CB30 func_0066CB30 (724 B)
 // [TODO] 0x0066CE10 func_0066CE10 (1020 B)
 // [TODO] 0x0066D210 func_0066D210 (48 B)
 // [TODO] 0x0066D240 func_0066D240 (48 B)
-// [TODO] 0x0066D270 func_0066D270 (8 B)
-// [TODO] 0x0066D280 func_0066D280 (8 B)
+// ============================================================================
+// [VERIFIED] func_0066D270 (0x0066D270, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0066D280 (0x0066D280, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x0066D290 func_0066D290 (64 B)
 // [TODO] 0x0066D2D0 func_0066D2D0 (64 B)
 // [TODO] 0x0066D310 func_0066D310 (56 B)
 // [TODO] 0x0066D350 func_0066D350 (108 B)
-// [TODO] 0x0066D3C0 func_0066D3C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0066D3C0 (0x0066D3C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0066D3D0 func_0066D3D0 (100 B)
 // [TODO] 0x0066D440 func_0066D440 (36 B)
 // [TODO] 0x0066D470 func_0066D470 (76 B)
@@ -37823,12 +44020,38 @@ extern "C" void func_0066A4A0() {
 // [TODO] 0x0066D860 func_0066D860 (96 B)
 // [TODO] 0x0066D8C0 func_0066D8C0 (64 B)
 // [TODO] 0x0066D900 func_0066D900 (108 B)
-// [TODO] 0x0066D970 func_0066D970 (8 B)
+// ============================================================================
+// [VERIFIED] func_0066D970 (0x0066D970, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0066D980 func_0066D980 (116 B)
 // [TODO] 0x0066DA00 func_0066DA00 (76 B)
 // [TODO] 0x0066DA50 func_0066DA50 (56 B)
 // [TODO] 0x0066DA90 func_0066DA90 (176 B)
-// [TODO] 0x0066DB40 func_0066DB40 (8 B)
+// ============================================================================
+// [VERIFIED] func_0066DB40 (0x0066DB40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xAC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xAC];
+    int m_FieldAC; // +0xAC
+};
+
+int Object::Get()
+{
+    return m_FieldAC;
+}
+
 // [TODO] 0x0066DB50 func_0066DB50 (1180 B)
 // [TODO] 0x0066DFF0 func_0066DFF0 (40 B)
 // [TODO] 0x0066E020 func_0066E020 (52 B)
@@ -37888,7 +44111,22 @@ extern "C" void func_0066E810() {
 // [TODO] 0x00670570 func_00670570 (12 B)
 // [TODO] 0x00670580 func_00670580 (260 B)
 // [TODO] 0x00670690 func_00670690 (296 B)
-// [TODO] 0x006707C0 func_006707C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006707C0 (0x006707C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x006707D0 func_006707D0 (204 B)
 // [TODO] 0x006708A0 func_006708A0 (104 B)
 // [TODO] 0x00670910 func_00670910 (80 B)
@@ -37908,7 +44146,22 @@ extern "C" void func_0066E810() {
 // [TODO] 0x00671070 func_00671070 (12 B)
 // [TODO] 0x00671080 func_00671080 (108 B)
 // [TODO] 0x006710F0 func_006710F0 (284 B)
-// [TODO] 0x00671210 func_00671210 (8 B)
+// ============================================================================
+// [VERIFIED] func_00671210 (0x00671210, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00671220 func_00671220 (172 B)
 // [TODO] 0x006712D0 func_006712D0 (104 B)
 // [TODO] 0x00671340 func_00671340 (12 B)
@@ -37916,7 +44169,23 @@ extern "C" void func_0066E810() {
 // [TODO] 0x00671590 func_00671590 (36 B)
 // [TODO] 0x006715C0 func_006715C0 (20 B)
 // [TODO] 0x006715E0 func_006715E0 (28 B)
-// [TODO] 0x00671600 func_00671600 (8 B)
+// ============================================================================
+// [VERIFIED] func_00671600 (0x00671600, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x0 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    unsigned char m_Field0; // +0x0
+};
+
+unsigned char Object::Get()
+{
+    return m_Field0;
+}
+
 // [TODO] 0x00671610 func_00671610 (36 B)
 // [TODO] 0x00671640 func_00671640 (16 B)
 // [TODO] 0x00671650 func_00671650 (40 B)
@@ -37954,10 +44223,70 @@ extern "C" void func_0066E810() {
 // [TODO] 0x00674AA0 func_00674AA0 (64 B)
 // [TODO] 0x00674AE0 func_00674AE0 (64 B)
 // [TODO] 0x00674B20 func_00674B20 (52 B)
-// [TODO] 0x00674B60 func_00674B60 (8 B)
-// [TODO] 0x00674B70 func_00674B70 (8 B)
-// [TODO] 0x00674B80 func_00674B80 (8 B)
-// [TODO] 0x00674B90 func_00674B90 (8 B)
+// ============================================================================
+// [VERIFIED] func_00674B60 (0x00674B60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_00674B70 (0x00674B70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_00674B80 (0x00674B80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_00674B90 (0x00674B90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00674BA0 func_00674BA0 (32 B)
 // [TODO] 0x00674BC0 func_00674BC0 (204 B)
 // [TODO] 0x00674C90 func_00674C90 (124 B)
@@ -37997,8 +44326,26 @@ extern "C" void func_0066E810() {
 // [TODO] 0x00676D80 func_00676D80 (116 B)
 // [TODO] 0x00676E00 func_00676E00 (588 B)
 // [TODO] 0x00677050 func_00677050 (156 B)
-// [TODO] 0x006770F0 func_006770F0 (8 B)
-// [TODO] 0x00677100 func_00677100 (8 B)
+// ============================================================================
+// [VERIFIED] func_006770F0 (0x006770F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 4.
+int Number()
+{
+    return 4;
+}
+
+// ============================================================================
+// [VERIFIED] func_00677100 (0x00677100, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00677110 func_00677110 (56 B)
 // [TODO] 0x00677150 func_00677150 (416 B)
 // [TODO] 0x006772F0 func_006772F0 (252 B)
@@ -38050,19 +44397,93 @@ extern "C" void func_0066E810() {
 // [TODO] 0x00679940 func_00679940 (612 B)
 // [TODO] 0x00679BB0 func_00679BB0 (92 B)
 // [TODO] 0x00679C10 func_00679C10 (144 B)
-// [TODO] 0x00679CA0 func_00679CA0 (8 B)
-// [TODO] 0x00679CB0 func_00679CB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00679CA0 (0x00679CA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00679CB0 (0x00679CB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00679CC0 func_00679CC0 (144 B)
-// [TODO] 0x00679D50 func_00679D50 (8 B)
-// [TODO] 0x00679D60 func_00679D60 (8 B)
+// ============================================================================
+// [VERIFIED] func_00679D50 (0x00679D50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00679D60 (0x00679D60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00679D70 func_00679D70 (68 B)
 // [TODO] 0x00679DC0 func_00679DC0 (124 B)
-// [TODO] 0x00679E40 func_00679E40 (8 B)
+// ============================================================================
+// [VERIFIED] func_00679E40 (0x00679E40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00679E50 func_00679E50 (120 B)
 // [TODO] 0x00679ED0 func_00679ED0 (144 B)
 // [TODO] 0x00679F60 func_00679F60 (184 B)
 // [TODO] 0x0067A020 func_0067A020 (132 B)
-// [TODO] 0x0067A0B0 func_0067A0B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067A0B0 (0x0067A0B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x34 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+};
+
+int Object::Get()
+{
+    return m_Field34;
+}
+
 // [TODO] 0x0067A0C0 func_0067A0C0 (12 B)
 // [TODO] 0x0067A0D0 func_0067A0D0 (216 B)
 // [TODO] 0x0067A1B0 func_0067A1B0 (52 B)
@@ -38073,37 +44494,223 @@ extern "C" void func_0066E810() {
 // [TODO] 0x0067A330 func_0067A330 (64 B)
 // [TODO] 0x0067A370 func_0067A370 (80 B)
 // [TODO] 0x0067A3C0 func_0067A3C0 (96 B)
-// [TODO] 0x0067A420 func_0067A420 (8 B)
-// [TODO] 0x0067A430 func_0067A430 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067A420 (0x0067A420, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0xC of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0xC];
+    char m_FieldC; // +0xC
+};
+
+void Object::Set(char value)
+{
+    m_FieldC = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0067A430 (0x0067A430, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0xC of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0xC];
+    unsigned char m_FieldC; // +0xC
+};
+
+unsigned char Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x0067A440 func_0067A440 (112 B)
-// [TODO] 0x0067A4B0 func_0067A4B0 (8 B)
-// [TODO] 0x0067A4C0 func_0067A4C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067A4B0 (0x0067A4B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x10 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+void Object::Set(float value)
+{
+    m_Field10 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0067A4C0 (0x0067A4C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x10 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+float Object::Get()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x0067A4D0 func_0067A4D0 (616 B)
 // [TODO] 0x0067A740 func_0067A740 (12 B)
 // [TODO] 0x0067A750 func_0067A750 (132 B)
 // [TODO] 0x0067A7E0 func_0067A7E0 (184 B)
 // [TODO] 0x0067A8A0 func_0067A8A0 (144 B)
 // [TODO] 0x0067A930 func_0067A930 (116 B)
-// [TODO] 0x0067A9B0 func_0067A9B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067A9B0 (0x0067A9B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x30 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+};
+
+int Object::Get()
+{
+    return m_Field30;
+}
+
 // [TODO] 0x0067A9C0 func_0067A9C0 (156 B)
 // [TODO] 0x0067AA60 func_0067AA60 (36 B)
 // [TODO] 0x0067AA90 func_0067AA90 (32 B)
 // [TODO] 0x0067AAB0 func_0067AAB0 (108 B)
-// [TODO] 0x0067AB20 func_0067AB20 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067AB20 (0x0067AB20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x28 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x28];
+    float m_Field28; // +0x28
+};
+
+float Object::Get()
+{
+    return m_Field28;
+}
+
 // [TODO] 0x0067AB30 func_0067AB30 (144 B)
 // [TODO] 0x0067ABC0 func_0067ABC0 (20 B)
 // [TODO] 0x0067ABE0 func_0067ABE0 (136 B)
-// [TODO] 0x0067AC70 func_0067AC70 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067AC70 (0x0067AC70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x14 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Object::Get()
+{
+    return m_Field14;
+}
+
 // [TODO] 0x0067AC80 func_0067AC80 (136 B)
 // [TODO] 0x0067AD10 func_0067AD10 (56 B)
-// [TODO] 0x0067AD50 func_0067AD50 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067AD50 (0x0067AD50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x1C of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+float Object::Get()
+{
+    return m_Field1C;
+}
+
 // [TODO] 0x0067AD60 func_0067AD60 (32 B)
 // [TODO] 0x0067AD80 func_0067AD80 (92 B)
 // [TODO] 0x0067ADE0 func_0067ADE0 (60 B)
 // [TODO] 0x0067AE20 func_0067AE20 (84 B)
-// [TODO] 0x0067AE80 func_0067AE80 (8 B)
-// [TODO] 0x0067AE90 func_0067AE90 (8 B)
-// [TODO] 0x0067AEA0 func_0067AEA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067AE80 (0x0067AE80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x28 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+int Object::Get()
+{
+    return m_Field28;
+}
+
+// ============================================================================
+// [VERIFIED] func_0067AE90 (0x0067AE90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x14 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x14];
+    float m_Field14; // +0x14
+};
+
+float Object::Get()
+{
+    return m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_0067AEA0 (0x0067AEA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x0 of its object.
+class Object
+{
+public:
+    float Get();
+    float m_Field0; // +0x0
+};
+
+float Object::Get()
+{
+    return m_Field0;
+}
+
 // [TODO] 0x0067AEB0 func_0067AEB0 (272 B)
 // [TODO] 0x0067AFC0 func_0067AFC0 (604 B)
 // [TODO] 0x0067B220 func_0067B220 (224 B)
@@ -38117,7 +44724,24 @@ extern "C" void func_0066E810() {
 // [TODO] 0x0067B900 func_0067B900 (204 B)
 // [TODO] 0x0067B9D0 func_0067B9D0 (72 B)
 // [TODO] 0x0067BA20 func_0067BA20 (216 B)
-// [TODO] 0x0067BB00 func_0067BB00 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067BB00 (0x0067BB00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x14 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Object::Get()
+{
+    return m_Field14;
+}
+
 // [TODO] 0x0067BB10 func_0067BB10 (204 B)
 // [TODO] 0x0067BBE0 func_0067BBE0 (100 B)
 // [TODO] 0x0067BC50 func_0067BC50 (52 B)
@@ -38127,7 +44751,24 @@ extern "C" void func_0066E810() {
 // [TODO] 0x0067BE00 func_0067BE00 (60 B)
 // [TODO] 0x0067BE40 func_0067BE40 (472 B)
 // [TODO] 0x0067C020 func_0067C020 (412 B)
-// [TODO] 0x0067C1C0 func_0067C1C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067C1C0 (0x0067C1C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0xA4 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0xA4];
+    unsigned char m_FieldA4; // +0xA4
+};
+
+unsigned char Object::Get()
+{
+    return m_FieldA4;
+}
+
 // [TODO] 0x0067C1D0 func_0067C1D0 (92 B)
 // [TODO] 0x0067C230 func_0067C230 (104 B)
 // [TODO] 0x0067C2A0 func_0067C2A0 (196 B)
@@ -38144,18 +44785,53 @@ extern "C" void func_0066E810() {
 // [TODO] 0x0067D270 func_0067D270 (32 B)
 // [TODO] 0x0067D290 func_0067D290 (64 B)
 // [TODO] 0x0067D2D0 func_0067D2D0 (108 B)
-// [TODO] 0x0067D340 func_0067D340 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067D340 (0x0067D340, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0067D350 func_0067D350 (116 B)
 // [TODO] 0x0067D3D0 func_0067D3D0 (76 B)
 // [TODO] 0x0067D420 func_0067D420 (56 B)
 // [TODO] 0x0067D460 func_0067D460 (160 B)
-// [TODO] 0x0067D500 func_0067D500 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067D500 (0x0067D500, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xAC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xAC];
+    int m_FieldAC; // +0xAC
+};
+
+int Object::Get()
+{
+    return m_FieldAC;
+}
+
 // [TODO] 0x0067D510 func_0067D510 (576 B)
 // [TODO] 0x0067D750 func_0067D750 (2652 B)
 // [TODO] 0x0067E1B0 func_0067E1B0 (336 B)
 // [TODO] 0x0067E300 func_0067E300 (412 B)
 // [TODO] 0x0067E4A0 func_0067E4A0 (220 B)
-// [TODO] 0x0067E580 func_0067E580 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067E580 (0x0067E580, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0067E590 func_0067E590 (56 B)
 // ============================================================================
 // [VERIFIED] func_0067E5D0 (0x0067E5D0, 8 B)
@@ -38171,20 +44847,139 @@ extern "C" void func_0067E5D0() {
 }
 
 // [TODO] 0x0067E5E0 func_0067E5E0 (68 B)
-// [TODO] 0x0067E630 func_0067E630 (8 B)
-// [TODO] 0x0067E640 func_0067E640 (8 B)
-// [TODO] 0x0067E650 func_0067E650 (8 B)
-// [TODO] 0x0067E660 func_0067E660 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067E630 (0x0067E630, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x18 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+void Object::Set(float value)
+{
+    m_Field18 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0067E640 (0x0067E640, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x18 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+float Object::Get()
+{
+    return m_Field18;
+}
+
+// ============================================================================
+// [VERIFIED] func_0067E650 (0x0067E650, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x14 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x14];
+    float m_Field14; // +0x14
+};
+
+float Object::Get()
+{
+    return m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_0067E660 (0x0067E660, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x28 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x28];
+    float m_Field28; // +0x28
+};
+
+float Object::Get()
+{
+    return m_Field28;
+}
+
 // [TODO] 0x0067E670 func_0067E670 (312 B)
-// [TODO] 0x0067E7B0 func_0067E7B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067E7B0 (0x0067E7B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x1C of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+float Object::Get()
+{
+    return m_Field1C;
+}
+
 // [TODO] 0x0067E7C0 func_0067E7C0 (324 B)
 // [TODO] 0x0067E910 func_0067E910 (36 B)
 // [TODO] 0x0067E940 func_0067E940 (180 B)
-// [TODO] 0x0067EA00 func_0067EA00 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067EA00 (0x0067EA00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x34 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+};
+
+int Object::Get()
+{
+    return m_Field34;
+}
+
 // [TODO] 0x0067EA10 func_0067EA10 (100 B)
 // [TODO] 0x0067EA80 func_0067EA80 (136 B)
 // [TODO] 0x0067EB10 func_0067EB10 (596 B)
-// [TODO] 0x0067ED70 func_0067ED70 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067ED70 (0x0067ED70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x2C of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x2C];
+    float m_Field2C; // +0x2C
+};
+
+float Object::Get()
+{
+    return m_Field2C;
+}
+
 // [TODO] 0x0067ED80 func_0067ED80 (164 B)
 // [TODO] 0x0067EE30 func_0067EE30 (280 B)
 // [TODO] 0x0067EF50 func_0067EF50 (220 B)
@@ -38219,14 +45014,49 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x0067FE70 func_0067FE70 (8 B)
 // [TODO] 0x0067FE80 func_0067FE80 (8 B)
 // [TODO] 0x0067FE90 func_0067FE90 (144 B)
-// [TODO] 0x0067FF20 func_0067FF20 (8 B)
-// [TODO] 0x0067FF30 func_0067FF30 (8 B)
+// ============================================================================
+// [VERIFIED] func_0067FF20 (0x0067FF20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 2.
+int Number()
+{
+    return 2;
+}
+
+// ============================================================================
+// [VERIFIED] func_0067FF30 (0x0067FF30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0067FF40 func_0067FF40 (60 B)
 // [TODO] 0x0067FF80 func_0067FF80 (72 B)
 // [TODO] 0x0067FFD0 func_0067FFD0 (96 B)
 // [TODO] 0x00680030 func_00680030 (232 B)
 // [TODO] 0x00680120 func_00680120 (8 B)
-// [TODO] 0x00680130 func_00680130 (8 B)
+// ============================================================================
+// [VERIFIED] func_00680130 (0x00680130, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x60 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x60];
+    int m_Field60; // +0x60
+};
+
+int Object::Get()
+{
+    return m_Field60;
+}
+
 // [TODO] 0x00680140 func_00680140 (52 B)
 // [TODO] 0x00680180 func_00680180 (60 B)
 // [TODO] 0x006801C0 func_006801C0 (60 B)
@@ -38234,11 +45064,88 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x00680240 func_00680240 (228 B)
 // [TODO] 0x00680330 func_00680330 (164 B)
 // [TODO] 0x006803E0 func_006803E0 (1628 B)
-// [TODO] 0x00680A40 func_00680A40 (8 B)
-// [TODO] 0x00680A50 func_00680A50 (8 B)
-// [TODO] 0x00680A60 func_00680A60 (8 B)
-// [TODO] 0x00680A70 func_00680A70 (8 B)
-// [TODO] 0x00680A80 func_00680A80 (8 B)
+// ============================================================================
+// [VERIFIED] func_00680A40 (0x00680A40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00680A50 (0x00680A50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x50 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x50];
+    char m_Field50; // +0x50
+};
+
+void Object::Set(char value)
+{
+    m_Field50 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00680A60 (0x00680A60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x54 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x54];
+    float m_Field54; // +0x54
+};
+
+void Object::Set(float value)
+{
+    m_Field54 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00680A70 (0x00680A70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x50 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x50];
+    unsigned char m_Field50; // +0x50
+};
+
+unsigned char Object::Get()
+{
+    return m_Field50;
+}
+
+// ============================================================================
+// [VERIFIED] func_00680A80 (0x00680A80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x54 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x54];
+    float m_Field54; // +0x54
+};
+
+float Object::Get()
+{
+    return m_Field54;
+}
+
 // [TODO] 0x00680A90 func_00680A90 (64 B)
 // [TODO] 0x00680AD0 func_00680AD0 (64 B)
 // [TODO] 0x00680B10 func_00680B10 (64 B)
@@ -38267,7 +45174,16 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x00681B90 func_00681B90 (28 B)
 // [TODO] 0x00681BB0 func_00681BB0 (116 B)
 // [TODO] 0x00681C30 func_00681C30 (184 B)
-// [TODO] 0x00681CF0 func_00681CF0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00681CF0 (0x00681CF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00681D00 func_00681D00 (188 B)
 // [TODO] 0x00681DC0 func_00681DC0 (160 B)
 // [TODO] 0x00681E60 func_00681E60 (56 B)
@@ -38275,9 +45191,43 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x00681F00 func_00681F00 (44 B)
 // [TODO] 0x00681F30 func_00681F30 (168 B)
 // [TODO] 0x00681FE0 func_00681FE0 (432 B)
-// [TODO] 0x00682190 func_00682190 (8 B)
+// ============================================================================
+// [VERIFIED] func_00682190 (0x00682190, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xA8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xA8];
+    int m_FieldA8; // +0xA8
+};
+
+int Object::Get()
+{
+    return m_FieldA8;
+}
+
 // [TODO] 0x006821A0 func_006821A0 (36 B)
-// [TODO] 0x006821D0 func_006821D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006821D0 (0x006821D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0xD0 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0xD0];
+    int m_FieldD0; // +0xD0
+};
+
+void Object::Set(int value)
+{
+    m_FieldD0 = value;
+}
+
 // [TODO] 0x006821E0 func_006821E0 (240 B)
 // [TODO] 0x006822D0 func_006822D0 (72 B)
 // [TODO] 0x00682320 func_00682320 (136 B)
@@ -38288,7 +45238,16 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x00682C60 func_00682C60 (388 B)
 // [TODO] 0x00682DF0 func_00682DF0 (60 B)
 // [TODO] 0x00682E30 func_00682E30 (132 B)
-// [TODO] 0x00682EC0 func_00682EC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00682EC0 (0x00682EC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00682ED0 func_00682ED0 (112 B)
 // [TODO] 0x00682F40 func_00682F40 (56 B)
 // [TODO] 0x00682F80 func_00682F80 (56 B)
@@ -38297,19 +45256,62 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x00683030 func_00683030 (8 B)
 // [TODO] 0x00683040 func_00683040 (160 B)
 // [TODO] 0x006830E0 func_006830E0 (172 B)
-// [TODO] 0x00683190 func_00683190 (8 B)
+// ============================================================================
+// [VERIFIED] func_00683190 (0x00683190, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x34 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+};
+
+int Object::Get()
+{
+    return m_Field34;
+}
+
 // [TODO] 0x006831A0 func_006831A0 (92 B)
 // [TODO] 0x00683200 func_00683200 (16 B)
 // [TODO] 0x00683210 func_00683210 (396 B)
 // [TODO] 0x006833A0 func_006833A0 (244 B)
 // [TODO] 0x006834A0 func_006834A0 (56 B)
 // [TODO] 0x006834E0 func_006834E0 (108 B)
-// [TODO] 0x00683550 func_00683550 (8 B)
+// ============================================================================
+// [VERIFIED] func_00683550 (0x00683550, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00683560 func_00683560 (108 B)
 // [TODO] 0x006835D0 func_006835D0 (160 B)
 // [TODO] 0x00683670 func_00683670 (56 B)
 // [TODO] 0x006836B0 func_006836B0 (8 B)
-// [TODO] 0x006836C0 func_006836C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006836C0 (0x006836C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x34 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+};
+
+int Object::Get()
+{
+    return m_Field34;
+}
+
 // [TODO] 0x006836D0 func_006836D0 (648 B)
 // [TODO] 0x00683960 func_00683960 (308 B)
 // [TODO] 0x00683AA0 func_00683AA0 (196 B)
@@ -38331,20 +45333,79 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x00684860 func_00684860 (96 B)
 // [TODO] 0x006848C0 pure3d::SkeletonLoader::vfunc_06 (1784 B)
 // [TODO] 0x00684FC0 func_00684FC0 (144 B)
-// [TODO] 0x00685050 func_00685050 (8 B)
-// [TODO] 0x00685060 func_00685060 (8 B)
+// ============================================================================
+// [VERIFIED] func_00685050 (0x00685050, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00685060 (0x00685060, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00685070 func_00685070 (56 B)
 // [TODO] 0x006850B0 func_006850B0 (108 B)
-// [TODO] 0x00685120 func_00685120 (8 B)
+// ============================================================================
+// [VERIFIED] func_00685120 (0x00685120, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00685130 func_00685130 (108 B)
 // [TODO] 0x006851A0 func_006851A0 (160 B)
 // [TODO] 0x00685240 func_00685240 (56 B)
 // [TODO] 0x00685280 func_00685280 (8 B)
-// [TODO] 0x00685290 func_00685290 (8 B)
+// ============================================================================
+// [VERIFIED] func_00685290 (0x00685290, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x34 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+};
+
+int Object::Get()
+{
+    return m_Field34;
+}
+
 // [TODO] 0x006852A0 func_006852A0 (248 B)
 // [TODO] 0x006853A0 func_006853A0 (56 B)
 // [TODO] 0x006853E0 func_006853E0 (108 B)
-// [TODO] 0x00685450 func_00685450 (8 B)
+// ============================================================================
+// [VERIFIED] func_00685450 (0x00685450, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00685460 func_00685460 (100 B)
 // [TODO] 0x006854D0 func_006854D0 (56 B)
 // [TODO] 0x00685510 func_00685510 (76 B)
@@ -38374,28 +45435,96 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x00686EC0 func_00686EC0 (92 B)
 // [TODO] 0x00686F20 pure3d::VertexOffsetExpressionMixerLoader::vfunc_06 (480 B)
 // [TODO] 0x00687100 func_00687100 (144 B)
-// [TODO] 0x00687190 func_00687190 (8 B)
-// [TODO] 0x006871A0 func_006871A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00687190 (0x00687190, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_006871A0 (0x006871A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006871B0 func_006871B0 (52 B)
 // [TODO] 0x006871F0 func_006871F0 (32 B)
 // [TODO] 0x00687210 func_00687210 (96 B)
 // [TODO] 0x00687270 func_00687270 (244 B)
-// [TODO] 0x00687370 func_00687370 (8 B)
+// ============================================================================
+// [VERIFIED] func_00687370 (0x00687370, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00687380 func_00687380 (148 B)
 // [TODO] 0x00687420 func_00687420 (44 B)
 // [TODO] 0x00687450 func_00687450 (56 B)
 // [TODO] 0x00687490 func_00687490 (76 B)
 // [TODO] 0x006874E0 func_006874E0 (8 B)
-// [TODO] 0x006874F0 func_006874F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006874F0 (0x006874F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x34 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+};
+
+int Object::Get()
+{
+    return m_Field34;
+}
+
 // [TODO] 0x00687500 func_00687500 (796 B)
 // [TODO] 0x00687820 func_00687820 (212 B)
 // [TODO] 0x00687900 func_00687900 (480 B)
 // [TODO] 0x00687AE0 func_00687AE0 (396 B)
 // [TODO] 0x00687C70 func_00687C70 (200 B)
-// [TODO] 0x00687D40 func_00687D40 (8 B)
+// ============================================================================
+// [VERIFIED] func_00687D40 (0x00687D40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 8.
+int Number()
+{
+    return 8;
+}
+
 // [TODO] 0x00687D50 func_00687D50 (48 B)
 // [TODO] 0x00687D80 func_00687D80 (48 B)
-// [TODO] 0x00687DB0 func_00687DB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00687DB0 (0x00687DB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00687DC0 func_00687DC0 (56 B)
 // [TODO] 0x00687E00 func_00687E00 (1008 B)
 // [TODO] 0x006881F0 func_006881F0 (348 B)
@@ -38428,7 +45557,18 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x00689C30 func_00689C30 (92 B)
 // [TODO] 0x00689C90 func_00689C90 (144 B)
 // [TODO] 0x00689D20 func_00689D20 (3216 B)
-// [TODO] 0x0068A9B0 func_0068A9B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068A9B0 (0x0068A9B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080ACDC.
+extern int D_0080ACDC;
+
+int Get()
+{
+    return D_0080ACDC;
+}
+
 // [TODO] 0x0068A9C0 func_0068A9C0 (64 B)
 // [TODO] 0x0068AA00 func_0068AA00 (96 B)
 // [TODO] 0x0068AA60 func_0068AA60 (12 B)
@@ -38437,7 +45577,23 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x0068AAB0 func_0068AAB0 (16 B)
 // [TODO] 0x0068AAC0 func_0068AAC0 (68 B)
 // [TODO] 0x0068AB10 func_0068AB10 (60 B)
-// [TODO] 0x0068AB50 func_0068AB50 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068AB50 (0x0068AB50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x0 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    int m_Field0; // +0x0
+};
+
+void Object::Set(int value)
+{
+    m_Field0 = value;
+}
+
 // [TODO] 0x0068AB60 func_0068AB60 (16 B)
 // [TODO] 0x0068AB70 func_0068AB70 (20 B)
 // [TODO] 0x0068AB90 func_0068AB90 (16 B)
@@ -38445,8 +45601,32 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x0068ABB0 func_0068ABB0 (52 B)
 // [TODO] 0x0068ABF0 func_0068ABF0 (64 B)
 // [TODO] 0x0068AC30 func_0068AC30 (112 B)
-// [TODO] 0x0068ACA0 func_0068ACA0 (8 B)
-// [TODO] 0x0068ACB0 func_0068ACB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068ACA0 (0x0068ACA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0068ACB0 (0x0068ACB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x0068ACC0 func_0068ACC0 (8 B)
 // [TODO] 0x0068ACD0 func_0068ACD0 (48 B)
 // [TODO] 0x0068AD00 func_0068AD00 (8 B)
@@ -38459,7 +45639,24 @@ extern "C" void func_0067E5D0() {
 // [TODO] 0x0068AF10 func_0068AF10 (160 B)
 // [TODO] 0x0068AFB0 func_0068AFB0 (296 B)
 // [TODO] 0x0068B0E0 func_0068B0E0 (112 B)
-// [TODO] 0x0068B150 func_0068B150 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068B150 (0x0068B150, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Set(int value)
+{
+    m_Field8 = value;
+}
+
 // [TODO] 0x0068B160 func_0068B160 (432 B)
 // ============================================================================
 // [VERIFIED] func_0068B310 (0x0068B310, 8 B)
@@ -38495,8 +45692,26 @@ extern "C" void func_0068B310() {
 // [TODO] 0x0068BF00 func_0068BF00 (432 B)
 // [TODO] 0x0068C0B0 func_0068C0B0 (144 B)
 // [TODO] 0x0068C140 func_0068C140 (124 B)
-// [TODO] 0x0068C1C0 func_0068C1C0 (8 B)
-// [TODO] 0x0068C1D0 func_0068C1D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068C1C0 (0x0068C1C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0068C1D0 (0x0068C1D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0068C1E0 func_0068C1E0 (224 B)
 // [TODO] 0x0068C2C0 func_0068C2C0 (96 B)
 // [TODO] 0x0068C320 func_0068C320 (100 B)
@@ -38509,12 +45724,114 @@ extern "C" void func_0068B310() {
 // [TODO] 0x0068C5A0 func_0068C5A0 (224 B)
 // [TODO] 0x0068C680 func_0068C680 (164 B)
 // [TODO] 0x0068C730 func_0068C730 (1440 B)
-// [TODO] 0x0068CCD0 func_0068CCD0 (8 B)
-// [TODO] 0x0068CCE0 func_0068CCE0 (8 B)
-// [TODO] 0x0068CCF0 func_0068CCF0 (8 B)
-// [TODO] 0x0068CD00 func_0068CD00 (8 B)
-// [TODO] 0x0068CD10 func_0068CD10 (8 B)
-// [TODO] 0x0068CD20 func_0068CD20 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068CCD0 (0x0068CCD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x50 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x50];
+    char m_Field50; // +0x50
+};
+
+void Object::Set(char value)
+{
+    m_Field50 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0068CCE0 (0x0068CCE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x54 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x54];
+    float m_Field54; // +0x54
+};
+
+void Object::Set(float value)
+{
+    m_Field54 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0068CCF0 (0x0068CCF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x50 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x50];
+    unsigned char m_Field50; // +0x50
+};
+
+unsigned char Object::Get()
+{
+    return m_Field50;
+}
+
+// ============================================================================
+// [VERIFIED] func_0068CD00 (0x0068CD00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x54 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x54];
+    float m_Field54; // +0x54
+};
+
+float Object::Get()
+{
+    return m_Field54;
+}
+
+// ============================================================================
+// [VERIFIED] func_0068CD10 (0x0068CD10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x58 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x58];
+    float m_Field58; // +0x58
+};
+
+float Object::Get()
+{
+    return m_Field58;
+}
+
+// ============================================================================
+// [VERIFIED] func_0068CD20 (0x0068CD20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x58 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x58];
+    float m_Field58; // +0x58
+};
+
+void Object::Set(float value)
+{
+    m_Field58 = value;
+}
+
 // [TODO] 0x0068CD30 func_0068CD30 (64 B)
 // [TODO] 0x0068CD70 func_0068CD70 (96 B)
 // [TODO] 0x0068CDD0 func_0068CDD0 (288 B)
@@ -38528,8 +45845,34 @@ extern "C" void func_0068B310() {
 // [TODO] 0x0068D290 func_0068D290 (756 B)
 // [TODO] 0x0068D590 func_0068D590 (192 B)
 // [TODO] 0x0068D650 func_0068D650 (108 B)
-// [TODO] 0x0068D6C0 func_0068D6C0 (8 B)
-// [TODO] 0x0068D6D0 func_0068D6D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068D6C0 (0x0068D6C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0068D6D0 (0x0068D6D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x38 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x38];
+    int m_Field38; // +0x38
+};
+
+int Object::Get()
+{
+    return m_Field38;
+}
+
 // [TODO] 0x0068D6E0 func_0068D6E0 (228 B)
 // [TODO] 0x0068D7D0 func_0068D7D0 (40 B)
 // [TODO] 0x0068D800 func_0068D800 (40 B)
@@ -38549,19 +45892,55 @@ extern "C" void func_0068D8F0() {
 }
 
 // [TODO] 0x0068D900 func_0068D900 (168 B)
-// [TODO] 0x0068D9B0 func_0068D9B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068D9B0 (0x0068D9B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0068D9C0 func_0068D9C0 (192 B)
 // [TODO] 0x0068DA80 func_0068DA80 (276 B)
 // [TODO] 0x0068DBA0 func_0068DBA0 (8 B)
 // [TODO] 0x0068DBB0 func_0068DBB0 (136 B)
-// [TODO] 0x0068DC40 func_0068DC40 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068DC40 (0x0068DC40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 129.
+int Number()
+{
+    return 129;
+}
+
 // [TODO] 0x0068DC50 func_0068DC50 (172 B)
 // [TODO] 0x0068DD00 func_0068DD00 (16 B)
 // [TODO] 0x0068DD10 func_0068DD10 (16 B)
 // [TODO] 0x0068DD20 func_0068DD20 (856 B)
 // [TODO] 0x0068E080 func_0068E080 (168 B)
-// [TODO] 0x0068E130 func_0068E130 (8 B)
-// [TODO] 0x0068E140 func_0068E140 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068E130 (0x0068E130, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 385.
+int Number()
+{
+    return 385;
+}
+
+// ============================================================================
+// [VERIFIED] func_0068E140 (0x0068E140, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0068E150 func_0068E150 (192 B)
 // [TODO] 0x0068E210 func_0068E210 (20 B)
 // [TODO] 0x0068E230 func_0068E230 (20 B)
@@ -38570,8 +45949,26 @@ extern "C" void func_0068D8F0() {
 // [TODO] 0x0068E400 func_0068E400 (272 B)
 // [TODO] 0x0068E510 func_0068E510 (364 B)
 // [TODO] 0x0068E680 func_0068E680 (152 B)
-// [TODO] 0x0068E720 func_0068E720 (8 B)
-// [TODO] 0x0068E730 func_0068E730 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068E720 (0x0068E720, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 64.
+int Number()
+{
+    return 64;
+}
+
+// ============================================================================
+// [VERIFIED] func_0068E730 (0x0068E730, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0068E740 func_0068E740 (56 B)
 // [TODO] 0x0068E780 func_0068E780 (260 B)
 // [TODO] 0x0068E890 func_0068E890 (400 B)
@@ -38579,10 +45976,44 @@ extern "C" void func_0068D8F0() {
 // [TODO] 0x0068ECE0 func_0068ECE0 (664 B)
 // [TODO] 0x0068EF80 func_0068EF80 (160 B)
 // [TODO] 0x0068F020 func_0068F020 (8 B)
-// [TODO] 0x0068F030 func_0068F030 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068F030 (0x0068F030, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4C];
+    int m_Field4C; // +0x4C
+};
+
+int Object::Get()
+{
+    return m_Field4C;
+}
+
 // [TODO] 0x0068F040 func_0068F040 (104 B)
 // [TODO] 0x0068F0B0 func_0068F0B0 (108 B)
-// [TODO] 0x0068F120 func_0068F120 (8 B)
+// ============================================================================
+// [VERIFIED] func_0068F120 (0x0068F120, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+void Object::Set(int value)
+{
+    m_Field18 = value;
+}
+
 // [TODO] 0x0068F130 func_0068F130 (296 B)
 // [TODO] 0x0068F260 func_0068F260 (716 B)
 // [TODO] 0x0068F530 func_0068F530 (4508 B)
@@ -38689,13 +46120,39 @@ extern "C" void func_00693300() {
 // [TODO] 0x006963E0 func_006963E0 (8680 B)
 // [TODO] 0x006985D0 func_006985D0 (96 B)
 // [TODO] 0x00698630 func_00698630 (356 B)
-// [TODO] 0x006987A0 func_006987A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006987A0 (0x006987A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x10 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+float Object::Get()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x006987B0 func_006987B0 (188 B)
 // [TODO] 0x00698870 func_00698870 (112 B)
 // [TODO] 0x006988E0 func_006988E0 (136 B)
 // [TODO] 0x00698970 func_00698970 (388 B)
 // [TODO] 0x00698B00 func_00698B00 (248 B)
-// [TODO] 0x00698C00 func_00698C00 (8 B)
+// ============================================================================
+// [VERIFIED] func_00698C00 (0x00698C00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00698C10 func_00698C10 (56 B)
 // [TODO] 0x00698C50 func_00698C50 (260 B)
 // [TODO] 0x00698D60 func_00698D60 (960 B)
@@ -38707,7 +46164,16 @@ extern "C" void func_00693300() {
 // [TODO] 0x00699350 func_00699350 (152 B)
 // [TODO] 0x006993F0 func_006993F0 (420 B)
 // [TODO] 0x006995A0 func_006995A0 (248 B)
-// [TODO] 0x006996A0 func_006996A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006996A0 (0x006996A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006996B0 func_006996B0 (56 B)
 // [TODO] 0x006996F0 func_006996F0 (340 B)
 // [TODO] 0x00699850 func_00699850 (1284 B)
@@ -38719,7 +46185,16 @@ extern "C" void func_00693300() {
 // [TODO] 0x00699F70 func_00699F70 (128 B)
 // [TODO] 0x00699FF0 func_00699FF0 (372 B)
 // [TODO] 0x0069A170 func_0069A170 (248 B)
-// [TODO] 0x0069A270 func_0069A270 (8 B)
+// ============================================================================
+// [VERIFIED] func_0069A270 (0x0069A270, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0069A280 func_0069A280 (56 B)
 // [TODO] 0x0069A2C0 func_0069A2C0 (220 B)
 // [TODO] 0x0069A3A0 func_0069A3A0 (1620 B)
@@ -38765,13 +46240,46 @@ extern "C" void func_00693300() {
 // [TODO] 0x0069D220 func_0069D220 (328 B)
 // [TODO] 0x0069D370 func_0069D370 (228 B)
 // [TODO] 0x0069D460 func_0069D460 (168 B)
-// [TODO] 0x0069D510 func_0069D510 (8 B)
+// ============================================================================
+// [VERIFIED] func_0069D510 (0x0069D510, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x0069D520 func_0069D520 (8 B)
 // [TODO] 0x0069D530 func_0069D530 (256 B)
 // [TODO] 0x0069D630 func_0069D630 (84 B)
 // [TODO] 0x0069D690 func_0069D690 (116 B)
-// [TODO] 0x0069D710 func_0069D710 (8 B)
-// [TODO] 0x0069D720 func_0069D720 (8 B)
+// ============================================================================
+// [VERIFIED] func_0069D710 (0x0069D710, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 4.
+int Number()
+{
+    return 4;
+}
+
+// ============================================================================
+// [VERIFIED] func_0069D720 (0x0069D720, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0069D730 func_0069D730 (192 B)
 // [TODO] 0x0069D7F0 func_0069D7F0 (208 B)
 // [TODO] 0x0069D8C0 func_0069D8C0 (88 B)
@@ -38792,19 +46300,106 @@ extern "C" void func_00693300() {
 // [TODO] 0x0069DFD0 func_0069DFD0 (12 B)
 // [TODO] 0x0069DFE0 func_0069DFE0 (12 B)
 // [TODO] 0x0069DFF0 func_0069DFF0 (292 B)
-// [TODO] 0x0069E120 func_0069E120 (8 B)
+// ============================================================================
+// [VERIFIED] func_0069E120 (0x0069E120, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x0069E130 func_0069E130 (528 B)
 // [TODO] 0x0069E340 func_0069E340 (424 B)
 // [TODO] 0x0069E4F0 func_0069E4F0 (404 B)
 // [TODO] 0x0069E690 func_0069E690 (584 B)
 // [TODO] 0x0069E8E0 func_0069E8E0 (144 B)
 // [TODO] 0x0069E970 func_0069E970 (12 B)
-// [TODO] 0x0069E980 func_0069E980 (8 B)
-// [TODO] 0x0069E990 func_0069E990 (8 B)
-// [TODO] 0x0069E9A0 func_0069E9A0 (8 B)
-// [TODO] 0x0069E9B0 func_0069E9B0 (8 B)
-// [TODO] 0x0069E9C0 func_0069E9C0 (8 B)
-// [TODO] 0x0069E9D0 func_0069E9D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0069E980 (0x0069E980, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0069E990 (0x0069E990, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0069E9A0 (0x0069E9A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
+// ============================================================================
+// [VERIFIED] func_0069E9B0 (0x0069E9B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0xC of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0xC];
+    char m_FieldC; // +0xC
+};
+
+void Object::Set(char value)
+{
+    m_FieldC = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0069E9C0 (0x0069E9C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0xC of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0xC];
+    unsigned char m_FieldC; // +0xC
+};
+
+unsigned char Object::Get()
+{
+    return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_0069E9D0 (0x0069E9D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x0069E9E0 func_0069E9E0 (108 B)
 // [TODO] 0x0069EA50 func_0069EA50 (220 B)
 // [TODO] 0x0069EB30 func_0069EB30 (128 B)
@@ -38816,7 +46411,24 @@ extern "C" void func_00693300() {
 // [TODO] 0x0069ED20 func_0069ED20 (248 B)
 // [TODO] 0x0069EE20 func_0069EE20 (40 B)
 // [TODO] 0x0069EE50 func_0069EE50 (28 B)
-// [TODO] 0x0069EE70 func_0069EE70 (8 B)
+// ============================================================================
+// [VERIFIED] func_0069EE70 (0x0069EE70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x28 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+int* Object::Get()
+{
+    return &m_Field28;
+}
+
 // [TODO] 0x0069EE80 func_0069EE80 (96 B)
 // [TODO] 0x0069EEE0 func_0069EEE0 (16 B)
 // [TODO] 0x0069EEF0 func_0069EEF0 (16 B)
@@ -38841,16 +46453,93 @@ extern "C" void func_00693300() {
 // [TODO] 0x0069FAA0 func_0069FAA0 (168 B)
 // [TODO] 0x0069FB50 func_0069FB50 (76 B)
 // [TODO] 0x0069FBA0 func_0069FBA0 (600 B)
-// [TODO] 0x0069FE00 func_0069FE00 (8 B)
-// [TODO] 0x0069FE10 func_0069FE10 (8 B)
-// [TODO] 0x0069FE20 func_0069FE20 (8 B)
-// [TODO] 0x0069FE30 func_0069FE30 (8 B)
-// [TODO] 0x0069FE40 func_0069FE40 (8 B)
+// ============================================================================
+// [VERIFIED] func_0069FE00 (0x0069FE00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0069FE10 (0x0069FE10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0069FE20 (0x0069FE20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_0069FE30 (0x0069FE30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x428 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x428];
+    int m_Field428; // +0x428
+};
+
+void Object::Set(int value)
+{
+    m_Field428 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0069FE40 (0x0069FE40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x0069FE50 func_0069FE50 (20 B)
 // [TODO] 0x0069FE70 func_0069FE70 (76 B)
 // [TODO] 0x0069FEC0 func_0069FEC0 (636 B)
-// [TODO] 0x006A0140 func_006A0140 (8 B)
-// [TODO] 0x006A0150 func_006A0150 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A0140 (0x006A0140, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006A0150 (0x006A0150, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006A0160 func_006A0160 (224 B)
 // [TODO] 0x006A0240 func_006A0240 (184 B)
 // ============================================================================
@@ -38906,7 +46595,24 @@ extern "C" void func_006A0DC0() {
 extern "C" void func_006A1750() {
 }
 
-// [TODO] 0x006A1760 func_006A1760 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A1760 (0x006A1760, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x14 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Object::Get()
+{
+    return m_Field14;
+}
+
 // [TODO] 0x006A1770 func_006A1770 (52 B)
 // [TODO] 0x006A17B0 func_006A17B0 (128 B)
 // [TODO] 0x006A1830 func_006A1830 (828 B)
@@ -38932,13 +46638,48 @@ extern "C" void func_006A2090() {
 // [TODO] 0x006A20A0 func_006A20A0 (272 B)
 // [TODO] 0x006A21B0 func_006A21B0 (272 B)
 // [TODO] 0x006A22C0 func_006A22C0 (176 B)
-// [TODO] 0x006A2370 func_006A2370 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A2370 (0x006A2370, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006A2380 func_006A2380 (148 B)
 // [TODO] 0x006A2420 func_006A2420 (148 B)
 // [TODO] 0x006A24C0 func_006A24C0 (88 B)
 // [TODO] 0x006A2520 func_006A2520 (152 B)
-// [TODO] 0x006A25C0 func_006A25C0 (8 B)
-// [TODO] 0x006A25D0 func_006A25D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A25C0 (0x006A25C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x28 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+void Object::Set(int value)
+{
+    m_Field28 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006A25D0 (0x006A25D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns -1.
+int Number()
+{
+    return -1;
+}
+
 // ============================================================================
 // [VERIFIED] func_006A25E0 (0x006A25E0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -38952,8 +46693,26 @@ extern "C" void func_006A2090() {
 extern "C" void func_006A25E0() {
 }
 
-// [TODO] 0x006A25F0 func_006A25F0 (8 B)
-// [TODO] 0x006A2600 func_006A2600 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A25F0 (0x006A25F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006A2600 (0x006A2600, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_006A2610 (0x006A2610, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -38984,8 +46743,26 @@ extern "C" void func_006A2620() {
 // [TODO] 0x006A2670 func_006A2670 (264 B)
 // [TODO] 0x006A2780 func_006A2780 (144 B)
 // [TODO] 0x006A2810 func_006A2810 (12 B)
-// [TODO] 0x006A2820 func_006A2820 (8 B)
-// [TODO] 0x006A2830 func_006A2830 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A2820 (0x006A2820, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006A2830 (0x006A2830, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006A2840 func_006A2840 (612 B)
 // [TODO] 0x006A2AB0 func_006A2AB0 (160 B)
 // [TODO] 0x006A2B50 func_006A2B50 (492 B)
@@ -38994,8 +46771,26 @@ extern "C" void func_006A2620() {
 // [TODO] 0x006A2F20 func_006A2F20 (700 B)
 // [TODO] 0x006A31E0 func_006A31E0 (144 B)
 // [TODO] 0x006A3270 func_006A3270 (12 B)
-// [TODO] 0x006A3280 func_006A3280 (8 B)
-// [TODO] 0x006A3290 func_006A3290 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A3280 (0x006A3280, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006A3290 (0x006A3290, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006A32A0 func_006A32A0 (44 B)
 // [TODO] 0x006A32D0 func_006A32D0 (68 B)
 // [TODO] 0x006A3320 func_006A3320 (36 B)
@@ -39016,13 +46811,81 @@ extern "C" void func_006A35D0() {
 
 // [TODO] 0x006A35E0 func_006A35E0 (212 B)
 // [TODO] 0x006A36C0 func_006A36C0 (80 B)
-// [TODO] 0x006A3710 func_006A3710 (8 B)
-// [TODO] 0x006A3720 func_006A3720 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A3710 (0x006A3710, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Set(int value)
+{
+    m_Field8 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006A3720 (0x006A3720, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x006A3730 func_006A3730 (20 B)
-// [TODO] 0x006A3750 func_006A3750 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A3750 (0x006A3750, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
 // [TODO] 0x006A3760 func_006A3760 (188 B)
 // [TODO] 0x006A3820 func_006A3820 (76 B)
-// [TODO] 0x006A3870 func_006A3870 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A3870 (0x006A3870, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xF0 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xF0];
+    int m_FieldF0; // +0xF0
+};
+
+int Object::Get()
+{
+    return m_FieldF0;
+}
+
 // [TODO] 0x006A3880 func_006A3880 (56 B)
 // [TODO] 0x006A38C0 func_006A38C0 (108 B)
 // [TODO] 0x006A3930 func_006A3930 (200 B)
@@ -39032,8 +46895,32 @@ extern "C" void func_006A35D0() {
 // [TODO] 0x006A3BD0 func_006A3BD0 (668 B)
 // [TODO] 0x006A3E70 func_006A3E70 (724 B)
 // [TODO] 0x006A4150 func_006A4150 (484 B)
-// [TODO] 0x006A4340 func_006A4340 (8 B)
-// [TODO] 0x006A4350 func_006A4350 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A4340 (0x006A4340, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006A4350 (0x006A4350, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x006A4360 func_006A4360 (64 B)
 // [TODO] 0x006A43A0 func_006A43A0 (176 B)
 // [TODO] 0x006A4450 func_006A4450 (188 B)
@@ -39061,7 +46948,22 @@ extern "C" void func_006A35D0() {
 // [TODO] 0x006A5430 func_006A5430 (112 B)
 // [TODO] 0x006A54A0 func_006A54A0 (748 B)
 // [TODO] 0x006A5790 func_006A5790 (108 B)
-// [TODO] 0x006A5800 func_006A5800 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A5800 (0x006A5800, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x006A5810 pure3d::d3dContext::vfunc_126 (224 B)
 // [TODO] 0x006A58F0 func_006A58F0 (140 B)
 // [TODO] 0x006A5980 func_006A5980 (76 B)
@@ -39121,19 +47023,96 @@ extern "C" void func_006A5A60() {
 // [TODO] 0x006A5DF0 func_006A5DF0 (156 B)
 // [TODO] 0x006A5E90 func_006A5E90 (244 B)
 // [TODO] 0x006A5F90 func_006A5F90 (88 B)
-// [TODO] 0x006A5FF0 func_006A5FF0 (8 B)
-// [TODO] 0x006A6000 func_006A6000 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A5FF0 (0x006A5FF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x10 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int* Object::Get()
+{
+    return &m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_006A6000 (0x006A6000, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x50 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x50];
+    int m_Field50; // +0x50
+};
+
+int* Object::Get()
+{
+    return &m_Field50;
+}
+
 // [TODO] 0x006A6010 func_006A6010 (68 B)
 // [TODO] 0x006A6060 func_006A6060 (124 B)
 // [TODO] 0x006A60E0 func_006A60E0 (12 B)
 // [TODO] 0x006A60F0 func_006A60F0 (84 B)
-// [TODO] 0x006A6150 func_006A6150 (8 B)
-// [TODO] 0x006A6160 func_006A6160 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A6150 (0x006A6150, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x229 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x229];
+    unsigned char m_Field229; // +0x229
+};
+
+unsigned char Object::Get()
+{
+    return m_Field229;
+}
+
+// ============================================================================
+// [VERIFIED] func_006A6160 (0x006A6160, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0xD0 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0xD0];
+    int m_FieldD0; // +0xD0
+};
+
+int* Object::Get()
+{
+    return &m_FieldD0;
+}
+
 // [TODO] 0x006A6170 func_006A6170 (136 B)
 // [TODO] 0x006A6200 func_006A6200 (52 B)
 // [TODO] 0x006A6240 func_006A6240 (136 B)
 // [TODO] 0x006A62D0 func_006A62D0 (52 B)
-// [TODO] 0x006A6310 func_006A6310 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A6310 (0x006A6310, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_006A6320 (0x006A6320, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -39177,7 +47156,16 @@ extern "C" void func_006A6340() {
 // [TODO] 0x006A64C0 func_006A64C0 (188 B)
 // [TODO] 0x006A6580 func_006A6580 (124 B)
 // [TODO] 0x006A6600 func_006A6600 (132 B)
-// [TODO] 0x006A6690 func_006A6690 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A6690 (0x006A6690, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 4.
+int Number()
+{
+    return 4;
+}
+
 // [TODO] 0x006A66A0 func_006A66A0 (28 B)
 // [TODO] 0x006A66C0 func_006A66C0 (16 B)
 // [TODO] 0x006A66D0 func_006A66D0 (372 B)
@@ -39226,11 +47214,62 @@ extern "C" void func_006A6340() {
 // [TODO] 0x006A6F80 func_006A6F80 (44 B)
 // [TODO] 0x006A6FB0 func_006A6FB0 (40 B)
 // [TODO] 0x006A6FE0 func_006A6FE0 (32 B)
-// [TODO] 0x006A7000 func_006A7000 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A7000 (0x006A7000, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x224 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x224];
+    int m_Field224; // +0x224
+};
+
+int Object::Get()
+{
+    return m_Field224;
+}
+
 // [TODO] 0x006A7010 func_006A7010 (28 B)
 // [TODO] 0x006A7030 func_006A7030 (16 B)
-// [TODO] 0x006A7040 func_006A7040 (8 B)
-// [TODO] 0x006A7050 func_006A7050 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A7040 (0x006A7040, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x220 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x220];
+    char m_Field220; // +0x220
+};
+
+void Object::Set(char value)
+{
+    m_Field220 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006A7050 (0x006A7050, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x220 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x220];
+    unsigned char m_Field220; // +0x220
+};
+
+unsigned char Object::Get()
+{
+    return m_Field220;
+}
+
 // [TODO] 0x006A7060 func_006A7060 (876 B)
 // [TODO] 0x006A73D0 func_006A73D0 (448 B)
 // [TODO] 0x006A7590 func_006A7590 (56 B)
@@ -39336,7 +47375,24 @@ extern "C" void func_006A76B0() {
 // [TODO] 0x006A7FF0 func_006A7FF0 (76 B)
 // [TODO] 0x006A8040 func_006A8040 (16 B)
 // [TODO] 0x006A8050 func_006A8050 (68 B)
-// [TODO] 0x006A80A0 func_006A80A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006A80A0 (0x006A80A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x006A80B0 func_006A80B0 (12 B)
 // [TODO] 0x006A80C0 func_006A80C0 (68 B)
 // [TODO] 0x006A8110 func_006A8110 (1344 B)
@@ -39387,7 +47443,24 @@ extern "C" void func_006A9880() {
 // [TODO] 0x006AA3E0 func_006AA3E0 (96 B)
 // [TODO] 0x006AA440 func_006AA440 (360 B)
 // [TODO] 0x006AA5B0 func_006AA5B0 (44 B)
-// [TODO] 0x006AA5E0 func_006AA5E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006AA5E0 (0x006AA5E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0xF4 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0xF4];
+    int m_FieldF4; // +0xF4
+};
+
+void Object::Set(int value)
+{
+    m_FieldF4 = value;
+}
+
 // [TODO] 0x006AA5F0 func_006AA5F0 (144 B)
 // [TODO] 0x006AA680 func_006AA680 (128 B)
 // [TODO] 0x006AA700 func_006AA700 (268 B)
@@ -39443,7 +47516,16 @@ extern "C" void func_006AB0A0() {
 extern "C" void func_006AB370() {
 }
 
-// [TODO] 0x006AB380 func_006AB380 (8 B)
+// ============================================================================
+// [VERIFIED] func_006AB380 (0x006AB380, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006AB390 func_006AB390 (16 B)
 // [TODO] 0x006AB3A0 func_006AB3A0 (8 B)
 // [TODO] 0x006AB3B0 func_006AB3B0 (8 B)
@@ -39454,7 +47536,16 @@ extern "C" void func_006AB370() {
 // [TODO] 0x006AB660 func_006AB660 (212 B)
 // [TODO] 0x006AB740 func_006AB740 (688 B)
 // [TODO] 0x006AB9F0 func_006AB9F0 (332 B)
-// [TODO] 0x006ABB40 func_006ABB40 (8 B)
+// ============================================================================
+// [VERIFIED] func_006ABB40 (0x006ABB40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006ABB50 func_006ABB50 (256 B)
 // [TODO] 0x006ABC50 func_006ABC50 (260 B)
 // [TODO] 0x006ABD60 func_006ABD60 (728 B)
@@ -39481,7 +47572,22 @@ extern "C" void func_006AB370() {
 // [TODO] 0x006ACED0 func_006ACED0 (144 B)
 // [TODO] 0x006ACF60 func_006ACF60 (500 B)
 // [TODO] 0x006AD160 func_006AD160 (204 B)
-// [TODO] 0x006AD230 func_006AD230 (8 B)
+// ============================================================================
+// [VERIFIED] func_006AD230 (0x006AD230, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x006AD240 func_006AD240 (68 B)
 // [TODO] 0x006AD290 func_006AD290 (2872 B)
 // [TODO] 0x006ADDD0 func_006ADDD0 (88 B)
@@ -39500,14 +47606,66 @@ extern "C" void func_006AB370() {
 // [TODO] 0x006AE660 func_006AE660 (116 B)
 // [TODO] 0x006AE6E0 func_006AE6E0 (408 B)
 // [TODO] 0x006AE880 func_006AE880 (236 B)
-// [TODO] 0x006AE970 func_006AE970 (8 B)
+// ============================================================================
+// [VERIFIED] func_006AE970 (0x006AE970, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006AE980 func_006AE980 (56 B)
-// [TODO] 0x006AE9C0 func_006AE9C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006AE9C0 (0x006AE9C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006AE9D0 func_006AE9D0 (76 B)
 // [TODO] 0x006AEA20 func_006AEA20 (24 B)
 // [TODO] 0x006AEA40 func_006AEA40 (220 B)
-// [TODO] 0x006AEB20 func_006AEB20 (8 B)
-// [TODO] 0x006AEB30 func_006AEB30 (8 B)
+// ============================================================================
+// [VERIFIED] func_006AEB20 (0x006AEB20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x3C of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x3C];
+    float m_Field3C; // +0x3C
+};
+
+float Object::Get()
+{
+    return m_Field3C;
+}
+
+// ============================================================================
+// [VERIFIED] func_006AEB30 (0x006AEB30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x38 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x38];
+    float m_Field38; // +0x38
+};
+
+float Object::Get()
+{
+    return m_Field38;
+}
+
 // [TODO] 0x006AEB40 func_006AEB40 (84 B)
 // [TODO] 0x006AEBA0 func_006AEBA0 (168 B)
 // [TODO] 0x006AEC50 func_006AEC50 (184 B)
@@ -39583,15 +47741,119 @@ extern "C" void func_006AF310() {
 // [TODO] 0x006AF320 func_006AF320 (12 B)
 // [TODO] 0x006AF330 func_006AF330 (16 B)
 // [TODO] 0x006AF340 func_006AF340 (16 B)
-// [TODO] 0x006AF350 func_006AF350 (8 B)
-// [TODO] 0x006AF360 func_006AF360 (8 B)
-// [TODO] 0x006AF370 func_006AF370 (8 B)
-// [TODO] 0x006AF380 func_006AF380 (8 B)
-// [TODO] 0x006AF390 func_006AF390 (8 B)
-// [TODO] 0x006AF3A0 func_006AF3A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006AF350 (0x006AF350, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x50 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x50];
+    char m_Field50; // +0x50
+};
+
+void Object::Set(char value)
+{
+    m_Field50 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006AF360 (0x006AF360, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x54 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x54];
+    float m_Field54; // +0x54
+};
+
+void Object::Set(float value)
+{
+    m_Field54 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006AF370 (0x006AF370, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x50 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x50];
+    unsigned char m_Field50; // +0x50
+};
+
+unsigned char Object::Get()
+{
+    return m_Field50;
+}
+
+// ============================================================================
+// [VERIFIED] func_006AF380 (0x006AF380, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x54 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x54];
+    float m_Field54; // +0x54
+};
+
+float Object::Get()
+{
+    return m_Field54;
+}
+
+// ============================================================================
+// [VERIFIED] func_006AF390 (0x006AF390, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 64.
+int Number()
+{
+    return 64;
+}
+
+// ============================================================================
+// [VERIFIED] func_006AF3A0 (0x006AF3A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006AF3B0 func_006AF3B0 (112 B)
-// [TODO] 0x006AF420 func_006AF420 (8 B)
-// [TODO] 0x006AF430 func_006AF430 (8 B)
+// ============================================================================
+// [VERIFIED] func_006AF420 (0x006AF420, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 32.
+int Number()
+{
+    return 32;
+}
+
+// ============================================================================
+// [VERIFIED] func_006AF430 (0x006AF430, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006AF440 func_006AF440 (112 B)
 // [TODO] 0x006AF4B0 func_006AF4B0 (384 B)
 // [TODO] 0x006AF630 func_006AF630 (308 B)
@@ -39599,15 +47861,66 @@ extern "C" void func_006AF310() {
 // [TODO] 0x006AFAD0 func_006AFAD0 (684 B)
 // [TODO] 0x006AFD80 func_006AFD80 (136 B)
 // [TODO] 0x006AFE10 func_006AFE10 (184 B)
-// [TODO] 0x006AFED0 func_006AFED0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006AFED0 (0x006AFED0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x14 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Object::Get()
+{
+    return m_Field14;
+}
+
 // [TODO] 0x006AFEE0 func_006AFEE0 (64 B)
 // [TODO] 0x006AFF20 func_006AFF20 (64 B)
 // [TODO] 0x006AFF60 func_006AFF60 (96 B)
 // [TODO] 0x006AFFC0 func_006AFFC0 (96 B)
 // [TODO] 0x006B0020 func_006B0020 (164 B)
 // [TODO] 0x006B00D0 func_006B00D0 (96 B)
-// [TODO] 0x006B0130 func_006B0130 (8 B)
-// [TODO] 0x006B0140 func_006B0140 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B0130 (0x006B0130, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_006B0140 (0x006B0140, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Set(int value)
+{
+    m_FieldC = value;
+}
+
 // [TODO] 0x006B0150 func_006B0150 (816 B)
 // [TODO] 0x006B0480 func_006B0480 (816 B)
 // [TODO] 0x006B07B0 func_006B07B0 (204 B)
@@ -39642,11 +47955,46 @@ extern "C" void func_006B0EA0() {
 }
 
 // [TODO] 0x006B0EB0 func_006B0EB0 (244 B)
-// [TODO] 0x006B0FB0 func_006B0FB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B0FB0 (0x006B0FB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 4.
+int Number()
+{
+    return 4;
+}
+
 // [TODO] 0x006B0FC0 func_006B0FC0 (1168 B)
-// [TODO] 0x006B1450 func_006B1450 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B1450 (0x006B1450, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x84 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x84];
+    int m_Field84; // +0x84
+};
+
+int Object::Get()
+{
+    return m_Field84;
+}
+
 // [TODO] 0x006B1460 func_006B1460 (196 B)
-// [TODO] 0x006B1530 func_006B1530 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B1530 (0x006B1530, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006B1540 func_006B1540 (668 B)
 // [TODO] 0x006B17E0 func_006B17E0 (3408 B)
 // [TODO] 0x006B2530 func_006B2530 (16 B)
@@ -39654,8 +48002,26 @@ extern "C" void func_006B0EA0() {
 // [TODO] 0x006B25F0 func_006B25F0 (260 B)
 // [TODO] 0x006B2700 func_006B2700 (436 B)
 // [TODO] 0x006B28C0 func_006B28C0 (96 B)
-// [TODO] 0x006B2920 func_006B2920 (8 B)
-// [TODO] 0x006B2930 func_006B2930 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B2920 (0x006B2920, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 8.
+int Number()
+{
+    return 8;
+}
+
+// ============================================================================
+// [VERIFIED] func_006B2930 (0x006B2930, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006B2940 func_006B2940 (96 B)
 // [TODO] 0x006B29A0 func_006B29A0 (172 B)
 // [TODO] 0x006B2A50 func_006B2A50 (96 B)
@@ -39664,10 +48030,78 @@ extern "C" void func_006B0EA0() {
 // [TODO] 0x006B4300 func_006B4300 (180 B)
 // [TODO] 0x006B43C0 func_006B43C0 (164 B)
 // [TODO] 0x006B4470 func_006B4470 (212 B)
-// [TODO] 0x006B4550 func_006B4550 (8 B)
-// [TODO] 0x006B4560 func_006B4560 (8 B)
-// [TODO] 0x006B4570 func_006B4570 (8 B)
-// [TODO] 0x006B4580 func_006B4580 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B4550 (0x006B4550, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x50 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x50];
+    char m_Field50; // +0x50
+};
+
+void Object::Set(char value)
+{
+    m_Field50 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006B4560 (0x006B4560, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x54 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x54];
+    float m_Field54; // +0x54
+};
+
+void Object::Set(float value)
+{
+    m_Field54 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006B4570 (0x006B4570, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x50 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x50];
+    unsigned char m_Field50; // +0x50
+};
+
+unsigned char Object::Get()
+{
+    return m_Field50;
+}
+
+// ============================================================================
+// [VERIFIED] func_006B4580 (0x006B4580, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x54 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x54];
+    float m_Field54; // +0x54
+};
+
+float Object::Get()
+{
+    return m_Field54;
+}
+
 // [TODO] 0x006B4590 func_006B4590 (40 B)
 // [TODO] 0x006B45C0 func_006B45C0 (32 B)
 // [TODO] 0x006B45E0 func_006B45E0 (64 B)
@@ -39795,23 +48229,134 @@ extern "C" void func_006B58A0() {
 // [TODO] 0x006B6690 func_006B6690 (112 B)
 // [TODO] 0x006B6700 func_006B6700 (272 B)
 // [TODO] 0x006B6810 func_006B6810 (140 B)
-// [TODO] 0x006B68A0 func_006B68A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B68A0 (0x006B68A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 2.
+int Number()
+{
+    return 2;
+}
+
 // [TODO] 0x006B68B0 func_006B68B0 (48 B)
 // [TODO] 0x006B68E0 func_006B68E0 (48 B)
 // [TODO] 0x006B6910 func_006B6910 (60 B)
 // [TODO] 0x006B6950 func_006B6950 (384 B)
-// [TODO] 0x006B6AD0 func_006B6AD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B6AD0 (0x006B6AD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0xA0 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0xA0];
+    float m_FieldA0; // +0xA0
+};
+
+float Object::Get()
+{
+    return m_FieldA0;
+}
+
 // [TODO] 0x006B6AE0 func_006B6AE0 (36 B)
 // [TODO] 0x006B6B10 func_006B6B10 (8 B)
-// [TODO] 0x006B6B20 func_006B6B20 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B6B20 (0x006B6B20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x80 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x80];
+    int m_Field80; // +0x80
+};
+
+int Object::Get()
+{
+    return m_Field80;
+}
+
 // [TODO] 0x006B6B30 func_006B6B30 (40 B)
-// [TODO] 0x006B6B60 func_006B6B60 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B6B60 (0x006B6B60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x84 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x84];
+    int m_Field84; // +0x84
+};
+
+int Object::Get()
+{
+    return m_Field84;
+}
+
 // [TODO] 0x006B6B70 func_006B6B70 (8 B)
-// [TODO] 0x006B6B80 func_006B6B80 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B6B80 (0x006B6B80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x88 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x88];
+    int m_Field88; // +0x88
+};
+
+int Object::Get()
+{
+    return m_Field88;
+}
+
 // [TODO] 0x006B6B90 func_006B6B90 (40 B)
-// [TODO] 0x006B6BC0 func_006B6BC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B6BC0 (0x006B6BC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8C];
+    int m_Field8C; // +0x8C
+};
+
+int Object::Get()
+{
+    return m_Field8C;
+}
+
 // [TODO] 0x006B6BD0 func_006B6BD0 (40 B)
-// [TODO] 0x006B6C00 func_006B6C00 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B6C00 (0x006B6C00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x90 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x90];
+    int m_Field90; // +0x90
+};
+
+int Object::Get()
+{
+    return m_Field90;
+}
+
 // [TODO] 0x006B6C10 func_006B6C10 (632 B)
 // [TODO] 0x006B6E90 func_006B6E90 (112 B)
 // [TODO] 0x006B6F00 func_006B6F00 (224 B)
@@ -39824,21 +48369,90 @@ extern "C" void func_006B58A0() {
 // [TODO] 0x006B7C70 func_006B7C70 (504 B)
 // [TODO] 0x006B7E70 func_006B7E70 (468 B)
 // [TODO] 0x006B8050 func_006B8050 (12 B)
-// [TODO] 0x006B8060 func_006B8060 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B8060 (0x006B8060, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006B8070 func_006B8070 (56 B)
 // [TODO] 0x006B80B0 func_006B80B0 (672 B)
 // [TODO] 0x006B8350 func_006B8350 (356 B)
-// [TODO] 0x006B84C0 func_006B84C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B84C0 (0x006B84C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x160 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x160];
+    int m_Field160; // +0x160
+};
+
+int Object::Get()
+{
+    return m_Field160;
+}
+
 // [TODO] 0x006B84D0 func_006B84D0 (1444 B)
 // [TODO] 0x006B8A80 func_006B8A80 (108 B)
 // [TODO] 0x006B8AF0 func_006B8AF0 (88 B)
 // [TODO] 0x006B8B50 func_006B8B50 (220 B)
 // [TODO] 0x006B8C30 func_006B8C30 (220 B)
-// [TODO] 0x006B8D10 func_006B8D10 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B8D10 (0x006B8D10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xB0 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xB0];
+    int m_FieldB0; // +0xB0
+};
+
+int Object::Get()
+{
+    return m_FieldB0;
+}
+
 // [TODO] 0x006B8D20 func_006B8D20 (48 B)
-// [TODO] 0x006B8D50 func_006B8D50 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B8D50 (0x006B8D50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006B8D60 func_006B8D60 (40 B)
-// [TODO] 0x006B8D90 func_006B8D90 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B8D90 (0x006B8D90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x148 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x148];
+    unsigned char m_Field148; // +0x148
+};
+
+unsigned char Object::Get()
+{
+    return m_Field148;
+}
+
 // [TODO] 0x006B8DA0 func_006B8DA0 (88 B)
 // ============================================================================
 // [VERIFIED] func_006B8E00 (0x006B8E00, 8 B)
@@ -39880,10 +48494,78 @@ extern "C" void func_006B8E00() {
 // [TODO] 0x006B9AD0 func_006B9AD0 (44 B)
 // [TODO] 0x006B9B00 func_006B9B00 (24 B)
 // [TODO] 0x006B9B20 func_006B9B20 (32 B)
-// [TODO] 0x006B9B40 func_006B9B40 (8 B)
-// [TODO] 0x006B9B50 func_006B9B50 (8 B)
-// [TODO] 0x006B9B60 func_006B9B60 (8 B)
-// [TODO] 0x006B9B70 func_006B9B70 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B9B40 (0x006B9B40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x20 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+float Object::Get()
+{
+    return m_Field20;
+}
+
+// ============================================================================
+// [VERIFIED] func_006B9B50 (0x006B9B50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x24 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x24];
+    float m_Field24; // +0x24
+};
+
+float Object::Get()
+{
+    return m_Field24;
+}
+
+// ============================================================================
+// [VERIFIED] func_006B9B60 (0x006B9B60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x18 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+float Object::Get()
+{
+    return m_Field18;
+}
+
+// ============================================================================
+// [VERIFIED] func_006B9B70 (0x006B9B70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x1C of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+float Object::Get()
+{
+    return m_Field1C;
+}
+
 // [TODO] 0x006B9B80 func_006B9B80 (32 B)
 // [TODO] 0x006B9BA0 func_006B9BA0 (40 B)
 // [TODO] 0x006B9BD0 func_006B9BD0 (44 B)
@@ -39902,7 +48584,16 @@ extern "C" void func_006B8E00() {
 extern "C" void func_006B9D90() {
 }
 
-// [TODO] 0x006B9DA0 func_006B9DA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B9DA0 (0x006B9DA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // ============================================================================
 // [VERIFIED] func_006B9DB0 (0x006B9DB0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -39918,7 +48609,16 @@ extern "C" void func_006B9DB0() {
 
 // [TODO] 0x006B9DC0 func_006B9DC0 (52 B)
 // [TODO] 0x006B9E00 func_006B9E00 (96 B)
-// [TODO] 0x006B9E60 func_006B9E60 (8 B)
+// ============================================================================
+// [VERIFIED] func_006B9E60 (0x006B9E60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006B9E70 func_006B9E70 (52 B)
 // [TODO] 0x006B9EB0 func_006B9EB0 (96 B)
 // [TODO] 0x006B9F10 func_006B9F10 (52 B)
@@ -39940,8 +48640,42 @@ extern "C" void func_006B9DB0() {
 // [TODO] 0x006BAE30 func_006BAE30 (52 B)
 // [TODO] 0x006BAE70 func_006BAE70 (288 B)
 // [TODO] 0x006BAF90 func_006BAF90 (476 B)
-// [TODO] 0x006BB170 func_006BB170 (8 B)
-// [TODO] 0x006BB180 func_006BB180 (8 B)
+// ============================================================================
+// [VERIFIED] func_006BB170 (0x006BB170, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a signed byte at +0x50 of its object.
+class Object
+{
+public:
+    signed char Get();
+    char m_pad00[0x50];
+    signed char m_Field50; // +0x50
+};
+
+signed char Object::Get()
+{
+    return m_Field50;
+}
+
+// ============================================================================
+// [VERIFIED] func_006BB180 (0x006BB180, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x50 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x50];
+    char m_Field50; // +0x50
+};
+
+void Object::Set(char value)
+{
+    m_Field50 = value;
+}
+
 // [TODO] 0x006BB190 func_006BB190 (56 B)
 // [TODO] 0x006BB1D0 func_006BB1D0 (48 B)
 // [TODO] 0x006BB200 func_006BB200 (36 B)
@@ -39966,8 +48700,38 @@ extern "C" void func_006B9DB0() {
 // [TODO] 0x006BEB60 func_006BEB60 (380 B)
 // [TODO] 0x006BECE0 func_006BECE0 (780 B)
 // [TODO] 0x006BEFF0 func_006BEFF0 (1528 B)
-// [TODO] 0x006BF5F0 func_006BF5F0 (8 B)
-// [TODO] 0x006BF600 func_006BF600 (8 B)
+// ============================================================================
+// [VERIFIED] func_006BF5F0 (0x006BF5F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_006BF600 (0x006BF600, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x006BF610 func_006BF610 (48 B)
 // [TODO] 0x006BF640 func_006BF640 (108 B)
 // [TODO] 0x006BF6B0 func_006BF6B0 (556 B)
@@ -40061,7 +48825,24 @@ extern "C" void func_006C29A0() {
 // [TODO] 0x006C3590 func_006C3590 (8 B)
 // [TODO] 0x006C35A0 func_006C35A0 (172 B)
 // [TODO] 0x006C3650 func_006C3650 (64 B)
-// [TODO] 0x006C3690 func_006C3690 (8 B)
+// ============================================================================
+// [VERIFIED] func_006C3690 (0x006C3690, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x50 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x50];
+    int m_Field50; // +0x50
+};
+
+int* Object::Get()
+{
+    return &m_Field50;
+}
+
 // [TODO] 0x006C36A0 func_006C36A0 (128 B)
 // [TODO] 0x006C3720 func_006C3720 (132 B)
 // [TODO] 0x006C37B0 func_006C37B0 (20 B)
@@ -40085,7 +48866,18 @@ extern "C" void func_006C29A0() {
 // [TODO] 0x006C42A0 func_006C42A0 (136 B)
 // [TODO] 0x006C4330 func_006C4330 (36 B)
 // [TODO] 0x006C4360 func_006C4360 (188 B)
-// [TODO] 0x006C4420 func_006C4420 (8 B)
+// ============================================================================
+// [VERIFIED] func_006C4420 (0x006C4420, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AD98.
+extern int D_0080AD98;
+
+int Get()
+{
+    return D_0080AD98;
+}
+
 // [TODO] 0x006C4430 func_006C4430 (216 B)
 // [TODO] 0x006C4510 func_006C4510 (236 B)
 // [TODO] 0x006C4600 func_006C4600 (16 B)
@@ -40134,14 +48926,49 @@ extern "C" void func_006C4620() {
 // [TODO] 0x006C5420 func_006C5420 (124 B)
 // [TODO] 0x006C54A0 func_006C54A0 (124 B)
 // [TODO] 0x006C5520 func_006C5520 (116 B)
-// [TODO] 0x006C55A0 func_006C55A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006C55A0 (0x006C55A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
 // [TODO] 0x006C55B0 func_006C55B0 (64 B)
 // [TODO] 0x006C55F0 func_006C55F0 (64 B)
 // [TODO] 0x006C5630 func_006C5630 (44 B)
 // [TODO] 0x006C5660 func_006C5660 (92 B)
 // [TODO] 0x006C56C0 func_006C56C0 (100 B)
-// [TODO] 0x006C5730 func_006C5730 (8 B)
-// [TODO] 0x006C5740 func_006C5740 (8 B)
+// ============================================================================
+// [VERIFIED] func_006C5730 (0x006C5730, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 448.
+int Number()
+{
+    return 448;
+}
+
+// ============================================================================
+// [VERIFIED] func_006C5740 (0x006C5740, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 640.
+int Number()
+{
+    return 640;
+}
+
 // [TODO] 0x006C5750 func_006C5750 (8 B)
 // [TODO] 0x006C5760 func_006C5760 (64 B)
 // [TODO] 0x006C57A0 func_006C57A0 (60 B)
@@ -40150,7 +48977,16 @@ extern "C" void func_006C4620() {
 // [TODO] 0x006C58A0 func_006C58A0 (20 B)
 // [TODO] 0x006C58C0 func_006C58C0 (120 B)
 // [TODO] 0x006C5940 func_006C5940 (124 B)
-// [TODO] 0x006C59C0 func_006C59C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006C59C0 (0x006C59C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006C59D0 func_006C59D0 (232 B)
 // [TODO] 0x006C5AC0 func_006C5AC0 (124 B)
 // [TODO] 0x006C5B40 func_006C5B40 (8 B)
@@ -40169,7 +49005,18 @@ extern "C" void func_006C4620() {
 // [TODO] 0x006C6110 func_006C6110 (792 B)
 // [TODO] 0x006C6430 func_006C6430 (424 B)
 // [TODO] 0x006C65E0 func_006C65E0 (136 B)
-// [TODO] 0x006C6670 func_006C6670 (8 B)
+// ============================================================================
+// [VERIFIED] func_006C6670 (0x006C6670, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns an unsigned 16-bit number kept in the global D_0080ADB0.
+extern unsigned short D_0080ADB0;
+
+unsigned short Get()
+{
+    return D_0080ADB0;
+}
+
 // [TODO] 0x006C6680 func_006C6680 (232 B)
 // [TODO] 0x006C6770 func_006C6770 (12 B)
 // [TODO] 0x006C6780 func_006C6780 (196 B)
@@ -40193,7 +49040,16 @@ extern "C" void func_006C4620() {
 extern "C" void func_006C7420() {
 }
 
-// [TODO] 0x006C7430 func_006C7430 (8 B)
+// ============================================================================
+// [VERIFIED] func_006C7430 (0x006C7430, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006C7440 func_006C7440 (92 B)
 // [TODO] 0x006C74A0 func_006C74A0 (28 B)
 // [TODO] 0x006C74C0 func_006C74C0 (144 B)
@@ -40262,7 +49118,16 @@ extern "C" void func_006CAEA0() {
 extern "C" void func_006CAEB0() {
 }
 
-// [TODO] 0x006CAEC0 func_006CAEC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006CAEC0 (0x006CAEC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_006CAED0 (0x006CAED0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -40304,12 +49169,40 @@ extern "C" void func_006CAED0() {
 // [TODO] 0x006CB900 func_006CB900 (68 B)
 // [TODO] 0x006CB950 func_006CB950 (8 B)
 // [TODO] 0x006CB960 func_006CB960 (52 B)
-// [TODO] 0x006CB9A0 func_006CB9A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006CB9A0 (0x006CB9A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080ADC8.
+extern int D_0080ADC8;
+
+int Get()
+{
+    return D_0080ADC8;
+}
+
 // [TODO] 0x006CB9B0 func_006CB9B0 (132 B)
 // [TODO] 0x006CBA40 func_006CBA40 (116 B)
 // [TODO] 0x006CBAC0 func_006CBAC0 (8 B)
 // [TODO] 0x006CBAD0 func_006CBAD0 (8 B)
-// [TODO] 0x006CBAE0 func_006CBAE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006CBAE0 (0x006CBAE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+void Object::Set(int value)
+{
+    m_Field10 = value;
+}
+
 // [TODO] 0x006CBAF0 func_006CBAF0 (92 B)
 // [TODO] 0x006CBB50 func_006CBB50 (124 B)
 // [TODO] 0x006CBBD0 func_006CBBD0 (192 B)
@@ -40333,7 +49226,22 @@ extern "C" void func_006CAED0() {
 // [TODO] 0x006CCA10 func_006CCA10 (116 B)
 // [TODO] 0x006CCA90 func_006CCA90 (8 B)
 // [TODO] 0x006CCAA0 func_006CCAA0 (288 B)
-// [TODO] 0x006CCBC0 func_006CCBC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006CCBC0 (0x006CCBC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x006CCBD0 func_006CCBD0 (124 B)
 // [TODO] 0x006CCC50 func_006CCC50 (76 B)
 // [TODO] 0x006CCCA0 func_006CCCA0 (232 B)
@@ -40369,17 +49277,105 @@ extern "C" void func_006CAED0() {
 // [TODO] 0x006CED40 func_006CED40 (36 B)
 // [TODO] 0x006CED70 func_006CED70 (56 B)
 // [TODO] 0x006CEDB0 func_006CEDB0 (116 B)
-// [TODO] 0x006CEE30 func_006CEE30 (8 B)
+// ============================================================================
+// [VERIFIED] func_006CEE30 (0x006CEE30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00808470.
+extern int D_00808470;
+
+int Get()
+{
+    return D_00808470;
+}
+
 // [TODO] 0x006CEE40 func_006CEE40 (20 B)
 // [TODO] 0x006CEE60 func_006CEE60 (12 B)
-// [TODO] 0x006CEE70 func_006CEE70 (8 B)
-// [TODO] 0x006CEE80 func_006CEE80 (8 B)
-// [TODO] 0x006CEE90 func_006CEE90 (8 B)
-// [TODO] 0x006CEEA0 func_006CEEA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006CEE70 (0x006CEE70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x18 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+void Object::Set(float value)
+{
+    m_Field18 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006CEE80 (0x006CEE80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x1C of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+void Object::Set(float value)
+{
+    m_Field1C = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006CEE90 (0x006CEE90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x20 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+void Object::Set(float value)
+{
+    m_Field20 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006CEEA0 (0x006CEEA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x24 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x24];
+    float m_Field24; // +0x24
+};
+
+void Object::Set(float value)
+{
+    m_Field24 = value;
+}
+
 // [TODO] 0x006CEEB0 func_006CEEB0 (24 B)
 // [TODO] 0x006CEED0 func_006CEED0 (200 B)
 // [TODO] 0x006CEFA0 func_006CEFA0 (96 B)
-// [TODO] 0x006CF000 func_006CF000 (8 B)
+// ============================================================================
+// [VERIFIED] func_006CF000 (0x006CF000, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_006CF010 (0x006CF010, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -40478,7 +49474,24 @@ extern "C" void func_006D13E0() {
 // [TODO] 0x006D25B0 func_006D25B0 (8 B)
 // [TODO] 0x006D25C0 func_006D25C0 (276 B)
 // [TODO] 0x006D26E0 func_006D26E0 (128 B)
-// [TODO] 0x006D2760 func_006D2760 (8 B)
+// ============================================================================
+// [VERIFIED] func_006D2760 (0x006D2760, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x94 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x94];
+    int m_Field94; // +0x94
+};
+
+void Object::Set(int value)
+{
+    m_Field94 = value;
+}
+
 // ============================================================================
 // [VERIFIED] func_006D2770 (0x006D2770, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -40505,21 +49518,157 @@ extern "C" void func_006D2770() {
 extern "C" void func_006D2780() {
 }
 
-// [TODO] 0x006D2790 func_006D2790 (8 B)
-// [TODO] 0x006D27A0 func_006D27A0 (8 B)
-// [TODO] 0x006D27B0 func_006D27B0 (8 B)
-// [TODO] 0x006D27C0 func_006D27C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006D2790 (0x006D2790, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x9C of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x9C];
+    float m_Field9C; // +0x9C
+};
+
+void Object::Set(float value)
+{
+    m_Field9C = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006D27A0 (0x006D27A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0xA4 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0xA4];
+    float m_FieldA4; // +0xA4
+};
+
+void Object::Set(float value)
+{
+    m_FieldA4 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006D27B0 (0x006D27B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0xAC of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0xAC];
+    float m_FieldAC; // +0xAC
+};
+
+void Object::Set(float value)
+{
+    m_FieldAC = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006D27C0 (0x006D27C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0xB8 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0xB8];
+    float m_FieldB8; // +0xB8
+};
+
+void Object::Set(float value)
+{
+    m_FieldB8 = value;
+}
+
 // [TODO] 0x006D27D0 func_006D27D0 (32 B)
 // [TODO] 0x006D27F0 func_006D27F0 (64 B)
-// [TODO] 0x006D2830 func_006D2830 (8 B)
-// [TODO] 0x006D2840 func_006D2840 (8 B)
+// ============================================================================
+// [VERIFIED] func_006D2830 (0x006D2830, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0xB4 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0xB4];
+    float m_FieldB4; // +0xB4
+};
+
+void Object::Set(float value)
+{
+    m_FieldB4 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006D2840 (0x006D2840, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x98 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x98];
+    float m_Field98; // +0x98
+};
+
+void Object::Set(float value)
+{
+    m_Field98 = value;
+}
+
 // [TODO] 0x006D2850 func_006D2850 (64 B)
 // [TODO] 0x006D2890 func_006D2890 (36 B)
 // [TODO] 0x006D28C0 func_006D28C0 (36 B)
 // [TODO] 0x006D28F0 func_006D28F0 (64 B)
 // [TODO] 0x006D2930 func_006D2930 (64 B)
-// [TODO] 0x006D2970 func_006D2970 (8 B)
-// [TODO] 0x006D2980 func_006D2980 (8 B)
+// ============================================================================
+// [VERIFIED] func_006D2970 (0x006D2970, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0xC4 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0xC4];
+    float m_FieldC4; // +0xC4
+};
+
+void Object::Set(float value)
+{
+    m_FieldC4 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006D2980 (0x006D2980, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x34 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x34];
+    char m_Field34; // +0x34
+};
+
+void Object::Set(char value)
+{
+    m_Field34 = value;
+}
+
 // [TODO] 0x006D2990 func_006D2990 (32 B)
 // [TODO] 0x006D29B0 func_006D29B0 (32 B)
 // [TODO] 0x006D29D0 func_006D29D0 (32 B)
@@ -40551,12 +49700,46 @@ extern "C" void func_006D3020() {
 // [TODO] 0x006D3930 func_006D3930 (36 B)
 // [TODO] 0x006D3960 func_006D3960 (144 B)
 // [TODO] 0x006D39F0 func_006D39F0 (128 B)
-// [TODO] 0x006D3A70 func_006D3A70 (8 B)
+// ============================================================================
+// [VERIFIED] func_006D3A70 (0x006D3A70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x120 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x120];
+    char m_Field120; // +0x120
+};
+
+void Object::Set(char value)
+{
+    m_Field120 = value;
+}
+
 // [TODO] 0x006D3A80 func_006D3A80 (448 B)
 // [TODO] 0x006D3C40 func_006D3C40 (412 B)
 // [TODO] 0x006D3DE0 func_006D3DE0 (176 B)
 // [TODO] 0x006D3E90 func_006D3E90 (108 B)
-// [TODO] 0x006D3F00 func_006D3F00 (8 B)
+// ============================================================================
+// [VERIFIED] func_006D3F00 (0x006D3F00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x114 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x114];
+    float m_Field114; // +0x114
+};
+
+void Object::Set(float value)
+{
+    m_Field114 = value;
+}
+
 // [TODO] 0x006D3F10 func_006D3F10 (440 B)
 // [TODO] 0x006D40D0 func_006D40D0 (12 B)
 // [TODO] 0x006D40E0 func_006D40E0 (12 B)
@@ -40866,9 +50049,43 @@ extern "C" void func_006DBED0() {
 // [TODO] 0x006DD060 func_006DD060 (464 B)
 // [TODO] 0x006DD230 func_006DD230 (116 B)
 // [TODO] 0x006DD2B0 func_006DD2B0 (96 B)
-// [TODO] 0x006DD310 func_006DD310 (8 B)
+// ============================================================================
+// [VERIFIED] func_006DD310 (0x006DD310, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Set(int value)
+{
+    m_FieldC = value;
+}
+
 // [TODO] 0x006DD320 func_006DD320 (456 B)
-// [TODO] 0x006DD4F0 func_006DD4F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006DD4F0 (0x006DD4F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x13 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x13];
+    unsigned char m_Field13; // +0x13
+};
+
+unsigned char Object::Get()
+{
+    return m_Field13;
+}
+
 // [TODO] 0x006DD500 func_006DD500 (508 B)
 // [TODO] 0x006DD700 func_006DD700 (96 B)
 // [TODO] 0x006DD760 func_006DD760 (56 B)
@@ -40922,8 +50139,26 @@ extern "C" void func_006DE6C0() {
 // [TODO] 0x006DE8B0 func_006DE8B0 (8 B)
 // [TODO] 0x006DE8C0 func_006DE8C0 (48 B)
 // [TODO] 0x006DE8F0 func_006DE8F0 (112 B)
-// [TODO] 0x006DE960 func_006DE960 (8 B)
-// [TODO] 0x006DE970 func_006DE970 (8 B)
+// ============================================================================
+// [VERIFIED] func_006DE960 (0x006DE960, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006DE970 (0x006DE970, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // ============================================================================
 // [VERIFIED] func_006DE980 (0x006DE980, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -40937,7 +50172,16 @@ extern "C" void func_006DE6C0() {
 extern "C" void func_006DE980() {
 }
 
-// [TODO] 0x006DE990 func_006DE990 (8 B)
+// ============================================================================
+// [VERIFIED] func_006DE990 (0x006DE990, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006DE9A0 func_006DE9A0 (76 B)
 // [TODO] 0x006DE9F0 func_006DE9F0 (96 B)
 // [TODO] 0x006DEA50 func_006DEA50 (120 B)
@@ -40997,17 +50241,84 @@ extern "C" void func_006DEFC0() {
 // [TODO] 0x006DF460 func_006DF460 (76 B)
 // [TODO] 0x006DF4B0 func_006DF4B0 (228 B)
 // [TODO] 0x006DF5A0 func_006DF5A0 (108 B)
-// [TODO] 0x006DF610 func_006DF610 (8 B)
+// ============================================================================
+// [VERIFIED] func_006DF610 (0x006DF610, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
 // [TODO] 0x006DF620 func_006DF620 (428 B)
 // [TODO] 0x006DF7D0 func_006DF7D0 (192 B)
 // [TODO] 0x006DF890 func_006DF890 (36 B)
 // [TODO] 0x006DF8C0 func_006DF8C0 (20 B)
 // [TODO] 0x006DF8E0 func_006DF8E0 (160 B)
 // [TODO] 0x006DF980 func_006DF980 (192 B)
-// [TODO] 0x006DFA40 func_006DFA40 (8 B)
+// ============================================================================
+// [VERIFIED] func_006DFA40 (0x006DFA40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x006DFA50 func_006DFA50 (20 B)
-// [TODO] 0x006DFA70 func_006DFA70 (8 B)
-// [TODO] 0x006DFA80 func_006DFA80 (8 B)
+// ============================================================================
+// [VERIFIED] func_006DFA70 (0x006DFA70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x20 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+int Object::Get()
+{
+    return m_Field20;
+}
+
+// ============================================================================
+// [VERIFIED] func_006DFA80 (0x006DFA80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x0 of its object.
+class Object
+{
+public:
+    int Get();
+    int m_Field0; // +0x0
+};
+
+int Object::Get()
+{
+    return m_Field0;
+}
+
 // [TODO] 0x006DFA90 func_006DFA90 (20 B)
 // [TODO] 0x006DFAB0 func_006DFAB0 (476 B)
 // [TODO] 0x006DFC90 func_006DFC90 (124 B)
@@ -41051,7 +50362,24 @@ extern "C" void func_006E0390() {
 // [TODO] 0x006E0640 func_006E0640 (80 B)
 // [TODO] 0x006E0690 func_006E0690 (68 B)
 // [TODO] 0x006E06E0 func_006E06E0 (96 B)
-// [TODO] 0x006E0740 func_006E0740 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E0740 (0x006E0740, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x006E0750 func_006E0750 (272 B)
 // [TODO] 0x006E0860 func_006E0860 (132 B)
 // [TODO] 0x006E08F0 func_006E08F0 (20 B)
@@ -41076,8 +50404,26 @@ extern "C" void func_006E0390() {
 extern "C" void func_006E11C0() {
 }
 
-// [TODO] 0x006E11D0 func_006E11D0 (8 B)
-// [TODO] 0x006E11E0 func_006E11E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E11D0 (0x006E11D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006E11E0 (0x006E11E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_006E11F0 (0x006E11F0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -41091,11 +50437,46 @@ extern "C" void func_006E11C0() {
 extern "C" void func_006E11F0() {
 }
 
-// [TODO] 0x006E1200 func_006E1200 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E1200 (0x006E1200, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006E1210 func_006E1210 (96 B)
-// [TODO] 0x006E1270 func_006E1270 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E1270 (0x006E1270, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006E1280 func_006E1280 (324 B)
-// [TODO] 0x006E13D0 func_006E13D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E13D0 (0x006E13D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x006E13E0 func_006E13E0 (120 B)
 // [TODO] 0x006E1460 func_006E1460 (68 B)
 // [TODO] 0x006E14B0 func_006E14B0 (184 B)
@@ -41107,7 +50488,24 @@ extern "C" void func_006E11F0() {
 // [TODO] 0x006E1840 func_006E1840 (184 B)
 // [TODO] 0x006E1900 func_006E1900 (580 B)
 // [TODO] 0x006E1B50 func_006E1B50 (16 B)
-// [TODO] 0x006E1B60 func_006E1B60 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E1B60 (0x006E1B60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x34 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+};
+
+int Object::Get()
+{
+    return m_Field34;
+}
+
 // [TODO] 0x006E1B70 func_006E1B70 (324 B)
 // [TODO] 0x006E1CC0 func_006E1CC0 (668 B)
 // [TODO] 0x006E1F60 func_006E1F60 (428 B)
@@ -41138,34 +50536,175 @@ extern "C" void func_006E2530() {
 extern "C" void func_006E2540() {
 }
 
-// [TODO] 0x006E2550 func_006E2550 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E2550 (0x006E2550, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006E2560 func_006E2560 (96 B)
 // [TODO] 0x006E25C0 func_006E25C0 (328 B)
-// [TODO] 0x006E2710 func_006E2710 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E2710 (0x006E2710, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006E2720 func_006E2720 (96 B)
 // [TODO] 0x006E2780 func_006E2780 (328 B)
-// [TODO] 0x006E28D0 func_006E28D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E28D0 (0x006E28D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006E28E0 func_006E28E0 (96 B)
 // [TODO] 0x006E2940 func_006E2940 (328 B)
-// [TODO] 0x006E2A90 func_006E2A90 (8 B)
-// [TODO] 0x006E2AA0 func_006E2AA0 (8 B)
-// [TODO] 0x006E2AB0 func_006E2AB0 (8 B)
-// [TODO] 0x006E2AC0 func_006E2AC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E2A90 (0x006E2A90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006E2AA0 (0x006E2AA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006E2AB0 (0x006E2AB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006E2AC0 (0x006E2AC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x006E2AD0 func_006E2AD0 (120 B)
-// [TODO] 0x006E2B50 func_006E2B50 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E2B50 (0x006E2B50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x006E2B60 func_006E2B60 (120 B)
-// [TODO] 0x006E2BE0 func_006E2BE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E2BE0 (0x006E2BE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x006E2BF0 func_006E2BF0 (120 B)
 // [TODO] 0x006E2C70 func_006E2C70 (96 B)
 // [TODO] 0x006E2CD0 func_006E2CD0 (120 B)
 // [TODO] 0x006E2D50 func_006E2D50 (160 B)
 // [TODO] 0x006E2DF0 func_006E2DF0 (316 B)
 // [TODO] 0x006E2F30 func_006E2F30 (164 B)
-// [TODO] 0x006E2FE0 func_006E2FE0 (8 B)
-// [TODO] 0x006E2FF0 func_006E2FF0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E2FE0 (0x006E2FE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006E2FF0 (0x006E2FF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006E3000 func_006E3000 (76 B)
-// [TODO] 0x006E3050 func_006E3050 (8 B)
-// [TODO] 0x006E3060 func_006E3060 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E3050 (0x006E3050, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006E3060 (0x006E3060, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006E3070 func_006E3070 (132 B)
 // [TODO] 0x006E3100 func_006E3100 (132 B)
 // [TODO] 0x006E3190 func_006E3190 (36 B)
@@ -41201,9 +50740,43 @@ extern "C" void func_006E2540() {
 // [TODO] 0x006E3F60 func_006E3F60 (108 B)
 // [TODO] 0x006E3FD0 func_006E3FD0 (120 B)
 // [TODO] 0x006E4050 func_006E4050 (436 B)
-// [TODO] 0x006E4210 func_006E4210 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E4210 (0x006E4210, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x20 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+int* Object::Get()
+{
+    return &m_Field20;
+}
+
 // [TODO] 0x006E4220 func_006E4220 (12 B)
-// [TODO] 0x006E4230 func_006E4230 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E4230 (0x006E4230, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x14 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int* Object::Get()
+{
+    return &m_Field14;
+}
+
 // [TODO] 0x006E4240 func_006E4240 (20 B)
 // [TODO] 0x006E4260 func_006E4260 (24 B)
 // [TODO] 0x006E4280 func_006E4280 (76 B)
@@ -41235,7 +50808,24 @@ extern "C" void func_006E2540() {
 // [TODO] 0x006E5000 func_006E5000 (96 B)
 // [TODO] 0x006E5060 func_006E5060 (76 B)
 // [TODO] 0x006E50B0 func_006E50B0 (96 B)
-// [TODO] 0x006E5110 func_006E5110 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E5110 (0x006E5110, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x006E5120 func_006E5120 (16 B)
 // [TODO] 0x006E5130 func_006E5130 (148 B)
 // [TODO] 0x006E51D0 func_006E51D0 (272 B)
@@ -41246,7 +50836,24 @@ extern "C" void func_006E2540() {
 // [TODO] 0x006E54E0 func_006E54E0 (232 B)
 // [TODO] 0x006E55D0 func_006E55D0 (208 B)
 // [TODO] 0x006E56A0 func_006E56A0 (96 B)
-// [TODO] 0x006E5700 func_006E5700 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E5700 (0x006E5700, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x006E5710 func_006E5710 (16 B)
 // [TODO] 0x006E5720 func_006E5720 (16 B)
 // [TODO] 0x006E5730 func_006E5730 (80 B)
@@ -41275,7 +50882,16 @@ extern "C" void func_006E2540() {
 // [TODO] 0x006E7CB0 fight::ScriptReader::vfunc_11 (1116 B)
 // [TODO] 0x006E8110 fight::ScriptReader::vfunc_12 (688 B)
 // [TODO] 0x006E83C0 fight::ScriptReader::vfunc_13 (712 B)
-// [TODO] 0x006E8690 func_006E8690 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E8690 (0x006E8690, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006E86A0 func_006E86A0 (64 B)
 // [TODO] 0x006E86E0 func_006E86E0 (52 B)
 // [TODO] 0x006E8720 func_006E8720 (68 B)
@@ -41285,10 +50901,53 @@ extern "C" void func_006E2540() {
 // [TODO] 0x006E88C0 func_006E88C0 (60 B)
 // [TODO] 0x006E8900 func_006E8900 (96 B)
 // [TODO] 0x006E8960 func_006E8960 (52 B)
-// [TODO] 0x006E89A0 func_006E89A0 (8 B)
-// [TODO] 0x006E89B0 func_006E89B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E89A0 (0x006E89A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006E89B0 (0x006E89B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x14 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int* Object::Get()
+{
+    return &m_Field14;
+}
+
 // [TODO] 0x006E89C0 func_006E89C0 (36 B)
-// [TODO] 0x006E89F0 func_006E89F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006E89F0 (0x006E89F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x54 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x54];
+    int m_Field54; // +0x54
+};
+
+int* Object::Get()
+{
+    return &m_Field54;
+}
+
 // [TODO] 0x006E8A00 func_006E8A00 (36 B)
 // ============================================================================
 // [VERIFIED] func_006E8A30 (0x006E8A30, 8 B)
@@ -41372,18 +51031,120 @@ extern "C" void func_006E8A40() {
 // [TODO] 0x006EBA50 func_006EBA50 (260 B)
 // [TODO] 0x006EBB60 func_006EBB60 (8 B)
 // [TODO] 0x006EBB70 func_006EBB70 (288 B)
-// [TODO] 0x006EBC90 func_006EBC90 (8 B)
-// [TODO] 0x006EBCA0 func_006EBCA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EBC90 (0x006EBC90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x8 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int* Object::Get()
+{
+    return &m_Field8;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EBCA0 (0x006EBCA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x006EBCB0 func_006EBCB0 (120 B)
 // [TODO] 0x006EBD30 func_006EBD30 (332 B)
 // [TODO] 0x006EBE80 func_006EBE80 (60 B)
 // [TODO] 0x006EBEC0 func_006EBEC0 (96 B)
-// [TODO] 0x006EBF20 func_006EBF20 (8 B)
-// [TODO] 0x006EBF30 func_006EBF30 (8 B)
-// [TODO] 0x006EBF40 func_006EBF40 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EBF20 (0x006EBF20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x18 of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+void Object::Set(float value)
+{
+    m_Field18 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EBF30 (0x006EBF30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a float at +0x1C of its object.
+class Object
+{
+public:
+    void Set(float value);
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+void Object::Set(float value)
+{
+    m_Field1C = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EBF40 (0x006EBF40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0xC of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0xC];
+    char m_FieldC; // +0xC
+};
+
+void Object::Set(char value)
+{
+    m_FieldC = value;
+}
+
 // [TODO] 0x006EBF50 func_006EBF50 (260 B)
 // [TODO] 0x006EC060 func_006EC060 (16 B)
-// [TODO] 0x006EC070 func_006EC070 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EC070 (0x006EC070, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xB0 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xB0];
+    int m_FieldB0; // +0xB0
+};
+
+int Object::Get()
+{
+    return m_FieldB0;
+}
+
 // [TODO] 0x006EC080 func_006EC080 (472 B)
 // [TODO] 0x006EC260 func_006EC260 (368 B)
 // [TODO] 0x006EC3D0 func_006EC3D0 (1752 B)
@@ -41391,9 +51152,43 @@ extern "C" void func_006E8A40() {
 // [TODO] 0x006ECB70 func_006ECB70 (340 B)
 // [TODO] 0x006ECCD0 func_006ECCD0 (216 B)
 // [TODO] 0x006ECDB0 func_006ECDB0 (412 B)
-// [TODO] 0x006ECF50 func_006ECF50 (8 B)
+// ============================================================================
+// [VERIFIED] func_006ECF50 (0x006ECF50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+void Object::Set(int value)
+{
+    m_Field10 = value;
+}
+
 // [TODO] 0x006ECF60 func_006ECF60 (168 B)
-// [TODO] 0x006ED010 func_006ED010 (8 B)
+// ============================================================================
+// [VERIFIED] func_006ED010 (0x006ED010, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x006ED020 func_006ED020 (712 B)
 // [TODO] 0x006ED2F0 func_006ED2F0 (44 B)
 // [TODO] 0x006ED320 func_006ED320 (348 B)
@@ -41409,9 +51204,44 @@ extern "C" void func_006E8A40() {
 // [TODO] 0x006EDCD0 func_006EDCD0 (200 B)
 // [TODO] 0x006EDDA0 func_006EDDA0 (212 B)
 // [TODO] 0x006EDE80 func_006EDE80 (8 B)
-// [TODO] 0x006EDE90 func_006EDE90 (8 B)
-// [TODO] 0x006EDEA0 func_006EDEA0 (8 B)
-// [TODO] 0x006EDEB0 func_006EDEB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EDE90 (0x006EDE90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EDEA0 (0x006EDEA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EDEB0 (0x006EDEB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // ============================================================================
 // [VERIFIED] func_006EDEC0 (0x006EDEC0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -41425,7 +51255,16 @@ extern "C" void func_006E8A40() {
 extern "C" void func_006EDEC0() {
 }
 
-// [TODO] 0x006EDED0 func_006EDED0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EDED0 (0x006EDED0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006EDEE0 func_006EDEE0 (156 B)
 // [TODO] 0x006EDF80 func_006EDF80 (164 B)
 // [TODO] 0x006EE030 func_006EE030 (316 B)
@@ -41449,9 +51288,52 @@ extern "C" void func_006EE230() {
 // [TODO] 0x006EE250 func_006EE250 (36 B)
 // [TODO] 0x006EE280 func_006EE280 (344 B)
 // [TODO] 0x006EE3E0 func_006EE3E0 (256 B)
-// [TODO] 0x006EE4E0 func_006EE4E0 (8 B)
-// [TODO] 0x006EE4F0 func_006EE4F0 (8 B)
-// [TODO] 0x006EE500 func_006EE500 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EE4E0 (0x006EE4E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EE4F0 (0x006EE4F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0xC of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int* Object::Get()
+{
+    return &m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EE500 (0x006EE500, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 2.
+int Number()
+{
+    return 2;
+}
+
 // ============================================================================
 // [VERIFIED] func_006EE510 (0x006EE510, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -41469,7 +51351,16 @@ extern "C" void func_006EE510() {
 // [TODO] 0x006EE610 func_006EE610 (8 B)
 // [TODO] 0x006EE620 func_006EE620 (84 B)
 // [TODO] 0x006EE680 func_006EE680 (80 B)
-// [TODO] 0x006EE6D0 func_006EE6D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EE6D0 (0x006EE6D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006EE6E0 func_006EE6E0 (360 B)
 // [TODO] 0x006EE850 func_006EE850 (184 B)
 // [TODO] 0x006EE910 func_006EE910 (92 B)
@@ -41477,12 +51368,51 @@ extern "C" void func_006EE510() {
 // [TODO] 0x006EE9C0 func_006EE9C0 (224 B)
 // [TODO] 0x006EEAA0 func_006EEAA0 (56 B)
 // [TODO] 0x006EEAE0 func_006EEAE0 (440 B)
-// [TODO] 0x006EECA0 func_006EECA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EECA0 (0x006EECA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00808508.
+extern int D_00808508;
+
+int Get()
+{
+    return D_00808508;
+}
+
 // [TODO] 0x006EECB0 func_006EECB0 (128 B)
-// [TODO] 0x006EED30 func_006EED30 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EED30 (0x006EED30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x18 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int* Object::Get()
+{
+    return &m_Field18;
+}
+
 // [TODO] 0x006EED40 func_006EED40 (112 B)
 // [TODO] 0x006EEDB0 func_006EEDB0 (68 B)
-// [TODO] 0x006EEE00 func_006EEE00 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EEE00 (0x006EEE00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AEB4.
+extern int D_0080AEB4;
+
+int Get()
+{
+    return D_0080AEB4;
+}
+
 // [TODO] 0x006EEE10 func_006EEE10 (8 B)
 // [TODO] 0x006EEE20 func_006EEE20 (96 B)
 // [TODO] 0x006EEE80 func_006EEE80 (96 B)
@@ -41491,10 +51421,54 @@ extern "C" void func_006EE510() {
 // [TODO] 0x006EEF50 func_006EEF50 (88 B)
 // [TODO] 0x006EEFB0 func_006EEFB0 (12 B)
 // [TODO] 0x006EEFC0 func_006EEFC0 (12 B)
-// [TODO] 0x006EEFD0 func_006EEFD0 (8 B)
-// [TODO] 0x006EEFE0 func_006EEFE0 (8 B)
-// [TODO] 0x006EEFF0 func_006EEFF0 (8 B)
-// [TODO] 0x006EF000 func_006EF000 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EEFD0 (0x006EEFD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AEC8.
+extern int D_0080AEC8;
+
+int Get()
+{
+    return D_0080AEC8;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EEFE0 (0x006EEFE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AECC.
+extern int D_0080AECC;
+
+int Get()
+{
+    return D_0080AECC;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EEFF0 (0x006EEFF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AED0.
+extern int D_0080AED0;
+
+int Get()
+{
+    return D_0080AED0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EF000 (0x006EF000, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AEC4.
+extern int D_0080AEC4;
+
+int Get()
+{
+    return D_0080AEC4;
+}
+
 // [TODO] 0x006EF010 func_006EF010 (300 B)
 // [TODO] 0x006EF140 func_006EF140 (768 B)
 // ============================================================================
@@ -41510,29 +51484,120 @@ extern "C" void func_006EE510() {
 extern "C" void func_006EF440() {
 }
 
-// [TODO] 0x006EF450 func_006EF450 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EF450 (0x006EF450, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006EF460 audio::Clip::vfunc_06 (212 B)
 // [TODO] 0x006EF540 func_006EF540 (124 B)
 // [TODO] 0x006EF5C0 func_006EF5C0 (100 B)
-// [TODO] 0x006EF630 func_006EF630 (8 B)
-// [TODO] 0x006EF640 func_006EF640 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EF630 (0x006EF630, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00809EFC.
+extern int D_00809EFC;
+
+int Get()
+{
+    return D_00809EFC;
+}
+
+// ============================================================================
+// [VERIFIED] func_006EF640 (0x006EF640, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006EF650 func_006EF650 (96 B)
-// [TODO] 0x006EF6B0 func_006EF6B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EF6B0 (0x006EF6B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AEDC.
+extern int D_0080AEDC;
+
+int Get()
+{
+    return D_0080AEDC;
+}
+
 // [TODO] 0x006EF6C0 func_006EF6C0 (84 B)
 // [TODO] 0x006EF720 func_006EF720 (12 B)
 // [TODO] 0x006EF730 func_006EF730 (116 B)
 // [TODO] 0x006EF7B0 func_006EF7B0 (124 B)
-// [TODO] 0x006EF830 func_006EF830 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EF830 (0x006EF830, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
 // [TODO] 0x006EF840 func_006EF840 (68 B)
 // [TODO] 0x006EF890 func_006EF890 (636 B)
 // [TODO] 0x006EFB10 func_006EFB10 (52 B)
 // [TODO] 0x006EFB50 func_006EFB50 (156 B)
 // [TODO] 0x006EFBF0 func_006EFBF0 (188 B)
-// [TODO] 0x006EFCB0 func_006EFCB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EFCB0 (0x006EFCB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x24 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x24];
+    int m_Field24; // +0x24
+};
+
+int Object::Get()
+{
+    return m_Field24;
+}
+
 // [TODO] 0x006EFCC0 func_006EFCC0 (8 B)
 // [TODO] 0x006EFCD0 func_006EFCD0 (40 B)
 // [TODO] 0x006EFD00 func_006EFD00 (72 B)
-// [TODO] 0x006EFD50 func_006EFD50 (8 B)
+// ============================================================================
+// [VERIFIED] func_006EFD50 (0x006EFD50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x20 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+int* Object::Get()
+{
+    return &m_Field20;
+}
+
 // [TODO] 0x006EFD60 func_006EFD60 (84 B)
 // [TODO] 0x006EFDC0 func_006EFDC0 (144 B)
 // [TODO] 0x006EFE50 func_006EFE50 (152 B)
@@ -41543,7 +51608,24 @@ extern "C" void func_006EF440() {
 // [TODO] 0x006F01D0 func_006F01D0 (8 B)
 // [TODO] 0x006F01E0 func_006F01E0 (192 B)
 // [TODO] 0x006F02A0 func_006F02A0 (240 B)
-// [TODO] 0x006F0390 func_006F0390 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F0390 (0x006F0390, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0xB9 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0xB9];
+    unsigned char m_FieldB9; // +0xB9
+};
+
+unsigned char Object::Get()
+{
+    return m_FieldB9;
+}
+
 // [TODO] 0x006F03A0 func_006F03A0 (20 B)
 // [TODO] 0x006F03C0 func_006F03C0 (96 B)
 // [TODO] 0x006F0420 func_006F0420 (668 B)
@@ -41560,7 +51642,24 @@ extern "C" void func_006EF440() {
 // [TODO] 0x006F1300 func_006F1300 (8 B)
 // [TODO] 0x006F1310 func_006F1310 (8 B)
 // [TODO] 0x006F1320 func_006F1320 (12 B)
-// [TODO] 0x006F1330 func_006F1330 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F1330 (0x006F1330, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC0 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC0];
+    int m_FieldC0; // +0xC0
+};
+
+int Object::Get()
+{
+    return m_FieldC0;
+}
+
 // [TODO] 0x006F1340 func_006F1340 (76 B)
 // [TODO] 0x006F1390 func_006F1390 (56 B)
 // [TODO] 0x006F13D0 func_006F13D0 (108 B)
@@ -41581,7 +51680,18 @@ extern "C" void func_006EF440() {
 // [TODO] 0x006F2030 func_006F2030 (80 B)
 // [TODO] 0x006F2080 func_006F2080 (248 B)
 // [TODO] 0x006F2180 func_006F2180 (252 B)
-// [TODO] 0x006F2280 func_006F2280 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F2280 (0x006F2280, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00809F30.
+extern int D_00809F30;
+
+int Get()
+{
+    return D_00809F30;
+}
+
 // [TODO] 0x006F2290 func_006F2290 (48 B)
 // [TODO] 0x006F22C0 func_006F22C0 (64 B)
 // [TODO] 0x006F2300 func_006F2300 (8 B)
@@ -41594,7 +51704,18 @@ extern "C" void func_006EF440() {
 // [TODO] 0x006F23E0 func_006F23E0 (132 B)
 // [TODO] 0x006F2470 func_006F2470 (188 B)
 // [TODO] 0x006F2530 func_006F2530 (164 B)
-// [TODO] 0x006F25E0 func_006F25E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F25E0 (0x006F25E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AF14.
+extern int D_0080AF14;
+
+int Get()
+{
+    return D_0080AF14;
+}
+
 // [TODO] 0x006F25F0 func_006F25F0 (108 B)
 // [TODO] 0x006F2660 func_006F2660 (12 B)
 // [TODO] 0x006F2670 func_006F2670 (8 B)
@@ -41602,7 +51723,24 @@ extern "C" void func_006EF440() {
 // [TODO] 0x006F26B0 func_006F26B0 (668 B)
 // [TODO] 0x006F2950 func_006F2950 (80 B)
 // [TODO] 0x006F29A0 func_006F29A0 (152 B)
-// [TODO] 0x006F2A40 func_006F2A40 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F2A40 (0x006F2A40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x48 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x48];
+    int m_Field48; // +0x48
+};
+
+int Object::Get()
+{
+    return m_Field48;
+}
+
 // [TODO] 0x006F2A50 func_006F2A50 (76 B)
 // [TODO] 0x006F2AA0 func_006F2AA0 (16 B)
 // [TODO] 0x006F2AB0 func_006F2AB0 (204 B)
@@ -41675,8 +51813,28 @@ extern "C" void func_006F4510() {
 // [TODO] 0x006F49F0 func_006F49F0 (96 B)
 // [TODO] 0x006F4A50 func_006F4A50 (112 B)
 // [TODO] 0x006F4AC0 func_006F4AC0 (100 B)
-// [TODO] 0x006F4B30 func_006F4B30 (8 B)
-// [TODO] 0x006F4B40 func_006F4B40 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F4B30 (0x006F4B30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AFAC.
+extern int D_0080AFAC;
+
+int Get()
+{
+    return D_0080AFAC;
+}
+
+// ============================================================================
+// [VERIFIED] func_006F4B40 (0x006F4B40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006F4B50 func_006F4B50 (168 B)
 // [TODO] 0x006F4C00 func_006F4C00 (108 B)
 // [TODO] 0x006F4C70 func_006F4C70 (104 B)
@@ -41695,7 +51853,18 @@ extern "C" void func_006F4510() {
 // [TODO] 0x006F5690 func_006F5690 (124 B)
 // [TODO] 0x006F5710 func_006F5710 (96 B)
 // [TODO] 0x006F5770 func_006F5770 (100 B)
-// [TODO] 0x006F57E0 func_006F57E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F57E0 (0x006F57E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AFD4.
+extern int D_0080AFD4;
+
+int Get()
+{
+    return D_0080AFD4;
+}
+
 // [TODO] 0x006F57F0 func_006F57F0 (180 B)
 // [TODO] 0x006F58B0 func_006F58B0 (80 B)
 // ============================================================================
@@ -41722,7 +51891,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F61E0 func_006F61E0 (196 B)
 // [TODO] 0x006F62B0 func_006F62B0 (96 B)
 // [TODO] 0x006F6310 func_006F6310 (128 B)
-// [TODO] 0x006F6390 func_006F6390 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F6390 (0x006F6390, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080AFF0.
+extern int D_0080AFF0;
+
+int Get()
+{
+    return D_0080AFF0;
+}
+
 // [TODO] 0x006F63A0 func_006F63A0 (44 B)
 // [TODO] 0x006F63D0 func_006F63D0 (280 B)
 // [TODO] 0x006F64F0 func_006F64F0 (96 B)
@@ -41733,7 +51913,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F67D0 func_006F67D0 (96 B)
 // [TODO] 0x006F6830 func_006F6830 (96 B)
 // [TODO] 0x006F6890 func_006F6890 (100 B)
-// [TODO] 0x006F6900 func_006F6900 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F6900 (0x006F6900, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B014.
+extern int D_0080B014;
+
+int Get()
+{
+    return D_0080B014;
+}
+
 // [TODO] 0x006F6910 func_006F6910 (108 B)
 // [TODO] 0x006F6980 func_006F6980 (96 B)
 // [TODO] 0x006F69E0 func_006F69E0 (224 B)
@@ -41744,7 +51935,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F6D90 func_006F6D90 (92 B)
 // [TODO] 0x006F6DF0 func_006F6DF0 (96 B)
 // [TODO] 0x006F6E50 func_006F6E50 (100 B)
-// [TODO] 0x006F6EC0 func_006F6EC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F6EC0 (0x006F6EC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B030.
+extern int D_0080B030;
+
+int Get()
+{
+    return D_0080B030;
+}
+
 // [TODO] 0x006F6ED0 func_006F6ED0 (112 B)
 // [TODO] 0x006F6F40 func_006F6F40 (96 B)
 // [TODO] 0x006F6FA0 func_006F6FA0 (208 B)
@@ -41757,7 +51959,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F7290 func_006F7290 (100 B)
 // [TODO] 0x006F7300 func_006F7300 (96 B)
 // [TODO] 0x006F7360 func_006F7360 (100 B)
-// [TODO] 0x006F73D0 func_006F73D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F73D0 (0x006F73D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B050.
+extern int D_0080B050;
+
+int Get()
+{
+    return D_0080B050;
+}
+
 // [TODO] 0x006F73E0 func_006F73E0 (88 B)
 // [TODO] 0x006F7440 func_006F7440 (96 B)
 // [TODO] 0x006F74A0 func_006F74A0 (216 B)
@@ -41772,7 +51985,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F8150 func_006F8150 (96 B)
 // [TODO] 0x006F81B0 func_006F81B0 (96 B)
 // [TODO] 0x006F8210 func_006F8210 (100 B)
-// [TODO] 0x006F8280 func_006F8280 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F8280 (0x006F8280, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B070.
+extern int D_0080B070;
+
+int Get()
+{
+    return D_0080B070;
+}
+
 // [TODO] 0x006F8290 func_006F8290 (176 B)
 // [TODO] 0x006F8340 func_006F8340 (112 B)
 // [TODO] 0x006F83B0 func_006F83B0 (20 B)
@@ -41781,7 +52005,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F84A0 func_006F84A0 (76 B)
 // [TODO] 0x006F84F0 func_006F84F0 (96 B)
 // [TODO] 0x006F8550 func_006F8550 (100 B)
-// [TODO] 0x006F85C0 func_006F85C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F85C0 (0x006F85C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B090.
+extern int D_0080B090;
+
+int Get()
+{
+    return D_0080B090;
+}
+
 // [TODO] 0x006F85D0 func_006F85D0 (80 B)
 // [TODO] 0x006F8620 func_006F8620 (112 B)
 // [TODO] 0x006F8690 func_006F8690 (152 B)
@@ -41790,7 +52025,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F8810 func_006F8810 (100 B)
 // [TODO] 0x006F8880 func_006F8880 (96 B)
 // [TODO] 0x006F88E0 func_006F88E0 (100 B)
-// [TODO] 0x006F8950 func_006F8950 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F8950 (0x006F8950, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B0B0.
+extern int D_0080B0B0;
+
+int Get()
+{
+    return D_0080B0B0;
+}
+
 // [TODO] 0x006F8960 func_006F8960 (88 B)
 // [TODO] 0x006F89C0 func_006F89C0 (112 B)
 // [TODO] 0x006F8A30 func_006F8A30 (28 B)
@@ -41799,7 +52045,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F8B30 func_006F8B30 (96 B)
 // [TODO] 0x006F8B90 func_006F8B90 (96 B)
 // [TODO] 0x006F8BF0 func_006F8BF0 (100 B)
-// [TODO] 0x006F8C60 func_006F8C60 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F8C60 (0x006F8C60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B0D0.
+extern int D_0080B0D0;
+
+int Get()
+{
+    return D_0080B0D0;
+}
+
 // [TODO] 0x006F8C70 func_006F8C70 (88 B)
 // [TODO] 0x006F8CD0 func_006F8CD0 (112 B)
 // [TODO] 0x006F8D40 func_006F8D40 (44 B)
@@ -41808,7 +52065,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F8E80 func_006F8E80 (140 B)
 // [TODO] 0x006F8F10 func_006F8F10 (96 B)
 // [TODO] 0x006F8F70 func_006F8F70 (100 B)
-// [TODO] 0x006F8FE0 func_006F8FE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F8FE0 (0x006F8FE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B0F0.
+extern int D_0080B0F0;
+
+int Get()
+{
+    return D_0080B0F0;
+}
+
 // [TODO] 0x006F8FF0 func_006F8FF0 (92 B)
 // [TODO] 0x006F9050 func_006F9050 (112 B)
 // [TODO] 0x006F90C0 func_006F90C0 (20 B)
@@ -41817,7 +52085,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F91A0 func_006F91A0 (76 B)
 // [TODO] 0x006F91F0 func_006F91F0 (96 B)
 // [TODO] 0x006F9250 func_006F9250 (100 B)
-// [TODO] 0x006F92C0 func_006F92C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F92C0 (0x006F92C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B110.
+extern int D_0080B110;
+
+int Get()
+{
+    return D_0080B110;
+}
+
 // [TODO] 0x006F92D0 func_006F92D0 (80 B)
 // [TODO] 0x006F9320 func_006F9320 (112 B)
 // [TODO] 0x006F9390 func_006F9390 (152 B)
@@ -41826,7 +52105,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F9510 func_006F9510 (80 B)
 // [TODO] 0x006F9560 func_006F9560 (96 B)
 // [TODO] 0x006F95C0 func_006F95C0 (100 B)
-// [TODO] 0x006F9630 func_006F9630 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F9630 (0x006F9630, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B130.
+extern int D_0080B130;
+
+int Get()
+{
+    return D_0080B130;
+}
+
 // [TODO] 0x006F9640 func_006F9640 (88 B)
 // [TODO] 0x006F96A0 func_006F96A0 (1032 B)
 // [TODO] 0x006F9AB0 func_006F9AB0 (48 B)
@@ -41836,8 +52126,42 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006F9BC0 func_006F9BC0 (332 B)
 // [TODO] 0x006F9D10 func_006F9D10 (240 B)
 // [TODO] 0x006F9E00 func_006F9E00 (172 B)
-// [TODO] 0x006F9EB0 func_006F9EB0 (8 B)
-// [TODO] 0x006F9EC0 func_006F9EC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006F9EB0 (0x006F9EB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 16-bit number at +0x6 of its object.
+class Object
+{
+public:
+    void Set(short value);
+    char m_pad00[0x6];
+    short m_Field6; // +0x6
+};
+
+void Object::Set(short value)
+{
+    m_Field6 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_006F9EC0 (0x006F9EC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns an unsigned 16-bit number at +0x6 of its object.
+class Object
+{
+public:
+    unsigned short Get();
+    char m_pad00[0x6];
+    unsigned short m_Field6; // +0x6
+};
+
+unsigned short Object::Get()
+{
+    return m_Field6;
+}
+
 // [TODO] 0x006F9ED0 func_006F9ED0 (32 B)
 // [TODO] 0x006F9EF0 func_006F9EF0 (32 B)
 // [TODO] 0x006F9F10 func_006F9F10 (176 B)
@@ -41856,7 +52180,22 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006FA850 func_006FA850 (120 B)
 // [TODO] 0x006FA8D0 func_006FA8D0 (28 B)
 // [TODO] 0x006FA8F0 func_006FA8F0 (48 B)
-// [TODO] 0x006FA920 func_006FA920 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FA920 (0x006FA920, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x006FA930 func_006FA930 (192 B)
 // [TODO] 0x006FA9F0 func_006FA9F0 (56 B)
 // [TODO] 0x006FAA30 func_006FAA30 (444 B)
@@ -41884,8 +52223,26 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006FB4E0 func_006FB4E0 (156 B)
 // [TODO] 0x006FB580 func_006FB580 (16 B)
 // [TODO] 0x006FB590 func_006FB590 (12 B)
-// [TODO] 0x006FB5A0 func_006FB5A0 (8 B)
-// [TODO] 0x006FB5B0 func_006FB5B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FB5A0 (0x006FB5A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006FB5B0 (0x006FB5B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006FB5C0 func_006FB5C0 (16 B)
 // [TODO] 0x006FB5D0 func_006FB5D0 (20 B)
 // [TODO] 0x006FB5F0 func_006FB5F0 (24 B)
@@ -41899,7 +52256,16 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006FB8A0 func_006FB8A0 (48 B)
 // [TODO] 0x006FB8D0 func_006FB8D0 (76 B)
 // [TODO] 0x006FB920 func_006FB920 (40 B)
-// [TODO] 0x006FB950 func_006FB950 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FB950 (0x006FB950, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x006FB960 func_006FB960 (160 B)
 // [TODO] 0x006FBA00 func_006FBA00 (96 B)
 // [TODO] 0x006FBA60 func_006FBA60 (280 B)
@@ -41925,7 +52291,16 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006FBF80 func_006FBF80 (64 B)
 // [TODO] 0x006FBFC0 func_006FBFC0 (12 B)
 // [TODO] 0x006FBFD0 func_006FBFD0 (8 B)
-// [TODO] 0x006FBFE0 func_006FBFE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FBFE0 (0x006FBFE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x006FBFF0 func_006FBFF0 (512 B)
 // [TODO] 0x006FC1F0 func_006FC1F0 (184 B)
 // [TODO] 0x006FC2B0 func_006FC2B0 (12 B)
@@ -41934,7 +52309,24 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006FC5E0 func_006FC5E0 (96 B)
 // [TODO] 0x006FC640 func_006FC640 (96 B)
 // [TODO] 0x006FC6A0 func_006FC6A0 (164 B)
-// [TODO] 0x006FC750 func_006FC750 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FC750 (0x006FC750, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a 16-bit number at +0x20 of its object.
+class Object
+{
+public:
+    short Get();
+    char m_pad00[0x20];
+    short m_Field20; // +0x20
+};
+
+short Object::Get()
+{
+    return m_Field20;
+}
+
 // [TODO] 0x006FC760 func_006FC760 (76 B)
 // [TODO] 0x006FC7B0 func_006FC7B0 (16 B)
 // [TODO] 0x006FC7C0 func_006FC7C0 (16 B)
@@ -41955,7 +52347,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006FCF70 func_006FCF70 (144 B)
 // [TODO] 0x006FD000 func_006FD000 (96 B)
 // [TODO] 0x006FD060 func_006FD060 (116 B)
-// [TODO] 0x006FD0E0 func_006FD0E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FD0E0 (0x006FD0E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B18C.
+extern int D_0080B18C;
+
+int Get()
+{
+    return D_0080B18C;
+}
+
 // [TODO] 0x006FD0F0 func_006FD0F0 (128 B)
 // [TODO] 0x006FD170 func_006FD170 (112 B)
 // [TODO] 0x006FD1E0 func_006FD1E0 (248 B)
@@ -41965,7 +52368,18 @@ extern "C" void func_006F5900() {
 // [TODO] 0x006FD400 func_006FD400 (144 B)
 // [TODO] 0x006FD490 func_006FD490 (96 B)
 // [TODO] 0x006FD4F0 func_006FD4F0 (116 B)
-// [TODO] 0x006FD570 func_006FD570 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FD570 (0x006FD570, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B1A8.
+extern int D_0080B1A8;
+
+int Get()
+{
+    return D_0080B1A8;
+}
+
 // [TODO] 0x006FD580 func_006FD580 (128 B)
 // [TODO] 0x006FD600 func_006FD600 (168 B)
 // [TODO] 0x006FD6B0 func_006FD6B0 (292 B)
@@ -42016,8 +52430,30 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x006FEA70 func_006FEA70 (212 B)
 // [TODO] 0x006FEB50 func_006FEB50 (96 B)
 // [TODO] 0x006FEBB0 func_006FEBB0 (96 B)
-// [TODO] 0x006FEC10 func_006FEC10 (8 B)
-// [TODO] 0x006FEC20 func_006FEC20 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FEC10 (0x006FEC10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B1C8.
+extern int D_0080B1C8;
+
+int Get()
+{
+    return D_0080B1C8;
+}
+
+// ============================================================================
+// [VERIFIED] func_006FEC20 (0x006FEC20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B1CC.
+extern int D_0080B1CC;
+
+int Get()
+{
+    return D_0080B1CC;
+}
+
 // [TODO] 0x006FEC30 func_006FEC30 (108 B)
 // [TODO] 0x006FECA0 func_006FECA0 (44 B)
 // [TODO] 0x006FECD0 func_006FECD0 (112 B)
@@ -42027,7 +52463,18 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x006FEE70 func_006FEE70 (72 B)
 // [TODO] 0x006FEEC0 func_006FEEC0 (96 B)
 // [TODO] 0x006FEF20 func_006FEF20 (116 B)
-// [TODO] 0x006FEFA0 func_006FEFA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FEFA0 (0x006FEFA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B1F4.
+extern int D_0080B1F4;
+
+int Get()
+{
+    return D_0080B1F4;
+}
+
 // [TODO] 0x006FEFB0 audio::SeqEventType<audio::SeqEventExpression>::vfunc_01 (116 B)
 // [TODO] 0x006FF030 func_006FF030 (96 B)
 // [TODO] 0x006FF090 func_006FF090 (12 B)
@@ -42040,7 +52487,18 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x006FF2E0 func_006FF2E0 (120 B)
 // [TODO] 0x006FF360 func_006FF360 (96 B)
 // [TODO] 0x006FF3C0 func_006FF3C0 (116 B)
-// [TODO] 0x006FF440 func_006FF440 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FF440 (0x006FF440, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B214.
+extern int D_0080B214;
+
+int Get()
+{
+    return D_0080B214;
+}
+
 // [TODO] 0x006FF450 func_006FF450 (144 B)
 // [TODO] 0x006FF4E0 func_006FF4E0 (96 B)
 // [TODO] 0x006FF540 func_006FF540 (12 B)
@@ -42053,7 +52511,18 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x006FF760 func_006FF760 (72 B)
 // [TODO] 0x006FF7B0 func_006FF7B0 (96 B)
 // [TODO] 0x006FF810 func_006FF810 (116 B)
-// [TODO] 0x006FF890 func_006FF890 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FF890 (0x006FF890, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B234.
+extern int D_0080B234;
+
+int Get()
+{
+    return D_0080B234;
+}
+
 // [TODO] 0x006FF8A0 audio::SeqEventType<audio::SeqEventWait>::vfunc_01 (116 B)
 // [TODO] 0x006FF920 func_006FF920 (112 B)
 // [TODO] 0x006FF990 func_006FF990 (68 B)
@@ -42063,7 +52532,18 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x006FFB20 func_006FFB20 (168 B)
 // [TODO] 0x006FFBD0 func_006FFBD0 (96 B)
 // [TODO] 0x006FFC30 func_006FFC30 (100 B)
-// [TODO] 0x006FFCA0 func_006FFCA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_006FFCA0 (0x006FFCA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B250.
+extern int D_0080B250;
+
+int Get()
+{
+    return D_0080B250;
+}
+
 // [TODO] 0x006FFCB0 func_006FFCB0 (44 B)
 // [TODO] 0x006FFCE0 func_006FFCE0 (96 B)
 // [TODO] 0x006FFD40 func_006FFD40 (248 B)
@@ -42075,7 +52555,18 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x007001C0 func_007001C0 (96 B)
 // [TODO] 0x00700220 func_00700220 (112 B)
 // [TODO] 0x00700290 func_00700290 (100 B)
-// [TODO] 0x00700300 func_00700300 (8 B)
+// ============================================================================
+// [VERIFIED] func_00700300 (0x00700300, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B274.
+extern int D_0080B274;
+
+int Get()
+{
+    return D_0080B274;
+}
+
 // [TODO] 0x00700310 func_00700310 (44 B)
 // [TODO] 0x00700340 func_00700340 (108 B)
 // [TODO] 0x007003B0 func_007003B0 (108 B)
@@ -42083,7 +52574,18 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x007004A0 func_007004A0 (104 B)
 // [TODO] 0x00700510 func_00700510 (108 B)
 // [TODO] 0x00700580 func_00700580 (116 B)
-// [TODO] 0x00700600 func_00700600 (8 B)
+// ============================================================================
+// [VERIFIED] func_00700600 (0x00700600, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B29C.
+extern int D_0080B29C;
+
+int Get()
+{
+    return D_0080B29C;
+}
+
 // [TODO] 0x00700610 func_00700610 (172 B)
 // [TODO] 0x007006C0 func_007006C0 (72 B)
 // [TODO] 0x00700710 func_00700710 (72 B)
@@ -42156,7 +52658,24 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x00703140 func_00703140 (448 B)
 // [TODO] 0x00703300 func_00703300 (112 B)
 // [TODO] 0x00703370 func_00703370 (120 B)
-// [TODO] 0x007033F0 func_007033F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007033F0 (0x007033F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x2C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x2C];
+    int m_Field2C; // +0x2C
+};
+
+int Object::Get()
+{
+    return m_Field2C;
+}
+
 // [TODO] 0x00703400 func_00703400 (240 B)
 // [TODO] 0x007034F0 func_007034F0 (164 B)
 // [TODO] 0x007035A0 func_007035A0 (8 B)
@@ -42180,13 +52699,35 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x00703CF0 func_00703CF0 (76 B)
 // [TODO] 0x00703D40 func_00703D40 (268 B)
 // [TODO] 0x00703E50 func_00703E50 (68 B)
-// [TODO] 0x00703EA0 func_00703EA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00703EA0 (0x00703EA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00809F28.
+extern int D_00809F28;
+
+int Get()
+{
+    return D_00809F28;
+}
+
 // [TODO] 0x00703EB0 func_00703EB0 (120 B)
 // [TODO] 0x00703F30 func_00703F30 (152 B)
 // [TODO] 0x00703FD0 func_00703FD0 (96 B)
 // [TODO] 0x00704030 func_00704030 (76 B)
 // [TODO] 0x00704080 func_00704080 (948 B)
-// [TODO] 0x00704440 func_00704440 (8 B)
+// ============================================================================
+// [VERIFIED] func_00704440 (0x00704440, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B310.
+extern int D_0080B310;
+
+int Get()
+{
+    return D_0080B310;
+}
+
 // [TODO] 0x00704450 func_00704450 (164 B)
 // [TODO] 0x00704500 func_00704500 (12 B)
 // [TODO] 0x00704510 func_00704510 (68 B)
@@ -42209,7 +52750,24 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x00704C60 func_00704C60 (120 B)
 // [TODO] 0x00704CE0 func_00704CE0 (256 B)
 // [TODO] 0x00704DE0 func_00704DE0 (268 B)
-// [TODO] 0x00704EF0 func_00704EF0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00704EF0 (0x00704EF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a 16-bit number at +0x34 of its object.
+class Object
+{
+public:
+    short Get();
+    char m_pad00[0x34];
+    short m_Field34; // +0x34
+};
+
+short Object::Get()
+{
+    return m_Field34;
+}
+
 // [TODO] 0x00704F00 func_00704F00 (16 B)
 // [TODO] 0x00704F10 func_00704F10 (392 B)
 // [TODO] 0x007050A0 func_007050A0 (432 B)
@@ -42223,7 +52781,18 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x00705BA0 func_00705BA0 (260 B)
 // [TODO] 0x00705CB0 func_00705CB0 (12 B)
 // [TODO] 0x00705CC0 func_00705CC0 (8 B)
-// [TODO] 0x00705CD0 func_00705CD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00705CD0 (0x00705CD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00809F2C.
+extern int D_00809F2C;
+
+int Get()
+{
+    return D_00809F2C;
+}
+
 // [TODO] 0x00705CE0 func_00705CE0 (388 B)
 // [TODO] 0x00705E70 func_00705E70 (180 B)
 // [TODO] 0x00705F30 func_00705F30 (644 B)
@@ -42257,7 +52826,22 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x007074D0 func_007074D0 (120 B)
 // [TODO] 0x00707550 func_00707550 (12 B)
 // [TODO] 0x00707560 func_00707560 (220 B)
-// [TODO] 0x00707640 func_00707640 (8 B)
+// ============================================================================
+// [VERIFIED] func_00707640 (0x00707640, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
 // [TODO] 0x00707650 func_00707650 (456 B)
 // [TODO] 0x00707820 func_00707820 (1836 B)
 // [TODO] 0x00707F50 func_00707F50 (40 B)
@@ -42333,22 +52917,142 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x0070C0D0 func_0070C0D0 (1312 B)
 // [TODO] 0x0070C5F0 func_0070C5F0 (576 B)
 // [TODO] 0x0070C830 func_0070C830 (520 B)
-// [TODO] 0x0070CA40 func_0070CA40 (8 B)
-// [TODO] 0x0070CA50 func_0070CA50 (8 B)
+// ============================================================================
+// [VERIFIED] func_0070CA40 (0x0070CA40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x20 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+int* Object::Get()
+{
+    return &m_Field20;
+}
+
+// ============================================================================
+// [VERIFIED] func_0070CA50 (0x0070CA50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x60 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x60];
+    int m_Field60; // +0x60
+};
+
+int* Object::Get()
+{
+    return &m_Field60;
+}
+
 // [TODO] 0x0070CA60 func_0070CA60 (184 B)
 // [TODO] 0x0070CB20 func_0070CB20 (36 B)
-// [TODO] 0x0070CB50 func_0070CB50 (8 B)
-// [TODO] 0x0070CB60 func_0070CB60 (8 B)
-// [TODO] 0x0070CB70 func_0070CB70 (8 B)
-// [TODO] 0x0070CB80 func_0070CB80 (8 B)
+// ============================================================================
+// [VERIFIED] func_0070CB50 (0x0070CB50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
+// ============================================================================
+// [VERIFIED] func_0070CB60 (0x0070CB60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_0070CB70 (0x0070CB70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
+// ============================================================================
+// [VERIFIED] func_0070CB80 (0x0070CB80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0xA0 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0xA0];
+    unsigned char m_FieldA0; // +0xA0
+};
+
+unsigned char Object::Get()
+{
+    return m_FieldA0;
+}
+
 // [TODO] 0x0070CB90 func_0070CB90 (520 B)
 // [TODO] 0x0070CDA0 func_0070CDA0 (184 B)
 // [TODO] 0x0070CE60 func_0070CE60 (520 B)
 // [TODO] 0x0070D070 func_0070D070 (232 B)
 // [TODO] 0x0070D160 func_0070D160 (520 B)
 // [TODO] 0x0070D370 func_0070D370 (128 B)
-// [TODO] 0x0070D3F0 func_0070D3F0 (8 B)
-// [TODO] 0x0070D400 func_0070D400 (8 B)
+// ============================================================================
+// [VERIFIED] func_0070D3F0 (0x0070D3F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0070D400 (0x0070D400, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x0070D410 func_0070D410 (1124 B)
 // [TODO] 0x0070D880 func_0070D880 (8 B)
 // [TODO] 0x0070D890 func_0070D890 (492 B)
@@ -42372,7 +53076,16 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x00711800 func_00711800 (600 B)
 // [TODO] 0x00711A60 func_00711A60 (364 B)
 // [TODO] 0x00711BD0 func_00711BD0 (316 B)
-// [TODO] 0x00711D10 func_00711D10 (8 B)
+// ============================================================================
+// [VERIFIED] func_00711D10 (0x00711D10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00711D20 func_00711D20 (496 B)
 // [TODO] 0x00711F10 func_00711F10 (464 B)
 // [TODO] 0x007120E0 func_007120E0 (404 B)
@@ -42424,11 +53137,39 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x00716640 func_00716640 (96 B)
 // [TODO] 0x007166A0 func_007166A0 (168 B)
 // [TODO] 0x00716750 func_00716750 (188 B)
-// [TODO] 0x00716810 func_00716810 (8 B)
+// ============================================================================
+// [VERIFIED] func_00716810 (0x00716810, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x4 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int* Object::Get()
+{
+    return &m_Field4;
+}
+
 // [TODO] 0x00716820 func_00716820 (2648 B)
 // [TODO] 0x00717280 func_00717280 (236 B)
 // [TODO] 0x00717370 func_00717370 (88 B)
-// [TODO] 0x007173D0 func_007173D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007173D0 (0x007173D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B3EC.
+extern int D_0080B3EC;
+
+int Get()
+{
+    return D_0080B3EC;
+}
+
 // [TODO] 0x007173E0 func_007173E0 (480 B)
 // [TODO] 0x007175C0 func_007175C0 (60 B)
 // [TODO] 0x00717600 func_00717600 (56 B)
@@ -42560,8 +53301,42 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x007268D0 func_007268D0 (232 B)
 // [TODO] 0x007269C0 func_007269C0 (344 B)
 // [TODO] 0x00726B20 func_00726B20 (568 B)
-// [TODO] 0x00726D60 func_00726D60 (8 B)
-// [TODO] 0x00726D70 func_00726D70 (8 B)
+// ============================================================================
+// [VERIFIED] func_00726D60 (0x00726D60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0xA0 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0xA0];
+    int m_FieldA0; // +0xA0
+};
+
+int* Object::Get()
+{
+    return &m_FieldA0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00726D70 (0x00726D70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0xB0 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0xB0];
+    int m_FieldB0; // +0xB0
+};
+
+int* Object::Get()
+{
+    return &m_FieldB0;
+}
+
 // [TODO] 0x00726D80 func_00726D80 (28 B)
 // [TODO] 0x00726DA0 func_00726DA0 (144 B)
 // [TODO] 0x00726E30 func_00726E30 (164 B)
@@ -42748,7 +53523,18 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x0073E7F0 func_0073E7F0 (204 B)
 // [TODO] 0x0073E8C0 func_0073E8C0 (268 B)
 // [TODO] 0x0073E9D0 func_0073E9D0 (276 B)
-// [TODO] 0x0074D410 func_0074D410 (8 B)
+// ============================================================================
+// [VERIFIED] func_0074D410 (0x0074D410, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B410.
+extern int D_0080B410;
+
+int Get()
+{
+    return D_0080B410;
+}
+
 // [TODO] 0x0074D420 func_0074D420 (8 B)
 // [TODO] 0x0074D430 func_0074D430 (92 B)
 // [TODO] 0x0074D490 func_0074D490 (24 B)
@@ -42771,7 +53557,24 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x0074E0E0 func_0074E0E0 (16 B)
 // [TODO] 0x0074E0F0 func_0074E0F0 (64 B)
 // [TODO] 0x0074E130 func_0074E130 (80 B)
-// [TODO] 0x0074E180 func_0074E180 (8 B)
+// ============================================================================
+// [VERIFIED] func_0074E180 (0x0074E180, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x14 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int* Object::Get()
+{
+    return &m_Field14;
+}
+
 // [TODO] 0x0074E190 func_0074E190 (56 B)
 // [TODO] 0x0074E1D0 func_0074E1D0 (172 B)
 // [TODO] 0x0074E280 func_0074E280 (96 B)
@@ -42790,7 +53593,24 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x0074EB00 func_0074EB00 (60 B)
 // [TODO] 0x0074EB40 func_0074EB40 (80 B)
 // [TODO] 0x0074EB90 func_0074EB90 (60 B)
-// [TODO] 0x0074EBD0 func_0074EBD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0074EBD0 (0x0074EBD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x24 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x24];
+    float m_Field24; // +0x24
+};
+
+float Object::Get()
+{
+    return m_Field24;
+}
+
 // [TODO] 0x0074EBE0 func_0074EBE0 (28 B)
 // [TODO] 0x0074EC00 func_0074EC00 (28 B)
 // [TODO] 0x0074EC20 func_0074EC20 (44 B)
@@ -42802,17 +53622,85 @@ extern "C" void func_006FE6E0() {
 // [TODO] 0x0074EDE0 func_0074EDE0 (200 B)
 // [TODO] 0x0074EEB0 func_0074EEB0 (60 B)
 // [TODO] 0x0074EEF0 func_0074EEF0 (76 B)
-// [TODO] 0x0074EF40 func_0074EF40 (8 B)
+// ============================================================================
+// [VERIFIED] func_0074EF40 (0x0074EF40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x18 of its object.
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+float Object::Get()
+{
+    return m_Field18;
+}
+
 // [TODO] 0x0074EF50 func_0074EF50 (88 B)
 // [TODO] 0x0074EFB0 func_0074EFB0 (16 B)
 // [TODO] 0x0074EFC0 func_0074EFC0 (16 B)
-// [TODO] 0x0074EFD0 func_0074EFD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0074EFD0 (0x0074EFD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x0074EFE0 func_0074EFE0 (16 B)
 // [TODO] 0x0074EFF0 func_0074EFF0 (16 B)
-// [TODO] 0x0074F000 func_0074F000 (8 B)
+// ============================================================================
+// [VERIFIED] func_0074F000 (0x0074F000, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x0074F010 func_0074F010 (16 B)
 // [TODO] 0x0074F020 func_0074F020 (16 B)
-// [TODO] 0x0074F030 func_0074F030 (8 B)
+// ============================================================================
+// [VERIFIED] func_0074F030 (0x0074F030, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
 // ============================================================================
 // [VERIFIED] func_0074F040 (0x0074F040, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -42867,7 +53755,24 @@ extern "C" void func_0074F070() {
 
 // [TODO] 0x0074F080 func_0074F080 (16 B)
 // [TODO] 0x0074F090 func_0074F090 (16 B)
-// [TODO] 0x0074F0A0 func_0074F0A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0074F0A0 (0x0074F0A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x88 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x88];
+    int m_Field88; // +0x88
+};
+
+int Object::Get()
+{
+    return m_Field88;
+}
+
 // [TODO] 0x0074F0B0 func_0074F0B0 (8 B)
 // [TODO] 0x0074F0C0 func_0074F0C0 (8 B)
 // [TODO] 0x0074F0D0 func_0074F0D0 (8 B)
@@ -42888,7 +53793,24 @@ extern "C" void func_0074F070() {
 // [TODO] 0x0074FD10 func_0074FD10 (144 B)
 // [TODO] 0x0074FDA0 func_0074FDA0 (20 B)
 // [TODO] 0x0074FDC0 func_0074FDC0 (20 B)
-// [TODO] 0x0074FDE0 func_0074FDE0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0074FDE0 (0x0074FDE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x20 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+int Object::Get()
+{
+    return m_Field20;
+}
+
 // [TODO] 0x0074FDF0 func_0074FDF0 (64 B)
 // [TODO] 0x0074FE30 func_0074FE30 (16 B)
 // [TODO] 0x0074FE40 func_0074FE40 (28 B)
@@ -42910,7 +53832,24 @@ extern "C" void func_0074F070() {
 // [TODO] 0x007507E0 func_007507E0 (20 B)
 // [TODO] 0x00750800 func_00750800 (120 B)
 // [TODO] 0x00750880 func_00750880 (80 B)
-// [TODO] 0x007508D0 func_007508D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007508D0 (0x007508D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x14 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Object::Get()
+{
+    return m_Field14;
+}
+
 // [TODO] 0x007508E0 func_007508E0 (76 B)
 // [TODO] 0x00750930 func_00750930 (8 B)
 // [TODO] 0x00750940 func_00750940 (8 B)
@@ -42923,7 +53862,24 @@ extern "C" void func_0074F070() {
 // [TODO] 0x007509B0 func_007509B0 (8 B)
 // [TODO] 0x007509C0 func_007509C0 (80 B)
 // [TODO] 0x00750A10 func_00750A10 (80 B)
-// [TODO] 0x00750A60 func_00750A60 (8 B)
+// ============================================================================
+// [VERIFIED] func_00750A60 (0x00750A60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x70 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x70];
+    int m_Field70; // +0x70
+};
+
+int* Object::Get()
+{
+    return &m_Field70;
+}
+
 // [TODO] 0x00750A70 func_00750A70 (112 B)
 // [TODO] 0x00750AE0 func_00750AE0 (456 B)
 // [TODO] 0x00750CB0 func_00750CB0 (96 B)
@@ -42936,8 +53892,42 @@ extern "C" void func_0074F070() {
 // [TODO] 0x00750F40 func_00750F40 (80 B)
 // [TODO] 0x00750F90 func_00750F90 (132 B)
 // [TODO] 0x00751020 func_00751020 (164 B)
-// [TODO] 0x007510D0 func_007510D0 (8 B)
-// [TODO] 0x007510E0 func_007510E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007510D0 (0x007510D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x6C of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x6C];
+    char m_Field6C; // +0x6C
+};
+
+void Object::Set(char value)
+{
+    m_Field6C = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_007510E0 (0x007510E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x6C of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x6C];
+    unsigned char m_Field6C; // +0x6C
+};
+
+unsigned char Object::Get()
+{
+    return m_Field6C;
+}
+
 // [TODO] 0x007510F0 func_007510F0 (8 B)
 // [TODO] 0x00751100 func_00751100 (8 B)
 // [TODO] 0x00751110 func_00751110 (8 B)
@@ -42948,22 +53938,164 @@ extern "C" void func_0074F070() {
 // [TODO] 0x00751160 func_00751160 (8 B)
 // [TODO] 0x00751170 func_00751170 (8 B)
 // [TODO] 0x00751180 func_00751180 (8 B)
-// [TODO] 0x00751190 func_00751190 (8 B)
+// ============================================================================
+// [VERIFIED] func_00751190 (0x00751190, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x14 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int* Object::Get()
+{
+    return &m_Field14;
+}
+
 // [TODO] 0x007511A0 func_007511A0 (8 B)
-// [TODO] 0x007511B0 func_007511B0 (8 B)
-// [TODO] 0x007511C0 func_007511C0 (8 B)
-// [TODO] 0x007511D0 func_007511D0 (8 B)
-// [TODO] 0x007511E0 func_007511E0 (8 B)
-// [TODO] 0x007511F0 func_007511F0 (8 B)
-// [TODO] 0x00751200 func_00751200 (8 B)
-// [TODO] 0x00751210 func_00751210 (8 B)
-// [TODO] 0x00751220 func_00751220 (8 B)
-// [TODO] 0x00751230 func_00751230 (8 B)
-// [TODO] 0x00751240 func_00751240 (8 B)
-// [TODO] 0x00751250 func_00751250 (8 B)
-// [TODO] 0x00751260 func_00751260 (8 B)
+// ============================================================================
+// [VERIFIED] func_007511B0 (0x007511B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_007511C0 (0x007511C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_007511D0 (0x007511D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_007511E0 (0x007511E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_007511F0 (0x007511F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00751200 (0x00751200, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00751210 (0x00751210, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00751220 (0x00751220, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00751230 (0x00751230, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00751240 (0x00751240, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00751250 (0x00751250, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00751260 (0x00751260, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00751270 func_00751270 (20 B)
-// [TODO] 0x00751290 func_00751290 (8 B)
+// ============================================================================
+// [VERIFIED] func_00751290 (0x00751290, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x007512A0 func_007512A0 (8 B)
 // [TODO] 0x007512B0 func_007512B0 (8 B)
 // [TODO] 0x007512C0 func_007512C0 (944 B)
@@ -42982,11 +54114,45 @@ extern "C" void func_0074F070() {
 // [TODO] 0x00751F00 func_00751F00 (52 B)
 // [TODO] 0x00751F40 func_00751F40 (12 B)
 // [TODO] 0x00751F50 func_00751F50 (240 B)
-// [TODO] 0x00752040 func_00752040 (8 B)
+// ============================================================================
+// [VERIFIED] func_00752040 (0x00752040, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x1C4 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x1C4];
+    unsigned char m_Field1C4; // +0x1C4
+};
+
+unsigned char Object::Get()
+{
+    return m_Field1C4;
+}
+
 // [TODO] 0x00752050 func_00752050 (108 B)
 // [TODO] 0x007520C0 func_007520C0 (76 B)
 // [TODO] 0x00752110 func_00752110 (144 B)
-// [TODO] 0x007521A0 func_007521A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007521A0 (0x007521A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x007521B0 func_007521B0 (8 B)
 // [TODO] 0x007521C0 func_007521C0 (8 B)
 // [TODO] 0x007521D0 func_007521D0 (8 B)
@@ -42997,7 +54163,24 @@ extern "C" void func_0074F070() {
 // [TODO] 0x00752510 func_00752510 (204 B)
 // [TODO] 0x007525E0 func_007525E0 (72 B)
 // [TODO] 0x00752630 func_00752630 (220 B)
-// [TODO] 0x00752710 func_00752710 (8 B)
+// ============================================================================
+// [VERIFIED] func_00752710 (0x00752710, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x00752720 func_00752720 (12 B)
 // [TODO] 0x00752730 func_00752730 (12 B)
 // [TODO] 0x00752740 func_00752740 (76 B)
@@ -43012,14 +54195,48 @@ extern "C" void func_0074F070() {
 // [TODO] 0x00752A70 func_00752A70 (60 B)
 // [TODO] 0x00752AB0 func_00752AB0 (60 B)
 // [TODO] 0x00752AF0 func_00752AF0 (60 B)
-// [TODO] 0x00752B30 func_00752B30 (8 B)
+// ============================================================================
+// [VERIFIED] func_00752B30 (0x00752B30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x128 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x128];
+    int m_Field128; // +0x128
+};
+
+int Object::Get()
+{
+    return m_Field128;
+}
+
 // [TODO] 0x00752B40 func_00752B40 (76 B)
 // [TODO] 0x00752B90 func_00752B90 (140 B)
 // [TODO] 0x00752C20 func_00752C20 (96 B)
 // [TODO] 0x00752C80 func_00752C80 (76 B)
 // [TODO] 0x00752CD0 func_00752CD0 (96 B)
 // [TODO] 0x00752D30 func_00752D30 (76 B)
-// [TODO] 0x00752D80 func_00752D80 (8 B)
+// ============================================================================
+// [VERIFIED] func_00752D80 (0x00752D80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x1C of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x1C];
+    unsigned char m_Field1C; // +0x1C
+};
+
+unsigned char Object::Get()
+{
+    return m_Field1C;
+}
+
 // [TODO] 0x00752D90 func_00752D90 (76 B)
 // [TODO] 0x00752DE0 func_00752DE0 (8 B)
 // [TODO] 0x00752DF0 func_00752DF0 (20 B)
@@ -43036,12 +54253,114 @@ extern "C" void func_0074F070() {
 extern "C" void func_00752E10() {
 }
 
-// [TODO] 0x00752E20 func_00752E20 (8 B)
-// [TODO] 0x00752E30 func_00752E30 (8 B)
-// [TODO] 0x00752E40 func_00752E40 (8 B)
-// [TODO] 0x00752E50 func_00752E50 (8 B)
-// [TODO] 0x00752E60 func_00752E60 (8 B)
-// [TODO] 0x00752E70 func_00752E70 (8 B)
+// ============================================================================
+// [VERIFIED] func_00752E20 (0x00752E20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00752E30 (0x00752E30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x160 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x160];
+    unsigned char m_Field160; // +0x160
+};
+
+unsigned char Object::Get()
+{
+    return m_Field160;
+}
+
+// ============================================================================
+// [VERIFIED] func_00752E40 (0x00752E40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x164 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x164];
+    int m_Field164; // +0x164
+};
+
+int Object::Get()
+{
+    return m_Field164;
+}
+
+// ============================================================================
+// [VERIFIED] func_00752E50 (0x00752E50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x120 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x120];
+    int m_Field120; // +0x120
+};
+
+void Object::Set(int value)
+{
+    m_Field120 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00752E60 (0x00752E60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x15C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x15C];
+    int m_Field15C; // +0x15C
+};
+
+int Object::Get()
+{
+    return m_Field15C;
+}
+
+// ============================================================================
+// [VERIFIED] func_00752E70 (0x00752E70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0x12C of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0x12C];
+    int m_Field12C; // +0x12C
+};
+
+int* Object::Get()
+{
+    return &m_Field12C;
+}
+
 // [TODO] 0x00752E80 func_00752E80 (8 B)
 // [TODO] 0x00752E90 func_00752E90 (8 B)
 // [TODO] 0x00752EA0 func_00752EA0 (420 B)
@@ -43065,7 +54384,18 @@ extern "C" void func_00752E10() {
 // [TODO] 0x00753880 func_00753880 (160 B)
 // [TODO] 0x00753920 func_00753920 (72 B)
 // [TODO] 0x00753970 func_00753970 (448 B)
-// [TODO] 0x00753B30 func_00753B30 (8 B)
+// ============================================================================
+// [VERIFIED] func_00753B30 (0x00753B30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B42C.
+extern int D_0080B42C;
+
+int Get()
+{
+    return D_0080B42C;
+}
+
 // [TODO] 0x00753B40 func_00753B40 (180 B)
 // [TODO] 0x00753C00 func_00753C00 (312 B)
 // [TODO] 0x00753D40 func_00753D40 (124 B)
@@ -43075,7 +54405,24 @@ extern "C" void func_00752E10() {
 // [TODO] 0x00754060 func_00754060 (192 B)
 // [TODO] 0x00754120 func_00754120 (72 B)
 // [TODO] 0x00754170 func_00754170 (224 B)
-// [TODO] 0x00754250 func_00754250 (8 B)
+// ============================================================================
+// [VERIFIED] func_00754250 (0x00754250, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
 // [TODO] 0x00754260 func_00754260 (12 B)
 // [TODO] 0x00754270 func_00754270 (12 B)
 // [TODO] 0x00754280 func_00754280 (20 B)
@@ -43125,7 +54472,24 @@ extern "C" void func_00752E10() {
 extern "C" void func_00754DF0() {
 }
 
-// [TODO] 0x00754E00 func_00754E00 (8 B)
+// ============================================================================
+// [VERIFIED] func_00754E00 (0x00754E00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x00754E10 func_00754E10 (8 B)
 // [TODO] 0x00754E20 func_00754E20 (8 B)
 // [TODO] 0x00754E30 func_00754E30 (8 B)
@@ -43147,27 +54511,134 @@ extern "C" void func_00754DF0() {
 // [TODO] 0x00755290 func_00755290 (124 B)
 // [TODO] 0x00755310 func_00755310 (164 B)
 // [TODO] 0x007553C0 func_007553C0 (32 B)
-// [TODO] 0x007553E0 func_007553E0 (8 B)
-// [TODO] 0x007553F0 func_007553F0 (8 B)
-// [TODO] 0x00755400 func_00755400 (8 B)
-// [TODO] 0x00755410 func_00755410 (8 B)
-// [TODO] 0x00755420 func_00755420 (8 B)
-// [TODO] 0x00755430 func_00755430 (8 B)
-// [TODO] 0x00755440 func_00755440 (8 B)
-// [TODO] 0x00755450 func_00755450 (8 B)
-// [TODO] 0x00755460 func_00755460 (8 B)
+// ============================================================================
+// [VERIFIED] func_007553E0 (0x007553E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_007553F0 (0x007553F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_00755400 (0x00755400, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00755410 (0x00755410, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00755420 (0x00755420, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 23.
+int Number()
+{
+    return 23;
+}
+
+// ============================================================================
+// [VERIFIED] func_00755430 (0x00755430, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00755440 (0x00755440, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00755450 (0x00755450, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00755460 (0x00755460, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00755470 func_00755470 (248 B)
 // [TODO] 0x00755570 func_00755570 (200 B)
 // [TODO] 0x00755640 func_00755640 (40 B)
 // [TODO] 0x00755670 func_00755670 (108 B)
 // [TODO] 0x007556E0 func_007556E0 (12 B)
-// [TODO] 0x007556F0 func_007556F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007556F0 (0x007556F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 10.
+int Number()
+{
+    return 10;
+}
+
 // [TODO] 0x00755700 func_00755700 (248 B)
 // [TODO] 0x00755800 func_00755800 (200 B)
 // [TODO] 0x007558D0 func_007558D0 (40 B)
 // [TODO] 0x00755900 func_00755900 (108 B)
 // [TODO] 0x00755970 func_00755970 (12 B)
-// [TODO] 0x00755980 func_00755980 (8 B)
+// ============================================================================
+// [VERIFIED] func_00755980 (0x00755980, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 22.
+int Number()
+{
+    return 22;
+}
+
 // [TODO] 0x00755990 func_00755990 (220 B)
 // [TODO] 0x00755A70 func_00755A70 (16 B)
 // [TODO] 0x00755A80 func_00755A80 (12 B)
@@ -43176,107 +54647,454 @@ extern "C" void func_00754DF0() {
 // [TODO] 0x00755B40 func_00755B40 (212 B)
 // [TODO] 0x00755C20 func_00755C20 (236 B)
 // [TODO] 0x00755D10 func_00755D10 (696 B)
-// [TODO] 0x00755FD0 func_00755FD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00755FD0 (0x00755FD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00755FE0 func_00755FE0 (232 B)
 // [TODO] 0x007560D0 func_007560D0 (256 B)
 // [TODO] 0x007561D0 func_007561D0 (264 B)
-// [TODO] 0x007562E0 func_007562E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007562E0 (0x007562E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x007562F0 func_007562F0 (244 B)
 // [TODO] 0x007563F0 func_007563F0 (236 B)
 // [TODO] 0x007564E0 func_007564E0 (208 B)
-// [TODO] 0x007565B0 func_007565B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007565B0 (0x007565B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x007565C0 func_007565C0 (180 B)
 // [TODO] 0x00756680 func_00756680 (236 B)
-// [TODO] 0x00756770 func_00756770 (8 B)
+// ============================================================================
+// [VERIFIED] func_00756770 (0x00756770, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00756780 func_00756780 (172 B)
-// [TODO] 0x00756830 func_00756830 (8 B)
+// ============================================================================
+// [VERIFIED] func_00756830 (0x00756830, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 2.
+int Number()
+{
+    return 2;
+}
+
 // [TODO] 0x00756840 func_00756840 (180 B)
 // [TODO] 0x00756900 func_00756900 (236 B)
 // [TODO] 0x007569F0 func_007569F0 (144 B)
-// [TODO] 0x00756A80 func_00756A80 (8 B)
+// ============================================================================
+// [VERIFIED] func_00756A80 (0x00756A80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 3.
+int Number()
+{
+    return 3;
+}
+
 // [TODO] 0x00756A90 func_00756A90 (228 B)
 // [TODO] 0x00756B80 func_00756B80 (236 B)
 // [TODO] 0x00756C70 func_00756C70 (388 B)
-// [TODO] 0x00756E00 func_00756E00 (8 B)
+// ============================================================================
+// [VERIFIED] func_00756E00 (0x00756E00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 4.
+int Number()
+{
+    return 4;
+}
+
 // [TODO] 0x00756E10 func_00756E10 (228 B)
 // [TODO] 0x00756F00 func_00756F00 (236 B)
 // [TODO] 0x00756FF0 func_00756FF0 (228 B)
-// [TODO] 0x007570E0 func_007570E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007570E0 (0x007570E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 5.
+int Number()
+{
+    return 5;
+}
+
 // [TODO] 0x007570F0 func_007570F0 (196 B)
 // [TODO] 0x007571C0 func_007571C0 (236 B)
 // [TODO] 0x007572B0 func_007572B0 (96 B)
-// [TODO] 0x00757310 func_00757310 (8 B)
+// ============================================================================
+// [VERIFIED] func_00757310 (0x00757310, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 6.
+int Number()
+{
+    return 6;
+}
+
 // [TODO] 0x00757320 func_00757320 (196 B)
 // [TODO] 0x007573F0 func_007573F0 (236 B)
 // [TODO] 0x007574E0 func_007574E0 (100 B)
-// [TODO] 0x00757550 func_00757550 (8 B)
+// ============================================================================
+// [VERIFIED] func_00757550 (0x00757550, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 7.
+int Number()
+{
+    return 7;
+}
+
 // [TODO] 0x00757560 func_00757560 (196 B)
 // [TODO] 0x00757630 func_00757630 (236 B)
 // [TODO] 0x00757720 func_00757720 (100 B)
-// [TODO] 0x00757790 func_00757790 (8 B)
+// ============================================================================
+// [VERIFIED] func_00757790 (0x00757790, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 8.
+int Number()
+{
+    return 8;
+}
+
 // [TODO] 0x007577A0 func_007577A0 (180 B)
 // [TODO] 0x00757860 func_00757860 (236 B)
 // [TODO] 0x00757950 func_00757950 (100 B)
-// [TODO] 0x007579C0 func_007579C0 (8 B)
-// [TODO] 0x007579D0 func_007579D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007579C0 (0x007579C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_007579D0 (0x007579D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 9.
+int Number()
+{
+    return 9;
+}
+
 // [TODO] 0x007579E0 func_007579E0 (220 B)
 // [TODO] 0x00757AC0 func_00757AC0 (16 B)
 // [TODO] 0x00757AD0 func_00757AD0 (12 B)
 // [TODO] 0x00757AE0 func_00757AE0 (136 B)
-// [TODO] 0x00757B70 func_00757B70 (8 B)
+// ============================================================================
+// [VERIFIED] func_00757B70 (0x00757B70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00757B80 func_00757B80 (180 B)
 // [TODO] 0x00757C40 func_00757C40 (236 B)
 // [TODO] 0x00757D30 func_00757D30 (136 B)
-// [TODO] 0x00757DC0 func_00757DC0 (8 B)
-// [TODO] 0x00757DD0 func_00757DD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00757DC0 (0x00757DC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00757DD0 (0x00757DD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 11.
+int Number()
+{
+    return 11;
+}
+
 // [TODO] 0x00757DE0 func_00757DE0 (196 B)
 // [TODO] 0x00757EB0 func_00757EB0 (236 B)
 // [TODO] 0x00757FA0 func_00757FA0 (200 B)
-// [TODO] 0x00758070 func_00758070 (8 B)
-// [TODO] 0x00758080 func_00758080 (8 B)
+// ============================================================================
+// [VERIFIED] func_00758070 (0x00758070, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00758080 (0x00758080, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 12.
+int Number()
+{
+    return 12;
+}
+
 // [TODO] 0x00758090 func_00758090 (180 B)
 // [TODO] 0x00758150 func_00758150 (236 B)
 // [TODO] 0x00758240 func_00758240 (136 B)
-// [TODO] 0x007582D0 func_007582D0 (8 B)
-// [TODO] 0x007582E0 func_007582E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007582D0 (0x007582D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 13.
+int Number()
+{
+    return 13;
+}
+
+// ============================================================================
+// [VERIFIED] func_007582E0 (0x007582E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x007582F0 func_007582F0 (212 B)
 // [TODO] 0x007583D0 func_007583D0 (236 B)
 // [TODO] 0x007584C0 func_007584C0 (140 B)
-// [TODO] 0x00758550 func_00758550 (8 B)
-// [TODO] 0x00758560 func_00758560 (8 B)
+// ============================================================================
+// [VERIFIED] func_00758550 (0x00758550, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0xC of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int* Object::Get()
+{
+    return &m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_00758560 (0x00758560, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 14.
+int Number()
+{
+    return 14;
+}
+
 // [TODO] 0x00758570 func_00758570 (212 B)
 // [TODO] 0x00758650 func_00758650 (236 B)
 // [TODO] 0x00758740 func_00758740 (140 B)
-// [TODO] 0x007587D0 func_007587D0 (8 B)
-// [TODO] 0x007587E0 func_007587E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007587D0 (0x007587D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0xC of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int* Object::Get()
+{
+    return &m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_007587E0 (0x007587E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 15.
+int Number()
+{
+    return 15;
+}
+
 // [TODO] 0x007587F0 func_007587F0 (228 B)
 // [TODO] 0x007588E0 func_007588E0 (236 B)
 // [TODO] 0x007589D0 func_007589D0 (192 B)
-// [TODO] 0x00758A90 func_00758A90 (8 B)
-// [TODO] 0x00758AA0 func_00758AA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00758A90 (0x00758A90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0xC of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int* Object::Get()
+{
+    return &m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_00758AA0 (0x00758AA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 16.
+int Number()
+{
+    return 16;
+}
+
 // [TODO] 0x00758AB0 func_00758AB0 (196 B)
 // [TODO] 0x00758B80 func_00758B80 (236 B)
 // [TODO] 0x00758C70 func_00758C70 (144 B)
-// [TODO] 0x00758D00 func_00758D00 (8 B)
+// ============================================================================
+// [VERIFIED] func_00758D00 (0x00758D00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 17.
+int Number()
+{
+    return 17;
+}
+
 // [TODO] 0x00758D10 func_00758D10 (180 B)
 // [TODO] 0x00758DD0 func_00758DD0 (236 B)
 // [TODO] 0x00758EC0 func_00758EC0 (116 B)
-// [TODO] 0x00758F40 func_00758F40 (8 B)
-// [TODO] 0x00758F50 func_00758F50 (8 B)
+// ============================================================================
+// [VERIFIED] func_00758F40 (0x00758F40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00758F50 (0x00758F50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 18.
+int Number()
+{
+    return 18;
+}
+
 // [TODO] 0x00758F60 func_00758F60 (212 B)
 // [TODO] 0x00759040 func_00759040 (236 B)
 // [TODO] 0x00759130 func_00759130 (140 B)
-// [TODO] 0x007591C0 func_007591C0 (8 B)
-// [TODO] 0x007591D0 func_007591D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007591C0 (0x007591C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0xC of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int* Object::Get()
+{
+    return &m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_007591D0 (0x007591D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 19.
+int Number()
+{
+    return 19;
+}
+
 // [TODO] 0x007591E0 func_007591E0 (180 B)
 // [TODO] 0x007592A0 func_007592A0 (236 B)
 // [TODO] 0x00759390 func_00759390 (100 B)
-// [TODO] 0x00759400 func_00759400 (8 B)
-// [TODO] 0x00759410 func_00759410 (8 B)
+// ============================================================================
+// [VERIFIED] func_00759400 (0x00759400, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00759410 (0x00759410, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 20.
+int Number()
+{
+    return 20;
+}
+
 // [TODO] 0x00759420 func_00759420 (216 B)
 // [TODO] 0x00759500 func_00759500 (236 B)
-// [TODO] 0x007595F0 func_007595F0 (8 B)
-// [TODO] 0x00759600 func_00759600 (8 B)
+// ============================================================================
+// [VERIFIED] func_007595F0 (0x007595F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00759600 (0x00759600, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 21.
+int Number()
+{
+    return 21;
+}
+
 // [TODO] 0x00759610 func_00759610 (140 B)
 // [TODO] 0x007596A0 func_007596A0 (172 B)
 // [TODO] 0x00759750 func_00759750 (452 B)
@@ -43284,9 +55102,27 @@ extern "C" void func_00754DF0() {
 // [TODO] 0x00759B00 func_00759B00 (116 B)
 // [TODO] 0x00759B80 func_00759B80 (16 B)
 // [TODO] 0x00759B90 func_00759B90 (16 B)
-// [TODO] 0x00759BA0 func_00759BA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00759BA0 (0x00759BA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 38.
+int Number()
+{
+    return 38;
+}
+
 // [TODO] 0x00759BB0 func_00759BB0 (12 B)
-// [TODO] 0x00759BC0 func_00759BC0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00759BC0 (0x00759BC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 32.
+int Number()
+{
+    return 32;
+}
+
 // [TODO] 0x00759BD0 func_00759BD0 (164 B)
 // [TODO] 0x00759C80 func_00759C80 (320 B)
 // [TODO] 0x00759DC0 func_00759DC0 (20 B)
@@ -43294,7 +55130,16 @@ extern "C" void func_00754DF0() {
 // [TODO] 0x00759E80 func_00759E80 (300 B)
 // [TODO] 0x00759FB0 func_00759FB0 (316 B)
 // [TODO] 0x0075A0F0 func_0075A0F0 (472 B)
-// [TODO] 0x0075A2D0 func_0075A2D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075A2D0 (0x0075A2D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0075A2E0 func_0075A2E0 (92 B)
 // [TODO] 0x0075A340 func_0075A340 (60 B)
 // [TODO] 0x0075A380 func_0075A380 (372 B)
@@ -43329,9 +55174,27 @@ extern "C" void func_00754DF0() {
 // [TODO] 0x0075B6E0 func_0075B6E0 (104 B)
 // [TODO] 0x0075B750 func_0075B750 (16 B)
 // [TODO] 0x0075B760 func_0075B760 (16 B)
-// [TODO] 0x0075B770 func_0075B770 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075B770 (0x0075B770, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 33.
+int Number()
+{
+    return 33;
+}
+
 // [TODO] 0x0075B780 func_0075B780 (12 B)
-// [TODO] 0x0075B790 func_0075B790 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075B790 (0x0075B790, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 32.
+int Number()
+{
+    return 32;
+}
+
 // [TODO] 0x0075B7A0 func_0075B7A0 (12 B)
 // [TODO] 0x0075B7B0 func_0075B7B0 (244 B)
 // [TODO] 0x0075B8B0 func_0075B8B0 (32 B)
@@ -43357,23 +55220,94 @@ extern "C" void func_00754DF0() {
 // [TODO] 0x0075BDE0 func_0075BDE0 (100 B)
 // [TODO] 0x0075BE50 func_0075BE50 (12 B)
 // [TODO] 0x0075BE60 func_0075BE60 (12 B)
-// [TODO] 0x0075BE70 func_0075BE70 (8 B)
-// [TODO] 0x0075BE80 func_0075BE80 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075BE70 (0x0075BE70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 79.
+int Number()
+{
+    return 79;
+}
+
+// ============================================================================
+// [VERIFIED] func_0075BE80 (0x0075BE80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the member at +0xD4 of its object.
+class Object
+{
+public:
+    int* Get();
+    char m_pad00[0xD4];
+    int m_FieldD4; // +0xD4
+};
+
+int* Object::Get()
+{
+    return &m_FieldD4;
+}
+
 // [TODO] 0x0075BE90 func_0075BE90 (140 B)
 // [TODO] 0x0075BF20 func_0075BF20 (1128 B)
 // [TODO] 0x0075C390 func_0075C390 (104 B)
 // [TODO] 0x0075C400 func_0075C400 (368 B)
-// [TODO] 0x0075C570 func_0075C570 (8 B)
-// [TODO] 0x0075C580 func_0075C580 (8 B)
-// [TODO] 0x0075C590 func_0075C590 (8 B)
-// [TODO] 0x0075C5A0 func_0075C5A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075C570 (0x0075C570, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 6140.
+int Number()
+{
+    return 6140;
+}
+
+// ============================================================================
+// [VERIFIED] func_0075C580 (0x0075C580, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0075C590 (0x0075C590, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 6140.
+int Number()
+{
+    return 6140;
+}
+
+// ============================================================================
+// [VERIFIED] func_0075C5A0 (0x0075C5A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x0075C5B0 func_0075C5B0 (212 B)
 // [TODO] 0x0075C690 func_0075C690 (232 B)
 // [TODO] 0x0075C780 func_0075C780 (316 B)
 // [TODO] 0x0075C8C0 func_0075C8C0 (156 B)
 // [TODO] 0x0075C960 func_0075C960 (124 B)
 // [TODO] 0x0075C9E0 func_0075C9E0 (484 B)
-// [TODO] 0x0075CBD0 func_0075CBD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075CBD0 (0x0075CBD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x0075CBE0 func_0075CBE0 (228 B)
 // [TODO] 0x0075CCD0 func_0075CCD0 (456 B)
 // [TODO] 0x0075CEA0 func_0075CEA0 (364 B)
@@ -43419,7 +55353,18 @@ extern "C" void func_00754DF0() {
 // [TODO] 0x0075ED10 func_0075ED10 (184 B)
 // [TODO] 0x0075EDD0 func_0075EDD0 (152 B)
 // [TODO] 0x0075EE70 func_0075EE70 (36 B)
-// [TODO] 0x0075EEA0 func_0075EEA0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075EEA0 (0x0075EEA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B464.
+extern int D_0080B464;
+
+int Get()
+{
+    return D_0080B464;
+}
+
 // [TODO] 0x0075EEB0 func_0075EEB0 (12 B)
 // [TODO] 0x0075EEC0 func_0075EEC0 (12 B)
 // [TODO] 0x0075EED0 func_0075EED0 (132 B)
@@ -43440,7 +55385,16 @@ extern "C" void func_00754DF0() {
 // [TODO] 0x0075F8D0 func_0075F8D0 (16 B)
 // [TODO] 0x0075F8E0 func_0075F8E0 (112 B)
 // [TODO] 0x0075F950 func_0075F950 (100 B)
-// [TODO] 0x0075F9C0 func_0075F9C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075F9C0 (0x0075F9C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_0075F9D0 (0x0075F9D0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -43454,18 +55408,78 @@ extern "C" void func_00754DF0() {
 extern "C" void func_0075F9D0() {
 }
 
-// [TODO] 0x0075F9E0 func_0075F9E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075F9E0 (0x0075F9E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x0075F9F0 func_0075F9F0 (208 B)
 // [TODO] 0x0075FAC0 func_0075FAC0 (280 B)
 // [TODO] 0x0075FBE0 func_0075FBE0 (16 B)
-// [TODO] 0x0075FBF0 func_0075FBF0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075FBF0 (0x0075FBF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
 // [TODO] 0x0075FC00 func_0075FC00 (24 B)
 // [TODO] 0x0075FC20 func_0075FC20 (36 B)
 // [TODO] 0x0075FC50 func_0075FC50 (20 B)
 // [TODO] 0x0075FC70 func_0075FC70 (44 B)
 // [TODO] 0x0075FCA0 func_0075FCA0 (328 B)
-// [TODO] 0x0075FDF0 func_0075FDF0 (8 B)
-// [TODO] 0x0075FE00 func_0075FE00 (8 B)
+// ============================================================================
+// [VERIFIED] func_0075FDF0 (0x0075FDF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_0075FE00 (0x0075FE00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
 // ============================================================================
 // [VERIFIED] func_0075FE10 (0x0075FE10, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -43489,10 +55503,36 @@ extern "C" void func_0075FE10() {
 // [TODO] 0x00760070 func_00760070 (764 B)
 // [TODO] 0x00760370 func_00760370 (388 B)
 // [TODO] 0x00760500 func_00760500 (112 B)
-// [TODO] 0x00760570 func_00760570 (8 B)
+// ============================================================================
+// [VERIFIED] func_00760570 (0x00760570, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
 // [TODO] 0x00760580 func_00760580 (16 B)
 // [TODO] 0x00760590 func_00760590 (16 B)
-// [TODO] 0x007605A0 func_007605A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007605A0 (0x007605A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
 // [TODO] 0x007605B0 func_007605B0 (172 B)
 // [TODO] 0x00760660 func_00760660 (92 B)
 // [TODO] 0x007606C0 func_007606C0 (76 B)
@@ -43512,13 +55552,64 @@ extern "C" void func_0075FE10() {
 // [TODO] 0x00760FC0 func_00760FC0 (12 B)
 // [TODO] 0x00760FD0 func_00760FD0 (176 B)
 // [TODO] 0x00761080 func_00761080 (420 B)
-// [TODO] 0x00761230 func_00761230 (8 B)
+// ============================================================================
+// [VERIFIED] func_00761230 (0x00761230, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x00761240 func_00761240 (68 B)
 // [TODO] 0x00761290 func_00761290 (16 B)
-// [TODO] 0x007612A0 func_007612A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007612A0 (0x007612A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x007612B0 func_007612B0 (68 B)
 // [TODO] 0x00761300 func_00761300 (16 B)
-// [TODO] 0x00761310 func_00761310 (8 B)
+// ============================================================================
+// [VERIFIED] func_00761310 (0x00761310, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
 // [TODO] 0x00761320 func_00761320 (68 B)
 // [TODO] 0x00761370 func_00761370 (16 B)
 // ============================================================================
@@ -43547,12 +55638,48 @@ extern "C" void func_00761380() {
 extern "C" void func_00761390() {
 }
 
-// [TODO] 0x007613A0 func_007613A0 (8 B)
-// [TODO] 0x007613B0 func_007613B0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007613A0 (0x007613A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_007613B0 (0x007613B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x007613C0 func_007613C0 (108 B)
 // [TODO] 0x00761430 func_00761430 (60 B)
-// [TODO] 0x00761470 func_00761470 (8 B)
-// [TODO] 0x00761480 func_00761480 (8 B)
+// ============================================================================
+// [VERIFIED] func_00761470 (0x00761470, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00761480 (0x00761480, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_00761490 (0x00761490, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -43566,9 +55693,36 @@ extern "C" void func_00761390() {
 extern "C" void func_00761490() {
 }
 
-// [TODO] 0x007614A0 func_007614A0 (8 B)
-// [TODO] 0x007614B0 func_007614B0 (8 B)
-// [TODO] 0x007614C0 func_007614C0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007614A0 (0x007614A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_007614B0 (0x007614B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_007614C0 (0x007614C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns -1.
+int Number()
+{
+    return -1;
+}
+
 // [TODO] 0x007614D0 func_007614D0 (112 B)
 // [TODO] 0x00761540 func_00761540 (8 B)
 // [TODO] 0x00761550 func_00761550 (8 B)
@@ -43615,14 +55769,50 @@ extern "C" void func_00761780() {
 extern "C" void func_00761790() {
 }
 
-// [TODO] 0x007617A0 func_007617A0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007617A0 (0x007617A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x007617B0 func_007617B0 (24 B)
 // [TODO] 0x007617D0 func_007617D0 (8 B)
 // [TODO] 0x007617E0 func_007617E0 (8 B)
 // [TODO] 0x007617F0 func_007617F0 (8 B)
-// [TODO] 0x00761800 func_00761800 (8 B)
-// [TODO] 0x00761810 func_00761810 (8 B)
-// [TODO] 0x00761820 func_00761820 (8 B)
+// ============================================================================
+// [VERIFIED] func_00761800 (0x00761800, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00761810 (0x00761810, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00761820 (0x00761820, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_00761830 (0x00761830, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -43636,7 +55826,18 @@ extern "C" void func_00761790() {
 extern "C" void func_00761830() {
 }
 
-// [TODO] 0x00761840 func_00761840 (8 B)
+// ============================================================================
+// [VERIFIED] func_00761840 (0x00761840, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B4A0.
+extern int D_0080B4A0;
+
+int Get()
+{
+    return D_0080B4A0;
+}
+
 // [TODO] 0x00761850 func_00761850 (12 B)
 // [TODO] 0x00761860 func_00761860 (20 B)
 // [TODO] 0x00761880 func_00761880 (12 B)
@@ -43694,30 +55895,159 @@ extern "C" void func_00761830() {
 // [TODO] 0x00763150 func_00763150 (8 B)
 // [TODO] 0x00763160 func_00763160 (168 B)
 // [TODO] 0x00763210 func_00763210 (48 B)
-// [TODO] 0x00763240 func_00763240 (8 B)
+// ============================================================================
+// [VERIFIED] func_00763240 (0x00763240, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B4BC.
+extern int D_0080B4BC;
+
+int Get()
+{
+    return D_0080B4BC;
+}
+
 // [TODO] 0x00763250 func_00763250 (112 B)
 // [TODO] 0x007632C0 func_007632C0 (8 B)
 // [TODO] 0x007632D0 func_007632D0 (16 B)
 // [TODO] 0x007632E0 func_007632E0 (16 B)
-// [TODO] 0x007632F0 func_007632F0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007632F0 (0x007632F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8B4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8B4];
+    int m_Field8B4; // +0x8B4
+};
+
+int Object::Get()
+{
+    return m_Field8B4;
+}
+
 // [TODO] 0x00763300 func_00763300 (556 B)
 // [TODO] 0x00763530 func_00763530 (76 B)
 // [TODO] 0x00763580 func_00763580 (952 B)
 // [TODO] 0x00763940 func_00763940 (224 B)
-// [TODO] 0x00763A20 func_00763A20 (8 B)
-// [TODO] 0x00763A30 func_00763A30 (8 B)
+// ============================================================================
+// [VERIFIED] func_00763A20 (0x00763A20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x88C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x88C];
+    int m_Field88C; // +0x88C
+};
+
+int Object::Get()
+{
+    return m_Field88C;
+}
+
+// ============================================================================
+// [VERIFIED] func_00763A30 (0x00763A30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x888 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x888];
+    int m_Field888; // +0x888
+};
+
+int Object::Get()
+{
+    return m_Field888;
+}
+
 // [TODO] 0x00763A40 func_00763A40 (68 B)
 // [TODO] 0x00763A90 func_00763A90 (224 B)
 // [TODO] 0x00763B70 func_00763B70 (164 B)
-// [TODO] 0x00763C20 func_00763C20 (8 B)
+// ============================================================================
+// [VERIFIED] func_00763C20 (0x00763C20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x8A1 of its object.
+class Object
+{
+public:
+    unsigned char Get();
+    char m_pad00[0x8A1];
+    unsigned char m_Field8A1; // +0x8A1
+};
+
+unsigned char Object::Get()
+{
+    return m_Field8A1;
+}
+
 // [TODO] 0x00763C30 func_00763C30 (792 B)
 // [TODO] 0x00763F50 func_00763F50 (52 B)
 // [TODO] 0x00763F90 func_00763F90 (68 B)
 // [TODO] 0x00763FE0 func_00763FE0 (272 B)
 // [TODO] 0x007640F0 func_007640F0 (12 B)
-// [TODO] 0x00764100 func_00764100 (8 B)
-// [TODO] 0x00764110 func_00764110 (8 B)
-// [TODO] 0x00764120 func_00764120 (8 B)
+// ============================================================================
+// [VERIFIED] func_00764100 (0x00764100, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x0 of its object.
+class Object
+{
+public:
+    int Get();
+    int m_Field0; // +0x0
+};
+
+int Object::Get()
+{
+    return m_Field0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00764110 (0x00764110, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
+// ============================================================================
+// [VERIFIED] func_00764120 (0x00764120, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
 // [TODO] 0x00764130 func_00764130 (100 B)
 // [TODO] 0x007641A0 func_007641A0 (56 B)
 // [TODO] 0x007641E0 func_007641E0 (132 B)
@@ -43729,7 +56059,18 @@ extern "C" void func_00761830() {
 // [TODO] 0x00764730 func_00764730 (8 B)
 // [TODO] 0x00764740 func_00764740 (8 B)
 // [TODO] 0x00764750 func_00764750 (136 B)
-// [TODO] 0x007647E0 func_007647E0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007647E0 (0x007647E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_00808674.
+extern int D_00808674;
+
+int Get()
+{
+    return D_00808674;
+}
+
 // [TODO] 0x007647F0 func_007647F0 (8 B)
 // [TODO] 0x00764800 func_00764800 (8 B)
 // [TODO] 0x00764810 func_00764810 (524 B)
@@ -43766,7 +56107,24 @@ extern "C" void func_00761830() {
 // [TODO] 0x007668E0 func_007668E0 (32 B)
 // [TODO] 0x00766900 func_00766900 (16 B)
 // [TODO] 0x00766910 func_00766910 (180 B)
-// [TODO] 0x007669D0 func_007669D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_007669D0 (0x007669D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x3C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x3C];
+    int m_Field3C; // +0x3C
+};
+
+int Object::Get()
+{
+    return m_Field3C;
+}
+
 // [TODO] 0x007669E0 func_007669E0 (160 B)
 // [TODO] 0x00766A80 func_00766A80 (160 B)
 // [TODO] 0x00766B20 func_00766B20 (296 B)
@@ -43775,9 +56133,60 @@ extern "C" void func_00761830() {
 // [TODO] 0x00766E40 func_00766E40 (52 B)
 // [TODO] 0x00766E80 func_00766E80 (52 B)
 // [TODO] 0x00766EC0 func_00766EC0 (124 B)
-// [TODO] 0x00766F40 func_00766F40 (8 B)
-// [TODO] 0x00766F50 func_00766F50 (8 B)
-// [TODO] 0x00766F60 func_00766F60 (8 B)
+// ============================================================================
+// [VERIFIED] func_00766F40 (0x00766F40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
+// ============================================================================
+// [VERIFIED] func_00766F50 (0x00766F50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00766F60 (0x00766F60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x14 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Object::Get()
+{
+    return m_Field14;
+}
+
 // [TODO] 0x00766F70 func_00766F70 (176 B)
 // [TODO] 0x00767020 func_00767020 (8 B)
 // [TODO] 0x00767030 func_00767030 (132 B)
@@ -43794,7 +56203,24 @@ extern "C" void func_00761830() {
 // [TODO] 0x00769830 func_00769830 (60 B)
 // [TODO] 0x00769870 func_00769870 (16 B)
 // [TODO] 0x00769880 func_00769880 (180 B)
-// [TODO] 0x00769940 func_00769940 (8 B)
+// ============================================================================
+// [VERIFIED] func_00769940 (0x00769940, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x3C of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x3C];
+    int m_Field3C; // +0x3C
+};
+
+int Object::Get()
+{
+    return m_Field3C;
+}
+
 // [TODO] 0x00769950 func_00769950 (240 B)
 // [TODO] 0x00769A40 func_00769A40 (240 B)
 // [TODO] 0x00769B30 func_00769B30 (344 B)
@@ -43815,8 +56241,59 @@ extern "C" void func_00761830() {
 extern "C" void func_00769EC0() {
 }
 
-// [TODO] 0x00769ED0 func_00769ED0 (8 B)
-// [TODO] 0x00769EE0 func_00769EE0 (8 B)
-// [TODO] 0x00769EF0 func_00769EF0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00769ED0 (0x00769ED0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+int Object::Get()
+{
+    return m_Field18;
+}
+
+// ============================================================================
+// [VERIFIED] func_00769EE0 (0x00769EE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+int Object::Get()
+{
+    return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00769EF0 (0x00769EF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x14 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+int Object::Get()
+{
+    return m_Field14;
+}
+
 // [TODO] 0x00769F00 func_00769F00 (176 B)
 // [TODO] 0x00769FB0 func_00769FB0 (8 B)

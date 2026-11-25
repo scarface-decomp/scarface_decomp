@@ -1,15 +1,26 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay PauseMenuOverlayf.bin (pause menu), loaded at 0x845480, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 20 of 191 functions matched (10.47%). NOT COMPLETE YET.
-// The 171 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 34 of 191 functions matched (17.80%). NOT COMPLETE YET.
+// The 157 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
 
-// [TODO] 0x00845500 func_00845500 (8 B)
+// ============================================================================
+// [VERIFIED] func_00845500 (0x00845500, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value kept in the global D_0080B520.
+extern int D_0080B520;
+
+int Get()
+{
+    return D_0080B520;
+}
+
 // [TODO] 0x00845510 func_00845510 (276 B)
 // [TODO] 0x00845630 func_00845630 (496 B)
 // ============================================================================
@@ -49,9 +60,36 @@ extern "C" void func_00845820() {
 extern "C" void func_00845F60() {
 }
 
-// [TODO] 0x00845F70 func_00845F70 (8 B)
-// [TODO] 0x00845F80 func_00845F80 (8 B)
-// [TODO] 0x00845F90 func_00845F90 (8 B)
+// ============================================================================
+// [VERIFIED] func_00845F70 (0x00845F70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00845F80 (0x00845F80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00845F90 (0x00845F90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00845FA0 func_00845FA0 (12 B)
 // ============================================================================
 // [VERIFIED] func_00845FB0 (0x00845FB0, 8 B)
@@ -92,8 +130,26 @@ extern "C" void func_00845FC0() {
 extern "C" void func_00845FD0() {
 }
 
-// [TODO] 0x00845FE0 func_00845FE0 (8 B)
-// [TODO] 0x00845FF0 func_00845FF0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00845FE0 (0x00845FE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00845FF0 (0x00845FF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00846000 func_00846000 (16 B)
 // ============================================================================
 // [VERIFIED] func_00846010 (0x00846010, 8 B)
@@ -174,11 +230,56 @@ extern "C" void func_00846050() {
 extern "C" void func_00846080() {
 }
 
-// [TODO] 0x00846090 func_00846090 (8 B)
-// [TODO] 0x008460A0 func_008460A0 (8 B)
-// [TODO] 0x008460B0 func_008460B0 (8 B)
-// [TODO] 0x008460C0 func_008460C0 (8 B)
-// [TODO] 0x008460D0 func_008460D0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00846090 (0x00846090, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_008460A0 (0x008460A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_008460B0 (0x008460B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_008460C0 (0x008460C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_008460D0 (0x008460D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x008460E0 func_008460E0 (8 B)
 // [TODO] 0x008460F0 func_008460F0 (132 B)
 // [TODO] 0x00846180 func_00846180 (216 B)
@@ -257,7 +358,15 @@ extern "C" void func_00846BB0() {
 extern "C" void func_00846BC0() {
 }
 
-// [TODO] 0x00846BD0 PauseMenuPageOptions::vfunc_54 (8 B)
+// ============================================================================
+// [VERIFIED] PauseMenuPageOptions::vfunc_54 (0x00846BD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Does nothing.
+void Nothing()
+{
+}
+
 // ============================================================================
 // [VERIFIED] func_00846BE0 (0x00846BE0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -314,7 +423,18 @@ extern "C" void func_00846C10() {
 // [TODO] 0x00846C30 func_00846C30 (8 B)
 // [TODO] 0x00846C40 func_00846C40 (104 B)
 // [TODO] 0x00846CB0 func_00846CB0 (660 B)
-// [TODO] 0x00846F50 func_00846F50 (8 B)
+// ============================================================================
+// [VERIFIED] func_00846F50 (0x00846F50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte kept in the global D_00809A18.
+extern unsigned char D_00809A18;
+
+unsigned char Get()
+{
+    return D_00809A18;
+}
+
 // [TODO] 0x00846F60 func_00846F60 (88 B)
 // [TODO] 0x00846FC0 func_00846FC0 (128 B)
 // [TODO] 0x00847040 func_00847040 (128 B)
@@ -377,7 +497,18 @@ extern "C" void func_00846C10() {
 // [TODO] 0x008498C0 func_008498C0 (12 B)
 // [TODO] 0x008498D0 func_008498D0 (104 B)
 // [TODO] 0x00849940 PauseMenuPageHome::vfunc_44 (868 B)
-// [TODO] 0x00849CB0 func_00849CB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_00849CB0 (0x00849CB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte kept in the global D_008099DC.
+extern unsigned char D_008099DC;
+
+unsigned char Get()
+{
+    return D_008099DC;
+}
+
 // [TODO] 0x00849CC0 func_00849CC0 (196 B)
 // [TODO] 0x00849D90 func_00849D90 (100 B)
 // [TODO] 0x00849E00 func_00849E00 (100 B)

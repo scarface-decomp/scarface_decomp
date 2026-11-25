@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay MiniGamesOverlayf.bin (gambling mini-games), loaded at 0x845480, engine/GlobalFunctions.cpp (14 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay MiniGamesOverlayf.bin (gambling mini-games), loaded at 0x845480, engine/GlobalFunctions.cpp (26 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 14 of 123 functions matched (11.38%). NOT COMPLETE YET.
-// The 109 still to do are listed in their place in Original_Binary_Order_PS2_MiniGames.cpp as "// [TODO] address name (size)"
+// PROGRESS: 26 of 123 functions matched (21.14%). NOT COMPLETE YET.
+// The 97 still to do are listed in their place in Original_Binary_Order_PS2_MiniGames.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -140,6 +140,56 @@ extern "C" void func_008474C0() {
 }
 
 // ============================================================================
+// [VERIFIED] func_008474D0 (0x008474D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_008474E0 (0x008474E0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_008474F0 (0x008474F0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00847500 (0x00847500, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00847510 (0x00847510, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_00847520 (0x00847520, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -189,5 +239,129 @@ extern "C" void func_00847540() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_00847550() {
+}
+
+// ============================================================================
+// [VERIFIED] func_00847560 (0x00847560, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns its object.
+class Object
+{
+public:
+    Object* Get();
+};
+
+Object* Object::Get()
+{
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084C970 (0x0084C970, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+int Object::Get()
+{
+    return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084C980 (0x0084C980, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0xC of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Set(int value)
+{
+    m_FieldC = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084C990 (0x0084C990, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+int Object::Get()
+{
+    return m_Field8;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084C9A0 (0x0084C9A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x8 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Set(int value)
+{
+    m_Field8 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084C9B0 (0x0084C9B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084C9C0 (0x0084C9C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x4 of its object.
+class Object
+{
+public:
+    void Set(int value);
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+void Object::Set(int value)
+{
+    m_Field4 = value;
 }
 

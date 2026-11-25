@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay ModalsOverlay1f.bin (empire and mansion screens), loaded at 0x845480, engine/GlobalFunctions.cpp (12 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay ModalsOverlay1f.bin (empire and mansion screens), loaded at 0x845480, engine/GlobalFunctions.cpp (23 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 12 of 95 functions matched (12.63%). NOT COMPLETE YET.
-// The 83 still to do are listed in their place in Original_Binary_Order_PS2_Modals1.cpp as "// [TODO] address name (size)"
+// PROGRESS: 23 of 95 functions matched (24.21%). NOT COMPLETE YET.
+// The 72 still to do are listed in their place in Original_Binary_Order_PS2_Modals1.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -23,6 +23,34 @@ extern "C" void func_0084AA90() {
 }
 
 // ============================================================================
+// [VERIFIED] func_0084ABC0 (0x0084ABC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x5 of its object.
+class Object
+{
+public:
+    void Set(char value);
+    char m_pad00[0x5];
+    char m_Field5; // +0x5
+};
+
+void Object::Set(char value)
+{
+    m_Field5 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084ACA0 (0x0084ACA0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_0084ACB0 (0x0084ACB0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -33,6 +61,36 @@ extern "C" void func_0084AA90() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_0084ACB0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0084ACC0 (0x0084ACC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084ACD0 (0x0084ACD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084ACE0 (0x0084ACE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
 }
 
 // ============================================================================
@@ -72,6 +130,16 @@ extern "C" void func_0084AD10() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_0084AD20() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AD30 (0x0084AD30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
 }
 
 // ============================================================================
@@ -163,5 +231,55 @@ extern "C" void func_0084ADC0() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_0084ADD0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0084ADE0 (0x0084ADE0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084ADF0 (0x0084ADF0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AE00 (0x0084AE00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AE10 (0x0084AE10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AE20 (0x0084AE20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
 }
 

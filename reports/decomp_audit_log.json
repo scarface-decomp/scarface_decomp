@@ -1,5 +1,13 @@
 [
   {
+    "time": "2026-11-24 22:19:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1030 PS2 function(s) from the portal's starter code",
+    "va": "",
+    "bytes": "PS2 easy pass, no AI"
+  },
+  {
     "time": "2026-11-24 21:19:49",
     "user": "RRutherfordd (Founder)",
     "action": "VERIFIED",
@@ -1989,14 +1997,6 @@
     "action": "VERIFIED",
     "symbol": "sub_002F1580",
     "va": "Proto 0x002F1580",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:48:03",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1540",
-    "va": "Proto 0x002F1540",
     "bytes": "50/50 B"
   }
 ]

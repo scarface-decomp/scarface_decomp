@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay ExoticsOverlayf.bin (exotics shop), loaded at 0x845480, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 15 of 115 functions matched (13.04%). NOT COMPLETE YET.
-// The 100 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 25 of 115 functions matched (21.74%). NOT COMPLETE YET.
+// The 90 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -86,9 +86,36 @@ extern "C" void func_008478F0() {
 extern "C" void func_00847900() {
 }
 
-// [TODO] 0x00847910 func_00847910 (8 B)
-// [TODO] 0x00847920 func_00847920 (8 B)
-// [TODO] 0x00847930 func_00847930 (8 B)
+// ============================================================================
+// [VERIFIED] func_00847910 (0x00847910, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00847920 (0x00847920, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00847930 (0x00847930, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x00847940 func_00847940 (12 B)
 // ============================================================================
 // [VERIFIED] func_00847950 (0x00847950, 8 B)
@@ -129,8 +156,26 @@ extern "C" void func_00847960() {
 extern "C" void func_00847970() {
 }
 
-// [TODO] 0x00847980 func_00847980 (8 B)
-// [TODO] 0x00847990 func_00847990 (8 B)
+// ============================================================================
+// [VERIFIED] func_00847980 (0x00847980, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00847990 (0x00847990, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // [TODO] 0x008479A0 func_008479A0 (16 B)
 // ============================================================================
 // [VERIFIED] func_008479B0 (0x008479B0, 8 B)
@@ -224,11 +269,56 @@ extern "C" void func_00847A20() {
 extern "C" void func_00847A30() {
 }
 
-// [TODO] 0x00847A40 func_00847A40 (8 B)
-// [TODO] 0x00847A50 func_00847A50 (8 B)
-// [TODO] 0x00847A60 func_00847A60 (8 B)
-// [TODO] 0x00847A70 func_00847A70 (8 B)
-// [TODO] 0x00847A80 func_00847A80 (8 B)
+// ============================================================================
+// [VERIFIED] func_00847A40 (0x00847A40, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00847A50 (0x00847A50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 1.
+int Number()
+{
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00847A60 (0x00847A60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00847A70 (0x00847A70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00847A80 (0x00847A80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.
+int Zero()
+{
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] func_00847A90 (0x00847A90, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
