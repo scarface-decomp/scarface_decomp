@@ -428,3 +428,18 @@ def test_flags_are_part_of_what_a_compiled_object_is_kept_under(through_tab):
     assert len(b.jobs) == 2
     server.ps2_compile(dict(TASK), "int f() { return 1; }", through="abcde", compiler="mwcps2-3.0.1b87-031208")
     assert len(b.jobs) == 3 and b.jobs[2]["compile"]["compiler"] == "mwcps2-3.0.1b87-031208"      # another build too
+
+
+def test_a_lookalike_recorded_without_compiling_carries_its_sources_flags(monkeypatch):
+    src = dict(TASK)
+    monkeypatch.setattr(server, "REGISTRY", {"entries": {server.task_key(src): {"flags": server.PV.FLAGS_BEFORE}}})
+    assert server.recorded_flags(src) == server.PV.FLAGS_BEFORE          # matched before the flags changed
+    monkeypatch.setattr(server, "REGISTRY", {"entries": {}})
+    assert server.recorded_flags(src) == server.PV.FLAGS
+
+
+def test_the_lane_compiles_with_exceptions_off():
+    assert server.PV.FLAGS == server.PV.FLAGS_BEFORE + " -Cpp_exceptions off" and server.PV.probe_flags_ok(server.PV.FLAGS)
+    import queue_builder
+    assert queue_builder.PS2_FLAGS == server.PV.FLAGS
+    assert server.PS2_EASY_VERSION == 4                  # every open function is tried again with the new flags

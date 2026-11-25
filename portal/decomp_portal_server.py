@@ -562,6 +562,8 @@ def load_tasks() -> None:
         if "fva_int" not in t or t.get("bin") not in BINARIES:
             continue
         t.update(tier_meta(int(t.get("size", 1))))
+        if PO.is_ps2(t["bin"]):
+            t["flags"] = recorded_flags(t)         # a queue built before the lane's flags changed says the old ones
         t.setdefault("status", "UNCLAIMED")
         t.setdefault("claimed_by", "")
         t.setdefault("claim_expires_at", 0)
@@ -1436,6 +1438,11 @@ def catchup_targets(t: dict, cpp_code: str, user: str, tried: dict) -> List[dict
     return [m for m in lookalike_targets(t, user) if tried.get(task_key(m)) != sig]
 
 
+def recorded_flags(t: dict) -> str:
+    """The flags t's own match was compiled with: a look-alike recorded without compiling is that same object."""
+    return (REGISTRY["entries"].get(task_key(t)) or {}).get("flags") or (PV.FLAGS if PO.is_ps2(t["bin"]) else t["flags"])
+
+
 def port_lookalikes(t: dict, cpp_code: str, user: str, tool: str, catchup: bool = False) -> dict:
     """Rewrite t's matched C++ for each look-alike, compile and verify it. Only exact matches whose
     every address is checked are recorded, credited to the same person. A catch-up run (an earlier match,
@@ -1454,7 +1461,7 @@ def port_lookalikes(t: dict, cpp_code: str, user: str, tool: str, catchup: bool 
         if ported and PO.is_ps2(m["bin"]) and not src_relocs and not dst_relocs:
             # No addresses in either: the two are the same bytes, and only the function's own name changed
             # in the C++, so the compiled code is the same too. Nothing to send to decomp.me.
-            res = {"ok": True, "verified": True, "flags": PV.FLAGS, "reloc_unverified": 0}
+            res = {"ok": True, "verified": True, "flags": recorded_flags(t), "reloc_unverified": 0}
         else:
             res = run_verify(m, ported) if ported else {"ok": False}
             if PO.is_ps2(m["bin"]):
@@ -1701,7 +1708,7 @@ def start_easy_pass(user: str) -> dict:
 # made from the same text is reused, and real compiles are spaced out and capped: decomp.me is a shared,
 # free service, and this must stay a light user of it.
 PS2_EASY_TOOL = "the portal's starter code for PS2 (no AI)"
-PS2_EASY_VERSION = 3          # 3: functions that end in a jump (tail calls, virtual forwards)
+PS2_EASY_VERSION = 4          # 3: functions that end in a jump (tail calls, virtual forwards); 4: exceptions off
 PS2_EASY_JSON = PRIVATE_DIR / "ps2_easy_pass.json"        # the scratch compiled through, and what was tried (gitignored)
 PS2_EASY_PAUSE = float(os.environ.get("SCARFACE_PS2_EASY_PAUSE", "2"))     # seconds between real compiles
 PS2_EASY_MAX = int(os.environ.get("SCARFACE_PS2_EASY_MAX", "400"))         # real compiles a run

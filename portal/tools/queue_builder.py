@@ -53,7 +53,7 @@ for _o in ps2_overlay.OVERLAYS:
     LANES[_o.bin] = (_o.bin + "_", f"PS2 overlay: {_o.label}", "PS2 ")
 # The PS2 game (SLUS_211.11) was built with Metrowerks CodeWarrior for PS2, not Visual C++: its functions are
 # compiled on decomp.me and compared here (portal/tools/ps2_verify.py, docs/PS2.md).
-PS2_FLAGS = "-O3 -lang c++ -str readonly"
+PS2_FLAGS = "-O3 -lang c++ -str readonly -Cpp_exceptions off"
 
 
 _BUILTIN = {"X": "void", "D": "char", "C": "signed char", "E": "unsigned char", "F": "short",

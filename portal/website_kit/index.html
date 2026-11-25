@@ -3221,7 +3221,7 @@
       return [
         'Decompile this MIPS R5900 (PlayStation 2) function from Scarface: The World Is Yours (2006) into genuine, human-readable C++ that compiles byte-for-byte to the target with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me compiler ' + 'mwcps2-3.0.1b103-040528).',
         'Function: ' + t.symbol + ' at ' + t.va + ' (' + t.size + ' bytes)',
-        'Compiler flags: ' + (t.flags || '-O3 -lang c++ -str readonly'),
+        'Compiler flags: ' + (t.flags || '-O3 -lang c++ -str readonly -Cpp_exceptions off'),
         'Name every called function and global after its address: extern "C" void func_XXXXXXXX(); extern int D_XXXXXXXX;',
         'Target disassembly:' + NL + disasmText,
         'Current best C++ (' + bestScore + '/' + t.size + ' bytes matched):' + NL + code,
