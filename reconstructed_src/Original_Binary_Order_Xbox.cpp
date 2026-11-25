@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11,703 of 22,053 functions matched (53.07%). NOT COMPLETE YET.
-// The 10,350 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 11,711 of 22,053 functions matched (53.10%). NOT COMPLETE YET.
+// The 10,342 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -346345,8 +346345,32 @@ void __cdecl sub_002C6B50(int a1, int a2)
     *(int*)(a1 + 108) = t1;
 }
 
-// [TODO] 0x002C6B80 sub_002C6B80 (722 B)
-// [TODO] 0x002C6E60 sub_002C6E60 (24 B)
+// ============================================================================
+// [VERIFIED] sub_002C6B80 (0x002C6B80, 722 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Updates a CRC-32 over a block of bytes four at a time, for little-endian machines (zlib 1.2.1's crc32_little).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C6B80.cpp --va 0x002C6B80 --bin xb --match '_crc32_little' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C6B80
+// what: Updates a CRC-32 over a block of bytes four at a time, for little-endian machines (zlib 1.2.1's crc32_little).
+// tool: Claude Fable 5.2 (the public zlib 1.2.1 source, unchanged; SPEC-014 section 5.3)
+// zlib 1.2.1, Copyright (C) 1995-2003 Jean-loup Gailly and Mark Adler. The file is the published one.
+#include "zlib-1.2.1/crc32.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C6E60 (0x002C6E60, 24 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Updates a running CRC-32 checksum with a block of bytes (zlib 1.2.1's crc32); it hands the work to the little-endian routine.
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C6E60.cpp --va 0x002C6E60 --bin xb --match '_crc32' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C6E60
+// what: Updates a running CRC-32 checksum with a block of bytes (zlib 1.2.1's crc32); it hands the work to the little-endian routine.
+// tool: Claude Fable 5.2 (the public zlib 1.2.1 source, unchanged; SPEC-014 section 5.3)
+// zlib 1.2.1, Copyright (C) 1995-2003 Jean-loup Gailly and Mark Adler. The file is the published one.
+#include "zlib-1.2.1/crc32.c"
+
 // ============================================================================
 // [VERIFIED] sub_002C6E80 (0x002C6E80, 73 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -346384,7 +346408,19 @@ L_43:
     return -2;
 }
 
-// [TODO] 0x002C6ED0 sub_002C6ED0 (199 B)
+// ============================================================================
+// [VERIFIED] sub_002C6ED0 (0x002C6ED0, 199 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Sets up a stream for decompression with a chosen window size, after checking the caller's zlib version (zlib 1.2.1's inflateInit2_).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C6ED0.cpp --va 0x002C6ED0 --bin xb --match '_inflateInit2_' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C6ED0
+// what: Sets up a stream for decompression with a chosen window size, after checking the caller's zlib version (zlib 1.2.1's inflateInit2_).
+// tool: Claude Fable 5.2 (the public zlib 1.2.1 source, unchanged; SPEC-014 section 5.3)
+// zlib 1.2.1, Copyright (C) 1995-2003 Jean-loup Gailly and Mark Adler. The file is the published one.
+#include "zlib-1.2.1/inflate.c"
+
 // ============================================================================
 // [VERIFIED] sub_002C6FA0 (0x002C6FA0, 26 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -346402,8 +346438,32 @@ void __cdecl sub_002C6FA0(int a1, int a2, int a3)
     sub_002C6ED0(a1, 15, a2, a3);
 }
 
-// [TODO] 0x002C6FC0 sub_002C6FC0 (277 B)
-// [TODO] 0x002C70E0 sub_002C70E0 (5204 B)
+// ============================================================================
+// [VERIFIED] sub_002C6FC0 (0x002C6FC0, 277 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Copies the newest output into zlib's sliding window so later matches can reach back into it (zlib 1.2.1's updatewindow).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C6FC0.cpp --va 0x002C6FC0 --bin xb --match '_updatewindow' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C6FC0
+// what: Copies the newest output into zlib's sliding window so later matches can reach back into it (zlib 1.2.1's updatewindow).
+// tool: Claude Fable 5.2 (the public zlib 1.2.1 source, unchanged; SPEC-014 section 5.3)
+// zlib 1.2.1, Copyright (C) 1995-2003 Jean-loup Gailly and Mark Adler. The file is the published one.
+#include "zlib-1.2.1/inflate.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C70E0 (0x002C70E0, 5204 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Decompresses as much of a deflate, zlib or gzip stream as the buffers allow: the state machine at the heart of zlib 1.2.1 (inflate).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C70E0.cpp --va 0x002C70E0 --bin xb --match '_inflate' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C70E0
+// what: Decompresses as much of a deflate, zlib or gzip stream as the buffers allow: the state machine at the heart of zlib 1.2.1 (inflate).
+// tool: Claude Fable 5.2 (the public zlib 1.2.1 source, unchanged; SPEC-014 section 5.3)
+// zlib 1.2.1, Copyright (C) 1995-2003 Jean-loup Gailly and Mark Adler. The file is the published one.
+#include "zlib-1.2.1/inflate.c"
+
 // ============================================================================
 // [VERIFIED] sub_002C8540 (0x002C8540, 72 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -346586,9 +346646,45 @@ int __cdecl sub_002CC350(int a1, int a2, int a3)
     return sub_002FE138(a2 * a3);
 }
 
-// [TODO] 0x002CC370 sub_002CC370 (12 B)
-// [TODO] 0x002CC380 sub_002CC380 (1131 B)
-// [TODO] 0x002CC7F0 sub_002CC7F0 (1210 B)
+// ============================================================================
+// [VERIFIED] sub_002CC370 (0x002CC370, 12 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Frees memory for zlib through the C library (zlib 1.2.1's zcfree).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CC370.cpp --va 0x002CC370 --bin xb --match '_zcfree' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CC370
+// what: Frees memory for zlib through the C library (zlib 1.2.1's zcfree).
+// tool: Claude Fable 5.2 (the public zlib 1.2.1 source, unchanged; SPEC-014 section 5.3)
+// zlib 1.2.1, Copyright (C) 1995-2003 Jean-loup Gailly and Mark Adler. The file is the published one.
+#include "zlib-1.2.1/zutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CC380 (0x002CC380, 1131 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Decodes literals and matches quickly while there is plenty of input and output room (zlib 1.2.1's inflate_fast).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CC380.cpp --va 0x002CC380 --bin xb --match '_inflate_fast' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CC380
+// what: Decodes literals and matches quickly while there is plenty of input and output room (zlib 1.2.1's inflate_fast).
+// tool: Claude Fable 5.2 (the public zlib 1.2.1 source, unchanged; SPEC-014 section 5.3)
+// zlib 1.2.1, Copyright (C) 1995-2003 Jean-loup Gailly and Mark Adler. The file is the published one.
+#include "zlib-1.2.1/inffast.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CC7F0 (0x002CC7F0, 1210 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Builds a Huffman decoding table from a list of code lengths (zlib 1.2.1's inflate_table).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CC7F0.cpp --va 0x002CC7F0 --bin xb --match '_inflate_table' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CC7F0
+// what: Builds a Huffman decoding table from a list of code lengths (zlib 1.2.1's inflate_table).
+// tool: Claude Fable 5.2 (the public zlib 1.2.1 source, unchanged; SPEC-014 section 5.3)
+// zlib 1.2.1, Copyright (C) 1995-2003 Jean-loup Gailly and Mark Adler. The file is the published one.
+#include "zlib-1.2.1/inftrees.c"
+
 // ============================================================================
 // [VERIFIED] sub_002CCCB0 (0x002CCCB0, 297 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
