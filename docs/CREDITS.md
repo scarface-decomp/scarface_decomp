@@ -52,6 +52,12 @@ authors are credited in the commit history. Thank you.
   named in the game's own program, but it was ScarfaceHook and
   [ScarfaceEX](https://www.moddb.com/mods/scarfaceex), which call them, that showed they were there to
   be read ([NAMES.md](NAMES.md)).
+* For a second opinion on the scripts' names: Gangsta Team's
+  [natives list](https://gangsta-team.github.io/website/#/documentation/game/natives) (public domain)
+  and the word list of their [RCF explorer](https://gangsta-team.github.io/web-rcf-explorer/). The
+  natives list confirmed all 820 script commands read from the Xbox program and showed the 34 only the
+  PC game has; the word list agreed with every hashed name both sides have. No name was taken from the
+  word list ([SCRIPTS.md](SCRIPTS.md#names)).
 * For compiling TorqueScript the way the game does: the code generator of
   [Torque2D](https://github.com/TorqueGameEngines/Torque2D) (`astNodes.cc`, `compiler.cc`, MIT
   licence), the open-source descendant of the engine Scarface's script compiler came from. It was read
