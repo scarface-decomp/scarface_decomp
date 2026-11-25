@@ -1,4 +1,4 @@
-# SPEC-016: `core::XboxSaveDrive`, the Xbox save-file drive (part 1 of the class)
+# SPEC-016: `core::XboxSaveDrive`, the Xbox save-file drive (parts 1 and 2a)
 
 **Examiner:** Claude (AI assistant) for RRutherrfordd, 2026-11-25.
 **Outside material read:** leaked source, read directly: the save-drive source file and header of the 2003
@@ -9,8 +9,8 @@ the leaked tree. Names here are Scarface's own (run-time type information, the r
 public ones (Win32 error codes, Xbox API). Fields are given by offset; name them yourself.
 
 This is the first whole-class spec written under the 25 November working method (CLEAN_ROOM.md, "How
-the clean room is worked"). Part 1 covers the block cache, mounting and error translation: four open
-functions and the data they share. The rest of the class follows in part 2.
+the clean room is worked"). Part 1 (§1 to §6) covers the block cache, mounting and error translation: four open
+functions and the data they share. Part 2a (§7) adds nine small functions around them. Part 2b follows.
 
 ## 1. Shared data
 
@@ -192,8 +192,105 @@ translate(`GetLastError()`) through 0x2BFE10; return false.
 space; 8 = hardware failure (the default); 0xB = media invalid; 0xC = data corrupt; 0xD = returned for a
 full unit at mount. The meanings are the examiner's reading of the Win32 codes that map to each value.
 
-## 7. Still to come (part 2)
+## 7. Part 2a: the small functions around the cache (nine open functions)
+
+Suggested names in this part are the examiner's own wording; rename freely.
+
+### 7.1 More layout
+
+| Offset | Type | Role | Witness |
+| :--- | :--- | :--- | :--- |
+| +0x10C | 4 entries of 0x208 bytes | directory-search pool. Each entry is a 0x204-byte search string followed by a 32-bit handle; an unused handle is 0xFFFFFFFF | 0x2BF948: loop of 4 from `this + 0x310`, step 0x208 |
+| whole object | 0x92C bytes | | 0x2C0095: the allocation size |
+
+### 7.2 Callees new in this part
+
+| VA | What it is (confirm against your library names) |
+| :--- | :--- |
+| 0x396663 | `XGetDeviceChanges(type, &inserted, &removed)`; the type object passed is at 0x395660 |
+| 0x23949C | `XCalculateSignatureBegin(flags)` |
+| 0x2394B0 | `XCalculateSignatureUpdate(handle, data, size)` |
+| 0x2394FE | `XCalculateSignatureEnd(handle, signature)` |
+| 0x396CB7 | `XUnmountMU(port, slot)` |
+| 0x30A4EB | closes a directory-search handle (one argument) |
+| 0x250E80 | `__cdecl`, two arguments (value, 0x4000): used to round a size |
+| 0x244450 | the engine's allocating `new` (size, allocator) |
+
+### 7.3 0x2BF6A0: refresh the memory-unit state (96 bytes)
+
+* **Signature:** member of the 2-byte state object (`this` = 0x4BDDF0), no arguments, no result.
+* **Steps:**
+  1. Call `XGetDeviceChanges` with two local 32-bit masks. If it returns 0, return.
+  2. Fold each mask to 8 bits: `(mask & 0xF) | ((mask >> 12) & 0xF0)`. The compiler emits its
+     bit-merge form (`shr 12; xor; and 0xF; xor`); the plain expression produces it.
+  3. `present ^= inserted ^ removed;` then `changed |= inserted | removed;`.
+
+### 7.4 0x2BF700: is the unit present (48 bytes)
+
+* **Signature:** member of the state object, (int port, int slot), returns bool. `ret 8`.
+* **Steps:** if port < 0 or slot < 0, return true. Otherwise return whether bit `port + slot * 4` of the
+  present mask is set (`(unsigned char)1 << n`, then `!= 0`).
+* **Scarface-only:** the negative-argument guard.
+
+### 7.5 0x2BF730: on-disk size of a save (48 bytes)
+
+* **Signature:** `__cdecl`, one `unsigned int` argument, returns `unsigned int`.
+* **Result:** `size + 4 + 20 * ((size + 4 + 0x1FEB) / 0x1FEC)`. In words: a 4-byte header, plus one
+  20-byte signature for every 0x1FEC bytes (a 0x2000 block less its signature), rounded up.
+* **Codegen:** the division is by the constant 0x1FEC (the compiler's multiply by 0xA0643F with the
+  subtract-shift-add fix-up, then `shr 12`), so write it as a division by a named constant.
+
+### 7.6 0x2BF8A0: space a new save needs (80 bytes)
+
+* **Signature:** member, two arguments (pointer to a structure, `unsigned int` size), returns
+  `unsigned int`. `ret 8`. `this` is not used.
+* **Steps:** compute §7.5's value for `size` (expanded in place); round it with 0x250E80(value, 0x4000);
+  add 0x8000; if the first 32-bit field of the structure is not zero, add another 0x4000.
+
+### 7.7 0x2BF7A0: signature of the cached block (96 bytes)
+
+* **Signature:** `__cdecl`, (unsigned int fileSize, pointer to the 20-byte result), returns bool.
+* **Steps:**
+  1. `start = cachedBlock * 0x2000`; `end = start + 0x2000`, clamped to `fileSize` (unsigned).
+  2. `h = XCalculateSignatureBegin(0)`. If `h` is 0xFFFFFFFF, return false.
+  3. `XCalculateSignatureUpdate(h, buffer, end - start - 20)`.
+  4. `XCalculateSignatureEnd(h, result)`. Return true.
+* **Note:** the verified 0x2BF760 (50 bytes) is the general form of steps 2 to 4 (buffer, size, result).
+  This one is the caller with that form expanded in place.
+
+### 7.8 0x2BF930: unmount (144 bytes)
+
+* **Signature:** member, no arguments, no result.
+* **Steps:**
+  1. If the drive letter (+0xFA) is `'U'`, return.
+  2. If not mounted (+0xF9), return.
+  3. For each of the 4 search-pool entries: if its handle is not 0xFFFFFFFF, close it (0x30A4EB) and set
+     it to 0xFFFFFFFF.
+  4. Work out port and slot (expanded in place, with the `'U'` name test as in §3 step 1).
+  5. `XUnmountMU(port, slot)`; mounted = false.
+
+### 7.9 0x2BF9C0: wide-string prefix test (64 bytes)
+
+* **Signature:** member, two arguments (pointers to 16-bit characters), returns bool. `ret 8`. `this` is
+  not used.
+* **Steps:** walk both strings together. While the first string's character is not zero: if the second's
+  is zero or differs, return false; advance both. Return true when the first string ends. So it answers
+  "does the second string start with the first".
+
+### 7.10 0x2C0090: create the drive (64 bytes)
+
+* **Signature:** `__cdecl`, three arguments (pointer to the result pointer, drive name, allocator).
+* **Steps:** store the allocator in the global 0x45894C; allocate 0x92C bytes with 0x244450; if that
+  gave memory, construct the object (0x2BFB50, passing the drive name) and store the result through the
+  first argument; otherwise store null.
+
+### 7.11 0x2C0480: guarded forward (64 bytes)
+
+* **Signature:** `__cdecl`. If the first argument is 0, return −3. If the second is 0, return −2.
+  Otherwise call 0x2BFA00 with three arguments and return its result. What 0x2BFA00 does was not read.
+
+## 8. Still to come (part 2b)
 
 The constructor (0x2BFB50), the save-file open (0x2C09C0, 1,280 bytes), file initialisation (0x2C0210),
-the signed block read and write, the directory search (0x2C1180, 0x2C1300), and the small members
-between them.
+the signed block read and write (0x2C04C0, 0x2C06B0), the directory search (0x2C1180, 0x2C1300), and the
+members at 0x2BFA00, 0x2BFAA0, 0x2C0EC0, 0x2C0F80, 0x2C1020 and 0x2C10E0.
