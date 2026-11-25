@@ -13,7 +13,8 @@ a script command or class field the program registers. A word of three letters o
 executable is too likely a chance hit and counts as "dictionary". Names from
 the project's own files (reports/names.json) and names made by joining two known words are "dictionary":
 probably right, but a wrong text matches some key by chance now and then (the report says how often to
-expect that). A key two different texts hash to is "ambiguous".
+expect that). So is a name already found with another number in it (`S02_01` is known, so `S02_03` and
+`S10_01` are tried). A key two different texts hash to is "ambiguous".
 
     python portal/tools/hash_names.py binaries/            -> reports/hash_names.json
 
@@ -203,9 +204,72 @@ def expected_chance(words: List[str], n_wanted: int) -> float:
     return len(words) ** 2 * len(PREFIXES) * n_wanted / 2 ** 31
 
 
+NUMBER = re.compile(r"\d+")
+RENUMBER_TOP = 100                          # numbers tried in place of each one: 0 to 99
+RENUMBER_ROUNDS = 3                         # a name found this way is renumbered in turn, this many times
+RENUMBERED = "a known name with another number"
+
+
+def renumberings(text: str, top: int = RENUMBER_TOP) -> List[str]:
+    """text with each of its numbers (three digits at most) replaced by 0 .. top-1, one number at a time,
+    written as wide as the one it replaces (`_01` -> `_00` .. `_99`) and, unless that one starts with a
+    zero, plainly too (`Wave10` -> `Wave9`)."""
+    out, seen = [], {text}
+    for m in NUMBER.finditer(text):
+        old = m.group()
+        if len(old) > 3:
+            continue
+        forms = [str(n).zfill(len(old)) for n in range(top)]
+        if len(old) == 1 or old[0] != "0":
+            forms += [str(n) for n in range(top)]
+        for f in forms:
+            t = text[:m.start()] + f + text[m.end():]
+            if t not in seen:
+                seen.add(t)
+                out.append(t)
+    return out
+
+
+def renumbered(names: Iterable[str], wanted: set, rounds: int = RENUMBER_ROUNDS) -> Tuple[Dict[int, List[str]], int]:
+    """({key: [texts]}, tries): names that are a known name with another number, for the keys in wanted.
+    The scripters numbered things in runs (missions, waves, slots), and only some of a run is spelled out
+    in the game's data."""
+    hits: Dict[int, List[str]] = defaultdict(list)
+    tries, tried, front = 0, set(), list(names)
+    for _ in range(rounds):
+        fresh = []
+        for name in front:
+            for t in renumberings(name):
+                low = t.lower()
+                if low in tried:
+                    continue
+                tried.add(low)
+                tries += 1
+                k = key(t)
+                if k in wanted:
+                    if not hits[k]:
+                        fresh.append(t)
+                    hits[k].append(t)
+        if not fresh:
+            break
+        front = fresh
+    return {k: v for k, v in hits.items() if v}, tries
+
+
+def add_renumbered(found: Dict[int, Dict[str, dict]], base: Iterable[str], wanted: set) -> float:
+    """Put the renumbered names for the keys nothing else named into found; how many to expect by chance."""
+    left = wanted - set(found)
+    hits, tries = renumbered(base, left)
+    for k, ts in hits.items():
+        for t in ts:
+            found.setdefault(k, {}).setdefault(t.lower(), {"text": t, "fold": True, "source": RENUMBERED,
+                                                           "certain": False})
+    return tries * len(left) / 2 ** 31
+
+
 # ---------------------------------------------------------------------------- the table
 
-def build(bin_dir: Path, script_files: Iterable[Path], compound: bool = True) -> dict:
+def build(bin_dir: Path, script_files: Iterable[Path], compound: bool = True, renumber: bool = True) -> dict:
     data_texts: List[str] = []
     wanted, texts = script_keys(script_files, data_texts)
     bins = [(e, (bin_dir / e).read_bytes()) for e in EXECUTABLES if (bin_dir / e).is_file()]
@@ -229,6 +293,8 @@ def build(bin_dir: Path, script_files: Iterable[Path], compound: bool = True) ->
         offer(t, src, not (src in EXECUTABLES and len(t.lstrip("$%")) <= SHORT))
     for t, src in project_candidates().items():
         offer(t, src, False)
+    # what the game's data and the project's names gave, before any text is made up: the names to renumber
+    base = [n["text"] for v in found.values() for n in v.values()]
     chance = 0.0
     if compound:
         words = vocabulary(n["text"] for v in found.values() for n in v.values())
@@ -238,22 +304,31 @@ def build(bin_dir: Path, script_files: Iterable[Path], compound: bool = True) ->
                 found[k].setdefault(t.lower(), {"text": t, "fold": True, "source": "two known words joined",
                                                 "certain": False})
         chance = expected_chance(words, len(left))
+    renumber_chance = add_renumbered(found, base, wanted) if renumber else 0.0
+    table = tabulate(found)
+    certain = sum(1 for v in table.values() if v["names"][0]["certain"])
+    return {"what": "Names for the hashed keys the game's scripts use (portal/tools/hash_names.py). certain: the "
+                    "text is in the game's own data; dictionary: from the project's names, two known words "
+                    "joined, or a known name with another number, so check it; ambiguous: more than one text "
+                    "hashes to the key.",
+            "keys_in_scripts": len(wanted), "named": len(table), "certain": certain,
+            "dictionary": len(table) - certain,
+            "ambiguous": sum(1 for v in table.values() if v["ambiguous"]),
+            "compound_chance_hits": round(chance, 1),
+            "renumbered_chance_hits": round(renumber_chance, 1),
+            "engine_callbacks": engine_callbacks(bin_dir),
+            "keys": table}
+
+
+def tabulate(found: Dict[int, Dict[str, dict]]) -> Dict[str, dict]:
+    """The report's "keys": each key's names, the best first."""
     table = {}
     for k in sorted(found):
         names = sorted(found[k].values(), key=lambda n: (not n["certain"], -casing_score(n["text"]), n["text"]))
         # a folded key matches every spelling; keep the best-looking one per distinct text
         table[f"0x{k:08X}"] = {"stx": stx(k), "names": names,
                                "ambiguous": len({n["text"].lower() for n in names}) > 1}
-    certain = sum(1 for v in table.values() if v["names"][0]["certain"])
-    return {"what": "Names for the hashed keys the game's scripts use (portal/tools/hash_names.py). certain: the "
-                    "text is in the game's own data; dictionary: from the project's names or two known words "
-                    "joined, so check it; ambiguous: more than one text hashes to the key.",
-            "keys_in_scripts": len(wanted), "named": len(table), "certain": certain,
-            "dictionary": len(table) - certain,
-            "ambiguous": sum(1 for v in table.values() if v["ambiguous"]),
-            "compound_chance_hits": round(chance, 1),
-            "engine_callbacks": engine_callbacks(bin_dir),
-            "keys": table}
+    return table
 
 
 def engine_callbacks(bin_dir: Path) -> List[dict]:
@@ -323,13 +398,15 @@ def main(argv=None) -> int:
     ap.add_argument("--scripts", type=Path, nargs="*", help="script folders (default: everything under folder)")
     ap.add_argument("--out", type=Path, default=ROOT / "reports" / "hash_names.json")
     ap.add_argument("--no-compounds", action="store_true", help="skip joining two known words")
+    ap.add_argument("--no-renumber", action="store_true", help="skip trying known names with other numbers")
     a = ap.parse_args(argv)
     files = [p for d in (a.scripts or [a.folder]) for p in sorted(d.rglob("*"))
              if p.suffix.lower() in (".cso", ".dso", ".cs") + DATA_TEXT]
-    t = build(a.folder, files, compound=not a.no_compounds)
+    t = build(a.folder, files, compound=not a.no_compounds, renumber=not a.no_renumber)
     write(t, a.out)
     print(f"{t['named']} of {t['keys_in_scripts']} keys named: {t['certain']} certain, {t['dictionary']} "
-          f"dictionary ({t['compound_chance_hits']} of the joined-word ones expected by chance), "
+          f"dictionary ({t['compound_chance_hits']} of the joined-word ones and "
+          f"{t['renumbered_chance_hits']} of the renumbered ones expected by chance), "
           f"{t['ambiguous']} ambiguous -> {a.out}")
     return 0
 
