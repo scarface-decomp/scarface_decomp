@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (7331 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (7336 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,331 of 15,290 functions matched (47.95%). NOT COMPLETE YET.
-// The 7,959 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7,336 of 15,290 functions matched (47.98%). NOT COMPLETE YET.
+// The 7,954 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -158003,6 +158003,34 @@ void Class_002BE710::sub_002BE710()
 }
 
 // ============================================================================
+// [VERIFIED] sub_002BF700 (0x002BF700, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Says whether the memory unit at a port and slot is present; a negative port or slot counts as present.
+// ============================================================================
+// bin: xb
+// va: 0x002BF700
+// what: Says whether the memory unit at a port and slot is present; a negative port or slot counts as present.
+// tool: Claude (from SPEC-016)
+
+// The memory units' state: which are present and which have changed (SPEC-016 section 1.2).
+class MemoryUnits
+{
+public:
+    bool sub_002BF700(int port, int slot);
+    unsigned char m_Present; // +0x0
+    unsigned char m_Changed; // +0x1
+};
+
+bool MemoryUnits::sub_002BF700(int port, int slot)
+{
+    if (port < 0 || slot < 0)
+    {
+        return true;
+    }
+    return (m_Present & (unsigned char)(1 << (port + slot * 4))) != 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002BF760 (0x002BF760, 50 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -158136,6 +158164,236 @@ void Class_002BFD90::sub_002BFD90()
 }
 
 // ============================================================================
+// [VERIFIED] sub_002BFE10 (0x002BFE10, 246 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Turns a Win32 error code into the save drive's own error value; for a disconnected device it asks whether the memory unit is still present.
+// ============================================================================
+// bin: xb
+// va: 0x002BFE10
+// what: Turns a Win32 error code into the save drive's own error value; for a disconnected device it asks whether the memory unit is still present.
+// tool: Claude (from SPEC-016)
+
+// The memory units' state: which are present and which have changed (SPEC-016 section 1.2).
+class MemoryUnits
+{
+public:
+    void sub_002BF6A0();                    // refresh both masks from the system
+    bool sub_002BF700(int port, int slot);  // is the unit at (port, slot) present
+    unsigned char m_Present; // +0x0
+    unsigned char m_Changed; // +0x1
+};
+
+extern "C" MemoryUnits DAT_004BDDF0;
+
+class XboxSaveDrive
+{
+public:
+    int sub_002BFE10(unsigned int code);
+    void sub_002BF8F0(int* port, int* slot);
+};
+
+int XboxSaveDrive::sub_002BFE10(unsigned int code)
+{
+    switch (code)
+    {
+    case 0:         // ERROR_SUCCESS
+        return 0;
+    case 2:         // ERROR_FILE_NOT_FOUND
+    case 3:         // ERROR_PATH_NOT_FOUND
+    case 15:        // ERROR_INVALID_DRIVE
+        return 1;
+    case 11:        // ERROR_BAD_FORMAT
+        return 5;
+    case 14:        // ERROR_OUTOFMEMORY
+        return 8;
+    case 17:        // ERROR_NOT_SAME_DEVICE
+        return 3;
+    case 0x1A:      // ERROR_NOT_DOS_DISK
+        return 0xB;
+    case 0x1B:      // ERROR_SECTOR_NOT_FOUND
+        return 5;
+    case 0x22:      // ERROR_WRONG_DISK
+        return 3;
+    case 0x55:      // ERROR_ALREADY_ASSIGNED
+        return 0;
+    case 0x70:      // ERROR_DISK_FULL
+        return 7;
+    case 0x3ED:     // ERROR_UNRECOGNIZED_VOLUME
+        return 5;
+    case 0x48F:     // ERROR_DEVICE_NOT_CONNECTED
+    {
+        int port;
+        int slot;
+
+        DAT_004BDDF0.sub_002BF6A0();
+        sub_002BF8F0(&port, &slot);
+        if (DAT_004BDDF0.sub_002BF700(port, slot))
+        {
+            return 3;
+        }
+        else
+        {
+            return 4;
+        }
+    }
+    default:
+        return 8;
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_002BFF10 (0x002BFF10, 286 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Mounts the save drive's memory unit: fails if the unit was swapped while files are open, otherwise unmounts a changed unit, mounts it and records the result.
+// ============================================================================
+// bin: xb
+// va: 0x002BFF10
+// what: Mounts the save drive's memory unit: fails if the unit was swapped while files are open, otherwise unmounts a changed unit, mounts it and records the result.
+// tool: Claude (from SPEC-016)
+
+// The memory units' state: which are present and which have changed (SPEC-016 section 1.2).
+class MemoryUnits
+{
+public:
+    void sub_002BF6A0();                    // refresh both masks from the system
+    bool sub_002BF700(int port, int slot);  // is the unit at (port, slot) present
+
+    bool HasChanged(int port, int slot)
+    {
+        if (port < 0 || slot < 0)
+        {
+            return false;
+        }
+        return (m_Changed & (unsigned char)(1 << (port + slot * 4))) != 0;
+    }
+
+    void ClearChanged(int port, int slot)
+    {
+        m_Changed &= ~(unsigned char)(1 << (port + slot * 4));
+    }
+
+    unsigned char m_Present; // +0x0
+    unsigned char m_Changed; // +0x1
+};
+
+extern "C" MemoryUnits DAT_004BDDF0;
+extern "C" unsigned int __stdcall sub_00396B85(int port, int slot, char* driveLetter);     // XMountMU
+
+class XboxSaveDrive
+{
+public:
+    int sub_002BFE10(unsigned int code);
+    bool sub_002BFF10();
+    void sub_002BF8F0(int* port, int* slot);
+    void sub_002BF930();
+
+    char m_pad00[0xD0];
+    int m_LastError;            // +0xD0
+    char m_padD4[0x10];
+    unsigned int m_OpenFiles;   // +0xE4
+    char m_Name[0x11];          // +0xE8
+    bool m_Mounted;             // +0xF9
+    char m_DriveLetter;         // +0xFA
+};
+
+int XboxSaveDrive::sub_002BFE10(unsigned int code)
+{
+    switch (code)
+    {
+    case 0:         // ERROR_SUCCESS
+        return 0;
+    case 2:         // ERROR_FILE_NOT_FOUND
+    case 3:         // ERROR_PATH_NOT_FOUND
+    case 15:        // ERROR_INVALID_DRIVE
+        return 1;
+    case 11:        // ERROR_BAD_FORMAT
+        return 5;
+    case 14:        // ERROR_OUTOFMEMORY
+        return 8;
+    case 17:        // ERROR_NOT_SAME_DEVICE
+        return 3;
+    case 0x1A:      // ERROR_NOT_DOS_DISK
+        return 0xB;
+    case 0x1B:      // ERROR_SECTOR_NOT_FOUND
+        return 5;
+    case 0x22:      // ERROR_WRONG_DISK
+        return 3;
+    case 0x55:      // ERROR_ALREADY_ASSIGNED
+        return 0;
+    case 0x70:      // ERROR_DISK_FULL
+        return 7;
+    case 0x3ED:     // ERROR_UNRECOGNIZED_VOLUME
+        return 5;
+    case 0x48F:     // ERROR_DEVICE_NOT_CONNECTED
+    {
+        int port;
+        int slot;
+
+        DAT_004BDDF0.sub_002BF6A0();
+        sub_002BF8F0(&port, &slot);
+        if (DAT_004BDDF0.sub_002BF700(port, slot))
+        {
+            return 3;
+        }
+        else
+        {
+            return 4;
+        }
+    }
+    default:
+        return 8;
+    }
+}
+
+bool XboxSaveDrive::sub_002BFF10()
+{
+    int port;
+    int slot;
+
+    if (m_Name[0] == 'U')
+    {
+        port = -1;
+        slot = -1;
+    }
+    else
+    {
+        port = m_Name[7] - '1';
+        slot = m_Name[8] - 'A';
+    }
+
+    DAT_004BDDF0.sub_002BF6A0();
+    if (DAT_004BDDF0.HasChanged(port, slot))
+    {
+        if (m_OpenFiles > 0)
+        {
+            m_LastError = sub_002BFE10(0x48F);      // ERROR_DEVICE_NOT_CONNECTED
+            return false;
+        }
+        DAT_004BDDF0.ClearChanged(port, slot);
+        sub_002BF930();
+    }
+
+    if (!m_Mounted)
+    {
+        unsigned int result = sub_00396B85(port, slot, &m_DriveLetter);
+        if (result != 0)
+        {
+            if (result == 0x70)     // ERROR_DISK_FULL
+            {
+                m_LastError = 0xD;
+                return false;
+            }
+            m_LastError = sub_002BFE10(result);
+            return false;
+        }
+    }
+
+    m_Mounted = true;
+    m_LastError = 0;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002C0030 (0x002C0030, 32 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -158200,6 +158458,196 @@ bool Class_002C0050::sub_002C0050(int a1, int a2)
         m_FieldD0 = sub_002BFE10(((Object*)a2)->sub_00234B47());
         return false;
     }
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C0100 (0x002C0100, 259 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Writes the cached save-file block back to its file if it was changed, with its 20-byte signature placed at the end of the block.
+// ============================================================================
+// bin: xb
+// va: 0x002C0100
+// what: Writes the cached save-file block back to its file if it was changed, with its 20-byte signature placed at the end of the block.
+// tool: Claude (from SPEC-016)
+
+// A block's signature: 20 bytes (SPEC-016 section 4).
+struct Signature
+{
+    unsigned int m_Words[5];
+};
+
+extern "C" char* DAT_004BFE38;          // the transfer buffer: one block, 0x2000 bytes
+extern "C" void* DAT_004BFE3C;          // the file whose block is in the buffer
+extern "C" unsigned int DAT_004BFE40;   // which block of that file
+extern "C" int DAT_004BFE44;            // 0 = nothing valid, 1 = valid and unchanged, 2 = changed and not yet written
+
+extern "C" unsigned int __stdcall sub_00233A64(void* file, unsigned int* high);                                    // GetFileSize
+extern "C" unsigned int __stdcall sub_0023383D(void* file, int distance, int* high, unsigned int from);            // SetFilePointer
+extern "C" int __stdcall sub_002336E3(void* file, const void* data, unsigned int count, unsigned int* done, void* overlapped);  // WriteFile
+extern "C" unsigned int __stdcall sub_00234B47();                                                                  // GetLastError
+bool __cdecl sub_002BF7A0(unsigned int size, Signature* signature);     // the signature of the cached block
+
+class XboxSaveDrive
+{
+public:
+    int sub_002BFE10(unsigned int code);
+    bool sub_002C0100();
+
+    bool sub_002C0030(unsigned int code)
+    {
+        m_LastError = sub_002BFE10(code);
+        return m_LastError == 0;
+    }
+
+    char m_pad00[0xD0];
+    int m_LastError;            // +0xD0
+};
+
+bool XboxSaveDrive::sub_002C0100()
+{
+    if (DAT_004BFE44 != 2)
+    {
+        return true;
+    }
+
+    unsigned int size = sub_00233A64(DAT_004BFE3C, 0);
+    if (size == 0xFFFFFFFF)
+    {
+        sub_002C0030(sub_00234B47());
+        return false;
+    }
+
+    Signature signature;
+    if (!sub_002BF7A0(size, &signature))
+    {
+        sub_002C0030(sub_00234B47());
+        return false;
+    }
+
+    unsigned int start = DAT_004BFE40 * 0x2000;
+    unsigned int end = start + 0x2000;
+    if (end >= size)
+    {
+        end = size;
+    }
+    *(Signature*)(DAT_004BFE38 + (end - 20 - start)) = signature;
+
+    unsigned int written;
+    if (sub_0023383D(DAT_004BFE3C, start, 0, 0) != start
+        || !sub_002336E3(DAT_004BFE3C, DAT_004BFE38, end - start, &written, 0))
+    {
+        sub_002C0030(sub_00234B47());
+        return false;
+    }
+
+    DAT_004BFE44 = 1;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C0760 (0x002C0760, 409 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Loads one block of a save file into the shared buffer (writing back the block that was there first) and checks the block's 20-byte signature.
+// ============================================================================
+// bin: xb
+// va: 0x002C0760
+// what: Loads one block of a save file into the shared buffer (writing back the block that was there first) and checks the block's 20-byte signature.
+// tool: Claude (from SPEC-016)
+
+extern "C" int __cdecl memcmp(const void* a, const void* b, unsigned int count);
+#pragma intrinsic(memcmp)
+
+// A block's signature: 20 bytes (SPEC-016 section 4).
+struct Signature
+{
+    unsigned int m_Words[5];
+};
+
+extern "C" char* DAT_004BFE38;          // the transfer buffer: one block, 0x2000 bytes
+extern "C" void* DAT_004BFE3C;          // the file whose block is in the buffer
+extern "C" unsigned int DAT_004BFE40;   // which block of that file
+extern "C" int DAT_004BFE44;            // 0 = nothing valid, 1 = valid and unchanged, 2 = changed and not yet written
+
+extern "C" unsigned int __stdcall sub_00233A64(void* file, unsigned int* high);                                    // GetFileSize
+extern "C" unsigned int __stdcall sub_0023383D(void* file, int distance, int* high, unsigned int from);            // SetFilePointer
+extern "C" int __stdcall sub_002335F6(void* file, void* data, unsigned int count, unsigned int* done, void* overlapped);         // ReadFile
+extern "C" unsigned int __stdcall sub_00234B47();                                                                  // GetLastError
+bool __cdecl sub_002BF7A0(unsigned int size, Signature* signature);     // the signature of the cached block
+
+class XboxSaveDrive
+{
+public:
+    int sub_002BFE10(unsigned int code);
+    bool sub_002C0030(unsigned int code);
+    bool sub_002C0100();
+    bool sub_002C0760(void* file, unsigned int block);
+
+    char m_pad00[0xD0];
+    int m_LastError;            // +0xD0
+};
+
+bool XboxSaveDrive::sub_002C0030(unsigned int code)
+{
+    m_LastError = sub_002BFE10(code);
+    return m_LastError == 0;
+}
+
+bool XboxSaveDrive::sub_002C0760(void* file, unsigned int block)
+{
+    if (DAT_004BFE44 != 0 && DAT_004BFE3C == file && DAT_004BFE40 == block)
+    {
+        return true;
+    }
+
+    unsigned int size = sub_00233A64(file, 0);
+    if (size == 0xFFFFFFFF)
+    {
+        sub_002C0030(sub_00234B47());
+        return false;
+    }
+
+    if (!sub_002C0100())
+    {
+        return false;
+    }
+    DAT_004BFE44 = 0;
+
+    unsigned int start = block * 0x2000;
+    unsigned int end = start + 0x2000;
+    if (end >= size)
+    {
+        end = size;
+    }
+    unsigned int count = end - start;
+    end -= 20;
+
+    unsigned int read;
+    if (sub_0023383D(file, start, 0, 0) != start
+        || !sub_002335F6(file, DAT_004BFE38, count, &read, 0))
+    {
+        sub_002C0030(sub_00234B47());
+        return false;
+    }
+
+    Signature stored = *(Signature*)(DAT_004BFE38 + (end - start));
+    DAT_004BFE3C = file;
+    DAT_004BFE40 = block;
+
+    Signature computed;
+    if (!sub_002BF7A0(size, &computed))
+    {
+        sub_002C0030(sub_00234B47());
+        return false;
+    }
+
+    if (memcmp(&computed, &stored, sizeof(Signature)) != 0)
+    {
+        m_LastError = 0xC;
+        return false;
+    }
+
+    DAT_004BFE44 = 1;
     return true;
 }
 

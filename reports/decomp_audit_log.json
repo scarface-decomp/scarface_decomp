@@ -1,5 +1,93 @@
 [
   {
+    "time": "2026-11-25 16:46:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "243 PS2 function(s) from the portal's starter code",
+    "va": "",
+    "bytes": "PS2 easy pass, no AI"
+  },
+  {
+    "time": "2026-11-25 16:27:41",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002C0760",
+    "va": "0x002C0760",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 16:27:21",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002C0760",
+    "va": "0x002C0760",
+    "bytes": "409/409 B"
+  },
+  {
+    "time": "2026-11-25 16:27:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002C0100",
+    "va": "0x002C0100",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 16:26:42",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002C0100",
+    "va": "0x002C0100",
+    "bytes": "259/259 B"
+  },
+  {
+    "time": "2026-11-25 16:26:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002BFF10",
+    "va": "0x002BFF10",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 16:26:03",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002BFF10",
+    "va": "0x002BFF10",
+    "bytes": "286/286 B"
+  },
+  {
+    "time": "2026-11-25 16:25:41",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002BFE10",
+    "va": "0x002BFE10",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 16:25:16",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002BFE10",
+    "va": "0x002BFE10",
+    "bytes": "246/246 B"
+  },
+  {
+    "time": "2026-11-25 16:24:56",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002BF700",
+    "va": "0x002BF700",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 16:24:37",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002BF700",
+    "va": "0x002BF700",
+    "bytes": "41/41 B"
+  },
+  {
     "time": "2026-11-25 15:17:42",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
@@ -1909,94 +1997,6 @@
     "action": "VERIFIED",
     "symbol": "sub_002F1AD0",
     "va": "Proto 0x002F1AD0",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:53:21",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1A90",
-    "va": "Proto 0x002F1A90",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:52:59",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1A50",
-    "va": "Proto 0x002F1A50",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:52:14",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1A10",
-    "va": "Proto 0x002F1A10",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:51:50",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F19D0",
-    "va": "Proto 0x002F19D0",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:51:27",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1990",
-    "va": "Proto 0x002F1990",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:51:05",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1950",
-    "va": "Proto 0x002F1950",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:50:41",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1910",
-    "va": "Proto 0x002F1910",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:50:19",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F18D0",
-    "va": "Proto 0x002F18D0",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:49:56",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1890",
-    "va": "Proto 0x002F1890",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:49:33",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1850",
-    "va": "Proto 0x002F1850",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:49:11",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1810",
-    "va": "Proto 0x002F1810",
     "bytes": "50/50 B"
   }
 ]

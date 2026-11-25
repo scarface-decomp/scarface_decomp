@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay PauseMenuOverlayf.bin (pause menu), loaded at 0x845480, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 45 of 191 functions matched (23.56%). NOT COMPLETE YET.
-// The 146 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 49 of 191 functions matched (25.65%). NOT COMPLETE YET.
+// The 142 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -300,13 +300,206 @@ int Zero()
 // [TODO] 0x00846370 func_00846370 (12 B)
 // [TODO] 0x00846380 PauseMenuPage::vfunc_44 (184 B)
 // [TODO] 0x00846440 func_00846440 (196 B)
-// [TODO] 0x00846510 func_00846510 (16 B)
-// [TODO] 0x00846520 func_00846520 (16 B)
+// ============================================================================
+// [VERIFIED] func_00846510 (0x00846510, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 68 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    virtual void Method30();
+    virtual void Method31();
+    virtual void Method32();
+    virtual void Method33();
+    virtual void Method34();
+    virtual void Method35();
+    virtual void Method36();
+    virtual void Method37();
+    virtual void Method38();
+    virtual void Method39();
+    virtual void Method40();
+    virtual void Method41();
+    virtual void Method42();
+    virtual void Method43();
+    virtual void Method44();
+    virtual void Method45();
+    virtual void Method46();
+    virtual void Method47();
+    virtual void Method48();
+    virtual void Method49();
+    virtual void Method50();
+    virtual void Method51();
+    virtual void Method52();
+    virtual void Method53();
+    virtual void Method54();
+    virtual void Method55();
+    virtual void Method56();
+    virtual void Method57();
+    virtual void Method58();
+    virtual void Method59();
+    virtual void Method60();
+    virtual void Method61();
+    virtual void Method62();
+    virtual void Method63();
+    virtual void Method64();
+    virtual void Method65();
+    virtual void Method66();
+    virtual void Method67();
+    virtual void Method68();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method68();
+}
+
+// ============================================================================
+// [VERIFIED] func_00846520 (0x00846520, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 69 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    virtual void Method30();
+    virtual void Method31();
+    virtual void Method32();
+    virtual void Method33();
+    virtual void Method34();
+    virtual void Method35();
+    virtual void Method36();
+    virtual void Method37();
+    virtual void Method38();
+    virtual void Method39();
+    virtual void Method40();
+    virtual void Method41();
+    virtual void Method42();
+    virtual void Method43();
+    virtual void Method44();
+    virtual void Method45();
+    virtual void Method46();
+    virtual void Method47();
+    virtual void Method48();
+    virtual void Method49();
+    virtual void Method50();
+    virtual void Method51();
+    virtual void Method52();
+    virtual void Method53();
+    virtual void Method54();
+    virtual void Method55();
+    virtual void Method56();
+    virtual void Method57();
+    virtual void Method58();
+    virtual void Method59();
+    virtual void Method60();
+    virtual void Method61();
+    virtual void Method62();
+    virtual void Method63();
+    virtual void Method64();
+    virtual void Method65();
+    virtual void Method66();
+    virtual void Method67();
+    virtual void Method68();
+    virtual void Method69();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method69();
+}
+
 // [TODO] 0x00846530 func_00846530 (128 B)
 // [TODO] 0x008465B0 func_008465B0 (128 B)
 // [TODO] 0x00846630 func_00846630 (148 B)
-// [TODO] 0x008466D0 func_008466D0 (12 B)
-// [TODO] 0x008466E0 func_008466E0 (12 B)
+// ============================================================================
+// [VERIFIED] func_008466D0 (0x008466D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00421D60 and lets it return to this function's caller (the call is a jump).
+extern char D_0084C550[];
+extern "C" void func_00421D60(char*);
+
+void Forward()
+{
+    func_00421D60(D_0084C550);
+}
+
+// ============================================================================
+// [VERIFIED] func_008466E0 (0x008466E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00421D60 and lets it return to this function's caller (the call is a jump).
+extern char D_0084C550[];
+extern "C" void func_00421D60(char*);
+
+void Forward()
+{
+    func_00421D60(D_0084C550);
+}
+
 // [TODO] 0x008466F0 func_008466F0 (40 B)
 // [TODO] 0x00846720 func_00846720 (280 B)
 // ============================================================================

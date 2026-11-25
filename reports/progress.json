@@ -1,22 +1,22 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-25 15:17:23",
+  "updated_at": "2026-11-25 16:45:32",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
     "pc": 780,
-    "xb": 11711,
-    "proto": 10950,
-    "ps2": 3489,
-    "total": 12491,
-    "bytes": 448801,
-    "ps2_bytes": 31760,
+    "xb": 11716,
+    "proto": 10955,
+    "ps2": 3732,
+    "total": 12496,
+    "bytes": 450042,
+    "ps2_bytes": 35300,
     "stubs": 2172
   },
   "readable": {
     "pc": 0,
     "xb": 31,
     "proto": 10,
-    "ps2": 839,
+    "ps2": 866,
     "total": 31
   },
   "source": {
@@ -41,12 +41,12 @@
   },
   "described": {
     "pc": 60,
-    "xb": 2691,
+    "xb": 2696,
     "proto": 1207,
     "ps2": 0,
-    "total": 2751,
+    "total": 2756,
     "how": {
-      "human": 445,
+      "human": 450,
       "read": 169,
       "bound": 0,
       "shape": 2106,
@@ -57,11 +57,11 @@
     "1-9 B": 2105,
     "10-19 B": 1787,
     "20-39 B": 4552,
-    "40-79 B": 3173,
-    "80+ B": 874
+    "40-79 B": 3174,
+    "80+ B": 878
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 20440,
+    "RRutherrfordd (Founder)": 20693,
     "NoahBPeterson": 5406,
     "RRutherfordd (Founder)": 976,
     "lemiur": 108
@@ -69,17 +69,17 @@
   "unattributed": 0,
   "queue": {
     "pc": 734,
-    "xb": 10342,
-    "proto": 9767,
-    "ps2": 20808,
-    "total": 11076,
+    "xb": 10337,
+    "proto": 9762,
+    "ps2": 20565,
+    "total": 11071,
     "tiers": {
       "TIER_1_QUICK": 194,
       "TIER_2_SMALL": 831,
-      "TIER_3_MEDIUM": 2411,
-      "TIER_4_LARGE": 7640
+      "TIER_3_MEDIUM": 2410,
+      "TIER_4_LARGE": 7636
     },
-    "bytes": 2619504,
+    "bytes": 2618263,
     "stubs": 101
   },
   "good_first": [

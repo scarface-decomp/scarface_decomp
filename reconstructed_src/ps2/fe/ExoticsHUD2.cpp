@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, fe/ExoticsHUD2.cpp (63 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, fe/ExoticsHUD2.cpp (69 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 63 of 317 functions matched (19.87%). NOT COMPLETE YET.
-// The 254 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
+// PROGRESS: 69 of 317 functions matched (21.77%). NOT COMPLETE YET.
+// The 248 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -97,6 +97,171 @@ extern char D_0080F2C0[];
 char* Get()
 {
     return D_0080F2C0;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_49 (0x00467800, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+#define __cdecl
+#define __stdcall
+#define __fastcall
+#define __thiscall
+// ExoticsHUD2::vfunc_49 is already matched in the retail Xbox game (0x001935C0); this is
+// that code. This build's machine code is different, so expect to change a few things.
+// The PS2 game was built with another compiler (CodeWarrior, not Visual C++): the C++ is
+// the same source, but names, calls and globals may need other declarations.
+// ExoticsHUD2::vfunc_49 (0x001935C0, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class ExoticsHUD2
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual void vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45(int);
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual void vfunc_48();
+    virtual void vfunc_49();
+};
+
+void ExoticsHUD2::vfunc_49()
+{
+    vfunc_45(1);
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_52 (0x00467F60, 56 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+#define __cdecl
+#define __stdcall
+#define __fastcall
+#define __thiscall
+// ExoticsHUD2::vfunc_52 is already matched in the retail Xbox game (0x001934B0); this is
+// that code. This build's machine code is different, so expect to change a few things.
+// The PS2 game was built with another compiler (CodeWarrior, not Visual C++): the C++ is
+// the same source, but names, calls and globals may need other declarations.
+// bin: xb
+// va: 0x001934B0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// ExoticsHUD2::vfunc_52 (0x001934B0, 18 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+class ExoticsHUD2
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05();
+    virtual void vfunc_06();
+    virtual void vfunc_07();
+    virtual void vfunc_08();
+    virtual void vfunc_09();
+    virtual void vfunc_10();
+    virtual void vfunc_11();
+    virtual void vfunc_12();
+    virtual void vfunc_13();
+    virtual void vfunc_14();
+    virtual void vfunc_15();
+    virtual void vfunc_16();
+    virtual void vfunc_17();
+    virtual void vfunc_18();
+    virtual void vfunc_19();
+    virtual void vfunc_20();
+    virtual void vfunc_21();
+    virtual void vfunc_22();
+    virtual void vfunc_23();
+    virtual void vfunc_24();
+    virtual void vfunc_25();
+    virtual void vfunc_26();
+    virtual void vfunc_27();
+    virtual void vfunc_28();
+    virtual void vfunc_29();
+    virtual void vfunc_30();
+    virtual void vfunc_31();
+    virtual void vfunc_32();
+    virtual void vfunc_33();
+    virtual void vfunc_34();
+    virtual void vfunc_35();
+    virtual void vfunc_36();
+    virtual void vfunc_37();
+    virtual void vfunc_38();
+    virtual void vfunc_39();
+    virtual void vfunc_40();
+    virtual void vfunc_41();
+    virtual bool vfunc_42();
+    virtual void vfunc_43();
+    virtual void vfunc_44();
+    virtual void vfunc_45();
+    virtual void vfunc_46();
+    virtual void vfunc_47();
+    virtual void vfunc_48();
+    virtual void vfunc_49();
+    virtual void vfunc_50();
+    virtual void vfunc_51();
+    virtual bool vfunc_52();
+    char m_pad04[0x48];
+    int m_Field4C; // +0x4C
+};
+
+bool ExoticsHUD2::vfunc_52()
+{
+    if (m_Field4C) {
+        return true;
+    }
+    return vfunc_42();
 }
 
 // ============================================================================
@@ -530,6 +695,16 @@ char* Get()
 }
 
 // ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_41 (0x005F5370, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns -1.0.
+float Number()
+{
+    return -1.0f;
+}
+
+// ============================================================================
 // [VERIFIED] ExoticsHUD2::vfunc_00 (0x005F5DD0, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -539,6 +714,16 @@ extern char D_0082F470[];
 char* Get()
 {
     return D_0082F470;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_41 (0x005F5FE0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns -1.0.
+float Number()
+{
+    return -1.0f;
 }
 
 // ============================================================================
@@ -590,6 +775,16 @@ void Nothing()
 // Does nothing.
 void Nothing()
 {
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_41 (0x005F96E0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 1000.0.
+float Number()
+{
+    return 1000.0f;
 }
 
 // ============================================================================
@@ -704,6 +899,16 @@ extern char D_0082FF30[];
 char* Get()
 {
     return D_0082FF30;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_41 (0x00606240, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns -1.0.
+float Number()
+{
+    return -1.0f;
 }
 
 // ============================================================================

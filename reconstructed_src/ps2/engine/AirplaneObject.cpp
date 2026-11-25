@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/AirplaneObject.cpp (11 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/AirplaneObject.cpp (12 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11 of 64 functions matched (17.19%). NOT COMPLETE YET.
-// The 53 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
+// PROGRESS: 12 of 64 functions matched (18.75%). NOT COMPLETE YET.
+// The 52 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -65,6 +65,32 @@ char* Get()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] AirplaneObject::vfunc_09 (0x003BDD20, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 2 of the object its member at +0xDC points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0xDC];
+    Inner* m_FieldDC; // +0xDC
+};
+
+void Object::Forward()
+{
+    m_FieldDC->Method2();
 }
 
 // ============================================================================

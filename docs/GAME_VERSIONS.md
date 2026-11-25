@@ -36,7 +36,7 @@ including `Scarface.exe` 1.00.2 from the official 1.00.2 patch, which carries th
 | :--- | :--- |
 | **PC 1.00 without the patch**, or any other patch level | The patch replaced `Scarface.exe` with a newer build (linked November 16, 2006), so functions sit at different addresses and some changed. Supporting both would mean every PC function twice. If your copy is 1.00, install the official 1.00.2 patch and use that `Scarface.exe`. Having the patch file in `binaries/` next to the game isn't enough: a patch file changes nothing until you run it on your installed game. The portal tells you this if it sees the patch there. |
 | **Any other Xbox disc or build** (other regions or languages, reprints with different files) | Only the US disc's `default.xbe` above. If you have a different disc, its file won't match the hashes and the portal won't use it. |
-| **Edited executables of any kind**: fan patches, remaster or "fixed" versions, widescreen or frame-rate fixes, trainers, repacks | They are no longer the game's original code. |
+| **Edited executables, as the file a match is checked against**: fan patches, remaster or "fixed" versions, widescreen or frame-rate fixes, trainers, repacks | A match means "this C++ compiles to the original game's exact bytes", so the file it is checked against has to be the original. Edited copies are welcome as something to study: see below. |
 | **Other PS2 discs** (other regions, the Greatest Hits reprint if its program differs) | Only the US disc's `SLUS_211.11` above. |
 | **The Wii version** | A different program for a different processor and compiler, so it can't be matched here yet. It is welcome as a separate effort: see [OTHER_VERSIONS.md](OTHER_VERSIONS.md). |
 | **Other prototypes or betas** | Only the April 20, 2006 build for now. If you have another one, open an issue to discuss it. Don't upload it. |
@@ -44,6 +44,19 @@ including `Scarface.exe` 1.00.2 from the official 1.00.2 patch, which carries th
 The game's **scripts** (`.cso`/`.dso`) are the same files on the US Xbox and PS2 discs (checked file by
 file, see [SCRIPTS.md](SCRIPTS.md)), so either disc can be used to copy them out. The PS2 program itself
 is matched in its own lane, with its own compiler: see [PS2.md](PS2.md).
+
+## Edited copies, mods and other versions: fine to study
+
+The list above is only about which file a match is checked against. It doesn't limit what you may look
+at. Fan patches, widescreen and frame-rate fixes, trainers, mods, other regions' discs, other patch
+levels and other prototypes are all fair material to learn from, like any published tool or research
+([PROVENANCE.md](PROVENANCE.md)):
+
+* What a patch changes, and where, often shows what a function or a value is for.
+* A fact or a name learned that way counts once the original game's code agrees with it, and the patch
+  or mod is credited in [CREDITS.md](CREDITS.md).
+* Copy code from a mod only where its licence allows.
+* The edited files themselves stay off the project, like every other game file.
 
 ## What you may and may not share
 

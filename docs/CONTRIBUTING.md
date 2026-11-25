@@ -191,7 +191,7 @@ code can be read, so its pairing and triage cover only that part.
   clearly named option.
 * **US versions only.** Matches count only against the accepted files: the US Xbox disc's
   `default.xbe`, the US PC `Scarface.exe` 1.00.2 and the April 2006 prototype. Other regions, the
-  unpatched PC 1.00 and edited files are refused. See [docs/GAME_VERSIONS.md](GAME_VERSIONS.md).
+  unpatched PC 1.00 and edited files are refused as the file a match is checked against (they are fine to study). See [docs/GAME_VERSIONS.md](GAME_VERSIONS.md).
 * **No game files, no compiler files** in commits, issues or chat: `binaries/` and `portal/tools/msvc71/`
   are ignored on purpose. CI (`portal/scripts/check_repo.py`) rejects them.
 * **Bigger changes** to the tools, the verifier or the rules: open an issue first so they can be

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/GlobalFunctions.cpp (3260 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/GlobalFunctions.cpp (3491 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3,260 of 22,789 functions matched (14.31%). NOT COMPLETE YET.
-// The 19,529 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
+// PROGRESS: 3,491 of 22,789 functions matched (15.32%). NOT COMPLETE YET.
+// The 19,298 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -569,6 +569,38 @@ extern char D_0080B860[];
 char* Get()
 {
     return D_0080B860;
+}
+
+// ============================================================================
+// [VERIFIED] func_0037D580 (0x0037D580, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 8 of the object its member at +0x20 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x20];
+    Inner* m_Field20; // +0x20
+};
+
+void Object::Forward()
+{
+    m_Field20->Method8();
 }
 
 // ============================================================================
@@ -1300,6 +1332,229 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_0038F5D0 (0x0038F5D0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 2 of the object its member at +0x30 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x30];
+    Inner* m_Field30; // +0x30
+};
+
+void Object::Forward()
+{
+    m_Field30->Method2();
+}
+
+// ============================================================================
+// [VERIFIED] func_0038F5F0 (0x0038F5F0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 1 of the object its member at +0x30 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x30];
+    Inner* m_Field30; // +0x30
+};
+
+void Object::Forward()
+{
+    m_Field30->Method1();
+}
+
+// ============================================================================
+// [VERIFIED] func_0038F610 (0x0038F610, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 0 of the object its member at +0x30 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x30];
+    Inner* m_Field30; // +0x30
+};
+
+void Object::Forward()
+{
+    m_Field30->Method0();
+}
+
+// ============================================================================
+// [VERIFIED] func_0038F630 (0x0038F630, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 15 of the object its member at +0x30 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x30];
+    Inner* m_Field30; // +0x30
+};
+
+void Object::Forward()
+{
+    m_Field30->Method15();
+}
+
+// ============================================================================
+// [VERIFIED] func_0038F650 (0x0038F650, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 14 of the object its member at +0x30 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x30];
+    Inner* m_Field30; // +0x30
+};
+
+void Object::Forward()
+{
+    m_Field30->Method14();
+}
+
+// ============================================================================
+// [VERIFIED] func_0038F670 (0x0038F670, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 12 of the object its member at +0x30 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x30];
+    Inner* m_Field30; // +0x30
+};
+
+void Object::Forward()
+{
+    m_Field30->Method12();
+}
+
+// ============================================================================
+// [VERIFIED] func_0038F690 (0x0038F690, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 11 of the object its member at +0x30 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x30];
+    Inner* m_Field30; // +0x30
+};
+
+void Object::Forward()
+{
+    m_Field30->Method11();
+}
+
+// ============================================================================
 // [VERIFIED] func_0038F6B0 (0x0038F6B0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -1310,6 +1565,103 @@ int Number()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_0038F6B0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0038F6C0 (0x0038F6C0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 10 of the object its member at +0x30 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x30];
+    Inner* m_Field30; // +0x30
+};
+
+void Object::Forward()
+{
+    m_Field30->Method10();
+}
+
+// ============================================================================
+// [VERIFIED] func_0038F6E0 (0x0038F6E0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 9 of the object its member at +0x30 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x30];
+    Inner* m_Field30; // +0x30
+};
+
+void Object::Forward()
+{
+    m_Field30->Method9();
+}
+
+// ============================================================================
+// [VERIFIED] func_0038F790 (0x0038F790, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 6 of the object its member at +0x30 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x30];
+    Inner* m_Field30; // +0x30
+};
+
+void Object::Forward()
+{
+    m_Field30->Method6();
 }
 
 // ============================================================================
@@ -2841,6 +3193,19 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_00398F90 (0x00398F90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00438690 and lets it return to this function's caller (the call is a jump).
+extern char D_00795890[];
+extern "C" void func_00438690(char*);
+
+void Forward()
+{
+    func_00438690(D_00795890);
+}
+
+// ============================================================================
 // [VERIFIED] func_00399160 (0x00399160, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -3026,6 +3391,32 @@ extern "C" void func_0039AE20() {
 }
 
 // ============================================================================
+// [VERIFIED] func_0039B560 (0x0039B560, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_0042FA60 and lets it return to this function's caller (the call is a jump).
+extern char D_00811E60[];
+extern "C" void func_0042FA60(char*);
+
+void Forward()
+{
+    func_0042FA60(D_00811E60);
+}
+
+// ============================================================================
+// [VERIFIED] func_0039B570 (0x0039B570, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_0042FAB0 and lets it return to this function's caller (the call is a jump).
+extern char D_00811E60[];
+extern "C" void func_0042FAB0(char*);
+
+void Forward()
+{
+    func_0042FAB0(D_00811E60);
+}
+
+// ============================================================================
 // [VERIFIED] func_0039B8E0 (0x0039B8E0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -3163,6 +3554,30 @@ int* Object::Get()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_003A02B0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_003A0E10 (0x003A0E10, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 0 of the object its member at +0x45C points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x45C];
+    Inner* m_Field45C; // +0x45C
+};
+
+void Object::Forward()
+{
+    m_Field45C->Method0();
 }
 
 // ============================================================================
@@ -4177,6 +4592,20 @@ public:
 int Object::Get()
 {
     return m_Field120;
+}
+
+// ============================================================================
+// [VERIFIED] func_003B86B0 (0x003B86B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_0080A658;
+extern int D_0080A65C;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_0080A658, D_0080A65C);
 }
 
 // ============================================================================
@@ -5691,6 +6120,20 @@ public:
 unsigned char Object::Get()
 {
     return m_Field142;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D2A20 (0x003D2A20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_00808E28;
+extern int D_00808E2C;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_00808E28, D_00808E2C);
 }
 
 // ============================================================================
@@ -7390,6 +7833,20 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EB610 (0x003EB610, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F50;
+extern int D_00808F54;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F50, &D_00808F54);
+}
+
+// ============================================================================
 // [VERIFIED] func_003EB750 (0x003EB750, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7406,6 +7863,20 @@ bool Object::Set(char value)
 {
     m_Field14 = value;
     return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_003EB8A0 (0x003EB8A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F48;
+extern int D_00808F4C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F48, &D_00808F4C);
 }
 
 // ============================================================================
@@ -7463,6 +7934,20 @@ extern "C" void func_003EBB70() {
 }
 
 // ============================================================================
+// [VERIFIED] func_003EBCF0 (0x003EBCF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F40;
+extern int D_00808F44;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F40, &D_00808F44);
+}
+
+// ============================================================================
 // [VERIFIED] func_003EC070 (0x003EC070, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7499,6 +7984,34 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EC1D0 (0x003EC1D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F38;
+extern int D_00808F3C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F38, &D_00808F3C);
+}
+
+// ============================================================================
+// [VERIFIED] func_003EC4B0 (0x003EC4B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F30;
+extern int D_00808F34;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F30, &D_00808F34);
+}
+
+// ============================================================================
 // [VERIFIED] func_003EC660 (0x003EC660, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7515,6 +8028,20 @@ bool Object::Set(char value)
 {
     m_Field2C = value;
     return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_003EC810 (0x003EC810, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F28;
+extern int D_00808F2C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F28, &D_00808F2C);
 }
 
 // ============================================================================
@@ -7555,6 +8082,20 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003ECBE0 (0x003ECBE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F20;
+extern int D_00808F24;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F20, &D_00808F24);
+}
+
+// ============================================================================
 // [VERIFIED] func_003ECCC0 (0x003ECCC0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7570,6 +8111,20 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003ECDD0 (0x003ECDD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F18;
+extern int D_00808F1C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F18, &D_00808F1C);
 }
 
 // ============================================================================
@@ -7601,6 +8156,20 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_003ECFB0 (0x003ECFB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F10;
+extern int D_00808F14;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F10, &D_00808F14);
+}
+
+// ============================================================================
 // [VERIFIED] func_003ED090 (0x003ED090, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7616,6 +8185,34 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003ED220 (0x003ED220, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F08;
+extern int D_00808F0C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F08, &D_00808F0C);
+}
+
+// ============================================================================
+// [VERIFIED] func_003ED4E0 (0x003ED4E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808F00;
+extern int D_00808F04;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808F00, &D_00808F04);
 }
 
 // ============================================================================
@@ -7673,6 +8270,20 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003ED820 (0x003ED820, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808EF8;
+extern int D_00808EFC;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808EF8, &D_00808EFC);
+}
+
+// ============================================================================
 // [VERIFIED] func_003ED970 (0x003ED970, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7688,6 +8299,20 @@ public:
 int* Object::Get()
 {
     return &m_Field54;
+}
+
+// ============================================================================
+// [VERIFIED] func_003EDAD0 (0x003EDAD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808EF0;
+extern int D_00808EF4;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808EF0, &D_00808EF4);
 }
 
 // ============================================================================
@@ -7727,6 +8352,20 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EDD80 (0x003EDD80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808EE8;
+extern int D_00808EEC;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808EE8, &D_00808EEC);
+}
+
+// ============================================================================
 // [VERIFIED] func_003EDFD0 (0x003EDFD0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7742,6 +8381,20 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003EE110 (0x003EE110, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808EE0;
+extern int D_00808EE4;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808EE0, &D_00808EE4);
 }
 
 // ============================================================================
@@ -7811,6 +8464,20 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EE540 (0x003EE540, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808ED8;
+extern int D_00808EDC;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808ED8, &D_00808EDC);
+}
+
+// ============================================================================
 // [VERIFIED] func_003EE690 (0x003EE690, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7844,6 +8511,20 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003EE800 (0x003EE800, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808ED0;
+extern int D_00808ED4;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808ED0, &D_00808ED4);
 }
 
 // ============================================================================
@@ -7883,6 +8564,20 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EEAD0 (0x003EEAD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808EC8;
+extern int D_00808ECC;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808EC8, &D_00808ECC);
+}
+
+// ============================================================================
 // [VERIFIED] func_003EEC20 (0x003EEC20, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7898,6 +8593,20 @@ public:
 int* Object::Get()
 {
     return &m_Field94;
+}
+
+// ============================================================================
+// [VERIFIED] func_003EED60 (0x003EED60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808EC0;
+extern int D_00808EC4;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808EC0, &D_00808EC4);
 }
 
 // ============================================================================
@@ -7938,6 +8647,20 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EF0F0 (0x003EF0F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808EB8;
+extern int D_00808EBC;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808EB8, &D_00808EBC);
+}
+
+// ============================================================================
 // [VERIFIED] func_003EF2A0 (0x003EF2A0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7971,6 +8694,20 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003EF3F0 (0x003EF3F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808EB0;
+extern int D_00808EB4;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808EB0, &D_00808EB4);
 }
 
 // ============================================================================
@@ -8011,6 +8748,20 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EF710 (0x003EF710, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808EA8;
+extern int D_00808EAC;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808EA8, &D_00808EAC);
+}
+
+// ============================================================================
 // [VERIFIED] func_003EF8C0 (0x003EF8C0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8044,6 +8795,34 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003EFA70 (0x003EFA70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808EA0;
+extern int D_00808EA4;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808EA0, &D_00808EA4);
+}
+
+// ============================================================================
+// [VERIFIED] func_003EFEC0 (0x003EFEC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808E98;
+extern int D_00808E9C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808E98, &D_00808E9C);
 }
 
 // ============================================================================
@@ -8117,6 +8896,20 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F0400 (0x003F0400, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808E90;
+extern int D_00808E94;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808E90, &D_00808E94);
 }
 
 // ============================================================================
@@ -8203,6 +8996,20 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003F0890 (0x003F0890, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808E88;
+extern int D_00808E8C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808E88, &D_00808E8C);
+}
+
+// ============================================================================
 // [VERIFIED] func_003F0BE0 (0x003F0BE0, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8260,6 +9067,20 @@ bool Object::Set(int value)
 }
 
 // ============================================================================
+// [VERIFIED] func_003F0D70 (0x003F0D70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808E80;
+extern int D_00808E84;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808E80, &D_00808E84);
+}
+
+// ============================================================================
 // [VERIFIED] func_003F0F30 (0x003F0F30, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8275,6 +9096,20 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F1090 (0x003F1090, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00808E78;
+extern int D_00808E7C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00808E78, &D_00808E7C);
 }
 
 // ============================================================================
@@ -9181,6 +10016,36 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_00406DE0 (0x00406DE0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 5 of the object its member at +0x18 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    char m_pad00[0xC];
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x18];
+    Inner* m_Field18; // +0x18
+};
+
+void Object::Forward()
+{
+    m_Field18->Method5();
+}
+
+// ============================================================================
 // [VERIFIED] func_004071B0 (0x004071B0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9301,6 +10166,36 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_00408950 (0x00408950, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 5 of the object its member at +0x14 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    char m_pad00[0xC];
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x14];
+    Inner* m_Field14; // +0x14
+};
+
+void Object::Forward()
+{
+    m_Field14->Method5();
+}
+
+// ============================================================================
 // [VERIFIED] func_00409600 (0x00409600, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9414,6 +10309,32 @@ Object* Object::Get()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_0040B9E0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0040BA60 (0x0040BA60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DFC0 and lets it return to this function's caller (the call is a jump).
+extern int D_00808FF8;
+extern "C" void func_0051DFC0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_0051DFC0(&D_00808FF8, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_0040BA80 (0x0040BA80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DFC0 and lets it return to this function's caller (the call is a jump).
+extern int D_00808FF4;
+extern "C" void func_0051DFC0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_0051DFC0(&D_00808FF4, p0);
 }
 
 // ============================================================================
@@ -9772,6 +10693,20 @@ void Object::Set()
 }
 
 // ============================================================================
+// [VERIFIED] func_00418580 (0x00418580, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_00809160;
+extern int D_00809164;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_00809160, D_00809164);
+}
+
+// ============================================================================
 // [VERIFIED] func_00418880 (0x00418880, 16 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -10047,6 +10982,58 @@ int Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0041C1D0 (0x0041C1D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809198;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809198, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_0041C1F0 (0x0041C1F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_008091A0;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_008091A0, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_0041C210 (0x0041C210, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_008091A8;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_008091A8, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_0041C230 (0x0041C230, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_008091B0;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_008091B0, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_0041C810 (0x0041C810, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -10103,6 +11090,101 @@ unsigned char Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0041E060 (0x0041E060, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0041EBC0 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    int m_Field0; // +0x0
+};
+
+extern "C" void func_0041EBC0(int, void*);
+
+void Forward(Arg0* p0)
+{
+    func_0041EBC0(p0->m_Field0, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_0041F5D0 (0x0041F5D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809200;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809200, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_00420CD0 (0x00420CD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809220;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809220, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_00421A10 (0x00421A10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809230;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809230, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_00423920 (0x00423920, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809248;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809248, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_00423DA0 (0x00423DA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809258;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809258, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_00424EC0 (0x00424EC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809270;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809270, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_00424F90 (0x00424F90, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -10118,6 +11200,19 @@ public:
 bool Object::IsSet()
 {
     return m_Field14 != 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00425670 (0x00425670, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809288;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809288, p0);
 }
 
 // ============================================================================
@@ -11181,6 +12276,19 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_0042D6D0 (0x0042D6D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_008092D0;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_008092D0, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_0042D780 (0x0042D780, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11257,6 +12365,20 @@ char* Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0042DDF0 (0x0042DDF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_008092E0;
+extern int D_008092E4;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_008092E0, D_008092E4);
+}
+
+// ============================================================================
 // [VERIFIED] func_0042E400 (0x0042E400, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11287,6 +12409,20 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0042E880 (0x0042E880, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_008092E8;
+extern int D_008092EC;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_008092E8, D_008092EC);
+}
+
+// ============================================================================
 // [VERIFIED] func_0042F130 (0x0042F130, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11302,6 +12438,20 @@ public:
 bool Object::IsSet()
 {
     return m_Field30 != 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00430BB0 (0x00430BB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_008093E8;
+extern int D_008093EC;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_008093E8, D_008093EC);
 }
 
 // ============================================================================
@@ -11484,6 +12634,19 @@ public:
 void Object::Set()
 {
     m_Field34 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_004373E0 (0x004373E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809468;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809468, p0);
 }
 
 // ============================================================================
@@ -11693,6 +12856,20 @@ char* Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0043CFF0 (0x0043CFF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_00809518;
+extern int D_0080951C;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_00809518, D_0080951C);
+}
+
+// ============================================================================
 // [VERIFIED] func_0043D1B0 (0x0043D1B0, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11728,6 +12905,20 @@ public:
 unsigned char Object::Get()
 {
     return m_Field9;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043E710 (0x0043E710, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_00809510;
+extern int D_00809514;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_00809510, D_00809514);
 }
 
 // ============================================================================
@@ -11776,6 +12967,20 @@ extern char D_0080E5A0[];
 char* Get()
 {
     return D_0080E5A0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043ED10 (0x0043ED10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_00809568;
+extern int D_0080956C;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_00809568, D_0080956C);
 }
 
 // ============================================================================
@@ -11833,6 +13038,20 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00440A80 (0x00440A80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_00809558;
+extern int D_0080955C;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_00809558, D_0080955C);
+}
+
+// ============================================================================
 // [VERIFIED] func_004410A0 (0x004410A0, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11842,6 +13061,20 @@ extern char D_0080E620[];
 char* Get()
 {
     return D_0080E620;
+}
+
+// ============================================================================
+// [VERIFIED] func_00441BA0 (0x00441BA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_008095D0;
+extern int D_008095D4;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_008095D0, D_008095D4);
 }
 
 // ============================================================================
@@ -13160,6 +14393,45 @@ unsigned short Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0046B600 (0x0046B600, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809708;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809708, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_0046B620 (0x0046B620, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809710;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809710, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_0046B640 (0x0046B640, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809718;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_00809718, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_0046B980 (0x0046B980, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -13814,6 +15086,29 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_00484820 (0x00484820, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_006C4430 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+struct Arg0
+{
+    Inner* m_Field0; // +0x0
+};
+
+extern "C" void func_006C4430(int);
+
+void Forward(Arg0* p0)
+{
+    func_006C4430(p0->m_Field0->m_Field28);
+}
+
+// ============================================================================
 // [VERIFIED] func_00485480 (0x00485480, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -13937,6 +15232,45 @@ char* Get()
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_004885F0 (0x004885F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0048EA70 and lets it return to this function's caller (the call is a jump).
+extern int D_008098CC;
+extern "C" void func_0048EA70(int, void*);
+
+void Forward(void* p0)
+{
+    func_0048EA70(D_008098CC, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_00488610 (0x00488610, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0048F200 and lets it return to this function's caller (the call is a jump).
+extern int D_008098CC;
+extern "C" void func_0048F200(int, void*);
+
+void Forward(void* p0)
+{
+    func_0048F200(D_008098CC, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_00488620 (0x00488620, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00427D70 and lets it return to this function's caller (the call is a jump).
+extern int D_008092A0;
+extern "C" void func_00427D70(int, void*);
+
+void Forward(void* p0)
+{
+    func_00427D70(D_008092A0, p0);
 }
 
 // ============================================================================
@@ -15246,6 +16580,34 @@ bool Object::Set(int value)
 }
 
 // ============================================================================
+// [VERIFIED] func_004B88A0 (0x004B88A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C00;
+extern int D_00809C04;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C00, &D_00809C04);
+}
+
+// ============================================================================
+// [VERIFIED] func_004B8C00 (0x004B8C00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809BF8;
+extern int D_00809BFC;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809BF8, &D_00809BFC);
+}
+
+// ============================================================================
 // [VERIFIED] func_004B8D70 (0x004B8D70, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -15262,6 +16624,20 @@ bool Object::Set(int value)
 {
     m_Field10 = value;
     return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004B8FA0 (0x004B8FA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809BF0;
+extern int D_00809BF4;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809BF0, &D_00809BF4);
 }
 
 // ============================================================================
@@ -16281,6 +17657,20 @@ float Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004CD1B0 (0x004CD1B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809CDC;
+extern int D_00809CE0;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809CDC, &D_00809CE0);
+}
+
+// ============================================================================
 // [VERIFIED] func_004CD470 (0x004CD470, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -16338,6 +17728,20 @@ float Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_004CD5B0 (0x004CD5B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809CD4;
+extern int D_00809CD8;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809CD4, &D_00809CD8);
+}
+
+// ============================================================================
 // [VERIFIED] func_004CD880 (0x004CD880, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -16392,6 +17796,20 @@ int Number()
 float Zero()
 {
     return 0.0f;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CD9C0 (0x004CD9C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809CCC;
+extern int D_00809CD0;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809CCC, &D_00809CD0);
 }
 
 // ============================================================================
@@ -16625,6 +18043,20 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004CE480 (0x004CE480, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809CAC;
+extern int D_00809CB0;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809CAC, &D_00809CB0);
+}
+
+// ============================================================================
 // [VERIFIED] func_004CE730 (0x004CE730, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -16666,6 +18098,20 @@ int Get()
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CEA10 (0x004CEA10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C9C;
+extern int D_00809CA0;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C9C, &D_00809CA0);
 }
 
 // ============================================================================
@@ -16740,6 +18186,20 @@ public:
 int* Object::Get()
 {
     return &m_Field30;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CF060 (0x004CF060, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C94;
+extern int D_00809C98;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C94, &D_00809C98);
 }
 
 // ============================================================================
@@ -17103,6 +18563,20 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_004D00C0 (0x004D00C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C88;
+extern int D_00809C8C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C88, &D_00809C8C);
+}
+
+// ============================================================================
 // [VERIFIED] func_004D03C0 (0x004D03C0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -17192,6 +18666,34 @@ public:
 int* Object::Get()
 {
     return &m_Field1C;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D0620 (0x004D0620, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C7C;
+extern int D_00809C80;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C7C, &D_00809C80);
+}
+
+// ============================================================================
+// [VERIFIED] func_004D0930 (0x004D0930, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C74;
+extern int D_00809C78;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C74, &D_00809C78);
 }
 
 // ============================================================================
@@ -17286,6 +18788,20 @@ public:
 float Object::Get()
 {
     return m_Field1C;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D0E00 (0x004D0E00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C68;
+extern int D_00809C6C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C68, &D_00809C6C);
 }
 
 // ============================================================================
@@ -17408,6 +18924,20 @@ float Object::Get()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D10F0 (0x004D10F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C5C;
+extern int D_00809C60;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C5C, &D_00809C60);
 }
 
 // ============================================================================
@@ -17758,6 +19288,20 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_004D1630 (0x004D1630, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C50;
+extern int D_00809C54;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C50, &D_00809C54);
+}
+
+// ============================================================================
 // [VERIFIED] func_004D1D50 (0x004D1D50, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -17941,6 +19485,20 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004D1E90 (0x004D1E90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C48;
+extern int D_00809C4C;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C48, &D_00809C4C);
+}
+
+// ============================================================================
 // [VERIFIED] func_004D2370 (0x004D2370, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -17978,6 +19536,20 @@ public:
 int* Object::Get()
 {
     return &m_Field1C;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D2560 (0x004D2560, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006E3100 and lets it return to this function's caller (the call is a jump).
+extern int D_00809C3C;
+extern int D_00809C40;
+extern "C" void func_006E3100(int*, int*);
+
+void Forward()
+{
+    func_006E3100(&D_00809C3C, &D_00809C40);
 }
 
 // ============================================================================
@@ -18545,6 +20117,19 @@ extern "C" void func_004E2F30() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_004E2F40() {
+}
+
+// ============================================================================
+// [VERIFIED] func_004E30A0 (0x004E30A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051E480 and lets it return to this function's caller (the call is a jump).
+extern int D_00809DB0;
+extern "C" void func_0051E480(int, void*);
+
+void Forward(void* p0)
+{
+    func_0051E480(D_00809DB0, p0);
 }
 
 // ============================================================================
@@ -19186,6 +20771,19 @@ extern "C" void func_004F16F0() {
 }
 
 // ============================================================================
+// [VERIFIED] func_004F1B00 (0x004F1B00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_004ECBE0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809E08;
+extern "C" void func_004ECBE0(int, void*);
+
+void Forward(void* p0)
+{
+    func_004ECBE0(D_00809E08, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_004F1CB0 (0x004F1CB0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -19195,6 +20793,32 @@ extern unsigned char D_00809E4C;
 unsigned char Get()
 {
     return D_00809E4C;
+}
+
+// ============================================================================
+// [VERIFIED] func_004F2400 (0x004F2400, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_004ECC00 and lets it return to this function's caller (the call is a jump).
+extern int D_00809E08;
+extern "C" void func_004ECC00(int, void*);
+
+void Forward(void* p0)
+{
+    func_004ECC00(D_00809E08, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_004F2420 (0x004F2420, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_004ECC80 and lets it return to this function's caller (the call is a jump).
+extern int D_00809E08;
+extern "C" void func_004ECC80(int, void*);
+
+void Forward(void* p0)
+{
+    func_004ECC80(D_00809E08, p0);
 }
 
 // ============================================================================
@@ -19219,6 +20843,19 @@ extern int D_00809E14;
 int Get()
 {
     return D_00809E14;
+}
+
+// ============================================================================
+// [VERIFIED] func_004F27A0 (0x004F27A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_004FF1A0 and lets it return to this function's caller (the call is a jump).
+extern int D_00809E18;
+extern "C" void func_004FF1A0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_004FF1A0(&D_00809E18, p0);
 }
 
 // ============================================================================
@@ -22991,6 +24628,39 @@ Object* Object::Clear()
 }
 
 // ============================================================================
+// [VERIFIED] func_0054B650 (0x0054B650, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 9 of the object its member at +0x4 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x4];
+    Inner* m_Field4; // +0x4
+};
+
+void Object::Forward()
+{
+    m_Field4->Method9();
+}
+
+// ============================================================================
 // [VERIFIED] func_0054B670 (0x0054B670, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -23721,6 +25391,20 @@ bool Object::IsSet()
 }
 
 // ============================================================================
+// [VERIFIED] func_00568B90 (0x00568B90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_0080A230;
+extern int D_0080A234;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_0080A230, D_0080A234);
+}
+
+// ============================================================================
 // [VERIFIED] func_00568BA0 (0x00568BA0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -23844,6 +25528,20 @@ public:
 void Object::Set()
 {
     m_Field2B4 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005692B0 (0x005692B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0051DF50 and lets it return to this function's caller (the call is a jump).
+extern int D_0080A1B8;
+extern int D_0080A1BC;
+extern "C" void func_0051DF50(int*, int);
+
+void Forward()
+{
+    func_0051DF50(&D_0080A1B8, D_0080A1BC);
 }
 
 // ============================================================================
@@ -25093,6 +26791,34 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0059A290 (0x0059A290, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 5 of the object its member at +0x0 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+};
+
+class Object
+{
+public:
+    void Forward();
+    Inner* m_Field0; // +0x0
+};
+
+void Object::Forward()
+{
+    m_Field0->Method5();
+}
+
+// ============================================================================
 // [VERIFIED] func_0059A4D0 (0x0059A4D0, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -25985,6 +27711,35 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0059EC90 (0x0059EC90, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 5 of the object its member at +0x8 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x8];
+    Inner* m_Field8; // +0x8
+};
+
+void Object::Forward()
+{
+    m_Field8->Method5();
+}
+
+// ============================================================================
 // [VERIFIED] func_0059ED70 (0x0059ED70, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -26122,6 +27877,34 @@ int Zero()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0059F910 (0x0059F910, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 4 of the object its member at +0x8 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x8];
+    Inner* m_Field8; // +0x8
+};
+
+void Object::Forward()
+{
+    m_Field8->Method4();
 }
 
 // ============================================================================
@@ -26997,6 +28780,18 @@ char* Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_005B8860 (0x005B8860, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds -1 to the global D_0080A4F8.
+extern int D_0080A4F8;
+
+void Step()
+{
+    D_0080A4F8 -= 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_005B8C50 (0x005B8C50, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -27407,6 +29202,18 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_005BC3A0 (0x005BC3A0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the global D_0080A474.
+extern int D_0080A474;
+
+void Step()
+{
+    D_0080A474 += 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_005BCC10 (0x005BCC10, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -27599,6 +29406,16 @@ int Number()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_005C0320() {
+}
+
+// ============================================================================
+// [VERIFIED] func_005C04E0 (0x005C04E0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 25.0.
+float Number()
+{
+    return 25.0f;
 }
 
 // ============================================================================
@@ -27809,6 +29626,16 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_005C1860 (0x005C1860, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 20.0.
+float Number()
+{
+    return 20.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_005C19F0 (0x005C19F0, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -27828,6 +29655,16 @@ char* Get()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C1A10 (0x005C1A10, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 12.0.
+float Number()
+{
+    return 12.0f;
 }
 
 // ============================================================================
@@ -27853,6 +29690,16 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_005C1BB0 (0x005C1BB0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 18.0.
+float Number()
+{
+    return 18.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_005C1CF0 (0x005C1CF0, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -27872,6 +29719,16 @@ char* Get()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C1D10 (0x005C1D10, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 10.0.
+float Number()
+{
+    return 10.0f;
 }
 
 // ============================================================================
@@ -27958,6 +29815,26 @@ char* Get()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C2240 (0x005C2240, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 5.0.
+float Number()
+{
+    return 5.0f;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C2250 (0x005C2250, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 1.0.
+float Number()
+{
+    return 1.0f;
 }
 
 // ============================================================================
@@ -28059,6 +29936,16 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_005C2760 (0x005C2760, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 25.0.
+float Number()
+{
+    return 25.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_005C2890 (0x005C2890, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -28081,6 +29968,16 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_005C28B0 (0x005C28B0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 12.0.
+float Number()
+{
+    return 12.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_005C2A40 (0x005C2A40, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -28100,6 +29997,16 @@ char* Get()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C2A60 (0x005C2A60, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 30.0.
+float Number()
+{
+    return 30.0f;
 }
 
 // ============================================================================
@@ -28192,6 +30099,16 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_005C3250 (0x005C3250, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 1.0.
+float Number()
+{
+    return 1.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_005C3260 (0x005C3260, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -28212,6 +30129,16 @@ extern "C" void func_005C3260() {
 int Number()
 {
     return 13;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C3320 (0x005C3320, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 15.0.
+float Number()
+{
+    return 15.0f;
 }
 
 // ============================================================================
@@ -28248,6 +30175,16 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_005C3970 (0x005C3970, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 15.0.
+float Number()
+{
+    return 15.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_005C3A80 (0x005C3A80, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -28266,6 +30203,16 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_005C3B50 (0x005C3B50, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 5.0.
+float Number()
+{
+    return 5.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_005C3D50 (0x005C3D50, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -28273,6 +30220,16 @@ int Object::Get()
 int Number()
 {
     return 13;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C3E20 (0x005C3E20, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 7.0.
+float Number()
+{
+    return 7.0f;
 }
 
 // ============================================================================
@@ -28294,6 +30251,16 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_005C4A50 (0x005C4A50, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 25.0.
+float Number()
+{
+    return 25.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_005C4D60 (0x005C4D60, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -28301,6 +30268,16 @@ int Object::Get()
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C4D70 (0x005C4D70, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 15.0.
+float Number()
+{
+    return 15.0f;
 }
 
 // ============================================================================
@@ -28529,6 +30506,59 @@ int Zero()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C5950 (0x005C5950, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 1 of the object its member at +0x58 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x58];
+    Inner* m_Field58; // +0x58
+};
+
+void Object::Forward()
+{
+    m_Field58->Method1();
+}
+
+// ============================================================================
+// [VERIFIED] func_005C6450 (0x005C6450, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x4 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+void Object::Step()
+{
+    m_Field4 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005C6460 (0x005C6460, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 10.0.
+float Number()
+{
+    return 10.0f;
 }
 
 // ============================================================================
@@ -28946,6 +30976,24 @@ int Number()
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005CA380 (0x005CA380, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x8 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Step()
+{
+    m_Field8 += 1;
 }
 
 // ============================================================================
@@ -29464,6 +31512,16 @@ char* Get()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005D1CC0 (0x005D1CC0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 20.0.
+float Number()
+{
+    return 20.0f;
 }
 
 // ============================================================================
@@ -30793,6 +32851,47 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_005F0C40 (0x005F0C40, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 17 of the object its member at +0x10 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x10];
+    Inner* m_Field10; // +0x10
+};
+
+void Object::Forward()
+{
+    m_Field10->Method17();
+}
+
+// ============================================================================
 // [VERIFIED] func_005F0EB0 (0x005F0EB0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -30986,6 +33085,99 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_005F64F0 (0x005F64F0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 76 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    virtual void Method30();
+    virtual void Method31();
+    virtual void Method32();
+    virtual void Method33();
+    virtual void Method34();
+    virtual void Method35();
+    virtual void Method36();
+    virtual void Method37();
+    virtual void Method38();
+    virtual void Method39();
+    virtual void Method40();
+    virtual void Method41();
+    virtual void Method42();
+    virtual void Method43();
+    virtual void Method44();
+    virtual void Method45();
+    virtual void Method46();
+    virtual void Method47();
+    virtual void Method48();
+    virtual void Method49();
+    virtual void Method50();
+    virtual void Method51();
+    virtual void Method52();
+    virtual void Method53();
+    virtual void Method54();
+    virtual void Method55();
+    virtual void Method56();
+    virtual void Method57();
+    virtual void Method58();
+    virtual void Method59();
+    virtual void Method60();
+    virtual void Method61();
+    virtual void Method62();
+    virtual void Method63();
+    virtual void Method64();
+    virtual void Method65();
+    virtual void Method66();
+    virtual void Method67();
+    virtual void Method68();
+    virtual void Method69();
+    virtual void Method70();
+    virtual void Method71();
+    virtual void Method72();
+    virtual void Method73();
+    virtual void Method74();
+    virtual void Method75();
+    virtual void Method76();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method76();
+}
+
+// ============================================================================
 // [VERIFIED] func_005F6500 (0x005F6500, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -30995,6 +33187,98 @@ extern int D_00807F14;
 int Get()
 {
     return D_00807F14;
+}
+
+// ============================================================================
+// [VERIFIED] func_005F6510 (0x005F6510, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 75 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    virtual void Method30();
+    virtual void Method31();
+    virtual void Method32();
+    virtual void Method33();
+    virtual void Method34();
+    virtual void Method35();
+    virtual void Method36();
+    virtual void Method37();
+    virtual void Method38();
+    virtual void Method39();
+    virtual void Method40();
+    virtual void Method41();
+    virtual void Method42();
+    virtual void Method43();
+    virtual void Method44();
+    virtual void Method45();
+    virtual void Method46();
+    virtual void Method47();
+    virtual void Method48();
+    virtual void Method49();
+    virtual void Method50();
+    virtual void Method51();
+    virtual void Method52();
+    virtual void Method53();
+    virtual void Method54();
+    virtual void Method55();
+    virtual void Method56();
+    virtual void Method57();
+    virtual void Method58();
+    virtual void Method59();
+    virtual void Method60();
+    virtual void Method61();
+    virtual void Method62();
+    virtual void Method63();
+    virtual void Method64();
+    virtual void Method65();
+    virtual void Method66();
+    virtual void Method67();
+    virtual void Method68();
+    virtual void Method69();
+    virtual void Method70();
+    virtual void Method71();
+    virtual void Method72();
+    virtual void Method73();
+    virtual void Method74();
+    virtual void Method75();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method75();
 }
 
 // ============================================================================
@@ -32213,6 +34497,24 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0061AD40 (0x0061AD40, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 1 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method1();
+}
+
+// ============================================================================
 // [VERIFIED] func_0061B0D0 (0x0061B0D0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -32404,6 +34706,24 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00625730 (0x00625730, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x8 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Step()
+{
+    m_Field8 += 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_00625740 (0x00625740, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -32451,6 +34771,24 @@ void Object::Set(int first, int second)
 {
     m_Field3C = first;
     m_Field40 = second;
+}
+
+// ============================================================================
+// [VERIFIED] func_00625F90 (0x00625F90, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0xC of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Step()
+{
+    m_FieldC += 1;
 }
 
 // ============================================================================
@@ -32608,6 +34946,24 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00626E80 (0x00626E80, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x10 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+void Object::Step()
+{
+    m_Field10 += 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_00627850 (0x00627850, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -32662,6 +35018,75 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_006278C0 (0x006278C0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 10 of the object its member at +0x18 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x18];
+    Inner* m_Field18; // +0x18
+};
+
+void Object::Forward()
+{
+    m_Field18->Method10();
+}
+
+// ============================================================================
+// [VERIFIED] func_006278E0 (0x006278E0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 11 of the object its member at +0x18 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x18];
+    Inner* m_Field18; // +0x18
+};
+
+void Object::Forward()
+{
+    m_Field18->Method11();
+}
+
+// ============================================================================
 // [VERIFIED] func_006284D0 (0x006284D0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -32677,6 +35102,24 @@ public:
 int Object::Get()
 {
     return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00628530 (0x00628530, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x10 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+void Object::Step()
+{
+    m_Field10 += 1;
 }
 
 // ============================================================================
@@ -33543,6 +35986,57 @@ void Object::Set()
 }
 
 // ============================================================================
+// [VERIFIED] func_0063A520 (0x0063A520, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 34 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    virtual void Method30();
+    virtual void Method31();
+    virtual void Method32();
+    virtual void Method33();
+    virtual void Method34();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method34();
+}
+
+// ============================================================================
 // [VERIFIED] func_0063CAF0 (0x0063CAF0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -33760,6 +36254,30 @@ extern "C" void func_00643E30() {
 }
 
 // ============================================================================
+// [VERIFIED] func_00643F40 (0x00643F40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_0064F950 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    char m_pad00[0x3AC];
+    int m_Field3AC; // +0x3AC
+};
+
+struct Arg0
+{
+    char m_pad00[0x4];
+    Inner* m_Field4; // +0x4
+};
+
+extern "C" void func_0064F950(int);
+
+void Forward(Arg0* p0)
+{
+    func_0064F950(p0->m_Field4->m_Field3AC);
+}
+
+// ============================================================================
 // [VERIFIED] func_00644260 (0x00644260, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -33823,6 +36341,438 @@ int Zero()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00644840 (0x00644840, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006386A0 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_006386A0(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_006386A0(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644850 (0x00644850, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00637850 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00637850(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00637850(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644880 (0x00644880, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00638050 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00638050(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00638050(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644890 (0x00644890, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00637850 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00637850(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00637850(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_006448C0 (0x006448C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_006384B0 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_006384B0(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_006384B0(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_006448D0 (0x006448D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00637850 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00637850(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00637850(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644910 (0x00644910, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00637850 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00637850(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00637850(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644950 (0x00644950, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00637850 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00637850(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00637850(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644990 (0x00644990, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00637AE0 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00637AE0(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00637AE0(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_006449D0 (0x006449D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00637850 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00637850(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00637850(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644A00 (0x00644A00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00639860 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00639860(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00639860(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644A10 (0x00644A10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00637AE0 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00637AE0(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00637AE0(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644A40 (0x00644A40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00639AE0 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00639AE0(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00639AE0(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644A50 (0x00644A50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00637AE0 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00637AE0(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00637AE0(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644A80 (0x00644A80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00639D40 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00639D40(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00639D40(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644A90 (0x00644A90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_00637AE0 and lets it return to this function's caller (the call is a jump).
+struct Arg0
+{
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+struct Arg1
+{
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+extern "C" void func_00637AE0(int, int);
+
+void Forward(Arg0* p0, Arg1* p1)
+{
+    func_00637AE0(p0->m_Field4, p1->m_FieldC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644AC0 (0x00644AC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_0064FCD0 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    char m_pad00[0x3AC];
+    int m_Field3AC; // +0x3AC
+};
+
+struct Arg0
+{
+    char m_pad00[0x4];
+    Inner* m_Field4; // +0x4
+};
+
+extern "C" void func_0064FCD0(int);
+
+void Forward(Arg0* p0)
+{
+    func_0064FCD0(p0->m_Field4->m_Field3AC);
+}
+
+// ============================================================================
+// [VERIFIED] func_00644AD0 (0x00644AD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_0064FD00 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    char m_pad00[0x3AC];
+    int m_Field3AC; // +0x3AC
+};
+
+struct Arg0
+{
+    char m_pad00[0x4];
+    Inner* m_Field4; // +0x4
+};
+
+extern "C" void func_0064FD00(int);
+
+void Forward(Arg0* p0)
+{
+    func_0064FD00(p0->m_Field4->m_Field3AC);
 }
 
 // ============================================================================
@@ -33940,6 +36890,102 @@ extern "C" void func_00644FF0() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_00645000() {
+}
+
+// ============================================================================
+// [VERIFIED] func_00645040 (0x00645040, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00657280 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    char m_pad00[0x3B4];
+    int m_Field3B4; // +0x3B4
+};
+
+struct Arg0
+{
+    char m_pad00[0x4];
+    Inner* m_Field4; // +0x4
+};
+
+extern "C" void func_00657280(int);
+
+void Forward(Arg0* p0)
+{
+    func_00657280(p0->m_Field4->m_Field3B4);
+}
+
+// ============================================================================
+// [VERIFIED] func_00645080 (0x00645080, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00657780 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    char m_pad00[0x3B4];
+    int m_Field3B4; // +0x3B4
+};
+
+struct Arg0
+{
+    char m_pad00[0x4];
+    Inner* m_Field4; // +0x4
+};
+
+extern "C" void func_00657780(int);
+
+void Forward(Arg0* p0)
+{
+    func_00657780(p0->m_Field4->m_Field3B4);
+}
+
+// ============================================================================
+// [VERIFIED] func_00645090 (0x00645090, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_0065B0E0 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    char m_pad00[0x3B4];
+    int m_Field3B4; // +0x3B4
+};
+
+struct Arg0
+{
+    char m_pad00[0x4];
+    Inner* m_Field4; // +0x4
+};
+
+extern "C" void func_0065B0E0(int);
+
+void Forward(Arg0* p0)
+{
+    func_0065B0E0(p0->m_Field4->m_Field3B4);
+}
+
+// ============================================================================
+// [VERIFIED] func_006450D0 (0x006450D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_0065BA80 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    char m_pad00[0x3B4];
+    int m_Field3B4; // +0x3B4
+};
+
+struct Arg0
+{
+    char m_pad00[0x4];
+    Inner* m_Field4; // +0x4
+};
+
+extern "C" void func_0065BA80(int);
+
+void Forward(Arg0* p0)
+{
+    func_0065BA80(p0->m_Field4->m_Field3B4);
 }
 
 // ============================================================================
@@ -34135,6 +37181,16 @@ int Zero()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_00645680() {
+}
+
+// ============================================================================
+// [VERIFIED] func_00645690 (0x00645690, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 1.0.
+float Number()
+{
+    return 1.0f;
 }
 
 // ============================================================================
@@ -34395,6 +37451,16 @@ extern "C" void func_00647140() {
 }
 
 // ============================================================================
+// [VERIFIED] func_00647150 (0x00647150, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 1.0.
+float Number()
+{
+    return 1.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_0064D2D0 (0x0064D2D0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -34607,6 +37673,64 @@ extern "C" void func_0064DDE0() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_0064DDF0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0064E290 (0x0064E290, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 34 of the object its member at +0x4 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    virtual void Method30();
+    virtual void Method31();
+    virtual void Method32();
+    virtual void Method33();
+    virtual void Method34();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x4];
+    Inner* m_Field4; // +0x4
+};
+
+void Object::Forward()
+{
+    m_Field4->Method34();
 }
 
 // ============================================================================
@@ -36414,6 +39538,52 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_00683020 (0x00683020, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 29 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method29();
+}
+
+// ============================================================================
 // [VERIFIED] func_00683190 (0x00683190, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -36429,6 +39599,52 @@ public:
 int Object::Get()
 {
     return m_Field34;
+}
+
+// ============================================================================
+// [VERIFIED] func_00683200 (0x00683200, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 29 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method29();
 }
 
 // ============================================================================
@@ -36595,6 +39811,89 @@ int Number()
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006892C0 (0x006892C0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 17 of the object its member at +0xA4 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0xA4];
+    Inner* m_FieldA4; // +0xA4
+};
+
+void Object::Forward()
+{
+    m_FieldA4->Method17();
+}
+
+// ============================================================================
+// [VERIFIED] func_006892E0 (0x006892E0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 18 of the object its member at +0xA4 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0xA4];
+    Inner* m_FieldA4; // +0xA4
+};
+
+void Object::Forward()
+{
+    m_FieldA4->Method18();
 }
 
 // ============================================================================
@@ -37614,6 +40913,45 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_006A3730 (0x006A3730, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 15 of the object its member at +0xEC points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0xEC];
+    Inner* m_FieldEC; // +0xEC
+};
+
+void Object::Forward()
+{
+    m_FieldEC->Method15();
+}
+
+// ============================================================================
 // [VERIFIED] func_006A3750 (0x006A3750, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -38330,6 +41668,24 @@ extern "C" void func_006A76B0() {
 }
 
 // ============================================================================
+// [VERIFIED] func_006A8040 (0x006A8040, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x4 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+void Object::Step()
+{
+    m_Field4 += 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_006A80A0 (0x006A80A0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -38546,6 +41902,52 @@ extern "C" void func_006AF180() {
 }
 
 // ============================================================================
+// [VERIFIED] func_006AF190 (0x006AF190, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00667DB0 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    int m_Field0; // +0x0
+};
+
+struct Arg0
+{
+    char m_pad00[0x44];
+    Inner* m_Field44; // +0x44
+};
+
+extern "C" void func_00667DB0(int);
+
+void Forward(Arg0* p0)
+{
+    func_00667DB0(p0->m_Field44->m_Field0);
+}
+
+// ============================================================================
+// [VERIFIED] func_006AF2A0 (0x006AF2A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00668920 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    int m_Field0; // +0x0
+};
+
+struct Arg0
+{
+    char m_pad00[0x44];
+    Inner* m_Field44; // +0x44
+};
+
+extern "C" void func_00668920(int);
+
+void Forward(Arg0* p0)
+{
+    func_00668920(p0->m_Field44->m_Field0);
+}
+
+// ============================================================================
 // [VERIFIED] func_006AF2F0 (0x006AF2F0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -38559,6 +41961,29 @@ extern "C" void func_006AF2F0() {
 }
 
 // ============================================================================
+// [VERIFIED] func_006AF300 (0x006AF300, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00667DB0 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    int m_Field0; // +0x0
+};
+
+struct Arg0
+{
+    char m_pad00[0x44];
+    Inner* m_Field44; // +0x44
+};
+
+extern "C" void func_00667DB0(int);
+
+void Forward(Arg0* p0)
+{
+    func_00667DB0(p0->m_Field44->m_Field0);
+}
+
+// ============================================================================
 // [VERIFIED] func_006AF310 (0x006AF310, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -38569,6 +41994,29 @@ extern "C" void func_006AF2F0() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_006AF310() {
+}
+
+// ============================================================================
+// [VERIFIED] func_006AF320 (0x006AF320, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_006688E0 and lets it return to this function's caller (the call is a jump).
+struct Inner
+{
+    int m_Field0; // +0x0
+};
+
+struct Arg0
+{
+    char m_pad00[0x44];
+    Inner* m_Field44; // +0x44
+};
+
+extern "C" void func_006688E0(int);
+
+void Forward(Arg0* p0)
+{
+    func_006688E0(p0->m_Field44->m_Field0);
 }
 
 // ============================================================================
@@ -38799,6 +42247,16 @@ int Object::Get()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006B2530 (0x006B2530, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 1.0.
+float Number()
+{
+    return 1.0f;
 }
 
 // ============================================================================
@@ -39510,6 +42968,34 @@ extern "C" void func_006C1960() {
 }
 
 // ============================================================================
+// [VERIFIED] func_006C2340 (0x006C2340, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 11 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method11();
+}
+
+// ============================================================================
 // [VERIFIED] func_006C26B0 (0x006C26B0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -39563,6 +43049,37 @@ extern int D_0080AD98;
 int Get()
 {
     return D_0080AD98;
+}
+
+// ============================================================================
+// [VERIFIED] func_006C4600 (0x006C4600, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 14 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method14();
 }
 
 // ============================================================================
@@ -41603,6 +45120,37 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_006E44A0 (0x006E44A0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 7 of the object its member at +0xC points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0xC];
+    Inner* m_FieldC; // +0xC
+};
+
+void Object::Forward()
+{
+    m_FieldC->Method7();
+}
+
+// ============================================================================
 // [VERIFIED] func_006E4730 (0x006E4730, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -42402,6 +45950,60 @@ int Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_006F2370 (0x006F2370, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds -1 to the member at +0x40 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x40];
+    int m_Field40; // +0x40
+};
+
+void Object::Step()
+{
+    m_Field40 -= 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006F2380 (0x006F2380, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x40 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x40];
+    int m_Field40; // +0x40
+};
+
+void Object::Step()
+{
+    m_Field40 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006F23D0 (0x006F23D0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x28 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+void Object::Step()
+{
+    m_Field28 += 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_006F25E0 (0x006F25E0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -42450,6 +46052,37 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_006F2AA0 (0x006F2AA0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x48 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x48];
+    int m_Field48; // +0x48
+};
+
+void Object::Step()
+{
+    m_Field48 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_006F2E50 (0x006F2E50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_0080AF38;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_0080AF38, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_006F4400 (0x006F4400, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -42459,6 +46092,19 @@ extern char D_008386F0[];
 char* Get()
 {
     return D_008386F0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006F4440 (0x006F4440, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_0080AF98;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_0080AF98, p0);
 }
 
 // ============================================================================
@@ -42723,6 +46369,19 @@ Object* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_006FB0F0 (0x006FB0F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_0080B170;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_0080B170, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_006FB590 (0x006FB590, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
 // ============================================================================
@@ -42762,6 +46421,19 @@ int Number()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_006FBFC0 (0x006FBFC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_0080B180;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_0080B180, p0);
 }
 
 // ============================================================================
@@ -42926,6 +46598,19 @@ int Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00700F20 (0x00700F20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_0080B2B8;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_0080B2B8, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_007033F0 (0x007033F0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -42980,6 +46665,32 @@ char* Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00704560 (0x00704560, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_0080B318;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_0080B318, p0);
+}
+
+// ============================================================================
+// [VERIFIED] func_00704980 (0x00704980, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_0080B350;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_0080B350, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_00704EF0 (0x00704EF0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -42998,6 +46709,19 @@ short Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00705CB0 (0x00705CB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_007014F0 and lets it return to this function's caller (the call is a jump).
+extern int D_0080B370;
+extern "C" void func_007014F0(int*, void*);
+
+void Forward(void* p0)
+{
+    func_007014F0(&D_0080B370, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_00705CD0 (0x00705CD0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -43007,6 +46731,19 @@ extern int D_00809F2C;
 int Get()
 {
     return D_00809F2C;
+}
+
+// ============================================================================
+// [VERIFIED] func_00707550 (0x00707550, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00720B60 and lets it return to this function's caller (the call is a jump).
+extern char D_00838B60[];
+extern "C" void func_00720B60(char*);
+
+void Forward()
+{
+    func_00720B60(D_00838B60);
 }
 
 // ============================================================================
@@ -43242,6 +46979,19 @@ int Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0074D930 (0x0074D930, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 2 values on to func_0075EFF0 and lets it return to this function's caller (the call is a jump).
+extern int D_0080866C;
+extern "C" void func_0075EFF0(int, void*);
+
+void Forward(void* p0)
+{
+    func_0075EFF0(D_0080866C, p0);
+}
+
+// ============================================================================
 // [VERIFIED] func_0074E180 (0x0074E180, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -43296,6 +47046,42 @@ float Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0074EFB0 (0x0074EFB0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0xC of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Step()
+{
+    m_FieldC += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0074EFC0 (0x0074EFC0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds -1 to the member at +0xC of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Step()
+{
+    m_FieldC -= 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_0074EFD0 (0x0074EFD0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -43314,6 +47100,42 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0074EFE0 (0x0074EFE0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0xC of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Step()
+{
+    m_FieldC += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0074EFF0 (0x0074EFF0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds -1 to the member at +0xC of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Step()
+{
+    m_FieldC -= 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_0074F000 (0x0074F000, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -43329,6 +47151,42 @@ public:
 int Object::Get()
 {
     return m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_0074F010 (0x0074F010, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x4 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+void Object::Step()
+{
+    m_Field4 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0074F020 (0x0074F020, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds -1 to the member at +0x4 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+void Object::Step()
+{
+    m_Field4 -= 1;
 }
 
 // ============================================================================
@@ -43402,6 +47260,42 @@ extern "C" void func_0074F070() {
 }
 
 // ============================================================================
+// [VERIFIED] func_0074F080 (0x0074F080, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x88 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x88];
+    int m_Field88; // +0x88
+};
+
+void Object::Step()
+{
+    m_Field88 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0074F090 (0x0074F090, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds -1 to the member at +0x88 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x88];
+    int m_Field88; // +0x88
+};
+
+void Object::Step()
+{
+    m_Field88 -= 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_0074F0A0 (0x0074F0A0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -43417,6 +47311,129 @@ public:
 int Object::Get()
 {
     return m_Field88;
+}
+
+// ============================================================================
+// [VERIFIED] func_0074FDA0 (0x0074FDA0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 37 of the object its member at +0x1C points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    virtual void Method30();
+    virtual void Method31();
+    virtual void Method32();
+    virtual void Method33();
+    virtual void Method34();
+    virtual void Method35();
+    virtual void Method36();
+    virtual void Method37();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x1C];
+    Inner* m_Field1C; // +0x1C
+};
+
+void Object::Forward()
+{
+    m_Field1C->Method37();
+}
+
+// ============================================================================
+// [VERIFIED] func_0074FDC0 (0x0074FDC0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 38 of the object its member at +0x1C points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    virtual void Method30();
+    virtual void Method31();
+    virtual void Method32();
+    virtual void Method33();
+    virtual void Method34();
+    virtual void Method35();
+    virtual void Method36();
+    virtual void Method37();
+    virtual void Method38();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x1C];
+    Inner* m_Field1C; // +0x1C
+};
+
+void Object::Forward()
+{
+    m_Field1C->Method38();
 }
 
 // ============================================================================
@@ -43720,6 +47737,32 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00752720 (0x00752720, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00762CF0 and lets it return to this function's caller (the call is a jump).
+extern char D_00842710[];
+extern "C" void func_00762CF0(char*);
+
+void Forward()
+{
+    func_00762CF0(D_00842710);
+}
+
+// ============================================================================
+// [VERIFIED] func_00752730 (0x00752730, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00762DA0 and lets it return to this function's caller (the call is a jump).
+extern char D_00842710[];
+extern "C" void func_00762DA0(char*);
+
+void Forward()
+{
+    func_00762DA0(D_00842710);
+}
+
+// ============================================================================
 // [VERIFIED] func_00752B30 (0x00752B30, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -43753,6 +47796,43 @@ public:
 unsigned char Object::Get()
 {
     return m_Field1C;
+}
+
+// ============================================================================
+// [VERIFIED] func_00752DF0 (0x00752DF0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 13 of the object its member at +0xC points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0xC];
+    Inner* m_FieldC; // +0xC
+};
+
+void Object::Forward()
+{
+    m_FieldC->Method13();
 }
 
 // ============================================================================
@@ -43907,6 +47987,72 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00754260 (0x00754260, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00762CF0 and lets it return to this function's caller (the call is a jump).
+extern char D_008434A0[];
+extern "C" void func_00762CF0(char*);
+
+void Forward()
+{
+    func_00762CF0(D_008434A0);
+}
+
+// ============================================================================
+// [VERIFIED] func_00754270 (0x00754270, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00762DA0 and lets it return to this function's caller (the call is a jump).
+extern char D_008434A0[];
+extern "C" void func_00762DA0(char*);
+
+void Forward()
+{
+    func_00762DA0(D_008434A0);
+}
+
+// ============================================================================
+// [VERIFIED] func_00754280 (0x00754280, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 16 of the object its member at +0xC points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0xC];
+    Inner* m_FieldC; // +0xC
+};
+
+void Object::Forward()
+{
+    m_FieldC->Method16();
+}
+
+// ============================================================================
 // [VERIFIED] func_00754DF0 (0x00754DF0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -43935,6 +48081,120 @@ public:
 int Object::Get()
 {
     return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00754F00 (0x00754F00, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 13 of the object its member at +0xC points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0xC];
+    Inner* m_FieldC; // +0xC
+};
+
+void Object::Forward()
+{
+    m_FieldC->Method13();
+}
+
+// ============================================================================
+// [VERIFIED] func_00754F20 (0x00754F20, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 14 of the object its member at +0xC points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0xC];
+    Inner* m_FieldC; // +0xC
+};
+
+void Object::Forward()
+{
+    m_FieldC->Method14();
+}
+
+// ============================================================================
+// [VERIFIED] func_00754F40 (0x00754F40, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 15 of the object its member at +0xC points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0xC];
+    Inner* m_FieldC; // +0xC
+};
+
+void Object::Forward()
+{
+    m_FieldC->Method15();
 }
 
 // ============================================================================
@@ -44125,6 +48385,56 @@ public:
 int Object::Get()
 {
     return m_Field8->m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_00755B20 (0x00755B20, 20 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls virtual method number 26 of the object its member at +0x8 points to, and lets it return to this function's caller.
+class Inner
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+};
+
+class Object
+{
+public:
+    void Forward();
+    char m_pad00[0x8];
+    Inner* m_Field8; // +0x8
+};
+
+void Object::Forward()
+{
+    m_Field8->Method26();
 }
 
 // ============================================================================
@@ -44608,6 +48918,32 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_0075BE50 (0x0075BE50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00762CF0 and lets it return to this function's caller (the call is a jump).
+extern char D_008434C0[];
+extern "C" void func_00762CF0(char*);
+
+void Forward()
+{
+    func_00762CF0(D_008434C0);
+}
+
+// ============================================================================
+// [VERIFIED] func_0075BE60 (0x0075BE60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Passes 1 value on to func_00762DA0 and lets it return to this function's caller (the call is a jump).
+extern char D_008434C0[];
+extern "C" void func_00762DA0(char*);
+
+void Forward()
+{
+    func_00762DA0(D_008434C0);
+}
+
+// ============================================================================
 // [VERIFIED] func_0075BE70 (0x0075BE70, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -44695,6 +49031,57 @@ extern int D_0080B464;
 int Get()
 {
     return D_0080B464;
+}
+
+// ============================================================================
+// [VERIFIED] func_0075F8C0 (0x0075F8C0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0xC of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0xC];
+    int m_FieldC; // +0xC
+};
+
+void Object::Step()
+{
+    m_FieldC += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0075F8D0 (0x0075F8D0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 16 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method16();
 }
 
 // ============================================================================
@@ -44808,6 +49195,42 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_00760580 (0x00760580, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x4 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+void Object::Step()
+{
+    m_Field4 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00760590 (0x00760590, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds -1 to the member at +0x4 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+void Object::Step()
+{
+    m_Field4 -= 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_007605A0 (0x007605A0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -44898,6 +49321,24 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00761290 (0x00761290, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x10 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+void Object::Step()
+{
+    m_Field10 += 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_007612A0 (0x007612A0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -44916,6 +49357,24 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00761300 (0x00761300, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x10 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+void Object::Step()
+{
+    m_Field10 += 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_00761310 (0x00761310, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -44931,6 +49390,24 @@ public:
 int Object::Get()
 {
     return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00761370 (0x00761370, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x10 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+void Object::Step()
+{
+    m_Field10 += 1;
 }
 
 // ============================================================================
@@ -45158,6 +49635,30 @@ char* Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00761980 (0x00761980, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the global D_0080B4A8.
+extern int D_0080B4A8;
+
+void Step()
+{
+    D_0080B4A8 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00761990 (0x00761990, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds -1 to the global D_0080B4A8.
+extern int D_0080B4A8;
+
+void Step()
+{
+    D_0080B4A8 -= 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_00763240 (0x00763240, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -45167,6 +49668,42 @@ extern int D_0080B4BC;
 int Get()
 {
     return D_0080B4BC;
+}
+
+// ============================================================================
+// [VERIFIED] func_007632D0 (0x007632D0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x8B4 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x8B4];
+    int m_Field8B4; // +0x8B4
+};
+
+void Object::Step()
+{
+    m_Field8B4 += 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_007632E0 (0x007632E0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds -1 to the member at +0x8B4 of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x8B4];
+    int m_Field8B4; // +0x8B4
+};
+
+void Object::Step()
+{
+    m_Field8B4 -= 1;
 }
 
 // ============================================================================
@@ -45324,6 +49861,24 @@ int Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00766900 (0x00766900, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x3C of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x3C];
+    int m_Field3C; // +0x3C
+};
+
+void Object::Step()
+{
+    m_Field3C += 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_007669D0 (0x007669D0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -45393,6 +49948,24 @@ public:
 int Object::Get()
 {
     return m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_00769870 (0x00769870, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Adds 1 to the member at +0x3C of its object.
+class Object
+{
+public:
+    void Step();
+    char m_pad00[0x3C];
+    int m_Field3C; // +0x3C
+};
+
+void Object::Step()
+{
+    m_Field3C += 1;
 }
 
 // ============================================================================

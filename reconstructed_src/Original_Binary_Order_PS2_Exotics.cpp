@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay ExoticsOverlayf.bin (exotics shop), loaded at 0x845480, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 28 of 115 functions matched (24.35%). NOT COMPLETE YET.
-// The 87 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 29 of 115 functions matched (25.22%). NOT COMPLETE YET.
+// The 86 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -395,7 +395,16 @@ char* Get()
     return D_0082FB80;
 }
 
-// [TODO] 0x0084A3E0 func_0084A3E0 (16 B)
+// ============================================================================
+// [VERIFIED] func_0084A3E0 (0x0084A3E0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns 1000.0.
+float Number()
+{
+    return 1000.0f;
+}
+
 // [TODO] 0x0084A3F0 func_0084A3F0 (324 B)
 // [TODO] 0x0084A540 func_0084A540 (96 B)
 // [TODO] 0x0084A5A0 RepGainHUD::vfunc_29 (288 B)
