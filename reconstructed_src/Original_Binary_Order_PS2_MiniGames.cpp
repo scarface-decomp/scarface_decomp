@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay MiniGamesOverlayf.bin (gambling mini-games), loaded at 0x845480, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 26 of 128 functions matched (20.31%). NOT COMPLETE YET.
-// The 102 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 30 of 128 functions matched (23.44%). NOT COMPLETE YET.
+// The 98 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -26,7 +26,18 @@
 // [TODO] 0x00846AC0 func_00846AC0 (196 B)
 // [TODO] 0x00846B90 func_00846B90 (172 B)
 // [TODO] 0x00846C40 func_00846C40 (1960 B)
-// [TODO] 0x008473F0 func_008473F0 (12 B)
+// ============================================================================
+// [VERIFIED] func_008473F0 (0x008473F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F370.
+extern char D_0082F370[];
+
+char* Get()
+{
+    return D_0082F370;
+}
+
 // ============================================================================
 // [VERIFIED] func_00847400 (0x00847400, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -293,7 +304,18 @@ Object* Object::Get()
 // [TODO] 0x008480F0 func_008480F0 (84 B)
 // [TODO] 0x00848150 func_00848150 (144 B)
 // [TODO] 0x008481E0 func_008481E0 (68 B)
-// [TODO] 0x00848230 func_00848230 (12 B)
+// ============================================================================
+// [VERIFIED] func_00848230 (0x00848230, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FA90.
+extern char D_0082FA90[];
+
+char* Get()
+{
+    return D_0082FA90;
+}
+
 // [TODO] 0x00848240 func_00848240 (364 B)
 // [TODO] 0x008483B0 func_008483B0 (248 B)
 // [TODO] 0x008484B0 BlackjackHUD::vfunc_29 (976 B)
@@ -313,7 +335,18 @@ Object* Object::Get()
 // [TODO] 0x00849EE0 func_00849EE0 (24 B)
 // [TODO] 0x00849F00 func_00849F00 (160 B)
 // [TODO] 0x00849FA0 func_00849FA0 (72 B)
-// [TODO] 0x00849FF0 func_00849FF0 (12 B)
+// ============================================================================
+// [VERIFIED] func_00849FF0 (0x00849FF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FAE0.
+extern char D_0082FAE0[];
+
+char* Get()
+{
+    return D_0082FAE0;
+}
+
 // [TODO] 0x0084A000 func_0084A000 (8 B)
 // [TODO] 0x0084A010 func_0084A010 (8 B)
 // [TODO] 0x0084A020 func_0084A020 (340 B)
@@ -341,7 +374,18 @@ Object* Object::Get()
 // [TODO] 0x0084BBF0 func_0084BBF0 (516 B)
 // [TODO] 0x0084BE00 func_0084BE00 (436 B)
 // [TODO] 0x0084BFC0 func_0084BFC0 (56 B)
-// [TODO] 0x0084C000 func_0084C000 (12 B)
+// ============================================================================
+// [VERIFIED] func_0084C000 (0x0084C000, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FB30.
+extern char D_0082FB30[];
+
+char* Get()
+{
+    return D_0082FB30;
+}
+
 // [TODO] 0x0084C010 func_0084C010 (40 B)
 // [TODO] 0x0084C040 func_0084C040 (336 B)
 // [TODO] 0x0084C190 func_0084C190 (224 B)

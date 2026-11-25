@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay ModalsOverlay1f.bin (empire and mansion screens), loaded at 0x845480, engine/GlobalFunctions.cpp (23 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay ModalsOverlay1f.bin (empire and mansion screens), loaded at 0x845480, engine/GlobalFunctions.cpp (24 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 23 of 95 functions matched (24.21%). NOT COMPLETE YET.
-// The 72 still to do are listed in their place in Original_Binary_Order_PS2_Modals1.cpp as "// [TODO] address name (size)"
+// PROGRESS: 24 of 95 functions matched (25.26%). NOT COMPLETE YET.
+// The 71 still to do are listed in their place in Original_Binary_Order_PS2_Modals1.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -38,6 +38,18 @@ public:
 void Object::Set(char value)
 {
     m_Field5 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AC90 (0x0084AC90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FCD0.
+extern char D_0082FCD0[];
+
+char* Get()
+{
+    return D_0082FCD0;
 }
 
 // ============================================================================

@@ -25,7 +25,7 @@ meant for modding research, engine bug fixing and preservation.
 
 Plus 10,950 in the April 2006 Xbox prototype (`game.xbe`), unreleased code, counted on its own.
 
-Plus 3,112 in the PS2 game (`SLUS_211.11` and its overlays), built with its own compiler, counted on its own.
+Plus 3,489 in the PS2 game (`SLUS_211.11` and its overlays), built with its own compiler, counted on its own.
 
 3,714 of them are under 10 bytes and the largest is 5,204 bytes, so the medium and large functions are where the work is.
 <!-- status:end -->

@@ -1,13 +1,25 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay MiniGamesOverlayf.bin (gambling mini-games), loaded at 0x845480, engine/GlobalFunctions.cpp (26 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay MiniGamesOverlayf.bin (gambling mini-games), loaded at 0x845480, engine/GlobalFunctions.cpp (30 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 26 of 123 functions matched (21.14%). NOT COMPLETE YET.
-// The 97 still to do are listed in their place in Original_Binary_Order_PS2_MiniGames.cpp as "// [TODO] address name (size)"
+// PROGRESS: 30 of 123 functions matched (24.39%). NOT COMPLETE YET.
+// The 93 still to do are listed in their place in Original_Binary_Order_PS2_MiniGames.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] func_008473F0 (0x008473F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F370.
+extern char D_0082F370[];
+
+char* Get()
+{
+    return D_0082F370;
+}
 
 // ============================================================================
 // [VERIFIED] func_00847400 (0x00847400, 8 B)
@@ -255,6 +267,42 @@ public:
 Object* Object::Get()
 {
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_00848230 (0x00848230, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FA90.
+extern char D_0082FA90[];
+
+char* Get()
+{
+    return D_0082FA90;
+}
+
+// ============================================================================
+// [VERIFIED] func_00849FF0 (0x00849FF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FAE0.
+extern char D_0082FAE0[];
+
+char* Get()
+{
+    return D_0082FAE0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0084C000 (0x0084C000, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FB30.
+extern char D_0082FB30[];
+
+char* Get()
+{
+    return D_0082FB30;
 }
 
 // ============================================================================

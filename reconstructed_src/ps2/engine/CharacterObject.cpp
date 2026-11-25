@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/CharacterObject.cpp (14 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/CharacterObject.cpp (15 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 14 of 61 functions matched (22.95%). NOT COMPLETE YET.
-// The 47 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
+// PROGRESS: 15 of 61 functions matched (24.59%). NOT COMPLETE YET.
+// The 46 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -109,6 +109,78 @@ public:
 float Object::Get()
 {
     return m_Field130;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_56 (0x003A27F0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Calls its own virtual method number 55 and lets it return to this function's caller.
+class Object
+{
+public:
+    virtual void Method0();
+    virtual void Method1();
+    virtual void Method2();
+    virtual void Method3();
+    virtual void Method4();
+    virtual void Method5();
+    virtual void Method6();
+    virtual void Method7();
+    virtual void Method8();
+    virtual void Method9();
+    virtual void Method10();
+    virtual void Method11();
+    virtual void Method12();
+    virtual void Method13();
+    virtual void Method14();
+    virtual void Method15();
+    virtual void Method16();
+    virtual void Method17();
+    virtual void Method18();
+    virtual void Method19();
+    virtual void Method20();
+    virtual void Method21();
+    virtual void Method22();
+    virtual void Method23();
+    virtual void Method24();
+    virtual void Method25();
+    virtual void Method26();
+    virtual void Method27();
+    virtual void Method28();
+    virtual void Method29();
+    virtual void Method30();
+    virtual void Method31();
+    virtual void Method32();
+    virtual void Method33();
+    virtual void Method34();
+    virtual void Method35();
+    virtual void Method36();
+    virtual void Method37();
+    virtual void Method38();
+    virtual void Method39();
+    virtual void Method40();
+    virtual void Method41();
+    virtual void Method42();
+    virtual void Method43();
+    virtual void Method44();
+    virtual void Method45();
+    virtual void Method46();
+    virtual void Method47();
+    virtual void Method48();
+    virtual void Method49();
+    virtual void Method50();
+    virtual void Method51();
+    virtual void Method52();
+    virtual void Method53();
+    virtual void Method54();
+    virtual void Method55();
+    void Forward();
+};
+
+void Object::Forward()
+{
+    Method55();
 }
 
 // ============================================================================

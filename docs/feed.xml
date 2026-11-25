@@ -5,356 +5,356 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-24T23:12:29Z</updated>
+  <updated>2026-11-25T15:17:23Z</updated>
   <author><name>Scarface decomp contributors</name></author>
   <entry>
-    <title>func_005652B0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x005652B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x005652B0</id>
-    <updated>2026-11-24T23:12:29Z</updated>
-    <summary>0x005652B0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0059B4B0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0059B4B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0059B4B0</id>
+    <updated>2026-11-25T15:17:23Z</updated>
+    <summary>0x0059B4B0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00564690 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00564690"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00564690</id>
-    <updated>2026-11-24T23:12:27Z</updated>
-    <summary>0x00564690 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00579BB0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00579BB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00579BB0</id>
+    <updated>2026-11-25T15:17:21Z</updated>
+    <summary>0x00579BB0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00560500 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00560500"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00560500</id>
-    <updated>2026-11-24T23:12:24Z</updated>
-    <summary>0x00560500 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00539680 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00539680"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00539680</id>
+    <updated>2026-11-25T15:16:59Z</updated>
+    <summary>0x00539680 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_005604F0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x005604F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x005604F0</id>
-    <updated>2026-11-24T23:12:22Z</updated>
-    <summary>0x005604F0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0051B580 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051B580"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051B580</id>
+    <updated>2026-11-25T15:16:57Z</updated>
+    <summary>0x0051B580 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_005604E0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x005604E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x005604E0</id>
-    <updated>2026-11-24T23:12:19Z</updated>
-    <summary>0x005604E0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00517B20 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00517B20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00517B20</id>
+    <updated>2026-11-25T15:16:57Z</updated>
+    <summary>0x00517B20 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0055CAB0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0055CAB0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0055CAB0</id>
-    <updated>2026-11-24T23:12:17Z</updated>
-    <summary>0x0055CAB0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_004FA330 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004FA330"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004FA330</id>
+    <updated>2026-11-25T15:16:54Z</updated>
+    <summary>0x004FA330 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0055BF40 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0055BF40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0055BF40</id>
-    <updated>2026-11-24T23:12:17Z</updated>
-    <summary>0x0055BF40 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_004CD4C0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CD4C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CD4C0</id>
+    <updated>2026-11-25T15:16:54Z</updated>
+    <summary>0x004CD4C0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0055BBE0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0055BBE0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0055BBE0</id>
-    <updated>2026-11-24T23:12:17Z</updated>
-    <summary>0x0055BBE0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_004C05B0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004C05B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004C05B0</id>
+    <updated>2026-11-25T15:16:54Z</updated>
+    <summary>0x004C05B0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0055BB60 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0055BB60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0055BB60</id>
-    <updated>2026-11-24T23:12:14Z</updated>
-    <summary>0x0055BB60 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_004A4CB0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004A4CB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004A4CB0</id>
+    <updated>2026-11-25T15:16:52Z</updated>
+    <summary>0x004A4CB0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00559440 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00559440"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00559440</id>
-    <updated>2026-11-24T23:12:12Z</updated>
-    <summary>0x00559440 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>ExoticsHUD2::vfunc_41 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004A37D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004A37D0</id>
+    <updated>2026-11-25T15:16:49Z</updated>
+    <summary>0x004A37D0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_005593D0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x005593D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x005593D0</id>
-    <updated>2026-11-24T23:12:10Z</updated>
-    <summary>0x005593D0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0047BB90 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0047BB90"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0047BB90</id>
+    <updated>2026-11-25T15:16:49Z</updated>
+    <summary>0x0047BB90 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_005593C0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x005593C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x005593C0</id>
-    <updated>2026-11-24T23:12:07Z</updated>
-    <summary>0x005593C0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_004787B0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004787B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004787B0</id>
+    <updated>2026-11-25T15:16:47Z</updated>
+    <summary>0x004787B0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_005593B0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x005593B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x005593B0</id>
-    <updated>2026-11-24T23:12:05Z</updated>
-    <summary>0x005593B0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_004708D0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004708D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004708D0</id>
+    <updated>2026-11-25T15:16:44Z</updated>
+    <summary>0x004708D0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00559340 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00559340"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00559340</id>
-    <updated>2026-11-24T23:12:02Z</updated>
-    <summary>0x00559340 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00464580 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00464580"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00464580</id>
+    <updated>2026-11-25T15:16:42Z</updated>
+    <summary>0x00464580 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_005592D0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x005592D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x005592D0</id>
-    <updated>2026-11-24T23:12:00Z</updated>
-    <summary>0x005592D0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00463D50 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00463D50"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00463D50</id>
+    <updated>2026-11-25T15:16:42Z</updated>
+    <summary>0x00463D50 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0054CD40 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0054CD40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0054CD40</id>
-    <updated>2026-11-24T23:11:57Z</updated>
-    <summary>0x0054CD40 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00453EC0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00453EC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00453EC0</id>
+    <updated>2026-11-25T15:16:40Z</updated>
+    <summary>0x00453EC0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0054CCD0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0054CCD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0054CCD0</id>
-    <updated>2026-11-24T23:11:55Z</updated>
-    <summary>0x0054CCD0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00453EB0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00453EB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00453EB0</id>
+    <updated>2026-11-25T15:16:37Z</updated>
+    <summary>0x00453EB0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0054AFB0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0054AFB0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0054AFB0</id>
-    <updated>2026-11-24T23:11:53Z</updated>
-    <summary>0x0054AFB0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00453EA0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00453EA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00453EA0</id>
+    <updated>2026-11-25T15:16:35Z</updated>
+    <summary>0x00453EA0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_005491E0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x005491E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x005491E0</id>
-    <updated>2026-11-24T23:11:53Z</updated>
-    <summary>0x005491E0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00453A80 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00453A80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00453A80</id>
+    <updated>2026-11-25T15:16:32Z</updated>
+    <summary>0x00453A80 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00548DB0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00548DB0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00548DB0</id>
-    <updated>2026-11-24T23:11:50Z</updated>
-    <summary>0x00548DB0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0044BF20 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0044BF20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0044BF20</id>
+    <updated>2026-11-25T15:16:30Z</updated>
+    <summary>0x0044BF20 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00544D50 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00544D50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00544D50</id>
-    <updated>2026-11-24T23:11:50Z</updated>
-    <summary>0x00544D50 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_004188A0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004188A0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004188A0</id>
+    <updated>2026-11-25T15:16:27Z</updated>
+    <summary>0x004188A0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00541E80 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00541E80"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00541E80</id>
-    <updated>2026-11-24T23:11:50Z</updated>
-    <summary>0x00541E80 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00418890 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00418890"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00418890</id>
+    <updated>2026-11-25T15:16:25Z</updated>
+    <summary>0x00418890 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00540550 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00540550"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00540550</id>
-    <updated>2026-11-24T23:11:27Z</updated>
-    <summary>0x00540550 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00418880 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00418880"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00418880</id>
+    <updated>2026-11-25T15:16:23Z</updated>
+    <summary>0x00418880 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0053D4D0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0053D4D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0053D4D0</id>
-    <updated>2026-11-24T23:11:24Z</updated>
-    <summary>0x0053D4D0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00416E70 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00416E70"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00416E70</id>
+    <updated>2026-11-25T15:16:20Z</updated>
+    <summary>0x00416E70 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00539350 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00539350"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00539350</id>
-    <updated>2026-11-24T23:11:24Z</updated>
-    <summary>0x00539350 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00416E60 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00416E60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00416E60</id>
+    <updated>2026-11-25T15:16:18Z</updated>
+    <summary>0x00416E60 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00528610 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00528610"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00528610</id>
-    <updated>2026-11-24T23:11:24Z</updated>
-    <summary>0x00528610 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0040CE80 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0040CE80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0040CE80</id>
+    <updated>2026-11-25T15:16:15Z</updated>
+    <summary>0x0040CE80 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00526130 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00526130"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00526130</id>
-    <updated>2026-11-24T23:11:22Z</updated>
-    <summary>0x00526130 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0040AC30 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0040AC30"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0040AC30</id>
+    <updated>2026-11-25T15:16:13Z</updated>
+    <summary>0x0040AC30 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051C7B0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051C7B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051C7B0</id>
-    <updated>2026-11-24T23:11:22Z</updated>
-    <summary>0x0051C7B0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_003C8B30 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003C8B30"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003C8B30</id>
+    <updated>2026-11-25T15:15:51Z</updated>
+    <summary>0x003C8B30 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051BB30 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051BB30"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051BB30</id>
-    <updated>2026-11-24T23:11:19Z</updated>
-    <summary>0x0051BB30 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_003AD000 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003AD000"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003AD000</id>
+    <updated>2026-11-25T15:15:49Z</updated>
+    <summary>0x003AD000 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051BAC0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051BAC0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051BAC0</id>
-    <updated>2026-11-24T23:11:17Z</updated>
-    <summary>0x0051BAC0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_003A45F0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003A45F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003A45F0</id>
+    <updated>2026-11-25T15:15:46Z</updated>
+    <summary>0x003A45F0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051BA40 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051BA40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051BA40</id>
-    <updated>2026-11-24T23:11:14Z</updated>
-    <summary>0x0051BA40 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_003A45E0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003A45E0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003A45E0</id>
+    <updated>2026-11-25T15:15:44Z</updated>
+    <summary>0x003A45E0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051B9D0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051B9D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051B9D0</id>
-    <updated>2026-11-24T23:11:12Z</updated>
-    <summary>0x0051B9D0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_003A3DC0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003A3DC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003A3DC0</id>
+    <updated>2026-11-25T15:15:42Z</updated>
+    <summary>0x003A3DC0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051B960 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051B960"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051B960</id>
-    <updated>2026-11-24T23:11:10Z</updated>
-    <summary>0x0051B960 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_003A3DB0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003A3DB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003A3DB0</id>
+    <updated>2026-11-25T15:15:42Z</updated>
+    <summary>0x003A3DB0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051B8E0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051B8E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051B8E0</id>
-    <updated>2026-11-24T23:11:07Z</updated>
-    <summary>0x0051B8E0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>CharacterObject::vfunc_56 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003A27F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003A27F0</id>
+    <updated>2026-11-25T15:15:41Z</updated>
+    <summary>0x003A27F0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051B860 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051B860"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051B860</id>
-    <updated>2026-11-24T23:11:05Z</updated>
-    <summary>0x0051B860 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0039A890 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0039A890"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0039A890</id>
+    <updated>2026-11-25T15:15:39Z</updated>
+    <summary>0x0039A890 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051B7E0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051B7E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051B7E0</id>
-    <updated>2026-11-24T23:11:02Z</updated>
-    <summary>0x0051B7E0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00394BE0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00394BE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00394BE0</id>
+    <updated>2026-11-25T15:15:37Z</updated>
+    <summary>0x00394BE0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051B760 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051B760"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051B760</id>
-    <updated>2026-11-24T23:11:00Z</updated>
-    <summary>0x0051B760 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00394B60 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00394B60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00394B60</id>
+    <updated>2026-11-25T15:15:36Z</updated>
+    <summary>0x00394B60 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_0051B6E0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x0051B6E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x0051B6E0</id>
-    <updated>2026-11-24T23:10:57Z</updated>
-    <summary>0x0051B6E0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00393050 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00393050"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00393050</id>
+    <updated>2026-11-25T15:15:36Z</updated>
+    <summary>0x00393050 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00517740 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00517740"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00517740</id>
-    <updated>2026-11-24T23:10:55Z</updated>
-    <summary>0x00517740 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00392C20 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00392C20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00392C20</id>
+    <updated>2026-11-25T15:15:36Z</updated>
+    <summary>0x00392C20 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00517730 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00517730"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00517730</id>
-    <updated>2026-11-24T23:10:53Z</updated>
-    <summary>0x00517730 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_003929D0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003929D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003929D0</id>
+    <updated>2026-11-25T15:15:34Z</updated>
+    <summary>0x003929D0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00515EE0 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00515EE0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00515EE0</id>
-    <updated>2026-11-24T23:10:50Z</updated>
-    <summary>0x00515EE0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_003919F0 (PS2, 16 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003919F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003919F0</id>
+    <updated>2026-11-25T15:15:31Z</updated>
+    <summary>0x003919F0 in the PS2 version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00505200 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00505200"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00505200</id>
-    <updated>2026-11-24T23:10:48Z</updated>
-    <summary>0x00505200 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0084C230 (PS2 pause menu overlay, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2pause%3A0x0084C230"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2pause:0x0084C230</id>
+    <updated>2026-11-25T15:15:29Z</updated>
+    <summary>0x0084C230 in the PS2 pause menu overlay version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004F6F50 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004F6F50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004F6F50</id>
-    <updated>2026-11-24T23:10:45Z</updated>
-    <summary>0x004F6F50 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0084C000 (PS2 gambling mini-games overlay, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2games%3A0x0084C000"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2games:0x0084C000</id>
+    <updated>2026-11-25T15:15:27Z</updated>
+    <summary>0x0084C000 in the PS2 gambling mini-games overlay version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004E7B60 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004E7B60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004E7B60</id>
-    <updated>2026-11-24T23:10:45Z</updated>
-    <summary>0x004E7B60 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0084BB90 (PS2 exotics shop overlay, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2exotics%3A0x0084BB90"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2exotics:0x0084BB90</id>
+    <updated>2026-11-25T15:15:24Z</updated>
+    <summary>0x0084BB90 in the PS2 exotics shop overlay version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004E7B50 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004E7B50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004E7B50</id>
-    <updated>2026-11-24T23:10:43Z</updated>
-    <summary>0x004E7B50 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0084BB90 (PS2 pause menu overlay, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2pause%3A0x0084BB90"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2pause:0x0084BB90</id>
+    <updated>2026-11-25T15:15:22Z</updated>
+    <summary>0x0084BB90 in the PS2 pause menu overlay version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004E7B40 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004E7B40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004E7B40</id>
-    <updated>2026-11-24T23:10:40Z</updated>
-    <summary>0x004E7B40 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0084AC90 (PS2 empire and mansion screens overlay, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2modals1%3A0x0084AC90"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2modals1:0x0084AC90</id>
+    <updated>2026-11-25T15:15:19Z</updated>
+    <summary>0x0084AC90 in the PS2 empire and mansion screens overlay version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004E7B30 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004E7B30"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004E7B30</id>
-    <updated>2026-11-24T23:10:38Z</updated>
-    <summary>0x004E7B30 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0084A3D0 (PS2 exotics shop overlay, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2exotics%3A0x0084A3D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2exotics:0x0084A3D0</id>
+    <updated>2026-11-25T15:15:17Z</updated>
+    <summary>0x0084A3D0 in the PS2 exotics shop overlay version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004E7B20 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004E7B20"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004E7B20</id>
-    <updated>2026-11-24T23:10:16Z</updated>
-    <summary>0x004E7B20 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_0084A330 (PS2 pause menu overlay, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2pause%3A0x0084A330"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2pause:0x0084A330</id>
+    <updated>2026-11-25T15:15:14Z</updated>
+    <summary>0x0084A330 in the PS2 pause menu overlay version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004E7B10 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004E7B10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004E7B10</id>
-    <updated>2026-11-24T23:10:14Z</updated>
-    <summary>0x004E7B10 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_00849FF0 (PS2 gambling mini-games overlay, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2games%3A0x00849FF0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2games:0x00849FF0</id>
+    <updated>2026-11-25T15:15:12Z</updated>
+    <summary>0x00849FF0 in the PS2 gambling mini-games overlay version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004E7B00 (PS2, 12 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004E7B00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004E7B00</id>
-    <updated>2026-11-24T23:10:11Z</updated>
-    <summary>0x004E7B00 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>func_008498C0 (PS2 pause menu overlay, 12 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2pause%3A0x008498C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:ps2pause:0x008498C0</id>
+    <updated>2026-11-25T15:15:10Z</updated>
+    <summary>0x008498C0 in the PS2 pause menu overlay version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

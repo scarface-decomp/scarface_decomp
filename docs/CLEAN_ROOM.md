@@ -1,7 +1,7 @@
 # Clean-room work
 
-Some useful material can't come into this project: leaked source code, debug symbols, and research done
-by people who had them open while they worked. Its *code* and *names* stay out
+Some useful material can't come into this project: leaked source code, leaked symbol files, and research
+done by people who had them open while they worked. Its *code* and *names* stay out
 ([PROVENANCE.md](PROVENANCE.md)). What it shows about the game's files and behaviour can come in, whatever
 the material is, through a
 [clean-room](https://en.wikipedia.org/wiki/Clean-room_design) process: the knowledge crosses over as a
@@ -15,9 +15,19 @@ worded that way: **no leaked source code is in the repository, nor any code or n
 from anything written beside it; what examiners learned from such material comes in only as reviewed
 specs; you need your own copy of the game.** Don't describe the decompilation itself as "clean room".
 
-## Names from another game's build
+**What is not behind the wall.** Anything a contributor holds their own copy of: the game, prototype and
+review builds, other games, development kits and manuals, and whatever those discs carry, linker maps
+included. Anyone may read those directly, implementers too ([PROVENANCE.md](PROVENANCE.md)). The wall is
+for leaked source and leaked symbol files only.
 
-One source of names is neither this game nor a spec, so it is recorded here. The 10 July 2003 PS2 prototype
+## Other builds the project reads
+
+Other builds are open to any contributor who holds their own copy, on PROVENANCE.md's three conditions:
+what is taken is checked against Scarface's code, the build is recorded here, and its files stay out of
+the project. To add one, describe it in your pull request the way the entries below do: which build,
+whose copy, which file, and what is taken from it.
+
+The 10 July 2003 PS2 prototype
 of *The Simpsons: Hit & Run*, a game on the same engine, carries its own linker map on the disc. Since 18
 November 2026 the project takes virtual functions' names from that map where the two games' classes line up
 ([NAMES.md](NAMES.md), `portal/scripts/names_from_shar_map.py`).
@@ -25,8 +35,8 @@ November 2026 the project takes virtual functions' names from that map where the
 * **What is read:** the map file and the prototype's program, from the founder's own copy of the disc. They
   are a build's own by-products, not source code. Neither file is in this repository.
 * **What is not:** *Hit & Run*'s source code, which has leaked, is not a source of names: it must not be
-  consulted to check, complete or correct a name from the map. Like any outside material it may be read
-  only by an examiner, under the roles below, and that reading goes in the record.
+  consulted to check, complete or correct a name from the map. It is leaked material: it may be read only by
+  an examiner, under the roles below, and that reading goes in the record.
 * **What it gives:** names only, each recorded in `reports/names.json` with the class and slot it came
   from. No code, layouts or behaviour are taken from it.
 

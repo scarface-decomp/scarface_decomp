@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay PauseMenuOverlayf.bin (pause menu), loaded at 0x845480, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 34 of 191 functions matched (17.80%). NOT COMPLETE YET.
-// The 157 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 45 of 191 functions matched (23.56%). NOT COMPLETE YET.
+// The 146 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -46,7 +46,18 @@ extern "C" void func_00845820() {
 // [TODO] 0x00845DA0 func_00845DA0 (140 B)
 // [TODO] 0x00845E30 func_00845E30 (168 B)
 // [TODO] 0x00845EE0 func_00845EE0 (100 B)
-// [TODO] 0x00845F50 func_00845F50 (12 B)
+// ============================================================================
+// [VERIFIED] func_00845F50 (0x00845F50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080EC60.
+extern char D_0080EC60[];
+
+char* Get()
+{
+    return D_0080EC60;
+}
+
 // ============================================================================
 // [VERIFIED] func_00845F60 (0x00845F60, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -318,7 +329,18 @@ extern "C" void func_00846840() {
 // [TODO] 0x00846A80 func_00846A80 (68 B)
 // [TODO] 0x00846AD0 func_00846AD0 (96 B)
 // [TODO] 0x00846B30 func_00846B30 (96 B)
-// [TODO] 0x00846B90 func_00846B90 (12 B)
+// ============================================================================
+// [VERIFIED] func_00846B90 (0x00846B90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080ECA0.
+extern char D_0080ECA0[];
+
+char* Get()
+{
+    return D_0080ECA0;
+}
+
 // ============================================================================
 // [VERIFIED] func_00846BA0 (0x00846BA0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -446,7 +468,18 @@ unsigned char Get()
 // [TODO] 0x008477A0 func_008477A0 (60 B)
 // [TODO] 0x008477E0 func_008477E0 (112 B)
 // [TODO] 0x00847850 func_00847850 (108 B)
-// [TODO] 0x008478C0 func_008478C0 (12 B)
+// ============================================================================
+// [VERIFIED] func_008478C0 (0x008478C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080EE20.
+extern char D_0080EE20[];
+
+char* Get()
+{
+    return D_0080EE20;
+}
+
 // [TODO] 0x008478D0 func_008478D0 (64 B)
 // [TODO] 0x00847910 PauseMenuPageController::vfunc_44 (676 B)
 // [TODO] 0x00847BC0 PauseMenuPageController::vfunc_63 (56 B)
@@ -457,7 +490,18 @@ unsigned char Get()
 // [TODO] 0x00847EC0 func_00847EC0 (180 B)
 // [TODO] 0x00847F80 func_00847F80 (112 B)
 // [TODO] 0x00847FF0 func_00847FF0 (108 B)
-// [TODO] 0x00848060 func_00848060 (12 B)
+// ============================================================================
+// [VERIFIED] func_00848060 (0x00848060, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080EEA0.
+extern char D_0080EEA0[];
+
+char* Get()
+{
+    return D_0080EEA0;
+}
+
 // [TODO] 0x00848070 func_00848070 (76 B)
 // [TODO] 0x008480C0 func_008480C0 (432 B)
 // [TODO] 0x00848270 func_00848270 (164 B)
@@ -465,7 +509,18 @@ unsigned char Get()
 // [TODO] 0x00848380 func_00848380 (96 B)
 // [TODO] 0x008483E0 PauseMenuPageCredits::vfunc_54 (168 B)
 // [TODO] 0x00848490 func_00848490 (124 B)
-// [TODO] 0x00848510 func_00848510 (12 B)
+// ============================================================================
+// [VERIFIED] func_00848510 (0x00848510, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080EE60.
+extern char D_0080EE60[];
+
+char* Get()
+{
+    return D_0080EE60;
+}
+
 // [TODO] 0x00848520 func_00848520 (72 B)
 // [TODO] 0x00848570 PauseMenuPageOptions::vfunc_54 (152 B)
 // [TODO] 0x00848610 PauseMenuPageOptions::vfunc_44 (676 B)
@@ -477,14 +532,36 @@ unsigned char Get()
 // [TODO] 0x00848A60 PauseMenuPageOptions::PauseMenuPageOptionsItem::vfunc_05 (516 B)
 // [TODO] 0x00848C70 func_00848C70 (112 B)
 // [TODO] 0x00848CE0 func_00848CE0 (108 B)
-// [TODO] 0x00848D50 func_00848D50 (12 B)
+// ============================================================================
+// [VERIFIED] func_00848D50 (0x00848D50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080EDE0.
+extern char D_0080EDE0[];
+
+char* Get()
+{
+    return D_0080EDE0;
+}
+
 // [TODO] 0x00848D60 func_00848D60 (64 B)
 // [TODO] 0x00848DA0 PauseMenuPageStats::vfunc_44 (576 B)
 // [TODO] 0x00848FE0 func_00848FE0 (60 B)
 // [TODO] 0x00849020 PauseMenuPageStats::PauseMenuPageStatsItem::vfunc_05 (496 B)
 // [TODO] 0x00849210 func_00849210 (112 B)
 // [TODO] 0x00849280 func_00849280 (108 B)
-// [TODO] 0x008492F0 func_008492F0 (12 B)
+// ============================================================================
+// [VERIFIED] func_008492F0 (0x008492F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080ED60.
+extern char D_0080ED60[];
+
+char* Get()
+{
+    return D_0080ED60;
+}
+
 // [TODO] 0x00849300 func_00849300 (64 B)
 // [TODO] 0x00849340 PauseMenuPageDebug::vfunc_44 (576 B)
 // [TODO] 0x00849580 PauseMenuPageDebug::vfunc_63 (104 B)
@@ -494,7 +571,18 @@ unsigned char Get()
 // [TODO] 0x00849710 PauseMenuPageDebug::PauseMenuPageDebugItem::vfunc_05 (204 B)
 // [TODO] 0x008497E0 func_008497E0 (112 B)
 // [TODO] 0x00849850 func_00849850 (108 B)
-// [TODO] 0x008498C0 func_008498C0 (12 B)
+// ============================================================================
+// [VERIFIED] func_008498C0 (0x008498C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080EEE0.
+extern char D_0080EEE0[];
+
+char* Get()
+{
+    return D_0080EEE0;
+}
+
 // [TODO] 0x008498D0 func_008498D0 (104 B)
 // [TODO] 0x00849940 PauseMenuPageHome::vfunc_44 (868 B)
 // ============================================================================
@@ -534,7 +622,18 @@ extern "C" void func_0084A2B0() {
 }
 
 // [TODO] 0x0084A2C0 func_0084A2C0 (108 B)
-// [TODO] 0x0084A330 func_0084A330 (12 B)
+// ============================================================================
+// [VERIFIED] func_0084A330 (0x0084A330, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080ECE0.
+extern char D_0080ECE0[];
+
+char* Get()
+{
+    return D_0080ECE0;
+}
+
 // [TODO] 0x0084A340 func_0084A340 (80 B)
 // [TODO] 0x0084A390 func_0084A390 (152 B)
 // [TODO] 0x0084A430 PauseMenuPageRewards::vfunc_44 (744 B)
@@ -561,7 +660,18 @@ extern "C" void func_0084A2B0() {
 // [TODO] 0x0084BA90 func_0084BA90 (20 B)
 // [TODO] 0x0084BAB0 func_0084BAB0 (112 B)
 // [TODO] 0x0084BB20 func_0084BB20 (112 B)
-// [TODO] 0x0084BB90 func_0084BB90 (12 B)
+// ============================================================================
+// [VERIFIED] func_0084BB90 (0x0084BB90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080EDA0.
+extern char D_0080EDA0[];
+
+char* Get()
+{
+    return D_0080EDA0;
+}
+
 // [TODO] 0x0084BBA0 func_0084BBA0 (120 B)
 // [TODO] 0x0084BC20 func_0084BC20 (120 B)
 // [TODO] 0x0084BCA0 PauseMenuPageMain::vfunc_29 (100 B)
@@ -569,5 +679,16 @@ extern "C" void func_0084A2B0() {
 // [TODO] 0x0084BDC0 func_0084BDC0 (984 B)
 // [TODO] 0x0084C1A0 func_0084C1A0 (8 B)
 // [TODO] 0x0084C1B0 func_0084C1B0 (120 B)
-// [TODO] 0x0084C230 func_0084C230 (12 B)
+// ============================================================================
+// [VERIFIED] func_0084C230 (0x0084C230, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080ED20.
+extern char D_0080ED20[];
+
+char* Get()
+{
+    return D_0080ED20;
+}
+
 // [TODO] 0x0084C240 func_0084C240 (8 B)

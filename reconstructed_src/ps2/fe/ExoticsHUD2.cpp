@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, fe/ExoticsHUD2.cpp (37 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, fe/ExoticsHUD2.cpp (63 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 37 of 317 functions matched (11.67%). NOT COMPLETE YET.
-// The 280 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
+// PROGRESS: 63 of 317 functions matched (19.87%). NOT COMPLETE YET.
+// The 254 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -337,12 +337,70 @@ void Nothing()
 }
 
 // ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_41 (0x004A37D0, 16 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns -1.0.
+float Number()
+{
+    return -1.0f;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005D63D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082E7D0.
+extern char D_0082E7D0[];
+
+char* Get()
+{
+    return D_0082E7D0;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005DA450, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082E820.
+extern char D_0082E820[];
+
+char* Get()
+{
+    return D_0082E820;
+}
+
+// ============================================================================
 // [VERIFIED] ExoticsHUD2::vfunc_57 (0x005DA460, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
 // Does nothing.
 void Nothing()
 {
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005DAC30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082E940.
+extern char D_0082E940[];
+
+char* Get()
+{
+    return D_0082E940;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005DB660, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082E980.
+extern char D_0082E980[];
+
+char* Get()
+{
+    return D_0082E980;
 }
 
 // ============================================================================
@@ -355,12 +413,156 @@ void Nothing()
 }
 
 // ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005DF730, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080E0C0.
+extern char D_0080E0C0[];
+
+char* Get()
+{
+    return D_0080E0C0;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005E5890, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F080.
+extern char D_0082F080[];
+
+char* Get()
+{
+    return D_0082F080;
+}
+
+// ============================================================================
 // [VERIFIED] ExoticsHUD2::vfunc_57 (0x005E58A0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
 // Does nothing.
 void Nothing()
 {
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005E6200, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F040.
+extern char D_0082F040[];
+
+char* Get()
+{
+    return D_0082F040;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005E7E50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F1A0.
+extern char D_0082F1A0[];
+
+char* Get()
+{
+    return D_0082F1A0;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005E84B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F160.
+extern char D_0082F160[];
+
+char* Get()
+{
+    return D_0082F160;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005ECC80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F230.
+extern char D_0082F230[];
+
+char* Get()
+{
+    return D_0082F230;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005ED3C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F280.
+extern char D_0082F280[];
+
+char* Get()
+{
+    return D_0082F280;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005EDE10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F2D0.
+extern char D_0082F2D0[];
+
+char* Get()
+{
+    return D_0082F2D0;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005F4110, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F420.
+extern char D_0082F420[];
+
+char* Get()
+{
+    return D_0082F420;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005F5DD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F470.
+extern char D_0082F470[];
+
+char* Get()
+{
+    return D_0082F470;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005F6790, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082F4B0.
+extern char D_0082F4B0[];
+
+char* Get()
+{
+    return D_0082F4B0;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005F8190, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0080E800.
+extern char D_0080E800[];
+
+char* Get()
+{
+    return D_0080E800;
 }
 
 // ============================================================================
@@ -391,6 +593,18 @@ void Nothing()
 }
 
 // ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x005FF130, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FC20.
+extern char D_0082FC20[];
+
+char* Get()
+{
+    return D_0082FC20;
+}
+
+// ============================================================================
 // [VERIFIED] ExoticsHUD2::vfunc_57 (0x005FF140, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -400,11 +614,107 @@ void Nothing()
 }
 
 // ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x006036A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FD90.
+extern char D_0082FD90[];
+
+char* Get()
+{
+    return D_0082FD90;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x00603C40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FE50.
+extern char D_0082FE50[];
+
+char* Get()
+{
+    return D_0082FE50;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x00603E70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FE10.
+extern char D_0082FE10[];
+
+char* Get()
+{
+    return D_0082FE10;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x00604350, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FDD0.
+extern char D_0082FDD0[];
+
+char* Get()
+{
+    return D_0082FDD0;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x00604770, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FEA0.
+extern char D_0082FEA0[];
+
+char* Get()
+{
+    return D_0082FEA0;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x00604B10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FEF0.
+extern char D_0082FEF0[];
+
+char* Get()
+{
+    return D_0082FEF0;
+}
+
+// ============================================================================
 // [VERIFIED] ExoticsHUD2::vfunc_57 (0x00604B30, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
 // Does nothing.
 void Nothing()
 {
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x00605820, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FF30.
+extern char D_0082FF30[];
+
+char* Get()
+{
+    return D_0082FF30;
+}
+
+// ============================================================================
+// [VERIFIED] ExoticsHUD2::vfunc_00 (0x00607E30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off
+// ============================================================================
+// Returns the address of the global D_0082FFD0.
+extern char D_0082FFD0[];
+
+char* Get()
+{
+    return D_0082FFD0;
 }
 
