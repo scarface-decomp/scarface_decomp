@@ -443,3 +443,18 @@ def test_the_lane_compiles_with_exceptions_off():
     import queue_builder
     assert queue_builder.PS2_FLAGS == server.PV.FLAGS
     assert server.PS2_EASY_VERSION == 4                  # every open function is tried again with the new flags
+
+
+def test_the_probes_round_is_one_the_portal_takes():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ps2_flag_probe", PORTAL / "scripts" / "ps2_flag_probe.py")
+    P = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(P)
+    tries = [x for _, _, _, ts in P.ROUND for x in ts]
+    assert len(tries) == 29 and all(x["compiler"] in server.PV.BUILDS and x["flags"] == server.PV.FLAGS for x in tries)
+    assert {va for va, _, _, _ in P.ROUND} == {0x003EB610, 0x00392940, 0x0066DFF0}
+    for _, what, code, _ in P.ROUND:
+        assert not server.check_genuine_cpp(code), what           # a #pragma that sets an optimisation is allowed
+    whats = [what for _, what, _, _ in P.ROUND]
+    assert len(set(whats)) == len(whats)                              # the closing list tells the cases apart by these
+    assert P.pragma("usefloatacc on", "fastmath on") == "#pragma usefloatacc on\n#pragma fastmath on\n\n"

@@ -3,27 +3,31 @@
 Find out how the PS2 game was built: compile one function's C++ with every build of its compiler, and
 with several optimisation settings, and say how close each gets to the game's bytes.
 
-    python portal/scripts/ps2_flag_probe.py                       the two built-in questions (below)
+    python portal/scripts/ps2_flag_probe.py                       the current round of questions (below)
+    python portal/scripts/ps2_flag_probe.py --sweep               the first two questions, every optimisation setting
     python portal/scripts/ps2_flag_probe.py FILE.cpp --va 0x003EB610
     python portal/scripts/ps2_flag_probe.py FILE.cpp --va 0x003EB610 --flags "-O4,p -lang c++ -str readonly -Cpp_exceptions off"
     python portal/scripts/ps2_flag_probe.py FILE.cpp --va 0x003EB610 --compiler mwcps2-3.0.1b87-031208
 
 The portal must be running and your decomp.me tab connected (docs/PS2.md). Nothing is recorded: a probe
 only compiles and compares. It is light on decomp.me: one compile per line, two seconds apart, and a text
-already compiled with the same build and flags is not compiled again. Without arguments it tries the
-lane's build with its own flags and 16 other settings: 17 compiles a function. `--all-builds` adds the
-other 22 builds with the lane's flags.
+already compiled with the same build and flags is not compiled again.
 
-The two built-in questions come from the first PS2 easy-pass runs (November 2026):
+The first two questions came from the first PS2 easy-pass runs (November 2026):
 
 * 0x003EB610 sets up two arguments and jumps into another function. Answered on 25 November 2026: with
   C++ exceptions on the compiler makes an ordinary call; `-Cpp_exceptions off` makes the jump, and is now
   one of the lane's flags.
-* 0x00392940 stores a float and returns 1, with the store first. The lane's build and flags put the store
-  last. What keeps it first?
+* 0x00392940 stores a float and returns 1, with the store first. The lane's build puts the store last with
+  every optimisation setting, the scheduler and the peephole pass off among them. Open.
 
 The game does both everywhere (1,772 functions end in such a jump, in every part of the code; the examiner's
 census, November 2026), so the answer is one build or one setting for the whole game.
+
+Without arguments the probe runs the current round (ROUND, below): 29 compiles that ask whether the 3.0 line
+of builds, which do store the float first, could be the game's compiler after all, and whether a `#pragma` or
+another way of writing it changes the lane's own build. `--sweep` runs the first two questions with the lane's
+build and 16 other settings; `--all-builds` adds the other 22 builds with the lane's flags.
 
 It asks for your handle and PIN (the PIN isn't shown, stored or printed).
 """
@@ -65,14 +69,52 @@ def default_tries(all_builds: bool = False) -> list:
     return builds + [{"compiler": LANE_COMPILER, "flags": f} for f in [LANE_FLAGS] + FLAG_SETS]
 
 
+TAIL_CALL = ('extern int D_00808F50;\nextern int D_00808F54;\nextern "C" void func_006E3100(int*, int*);\n\n'
+             "void Forward()\n{\n    func_006E3100(&D_00808F50, &D_00808F54);\n}\n")
+FLOAT_CLASS = "class Object\n{\npublic:\n    %s Set(float value);\n    char m_pad00[0xC];\n    float m_FieldC; // +0xC\n};\n\n"
+FLOAT_STORE = FLOAT_CLASS % "bool" + "bool Object::Set(float value)\n{\n    m_FieldC = value;\n    return true;\n}\n"
+DOT = ("struct Vector3\n{\n    float x, y, z;\n};\n\n"
+       "float Dot(const Vector3* a, const Vector3* b)\n{\n    return a->x * b->x + a->y * b->y + a->z * b->z;\n}\n")
+
 BUILT_IN = [
-    (0x003EB610, "a call as the last statement (the game jumps)",
-     'extern int D_00808F50;\nextern int D_00808F54;\nextern "C" void func_006E3100(int*, int*);\n\n'
-     "void Forward()\n{\n    func_006E3100(&D_00808F50, &D_00808F54);\n}\n"),
-    (0x00392940, "a float stored, then 1 returned (the game stores first)",
-     "class Object\n{\npublic:\n    bool Set(float value);\n    char m_pad00[0xC];\n    float m_FieldC; // +0xC\n};\n\n"
-     "bool Object::Set(float value)\n{\n    m_FieldC = value;\n    return true;\n}\n"),
+    (0x003EB610, "a call as the last statement (the game jumps)", TAIL_CALL),
+    (0x00392940, "a float stored, then 1 returned (the game stores first)", FLOAT_STORE),
 ]
+
+# The round of 25 November 2026. The float store comes first only in the 3.0 line of builds (3.0.3, 3.0 builds 38,
+# 50 and 52), which were ruled out because they "never write madda.s chains". But every build has a setting
+# called usefloatacc, so that may only have been their default. Three questions, one compile a line:
+#   1. do the 3.0-line builds make the jump and the store-first order with the lane's flags?
+#   2. do they write the game's multiply-accumulate chain (0x0066DFF0, a dot product) with a setting turned on?
+#   3. does a setting or another way of writing it make the lane's own build store the float first?
+OLD_LINE = ["mwcps2-3.0.3-020716", "mwcps2-3.0b38-030307", "mwcps2-3.0b50-030527", "mwcps2-3.0b52-030722"]
+
+
+def on(builds: list) -> list:
+    return [{"compiler": b, "flags": LANE_FLAGS} for b in builds]
+
+
+def pragma(*names: str) -> str:
+    return "".join(f"#pragma {n}\n" for n in names) + "\n"
+
+
+ROUND = (
+    [(0x003EB610, "the jump, on the 3.0-line builds", TAIL_CALL, on(OLD_LINE)),
+     (0x00392940, "the float store, on the 3.0-line builds", FLOAT_STORE, on(OLD_LINE)),
+     (0x0066DFF0, "a dot product (the game writes mula.s, madda.s, madd.s)", DOT,
+      on([LANE_COMPILER, "mwcps2-3.0.1b87-031208"] + OLD_LINE))]
+    + [(0x0066DFF0, f"the dot product with #pragma {' and '.join(n)}", pragma(*n) + DOT, on(OLD_LINE[2:]))
+       for n in (("usefloatacc on",), ("fastmath on",), ("usefloatacc on", "fastmath on"))]
+    + [(0x00392940, f"the float store with #pragma {n}", pragma(n) + FLOAT_STORE, on([LANE_COMPILER]))
+       for n in ("schedule off", "peephole off", "usefloatacc off", "fastmath on", "memoryrewrite off",
+                 "conditional_move off")]
+    + [(0x00392940, "the float store, returning int", FLOAT_CLASS % "int"
+        + "int Object::Set(float value)\n{\n    m_FieldC = value;\n    return 1;\n}\n", on([LANE_COMPILER])),
+       (0x00392940, "the float store, written as one expression", FLOAT_CLASS % "bool"
+        + "bool Object::Set(float value)\n{\n    return (m_FieldC = value, true);\n}\n", on([LANE_COMPILER])),
+       (0x00392940, "the float store, as a plain function", "struct Object\n{\n    char m_pad00[0xC];\n    float m_FieldC;\n};\n\n"
+        "int Set(Object* object, float value)\n{\n    object->m_FieldC = value;\n    return 1;\n}\n", on([LANE_COMPILER]))]
+)
 
 
 def call(base: str, path: str, body: dict) -> dict:
@@ -134,24 +176,33 @@ def main() -> int:
     ap.add_argument("--va", help="the PS2 function's address, with a file")
     ap.add_argument("--flags", action="append", help="a flag set to try (repeatable)")
     ap.add_argument("--compiler", action="append", help="a build to try, e.g. mwcps2-3.0.1b87-031208 (repeatable)")
+    ap.add_argument("--sweep", action="store_true",
+                    help="the first two questions with every optimisation setting (17 compiles a function)")
     ap.add_argument("--all-builds", action="store_true",
                     help="also try every other CodeWarrior build with the lane's flags (22 more compiles a function)")
     ap.add_argument("--portal", default="http://127.0.0.1:8085", help="where your portal is running")
     args = ap.parse_args()
     if bool(args.file) != bool(args.va):
         ap.error("give a file and --va together, or neither")
-    cases = BUILT_IN if not args.file else [(int(args.va, 16), args.file, Path(args.file).read_text(encoding="utf-8"))]
-    if args.flags or args.compiler:
+    if args.file:
+        code = Path(args.file).read_text(encoding="utf-8")
+        tries = ([{"compiler": c, "flags": f} for c in (args.compiler or [LANE_COMPILER]) for f in (args.flags or [LANE_FLAGS])]
+                 if args.flags or args.compiler else default_tries(args.all_builds))
+        cases = [(int(args.va, 16), args.file, code, tries)]
+    elif args.flags or args.compiler:
         tries = [{"compiler": c, "flags": f} for c in (args.compiler or [LANE_COMPILER]) for f in (args.flags or [LANE_FLAGS])]
+        cases = [(va, what, code, tries) for va, what, code in BUILT_IN]
+    elif args.sweep or args.all_builds:
+        cases = [(va, what, code, default_tries(args.all_builds)) for va, what, code in BUILT_IN]
     else:
-        tries = default_tries(args.all_builds)
+        cases = list(ROUND)
     user = input("Your handle: ").strip()
     creds = {"user": user, "pin": getpass.getpass("Your PIN (not shown): ")}
-    n = len(tries) * len(cases)
-    say(f"{len(tries)} compile(s) on each of {len(cases)} function(s): about {n * 3 // 60 + 1} minute(s). "
+    n = sum(len(tries) for _, _, _, tries in cases)
+    say(f"{n} compile(s) on {len({va for va, _, _, _ in cases})} function(s): about {n * 3 // 60 + 1} minute(s). "
         "Leave your decomp.me tab open.")
     hits, rc = [], 0
-    for va, what, code in cases:
+    for va, what, code, tries in cases:
         say(f"\n0x{va:08X}: {what}")
         for i in range(0, len(tries), CHUNK):
             try:
@@ -160,7 +211,7 @@ def main() -> int:
                 say(f"The portal isn't answering at {args.portal} - start it (START_PORTAL.bat) and try again.")
                 rc = 1
                 break
-            hits += [(va, label, mark) for label, mark in show(res.get("rows", []))]
+            hits += [(va, f"{what}: {label}", mark) for label, mark in show(res.get("rows", []))]
             if not res.get("ok"):
                 say("  " + (res.get("error") or "the portal could not do it"))
                 rc = 1
