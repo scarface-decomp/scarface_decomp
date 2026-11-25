@@ -579,6 +579,8 @@ def test_cmov_and_fcomi_also_mean_arch_sse():
     assert MV.flag_options("xb", "/O2 /G6", bytes.fromhex("0F44C1C3")) == ["/O2 /G6", "/O2 /G6 /arch:SSE"]
     assert MV.verify_line_options("// verify: python portal/verify.py a.cpp --va 0x1 --bin xb --match '??_I'\n") == {"match": "??_I"}
     assert MV.allowed_flags("/O2 /G6 /EHsc", "/O2 /G6") == "" and MV.allowed_flags("/O2", "/O2 /Fo x")
+    assert MV.allowed_flags("/O2 /G6 /GR", "/TC /O2 /G6") == ""      # a public C library, compiled as C
+    assert MV.allowed_flags("/O2 /G6", "/TP /O2 /G6") and MV.allowed_flags("/O2 /G6", "/O2 /G6 /Ob1")
     # /EHsc: tried without it when the function has no exception frame at fs:[0]; kept when it has one
     frame = bytes.fromhex("6AFF68000000006" "4A10000000050C3")    # push -1; push h; mov eax, fs:[0]; push eax; ret
     assert MV.has_eh_frame(frame) and not MV.has_eh_frame(bytes.fromhex("C3"))

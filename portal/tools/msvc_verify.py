@@ -795,13 +795,18 @@ def verify_line_options(text: str) -> Dict[str, str]:
     return out
 
 
+# Compile as C, not C++: for the public C libraries inside the engine (zlib, libpng; SPEC-014 section 5),
+# whose published source is C and does not compile as C++.
+C_FLAG = "/TC"
+
+
 def allowed_flags(own: str, asked: str) -> str:
     """'' when the flags asked for are the function's own flags, fewer of them, or /arch:SSE added (a unit
-    built without /EHsc, say); otherwise why not. Nothing else may reach the compiler from a submission."""
+    built without /EHsc, say) or /TC added (a C library); otherwise why not. Nothing else may reach the compiler from a submission."""
     words = str(asked).split()
-    ok = set(str(own).split()) | {SSE_FLAG}
+    ok = set(str(own).split()) | {SSE_FLAG, C_FLAG}
     if not words or len(set(words)) != len(words) or any(w not in ok for w in words):
-        return f"flags: only the function's own flags ({own}), fewer of them, or {SSE_FLAG}."
+        return f"flags: only the function's own flags ({own}), fewer of them, {SSE_FLAG} or {C_FLAG}."
     return ""
 
 

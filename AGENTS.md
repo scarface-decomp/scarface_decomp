@@ -52,8 +52,8 @@ the work that needs neither: **writing descriptions** (below).
 - When the object file holds more than one function (an inline helper, `<math.h>`, `delete`), `check`
   picks the one named `sub_XXXXXXXX` for the address. A template instantiation or a compiler helper
   is picked with `--match` (part of its compiled symbol, e.g. `--match '?$_Sort@'`); a unit built
-  without one of the usual flags takes `--flags` (the function's own flags, fewer of them, or
-  `/arch:SSE`). `keep` writes both into the file's `// verify:` line, and recording uses them.
+  without one of the usual flags takes `--flags` (the function's own flags, fewer of them,
+  `/arch:SSE`, or `/TC` for a public C library). `keep` writes both into the file's `// verify:` line, and recording uses them.
 - `packet` prints `hint:` lines when the function's own instructions say how its source was written
   (an 8-byte-aligned local, double `sqrt()` next to SSE code); `docs/METHODOLOGY.md` section 5 explains them.
 - `packet` prints up to three functions of the same class that are already matched, then up to three
