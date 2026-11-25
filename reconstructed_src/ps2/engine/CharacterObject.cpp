@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/CharacterObject.cpp (6 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/CharacterObject.cpp (14 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6 of 61 functions matched (9.84%). NOT COMPLETE YET.
-// The 55 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
+// PROGRESS: 14 of 61 functions matched (22.95%). NOT COMPLETE YET.
+// The 47 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -109,5 +109,101 @@ public:
 float Object::Get()
 {
     return m_Field130;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x0047B740, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080F160.
+extern char D_0080F160[];
+
+char* Get()
+{
+    return D_0080F160;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x0047B7C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080F120.
+extern char D_0080F120[];
+
+char* Get()
+{
+    return D_0080F120;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x0047B840, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080F0E0.
+extern char D_0080F0E0[];
+
+char* Get()
+{
+    return D_0080F0E0;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x0047B850, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080F0A0.
+extern char D_0080F0A0[];
+
+char* Get()
+{
+    return D_0080F0A0;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x0047B8C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080F060.
+extern char D_0080F060[];
+
+char* Get()
+{
+    return D_0080F060;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x0047B940, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080F020.
+extern char D_0080F020[];
+
+char* Get()
+{
+    return D_0080F020;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x0047B9C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080EFE0.
+extern char D_0080EFE0[];
+
+char* Get()
+{
+    return D_0080EFE0;
+}
+
+// ============================================================================
+// [VERIFIED] CharacterObject::vfunc_00 (0x0047B9D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080EFA0.
+extern char D_0080EFA0[];
+
+char* Get()
+{
+    return D_0080EFA0;
 }
 

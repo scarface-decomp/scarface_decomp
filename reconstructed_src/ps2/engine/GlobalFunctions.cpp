@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/GlobalFunctions.cpp (2522 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, engine/GlobalFunctions.cpp (2935 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 2,522 of 22,789 functions matched (11.07%). NOT COMPLETE YET.
-// The 20,267 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
+// PROGRESS: 2,935 of 22,789 functions matched (12.88%). NOT COMPLETE YET.
+// The 19,854 still to do are listed in their place in Original_Binary_Order_PS2.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -5420,6 +5420,18 @@ unsigned char Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003D1E00 (0x003D1E00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C730.
+extern char D_0080C730[];
+
+char* Get()
+{
+    return D_0080C730;
+}
+
+// ============================================================================
 // [VERIFIED] func_003D1E10 (0x003D1E10, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5445,6 +5457,30 @@ public:
 int Object::Get()
 {
     return m_FieldD4;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D2730 (0x003D2730, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C770.
+extern char D_0080C770[];
+
+char* Get()
+{
+    return D_0080C770;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D2820 (0x003D2820, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C7C0.
+extern char D_0080C7C0[];
+
+char* Get()
+{
+    return D_0080C7C0;
 }
 
 // ============================================================================
@@ -5499,6 +5535,18 @@ public:
 unsigned char Object::Get()
 {
     return m_Field142;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D4CD0 (0x003D4CD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C840.
+extern char D_0080C840[];
+
+char* Get()
+{
+    return D_0080C840;
 }
 
 // ============================================================================
@@ -5601,6 +5649,192 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_003D8F40 (0x003D8F40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C880.
+extern char D_0080C880[];
+
+char* Get()
+{
+    return D_0080C880;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D8F60 (0x003D8F60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x22 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x22];
+    char m_Field22; // +0x22
+};
+
+void Object::Set()
+{
+    m_Field22 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D9050 (0x003D9050, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C8C0.
+extern char D_0080C8C0[];
+
+char* Get()
+{
+    return D_0080C8C0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D9270 (0x003D9270, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CA80.
+extern char D_0080CA80[];
+
+char* Get()
+{
+    return D_0080CA80;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D95B0 (0x003D95B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CA40.
+extern char D_0080CA40[];
+
+char* Get()
+{
+    return D_0080CA40;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D9830 (0x003D9830, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C900.
+extern char D_0080C900[];
+
+char* Get()
+{
+    return D_0080C900;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D9AF0 (0x003D9AF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C980.
+extern char D_0080C980[];
+
+char* Get()
+{
+    return D_0080C980;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D9ED0 (0x003D9ED0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C940.
+extern char D_0080C940[];
+
+char* Get()
+{
+    return D_0080C940;
+}
+
+// ============================================================================
+// [VERIFIED] func_003D9F20 (0x003D9F20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CA00.
+extern char D_0080CA00[];
+
+char* Get()
+{
+    return D_0080CA00;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DA230 (0x003DA230, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C9C0.
+extern char D_0080C9C0[];
+
+char* Get()
+{
+    return D_0080C9C0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DA280 (0x003DA280, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CE50.
+extern char D_0080CE50[];
+
+char* Get()
+{
+    return D_0080CE50;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DA420 (0x003DA420, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CB40.
+extern char D_0080CB40[];
+
+char* Get()
+{
+    return D_0080CB40;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DA8C0 (0x003DA8C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CB00.
+extern char D_0080CB00[];
+
+char* Get()
+{
+    return D_0080CB00;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DA930 (0x003DA930, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CAC0.
+extern char D_0080CAC0[];
+
+char* Get()
+{
+    return D_0080CAC0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DA9C0 (0x003DA9C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D5D0.
+extern char D_0080D5D0[];
+
+char* Get()
+{
+    return D_0080D5D0;
+}
+
+// ============================================================================
 // [VERIFIED] func_003DAC90 (0x003DAC90, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5611,6 +5845,42 @@ int Zero()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_003DAC90() {
+}
+
+// ============================================================================
+// [VERIFIED] func_003DAD60 (0x003DAD60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D590.
+extern char D_0080D590[];
+
+char* Get()
+{
+    return D_0080D590;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DAD70 (0x003DAD70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D550.
+extern char D_0080D550[];
+
+char* Get()
+{
+    return D_0080D550;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DAD80 (0x003DAD80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D510.
+extern char D_0080D510[];
+
+char* Get()
+{
+    return D_0080D510;
 }
 
 // ============================================================================
@@ -5640,6 +5910,18 @@ extern "C" void func_003DADA0() {
 }
 
 // ============================================================================
+// [VERIFIED] func_003DADB0 (0x003DADB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CC00.
+extern char D_0080CC00[];
+
+char* Get()
+{
+    return D_0080CC00;
+}
+
+// ============================================================================
 // [VERIFIED] func_003DB3F0 (0x003DB3F0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5650,6 +5932,138 @@ extern "C" void func_003DADA0() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_003DB3F0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_003DB460 (0x003DB460, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CBC0.
+extern char D_0080CBC0[];
+
+char* Get()
+{
+    return D_0080CBC0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DB4D0 (0x003DB4D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CB80.
+extern char D_0080CB80[];
+
+char* Get()
+{
+    return D_0080CB80;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DB760 (0x003DB760, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CE10.
+extern char D_0080CE10[];
+
+char* Get()
+{
+    return D_0080CE10;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DBE10 (0x003DBE10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CDD0.
+extern char D_0080CDD0[];
+
+char* Get()
+{
+    return D_0080CDD0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DBE80 (0x003DBE80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CD90.
+extern char D_0080CD90[];
+
+char* Get()
+{
+    return D_0080CD90;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DBEF0 (0x003DBEF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CD50.
+extern char D_0080CD50[];
+
+char* Get()
+{
+    return D_0080CD50;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DBF00 (0x003DBF00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CD10.
+extern char D_0080CD10[];
+
+char* Get()
+{
+    return D_0080CD10;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DBF10 (0x003DBF10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CCD0.
+extern char D_0080CCD0[];
+
+char* Get()
+{
+    return D_0080CCD0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DBF20 (0x003DBF20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CC90.
+extern char D_0080CC90[];
+
+char* Get()
+{
+    return D_0080CC90;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DBF30 (0x003DBF30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CC50.
+extern char D_0080CC50[];
+
+char* Get()
+{
+    return D_0080CC50;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DC280 (0x003DC280, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DA10.
+extern char D_0080DA10[];
+
+char* Get()
+{
+    return D_0080DA10;
 }
 
 // ============================================================================
@@ -5676,6 +6090,18 @@ extern "C" void func_003DE5C0() {
 }
 
 // ============================================================================
+// [VERIFIED] func_003DE8D0 (0x003DE8D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D9D0.
+extern char D_0080D9D0[];
+
+char* Get()
+{
+    return D_0080D9D0;
+}
+
+// ============================================================================
 // [VERIFIED] func_003DE8E0 (0x003DE8E0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5683,6 +6109,18 @@ extern "C" void func_003DE5C0() {
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DE8F0 (0x003DE8F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D990.
+extern char D_0080D990[];
+
+char* Get()
+{
+    return D_0080D990;
 }
 
 // ============================================================================
@@ -5696,6 +6134,42 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_003DE910 (0x003DE910, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D950.
+extern char D_0080D950[];
+
+char* Get()
+{
+    return D_0080D950;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DE920 (0x003DE920, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D910.
+extern char D_0080D910[];
+
+char* Get()
+{
+    return D_0080D910;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DE930 (0x003DE930, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D8D0.
+extern char D_0080D8D0[];
+
+char* Get()
+{
+    return D_0080D8D0;
+}
+
+// ============================================================================
 // [VERIFIED] func_003DE940 (0x003DE940, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5703,6 +6177,18 @@ int Zero()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DE950 (0x003DE950, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D890.
+extern char D_0080D890[];
+
+char* Get()
+{
+    return D_0080D890;
 }
 
 // ============================================================================
@@ -5716,6 +6202,18 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_003DE970 (0x003DE970, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D850.
+extern char D_0080D850[];
+
+char* Get()
+{
+    return D_0080D850;
+}
+
+// ============================================================================
 // [VERIFIED] func_003DE980 (0x003DE980, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5723,6 +6221,66 @@ int Zero()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DE990 (0x003DE990, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D810.
+extern char D_0080D810[];
+
+char* Get()
+{
+    return D_0080D810;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DE9A0 (0x003DE9A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D7D0.
+extern char D_0080D7D0[];
+
+char* Get()
+{
+    return D_0080D7D0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DE9B0 (0x003DE9B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D790.
+extern char D_0080D790[];
+
+char* Get()
+{
+    return D_0080D790;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DE9C0 (0x003DE9C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D750.
+extern char D_0080D750[];
+
+char* Get()
+{
+    return D_0080D750;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DE9D0 (0x003DE9D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D710.
+extern char D_0080D710[];
+
+char* Get()
+{
+    return D_0080D710;
 }
 
 // ============================================================================
@@ -5736,6 +6294,18 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_003DE9F0 (0x003DE9F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D6D0.
+extern char D_0080D6D0[];
+
+char* Get()
+{
+    return D_0080D6D0;
+}
+
+// ============================================================================
 // [VERIFIED] func_003DEA00 (0x003DEA00, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5746,6 +6316,18 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_003DEA10 (0x003DEA10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D690.
+extern char D_0080D690[];
+
+char* Get()
+{
+    return D_0080D690;
+}
+
+// ============================================================================
 // [VERIFIED] func_003DEA20 (0x003DEA20, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5753,6 +6335,18 @@ int Zero()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DEA30 (0x003DEA30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D650.
+extern char D_0080D650[];
+
+char* Get()
+{
+    return D_0080D650;
 }
 
 // ============================================================================
@@ -5769,6 +6363,90 @@ extern "C" void func_003DEA40() {
 }
 
 // ============================================================================
+// [VERIFIED] func_003DEA50 (0x003DEA50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D610.
+extern char D_0080D610[];
+
+char* Get()
+{
+    return D_0080D610;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DECE0 (0x003DECE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D3D0.
+extern char D_0080D3D0[];
+
+char* Get()
+{
+    return D_0080D3D0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DF0D0 (0x003DF0D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D390.
+extern char D_0080D390[];
+
+char* Get()
+{
+    return D_0080D390;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DF140 (0x003DF140, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D350.
+extern char D_0080D350[];
+
+char* Get()
+{
+    return D_0080D350;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DF490 (0x003DF490, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D290.
+extern char D_0080D290[];
+
+char* Get()
+{
+    return D_0080D290;
+}
+
+// ============================================================================
+// [VERIFIED] func_003DF710 (0x003DF710, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D250.
+extern char D_0080D250[];
+
+char* Get()
+{
+    return D_0080D250;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E1070 (0x003E1070, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D210.
+extern char D_0080D210[];
+
+char* Get()
+{
+    return D_0080D210;
+}
+
+// ============================================================================
 // [VERIFIED] func_003E1080 (0x003E1080, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5776,6 +6454,234 @@ extern "C" void func_003DEA40() {
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E1090 (0x003E1090, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D1D0.
+extern char D_0080D1D0[];
+
+char* Get()
+{
+    return D_0080D1D0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E10A0 (0x003E10A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D190.
+extern char D_0080D190[];
+
+char* Get()
+{
+    return D_0080D190;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E10B0 (0x003E10B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D150.
+extern char D_0080D150[];
+
+char* Get()
+{
+    return D_0080D150;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E10C0 (0x003E10C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D110.
+extern char D_0080D110[];
+
+char* Get()
+{
+    return D_0080D110;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E10D0 (0x003E10D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D0D0.
+extern char D_0080D0D0[];
+
+char* Get()
+{
+    return D_0080D0D0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E10E0 (0x003E10E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D090.
+extern char D_0080D090[];
+
+char* Get()
+{
+    return D_0080D090;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E10F0 (0x003E10F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D050.
+extern char D_0080D050[];
+
+char* Get()
+{
+    return D_0080D050;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E1100 (0x003E1100, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D010.
+extern char D_0080D010[];
+
+char* Get()
+{
+    return D_0080D010;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E1110 (0x003E1110, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CFD0.
+extern char D_0080CFD0[];
+
+char* Get()
+{
+    return D_0080CFD0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E1120 (0x003E1120, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CF90.
+extern char D_0080CF90[];
+
+char* Get()
+{
+    return D_0080CF90;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E1130 (0x003E1130, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CF50.
+extern char D_0080CF50[];
+
+char* Get()
+{
+    return D_0080CF50;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E1140 (0x003E1140, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CF10.
+extern char D_0080CF10[];
+
+char* Get()
+{
+    return D_0080CF10;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E1150 (0x003E1150, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CED0.
+extern char D_0080CED0[];
+
+char* Get()
+{
+    return D_0080CED0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E1160 (0x003E1160, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080CE90.
+extern char D_0080CE90[];
+
+char* Get()
+{
+    return D_0080CE90;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E2500 (0x003E2500, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D4D0.
+extern char D_0080D4D0[];
+
+char* Get()
+{
+    return D_0080D4D0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E2B30 (0x003E2B30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D490.
+extern char D_0080D490[];
+
+char* Get()
+{
+    return D_0080D490;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E2B40 (0x003E2B40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D450.
+extern char D_0080D450[];
+
+char* Get()
+{
+    return D_0080D450;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E2B50 (0x003E2B50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080D410.
+extern char D_0080D410[];
+
+char* Get()
+{
+    return D_0080D410;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E2C30 (0x003E2C30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C600.
+extern char D_0080C600[];
+
+char* Get()
+{
+    return D_0080C600;
 }
 
 // ============================================================================
@@ -5811,6 +6717,36 @@ Object* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003E3350 (0x003E3350, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DA50.
+extern char D_0080DA50[];
+
+char* Get()
+{
+    return D_0080DA50;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E35D0 (0x003E35D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] func_003E3C50 (0x003E3C50, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5829,6 +6765,27 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003E3EA0 (0x003E3EA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the members at +0x1 and +0x70 of its object to zero.
+class Object
+{
+public:
+    void Clear();
+    char m_pad00[0x1];
+    char m_Field1; // +0x1
+    char m_pad02[0x6E];
+    int m_Field70; // +0x70
+};
+
+void Object::Clear()
+{
+    m_Field1 = 0;
+    m_Field70 = 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_003E47E0 (0x003E47E0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -5838,6 +6795,18 @@ extern int D_00806FAC;
 int Get()
 {
     return D_00806FAC;
+}
+
+// ============================================================================
+// [VERIFIED] func_003E4940 (0x003E4940, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DA90.
+extern char D_0080DA90[];
+
+char* Get()
+{
+    return D_0080DA90;
 }
 
 // ============================================================================
@@ -6265,6 +7234,25 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EB750 (0x003EB750, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x14 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x14];
+    char m_Field14; // +0x14
+};
+
+bool Object::Set(char value)
+{
+    m_Field14 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_003EBA50 (0x003EBA50, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -6352,6 +7340,44 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003EC660 (0x003EC660, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x2C of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x2C];
+    char m_Field2C; // +0x2C
+};
+
+bool Object::Set(char value)
+{
+    m_Field2C = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_003ECA90 (0x003ECA90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x28 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+bool Object::Set(int value)
+{
+    m_Field28 = value;
+    return true;
 }
 
 // ============================================================================
@@ -6563,6 +7589,44 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EE390 (0x003EE390, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+};
+
+bool Object::Set(int value)
+{
+    m_Field1C = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_003EE3A0 (0x003EE3A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+bool Object::Set(int value)
+{
+    m_Field18 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_003EE3B0 (0x003EE3B0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -6681,6 +7745,25 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EEF80 (0x003EEF80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x18];
+    char m_Field18; // +0x18
+};
+
+bool Object::Set(char value)
+{
+    m_Field18 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_003EEF90 (0x003EEF90, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -6735,6 +7818,25 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003EF5A0 (0x003EF5A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x18];
+    char m_Field18; // +0x18
+};
+
+bool Object::Set(char value)
+{
+    m_Field18 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_003EF5B0 (0x003EF5B0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -6786,6 +7888,25 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F0210 (0x003F0210, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x38 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x38];
+    char m_Field38; // +0x38
+};
+
+bool Object::Set(char value)
+{
+    m_Field38 = value;
+    return true;
 }
 
 // ============================================================================
@@ -6879,6 +8000,25 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003F0710 (0x003F0710, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+bool Object::Set(int value)
+{
+    m_Field18 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_003F0720 (0x003F0720, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -6904,6 +8044,63 @@ public:
 int* Object::Get()
 {
     return &m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F0BE0 (0x003F0BE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x28 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+bool Object::Set(int value)
+{
+    m_Field28 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F0BF0 (0x003F0BF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x24 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x24];
+    int m_Field24; // +0x24
+};
+
+bool Object::Set(int value)
+{
+    m_Field24 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F0C00 (0x003F0C00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x20 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+bool Object::Set(int value)
+{
+    m_Field20 = value;
+    return true;
 }
 
 // ============================================================================
@@ -7011,6 +8208,44 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_003F6010 (0x003F6010, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F6150 (0x003F6150, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_003F62E0 (0x003F62E0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7028,6 +8263,25 @@ int Zero()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F64A0 (0x003F64A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
 }
 
 // ============================================================================
@@ -7085,6 +8339,18 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003F6AA0 (0x003F6AA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DAE0.
+extern char D_0080DAE0[];
+
+char* Get()
+{
+    return D_0080DAE0;
+}
+
+// ============================================================================
 // [VERIFIED] func_003F6C70 (0x003F6C70, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7098,6 +8364,30 @@ extern "C" void func_003F6C70() {
 }
 
 // ============================================================================
+// [VERIFIED] func_003F6C80 (0x003F6C80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831BE0.
+extern char D_00831BE0[];
+
+char* Get()
+{
+    return D_00831BE0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F8170 (0x003F8170, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DB20.
+extern char D_0080DB20[];
+
+char* Get()
+{
+    return D_0080DB20;
+}
+
+// ============================================================================
 // [VERIFIED] func_003F8180 (0x003F8180, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7105,6 +8395,30 @@ extern "C" void func_003F6C70() {
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F83F0 (0x003F83F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DB60.
+extern char D_0080DB60[];
+
+char* Get()
+{
+    return D_0080DB60;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F84B0 (0x003F84B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080BF30.
+extern char D_0080BF30[];
+
+char* Get()
+{
+    return D_0080BF30;
 }
 
 // ============================================================================
@@ -7131,6 +8445,16 @@ extern "C" void func_003F84C0() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_003F84D0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_003F84E0 (0x003F84E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.0.
+float Zero()
+{
+    return 0.0f;
 }
 
 // ============================================================================
@@ -7209,6 +8533,30 @@ int Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_003F8AB0 (0x003F8AB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DBA0.
+extern char D_0080DBA0[];
+
+char* Get()
+{
+    return D_0080DBA0;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F8B80 (0x003F8B80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DC60.
+extern char D_0080DC60[];
+
+char* Get()
+{
+    return D_0080DC60;
+}
+
+// ============================================================================
 // [VERIFIED] func_003F8EF0 (0x003F8EF0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7255,6 +8603,30 @@ extern "C" void func_003F9530() {
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F9550 (0x003F9550, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DC20.
+extern char D_0080DC20[];
+
+char* Get()
+{
+    return D_0080DC20;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F9560 (0x003F9560, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DBE0.
+extern char D_0080DBE0[];
+
+char* Get()
+{
+    return D_0080DBE0;
 }
 
 // ============================================================================
@@ -7422,6 +8794,90 @@ public:
 void Object::Set(int value)
 {
     m_FieldC = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00400C40 (0x00400C40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DCA0.
+extern char D_0080DCA0[];
+
+char* Get()
+{
+    return D_0080DCA0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00400C60 (0x00400C60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x22 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x22];
+    char m_Field22; // +0x22
+};
+
+void Object::Set()
+{
+    m_Field22 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00400D50 (0x00400D50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DCE0.
+extern char D_0080DCE0[];
+
+char* Get()
+{
+    return D_0080DCE0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004010C0 (0x004010C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DD20.
+extern char D_0080DD20[];
+
+char* Get()
+{
+    return D_0080DD20;
+}
+
+// ============================================================================
+// [VERIFIED] func_004010E0 (0x004010E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x22 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x22];
+    char m_Field22; // +0x22
+};
+
+void Object::Set()
+{
+    m_Field22 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_004011C0 (0x004011C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DD60.
+extern char D_0080DD60[];
+
+char* Get()
+{
+    return D_0080DD60;
 }
 
 // ============================================================================
@@ -7720,6 +9176,44 @@ extern "C" void func_0040A770() {
 }
 
 // ============================================================================
+// [VERIFIED] func_0040A870 (0x0040A870, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the members at +0x4 and +0x0 of its object to zero.
+class Object
+{
+public:
+    void Clear();
+    int m_Field0; // +0x0
+    int m_Field4; // +0x4
+};
+
+void Object::Clear()
+{
+    m_Field4 = 0;
+    m_Field0 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0040A990 (0x0040A990, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the members at +0x4 and +0x0 of its object to zero.
+class Object
+{
+public:
+    void Clear();
+    int m_Field0; // +0x0
+    int m_Field4; // +0x4
+};
+
+void Object::Clear()
+{
+    m_Field4 = 0;
+    m_Field0 = 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_0040B820 (0x0040B820, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7779,6 +9273,18 @@ extern "C" void func_0040CD70() {
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0040CD90 (0x0040CD90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007A1070.
+extern char D_007A1070[];
+
+char* Get()
+{
+    return D_007A1070;
 }
 
 // ============================================================================
@@ -7852,6 +9358,18 @@ int Zero()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_00410B90() {
+}
+
+// ============================================================================
+// [VERIFIED] func_00410BA0 (0x00410BA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007A1850.
+extern char D_007A1850[];
+
+char* Get()
+{
+    return D_007A1850;
 }
 
 // ============================================================================
@@ -7942,6 +9460,18 @@ int Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004152C0 (0x004152C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_008090B0 to 1.
+extern char D_008090B0;
+
+void Set()
+{
+    D_008090B0 = 1;
+}
+
+// ============================================================================
 // [VERIFIED] func_004152D0 (0x004152D0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -7957,6 +9487,30 @@ public:
 int Object::Get()
 {
     return m_Field8;
+}
+
+// ============================================================================
+// [VERIFIED] func_004155F0 (0x004155F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DDB0.
+extern char D_0080DDB0[];
+
+char* Get()
+{
+    return D_0080DDB0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00416A70 (0x00416A70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C800.
+extern char D_0080C800[];
+
+char* Get()
+{
+    return D_0080C800;
 }
 
 // ============================================================================
@@ -7991,6 +9545,24 @@ public:
 int* Object::Get()
 {
     return &m_FieldC;
+}
+
+// ============================================================================
+// [VERIFIED] func_00416FC0 (0x00416FC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x20 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x20];
+    char m_Field20; // +0x20
+};
+
+void Object::Set()
+{
+    m_Field20 = 1;
 }
 
 // ============================================================================
@@ -8094,6 +9666,24 @@ unsigned char Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0041B4C0 (0x0041B4C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x128 of the object the global D_00809184 points to.
+struct Inner
+{
+    char m_pad00[0x128];
+    unsigned char m_Field128; // +0x128
+};
+
+extern Inner* D_00809184;
+
+unsigned char Get()
+{
+    return D_00809184->m_Field128;
+}
+
+// ============================================================================
 // [VERIFIED] func_0041C030 (0x0041C030, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8116,6 +9706,24 @@ int Get()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_0041C0E0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0041C1B0 (0x0041C1B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0xF58 of the object the global D_00809184 points to.
+struct Inner
+{
+    char m_pad00[0xF58];
+    int m_FieldF58; // +0xF58
+};
+
+extern Inner* D_00809184;
+
+int Get()
+{
+    return D_00809184->m_FieldF58;
 }
 
 // ============================================================================
@@ -8154,6 +9762,42 @@ extern int D_008091F4;
 int Get()
 {
     return D_008091F4;
+}
+
+// ============================================================================
+// [VERIFIED] func_0041DFF0 (0x0041DFF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x44 of the object the global D_008096FC points to.
+struct Inner
+{
+    char m_pad00[0x44];
+    unsigned char m_Field44; // +0x44
+};
+
+extern Inner* D_008096FC;
+
+unsigned char Get()
+{
+    return D_008096FC->m_Field44;
+}
+
+// ============================================================================
+// [VERIFIED] func_00424F90 (0x00424F90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x14 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+bool Object::IsSet()
+{
+    return m_Field14 != 0;
 }
 
 // ============================================================================
@@ -8223,6 +9867,990 @@ void Object::Set(int value)
 }
 
 // ============================================================================
+// [VERIFIED] func_00429910 (0x00429910, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429910.
+extern char D_00429910[];
+
+char* Get()
+{
+    return D_00429910;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429920 (0x00429920, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429920.
+extern char D_00429920[];
+
+char* Get()
+{
+    return D_00429920;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429930 (0x00429930, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429930.
+extern char D_00429930[];
+
+char* Get()
+{
+    return D_00429930;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429940 (0x00429940, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429940.
+extern char D_00429940[];
+
+char* Get()
+{
+    return D_00429940;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429950 (0x00429950, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429950.
+extern char D_00429950[];
+
+char* Get()
+{
+    return D_00429950;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429960 (0x00429960, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429960.
+extern char D_00429960[];
+
+char* Get()
+{
+    return D_00429960;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429970 (0x00429970, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429970.
+extern char D_00429970[];
+
+char* Get()
+{
+    return D_00429970;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429980 (0x00429980, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429980.
+extern char D_00429980[];
+
+char* Get()
+{
+    return D_00429980;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429990 (0x00429990, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429990.
+extern char D_00429990[];
+
+char* Get()
+{
+    return D_00429990;
+}
+
+// ============================================================================
+// [VERIFIED] func_004299A0 (0x004299A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299A0.
+extern char D_004299A0[];
+
+char* Get()
+{
+    return D_004299A0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004299B0 (0x004299B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299B0.
+extern char D_004299B0[];
+
+char* Get()
+{
+    return D_004299B0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004299C0 (0x004299C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299C0.
+extern char D_004299C0[];
+
+char* Get()
+{
+    return D_004299C0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004299D0 (0x004299D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299D0.
+extern char D_004299D0[];
+
+char* Get()
+{
+    return D_004299D0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004299E0 (0x004299E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299E0.
+extern char D_004299E0[];
+
+char* Get()
+{
+    return D_004299E0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004299F0 (0x004299F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299F0.
+extern char D_004299F0[];
+
+char* Get()
+{
+    return D_004299F0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429A00 (0x00429A00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A00.
+extern char D_00429A00[];
+
+char* Get()
+{
+    return D_00429A00;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429A10 (0x00429A10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A10.
+extern char D_00429A10[];
+
+char* Get()
+{
+    return D_00429A10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429A20 (0x00429A20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A20.
+extern char D_00429A20[];
+
+char* Get()
+{
+    return D_00429A20;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429A30 (0x00429A30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A30.
+extern char D_00429A30[];
+
+char* Get()
+{
+    return D_00429A30;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429A40 (0x00429A40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A40.
+extern char D_00429A40[];
+
+char* Get()
+{
+    return D_00429A40;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429A50 (0x00429A50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A50.
+extern char D_00429A50[];
+
+char* Get()
+{
+    return D_00429A50;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429A60 (0x00429A60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A60.
+extern char D_00429A60[];
+
+char* Get()
+{
+    return D_00429A60;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429A70 (0x00429A70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A70.
+extern char D_00429A70[];
+
+char* Get()
+{
+    return D_00429A70;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429A80 (0x00429A80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A80.
+extern char D_00429A80[];
+
+char* Get()
+{
+    return D_00429A80;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429A90 (0x00429A90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A90.
+extern char D_00429A90[];
+
+char* Get()
+{
+    return D_00429A90;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429AA0 (0x00429AA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AA0.
+extern char D_00429AA0[];
+
+char* Get()
+{
+    return D_00429AA0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429AB0 (0x00429AB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AB0.
+extern char D_00429AB0[];
+
+char* Get()
+{
+    return D_00429AB0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429AC0 (0x00429AC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AC0.
+extern char D_00429AC0[];
+
+char* Get()
+{
+    return D_00429AC0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429AD0 (0x00429AD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AD0.
+extern char D_00429AD0[];
+
+char* Get()
+{
+    return D_00429AD0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429AE0 (0x00429AE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AE0.
+extern char D_00429AE0[];
+
+char* Get()
+{
+    return D_00429AE0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429AF0 (0x00429AF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AF0.
+extern char D_00429AF0[];
+
+char* Get()
+{
+    return D_00429AF0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429B00 (0x00429B00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B00.
+extern char D_00429B00[];
+
+char* Get()
+{
+    return D_00429B00;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429B10 (0x00429B10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B10.
+extern char D_00429B10[];
+
+char* Get()
+{
+    return D_00429B10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429B20 (0x00429B20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B20.
+extern char D_00429B20[];
+
+char* Get()
+{
+    return D_00429B20;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429B30 (0x00429B30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B30.
+extern char D_00429B30[];
+
+char* Get()
+{
+    return D_00429B30;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429B40 (0x00429B40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B40.
+extern char D_00429B40[];
+
+char* Get()
+{
+    return D_00429B40;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429B50 (0x00429B50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B50.
+extern char D_00429B50[];
+
+char* Get()
+{
+    return D_00429B50;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429B60 (0x00429B60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429910.
+extern char D_00429910[];
+
+char* Get()
+{
+    return D_00429910;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429B70 (0x00429B70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429920.
+extern char D_00429920[];
+
+char* Get()
+{
+    return D_00429920;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429B80 (0x00429B80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429930.
+extern char D_00429930[];
+
+char* Get()
+{
+    return D_00429930;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429B90 (0x00429B90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429940.
+extern char D_00429940[];
+
+char* Get()
+{
+    return D_00429940;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429BA0 (0x00429BA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429950.
+extern char D_00429950[];
+
+char* Get()
+{
+    return D_00429950;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429BB0 (0x00429BB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429960.
+extern char D_00429960[];
+
+char* Get()
+{
+    return D_00429960;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429BC0 (0x00429BC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429970.
+extern char D_00429970[];
+
+char* Get()
+{
+    return D_00429970;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429BD0 (0x00429BD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429980.
+extern char D_00429980[];
+
+char* Get()
+{
+    return D_00429980;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429BE0 (0x00429BE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429990.
+extern char D_00429990[];
+
+char* Get()
+{
+    return D_00429990;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429BF0 (0x00429BF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299A0.
+extern char D_004299A0[];
+
+char* Get()
+{
+    return D_004299A0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429C00 (0x00429C00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299B0.
+extern char D_004299B0[];
+
+char* Get()
+{
+    return D_004299B0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429C10 (0x00429C10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299C0.
+extern char D_004299C0[];
+
+char* Get()
+{
+    return D_004299C0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429C20 (0x00429C20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299D0.
+extern char D_004299D0[];
+
+char* Get()
+{
+    return D_004299D0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429C30 (0x00429C30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299E0.
+extern char D_004299E0[];
+
+char* Get()
+{
+    return D_004299E0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429C40 (0x00429C40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_004299F0.
+extern char D_004299F0[];
+
+char* Get()
+{
+    return D_004299F0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429C50 (0x00429C50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A00.
+extern char D_00429A00[];
+
+char* Get()
+{
+    return D_00429A00;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429C60 (0x00429C60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A10.
+extern char D_00429A10[];
+
+char* Get()
+{
+    return D_00429A10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429C70 (0x00429C70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A20.
+extern char D_00429A20[];
+
+char* Get()
+{
+    return D_00429A20;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429C80 (0x00429C80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A30.
+extern char D_00429A30[];
+
+char* Get()
+{
+    return D_00429A30;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429C90 (0x00429C90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A40.
+extern char D_00429A40[];
+
+char* Get()
+{
+    return D_00429A40;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429CA0 (0x00429CA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A50.
+extern char D_00429A50[];
+
+char* Get()
+{
+    return D_00429A50;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429CB0 (0x00429CB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A60.
+extern char D_00429A60[];
+
+char* Get()
+{
+    return D_00429A60;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429CC0 (0x00429CC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A70.
+extern char D_00429A70[];
+
+char* Get()
+{
+    return D_00429A70;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429CD0 (0x00429CD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A80.
+extern char D_00429A80[];
+
+char* Get()
+{
+    return D_00429A80;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429CE0 (0x00429CE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429A90.
+extern char D_00429A90[];
+
+char* Get()
+{
+    return D_00429A90;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429CF0 (0x00429CF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AA0.
+extern char D_00429AA0[];
+
+char* Get()
+{
+    return D_00429AA0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429D00 (0x00429D00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AB0.
+extern char D_00429AB0[];
+
+char* Get()
+{
+    return D_00429AB0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429D10 (0x00429D10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AC0.
+extern char D_00429AC0[];
+
+char* Get()
+{
+    return D_00429AC0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429D20 (0x00429D20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AD0.
+extern char D_00429AD0[];
+
+char* Get()
+{
+    return D_00429AD0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429D30 (0x00429D30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AE0.
+extern char D_00429AE0[];
+
+char* Get()
+{
+    return D_00429AE0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429D40 (0x00429D40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429AF0.
+extern char D_00429AF0[];
+
+char* Get()
+{
+    return D_00429AF0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429D50 (0x00429D50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B00.
+extern char D_00429B00[];
+
+char* Get()
+{
+    return D_00429B00;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429D60 (0x00429D60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B10.
+extern char D_00429B10[];
+
+char* Get()
+{
+    return D_00429B10;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429D70 (0x00429D70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B20.
+extern char D_00429B20[];
+
+char* Get()
+{
+    return D_00429B20;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429D80 (0x00429D80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B30.
+extern char D_00429B30[];
+
+char* Get()
+{
+    return D_00429B30;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429D90 (0x00429D90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B40.
+extern char D_00429B40[];
+
+char* Get()
+{
+    return D_00429B40;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429DA0 (0x00429DA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00429B50.
+extern char D_00429B50[];
+
+char* Get()
+{
+    return D_00429B50;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429E90 (0x00429E90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x48 of the object its member at +0x64 points to.
+struct Inner
+{
+    char m_pad00[0x48];
+    float m_Field48; // +0x48
+};
+
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x64];
+    Inner* m_Field64; // +0x64
+};
+
+float Object::Get()
+{
+    return m_Field64->m_Field48;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429EA0 (0x00429EA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x44 of the object its member at +0x64 points to.
+struct Inner
+{
+    char m_pad00[0x44];
+    float m_Field44; // +0x44
+};
+
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x64];
+    Inner* m_Field64; // +0x64
+};
+
+float Object::Get()
+{
+    return m_Field64->m_Field44;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429EB0 (0x00429EB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x50 of the object its member at +0x64 points to.
+struct Inner
+{
+    char m_pad00[0x50];
+    float m_Field50; // +0x50
+};
+
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x64];
+    Inner* m_Field64; // +0x64
+};
+
+float Object::Get()
+{
+    return m_Field64->m_Field50;
+}
+
+// ============================================================================
+// [VERIFIED] func_00429EC0 (0x00429EC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x4C of the object its member at +0x64 points to.
+struct Inner
+{
+    char m_pad00[0x4C];
+    float m_Field4C; // +0x4C
+};
+
+class Object
+{
+public:
+    float Get();
+    char m_pad00[0x64];
+    Inner* m_Field64; // +0x64
+};
+
+float Object::Get()
+{
+    return m_Field64->m_Field4C;
+}
+
+// ============================================================================
 // [VERIFIED] func_00429F50 (0x00429F50, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8233,6 +10861,60 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_0042D780 (0x0042D780, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DE10.
+extern char D_0080DE10[];
+
+char* Get()
+{
+    return D_0080DE10;
+}
+
+// ============================================================================
+// [VERIFIED] func_0042D790 (0x0042D790, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x22 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x22];
+    char m_Field22; // +0x22
+};
+
+void Object::Set()
+{
+    m_Field22 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0042D880 (0x0042D880, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DE60.
+extern char D_0080DE60[];
+
+char* Get()
+{
+    return D_0080DE60;
+}
+
+// ============================================================================
+// [VERIFIED] func_0042DC40 (0x0042DC40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DEA0.
+extern char D_0080DEA0[];
+
+char* Get()
+{
+    return D_0080DEA0;
+}
+
+// ============================================================================
 // [VERIFIED] func_0042DC50 (0x0042DC50, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8240,6 +10922,30 @@ int Number()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0042DDE0 (0x0042DDE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0082E4C0.
+extern char D_0082E4C0[];
+
+char* Get()
+{
+    return D_0082E4C0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0042E400 (0x0042E400, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080DEF0.
+extern char D_0080DEF0[];
+
+char* Get()
+{
+    return D_0080DEF0;
 }
 
 // ============================================================================
@@ -8258,6 +10964,102 @@ public:
 int Object::Get()
 {
     return m_Field64;
+}
+
+// ============================================================================
+// [VERIFIED] func_0042F130 (0x0042F130, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x30 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+};
+
+bool Object::IsSet()
+{
+    return m_Field30 != 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00430BC0 (0x00430BC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x30 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+};
+
+bool Object::IsSet()
+{
+    return m_Field30 != 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00430FF0 (0x00430FF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E140.
+extern char D_0080E140[];
+
+char* Get()
+{
+    return D_0080E140;
+}
+
+// ============================================================================
+// [VERIFIED] func_004312A0 (0x004312A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E100.
+extern char D_0080E100[];
+
+char* Get()
+{
+    return D_0080E100;
+}
+
+// ============================================================================
+// [VERIFIED] func_004312B0 (0x004312B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E180.
+extern char D_0080E180[];
+
+char* Get()
+{
+    return D_0080E180;
+}
+
+// ============================================================================
+// [VERIFIED] func_004314E0 (0x004314E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E1C0.
+extern char D_0080E1C0[];
+
+char* Get()
+{
+    return D_0080E1C0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004317C0 (0x004317C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E200.
+extern char D_0080E200[];
+
+char* Get()
+{
+    return D_0080E200;
 }
 
 // ============================================================================
@@ -8307,6 +11109,18 @@ Object* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00432750 (0x00432750, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E250.
+extern char D_0080E250[];
+
+char* Get()
+{
+    return D_0080E250;
+}
+
+// ============================================================================
 // [VERIFIED] func_00432760 (0x00432760, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8335,6 +11149,60 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00437080 (0x00437080, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x34 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x34];
+    char m_Field34; // +0x34
+};
+
+void Object::Set()
+{
+    m_Field34 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00437BA0 (0x00437BA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E290.
+extern char D_0080E290[];
+
+char* Get()
+{
+    return D_0080E290;
+}
+
+// ============================================================================
+// [VERIFIED] func_00437C60 (0x00437C60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E2D0.
+extern char D_0080E2D0[];
+
+char* Get()
+{
+    return D_0080E2D0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00437D70 (0x00437D70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E310.
+extern char D_0080E310[];
+
+char* Get()
+{
+    return D_0080E310;
+}
+
+// ============================================================================
 // [VERIFIED] func_00437E90 (0x00437E90, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8345,6 +11213,48 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_00438620 (0x00438620, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E390.
+extern char D_0080E390[];
+
+char* Get()
+{
+    return D_0080E390;
+}
+
+// ============================================================================
+// [VERIFIED] func_00438BF0 (0x00438BF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E3E0.
+extern char D_0080E3E0[];
+
+char* Get()
+{
+    return D_0080E3E0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00439390 (0x00439390, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] func_00439980 (0x00439980, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8352,6 +11262,54 @@ int Number()
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043A230 (0x0043A230, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E460.
+extern char D_0080E460[];
+
+char* Get()
+{
+    return D_0080E460;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043AEE0 (0x0043AEE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E420.
+extern char D_0080E420[];
+
+char* Get()
+{
+    return D_0080E420;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043B610 (0x0043B610, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E4C0.
+extern char D_0080E4C0[];
+
+char* Get()
+{
+    return D_0080E4C0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043B9B0 (0x0043B9B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E500.
+extern char D_0080E500[];
+
+char* Get()
+{
+    return D_0080E500;
 }
 
 // ============================================================================
@@ -8370,6 +11328,68 @@ public:
 unsigned char Object::Get()
 {
     return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043C490 (0x0043C490, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E550.
+extern char D_0080E550[];
+
+char* Get()
+{
+    return D_0080E550;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043CE90 (0x0043CE90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043CF60 (0x0043CF60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E5E0.
+extern char D_0080E5E0[];
+
+char* Get()
+{
+    return D_0080E5E0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043D1B0 (0x0043D1B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the members at +0x30 and +0x34 of its object to zero.
+class Object
+{
+public:
+    void Clear();
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+    int m_Field34; // +0x34
+};
+
+void Object::Clear()
+{
+    m_Field30 = 0;
+    m_Field34 = 0;
 }
 
 // ============================================================================
@@ -8427,6 +11447,36 @@ void Object::Set(char value)
 }
 
 // ============================================================================
+// [VERIFIED] func_0043E890 (0x0043E890, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E5A0.
+extern char D_0080E5A0[];
+
+char* Get()
+{
+    return D_0080E5A0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0043F2E0 (0x0043F2E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x30 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x30];
+    int m_Field30; // +0x30
+};
+
+bool Object::IsSet()
+{
+    return m_Field30 != 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_0043F3E0 (0x0043F3E0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8463,6 +11513,18 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004410A0 (0x004410A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E620.
+extern char D_0080E620[];
+
+char* Get()
+{
+    return D_0080E620;
+}
+
+// ============================================================================
 // [VERIFIED] func_00441F90 (0x00441F90, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8473,6 +11535,18 @@ unsigned char Object::Get()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_00441F90() {
+}
+
+// ============================================================================
+// [VERIFIED] func_004425D0 (0x004425D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E660.
+extern char D_0080E660[];
+
+char* Get()
+{
+    return D_0080E660;
 }
 
 // ============================================================================
@@ -8521,6 +11595,42 @@ extern unsigned char D_008095E8;
 unsigned char Get()
 {
     return D_008095E8;
+}
+
+// ============================================================================
+// [VERIFIED] func_00444300 (0x00444300, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x91 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x91];
+    char m_Field91; // +0x91
+};
+
+void Object::Set()
+{
+    m_Field91 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00444310 (0x00444310, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x90 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x90];
+    char m_Field90; // +0x90
+};
+
+void Object::Set()
+{
+    m_Field90 = 1;
 }
 
 // ============================================================================
@@ -8586,6 +11696,24 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0044A190 (0x0044A190, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x64 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x64];
+    int m_Field64; // +0x64
+};
+
+bool Object::IsSet()
+{
+    return m_Field64 != 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_0044A400 (0x0044A400, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8595,6 +11723,30 @@ extern int D_00809624;
 int Get()
 {
     return D_00809624;
+}
+
+// ============================================================================
+// [VERIFIED] func_0044A450 (0x0044A450, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E770.
+extern char D_0080E770[];
+
+char* Get()
+{
+    return D_0080E770;
+}
+
+// ============================================================================
+// [VERIFIED] func_0044AE10 (0x0044AE10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E730.
+extern char D_0080E730[];
+
+char* Get()
+{
+    return D_0080E730;
 }
 
 // ============================================================================
@@ -8616,6 +11768,18 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0044AEA0 (0x0044AEA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E6F0.
+extern char D_0080E6F0[];
+
+char* Get()
+{
+    return D_0080E6F0;
+}
+
+// ============================================================================
 // [VERIFIED] func_0044AEB0 (0x0044AEB0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8631,6 +11795,78 @@ public:
 int Object::Get()
 {
     return m_Field10;
+}
+
+// ============================================================================
+// [VERIFIED] func_0044AEC0 (0x0044AEC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E6B0.
+extern char D_0080E6B0[];
+
+char* Get()
+{
+    return D_0080E6B0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0044AF50 (0x0044AF50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E7B0.
+extern char D_0080E7B0[];
+
+char* Get()
+{
+    return D_0080E7B0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0044B0F0 (0x0044B0F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E840.
+extern char D_0080E840[];
+
+char* Get()
+{
+    return D_0080E840;
+}
+
+// ============================================================================
+// [VERIFIED] func_0044BAE0 (0x0044BAE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E890.
+extern char D_0080E890[];
+
+char* Get()
+{
+    return D_0080E890;
+}
+
+// ============================================================================
+// [VERIFIED] func_0044BC20 (0x0044BC20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E910.
+extern char D_0080E910[];
+
+char* Get()
+{
+    return D_0080E910;
+}
+
+// ============================================================================
+// [VERIFIED] func_0044C5C0 (0x0044C5C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E8D0.
+extern char D_0080E8D0[];
+
+char* Get()
+{
+    return D_0080E8D0;
 }
 
 // ============================================================================
@@ -8783,6 +12019,25 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004546F0 (0x004546F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the members at +0x4 and +0x0 of its object to zero.
+class Object
+{
+public:
+    void Clear();
+    int m_Field0; // +0x0
+    int m_Field4; // +0x4
+};
+
+void Object::Clear()
+{
+    m_Field4 = 0;
+    m_Field0 = 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_00454860 (0x00454860, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -8835,6 +12090,42 @@ public:
 unsigned char Object::Get()
 {
     return m_Field4;
+}
+
+// ============================================================================
+// [VERIFIED] func_00456310 (0x00456310, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_004575B0 (0x004575B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
 }
 
 // ============================================================================
@@ -8936,6 +12227,25 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00458850 (0x00458850, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its two arguments at +0x0 and +0x4 of its object.
+class Object
+{
+public:
+    void Set(int first, char second);
+    int m_Field0; // +0x0
+    char m_Field4; // +0x4
+};
+
+void Object::Set(int first, char second)
+{
+    m_Field0 = first;
+    m_Field4 = second;
+}
+
+// ============================================================================
 // [VERIFIED] func_004589F0 (0x004589F0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9002,6 +12312,42 @@ public:
 void Object::Set(int value)
 {
     m_Field0 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_004592D0 (0x004592D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080EA20.
+extern char D_0080EA20[];
+
+char* Get()
+{
+    return D_0080EA20;
+}
+
+// ============================================================================
+// [VERIFIED] func_00459AD0 (0x00459AD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E9E0.
+extern char D_0080E9E0[];
+
+char* Get()
+{
+    return D_0080E9E0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00459AE0 (0x00459AE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E9A0.
+extern char D_0080E9A0[];
+
+char* Get()
+{
+    return D_0080E9A0;
 }
 
 // ============================================================================
@@ -9243,6 +12589,18 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_00466E20 (0x00466E20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080EAC0.
+extern char D_0080EAC0[];
+
+char* Get()
+{
+    return D_0080EAC0;
+}
+
+// ============================================================================
 // [VERIFIED] func_00466E30 (0x00466E30, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9284,6 +12642,36 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00468770 (0x00468770, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x20 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+void Object::Set()
+{
+    m_Field20 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0046A2F0 (0x0046A2F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080EC10.
+extern char D_0080EC10[];
+
+char* Get()
+{
+    return D_0080EC10;
+}
+
+// ============================================================================
 // [VERIFIED] func_0046A760 (0x0046A760, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9314,6 +12702,18 @@ unsigned short Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0046B980 (0x0046B980, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C330.
+extern char D_0080C330[];
+
+char* Get()
+{
+    return D_0080C330;
+}
+
+// ============================================================================
 // [VERIFIED] func_0046BBC0 (0x0046BBC0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9331,6 +12731,18 @@ int Number()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004706B0 (0x004706B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C3B0.
+extern char D_0080C3B0[];
+
+char* Get()
+{
+    return D_0080C3B0;
 }
 
 // ============================================================================
@@ -9366,6 +12778,18 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_00471250 (0x00471250, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C370.
+extern char D_0080C370[];
+
+char* Get()
+{
+    return D_0080C370;
+}
+
+// ============================================================================
 // [VERIFIED] func_00471260 (0x00471260, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9383,6 +12807,18 @@ int Number()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00472250 (0x00472250, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C2B0.
+extern char D_0080C2B0[];
+
+char* Get()
+{
+    return D_0080C2B0;
 }
 
 // ============================================================================
@@ -9417,6 +12853,18 @@ extern "C" void func_00472490() {
 }
 
 // ============================================================================
+// [VERIFIED] func_004728B0 (0x004728B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C270.
+extern char D_0080C270[];
+
+char* Get()
+{
+    return D_0080C270;
+}
+
+// ============================================================================
 // [VERIFIED] func_004728C0 (0x004728C0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9430,6 +12878,16 @@ extern "C" void func_004728C0() {
 }
 
 // ============================================================================
+// [VERIFIED] func_004728D0 (0x004728D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.0.
+float Zero()
+{
+    return 0.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_004728E0 (0x004728E0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9437,6 +12895,75 @@ extern "C" void func_004728C0() {
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00473050 (0x00473050, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080EF40.
+extern char D_0080EF40[];
+
+char* Get()
+{
+    return D_0080EF40;
+}
+
+// ============================================================================
+// [VERIFIED] func_00473C90 (0x00473C90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its two arguments at +0xB0 and +0xBC of its object.
+class Object
+{
+public:
+    void Set(int first, char second);
+    char m_pad00[0xB0];
+    int m_FieldB0; // +0xB0
+    char m_padB4[0x8];
+    char m_FieldBC; // +0xBC
+};
+
+void Object::Set(int first, char second)
+{
+    m_FieldB0 = first;
+    m_FieldBC = second;
+}
+
+// ============================================================================
+// [VERIFIED] func_00474590 (0x00474590, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C1B0.
+extern char D_0080C1B0[];
+
+char* Get()
+{
+    return D_0080C1B0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00475020 (0x00475020, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0081C960.
+extern char D_0081C960[];
+
+char* Get()
+{
+    return D_0081C960;
+}
+
+// ============================================================================
+// [VERIFIED] func_00476000 (0x00476000, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0081CB00.
+extern char D_0081CB00[];
+
+char* Get()
+{
+    return D_0081CB00;
 }
 
 // ============================================================================
@@ -9461,6 +12988,30 @@ extern int D_00809780;
 int Get()
 {
     return D_00809780;
+}
+
+// ============================================================================
+// [VERIFIED] func_00478510 (0x00478510, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C3F0.
+extern char D_0080C3F0[];
+
+char* Get()
+{
+    return D_0080C3F0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004787A0 (0x004787A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C2F0.
+extern char D_0080C2F0[];
+
+char* Get()
+{
+    return D_0080C2F0;
 }
 
 // ============================================================================
@@ -9556,6 +13107,18 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_0047C4F0 (0x0047C4F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080F270.
+extern char D_0080F270[];
+
+char* Get()
+{
+    return D_0080F270;
+}
+
+// ============================================================================
 // [VERIFIED] func_0047C5D0 (0x0047C5D0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9566,6 +13129,60 @@ unsigned char Object::Get()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_0047C5D0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0047C6A0 (0x0047C6A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0081DED0.
+extern char D_0081DED0[];
+
+char* Get()
+{
+    return D_0081DED0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0047C6B0 (0x0047C6B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0081DDC0.
+extern char D_0081DDC0[];
+
+char* Get()
+{
+    return D_0081DDC0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0047C6C0 (0x0047C6C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0081DCF0.
+extern char D_0081DCF0[];
+
+char* Get()
+{
+    return D_0081DCF0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0047C7B0 (0x0047C7B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x177 of the object the global D_00809828 points to.
+struct Inner
+{
+    char m_pad00[0x177];
+    unsigned char m_Field177; // +0x177
+};
+
+extern Inner* D_00809828;
+
+unsigned char Get()
+{
+    return D_00809828->m_Field177;
 }
 
 // ============================================================================
@@ -9623,6 +13240,18 @@ void Object::Set(int value)
 }
 
 // ============================================================================
+// [VERIFIED] func_0047DB20 (0x0047DB20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C230.
+extern char D_0080C230[];
+
+char* Get()
+{
+    return D_0080C230;
+}
+
+// ============================================================================
 // [VERIFIED] func_0047DB30 (0x0047DB30, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9630,6 +13259,24 @@ void Object::Set(int value)
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_0047DEF0 (0x0047DEF0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0xE3 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0xE3];
+    char m_FieldE3; // +0xE3
+};
+
+void Object::Set()
+{
+    m_FieldE3 = 1;
 }
 
 // ============================================================================
@@ -9713,6 +13360,30 @@ Object* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004854C0 (0x004854C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C1F0.
+extern char D_0080C1F0[];
+
+char* Get()
+{
+    return D_0080C1F0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00485870 (0x00485870, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0081E950.
+extern char D_0081E950[];
+
+char* Get()
+{
+    return D_0081E950;
+}
+
+// ============================================================================
 // [VERIFIED] func_00486E80 (0x00486E80, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9748,6 +13419,18 @@ extern "C" void func_00487110() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_00487120() {
+}
+
+// ============================================================================
+// [VERIFIED] func_004875A0 (0x004875A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0081E990.
+extern char D_0081E990[];
+
+char* Get()
+{
+    return D_0081E990;
 }
 
 // ============================================================================
@@ -9796,6 +13479,27 @@ public:
 int Object::Get()
 {
     return m_Field3C4;
+}
+
+// ============================================================================
+// [VERIFIED] func_00488D50 (0x00488D50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its two arguments at +0x3C and +0x44 of its object.
+class Object
+{
+public:
+    void Set(int first, int second);
+    char m_pad00[0x3C];
+    int m_Field3C; // +0x3C
+    char m_pad40[0x4];
+    int m_Field44; // +0x44
+};
+
+void Object::Set(int first, int second)
+{
+    m_Field3C = first;
+    m_Field44 = second;
 }
 
 // ============================================================================
@@ -9941,6 +13645,44 @@ void Object::Set(int value)
 }
 
 // ============================================================================
+// [VERIFIED] func_004931E0 (0x004931E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the members at +0x8 and +0x4 of its object to zero.
+class Object
+{
+public:
+    void Clear();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+    int m_Field8; // +0x8
+};
+
+void Object::Clear()
+{
+    m_Field8 = 0;
+    m_Field4 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004931F0 (0x004931F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x8 of its object to 10.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Set()
+{
+    m_Field8 = 10;
+}
+
+// ============================================================================
 // [VERIFIED] func_00493200 (0x00493200, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9951,6 +13693,174 @@ void Object::Set(int value)
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_00493200() {
+}
+
+// ============================================================================
+// [VERIFIED] func_00493230 (0x00493230, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x8 of its object to 7.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Set()
+{
+    m_Field8 = 7;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493240 (0x00493240, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x8 of its object to 6.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Set()
+{
+    m_Field8 = 6;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493250 (0x00493250, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x8 of its object to 5.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Set()
+{
+    m_Field8 = 5;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493260 (0x00493260, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x8 of its object to 4.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Set()
+{
+    m_Field8 = 4;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493270 (0x00493270, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x8 of its object to 3.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Set()
+{
+    m_Field8 = 3;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493280 (0x00493280, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x8 of its object to 2.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x8];
+    int m_Field8; // +0x8
+};
+
+void Object::Set()
+{
+    m_Field8 = 2;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493B10 (0x00493B10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00809A10 to 1.
+extern char D_00809A10;
+
+void Set()
+{
+    D_00809A10 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493B20 (0x00493B20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00809A0C to 1.
+extern char D_00809A0C;
+
+void Set()
+{
+    D_00809A0C = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493B30 (0x00493B30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_00809A08 to 1.
+extern char D_00809A08;
+
+void Set()
+{
+    D_00809A08 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493B80 (0x00493B80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_008099F4 to 1.
+extern char D_008099F4;
+
+void Set()
+{
+    D_008099F4 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493C00 (0x00493C00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the global D_008099EC to 1.
+extern char D_008099EC;
+
+void Set()
+{
+    D_008099EC = 1;
 }
 
 // ============================================================================
@@ -9972,6 +13882,42 @@ short Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00493CA0 (0x00493CA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x5C of its object to 2.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x5C];
+    int m_Field5C; // +0x5C
+};
+
+void Object::Set()
+{
+    m_Field5C = 2;
+}
+
+// ============================================================================
+// [VERIFIED] func_00493D00 (0x00493D00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x5C of its object to 3.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x5C];
+    int m_Field5C; // +0x5C
+};
+
+void Object::Set()
+{
+    m_Field5C = 3;
+}
+
+// ============================================================================
 // [VERIFIED] func_004951F0 (0x004951F0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -9981,6 +13927,42 @@ extern int D_00807714;
 int Get()
 {
     return D_00807714;
+}
+
+// ============================================================================
+// [VERIFIED] func_00495430 (0x00495430, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x2C of the object the global D_00809828 points to.
+struct Inner
+{
+    char m_pad00[0x2C];
+    int m_Field2C; // +0x2C
+};
+
+extern Inner* D_00809828;
+
+int Get()
+{
+    return D_00809828->m_Field2C;
+}
+
+// ============================================================================
+// [VERIFIED] func_00495440 (0x00495440, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x28 of the object the global D_00809828 points to.
+struct Inner
+{
+    char m_pad00[0x28];
+    int m_Field28; // +0x28
+};
+
+extern Inner* D_00809828;
+
+int Get()
+{
+    return D_00809828->m_Field28;
 }
 
 // ============================================================================
@@ -10064,6 +14046,48 @@ extern "C" void func_0049B9D0() {
 }
 
 // ============================================================================
+// [VERIFIED] func_0049BD30 (0x0049BD30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns a byte at +0x90 of the object the global D_00809AA4 points to.
+struct Inner
+{
+    char m_pad00[0x90];
+    unsigned char m_Field90; // +0x90
+};
+
+extern Inner* D_00809AA4;
+
+unsigned char Get()
+{
+    return D_00809AA4->m_Field90;
+}
+
+// ============================================================================
+// [VERIFIED] func_0049C1A0 (0x0049C1A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0081EC10.
+extern char D_0081EC10[];
+
+char* Get()
+{
+    return D_0081EC10;
+}
+
+// ============================================================================
+// [VERIFIED] func_0049DD90 (0x0049DD90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0081ECA0.
+extern char D_0081ECA0[];
+
+char* Get()
+{
+    return D_0081ECA0;
+}
+
+// ============================================================================
 // [VERIFIED] func_004A0FC0 (0x004A0FC0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -10073,6 +14097,18 @@ extern int D_00809AC4;
 int Get()
 {
     return D_00809AC4;
+}
+
+// ============================================================================
+// [VERIFIED] func_004A19B0 (0x004A19B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0081EC60.
+extern char D_0081EC60[];
+
+char* Get()
+{
+    return D_0081EC60;
 }
 
 // ============================================================================
@@ -10171,6 +14207,18 @@ int Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004A75C0 (0x004A75C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080C170.
+extern char D_0080C170[];
+
+char* Get()
+{
+    return D_0080C170;
+}
+
+// ============================================================================
 // [VERIFIED] func_004A76C0 (0x004A76C0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -10181,6 +14229,18 @@ int Get()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_004A76C0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_004A80A0 (0x004A80A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080E080.
+extern char D_0080E080[];
+
+char* Get()
+{
+    return D_0080E080;
 }
 
 // ============================================================================
@@ -10214,6 +14274,24 @@ public:
 void Object::Set(int value)
 {
     m_Field0 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_004AAE20 (0x004AAE20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
 }
 
 // ============================================================================
@@ -10323,6 +14401,24 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004ACAC0 (0x004ACAC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x118 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x118];
+    int m_Field118; // +0x118
+};
+
+bool Object::IsSet()
+{
+    return m_Field118 != 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_004B0DD0 (0x004B0DD0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -10377,6 +14473,24 @@ void Object::Set(int value)
 }
 
 // ============================================================================
+// [VERIFIED] func_004B2FA0 (0x004B2FA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x184 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x184];
+    int m_Field184; // +0x184
+};
+
+bool Object::IsSet()
+{
+    return m_Field184 != 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_004B3FF0 (0x004B3FF0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -10392,6 +14506,30 @@ public:
 int Object::Get()
 {
     return m_Field180;
+}
+
+// ============================================================================
+// [VERIFIED] func_004B4210 (0x004B4210, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x10 of the object its member at +0x50 points to.
+struct Inner
+{
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x50];
+    Inner* m_Field50; // +0x50
+};
+
+int Object::Get()
+{
+    return m_Field50->m_Field10;
 }
 
 // ============================================================================
@@ -10478,6 +14616,25 @@ int Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004B79A0 (0x004B79A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004B79B0 (0x004B79B0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -10556,6 +14713,139 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_004B87D0 (0x004B87D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004B8D70 (0x004B8D70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004B9110 (0x004B9110, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004B9120 (0x004B9120, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004B9260 (0x004B9260, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004B9380 (0x004B9380, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004B95A0 (0x004B95A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x10];
+    int m_Field10; // +0x10
+};
+
+bool Object::Set(int value)
+{
+    m_Field10 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004B9760 (0x004B9760, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -10601,6 +14891,24 @@ float Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004BA5F0 (0x004BA5F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x20 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+bool Object::IsSet()
+{
+    return m_Field20 != 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_004BB160 (0x004BB160, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -10616,6 +14924,24 @@ public:
 int Object::Get()
 {
     return m_Field154;
+}
+
+// ============================================================================
+// [VERIFIED] func_004BB240 (0x004BB240, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x228 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x228];
+    int m_Field228; // +0x228
+};
+
+bool Object::IsSet()
+{
+    return m_Field228 != 0;
 }
 
 // ============================================================================
@@ -11300,6 +15626,25 @@ void Object::Set(int value)
 }
 
 // ============================================================================
+// [VERIFIED] func_004CCE70 (0x004CCE70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x1C];
+    char m_Field1C; // +0x1C
+};
+
+bool Object::Set(char value)
+{
+    m_Field1C = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004CCE80 (0x004CCE80, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11318,6 +15663,25 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004CCEA0 (0x004CCEA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x14 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x14];
+    char m_Field14; // +0x14
+};
+
+bool Object::Set(char value)
+{
+    m_Field14 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004CCEB0 (0x004CCEB0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11333,6 +15697,25 @@ public:
 unsigned char Object::Get()
 {
     return m_Field14;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CD050 (0x004CD050, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x20 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x20];
+    char m_Field20; // +0x20
+};
+
+bool Object::Set(char value)
+{
+    m_Field20 = value;
+    return true;
 }
 
 // ============================================================================
@@ -11372,6 +15755,25 @@ float Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004CD470 (0x004CD470, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+};
+
+bool Object::Set(int value)
+{
+    m_Field1C = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004CD480 (0x004CD480, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11397,6 +15799,25 @@ int Object::Get()
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CD880 (0x004CD880, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+};
+
+bool Object::Set(int value)
+{
+    m_Field1C = value;
+    return true;
 }
 
 // ============================================================================
@@ -11428,6 +15849,16 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_004CD8D0 (0x004CD8D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.0.
+float Zero()
+{
+    return 0.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_004CDC10 (0x004CDC10, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11443,6 +15874,25 @@ public:
 int* Object::Get()
 {
     return &m_Field1C;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CDF20 (0x004CDF20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x14 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+bool Object::Set(int value)
+{
+    m_Field14 = value;
+    return true;
 }
 
 // ============================================================================
@@ -11464,6 +15914,25 @@ int Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004CE160 (0x004CE160, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+};
+
+bool Object::Set(int value)
+{
+    m_Field1C = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004CE170 (0x004CE170, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11479,6 +15948,25 @@ public:
 int Object::Get()
 {
     return m_Field1C;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CE180 (0x004CE180, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+bool Object::Set(int value)
+{
+    m_Field18 = value;
+    return true;
 }
 
 // ============================================================================
@@ -11525,6 +16013,25 @@ int* Object::Get()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CE3B0 (0x004CE3B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x28 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x28];
+    char m_Field28; // +0x28
+};
+
+bool Object::Set(char value)
+{
+    m_Field28 = value;
+    return true;
 }
 
 // ============================================================================
@@ -11644,6 +16151,44 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004CEEA0 (0x004CEEA0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x39 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x39];
+    char m_Field39; // +0x39
+};
+
+bool Object::Set(char value)
+{
+    m_Field39 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CEEB0 (0x004CEEB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x38 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x38];
+    char m_Field38; // +0x38
+};
+
+bool Object::Set(char value)
+{
+    m_Field38 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004CEEC0 (0x004CEEC0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11659,6 +16204,44 @@ public:
 int* Object::Get()
 {
     return &m_Field30;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFBD0 (0x004CFBD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x71 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x71];
+    char m_Field71; // +0x71
+};
+
+bool Object::Set(char value)
+{
+    m_Field71 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFBE0 (0x004CFBE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x70 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x70];
+    char m_Field70; // +0x70
+};
+
+bool Object::Set(char value)
+{
+    m_Field70 = value;
+    return true;
 }
 
 // ============================================================================
@@ -11680,6 +16263,44 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004CFC20 (0x004CFC20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x61 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x61];
+    char m_Field61; // +0x61
+};
+
+bool Object::Set(char value)
+{
+    m_Field61 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFC30 (0x004CFC30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x60 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x60];
+    char m_Field60; // +0x60
+};
+
+bool Object::Set(char value)
+{
+    m_Field60 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004CFC60 (0x004CFC60, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11695,6 +16316,44 @@ public:
 int* Object::Get()
 {
     return &m_Field54;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFC70 (0x004CFC70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x51 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x51];
+    char m_Field51; // +0x51
+};
+
+bool Object::Set(char value)
+{
+    m_Field51 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFC80 (0x004CFC80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x50 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x50];
+    char m_Field50; // +0x50
+};
+
+bool Object::Set(char value)
+{
+    m_Field50 = value;
+    return true;
 }
 
 // ============================================================================
@@ -11716,6 +16375,44 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004CFCC0 (0x004CFCC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x41 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x41];
+    char m_Field41; // +0x41
+};
+
+bool Object::Set(char value)
+{
+    m_Field41 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFCD0 (0x004CFCD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x40 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x40];
+    char m_Field40; // +0x40
+};
+
+bool Object::Set(char value)
+{
+    m_Field40 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004CFD00 (0x004CFD00, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11731,6 +16428,61 @@ public:
 int* Object::Get()
 {
     return &m_Field34;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFD20 (0x004CFD20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x29 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x29];
+    char m_Field29; // +0x29
+};
+
+bool Object::Set(char value)
+{
+    m_Field29 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFD30 (0x004CFD30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x28 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x28];
+    char m_Field28; // +0x28
+};
+
+bool Object::Set(char value)
+{
+    m_Field28 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFD70 (0x004CFD70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to -32768.
+class Object
+{
+public:
+    void Set();
+    int m_Field0; // +0x0
+};
+
+void Object::Set()
+{
+    m_Field0 = -32768;
 }
 
 // ============================================================================
@@ -11753,6 +16505,25 @@ int Get()
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D0000 (0x004D0000, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x20 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+bool Object::Set(int value)
+{
+    m_Field20 = value;
+    return true;
 }
 
 // ============================================================================
@@ -11814,6 +16585,44 @@ int* Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004D03D0 (0x004D03D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x1D of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x1D];
+    char m_Field1D; // +0x1D
+};
+
+bool Object::Set(char value)
+{
+    m_Field1D = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D03E0 (0x004D03E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x1C];
+    char m_Field1C; // +0x1C
+};
+
+bool Object::Set(char value)
+{
+    m_Field1C = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004D04C0 (0x004D04C0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -11847,6 +16656,42 @@ public:
 int* Object::Get()
 {
     return &m_Field1C;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D0C60 (0x004D0C60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+};
+
+bool Object::Set(int value)
+{
+    m_Field1C = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D0C70 (0x004D0C70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to -32768.
+class Object
+{
+public:
+    void Set();
+    int m_Field0; // +0x0
+};
+
+void Object::Set()
+{
+    m_Field0 = -32768;
 }
 
 // ============================================================================
@@ -12050,6 +16895,25 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_004D1460 (0x004D1460, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x14 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+bool Object::Set(int value)
+{
+    m_Field14 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004D1470 (0x004D1470, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -12086,6 +16950,25 @@ float Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004D14A0 (0x004D14A0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x34 of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x34];
+    int m_Field34; // +0x34
+};
+
+bool Object::Set(int value)
+{
+    m_Field34 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004D14B0 (0x004D14B0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -12101,6 +16984,25 @@ public:
 int Object::Get()
 {
     return m_Field34;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D14C0 (0x004D14C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x30 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x30];
+    char m_Field30; // +0x30
+};
+
+bool Object::Set(char value)
+{
+    m_Field30 = value;
+    return true;
 }
 
 // ============================================================================
@@ -12140,6 +17042,25 @@ float Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004D1550 (0x004D1550, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a 32-bit value at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(int value);
+    char m_pad00[0x1C];
+    int m_Field1C; // +0x1C
+};
+
+bool Object::Set(int value)
+{
+    m_Field1C = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004D1560 (0x004D1560, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -12155,6 +17076,25 @@ public:
 int Object::Get()
 {
     return m_Field1C;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D1570 (0x004D1570, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x1A of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x1A];
+    char m_Field1A; // +0x1A
+};
+
+bool Object::Set(char value)
+{
+    m_Field1A = value;
+    return true;
 }
 
 // ============================================================================
@@ -12176,6 +17116,25 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004D1590 (0x004D1590, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x19 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x19];
+    char m_Field19; // +0x19
+};
+
+bool Object::Set(char value)
+{
+    m_Field19 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004D15A0 (0x004D15A0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -12191,6 +17150,25 @@ public:
 unsigned char Object::Get()
 {
     return m_Field19;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D15B0 (0x004D15B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x18];
+    char m_Field18; // +0x18
+};
+
+bool Object::Set(char value)
+{
+    m_Field18 = value;
+    return true;
 }
 
 // ============================================================================
@@ -12244,6 +17222,25 @@ int Zero()
 }
 
 // ============================================================================
+// [VERIFIED] func_004D1D50 (0x004D1D50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x32 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x32];
+    char m_Field32; // +0x32
+};
+
+bool Object::Set(char value)
+{
+    m_Field32 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004D1D60 (0x004D1D60, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -12262,6 +17259,25 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_004D1D70 (0x004D1D70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x31 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x31];
+    char m_Field31; // +0x31
+};
+
+bool Object::Set(char value)
+{
+    m_Field31 = value;
+    return true;
+}
+
+// ============================================================================
 // [VERIFIED] func_004D1D80 (0x004D1D80, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -12277,6 +17293,25 @@ public:
 unsigned char Object::Get()
 {
     return m_Field31;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D1D90 (0x004D1D90, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its argument as a byte at +0x30 of its object and returns true.
+class Object
+{
+public:
+    bool Set(char value);
+    char m_pad00[0x30];
+    char m_Field30; // +0x30
+};
+
+bool Object::Set(char value)
+{
+    m_Field30 = value;
+    return true;
 }
 
 // ============================================================================
@@ -12460,6 +17495,16 @@ void Object::Set(int value)
 }
 
 // ============================================================================
+// [VERIFIED] func_004D39B0 (0x004D39B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.0.
+float Zero()
+{
+    return 0.0f;
+}
+
+// ============================================================================
 // [VERIFIED] func_004D39D0 (0x004D39D0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -12614,6 +17659,75 @@ int Number()
 }
 
 // ============================================================================
+// [VERIFIED] func_004DA020 (0x004DA020, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x18 of the object its member at +0x0 points to.
+struct Inner
+{
+    char m_pad00[0x18];
+    int m_Field18; // +0x18
+};
+
+class Object
+{
+public:
+    int Get();
+    Inner* m_Field0; // +0x0
+};
+
+int Object::Get()
+{
+    return m_Field0->m_Field18;
+}
+
+// ============================================================================
+// [VERIFIED] func_004DA030 (0x004DA030, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns an unsigned 16-bit number at +0x44 of the object its member at +0x0 points to.
+struct Inner
+{
+    char m_pad00[0x44];
+    unsigned short m_Field44; // +0x44
+};
+
+class Object
+{
+public:
+    unsigned short Get();
+    Inner* m_Field0; // +0x0
+};
+
+unsigned short Object::Get()
+{
+    return m_Field0->m_Field44;
+}
+
+// ============================================================================
+// [VERIFIED] func_004DA0B0 (0x004DA0B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x40 of the object its member at +0x0 points to.
+struct Inner
+{
+    char m_pad00[0x40];
+    float m_Field40; // +0x40
+};
+
+class Object
+{
+public:
+    float Get();
+    Inner* m_Field0; // +0x0
+};
+
+float Object::Get()
+{
+    return m_Field0->m_Field40;
+}
+
+// ============================================================================
 // [VERIFIED] func_004DA260 (0x004DA260, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -12629,6 +17743,29 @@ public:
 int Object::Get()
 {
     return m_Field4;
+}
+
+// ============================================================================
+// [VERIFIED] func_004DA3D0 (0x004DA3D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the float at +0x40 of the object its member at +0x0 points to.
+struct Inner
+{
+    char m_pad00[0x40];
+    float m_Field40; // +0x40
+};
+
+class Object
+{
+public:
+    float Get();
+    Inner* m_Field0; // +0x0
+};
+
+float Object::Get()
+{
+    return m_Field0->m_Field40;
 }
 
 // ============================================================================
@@ -12711,6 +17848,60 @@ public:
 unsigned short Object::Get()
 {
     return m_Field20;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E1B70 (0x004E1B70, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B600.
+extern char D_0080B600[];
+
+char* Get()
+{
+    return D_0080B600;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E1B80 (0x004E1B80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_0080B5C0.
+extern char D_0080B5C0[];
+
+char* Get()
+{
+    return D_0080B5C0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E27E0 (0x004E27E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E2880 (0x004E2880, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831C20.
+extern char D_00831C20[];
+
+char* Get()
+{
+    return D_00831C20;
 }
 
 // ============================================================================
@@ -13100,6 +18291,90 @@ extern "C" void func_004E6150() {
 int Number()
 {
     return 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E7B00 (0x004E7B00, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831BA0.
+extern char D_00831BA0[];
+
+char* Get()
+{
+    return D_00831BA0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E7B10 (0x004E7B10, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831B60.
+extern char D_00831B60[];
+
+char* Get()
+{
+    return D_00831B60;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E7B20 (0x004E7B20, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831B20.
+extern char D_00831B20[];
+
+char* Get()
+{
+    return D_00831B20;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E7B30 (0x004E7B30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831AD0.
+extern char D_00831AD0[];
+
+char* Get()
+{
+    return D_00831AD0;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E7B40 (0x004E7B40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831A80.
+extern char D_00831A80[];
+
+char* Get()
+{
+    return D_00831A80;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E7B50 (0x004E7B50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831A30.
+extern char D_00831A30[];
+
+char* Get()
+{
+    return D_00831A30;
+}
+
+// ============================================================================
+// [VERIFIED] func_004E7B60 (0x004E7B60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831990.
+extern char D_00831990[];
+
+char* Get()
+{
+    return D_00831990;
 }
 
 // ============================================================================
@@ -13515,6 +18790,16 @@ extern "C" void func_004F6B00() {
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_004F6F40() {
+}
+
+// ============================================================================
+// [VERIFIED] func_004F6F50 (0x004F6F50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns 0.0.
+float Zero()
+{
+    return 0.0f;
 }
 
 // ============================================================================
@@ -13997,6 +19282,29 @@ Object* Object::Get()
 int Zero()
 {
     return 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00505200 (0x00505200, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x0 of the object its member at +0x44 points to.
+struct Inner
+{
+    int m_Field0; // +0x0
+};
+
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x44];
+    Inner* m_Field44; // +0x44
+};
+
+int Object::Get()
+{
+    return m_Field44->m_Field0;
 }
 
 // ============================================================================
@@ -14925,6 +20233,26 @@ extern "C" void func_00514530() {
 }
 
 // ============================================================================
+// [VERIFIED] func_00515EE0 (0x00515EE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Stores its two arguments at +0x134 and +0x138 of its object.
+class Object
+{
+public:
+    void Set(int first, int second);
+    char m_pad00[0x134];
+    int m_Field134; // +0x134
+    int m_Field138; // +0x138
+};
+
+void Object::Set(int first, int second)
+{
+    m_Field134 = first;
+    m_Field138 = second;
+}
+
+// ============================================================================
 // [VERIFIED] func_00516010 (0x00516010, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -14981,6 +20309,30 @@ int Zero()
 // Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
 
 extern "C" void func_00516940() {
+}
+
+// ============================================================================
+// [VERIFIED] func_00517730 (0x00517730, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00829254.
+extern char D_00829254[];
+
+char* Get()
+{
+    return D_00829254;
+}
+
+// ============================================================================
+// [VERIFIED] func_00517740 (0x00517740, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_008291A0.
+extern char D_008291A0[];
+
+char* Get()
+{
+    return D_008291A0;
 }
 
 // ============================================================================
@@ -15165,6 +20517,126 @@ public:
 int Object::Get()
 {
     return m_Field4;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051B6E0 (0x0051B6E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007B8AA8.
+extern char D_007B8AA8[];
+
+char* Get()
+{
+    return D_007B8AA8;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051B760 (0x0051B760, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007B8AC8.
+extern char D_007B8AC8[];
+
+char* Get()
+{
+    return D_007B8AC8;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051B7E0 (0x0051B7E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007A3938.
+extern char D_007A3938[];
+
+char* Get()
+{
+    return D_007A3938;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051B860 (0x0051B860, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007A3908.
+extern char D_007A3908[];
+
+char* Get()
+{
+    return D_007A3908;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051B8E0 (0x0051B8E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007A27A8.
+extern char D_007A27A8[];
+
+char* Get()
+{
+    return D_007A27A8;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051B960 (0x0051B960, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007A2778.
+extern char D_007A2778[];
+
+char* Get()
+{
+    return D_007A2778;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051B9D0 (0x0051B9D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007A2748.
+extern char D_007A2748[];
+
+char* Get()
+{
+    return D_007A2748;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051BA40 (0x0051BA40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007A3688.
+extern char D_007A3688[];
+
+char* Get()
+{
+    return D_007A3688;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051BAC0 (0x0051BAC0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007A3C98.
+extern char D_007A3C98[];
+
+char* Get()
+{
+    return D_007A3C98;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051BB30 (0x0051BB30, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_007A2568.
+extern char D_007A2568[];
+
+char* Get()
+{
+    return D_007A2568;
 }
 
 // ============================================================================
@@ -15438,6 +20910,23 @@ extern int D_00809F00;
 int Get()
 {
     return D_00809F00;
+}
+
+// ============================================================================
+// [VERIFIED] func_0051C7B0 (0x0051C7B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x0 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    int m_Field0; // +0x0
+};
+
+bool Object::IsSet()
+{
+    return m_Field0 != 0;
 }
 
 // ============================================================================
@@ -15720,6 +21209,24 @@ void Object::Set(int value)
 }
 
 // ============================================================================
+// [VERIFIED] func_00526130 (0x00526130, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] func_00527D00 (0x00527D00, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -15752,6 +21259,24 @@ public:
 void Object::Set(int value)
 {
     m_Field0 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00528610 (0x00528610, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x4 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x4];
+    int m_Field4; // +0x4
+};
+
+bool Object::IsSet()
+{
+    return m_Field4 != 0;
 }
 
 // ============================================================================
@@ -16338,6 +21863,24 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00539350 (0x00539350, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Says whether the member at +0x14 of its object is not zero.
+class Object
+{
+public:
+    bool IsSet();
+    char m_pad00[0x14];
+    int m_Field14; // +0x14
+};
+
+bool Object::IsSet()
+{
+    return m_Field14 != 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_005396E0 (0x005396E0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -16428,6 +21971,24 @@ extern "C" void func_0053D420() {
 }
 
 // ============================================================================
+// [VERIFIED] func_0053D4D0 (0x0053D4D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] func_0053E3F0 (0x0053E3F0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -16474,6 +22035,25 @@ public:
 void Object::Set(int value)
 {
     m_Field4 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00540550 (0x00540550, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the members at +0x0 and +0x4 of its object to zero.
+class Object
+{
+public:
+    void Clear();
+    int m_Field0; // +0x0
+    int m_Field4; // +0x4
+};
+
+void Object::Clear()
+{
+    m_Field0 = 0;
+    m_Field4 = 0;
 }
 
 // ============================================================================
@@ -16559,6 +22139,25 @@ unsigned char Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_00541E80 (0x00541E80, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the members at +0x0 and +0x4 of its object to zero.
+class Object
+{
+public:
+    void Clear();
+    int m_Field0; // +0x0
+    int m_Field4; // +0x4
+};
+
+void Object::Clear()
+{
+    m_Field0 = 0;
+    m_Field4 = 0;
+}
+
+// ============================================================================
 // [VERIFIED] func_00544850 (0x00544850, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -16574,6 +22173,24 @@ public:
 void Object::Set(int value)
 {
     m_Field4 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_00544D50 (0x00544D50, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
 }
 
 // ============================================================================
@@ -16683,6 +22300,49 @@ extern "C" void func_00548D20() {
 }
 
 // ============================================================================
+// [VERIFIED] func_00548DB0 (0x00548DB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the members at +0x0 and +0x4 of its object to zero.
+class Object
+{
+public:
+    void Clear();
+    int m_Field0; // +0x0
+    int m_Field4; // +0x4
+};
+
+void Object::Clear()
+{
+    m_Field0 = 0;
+    m_Field4 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005491E0 (0x005491E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the 32-bit value at +0x20 of the object its member at +0x4 points to.
+struct Inner
+{
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+class Object
+{
+public:
+    int Get();
+    char m_pad00[0x4];
+    Inner* m_Field4; // +0x4
+};
+
+int Object::Get()
+{
+    return m_Field4->m_Field20;
+}
+
+// ============================================================================
 // [VERIFIED] func_0054AB60 (0x0054AB60, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -16716,6 +22376,24 @@ public:
 void Object::Set(int value)
 {
     m_Field4 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0054AFB0 (0x0054AFB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x0 of its object to zero and returns the object.
+class Object
+{
+public:
+    Object* Clear();
+    int m_Field0; // +0x0
+};
+
+Object* Object::Clear()
+{
+    m_Field0 = 0;
+    return this;
 }
 
 // ============================================================================
@@ -16949,6 +22627,30 @@ extern "C" void func_0054CC10() {
 }
 
 // ============================================================================
+// [VERIFIED] func_0054CCD0 (0x0054CCD0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00832010.
+extern char D_00832010[];
+
+char* Get()
+{
+    return D_00832010;
+}
+
+// ============================================================================
+// [VERIFIED] func_0054CD40 (0x0054CD40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831EA0.
+extern char D_00831EA0[];
+
+char* Get()
+{
+    return D_00831EA0;
+}
+
+// ============================================================================
 // [VERIFIED] func_0054DB30 (0x0054DB30, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -17029,6 +22731,78 @@ float Object::Get()
 }
 
 // ============================================================================
+// [VERIFIED] func_005592D0 (0x005592D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831E60.
+extern char D_00831E60[];
+
+char* Get()
+{
+    return D_00831E60;
+}
+
+// ============================================================================
+// [VERIFIED] func_00559340 (0x00559340, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831F20.
+extern char D_00831F20[];
+
+char* Get()
+{
+    return D_00831F20;
+}
+
+// ============================================================================
+// [VERIFIED] func_005593B0 (0x005593B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831EE0.
+extern char D_00831EE0[];
+
+char* Get()
+{
+    return D_00831EE0;
+}
+
+// ============================================================================
+// [VERIFIED] func_005593C0 (0x005593C0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831E20.
+extern char D_00831E20[];
+
+char* Get()
+{
+    return D_00831E20;
+}
+
+// ============================================================================
+// [VERIFIED] func_005593D0 (0x005593D0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831DD0.
+extern char D_00831DD0[];
+
+char* Get()
+{
+    return D_00831DD0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00559440 (0x00559440, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831FC0.
+extern char D_00831FC0[];
+
+char* Get()
+{
+    return D_00831FC0;
+}
+
+// ============================================================================
 // [VERIFIED] func_00559450 (0x00559450, 8 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -17091,6 +22865,30 @@ void Object::Set(int value)
 }
 
 // ============================================================================
+// [VERIFIED] func_0055BB60 (0x0055BB60, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831F70.
+extern char D_00831F70[];
+
+char* Get()
+{
+    return D_00831F70;
+}
+
+// ============================================================================
+// [VERIFIED] func_0055BBE0 (0x0055BBE0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831D40.
+extern char D_00831D40[];
+
+char* Get()
+{
+    return D_00831D40;
+}
+
+// ============================================================================
 // [VERIFIED] func_0055BD40 (0x0055BD40, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
 // ============================================================================
@@ -17124,6 +22922,90 @@ public:
 void Object::Set(int value)
 {
     m_Field30 = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_0055BF40 (0x0055BF40, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x20 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+void Object::Set()
+{
+    m_Field20 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_0055CAB0 (0x0055CAB0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0x20 of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0x20];
+    int m_Field20; // +0x20
+};
+
+void Object::Set()
+{
+    m_Field20 = 1;
+}
+
+// ============================================================================
+// [VERIFIED] func_005604E0 (0x005604E0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831D80.
+extern char D_00831D80[];
+
+char* Get()
+{
+    return D_00831D80;
+}
+
+// ============================================================================
+// [VERIFIED] func_005604F0 (0x005604F0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831D00.
+extern char D_00831D00[];
+
+char* Get()
+{
+    return D_00831D00;
+}
+
+// ============================================================================
+// [VERIFIED] func_00560500 (0x00560500, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00831CB0.
+extern char D_00831CB0[];
+
+char* Get()
+{
+    return D_00831CB0;
+}
+
+// ============================================================================
+// [VERIFIED] func_00564690 (0x00564690, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Returns the address of the global D_00832200.
+extern char D_00832200[];
+
+char* Get()
+{
+    return D_00832200;
 }
 
 // ============================================================================
@@ -17206,6 +23088,24 @@ public:
 void Object::Set(char value)
 {
     m_FieldCF = value;
+}
+
+// ============================================================================
+// [VERIFIED] func_005652B0 (0x005652B0, 12 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Sets the member at +0xCC of its object to 1.
+class Object
+{
+public:
+    void Set();
+    char m_pad00[0xCC];
+    char m_FieldCC; // +0xCC
+};
+
+void Object::Set()
+{
+    m_FieldCC = 1;
 }
 
 // ============================================================================
