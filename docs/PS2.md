@@ -154,22 +154,42 @@ RTTI off, and the scheduler or the peephole pass turned off (`-opt noschedule`, 
 gave the same bytes as leaving them on. The jump, meanwhile, matched with every `-O3` and `-O4` setting once
 exceptions were off, and with none at `-O2`.
 
+### What the fourth run showed (25 November 2026)
+
+32 compiles: the 3.0 line of builds, a dot product, and other ways of writing the two test functions.
+
+| Question | Result |
+| :--- | :--- |
+| The jump and the float store on 3.0.3 and 3.0 builds 38, 50, 52, lane flags | All eight match. |
+| A dot product the game writes as load, load, `mula.s`; load, load, `madda.s`; load, load, `madd.s` in the delay slot (`0x0066DFF0`, 40 bytes) | **No build matches.** Builds 87 and 103 write the right three multiply instructions but load all six floats first, into six registers (16 of 40 bytes). The 3.0-line builds also load first and write `mul.s`, `mul.s`, `adda.s`, `madd.s` (44 bytes), with or without `#pragma usefloatacc on` and `#pragma fastmath on`. |
+| The float store on build 103 with a `#pragma` | `#pragma schedule off` puts the store first but leaves the delay slot empty (`swc1; li; jr; nop`, 16 bytes), as `-O2` does. `peephole off`, `usefloatacc off`, `fastmath on`, `memoryrewrite off` and `conditional_move off` change nothing. |
+| The float store on build 103 written another way (returning `int`, as one expression, as a plain function) | No change. |
+| A jump after reading a global from its full address (`0x0038EC30`: `lui $at; j; lw $a0`) | The easy pass's text compiles to `lui $v0; j; lw $a0` (4 of 12 bytes): another register for the address. With the global declared as a pointer it is read through `$gp` (8 bytes). |
+| A jump passing the object, one of its members and a zero (`0x0037DBF0`) | Matches on build 103: `func(this, m_FieldD0, 0)` as the last statement. |
+
+What that adds up to:
+
+* The 3.0 line is out again, on the dot product: it does not write `madda.s` chains with these settings. The
+  table below stands on that point.
+* The lane's build is not the whole answer either. It differs from the game in three places: the float
+  store comes after the return value, the six loads of the dot product come before the multiplies, and an
+  address used once goes through `$v0` where the game uses `$at`. In the first two the game has the order
+  the source has. With its scheduler off, build 103 keeps that order for the float store, but leaves the
+  delay slot empty, and the game fills it. Whether the other two follow the scheduler is not tested yet.
+* `-opt noschedule` on the command line changed nothing where `#pragma schedule off` did, so the flag is
+  not the pragma.
+
 ### The round the probe runs now
 
-Run without arguments, the probe asks whether the table below was right to rule out the 3.0 line of builds
-(3.0.3 and 3.0 builds 38, 50 and 52), the only ones that store the float first:
+Run without arguments, the probe asks which 3.0.1 build keeps the source's order and still fills the delay
+slot with the scheduler off (33 compiles):
 
-* Every build from 2.4 on has a setting named `usefloatacc` ("use the float accumulator", which is what a
-  `madda.s` chain does) and, from 3.0 on, one named `fastmath`. So "never writes `madda.s`" may only be
-  those builds' default. The round compiles a dot product the game writes as `mula.s`, `madda.s`, `madd.s`
-  (`0x0066DFF0`) on the 3.0-line builds, plain and with `#pragma usefloatacc on` and `#pragma fastmath on`.
-* It compiles the jump and the float store on those builds with the lane's flags.
-* It tries the float store on the lane's own build with six `#pragma` settings and written three other ways.
+* the float store with `#pragma schedule off` on the other twelve 3.0.1 builds (44 to 210);
+* the dot product with `#pragma schedule off` on all thirteen;
+* the jump after reading a global: on the 3.0-line builds, with the scheduler off on builds 87, 95 and 103,
+  and with the global as the first member of a larger object.
 
-* It compiles the first jump shape the easy pass tried, which did not match (below), as the pass writes it
-  and two other ways.
-
-That is 32 compiles. `--sweep` runs the earlier two questions with every optimisation setting again.
+`--sweep` runs the first two questions with every optimisation setting again.
 
 ### The easy pass's first run with exceptions off
 

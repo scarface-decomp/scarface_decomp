@@ -457,13 +457,12 @@ def test_the_probes_round_is_one_the_portal_takes():
     P = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(P)
     tries = [x for _, _, _, ts in P.ROUND for x in ts]
-    assert len(tries) == 32 and all(x["compiler"] in server.PV.BUILDS and x["flags"] == server.PV.FLAGS for x in tries)
-    assert {va for va, _, _, _ in P.ROUND} == {0x003EB610, 0x00392940, 0x0066DFF0, 0x0038EC30, 0x0037DBF0}
-    easy = PSH.sources((0x3C010082, 0x0811FBBC, 0x8C24DFE8), 0x0038EC30, 0x80E170)[0]
-    asked = next(code for va, what, code, _ in P.ROUND if "as the easy pass writes it" in what)
-    assert asked.strip() == easy.split("\n", 1)[1].strip()          # the pass's own text, without its comment line
+    assert len(tries) == 33 and all(x["compiler"] in server.PV.BUILDS and x["flags"] == server.PV.FLAGS for x in tries)
+    assert {va for va, _, _, _ in P.ROUND} == {0x00392940, 0x0066DFF0, 0x0038EC30}
+    assert len(P.NEW_LINE) == 13 and P.LANE_COMPILER in P.NEW_LINE and not set(P.NEW_LINE) & set(P.OLD_LINE)
     for _, what, code, _ in P.ROUND:
         assert not server.check_genuine_cpp(code), what           # a #pragma that sets an optimisation is allowed
     whats = [what for _, what, _, _ in P.ROUND]
     assert len(set(whats)) == len(whats)                              # the closing list tells the cases apart by these
-    assert P.pragma("usefloatacc on", "fastmath on") == "#pragma usefloatacc on\n#pragma fastmath on\n\n"
+    easy = PSH.sources((0x3C010082, 0x0811FBBC, 0x8C24DFE8), 0x0038EC30, 0x80E170)[0]
+    assert P.READ_GLOBAL.strip() == easy.split("\n", 1)[1].strip()   # the pass's own text, without its comment line
