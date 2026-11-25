@@ -65,7 +65,10 @@ def check_registry(problems: list) -> dict:
         if not isinstance(e.get("size"), int) or e["size"] <= 0:
             problems.append(f"{where}: bad size {e.get('size')!r}")
         want = "-O3" if ps2_overlay.is_ps2(e.get("bin")) else "/O2"        # the PS2 game has its own compiler
-        if not str(e.get("flags", "")).startswith(want):
+        flags = str(e.get("flags", ""))
+        if flags.startswith("/TC "):                       # a public C library, compiled as C (METHODOLOGY.md)
+            flags = flags[4:]
+        if not flags.startswith(want):
             problems.append(f"{where}: unexpected flags {e.get('flags')!r}")
         what = e.get("what")
         if what is not None and (not isinstance(what, str) or len(what) > 160 or "\n" in what or what != what.strip()):
