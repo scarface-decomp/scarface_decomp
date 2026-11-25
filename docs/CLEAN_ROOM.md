@@ -78,6 +78,41 @@ take their names from that map where their bytes are found exactly once in Scarf
 Anyone can be an examiner, but once you have read the outside research you can't be the implementer
 for anything it covers. Say which side you are on in your pull request.
 
+## How the clean room is worked
+
+Since 25 November 2026 the examiner and the implementer work as closely as the roles allow. Nothing here
+moves the wall: the examiner still never writes code for what the leaked material covers, and the
+implementer still never opens it.
+
+**What a spec may carry.** Any fact about how the program behaves, as long as it can be checked on a copy
+of the game:
+
+* what a function does, step by step: its branches, loops and calls, in order;
+* a class's layout: each member's offset, size and type, and what it is for;
+* constants, tables and limits;
+* how the source was probably shaped where that changes the compiled bytes: which small functions are
+  expanded in place, signed or unsigned, the order of locals, early returns;
+* which functions belong to one source file, and their order.
+
+**What it may not carry.** Code or anything that reads as code with the words changed; names that exist
+only in the leaked material; text copied from it.
+
+**Whole classes.** The examiner writes up a class and its functions together, so the implementer can
+write one declaration and work through the members.
+
+**Feedback on attempts.** When an implementer's function does not match, it may show the examiner the
+attempt and the difference. The examiner answers with facts about the game's code ("that compare is
+unsigned", "that member is read before the call"), each checkable on the game, and never with code. The
+answer goes into the spec.
+
+**Questions.** The implementer may ask anything about behaviour. Answers go into the spec.
+
+**Names.** The examiner passes no name from leaked material. Names come from the game's own type
+information and text, from builds a contributor holds (see above), and from published research.
+
+**Second review.** A spec built from leaked material is read by a reviewer that has seen neither the
+leaked material nor the implementation, before or soon after it is used. The record says who.
+
 ## Record
 
 | Spec | Examiner | Outside material read | Review | Implementer |
@@ -100,6 +135,7 @@ for anything it covers. Say which side you are on in your pull request.
 | [SPEC-012](cleanroom/SPEC-012-ps2-class-records.md): the PS2 program's class records (name, ancestor list), its virtual tables and how an object points at them; what that gives the PS2 pairing | Claude (AI assistant) for RRutherrfordd, 2026-11-23 | the same research's PS2 notes (`re/notes/ps2.md`, which describe the European program); they said the records exist and where to look. Every layout, count and address read from the founder's own US `SLUS_211.11` (2,723 records, 2,293 main tables, the 7,274 places code builds a table's address) and `default.xbe` (class-name comparison) | 2026-11-23, by the examiner: no code and no names from the research; identifiers are class names stored as text in the PS2 program and in the Xbox program's run-time type information, the repository's file names, addresses, numbers and English words; no six words in a row match the notes. Not yet read by a second reviewer | to be written by a separate Claude chat that has never read the research, given only this repository |
 | [SPEC-013](cleanroom/SPEC-013-sister-game-build-settings.md): how the 2003 sister game's Xbox release build was compiled, library by library, as leads to test; which of Scarface's classes still have an ancestor in that engine | Claude (AI assistant) for RRutherrfordd, 2026-11-23 | **leaked source, read directly:** the development tree of *The Simpsons: Hit & Run* on the founder's computer. For this spec its Xbox project files and release build logs, and two scripted counts over its source text (class declarations, text literals); no function body. Its maps, symbol files and objects were listed, not opened. Counts checked against `reports/classes.json` and `default.xbe` | 2026-11-23, by the examiner: no code and no names from the tree; identifiers are Scarface's own class and namespace names from run-time type information, Microsoft's public compiler switches, text stored in `default.xbe`, numbers and English words. Not yet read by a second reviewer | to be tested by a separate Claude chat that has never seen the tree, given only this repository |
 | [SPEC-014](cleanroom/SPEC-014-engine-functions-and-public-libraries.md): how close each shared engine library is to the 2003 one; libpng 1.2.8, zlib 1.2.1 and Doug Lea's malloc inside the engine (public source, no clean room needed); the render context's state stacks (slots 99 and 100 of `pure3d::pddiBaseContext`); 81 open engine functions that kept their 2003 shape | Claude (AI assistant) for RRutherrfordd, 2026-11-24 | **leaked material, read directly:** the 2003 *Simpsons: Hit & Run* Xbox release program and its link map (function boundaries and library membership, to compare the two programs), and the source of the context's state-stack functions. Every fact then checked on `default.xbe`. Added 2026-11-24 (§5): the 2003 build logs and project files for its PNG, zlib and core libraries, and the configuration lines and comments at the top of its allocator source file; §5's facts about Scarface (library regions, configuration, the allocator's changes, link-time code generation) were read from `default.xbe` | 2026-11-24, by the examiner: no code; names only from Scarface's run-time type information and text, public library names, Microsoft's compiler switches, addresses, numbers and English words; the 2003 build's function names appear nowhere. Not yet read by a second reviewer | to be written by a separate Claude chat that has never seen the tree, given only this repository |
+| [SPEC-016](cleanroom/SPEC-016-xbox-save-drive.md): `core::XboxSaveDrive`, part 1: the block cache, mounting, error translation (0x2BFE10, 0x2BFF10, 0x2C0100, 0x2C0760) and the data they share | Claude (AI assistant) for RRutherrfordd, 2026-11-25 | **leaked source, read directly:** the save-drive source file and header of the 2003 *Simpsons: Hit & Run* core library. Every fact then read from `default.xbe`; where the two differ the spec follows Scarface and says so | 2026-11-25, by the examiner: no code; names are Scarface's own, Win32 error codes and Xbox API functions (public), addresses, numbers and English words; members are given by offset. Not yet read by a second reviewer | to be written by a separate Claude chat that has never seen the tree, given only this repository |
 
 Text in the game files that SPEC-001 names, for the first person who checks it on their own copy:
 `MiamiSunShape`, `MiamiFillShape`, `MiamiAmbientShape`, `MiamiBuildingAmbientShape`, `zone_lights`,
