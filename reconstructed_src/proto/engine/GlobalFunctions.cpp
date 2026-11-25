@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (6606 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (6608 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6,606 of 13,955 functions matched (47.34%). NOT COMPLETE YET.
-// The 7,349 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6,608 of 13,955 functions matched (47.35%). NOT COMPLETE YET.
+// The 7,347 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -17726,6 +17726,30 @@ int __cdecl sub_00055FA0(int a1, int a2, int a3)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00055FC0 (0x00055FC0, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// bin: proto
+// va: 0x00055FC0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_00055FC0 (Proto 0x00055FC0, 38 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_000599D0(int, int);
+extern "C" int __cdecl sub_002C96FE(int);
+
+void __cdecl sub_00055FC0(int a1, int a2, int a3)
+{
+    int t2;
+
+    t2 = sub_002C96FE(*(int*)a3);
+    sub_000599D0(t2, sub_002C96FE(*(int*)(a3 + 4)));
+}
+
+// ============================================================================
 // [VERIFIED] sub_00056270 (0x00056270, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -23140,6 +23164,29 @@ public:
 void Class_0006C6F0::sub_0006C6F0()
 {
     sub_0006D1C0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0006C700 (0x0006C700, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_0006C4A0 (Proto 0x0006C4A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0006C700
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0006C700 (Proto 0x0006C700, 29 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0006EC50(int, int);
+extern "C" int __cdecl sub_0008E600(int);
+
+void __cdecl sub_0006C700(int a1, int a2, int a3)
+{
+    sub_0006EC50(*(int*)(a3 + 4), sub_0008E600(*(int*)(a3 + 8)));
 }
 
 // ============================================================================

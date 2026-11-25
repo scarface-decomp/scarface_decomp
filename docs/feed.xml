@@ -5,8 +5,197 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-24T12:19:39Z</updated>
+  <updated>2026-11-24T18:30:15Z</updated>
   <author><name>Scarface decomp contributors</name></author>
+  <entry>
+    <title>pure3d::d3dContext::vfunc_99 (Xbox, 421 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029F160"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029F160</id>
+    <updated>2026-11-24T18:30:15Z</updated>
+    <summary>Pushes a copy of the current render, view, lighting, fog and stencil states for each bit of the mask. 0x0029F160 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0029EA30 (Xbox, 186 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029EA30"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029EA30</id>
+    <updated>2026-11-24T18:29:56Z</updated>
+    <summary>Compiler-written assignment for one saved state: copies every member after the vtable pointer. 0x0029EA30 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0029E9D0 (Xbox, 96 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029E9D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029E9D0</id>
+    <updated>2026-11-24T18:29:36Z</updated>
+    <summary>Compiler-written assignment for one saved state: copies every member after the vtable pointer. 0x0029E9D0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>pure3d::d3dContext::vfunc_100 (Xbox, 231 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029E8E0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029E8E0</id>
+    <updated>2026-11-24T18:29:17Z</updated>
+    <summary>Pops the saved render, view, lighting, fog and stencil states the mask names, and applies each one that is now current. 0x0029E8E0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_000608C0 (Xbox, 38 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000608C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000608C0</id>
+    <updated>2026-11-24T18:24:10Z</updated>
+    <summary>0x000608C0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00055FC0 (Xbox prototype, 38 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00055FC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00055FC0</id>
+    <updated>2026-11-24T18:23:47Z</updated>
+    <summary>0x00055FC0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0006C700 (Xbox prototype, 29 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0006C700"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0006C700</id>
+    <updated>2026-11-24T18:19:44Z</updated>
+    <summary>0x0006C700 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0030AD50 (Xbox, 6 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0030AD50"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0030AD50</id>
+    <updated>2026-11-24T18:19:24Z</updated>
+    <summary>0x0030AD50 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0029BAB0 (Xbox, 9 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029BAB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029BAB0</id>
+    <updated>2026-11-24T18:19:05Z</updated>
+    <summary>0x0029BAB0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00242920 (Xbox, 7 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00242920"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00242920</id>
+    <updated>2026-11-24T18:18:46Z</updated>
+    <summary>0x00242920 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0023DEC0 (Xbox, 10 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0023DEC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0023DEC0</id>
+    <updated>2026-11-24T18:18:27Z</updated>
+    <summary>0x0023DEC0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00219DD0 (Xbox, 11 bytes) by NoahBPeterson</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00219DD0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00219DD0</id>
+    <updated>2026-11-24T18:18:07Z</updated>
+    <summary>0x00219DD0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_001C84F0 (Xbox, 47 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001C84F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001C84F0</id>
+    <updated>2026-11-24T18:17:47Z</updated>
+    <summary>0x001C84F0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_001C84D0 (Xbox, 20 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001C84D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001C84D0</id>
+    <updated>2026-11-24T18:17:28Z</updated>
+    <summary>0x001C84D0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_001C84B0 (Xbox, 20 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001C84B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001C84B0</id>
+    <updated>2026-11-24T18:17:28Z</updated>
+    <summary>0x001C84B0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_001C8460 (Xbox, 20 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001C8460"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001C8460</id>
+    <updated>2026-11-24T18:17:27Z</updated>
+    <summary>0x001C8460 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_001C8580 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001C8580"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001C8580</id>
+    <updated>2026-11-24T18:17:08Z</updated>
+    <summary>0x001C8580 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_001C8430 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001C8430"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001C8430</id>
+    <updated>2026-11-24T18:17:08Z</updated>
+    <summary>0x001C8430 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_001C8400 (Xbox, 33 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001C8400"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001C8400</id>
+    <updated>2026-11-24T18:17:08Z</updated>
+    <summary>0x001C8400 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0029BA60 (Xbox, 7 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x0029BA60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x0029BA60</id>
+    <updated>2026-11-24T18:16:49Z</updated>
+    <summary>0x0029BA60 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_000B2070 (Xbox, 7 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000B2070"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000B2070</id>
+    <updated>2026-11-24T18:16:49Z</updated>
+    <summary>0x000B2070 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_001C8540 (Xbox, 11 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x001C8540"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x001C8540</id>
+    <updated>2026-11-24T18:16:29Z</updated>
+    <summary>0x001C8540 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00076DA0 (Xbox, 11 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00076DA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00076DA0</id>
+    <updated>2026-11-24T18:16:29Z</updated>
+    <summary>0x00076DA0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_000766B0 (Xbox, 8 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000766B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000766B0</id>
+    <updated>2026-11-24T18:16:10Z</updated>
+    <summary>0x000766B0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_000766C0 (Xbox, 8 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x000766C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x000766C0</id>
+    <updated>2026-11-24T18:15:48Z</updated>
+    <summary>0x000766C0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00067670 (Xbox, 8 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00067670"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00067670</id>
+    <updated>2026-11-24T18:15:48Z</updated>
+    <summary>0x00067670 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00053460 (Xbox, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00053460"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00053460</id>
+    <updated>2026-11-24T18:15:11Z</updated>
+    <summary>0x00053460 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
   <entry>
     <title>sub_00325170 (Xbox, 26 bytes) by RRutherrfordd (Founder)</title>
     <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00325170"/>
@@ -167,194 +356,5 @@
     <id>tag:scarface-decomp.pages.dev,2026:xb:0x0031A280</id>
     <updated>2026-11-24T12:10:18Z</updated>
     <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x0031A280 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003195E0 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003195E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003195E0</id>
-    <updated>2026-11-24T12:09:51Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003195E0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00319400 (Xbox, 20 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00319400"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00319400</id>
-    <updated>2026-11-24T12:09:27Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00319400 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003193E0 (Xbox, 20 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003193E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003193E0</id>
-    <updated>2026-11-24T12:09:02Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003193E0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00318C00 (Xbox, 32 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00318C00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00318C00</id>
-    <updated>2026-11-24T12:08:36Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00318C00 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00316950 (Xbox, 37 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00316950"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00316950</id>
-    <updated>2026-11-24T12:08:06Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00316950 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003168D0 (Xbox, 37 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003168D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003168D0</id>
-    <updated>2026-11-24T12:07:41Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003168D0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003168A0 (Xbox, 37 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003168A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003168A0</id>
-    <updated>2026-11-24T12:07:16Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003168A0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003164C0 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003164C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003164C0</id>
-    <updated>2026-11-24T12:06:51Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003164C0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00316380 (Xbox, 29 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00316380"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00316380</id>
-    <updated>2026-11-24T12:06:28Z</updated>
-    <summary>0x00316380 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00316340 (Xbox, 29 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00316340"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00316340</id>
-    <updated>2026-11-24T12:06:03Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00316340 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00315F10 (Xbox, 67 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00315F10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00315F10</id>
-    <updated>2026-11-24T12:05:38Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00315F10 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003155C0 (Xbox, 29 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003155C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003155C0</id>
-    <updated>2026-11-24T12:05:13Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003155C0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003154F0 (Xbox, 37 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003154F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003154F0</id>
-    <updated>2026-11-24T12:04:48Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003154F0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003154C0 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003154C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003154C0</id>
-    <updated>2026-11-24T12:04:24Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003154C0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003152B0 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003152B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003152B0</id>
-    <updated>2026-11-24T12:03:59Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003152B0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00315230 (Xbox, 20 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00315230"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00315230</id>
-    <updated>2026-11-24T12:03:34Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00315230 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00314F00 (Xbox, 37 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00314F00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00314F00</id>
-    <updated>2026-11-24T12:03:09Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00314F00 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00314D50 (Xbox, 37 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00314D50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00314D50</id>
-    <updated>2026-11-24T12:02:44Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00314D50 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00314C60 (Xbox, 37 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00314C60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00314C60</id>
-    <updated>2026-11-24T12:02:19Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00314C60 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00314C30 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00314C30"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00314C30</id>
-    <updated>2026-11-24T12:01:55Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00314C30 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003149C0 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003149C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003149C0</id>
-    <updated>2026-11-24T12:01:30Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003149C0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003145B0 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003145B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003145B0</id>
-    <updated>2026-11-24T12:01:05Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003145B0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003138B0 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003138B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003138B0</id>
-    <updated>2026-11-24T12:00:38Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003138B0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00313840 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00313840"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00313840</id>
-    <updated>2026-11-24T12:00:13Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00313840 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_003132B0 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x003132B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x003132B0</id>
-    <updated>2026-11-24T11:59:48Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x003132B0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00313000 (Xbox, 37 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00313000"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00313000</id>
-    <updated>2026-11-24T11:59:23Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00313000 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00312D10 (Xbox, 20 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00312D10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00312D10</id>
-    <updated>2026-11-24T11:58:58Z</updated>
-    <summary>Start-up code (a static initializer): runs once before the game starts, setting up one of its global objects. 0x00312D10 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

@@ -1,14 +1,14 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-24 12:19:39",
+  "updated_at": "2026-11-24 18:30:15",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
     "pc": 780,
-    "xb": 11678,
-    "proto": 10948,
+    "xb": 11703,
+    "proto": 10950,
     "ps2": 0,
-    "total": 12458,
-    "bytes": 438726,
+    "total": 12483,
+    "bytes": 440022,
     "ps2_bytes": 0,
     "stubs": 2172
   },
@@ -22,9 +22,9 @@
   "source": {
     "member_functions": {
       "pc": 489,
-      "xb": 4378,
+      "xb": 4380,
       "proto": 4342,
-      "total": 4867
+      "total": 4869
     },
     "shared_class": {
       "pc": 159,
@@ -34,19 +34,19 @@
     },
     "named": {
       "pc": 1,
-      "xb": 2335,
-      "proto": 2263,
-      "total": 2336
+      "xb": 2336,
+      "proto": 2265,
+      "total": 2337
     }
   },
   "described": {
     "pc": 60,
-    "xb": 2679,
+    "xb": 2683,
     "proto": 1207,
     "ps2": 0,
-    "total": 2739,
+    "total": 2743,
     "how": {
-      "human": 433,
+      "human": 437,
       "read": 169,
       "bound": 0,
       "shape": 2106,
@@ -54,31 +54,31 @@
     }
   },
   "size_buckets": {
-    "1-9 B": 2097,
-    "10-19 B": 1781,
-    "20-39 B": 4544,
-    "40-79 B": 3172,
-    "80+ B": 864
+    "1-9 B": 2105,
+    "10-19 B": 1786,
+    "20-39 B": 4551,
+    "40-79 B": 3173,
+    "80+ B": 868
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 17893,
-    "NoahBPeterson": 5405,
+    "RRutherrfordd (Founder)": 17919,
+    "NoahBPeterson": 5406,
     "lemiur": 108
   },
   "unattributed": 0,
   "queue": {
     "pc": 734,
-    "xb": 10374,
-    "proto": 9769,
+    "xb": 10349,
+    "proto": 9767,
     "ps2": 24297,
-    "total": 11108,
+    "total": 11083,
     "tiers": {
-      "TIER_1_QUICK": 207,
-      "TIER_2_SMALL": 839,
-      "TIER_3_MEDIUM": 2412,
-      "TIER_4_LARGE": 7650
+      "TIER_1_QUICK": 194,
+      "TIER_2_SMALL": 832,
+      "TIER_3_MEDIUM": 2411,
+      "TIER_4_LARGE": 7646
     },
-    "bytes": 2629118,
+    "bytes": 2627822,
     "stubs": 101
   },
   "good_first": [
