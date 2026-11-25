@@ -257,13 +257,176 @@ def _four(words: Tuple[int, ...], gp: int) -> List[str]:
     return []
 
 
+# ---- functions that end by jumping into another one --------------------------------------------------------
+#
+# At -O3 the compiler turns a call that is the last thing a function does into a jump, when the function
+# needs no stack frame of its own (the examiner's reading of the compiler's own option text, round PS2).
+# So `void f() { g(&a, &b); }` becomes: set up the arguments, `j g`, with one of them in the delay slot.
+# These are tried as a family: the pass stops trying a family that has not matched once in a few tries.
+
+A_REGS = {4: 0, 5: 1}                 # a0, a1
+AT, T9 = 1, 25
+JR_T9 = 0x03200008
+
+
+def _jump_target(w: int, pc: int) -> int:
+    return ((pc + 4) & 0xF0000000) | ((w & 0x03FFFFFF) << 2)
+
+
+def _tail_args(i0: int, i2: int, gp: int):
+    """What a0/a1 hold at the jump, from the two instructions around it: ({reg index: (expression, C type)},
+    declarations, parameters used) or None."""
+    args, decls, used = {}, [], set()
+    op0, rs0, rt0, imm0 = _fields(i0)
+    op2, rs2, rt2, imm2 = _fields(i2)
+
+    def simple(w: int) -> bool:
+        """One instruction that sets a0 or a1 from $gp or from an incoming argument."""
+        op, rs, rt, imm = _fields(w)
+        off = _s16(imm)
+        if w in (0x0080282D, 0x00802821, 0x00802825):                 # move a1, a0
+            args[1] = ("p0", "void*")
+            used.add(0)
+            return True
+        if rt not in A_REGS:
+            return False
+        k = A_REGS[rt]
+        if op == 0x09 and rs == GP and gp:                            # addiu aK, gp, N
+            name = f"D_{(gp + off) & 0xFFFFFFFF:08X}"
+            decls.append(f"extern int {name};")
+            args[k] = (f"&{name}", "int*")
+            return True
+        if op == 0x23 and rs == GP and gp:                            # lw aK, N(gp)
+            name = f"D_{(gp + off) & 0xFFFFFFFF:08X}"
+            decls.append(f"extern int {name};")
+            args[k] = (name, "int")
+            return True
+        if op == 0x23 and rs in A_REGS and off >= 0:                  # lw aK, N(aJ)
+            j = A_REGS[rs]
+            used.add(j)
+            args[k] = (f"p{j}->m_Field{off:X}", "int", j, off)
+            return True
+        return False
+
+    if op0 == 0x0F and rs0 == 0 and rs2 == rt0 and rt2 == A0 and rt0 in (AT, A0):          # lui; then a0 from it
+        name = f"D_{((imm0 << 16) + _s16(imm2)) & 0xFFFFFFFF:08X}"
+        if op2 == 0x23 and rt0 == AT:
+            return {0: (f"{name}[0]", "int")}, [f"extern int {name}[];"], set()
+        if op2 == 0x09 and rt0 == A0:
+            return {0: (name, "char*")}, [f"extern char {name}[];"], set()
+        return None
+    if op0 == 0x23 and rs0 == A0 and rt0 == V0 and op2 == 0x23 and rs2 == V0 and rt2 == A0:  # a0 = p0->x->y
+        o1, o2 = _s16(imm0), _s16(imm2)
+        if o1 < 0 or o2 < 0:
+            return None
+        return {0: (f"p0->m_Field{o1:X}->m_Field{o2:X}", "int", 0, o1, o2)}, [], {0}
+    if i2 == NOP:
+        return (args, decls, used) if simple(i0) and 0 in args else None
+    if not (simple(i0) and simple(i2)) or len(args) != 2:
+        return None
+    return args, decls, used
+
+
+def _tail_call(words: Tuple[int, ...], va: int, gp: int) -> List[str]:
+    """instruction; j target; instruction."""
+    if len(words) != 3 or (words[1] >> 26) != 0x02:
+        return []
+    got = _tail_args(words[0], words[2], gp)
+    if got is None:
+        return []
+    args, decls, used = got
+    target = f"func_{_jump_target(words[1], va + 4):08X}"
+    structs, params = [], []
+    for j in sorted(used):
+        fields = [a for a in args.values() if len(a) >= 4 and a[2] == j]
+        if not fields:
+            params.append(f"void* p{j}")
+            continue
+        if len(fields[0]) == 5:                                        # p0->x->y
+            _e, _t, _j, o1, o2 = fields[0]
+            structs.append("struct Inner\n{\n" + (f"    char m_pad00[0x{o2:X}];\n" if o2 else "")
+                           + f"    int m_Field{o2:X}; // +0x{o2:X}\n}};\n")
+            structs.append(f"struct Arg{j}\n{{\n" + (f"    char m_pad00[0x{o1:X}];\n" if o1 else "")
+                           + f"    Inner* m_Field{o1:X}; // +0x{o1:X}\n}};\n")
+        else:
+            off = fields[0][3]
+            structs.append(f"struct Arg{j}\n{{\n" + (f"    char m_pad00[0x{off:X}];\n" if off else "")
+                           + f"    int m_Field{off:X}; // +0x{off:X}\n}};\n")
+        params.append(f"Arg{j}* p{j}")
+    if 1 in used and 0 not in used:
+        params.insert(0, "void*")                                      # a1 is read, so there is a first argument
+    order = sorted(args)
+    if order != list(range(len(order))):
+        return []                                                      # a1 set but not a0: not this shape
+    call = ", ".join(args[k][0] for k in order)
+    proto = ", ".join(args[k][1] for k in order)
+    head = (f"// Passes {len(order)} value{'s' if len(order) != 1 else ''} on to {target} and lets it return to this "
+            "function's caller (the call is a jump).\n")
+    body = "\n".join(structs + sorted(set(decls)) + [f'extern "C" void {target}({proto});'])
+    return [head + body + f"\n\nvoid Forward({', '.join(params)})\n{{\n    {target}({call});\n}}\n"]
+
+
+def _virtual_forward(words: Tuple[int, ...]) -> List[str]:
+    """lw t9, N(a0); lw t9, M(t9); jr t9; nop -- and the same through a pointer member first."""
+    w = list(words)
+    through = None
+    if len(w) == 5:
+        op, rs, rt, imm = _fields(w[0])
+        if op != 0x23 or rs != A0 or rt != A0 or _s16(imm) < 0:
+            return []
+        through, w = _s16(imm), w[1:]
+    if len(w) != 4 or w[2] != JR_T9 or w[3] != NOP:
+        return []
+    op0, rs0, rt0, imm0 = _fields(w[0])
+    op1, rs1, rt1, imm1 = _fields(w[1])
+    if not (op0 == 0x23 and rs0 == A0 and rt0 == T9 and op1 == 0x23 and rs1 == T9 and rt1 == T9):
+        return []
+    vptr, slot_off = _s16(imm0), _s16(imm1)
+    if vptr < 0 or slot_off < 0 or slot_off % 4 or vptr % 4:
+        return []
+    out = []
+    for first in (8, 0):                         # the table's first method at +8 (after two header words), or at +0
+        if slot_off < first:
+            continue
+        k = (slot_off - first) // 4
+        if k > 400:
+            continue
+        methods = "".join(f"    virtual void Method{i}();\n" for i in range(k + 1))
+        pad = f"    char m_pad00[0x{vptr:X}];\n" if vptr else ""
+        if through is None:
+            out.append(f"// Calls its own virtual method number {k} and lets it return to this function's caller.\n"
+                       f"class Object\n{{\npublic:\n{pad}{methods}    void Forward();\n}};\n\n"
+                       f"void Object::Forward()\n{{\n    Method{k}();\n}}\n")
+        else:
+            tpad = f"    char m_pad00[0x{through:X}];\n" if through else ""
+            out.append(f"// Calls virtual method number {k} of the object its member at +0x{through:X} points to, and lets "
+                       "it return to this function's caller.\n"
+                       f"class Inner\n{{\npublic:\n{pad}{methods}}};\n\n"
+                       f"class Object\n{{\npublic:\n    void Forward();\n{tpad}    Inner* m_Field{through:X}; // +0x{through:X}\n}};\n\n"
+                       f"void Object::Forward()\n{{\n    m_Field{through:X}->Method{k}();\n}}\n")
+    return out
+
+
+def family(words: Tuple[int, ...]) -> str:
+    """'' for the shapes that have matched from the first night on; a name for a family still on trial (the
+    pass stops trying a family that has not matched once in its first few tries)."""
+    words = tuple(words)
+    if len(words) == 3 and (words[1] >> 26) == 0x02:
+        return "tail call"
+    if len(words) in (4, 5) and words[-2] == JR_T9:
+        return "virtual forward"
+    return ""
+
+
 def sources(words: Tuple[int, ...], va: int = 0, gp: int = 0) -> List[str]:
     """C++ to try for a function made of these instructions, the likeliest first."""
     words = tuple(words)
     if len(words) == 2 and words[0] == JR_RA:
         return _two(words, gp)
     if len(words) == 3:
-        return _three(words) or _three_more(words, gp)
+        return _three(words) or _three_more(words, gp) or _tail_call(words, va, gp)
     if len(words) == 4:
-        return _four(words, gp)
+        return _four(words, gp) or _virtual_forward(words)
+    if len(words) == 5:
+        return _virtual_forward(words)
     return []

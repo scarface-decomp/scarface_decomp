@@ -144,6 +144,7 @@ def pass_env(monkeypatch, tmp_path):
     monkeypatch.setattr(server, "BRIDGE", FakeBridge({}, connected=False))
     monkeypatch.setattr(server, "PS2_OBJECTS", {})
     monkeypatch.setattr(server, "ps2_easy_codes", lambda t: ["// first\nint a();\n", "// second\nint b();\n"])
+    monkeypatch.setattr(server, "ps2_family", lambda t: "")
     monkeypatch.setattr(server, "_held_by_someone_else", lambda t, user: False)
     monkeypatch.setattr(server, "record_verified", lambda t, code, user, tool, res, **k: recorded.append((t["id"], code, user, tool)))
     for name in ("save_overlay", "save_registry", "append_audit"):
@@ -256,3 +257,53 @@ def test_members_are_padded_to_their_places():
     text = PSH._class([(4, "int"), (0, "short")], "void Clear()")
     assert text.index("short m_Field0;") < text.index("char m_pad02[0x2];") < text.index("int m_Field4;")
     assert "m_pad" not in PSH._class([(0, "int"), (4, "float")], "void f()")
+
+
+# --------------------------------------------------------------------------- functions that end in a jump
+
+def test_tail_call_shapes():
+    gp = 0x0080E170
+    two = PSH.sources((0x2784ADE0, 0x081B8C40, 0x2785ADE4), 0x003EB610, gp)[0]     # addiu a0, gp; j; addiu a1, gp
+    assert 'extern "C" void func_006E3100(int*, int*);' in two and "func_006E3100(&D_00808F50, &D_00808F54);" in two
+    moved = PSH.sources((0x0080282D, 0x081477F0, 0x2784AE88), 0x0040BA60, gp)[0]   # move a1, a0; j; addiu a0, gp
+    assert "void Forward(void* p0)" in moved and "func_0051DFC0(&D_00808FF8, p0);" in moved
+    members = PSH.sources((0x8CA5000C, 0x0818E1A8, 0x8C840004), 0x00644840, gp)[0]  # lw a1, 0xC(a1); j; lw a0, 4(a0)
+    assert "void Forward(Arg0* p0, Arg1* p1)" in members and "func_006386A0(p0->m_Field4, p1->m_FieldC);" in members
+    chain = PSH.sources((0x8C820000, 0x081B110C, 0x8C440028), 0x00484820, gp)[0]    # lw v0, 0(a0); j; lw a0, 0x28(v0)
+    assert "Inner* m_Field0;" in chain and "func_006C4430(p0->m_Field0->m_Field28);" in chain
+    far = PSH.sources((0x3C010082, 0x0811FBBC, 0x8C24DFE8), 0x0038EC30, gp)[0]      # lui at; j; lw a0, lo(at)
+    assert "extern int D_0081DFE8[];" in far and "func_0047EEF0(D_0081DFE8[0]);" in far
+    text = PSH.sources((0x3C040079, 0x0810E1A4, 0x24845890), 0x00398F90, gp)[0]     # lui a0; j; addiu a0, a0, lo
+    assert "extern char D_00795890[];" in text and "func_00438690(D_00795890);" in text
+    assert PSH.sources((0x2785ADE4, 0x081B8C40, 0), 0x003EB610, gp) == []           # only a1 set: not this shape
+    assert PSH.family((0x2784ADE0, 0x081B8C40, 0x2785ADE4)) == "tail call" and PSH.family((JR_RA, 0)) == ""
+
+
+def test_virtual_forward_shapes():
+    own = PSH.sources((0x8C990000, 0x8F3900E4, 0x03200008, 0))                      # lw t9, 0(a0); lw t9, 0xE4(t9); jr t9
+    assert "virtual void Method55();" in own[0] and "    Method55();" in own[0] and "Method56" not in own[0]
+    assert "    Method57();" in own[1]                                              # the other reading of the table
+    member = PSH.sources((0x8C840020, 0x8C990000, 0x8F390028, 0x03200008, 0))
+    assert "Inner* m_Field20;" in member[0] and "m_Field20->Method8();" in member[0]
+    assert PSH.family((0x8C990000, 0x8F3900E4, 0x03200008, 0)) == "virtual forward"
+    assert PSH.sources((0x8C990000, 0x8F3900E6, 0x03200008, 0)) == []               # not a table slot
+
+
+def test_a_family_on_trial_is_dropped_when_it_never_matches(pass_env, monkeypatch):
+    tasks, recorded, calls = pass_env
+    more = [dict(TASK, id=f"ps2_{0x00400000 + 16 * i:08X}", fva_int=0x00400000 + 16 * i, symbol=f"func_{0x00400000 + 16 * i:08X}",
+                 size=12) for i in range(10)]
+    monkeypatch.setattr(server, "ALL_TASKS", more)
+    monkeypatch.setattr(server, "ps2_family", lambda t: "tail call")
+    monkeypatch.setattr(server, "ps2_easy_codes", lambda t: [f"// {t['id']}\nint a();\n"])
+
+    def verify(t, code, **k):
+        calls.append(t["id"])
+        server.PS2_OBJECTS[key_of(code)] = b"o"
+        return {"ok": True, "verified": False}
+    monkeypatch.setattr(server, "run_verify_ps2", verify)
+    st = server.ps2_easy_pass("Alice")
+    assert len(calls) == server.PS2_FAMILY_TRIES and st["compiles"] == server.PS2_FAMILY_TRIES
+    assert "tail call" in st["last"] and "left alone" in st["last"]
+    tried = json.loads(server.PS2_EASY_JSON.read_text(encoding="utf-8"))["tried"]
+    assert len(tried) == server.PS2_FAMILY_TRIES                # the rest were not touched: tried again when the shape is fixed
