@@ -5,6 +5,7 @@ with several optimisation settings, and say how close each gets to the game's by
 
     python portal/scripts/ps2_flag_probe.py                       the current round of questions (below)
     python portal/scripts/ps2_flag_probe.py --sweep               the first two questions, every optimisation setting
+    python portal/scripts/ps2_flag_probe.py --recheck             30 matched functions, on build 3.0b52 and the lane's build
     python portal/scripts/ps2_flag_probe.py FILE.cpp --va 0x003EB610
     python portal/scripts/ps2_flag_probe.py FILE.cpp --va 0x003EB610 --flags "-O4,p -lang c++ -str readonly -Cpp_exceptions off"
     python portal/scripts/ps2_flag_probe.py FILE.cpp --va 0x003EB610 --compiler mwcps2-3.0.1b87-031208
@@ -24,10 +25,9 @@ The first two questions came from the first PS2 easy-pass runs (November 2026):
 The game does both everywhere (1,772 functions end in such a jump, in every part of the code; the examiner's
 census, November 2026), so the answer is one build or one setting for the whole game.
 
-Without arguments the probe runs the current round (ROUND, below): 33 compiles that ask which 3.0.1 build keeps
-the source's order and still fills its delay slots when the scheduler is off. `--sweep` runs the first two
-questions with the lane's build and 16 other settings; `--all-builds` adds the other 22 builds with the lane's
-flags.
+Without arguments the probe runs the current round (ROUND, below). `--sweep` runs the first two questions with
+the lane's build and 16 other settings; `--all-builds` adds the other 22 builds with the lane's flags.
+`--recheck` compiles functions that are already matched again, with another build or with the lane's own.
 
 It asks for your handle and PIN (the PIN isn't shown, stored or printed).
 """
@@ -37,6 +37,7 @@ from __future__ import annotations
 import argparse
 import getpass
 import json
+import re
 import sys
 import urllib.error
 import urllib.request
@@ -115,6 +116,33 @@ ROUND = [
 ]
 
 
+REGISTRY = Path(__file__).resolve().parents[2] / "reports" / "verified_registry.json"
+
+
+def shape_of(code: str) -> str:
+    """A match's C++ without its comments and numbers: functions written the same way have the same shape."""
+    text = re.sub(r"//[^\n]*", "", code)
+    text = re.sub(r"\b(m_Field|m_pad|D_|func_|Method|Arg)[0-9A-Fa-f]+", r"\1N", text)      # names made from an offset or address
+    return re.sub(r"\s+", " ", re.sub(r"0x[0-9A-Fa-f]+|\d+", "N", text)).strip()
+
+
+def recheck_cases(count: int, compilers: list, registry: Path = REGISTRY) -> list:
+    """count functions the registry already has matched for the main PS2 program, one for each way of writing
+    one (half of them the commonest ways, half the largest functions), each to be compiled again with every
+    build in compilers and the lane's flags. It answers "does this build also make what has been matched?" for a build other than the lane's,
+    and "do the matches recorded before exceptions were turned off still hold?" for the lane's own."""
+    entries = [e for e in json.loads(registry.read_text(encoding="utf-8")).get("entries", {}).values()
+               if e.get("bin") == "ps2" and e.get("code")]
+    by_shape: dict = {}
+    for e in sorted(entries, key=lambda e: e["va"]):
+        by_shape.setdefault(shape_of(e["code"]), []).append(e)
+    common = [g[0] for g in sorted(by_shape.values(), key=lambda g: (-len(g), g[0]["va"]))[:count // 2]]
+    large = [g[0] for g in sorted(by_shape.values(), key=lambda g: (-int(g[0]["size"]), g[0]["va"])) if g[0] not in common]
+    picked = common + large[:count - len(common)]         # half the commonest ways, half the largest functions
+    return [(int(e["va"], 16), f"matched already ({e['size']} bytes; {len(by_shape[shape_of(e['code'])])} written this way)",
+             e["code"], on(compilers)) for e in picked]
+
+
 def call(base: str, path: str, body: dict) -> dict:
     req = urllib.request.Request(base + path, data=json.dumps(body).encode(), headers={"Content-Type": "application/json"})
     try:
@@ -178,11 +206,16 @@ def main() -> int:
                     help="the first two questions with every optimisation setting (17 compiles a function)")
     ap.add_argument("--all-builds", action="store_true",
                     help="also try every other CodeWarrior build with the lane's flags (22 more compiles a function)")
+    ap.add_argument("--recheck", type=int, nargs="?", const=30, metavar="N",
+                    help="compile N functions that are already matched (one for each way of writing one) with the "
+                         "last 3.0-line build and the lane's build, or with --compiler; default 30")
     ap.add_argument("--portal", default="http://127.0.0.1:8085", help="where your portal is running")
     args = ap.parse_args()
     if bool(args.file) != bool(args.va):
         ap.error("give a file and --va together, or neither")
-    if args.file:
+    if args.recheck:
+        cases = recheck_cases(args.recheck, args.compiler or [OLD_LINE[-1], LANE_COMPILER])
+    elif args.file:
         code = Path(args.file).read_text(encoding="utf-8")
         tries = ([{"compiler": c, "flags": f} for c in (args.compiler or [LANE_COMPILER]) for f in (args.flags or [LANE_FLAGS])]
                  if args.flags or args.compiler else default_tries(args.all_builds))
@@ -200,6 +233,7 @@ def main() -> int:
     say(f"{n} compile(s) on {len({va for va, _, _, _ in cases})} function(s): about {n * 3 // 60 + 1} minute(s). "
         "Leave your decomp.me tab open.")
     hits, rc = [], 0
+    tally: dict = {}                       # build -> [gave the game's bytes, compiled, the addresses that did not]
     for va, what, code, tries in cases:
         say(f"\n0x{va:08X}: {what}")
         for i in range(0, len(tries), CHUNK):
@@ -210,6 +244,13 @@ def main() -> int:
                 rc = 1
                 break
             hits += [(va, f"{what}: {label}", mark) for label, mark in show(res.get("rows", []))]
+            for row in res.get("rows", []):
+                t = tally.setdefault(row["compiler"], [0, 0, []])
+                t[1] += 1
+                if row.get("exact"):
+                    t[0] += 1
+                else:
+                    t[2].append(f"0x{va:08X}")
             if not res.get("ok"):
                 say("  " + (res.get("error") or "the portal could not do it"))
                 rc = 1
@@ -217,11 +258,20 @@ def main() -> int:
         if rc:
             break
     say()
-    for line in summary(hits):
+    for line in (recheck_summary(tally) if args.recheck else summary(hits)):
         say(line)
     if save():
         print(f"\nAll of the above is saved in {REPORT}")
     return rc
+
+
+def recheck_summary(tally: dict) -> list:
+    """How many of the functions already matched each build gives back, and which it does not."""
+    out = ["Of the functions already matched:"]
+    for compiler, (good, total, missed) in tally.items():
+        out.append(f"  {compiler.replace('mwcps2-', ''):<18} gives the game's bytes for {good} of {total}"
+                   + (f"; not for {', '.join(missed)}" if missed else ""))
+    return out
 
 
 def summary(hits: list) -> list:
