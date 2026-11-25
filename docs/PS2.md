@@ -166,7 +166,22 @@ Run without arguments, the probe asks whether the table below was right to rule 
 * It compiles the jump and the float store on those builds with the lane's flags.
 * It tries the float store on the lane's own build with six `#pragma` settings and written three other ways.
 
-That is 29 compiles. `--sweep` runs the earlier two questions with every optimisation setting again.
+* It compiles the first jump shape the easy pass tried, which did not match (below), as the pass writes it
+  and two other ways.
+
+That is 32 compiles. `--sweep` runs the earlier two questions with every optimisation setting again.
+
+### The easy pass's first run with exceptions off
+
+377 functions matched in 400 compiles, all of them the 12- and 16-byte shapes left over from the earlier
+runs. No jump matched, and that was the trial rule, not the flags. The pass took "ends in a jump" for one
+family and gave it six tries; in address order those went to two functions it has no code for and four of
+one shape (a global read from its full address, then the jump: `lui $at; j; lw $a0`), all of which failed.
+The shape the probe had proved, two small-data addresses and a jump (45 functions), was never reached.
+
+Each way of writing a jump is now a family of its own (ten of them, 145 functions), with its own six tries,
+and a function the pass has no code for is on no trial. Another 114 three-instruction jumps pass constants,
+zeros and arguments the pass does not write yet.
 
 ## How the compiler was worked out
 

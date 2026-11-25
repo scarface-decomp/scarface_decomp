@@ -24,9 +24,9 @@ The first two questions came from the first PS2 easy-pass runs (November 2026):
 The game does both everywhere (1,772 functions end in such a jump, in every part of the code; the examiner's
 census, November 2026), so the answer is one build or one setting for the whole game.
 
-Without arguments the probe runs the current round (ROUND, below): 29 compiles that ask whether the 3.0 line
+Without arguments the probe runs the current round (ROUND, below): 32 compiles that ask whether the 3.0 line
 of builds, which do store the float first, could be the game's compiler after all, and whether a `#pragma` or
-another way of writing it changes the lane's own build. `--sweep` runs the first two questions with the lane's
+another way of writing it changes the lane's own build, and what the easy pass's first jump shape compiles to. `--sweep` runs the first two questions with the lane's
 build and 16 other settings; `--all-builds` adds the other 22 builds with the lane's flags.
 
 It asks for your handle and PIN (the PIN isn't shown, stored or printed).
@@ -114,6 +114,18 @@ ROUND = (
         + "bool Object::Set(float value)\n{\n    return (m_FieldC = value, true);\n}\n", on([LANE_COMPILER])),
        (0x00392940, "the float store, as a plain function", "struct Object\n{\n    char m_pad00[0xC];\n    float m_FieldC;\n};\n\n"
         "int Set(Object* object, float value)\n{\n    object->m_FieldC = value;\n    return 1;\n}\n", on([LANE_COMPILER]))]
+    # 4. The easy pass's first run with exceptions off: the jump shape it tried first (a global read from its
+    #    full address, then the jump) failed four times. What does that text compile to? And two other ways.
+    + [(0x0038EC30, "a jump after reading a global, as the easy pass writes it",
+        'extern int D_0081DFE8[];\nextern "C" void func_0047EEF0(int);\n\n'
+        "void Forward()\n{\n    func_0047EEF0(D_0081DFE8[0]);\n}\n", on([LANE_COMPILER])),
+       (0x0038EC30, "that jump, with the global as a pointer to an object",
+        'struct Manager;\nextern Manager* D_0081DFE8;\nextern "C" void func_0047EEF0(Manager*);\n\n'
+        "void Forward()\n{\n    func_0047EEF0(D_0081DFE8);\n}\n", on([LANE_COMPILER])),
+       (0x0037DBF0, "a jump passing the object, one of its members and a zero",
+        'extern "C" void func_0039A050(void*, int, int);\n\n'
+        "class Object\n{\npublic:\n    void Forward();\n    char m_pad00[0xD0];\n    int m_FieldD0; // +0xD0\n};\n\n"
+        "void Object::Forward()\n{\n    func_0039A050(this, m_FieldD0, 0);\n}\n", on([LANE_COMPILER]))]
 )
 
 
