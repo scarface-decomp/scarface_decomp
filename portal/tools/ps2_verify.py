@@ -28,6 +28,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import re
 import shutil
 import struct
 import subprocess
@@ -43,6 +44,18 @@ from ps2_mips import decode
 
 COMPILER = "mwcps2-3.0.1b103-040528"
 FLAGS = "-O3 -lang c++ -str readonly"
+# Flag sets a probe may ask for (portal/scripts/ps2_flag_probe.py): only words from this list, so a probe can
+# change how the compiler optimises and nothing else. Parts of the game may have been built with other
+# optimisation settings than FLAGS, as the Xbox game's libraries were.
+PROBE_WORDS = re.compile(r"^(?:-O[0-4](?:,[ps])?|-opt|speed|space|level=[0-4]|-lang|c\+\+|c|-str|readonly|reuse|pool|"
+                         r"-inline|on|off|auto|deferred|-fp|single|-sdatathreshold|\d{1,3}|-RTTI|-Cpp_exceptions|"
+                         r"-schedule|-peephole)$")
+
+
+def probe_flags_ok(flags: str) -> bool:
+    words = str(flags).split()
+    return 0 < len(words) <= 16 and all(PROBE_WORDS.match(w) for w in words)
+
 PLATFORM = "ps2"
 DECOMPME_URL = os.environ.get("SCARFACE_DECOMPME_URL", "https://decomp.me").rstrip("/")
 USER_AGENT = "scarface-decomp-portal (+https://github.com/scarface-decomp/scarface_decomp)"
@@ -405,7 +418,8 @@ def _local_runner(exe: Path) -> Optional[List[str]]:
     return [wine, str(exe)] if wine else None
 
 
-def compile_locally(source: str, context: str = "", compiler_dir: Optional[Path] = None) -> dict:
+def compile_locally(source: str, context: str = "", compiler_dir: Optional[Path] = None,
+                    flags: str = "") -> dict:
     """Compile with the copy of the game's compiler on this computer. The same answer as
     compile_on_decompme: {ok, object (bytes), output} or {ok: False, compiler_error | error}."""
     d = compiler_dir or local_compiler()
@@ -418,7 +432,7 @@ def compile_locally(source: str, context: str = "", compiler_dir: Optional[Path]
     text = (context.replace("\r\n", "\n") + "\n" if context.strip() else "") + source.replace("\r\n", "\n")
     with tempfile.TemporaryDirectory(prefix="scarface_ps2_") as tmp:
         (Path(tmp) / "candidate.cpp").write_text(text, encoding="utf-8")
-        cmd = runner + ["-c"] + FLAGS.split() + ["-nostdinc", "-stderr", "candidate.cpp", "-o", "candidate.o"]
+        cmd = runner + ["-c"] + (flags or FLAGS).split() + ["-nostdinc", "-stderr", "candidate.cpp", "-o", "candidate.o"]
         try:
             p = subprocess.run(cmd, cwd=tmp, capture_output=True, timeout=LOCAL_TIMEOUT)
         except subprocess.TimeoutExpired:
@@ -436,10 +450,11 @@ def compile_locally(source: str, context: str = "", compiler_dir: Optional[Path]
         return {"ok": True, "object": obj.read_bytes(), "output": out}
 
 
-def compile_on_decompme(slug: str, source: str, context: str = "", base_url: str = DECOMPME_URL) -> dict:
+def compile_on_decompme(slug: str, source: str, context: str = "", base_url: str = DECOMPME_URL,
+                        flags: str = "") -> dict:
     """Compile with the game's compiler on decomp.me, without saving anything there.
     {ok, object (bytes), output} or {ok: False, error, unreachable?, compiler_error?}."""
-    body = {"compiler": COMPILER, "compiler_flags": FLAGS, "source_code": source.replace("\r\n", "\n"),
+    body = {"compiler": COMPILER, "compiler_flags": flags or FLAGS, "source_code": source.replace("\r\n", "\n"),
             "context": context.replace("\r\n", "\n"), "include_objects": True}
     try:
         st, data, raw = _post_json(f"{base_url}/api/scratch/{slug}/compile", body)

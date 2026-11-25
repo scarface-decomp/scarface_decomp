@@ -1121,13 +1121,13 @@ PS2_UNREACHABLE = ("PS2 functions are compiled on decomp.me (the game's PS2 comp
                    "follow the steps that just opened. ({why})")
 
 
-def ps2_job(t: dict, cpp_code: str, through: str = "") -> dict:
+def ps2_job(t: dict, cpp_code: str, through: str = "", flags: str = "") -> dict:
     """What the page's decomp.me connection has to do for a PS2 compile: make the function's scratch if it
     has none, then compile the C++ there and send back the object. through: a scratch to compile in
     instead (compiling saves nothing there, so one scratch can serve any number of functions)."""
     src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
     job = {"slug": through or t.get("decompme_slug", ""),
-           "compile": {"compiler": PV.COMPILER, "compiler_flags": PV.FLAGS, "source_code": src.replace("\r\n", "\n"),
+           "compile": {"compiler": PV.COMPILER, "compiler_flags": flags or PV.FLAGS, "source_code": src.replace("\r\n", "\n"),
                        "context": ctx.replace("\r\n", "\n"), "include_objects": True}}
     if not job["slug"]:
         job["create"] = {"json": ps2_scratch_fields(t, cpp_code)}
@@ -1141,17 +1141,17 @@ PS2_OBJECTS_MAX = 4000
 PS2_DIRECT = {"blocked": False}          # decomp.me turned this program away once: go through the tab from then on
 
 
-def _ps2_key(src: str, ctx: str) -> str:
-    return hashlib.sha256("\0".join((PV.COMPILER, PV.FLAGS, ctx, src)).encode("utf-8", "replace")).hexdigest()
+def _ps2_key(src: str, ctx: str, flags: str = "") -> str:
+    return hashlib.sha256("\0".join((PV.COMPILER, flags or PV.FLAGS, ctx, src)).encode("utf-8", "replace")).hexdigest()
 
 
-def ps2_compile(t: dict, cpp_code: str, through: str = "", bridge_only: bool = False) -> dict:
+def ps2_compile(t: dict, cpp_code: str, through: str = "", bridge_only: bool = False, flags: str = "") -> dict:
     """Compile for the PS2 by whatever way works here: an object already made from the same text, the
     compiler on this computer, decomp.me directly, or the person's connected decomp.me tab.
     {ok, object, output, slug?, cached?} | {ok: False, compiler_error} | {ok: False, error, unreachable: True}."""
     src, ctx = DME._inline_project_includes(cpp_code, [INCLUDE_DIR])
     src, ctx = src.replace("\r\n", "\n"), ctx.replace("\r\n", "\n")
-    key = _ps2_key(src, ctx)
+    key = _ps2_key(src, ctx, flags)
     if key in PS2_OBJECTS:
         return {"ok": True, "object": PS2_OBJECTS[key], "output": "", "cached": True}
 
@@ -1163,7 +1163,7 @@ def ps2_compile(t: dict, cpp_code: str, through: str = "", bridge_only: bool = F
         return res
 
     if PV.local_compiler() is not None and not bridge_only:
-        res = PV.compile_locally(src, ctx)
+        res = PV.compile_locally(src, ctx, flags=flags)
         if res.get("ok") or res.get("compiler_error") is not None:
             return keep(res)                               # otherwise it could not run here (no licence, say)
     slug = through or t.get("decompme_slug", "")
@@ -1175,14 +1175,14 @@ def ps2_compile(t: dict, cpp_code: str, through: str = "", bridge_only: bool = F
             elif made.get("unreachable"):
                 PS2_DIRECT["blocked"] = True
         if slug and not PS2_DIRECT["blocked"]:
-            res = PV.compile_on_decompme(slug, src, ctx)
+            res = PV.compile_on_decompme(slug, src, ctx, flags=flags)
             if res.get("ok") or res.get("compiler_error") is not None:
                 return keep(dict(res, slug=slug))
             if res.get("unreachable"):
                 PS2_DIRECT["blocked"] = True
     if not BRIDGE.connected():
         return {"ok": False, "unreachable": True, "error": "decomp.me turns this program away, and no decomp.me tab is connected"}
-    r = BRIDGE.run(ps2_job(t, cpp_code, through=slug))
+    r = BRIDGE.run(ps2_job(t, cpp_code, through=slug, flags=flags))
     if not r.get("ok"):
         return {"ok": False, "unreachable": True, "error": r.get("error") or "the decomp.me tab could not do it"}
     if not r.get("success") or not r.get("right_object"):
@@ -1195,7 +1195,8 @@ def ps2_compile(t: dict, cpp_code: str, through: str = "", bridge_only: bool = F
     return keep({"ok": True, "object": obj, "output": r.get("compiler_output", ""), "slug": r.get("slug", "")})
 
 
-def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "", through: str = "") -> dict:
+def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "", through: str = "",
+                   flags: str = "") -> dict:
     """Compile on decomp.me with the PS2 compiler, then compare the object with the game here. The object
     comes either from here (when this computer can reach decomp.me's API) or from the page, which compiled
     it through decomp.me in the browser (object_b64)."""
@@ -1217,7 +1218,7 @@ def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "",
         except (ValueError, TypeError):
             return {"ok": False, "compiler_error": "The page sent an object that could not be read."}
     else:
-        res = ps2_compile(t, cpp_code, through=through)
+        res = ps2_compile(t, cpp_code, through=through, flags=flags)
         got = res.get("slug", "")
         if got and not through and _SLUG_RE.match(got) and got != t.get("decompme_slug"):
             with STATE_LOCK:
@@ -1238,7 +1239,7 @@ def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "",
     if fn is None:
         return {"ok": False, "compiler_error": "The C++ compiled, but it has no function in it."}
     out = {"ok": True, **cmp, "compiled_sym": obj.name_of(fn), "compiled_hex": " ".join(f"{b:02X}" for b in fn.data),
-           "flags": PV.FLAGS, "compiler_output": res.get("output", "")}
+           "flags": flags or PV.FLAGS, "compiler_output": res.get("output", "")}
     out["verified"] = bool(out["is_exact"] and not out.get("hardcoded_addresses"))
     out["bytes_exact"] = out["is_exact"]
     out["is_exact"] = out["verified"]
@@ -1704,6 +1705,7 @@ PS2_EASY_JSON = PRIVATE_DIR / "ps2_easy_pass.json"        # the scratch compiled
 PS2_EASY_PAUSE = float(os.environ.get("SCARFACE_PS2_EASY_PAUSE", "2"))     # seconds between real compiles
 PS2_EASY_MAX = int(os.environ.get("SCARFACE_PS2_EASY_MAX", "400"))         # real compiles a run
 PS2_EASY_WAIT = float(os.environ.get("SCARFACE_PS2_EASY_WAIT", "75"))       # seconds to let the tab reconnect
+PS2_PROBE_MAX = 12                 # flag sets a probe may try at once
 PS2_SHAPE_SIZES = (8, 12, 16, 20)
 PS2_FAMILY_TRIES = 6             # a family of shapes on trial is dropped for the run after this many tries with no match
 PS2EASY: dict = {"running": False, "stop": False, "total": 0, "tried": 0, "matched": 0, "compiles": 0, "by": "", "last": ""}
@@ -3179,7 +3181,7 @@ class Handler(BaseHTTPRequestHandler):
             "/api/verify": self.post_verify, "/api/fast-synthesize": self.post_synth, "/api/ai-proxy": self.post_ai,
             "/api/git-sync": self.post_git, "/api/upload-script": self.post_upload,
             "/api/submit": self.post_submit, "/api/import-submission": self.post_import,
-            "/api/decompme": self.post_decompme, "/api/easy-pass": self.post_easy_pass, "/api/ps2-easy-pass": self.post_ps2_easy_pass, "/api/name": self.post_name,
+            "/api/decompme": self.post_decompme, "/api/easy-pass": self.post_easy_pass, "/api/ps2-easy-pass": self.post_ps2_easy_pass, "/api/ps2-probe": self.post_ps2_probe, "/api/name": self.post_name,
             "/api/game-files/start": self.post_game_files_start, "/api/game-files/stop": self.post_game_files_stop,
             "/api/game-files/blender": self.post_game_files_blender,
             "/api/game-files/blender-stop": self.post_game_files_blender_stop,
@@ -3239,6 +3241,40 @@ class Handler(BaseHTTPRequestHandler):
                 EASY["stop"] = True
             return self._json(dict(easy_status(), ok=True))
         return self._json(start_easy_pass(user))
+
+    def post_ps2_probe(self, body):
+        """Compile one PS2 function's C++ with other optimisation flags and say how close each gets. Nothing is
+        recorded: this is for finding out how a part of the game was built (portal/scripts/ps2_flag_probe.py)."""
+        user = self._auth(body)
+        if not user:
+            return
+        with STATE_LOCK:
+            t = TASK_BY_ID.get(body.get("id"))
+        if not t or not PO.is_ps2(t["bin"]):
+            return self._json({"ok": False, "error": "Not a PS2 function the portal knows."}, 404)
+        code = body.get("cpp_code")
+        sets = body.get("flag_sets")
+        if not isinstance(code, str) or not code.strip() or not isinstance(sets, list) or not 0 < len(sets) <= PS2_PROBE_MAX:
+            return self._json({"ok": False, "error": f"Send cpp_code and 1 to {PS2_PROBE_MAX} flag_sets."}, 400)
+        if not all(isinstance(f, str) and PV.probe_flags_ok(f) for f in sets):
+            return self._json({"ok": False, "error": "A flag set has a word that isn't an optimisation setting."}, 400)
+        state = read_json(PS2_EASY_JSON, {}) if PS2_EASY_JSON.exists() else {}
+        rows = []
+        for flags in sets:
+            real = _ps2_key(*DME._inline_project_includes(code, [INCLUDE_DIR]), flags) not in PS2_OBJECTS
+            res = run_verify_ps2(t, code, through=state.get("slug", "") or t.get("decompme_slug", ""), flags=flags)
+            if res.get("compiler_unavailable"):
+                return self._json({"ok": False, "not_connected": True, "rows": rows,
+                                   "error": "Your decomp.me tab isn't connected (docs/PS2.md has the steps)."})
+            rows.append({"flags": flags, "compiled": bool(res.get("ok")),
+                         "exact": bool(res.get("ok") and res.get("bytes_exact")),
+                         "verified": bool(res.get("ok") and res.get("verified") and not res.get("reloc_unverified")),
+                         "matched_bytes": res.get("matched_bytes", 0), "total_bytes": res.get("total_bytes", int(t["size"])),
+                         "compiled_size": res.get("compiled_size", 0), "compiled_hex": res.get("compiled_hex", ""),
+                         "error": (res.get("compiler_error") or "")[:300]})
+            if real:
+                time.sleep(PS2_EASY_PAUSE)
+        self._json({"ok": True, "id": t["id"], "rows": rows})
 
     def post_ps2_easy_pass(self, body):
         """Start, stop or ask about the PS2 easy pass (the portal's own starter code, through decomp.me)."""
