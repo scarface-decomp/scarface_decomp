@@ -1,5 +1,29 @@
 [
   {
+    "time": "2026-11-24 21:19:49",
+    "user": "RRutherfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "976 PS2 function(s) from the portal's starter code",
+    "va": "",
+    "bytes": "PS2 easy pass, no AI"
+  },
+  {
+    "time": "2026-11-24 20:43:35",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "658 look-alike(s) of func_0037AAB0",
+    "va": "PS2 0x0037AAB0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-24 20:38:08",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "func_0037AAB0",
+    "va": "PS2 0x0037AAB0",
+    "bytes": "8/8 B"
+  },
+  {
     "time": "2026-11-24 19:12:01",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
@@ -1973,30 +1997,6 @@
     "action": "VERIFIED",
     "symbol": "sub_002F1540",
     "va": "Proto 0x002F1540",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:47:40",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1500",
-    "va": "Proto 0x002F1500",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:47:17",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F14A0",
-    "va": "Proto 0x002F14A0",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 10:46:32",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F1460",
-    "va": "Proto 0x002F1460",
     "bytes": "50/50 B"
   }
 ]

@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay ModalsOverlayf.bin (business screens), loaded at 0x845480, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 0 of 124 functions matched (0.00%). NOT COMPLETE YET.
-// The 124 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 2 of 124 functions matched (1.61%). NOT COMPLETE YET.
+// The 122 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -17,7 +17,19 @@
 // [TODO] 0x00845C20 func_00845C20 (160 B)
 // [TODO] 0x00845CC0 func_00845CC0 (192 B)
 // [TODO] 0x00845D80 func_00845D80 (420 B)
-// [TODO] 0x00845F30 func_00845F30 (8 B)
+// ============================================================================
+// [VERIFIED] func_00845F30 (0x00845F30, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_00845F30 (PS2 0x00845F30, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_00845F30() {
+}
+
 // [TODO] 0x00845F40 func_00845F40 (208 B)
 // [TODO] 0x00846010 func_00846010 (600 B)
 // [TODO] 0x00846270 func_00846270 (212 B)
@@ -68,7 +80,19 @@
 // [TODO] 0x00849770 func_00849770 (180 B)
 // [TODO] 0x00849830 func_00849830 (144 B)
 // [TODO] 0x008498C0 func_008498C0 (144 B)
-// [TODO] 0x00849950 func_00849950 (8 B)
+// ============================================================================
+// [VERIFIED] func_00849950 (0x00849950, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_00849950 (PS2 0x00849950, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_00849950() {
+}
+
 // [TODO] 0x00849960 func_00849960 (68 B)
 // [TODO] 0x008499B0 func_008499B0 (92 B)
 // [TODO] 0x00849A10 func_00849A10 (96 B)

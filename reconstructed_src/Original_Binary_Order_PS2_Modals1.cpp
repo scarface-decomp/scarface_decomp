@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 overlay ModalsOverlay1f.bin (empire and mansion screens), loaded at 0x845480, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 0 of 102 functions matched (0.00%). NOT COMPLETE YET.
-// The 102 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 12 of 102 functions matched (11.76%). NOT COMPLETE YET.
+// The 90 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -79,7 +79,19 @@
 // [TODO] 0x0084A700 func_0084A700 (324 B)
 // [TODO] 0x0084A850 func_0084A850 (380 B)
 // [TODO] 0x0084A9D0 func_0084A9D0 (184 B)
-// [TODO] 0x0084AA90 func_0084AA90 (8 B)
+// ============================================================================
+// [VERIFIED] func_0084AA90 (0x0084AA90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084AA90 (PS2 0x0084AA90, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084AA90() {
+}
+
 // [TODO] 0x0084AAA0 func_0084AAA0 (88 B)
 // [TODO] 0x0084AB00 func_0084AB00 (88 B)
 // [TODO] 0x0084AB60 func_0084AB60 (96 B)
@@ -88,24 +100,156 @@
 // [TODO] 0x0084AC30 func_0084AC30 (96 B)
 // [TODO] 0x0084AC90 func_0084AC90 (12 B)
 // [TODO] 0x0084ACA0 func_0084ACA0 (8 B)
-// [TODO] 0x0084ACB0 func_0084ACB0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0084ACB0 (0x0084ACB0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084ACB0 (PS2 0x0084ACB0, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084ACB0() {
+}
+
 // [TODO] 0x0084ACC0 func_0084ACC0 (8 B)
 // [TODO] 0x0084ACD0 func_0084ACD0 (8 B)
 // [TODO] 0x0084ACE0 func_0084ACE0 (8 B)
 // [TODO] 0x0084ACF0 func_0084ACF0 (12 B)
-// [TODO] 0x0084AD00 func_0084AD00 (8 B)
-// [TODO] 0x0084AD10 func_0084AD10 (8 B)
-// [TODO] 0x0084AD20 func_0084AD20 (8 B)
+// ============================================================================
+// [VERIFIED] func_0084AD00 (0x0084AD00, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084AD00 (PS2 0x0084AD00, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084AD00() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AD10 (0x0084AD10, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084AD10 (PS2 0x0084AD10, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084AD10() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AD20 (0x0084AD20, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084AD20 (PS2 0x0084AD20, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084AD20() {
+}
+
 // [TODO] 0x0084AD30 func_0084AD30 (8 B)
 // [TODO] 0x0084AD40 func_0084AD40 (16 B)
-// [TODO] 0x0084AD50 func_0084AD50 (8 B)
-// [TODO] 0x0084AD60 func_0084AD60 (8 B)
-// [TODO] 0x0084AD70 func_0084AD70 (8 B)
-// [TODO] 0x0084AD80 func_0084AD80 (8 B)
-// [TODO] 0x0084AD90 func_0084AD90 (8 B)
+// ============================================================================
+// [VERIFIED] func_0084AD50 (0x0084AD50, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084AD50 (PS2 0x0084AD50, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084AD50() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AD60 (0x0084AD60, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084AD60 (PS2 0x0084AD60, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084AD60() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AD70 (0x0084AD70, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084AD70 (PS2 0x0084AD70, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084AD70() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AD80 (0x0084AD80, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084AD80 (PS2 0x0084AD80, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084AD80() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0084AD90 (0x0084AD90, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084AD90 (PS2 0x0084AD90, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084AD90() {
+}
+
 // [TODO] 0x0084ADA0 func_0084ADA0 (28 B)
-// [TODO] 0x0084ADC0 func_0084ADC0 (8 B)
-// [TODO] 0x0084ADD0 func_0084ADD0 (8 B)
+// ============================================================================
+// [VERIFIED] func_0084ADC0 (0x0084ADC0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084ADC0 (PS2 0x0084ADC0, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084ADC0() {
+}
+
+// ============================================================================
+// [VERIFIED] func_0084ADD0 (0x0084ADD0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
+// ============================================================================
+// Same machine code as func_0037AAB0 (PS2 0x0037AAB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// func_0084ADD0 (PS2 0x0084ADD0, 8 bytes) from the PS2 game.
+// Compiled on decomp.me with mwcps2-3.0.1b103-040528, flags -O3 -lang c++ -str readonly.
+// Name what it uses after their addresses (func_XXXXXXXX, D_XXXXXXXX) so each one can be checked.
+
+extern "C" void func_0084ADD0() {
+}
+
 // [TODO] 0x0084ADE0 func_0084ADE0 (8 B)
 // [TODO] 0x0084ADF0 func_0084ADF0 (8 B)
 // [TODO] 0x0084AE00 func_0084AE00 (8 B)

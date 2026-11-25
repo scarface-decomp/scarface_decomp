@@ -1,22 +1,22 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-24 19:11:41",
+  "updated_at": "2026-11-24 21:19:23",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
     "pc": 780,
     "xb": 11711,
     "proto": 10950,
-    "ps2": 0,
+    "ps2": 1635,
     "total": 12491,
     "bytes": 448801,
-    "ps2_bytes": 0,
+    "ps2_bytes": 13080,
     "stubs": 2172
   },
   "readable": {
     "pc": 0,
     "xb": 31,
     "proto": 10,
-    "ps2": 0,
+    "ps2": 345,
     "total": 31
   },
   "source": {
@@ -61,8 +61,9 @@
     "80+ B": 874
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 17927,
+    "RRutherrfordd (Founder)": 18586,
     "NoahBPeterson": 5406,
+    "RRutherfordd (Founder)": 976,
     "lemiur": 108
   },
   "unattributed": 0,
@@ -70,7 +71,7 @@
     "pc": 734,
     "xb": 10342,
     "proto": 9767,
-    "ps2": 24297,
+    "ps2": 22662,
     "total": 11076,
     "tiers": {
       "TIER_1_QUICK": 194,
