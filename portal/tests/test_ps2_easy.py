@@ -390,6 +390,28 @@ def test_the_probes_own_lists_are_ones_the_portal_accepts():
     assert P.words("F0 FF BD 27 08 00 E0 03") == "27BDFFF0 03E00008"
 
 
+def test_the_probe_repeats_every_hit_at_the_end_and_saves_what_it_printed(tmp_path, capsys):
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("ps2_flag_probe", PORTAL / "scripts" / "ps2_flag_probe.py")
+    P = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(P)
+    row = {"compiler": "mwcps2-3.0.1b87-031208", "flags": "-O3 -lang c++ -str readonly", "compiled": True,
+           "verified": False, "exact": True, "matched_bytes": 12, "total_bytes": 12, "compiled_size": 12,
+           "compiled_hex": "0C 00 8C E4 08 00 E0 03 01 00 02 24", "error": ""}
+    miss = dict(row, compiler="mwcps2-3.0.1b103-040528", exact=False, matched_bytes=6)
+    broken = dict(row, compiled=False, exact=False, error="### mwccps2.exe Usage Error:\nmore")
+    hits = P.show([miss, row, broken])
+    assert hits == [("3.0.1b87-031208 -O3 -lang c++ -str readonly", "same bytes, an address unchecked")]
+    assert P.show([dict(row, verified=True)])[0][1] == "MATCH"
+    lines = P.summary([(0x00392940, *hits[0])])
+    assert lines[0] == "Gave the game's bytes:" and "0x00392940  3.0.1b87-031208 -O3" in lines[1]
+    assert P.summary([])[0].startswith("Nothing gave the game's bytes")
+    assert P.save(tmp_path / "work" / "p.txt")
+    saved = (tmp_path / "work" / "p.txt").read_text()
+    assert "did not compile: ### mwccps2.exe Usage Error:" in saved and "E48C000C 03E00008 24020001" in saved
+    assert saved.splitlines() == capsys.readouterr().out.splitlines()
+
+
 def test_flags_are_part_of_what_a_compiled_object_is_kept_under(through_tab):
     b = through_tab({"ok": True, "success": True, "right_object": base64.b64encode(b"\x7fELFo").decode(), "slug": "abcde"})
     server.ps2_compile(dict(TASK), "int f() { return 1; }", through="abcde")

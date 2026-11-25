@@ -85,18 +85,39 @@ def words(hex_text: str) -> str:
     return " ".join(f"{int.from_bytes(b[i:i + 4], 'little'):08X}" for i in range(0, len(b) - len(b) % 4, 4))
 
 
-def show(rows: list) -> bool:
-    hit = False
+REPORT = Path(__file__).resolve().parents[2] / "work" / "ps2_probe.txt"     # work/ is never committed
+LINES: list = []
+
+
+def say(text: str = "") -> None:
+    """Print a line and keep it for the report file: the screen scrolls, and a transcript loses lines."""
+    print(text, flush=True)
+    LINES.append(text)
+
+
+def save(path: Path = REPORT) -> bool:
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("\n".join(LINES) + "\n", encoding="utf-8")
+        return True
+    except OSError:
+        return False
+
+
+def show(rows: list) -> list:
+    """Print each try; the ones that gave the game's bytes, as (build and flags, what kind of match)."""
+    hits = []
     for row in rows:
         label = f"{row['compiler'].replace('mwcps2-', ''):<18} {row['flags']}"
         if not row["compiled"]:
-            print(f"  {label:<62} did not compile: {row['error'].splitlines()[0] if row['error'] else ''}")
+            say(f"  {label:<62} did not compile: {row['error'].splitlines()[0] if row['error'] else ''}")
             continue
         mark = "MATCH" if row["verified"] else ("same bytes, an address unchecked" if row["exact"] else "")
-        hit = hit or row["exact"]
-        print(f"  {label:<62} {row['matched_bytes']:>3}/{row['total_bytes']} bytes, compiled {row['compiled_size']:>3} B  {mark}")
-        print(f"      {words(row['compiled_hex'])}")
-    return hit
+        if row["exact"]:
+            hits.append((" ".join(label.split()), mark))
+        say(f"  {label:<62} {row['matched_bytes']:>3}/{row['total_bytes']} bytes, compiled {row['compiled_size']:>3} B  {mark}")
+        say(f"      {words(row['compiled_hex'])}")
+    return hits
 
 
 def main() -> int:
@@ -117,25 +138,42 @@ def main() -> int:
     user = input("Your handle: ").strip()
     creds = {"user": user, "pin": getpass.getpass("Your PIN (not shown): ")}
     n = len(tries) * len(cases)
-    print(f"{len(tries)} compile(s) on each of {len(cases)} function(s): about {n * 3 // 60 + 1} minute(s). "
-          "Leave your decomp.me tab open.")
-    hits = []
+    say(f"{len(tries)} compile(s) on each of {len(cases)} function(s): about {n * 3 // 60 + 1} minute(s). "
+        "Leave your decomp.me tab open.")
+    hits, rc = [], 0
     for va, what, code in cases:
-        print(f"\n0x{va:08X}: {what}")
+        say(f"\n0x{va:08X}: {what}")
         for i in range(0, len(tries), CHUNK):
             try:
                 res = call(args.portal, "/api/ps2-probe", dict(creds, id=f"ps2_{va:08X}", cpp_code=code, tries=tries[i:i + CHUNK]))
             except OSError:
-                print("The portal isn't answering at", args.portal, "- start it (START_PORTAL.bat) and try again.")
-                return 1
-            if show(res.get("rows", [])):
-                hits.append(va)
+                say(f"The portal isn't answering at {args.portal} - start it (START_PORTAL.bat) and try again.")
+                rc = 1
+                break
+            hits += [(va, label, mark) for label, mark in show(res.get("rows", []))]
             if not res.get("ok"):
-                print("  " + (res.get("error") or "the portal could not do it"))
-                return 1
-    print("\nA line that says MATCH is the build and flags that part of the game was made with." if hits else
-          "\nNothing gave the game's bytes. The lines above still show what each build and setting changed.")
-    return 0
+                say("  " + (res.get("error") or "the portal could not do it"))
+                rc = 1
+                break
+        if rc:
+            break
+    say()
+    for line in summary(hits):
+        say(line)
+    if save():
+        print(f"\nAll of the above is saved in {REPORT}")
+    return rc
+
+
+def summary(hits: list) -> list:
+    """The closing lines: every try that gave the game's bytes, again, so none is lost off the screen."""
+    if not hits:
+        return ["Nothing gave the game's bytes. The lines above still show what each build and setting changed."]
+    out = ["Gave the game's bytes:"]
+    out += [f"  0x{va:08X}  {label}  ({mark})" for va, label, mark in hits]
+    out.append("A line that says MATCH is the build and flags that part of the game was made with. \"same bytes, an "
+               "address unchecked\" is as good for this question: only an address the test code can't know differs.")
+    return out
 
 
 if __name__ == "__main__":

@@ -100,6 +100,9 @@ goes on by itself when the tab comes back. Keeping the tab in a window of its ow
 
     python portal/scripts/ps2_flag_probe.py
 
+Every try that gave the game's bytes is listed again at the end, and everything the run printed is saved
+in `work/ps2_probe.txt` (never committed), so nothing is lost when the screen scrolls.
+
 The lane's flags (`-O3 -lang c++ -str readonly`) match the smallest functions everywhere, but parts of the
 game may have been built with other optimisation settings, as the Xbox game's libraries were. Two things
 the lane's flags do not reproduce (first easy-pass runs, November 2026):
