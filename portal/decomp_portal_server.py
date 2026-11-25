@@ -36,7 +36,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
-from collections import Counter
+from collections import Counter, defaultdict
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -1699,11 +1699,13 @@ def start_easy_pass(user: str) -> dict:
 # made from the same text is reused, and real compiles are spaced out and capped: decomp.me is a shared,
 # free service, and this must stay a light user of it.
 PS2_EASY_TOOL = "the portal's starter code for PS2 (no AI)"
-PS2_EASY_VERSION = 2          # 2: three- and four-instruction shapes
+PS2_EASY_VERSION = 3          # 3: functions that end in a jump (tail calls, virtual forwards)
 PS2_EASY_JSON = PRIVATE_DIR / "ps2_easy_pass.json"        # the scratch compiled through, and what was tried (gitignored)
 PS2_EASY_PAUSE = float(os.environ.get("SCARFACE_PS2_EASY_PAUSE", "2"))     # seconds between real compiles
 PS2_EASY_MAX = int(os.environ.get("SCARFACE_PS2_EASY_MAX", "400"))         # real compiles a run
 PS2_EASY_WAIT = float(os.environ.get("SCARFACE_PS2_EASY_WAIT", "75"))       # seconds to let the tab reconnect
+PS2_SHAPE_SIZES = (8, 12, 16, 20)
+PS2_FAMILY_TRIES = 6             # a family of shapes on trial is dropped for the run after this many tries with no match
 PS2EASY: dict = {"running": False, "stop": False, "total": 0, "tried": 0, "matched": 0, "compiles": 0, "by": "", "last": ""}
 _ADDRESS_NAME = re.compile(r"\b(?:sub|DAT|func|D|g)_[0-9A-Fa-f]{8}\b")
 # Visual C++ words in C++ that came from the Xbox game; CodeWarrior has no use for them.
@@ -1715,13 +1717,21 @@ def ps2_easy_status() -> dict:
                 connected=BRIDGE.connected())
 
 
+def ps2_family(t: dict) -> str:
+    """The family of shapes on trial that t belongs to ('' for none): see tools/ps2_shapes.py family()."""
+    tb = target_bytes(t)
+    if not tb or len(tb) not in PS2_SHAPE_SIZES:
+        return ""
+    return PSH.family(struct.unpack(f"<{len(tb) // 4}I", tb))
+
+
 def ps2_easy_codes(t: dict) -> List[str]:
     """What to try on a PS2 function, the likeliest first."""
     img, tb = image_for(t["bin"]), target_bytes(t)
     if img is None or not tb:
         return []
     out: List[str] = []
-    if len(tb) in (8, 12, 16):
+    if len(tb) in PS2_SHAPE_SIZES:
         out += PSH.sources(struct.unpack(f"<{len(tb) // 4}I", tb), t["fva_int"], getattr(img, "gp", 0))
     with STATE_LOCK:
         out.append(lookalike_starter(t)[0])
@@ -1745,6 +1755,7 @@ def ps2_easy_pass(user: str) -> dict:
     targets.sort(key=lambda t: (int(t["size"]), t["fva_int"]))
     PS2EASY.update(total=len(targets), tried=0, matched=0, compiles=0, by=user, last="")
     unsaved = 0
+    trial: Dict[str, List[int]] = defaultdict(lambda: [0, 0])          # family on trial -> [tried, matched] this run
 
     def remember() -> None:
         try:
@@ -1760,6 +1771,9 @@ def ps2_easy_pass(user: str) -> dict:
                 PS2EASY["last"] = (f"Stopped after {PS2_EASY_MAX} compiles on decomp.me, to stay a light user of it. "
                                    "Run it again later to go on.")
                 break
+            fam = ps2_family(t)
+            if fam and trial[fam][0] >= PS2_FAMILY_TRIES and not trial[fam][1]:
+                continue                                   # this family isn't matching: no more compiles on it this run
             codes = ps2_easy_codes(t)
             if not codes:
                 continue                                   # nothing to try yet: not counted, not remembered
@@ -1788,6 +1802,9 @@ def ps2_easy_pass(user: str) -> dict:
                                    "Scarface bookmark there, and start it again.")
                 break
             PS2EASY["tried"] += 1
+            if fam:
+                trial[fam][0] += 1
+                trial[fam][1] += 1 if hit else 0
             if not hit:
                 if not PS2EASY["stop"] and PS2EASY["compiles"] < PS2_EASY_MAX:
                     tried[task_key(t)] = PS2_EASY_VERSION
@@ -1816,6 +1833,10 @@ def ps2_easy_pass(user: str) -> dict:
                               "bytes": "PS2 easy pass, no AI"})
                 print(f"[+] PS2 easy pass by {user}: {PS2EASY['matched']} matched of {PS2EASY['tried']} tried, "
                       f"{PS2EASY['compiles']} compiles on decomp.me -> {len(REGISTRY['entries'])} total")
+            dropped = sorted(f for f, (n, hits) in trial.items() if n >= PS2_FAMILY_TRIES and not hits)
+            if dropped:
+                PS2EASY["last"] = ((PS2EASY["last"] + " ") if PS2EASY["last"] else "") + (
+                    f"Shapes on trial that did not match in {PS2_FAMILY_TRIES} tries and were left alone: {', '.join(dropped)}.")
             PS2EASY.update(running=False, stop=False)
     return ps2_easy_status()
 

@@ -139,10 +139,13 @@ matched too. `-str readonly` is what puts string literals where the game has the
 
 ## Known gaps
 
-* **Tail calls.** The game sometimes ends a function with a jump straight into the next one (`j func`),
-  for example after setting a few fields. None of decomp.me's CodeWarrior builds did that with any flag
-  we tried, so those functions (a few percent) can't match yet. If you find the setting or the source
-  shape that makes the compiler do it, tell everyone.
+* **Tail calls.** The game sometimes ends a function with a jump straight into another one (`j func`, or
+  `jr $t9` for a virtual method), for example after setting up two arguments. The examiner's reading of
+  the compiler's own option text is that this is its tail-call optimisation, on from `-O3`, and that it
+  only happens when the function needs no stack frame of its own; so the source is an ordinary call as the
+  last statement of a function that returns nothing, such as `void f() { g(&a, &b); }`. The easy pass now
+  writes that for the three-instruction cases and for virtual forwards, as shapes on trial: if one of
+  those families does not match once in its first six tries of a run, the pass leaves it alone and says so.
 * **Thunks.** Short `j` stubs at the start of some functions are made by the compiler for classes with more
   than one base class; they come from the class definitions, not from a function of their own.
 * **Overlays.** The game loads extra code from `CEMENT.RCF/Overlays/FrontEnd/` when it needs it: six
