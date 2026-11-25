@@ -5,7 +5,7 @@ with the game's own bytes here, on your computer.
 
 The PS2 game was built with Metrowerks CodeWarrior for PS2 3.0.1 (build 87 to 103, 2004; see
 docs/PS2.md for how that was worked out). The project doesn't ship that compiler. A licensed copy in
-portal/tools/mwcps2/ runs here; otherwise decomp.me runs it: `mwcps2-3.0.1b103-040528`, flags `-O3 -lang c++ -str readonly`. decomp.me sends back the object
+portal/tools/mwcps2/ runs here; otherwise decomp.me runs it: `mwcps2-3.0.1b103-040528`, flags `-O3 -lang c++ -str readonly -Cpp_exceptions off`. decomp.me sends back the object
 file it built, and this module checks it the same way portal/tools/msvc_verify.py checks a PC or
 Xbox object:
 
@@ -43,7 +43,12 @@ from ps2_binary import address_named
 from ps2_mips import decode
 
 COMPILER = "mwcps2-3.0.1b103-040528"
-FLAGS = "-O3 -lang c++ -str readonly"
+# -Cpp_exceptions off: with exceptions on, a function that may have to be unwound keeps its stack frame, so
+# its last call stays a call; the game jumps instead, in 1,772 functions (docs/PS2.md, the probe).
+FLAGS = "-O3 -lang c++ -str readonly -Cpp_exceptions off"
+# What the lane used until 25 November 2026. Matches recorded with it stay as recorded: none of them calls
+# anything, and code that calls nothing is the same with exceptions on or off.
+FLAGS_BEFORE = "-O3 -lang c++ -str readonly"
 # Flag sets a probe may ask for (portal/scripts/ps2_flag_probe.py): only words from this list, so a probe can
 # change how the compiler optimises and nothing else. Parts of the game may have been built with other
 # optimisation settings than FLAGS, as the Xbox game's libraries were.

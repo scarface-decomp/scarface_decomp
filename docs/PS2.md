@@ -12,7 +12,7 @@ The project doesn't ship the compiler. decomp.me runs it:
 | | |
 | :--- | :--- |
 | Compiler | Metrowerks CodeWarrior for PS2, 3.0.1 build 103 (`mwcps2-3.0.1b103-040528` on decomp.me) |
-| Flags | `-O3 -lang c++ -str readonly` |
+| Flags | `-O3 -lang c++ -str readonly -Cpp_exceptions off` (until 25 November 2026 without the last two words; see "What the first run showed") |
 | Where it runs | decomp.me, through its compile endpoint (nothing is saved there by checking); on your computer if you hold a licence for the compiler (below) |
 | Where it is checked | the portal on your computer, against your own `binaries/SLUS_211.11` |
 
@@ -103,9 +103,8 @@ goes on by itself when the tab comes back. Keeping the tab in a window of its ow
 Every try that gave the game's bytes is listed again at the end, and everything the run printed is saved
 in `work/ps2_probe.txt` (never committed), so nothing is lost when the screen scrolls.
 
-The lane's flags (`-O3 -lang c++ -str readonly`) match the smallest functions everywhere, but parts of the
-game may have been built with other optimisation settings, as the Xbox game's libraries were. Two things
-the lane's flags do not reproduce (first easy-pass runs, November 2026):
+The lane's first flags (`-O3 -lang c++ -str readonly`) matched the smallest functions everywhere, but two
+things they did not reproduce (first easy-pass runs, November 2026):
 
 * a call as a function's last statement that the game turns into a jump (`0x003EB610`: the compiler makes
   an ordinary call with a stack frame, 32 bytes against the game's 12, with or without `#pragma tailcall on`);
@@ -120,7 +119,8 @@ one compiler build or one setting for the whole game.
 The probe compiles one function's C++ through your decomp.me tab with other builds or flags and prints how
 close each gets, with the compiled instruction words. It records nothing. Run without arguments it asks
 those two questions with the lane's build and 16 other settings (`-O2` to `-O4`, speed and space,
-instruction scheduling and the peephole pass off, C++ exceptions and RTTI off); `--all-builds` adds the
+instruction scheduling and the peephole pass off, RTTI off, and the flags as they were with exceptions
+on); `--all-builds` adds the
 other 22 CodeWarrior for PS2 builds decomp.me has, with the lane's flags. Give it a file and `--va`, with `--compiler`
 and `--flags`, for your own. Only decomp.me's PS2 builds and optimisation words are accepted, one compile
 per line, two seconds apart.
@@ -138,11 +138,23 @@ So the builds that keep the store first are the ones the table below rules out (
 chains), and the builds that write those chains move the store. No build decomp.me has does both with these
 flags, which leaves a setting that hasn't been tried, or a build decomp.me doesn't have.
 
-The compiler's own help text says what to try. It lists what optimisation level 3 adds: "instruction
-scheduling, tail call optimization". The jump is that tail call optimisation, so something in the test
-turns it off; C++ exceptions are the first suspect, because a function that may have to be unwound keeps its
-frame, and the lane's flags leave them on. The store moving into the delay slot is the scheduler at work,
-and `-opt noschedule` turns it off. The probe's default list now has both.
+The compiler's own help text said what to try. It lists what optimisation level 3 adds: "instruction
+scheduling, tail call optimization". The jump is that tail call optimisation, so something was turning it
+off, and C++ exceptions were the first suspect: a function that may have to be unwound keeps its frame, and
+the lane's flags left them on.
+
+**The second run settled the first question.** Build 103 with `-O3 -lang c++ -str readonly -Cpp_exceptions
+off` gives `0x003EB610` exactly: two arguments, a jump, 12 bytes (`-RTTI off` and `-O4,p` on top change
+nothing there). The game was built with C++ exceptions off, and since 25 November 2026 so is the lane.
+
+* Matches recorded before that keep the flags they were compiled with. All 3,112 of them are functions that
+  call nothing, where exceptions make no difference to the code; none has been compiled again to show it.
+* The easy pass tries every open function again with the new flags, the two families that end in a jump
+  among them.
+
+**The second question is open.** With exceptions off the float store still goes into the delay slot. That
+is the scheduler's doing, so `-opt noschedule` is the next thing the probe tries by default, alone and with
+`-RTTI off` and `-O4,p`.
 
 ## How the compiler was worked out
 
@@ -191,9 +203,12 @@ matched too. `-str readonly` is what puts string literals where the game has the
   `jr $t9` for a virtual method), for example after setting up two arguments. The examiner's reading of
   the compiler's own option text is that this is its tail-call optimisation, on from `-O3`, and that it
   only happens when the function needs no stack frame of its own; so the source is an ordinary call as the
-  last statement of a function that returns nothing, such as `void f() { g(&a, &b); }`. The easy pass now
-  writes that for the three-instruction cases and for virtual forwards, as shapes on trial: if one of
-  those families does not match once in its first six tries of a run, the pass leaves it alone and says so.
+  last statement of a function that returns nothing, such as `void f() { g(&a, &b); }`. That source gives
+  the jump once C++ exceptions are off (the probe, above), which the lane's flags now are. The easy pass
+  writes it for the three-instruction cases and for virtual forwards, as shapes on trial: if one of those
+  families does not match once in its first six tries of a run, the pass leaves it alone and says so.
+* **A float stored before a value is returned.** The game stores first; the lane's build puts the store in
+  the delay slot (the probe's second question, above).
 * **Thunks.** Short `j` stubs at the start of some functions are made by the compiler for classes with more
   than one base class; they come from the class definitions, not from a function of their own.
 * **Overlays.** The game loads extra code from `CEMENT.RCF/Overlays/FrontEnd/` when it needs it: six

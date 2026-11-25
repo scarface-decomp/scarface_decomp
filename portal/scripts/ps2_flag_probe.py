@@ -5,7 +5,7 @@ with several optimisation settings, and say how close each gets to the game's by
 
     python portal/scripts/ps2_flag_probe.py                       the two built-in questions (below)
     python portal/scripts/ps2_flag_probe.py FILE.cpp --va 0x003EB610
-    python portal/scripts/ps2_flag_probe.py FILE.cpp --va 0x003EB610 --flags "-O4,p -lang c++ -str readonly"
+    python portal/scripts/ps2_flag_probe.py FILE.cpp --va 0x003EB610 --flags "-O4,p -lang c++ -str readonly -Cpp_exceptions off"
     python portal/scripts/ps2_flag_probe.py FILE.cpp --va 0x003EB610 --compiler mwcps2-3.0.1b87-031208
 
 The portal must be running and your decomp.me tab connected (docs/PS2.md). Nothing is recorded: a probe
@@ -16,8 +16,9 @@ other 22 builds with the lane's flags.
 
 The two built-in questions come from the first PS2 easy-pass runs (November 2026):
 
-* 0x003EB610 sets up two arguments and jumps into another function. With the lane's build and flags the
-  compiler makes an ordinary call instead. What turns the call into a jump?
+* 0x003EB610 sets up two arguments and jumps into another function. Answered on 25 November 2026: with
+  C++ exceptions on the compiler makes an ordinary call; `-Cpp_exceptions off` makes the jump, and is now
+  one of the lane's flags.
 * 0x00392940 stores a float and returns 1, with the store first. The lane's build and flags put the store
   last. What keeps it first?
 
@@ -37,17 +38,16 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-TAIL = " -lang c++ -str readonly"
+TAIL = " -lang c++ -str readonly -Cpp_exceptions off"
 LANE_COMPILER, LANE_FLAGS = "mwcps2-3.0.1b103-040528", "-O3" + TAIL
 # Optimisation levels, then what the compiler's own help says level 3 adds ("instruction scheduling, tail call
-# optimization") switched one at a time, and C++ exceptions off (a function that may have to be unwound keeps
-# its frame, so it can't end in a jump).
+# optimization") and the peephole pass switched off one at a time, RTTI off, and the lane's flags as they were
+# before C++ exceptions were turned off (the first run's answer to the first question).
 FLAG_SETS = [o + TAIL for o in ("-O3,p", "-O3,s", "-O4", "-O4,p", "-O4,s", "-O2", "-O2,p", "-O3 -opt speed",
                                 "-O3 -opt space", "-O4,p -inline auto")]
-FLAG_SETS += ["-O3" + TAIL + x for x in (" -Cpp_exceptions off", " -Cpp_exceptions off -RTTI off",
-                                         " -opt noschedule", " -opt nopeephole",
-                                         " -Cpp_exceptions off -opt noschedule")]
-FLAG_SETS += ["-O4,p" + TAIL + " -Cpp_exceptions off"]
+FLAG_SETS += ["-O3" + TAIL + x for x in (" -opt noschedule", " -opt nopeephole", " -RTTI off",
+                                         " -RTTI off -opt noschedule")]
+FLAG_SETS += ["-O4,p" + TAIL + " -opt noschedule", "-O3 -lang c++ -str readonly"]
 # Every CodeWarrior for PS2 build decomp.me has, oldest first (the same list as portal/tools/ps2_verify.py BUILDS).
 BUILDS = ["mwcps2-2.3-991202", "mwcps2-2.3.3-000906", "mwcps2-2.4-001213", "mwcps2-3.0-011126", "mwcps2-3.0.1-020123",
           "mwcps2-3.0.3-020716", "mwcps2-3.0b22-020926", "mwcps2-3.0b38-030307", "mwcps2-3.0.1b44-030325",

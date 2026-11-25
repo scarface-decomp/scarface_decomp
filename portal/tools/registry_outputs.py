@@ -44,7 +44,8 @@ for _o in ps2_overlay.OVERLAYS:
     _stem = _o.file[:-len("f.bin")].replace("Overlay", "")          # ModalsOverlay1f.bin -> Modals1
     BIN_INFO[_o.bin] = (f"Original_Binary_Order_PS2_{_stem}.cpp", _o.bin.replace("ps2", "ps2_", 1),
                         f"Retail PS2 overlay {_o.file} ({_o.label}), loaded at 0x845480")
-PS2_CODEWARRIOR = "Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528, -O3 -lang c++ -str readonly)"
+# Without the flags: every function's own header line gives the ones it was compiled with (the lane's changed once).
+PS2_CODEWARRIOR = "Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528)"
 # The PS2 game has its own compiler; everything else was built with Visual C++ 2003.
 BIN_COMPILER = {b: PS2_CODEWARRIOR for b in ("ps2",) + ps2_overlay.BINS}
 
