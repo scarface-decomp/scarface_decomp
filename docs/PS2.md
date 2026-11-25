@@ -69,9 +69,11 @@ has the portal try its own starter code on the open PS2 functions and record eve
 your handle, with no AI and no typing. Connect your decomp.me tab first (the three steps above) and leave
 it open. Smallest functions first, it tries:
 
-* **C++ written from two or three instructions** (`portal/tools/ps2_shapes.py`): an empty function, one
-  that returns or stores a member of its object, one that returns a constant, its object, or a global.
-  About 3,000 of the PS2 game's functions have one of these shapes.
+* **C++ written from two to four instructions** (`portal/tools/ps2_shapes.py`): an empty function, one
+  that returns or stores a member of its object, one that returns a constant, its object, or a global,
+  one that sets a member to a constant, adds to it, or reads through a pointer member. About 3,450 of
+  the PS2 game's functions have one of these shapes. On its first night the pass matched 976 of the
+  978 functions it tried.
 * **A matched look-alike's C++**, with this function's addresses.
 * **The matched Xbox function's C++**, for a PS2 function paired with one, when that code names no
   address (Xbox addresses would be wrong here).
@@ -89,6 +91,10 @@ decomp.me is a free service shared by many projects, so the pass is a light user
   please don't make it heavier).
 
 When your decomp.me tab is connected, the portal's own Compile & Verify uses it by itself too.
+
+After the portal restarts, or while the decomp.me tab is in the background, the browser can take up to a
+minute to let the tab ask the portal again. The pass waits for it (75 seconds) before it gives up, and
+goes on by itself when the tab comes back. Keeping the tab in a window of its own, in view, avoids the wait.
 
 ## How the compiler was worked out
 

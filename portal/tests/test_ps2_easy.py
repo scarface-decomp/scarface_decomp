@@ -75,6 +75,9 @@ class FakeBridge:
     def connected(self):
         return self.is_connected
 
+    def wait_connected(self, timeout):
+        return self.is_connected
+
     def run(self, job, timeout=None):
         self.jobs.append(job)
         return dict(self.answer)
@@ -137,6 +140,8 @@ def pass_env(monkeypatch, tmp_path):
     monkeypatch.setattr(server, "ALL_TASKS", tasks)
     monkeypatch.setattr(server, "PS2_EASY_JSON", tmp_path / "ps2_easy_pass.json")
     monkeypatch.setattr(server, "PS2_EASY_PAUSE", 0)
+    monkeypatch.setattr(server, "PS2_EASY_WAIT", 0)
+    monkeypatch.setattr(server, "BRIDGE", FakeBridge({}, connected=False))
     monkeypatch.setattr(server, "PS2_OBJECTS", {})
     monkeypatch.setattr(server, "ps2_easy_codes", lambda t: ["// first\nint a();\n", "// second\nint b();\n"])
     monkeypatch.setattr(server, "_held_by_someone_else", lambda t, user: False)
@@ -192,5 +197,62 @@ def test_pass_will_not_start_without_a_way_to_compile(monkeypatch):
     monkeypatch.setattr(server.PV, "local_compiler", lambda: None)
     monkeypatch.setattr(server, "BRIDGE", FakeBridge({}, connected=False))
     monkeypatch.setitem(server.PS2EASY, "running", False)
+    monkeypatch.setattr(server, "PS2_EASY_WAIT", 0)
     res = server.start_ps2_easy_pass("Alice")
     assert not res["ok"] and res["not_connected"] and "bookmark" in res["error"]
+
+
+def test_the_tab_gets_time_to_check_in():
+    b = server.Bridge()
+    assert not b.wait_connected(0.05)                       # nobody there
+    import threading
+    threading.Timer(0.2, lambda: b.next(wait=0.01)).start() # the tab asks for a job a moment later
+    assert b.wait_connected(3)
+
+
+def test_a_pass_goes_on_when_the_tab_comes_back(pass_env, monkeypatch):
+    tasks, recorded, calls = pass_env
+    back = FakeBridge({}, connected=True)
+    monkeypatch.setattr(server, "BRIDGE", back)
+    answers = iter([{"ok": False, "compiler_unavailable": True}])
+
+    def verify(t, code, **k):
+        server.PS2_OBJECTS[key_of(code)] = b"o"
+        return next(answers, {"ok": True, "verified": True, "reloc_unverified": 0})
+    monkeypatch.setattr(server, "run_verify_ps2", verify)
+    st = server.ps2_easy_pass("Alice")
+    assert st["matched"] == 2 and "isn't connected" not in st["last"]
+
+
+# --------------------------------------------------------------------------- three and four instructions
+
+def test_three_instruction_shapes():
+    setter = PSH.sources((0xE48C0010, JR_RA, 0x24020001))              # swc1 f12, 0x10(a0); jr ra; li v0, 1
+    assert "bool Object::Set(float value)" in setter[0] and "return true;" in setter[0] and "int Object::Set" in setter[1]
+    const = PSH.sources((0x24030001, JR_RA, 0xA0830022))               # li v1, 1; jr ra; sb v1, 0x22(a0)
+    assert "m_Field22 = 1;" in const[0] and "char m_Field22" in const[0] and "m_Field22 = true;" in const[1]
+    through = PSH.sources((0x8C820008, JR_RA, 0x8C420004))[0]          # lw v0, 8(a0); jr ra; lw v0, 4(v0)
+    assert "Inner* m_Field8;" in through and "return m_Field8->m_Field4;" in through
+    assert "return m_FieldB0 != 0;" in PSH.sources((0x8C8200B0, JR_RA, 0x0002102B))[0]
+    assert "return 0x7FFFFFFF;" in PSH.sources((0x3C027FFF, JR_RA, 0x3442FFFF))[0]
+    both = PSH.sources((0xAC800004, JR_RA, 0xAC800000))                # sw zero, 4(a0); jr ra; sw zero, 0(a0)
+    assert len(both) == 2 and both[0].index("m_Field4 = 0;") < both[0].index("m_Field0 = 0;")
+    assert both[1].index("m_Field0 = 0;") < both[1].index("m_Field4 = 0;")
+    assert "return 0.0f;" in PSH.sources((0x44800000, JR_RA, 0))[0]
+    assert "D_00808918 = 1;" in PSH.sources((0x24030001, JR_RA, 0xA383A7A8), gp=0x0080E170)[0]
+    assert "extern int D_007F8920[];" in PSH.sources((0x3C020080, JR_RA, 0x8C428920))[0]      # the first shapes still win
+
+
+def test_four_instruction_shapes():
+    assert "return 1.0f;" in PSH.sources((0x3C023F80, 0x44820000, JR_RA, 0))[0]              # lui v0, 0x3F80; mtc1 v0, f0
+    assert "return 0.5f;" in PSH.sources((0x3C023F00, 0x44820000, JR_RA, 0))[0]
+    step = PSH.sources((0x8C830008, 0x24630001, JR_RA, 0xAC830008))[0]                       # lw v1, 8(a0); addiu; jr ra; sw
+    assert "m_Field8 += 1;" in step
+    assert "m_Field8 -= 1;" in PSH.sources((0x8C830008, 0x2463FFFF, JR_RA, 0xAC830008))[0]
+    assert PSH.sources((0x8C830008, 0x24630001, JR_RA, 0xAC83000C)) == []                    # stored somewhere else: no guess
+
+
+def test_members_are_padded_to_their_places():
+    text = PSH._class([(4, "int"), (0, "short")], "void Clear()")
+    assert text.index("short m_Field0;") < text.index("char m_pad02[0x2];") < text.index("int m_Field4;")
+    assert "m_pad" not in PSH._class([(0, "int"), (4, "float")], "void f()")

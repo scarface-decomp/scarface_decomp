@@ -1699,10 +1699,11 @@ def start_easy_pass(user: str) -> dict:
 # made from the same text is reused, and real compiles are spaced out and capped: decomp.me is a shared,
 # free service, and this must stay a light user of it.
 PS2_EASY_TOOL = "the portal's starter code for PS2 (no AI)"
-PS2_EASY_VERSION = 1
+PS2_EASY_VERSION = 2          # 2: three- and four-instruction shapes
 PS2_EASY_JSON = PRIVATE_DIR / "ps2_easy_pass.json"        # the scratch compiled through, and what was tried (gitignored)
 PS2_EASY_PAUSE = float(os.environ.get("SCARFACE_PS2_EASY_PAUSE", "2"))     # seconds between real compiles
 PS2_EASY_MAX = int(os.environ.get("SCARFACE_PS2_EASY_MAX", "400"))         # real compiles a run
+PS2_EASY_WAIT = float(os.environ.get("SCARFACE_PS2_EASY_WAIT", "75"))       # seconds to let the tab reconnect
 PS2EASY: dict = {"running": False, "stop": False, "total": 0, "tried": 0, "matched": 0, "compiles": 0, "by": "", "last": ""}
 _ADDRESS_NAME = re.compile(r"\b(?:sub|DAT|func|D|g)_[0-9A-Fa-f]{8}\b")
 # Visual C++ words in C++ that came from the Xbox game; CodeWarrior has no use for them.
@@ -1720,7 +1721,7 @@ def ps2_easy_codes(t: dict) -> List[str]:
     if img is None or not tb:
         return []
     out: List[str] = []
-    if len(tb) in (8, 12):
+    if len(tb) in (8, 12, 16):
         out += PSH.sources(struct.unpack(f"<{len(tb) // 4}I", tb), t["fva_int"], getattr(img, "gp", 0))
     with STATE_LOCK:
         out.append(lookalike_starter(t)[0])
@@ -1767,6 +1768,8 @@ def ps2_easy_pass(user: str) -> dict:
                 key = _ps2_key(*[x.replace("\r\n", "\n") for x in DME._inline_project_includes(code, [INCLUDE_DIR])])
                 real = key not in PS2_OBJECTS
                 res = run_verify_ps2(t, code, through=state.get("slug", ""))
+                if res.get("compiler_unavailable") and not PS2EASY["stop"] and BRIDGE.wait_connected(PS2_EASY_WAIT):
+                    res = run_verify_ps2(t, code, through=state.get("slug", ""))     # the tab came back: once more
                 if res.get("compiler_unavailable"):
                     unavailable = True
                     break
@@ -1823,7 +1826,7 @@ def start_ps2_easy_pass(user: str) -> dict:
             return dict(ps2_easy_status(), ok=True)
         if image_for("ps2") is None:
             return {"ok": False, "error": "binaries/SLUS_211.11 is missing, so there is nothing to compare against."}
-        if PV.local_compiler() is None and not BRIDGE.connected():
+        if PV.local_compiler() is None and not BRIDGE.wait_connected(PS2_EASY_WAIT):
             return {"ok": False, "not_connected": True,
                     "error": "Your decomp.me tab isn't connected. Open decomp.me, click the Scarface bookmark in that "
                              "tab (docs/PS2.md has the steps), and start again."}
@@ -2675,6 +2678,16 @@ class Bridge:
 
     def connected(self) -> bool:
         return time.time() - self.last_seen < BRIDGE_POLL_SECONDS + 15
+
+    def wait_connected(self, timeout: float) -> bool:
+        """Give the decomp.me tab up to `timeout` seconds to check in. After the portal restarts, or while its
+        tab is in the background, the browser can take a minute to let the tab ask again."""
+        end = time.time() + timeout
+        while not self.connected():
+            if time.time() >= end:
+                return False
+            time.sleep(0.5)
+        return True
 
     def run(self, job: dict, timeout: Optional[float] = None) -> dict:
         """Hand a job to the decomp.me tab and wait for its answer."""
