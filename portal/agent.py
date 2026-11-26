@@ -386,6 +386,29 @@ def fix_lead(b: str, va: int) -> str:
     return ("ThirteenAG's Scarface Fusion Fix " + "; ".join(said) + ". Check it against the code.") if said else ""
 
 
+_SIBLING_LEADS = None
+SIBLING_TITLES = {"crash": "Crash Tag Team Racing", "hulk": "The Incredible Hulk: Ultimate Destruction",
+                  "hulk_eu": "The Incredible Hulk: Ultimate Destruction (Europe)"}
+
+
+def sibling_lead(b: str, va: int) -> str:
+    """What reports/sibling_twins.json says about a function ("" for none): which of Radical's other Xbox
+    games has the same function, byte for byte apart from addresses, and where. Shared engine code."""
+    global _SIBLING_LEADS
+    if _SIBLING_LEADS is None:
+        try:
+            rows = json.loads((ROOT / "reports" / "sibling_twins.json").read_text(encoding="utf-8")).get("functions", {})
+            _SIBLING_LEADS = {(bb, int(r["va"], 16)): r.get("in", {}) for bb, rs in rows.items() for r in rs}
+        except (OSError, ValueError, KeyError, TypeError, AttributeError):
+            _SIBLING_LEADS = {}
+    found = _SIBLING_LEADS.get((b, va))
+    if not found:
+        return ""
+    where = [SIBLING_TITLES.get(k, k) + (f" (at {v})" if v else "") for k, v in sorted(found.items())]
+    return ("engine code shared with other games: the same function, apart from addresses, is in the Xbox version of "
+            + "; ".join(where) + ". None of them has names, but a spec from older engine source may fit.")
+
+
 def cmd_packet(args) -> int:
     import decompme as DME
     from disasm_synth import disassemble, synthesize_cpp
@@ -417,6 +440,9 @@ def cmd_packet(args) -> int:
     if lead:
         print("lead: " + lead)
     lead = fix_lead(b, va)
+    if lead:
+        print("lead: " + lead)
+    lead = sibling_lead(b, va)
     if lead:
         print("lead: " + lead)
     print("\ntarget bytes:\n  " + " ".join(f"{x:02X}" for x in tb[:512]) + (" ..." if size > 512 else ""))

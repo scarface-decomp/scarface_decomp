@@ -12,7 +12,9 @@ Functions the work queue can't find by following calls and vtables, read from th
   CompleteObjectLocator offset is not 0;
 - functions reached only by another function's closing jump (a call written as `jmp`): the jump is an
   instruction of a known function, and its target is not known, starts on a 16-byte line right after
-  padding, and is outside every known function.
+  padding, and is outside every known function;
+- functions whose address is only handed on (`push offset f`, `mov [..], offset f`): a thread's entry
+  function, a callback. Same conditions on the instruction and the target as for a closing jump.
 
 And what must never be a start: the exception-handling stubs (`mov eax, FuncInfo; jmp __CxxFrameHandler`)
 and the unwind funclets their FuncInfo records point at. Those go to reports/queue_exclusions.json as
@@ -322,6 +324,76 @@ def closing_jump_targets(im: Img, known: Set[int], not_game: Set[int]) -> Dict[i
     return out
 
 
+# ---------------------------------------------------------------------------- addresses taken in code
+
+def address_taken_targets(im: Img, known: Set[int], not_game: Set[int]) -> Dict[int, int]:
+    """{target: the instruction that takes its address} for functions that are never called or jumped to:
+    their address is only handed on, as `push offset f` or `mov [..], offset f` (a thread's entry function,
+    a callback). The instruction is one of a known function of the game's, the address is its last four
+    bytes, and the target is not known, starts on a 16-byte line right after padding and is outside every
+    known function."""
+    import bisect
+    import capstone
+    order = sorted(known)
+    extents: Dict[int, int] = {}
+    md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+
+    def below(va: int) -> Optional[int]:
+        at = bisect.bisect_right(order, va) - 1
+        return order[at] if at >= 0 else None
+
+    def owner(va: int) -> Optional[int]:
+        f = below(va)
+        if f is None:
+            return None
+        if f in not_game:
+            return f if va == f else None
+        if f not in extents:
+            e = function_extent(im.img, f, known)
+            extents[f] = e.size if e.ok else 0
+        return f if va < f + extents[f] else None
+
+    blobs = list(im.code_blobs())
+    candidates: List[int] = []
+    for base, code in blobs:
+        first = (-base) % 16
+        for at in range(first if first else 16, len(code), 16):
+            va = base + at
+            if code[at - 1] != 0xCC or code[at] in (0xCC, 0x00) or va in known:
+                continue
+            if below(va) in not_game:
+                continue                      # inside a library function
+            inside = owner(va)
+            if inside is not None and not padding_ends_at(im, inside, va):
+                continue                      # part of a known function
+            candidates.append(va)
+
+    out: Dict[int, int] = {}
+    for target in candidates:
+        needle = struct.pack("<I", target)
+        taken = None
+        for base, code in blobs:
+            at = code.find(needle)
+            while at != -1 and taken is None:
+                here = base + at
+                f = owner(here)
+                if f is not None and f not in not_game:
+                    for i in md.disasm(im.img.read(f, here - f + 4) or b"", f):
+                        if i.address + i.size == here + 4 and i.mnemonic in ("push", "mov") and i.size >= 5:
+                            taken = i.address
+                        if i.address + i.size >= here + 4:
+                            break
+                at = code.find(needle, at + 1)
+            if taken is not None:
+                break
+        if taken is None:
+            continue
+        e = function_extent(im.img, target, known | {target})
+        if e.ok and e.size and not not_compiled_reason(im.img, target, e.size):
+            out[target] = taken
+    return out
+
+
 def names_by_address(b: str) -> Dict[str, int]:
     try:
         names = json.loads((ROOT / "reports" / "names.json").read_text(encoding="utf-8"))["names"]
@@ -347,6 +419,8 @@ def scan(bin_dir: Path) -> Dict[str, dict]:
             "adjustors": set(adjustors(im)),
             "reached by a closing jump": set(closing_jump_targets(im, *known_starts(im, b))),
         }
+        found["address taken in code"] = set(address_taken_targets(im, *known_starts(im, b))) \
+            - found["reached by a closing jump"]
         never = stubs | funclets
         for k in found:
             found[k] -= never

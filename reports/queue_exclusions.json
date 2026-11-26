@@ -9,6 +9,11 @@
     "why": "Byte for byte (addresses masked) _GetCurrentThreadId@0 from xapilib:thread.obj in The Godfather's Feb 2006 Xbox prototype, linked with the same SDK (5849); its linker map names it."
    },
    {
+    "va": "0x00235F82",
+    "kind": "library",
+    "why": "Microsoft library function (Sleep): number 144 of library 2 in the library lists (.XTLID) of Crash Tag Team Racing's and Hulk: Ultimate Destruction's Xbox programs, linked with the same SDK (5849), and byte for byte the same here (addresses masked). reports/sibling_twins.json has the list."
+   },
+   {
     "va": "0x00238741",
     "kind": "nonstart",
     "why": "frame-relative entry ([ebp-x] of a parent frame) = EH/SEH funclet"
@@ -142,6 +147,26 @@
     "va": "0x00308F6F",
     "kind": "nonstart",
     "why": "EH/SEH funclet inside 0x308ef8"
+   },
+   {
+    "va": "0x00309449",
+    "kind": "library",
+    "why": "Microsoft library function (CreateFiber): number 95 of library 2 in the library lists (.XTLID) of Crash Tag Team Racing's and Hulk: Ultimate Destruction's Xbox programs, linked with the same SDK (5849), and byte for byte the same here (addresses masked). reports/sibling_twins.json has the list."
+   },
+   {
+    "va": "0x003094D5",
+    "kind": "library",
+    "why": "Microsoft library function (DeleteFiber): number 96 of library 2 in the library lists (.XTLID) of Crash Tag Team Racing's and Hulk: Ultimate Destruction's Xbox programs, linked with the same SDK (5849), and byte for byte the same here (addresses masked). reports/sibling_twins.json has the list."
+   },
+   {
+    "va": "0x003094E8",
+    "kind": "library",
+    "why": "Microsoft library function (SwitchToFiber): number 98 of library 2 in the library lists (.XTLID) of Crash Tag Team Racing's and Hulk: Ultimate Destruction's Xbox programs, linked with the same SDK (5849), and byte for byte the same here (addresses masked). reports/sibling_twins.json has the list."
+   },
+   {
+    "va": "0x00309527",
+    "kind": "library",
+    "why": "Microsoft library function (ConvertThreadToFiber): number 97 of library 2 in the library lists (.XTLID) of Crash Tag Team Racing's and Hulk: Ultimate Destruction's Xbox programs, linked with the same SDK (5849), and byte for byte the same here (addresses masked). reports/sibling_twins.json has the list."
    },
    {
     "va": "0x00309C0A",

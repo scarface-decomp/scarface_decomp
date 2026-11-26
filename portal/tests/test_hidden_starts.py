@@ -78,3 +78,30 @@ def test_functions_reached_only_by_a_closing_jump(tmp_path):
     assert H.closing_jump_targets(im, known, set()) == {TEXT + 0x040: TEXT + 0x000}
     # a library function's jumps are not followed, and nothing inside a library's stretch is taken
     assert H.closing_jump_targets(im, known, {TEXT + 0x000}) == {}
+
+
+def test_functions_whose_address_is_only_handed_on(tmp_path):
+    code = bytearray(b"\xCC" * 0x400)
+
+    def put(at, b):
+        code[at:at + len(b)] = b
+    put(0x000, b"\x68" + u32(TEXT + 0x040) + b"\xC3")                    # push offset f: found
+    put(0x040, b"\x33\xC0\xC3")
+    put(0x080, b"\xC7\x46\x08" + u32(TEXT + 0x0C0) + b"\xC3")            # mov [esi+8], offset f: found
+    put(0x0C0, b"\x33\xC0\xC3")
+    put(0x100, b"\x68" + u32(TEXT + 0x144) + b"\xC3")                    # target not on a 16-byte line
+    put(0x144, b"\xC3")
+    put(0x180, b"\x68" + u32(TEXT + 0x000) + b"\xC3")                    # target already known
+    put(0x1C0, b"\x3D" + u32(TEXT + 0x200) + b"\xC3")                    # cmp eax, value: not handed on
+    put(0x200, b"\xC3")
+    put(0x240, b"\x68" + u32(TEXT + 0x280) + b"\xC3")                    # the push is in no known function
+    put(0x280, b"\xC3")
+    # the address is the middle of an instruction's bytes, not its last four
+    put(0x2C0, b"\xC7\x05" + u32(TEXT + 0x300) + u32(1) + b"\xC3")
+    put(0x300, b"\xC3")
+    path = make_xbe(tmp_path / "default.xbe", [(".text", TEXT, bytes(code), 0x6), (".data", DATA, bytes(16), 0x1)])
+    im = H.Img(BinaryImage(path))
+    known = {TEXT + 0x000, TEXT + 0x080, TEXT + 0x100, TEXT + 0x180, TEXT + 0x1C0, TEXT + 0x2C0}
+    assert H.address_taken_targets(im, known, set()) == {TEXT + 0x040: TEXT + 0x000, TEXT + 0x0C0: TEXT + 0x080}
+    # nothing a library function hands on is taken
+    assert H.address_taken_targets(im, known, {TEXT + 0x000, TEXT + 0x080}) == {}
