@@ -1273,8 +1273,9 @@ the camera and keys their colour.
 
 ### Ids seen but not worked out
 
-`0x00010021` (u32 0, then seven u32: 32 on the PC and Xbox, 8 or 16 on the PS2, perhaps the bits each
-kind of vertex data is stored in), `0x0001001D` (u32 1, 3, 1, 0 in every mesh), `0x00121008` (u32 2),
+`0x00010021` Vertex Compression Hint (u32 0, then seven u32: 32 on the PC and Xbox, 8 or 16 on the PS2,
+which fits the name: the bits each kind of vertex data is stored in), `0x0001001D` Mesh Stats (u32 1, 3,
+1, 0 in every mesh), `0x00121008` (u32 2),
 `0x00121402` (u32 0, 0), `0x01000001`, the fields of the loaders' chunks not written up above.
 
 ## Cutscenes (`art/nis/`)
@@ -1527,6 +1528,11 @@ what you find. Known gaps:
   [NetP3DLib](https://github.com/Hampo/NetP3DLib) and [LuaP3DLib](https://github.com/Hampo/LuaP3DLib)
   (with chunk structures by Lucas Cardellini): the names of most chunks, and the older layouts these
   build on.
+* Lucas' Pure3D Editor 4 by Lucas Cardellini (Donut Team), in its ordinary and its "Scarface Test" builds:
+  the names it shows for fifteen chunks the list above lacks (Mesh Stats, Vertex Compression Hint,
+  Frontend Layer and Language, the collision volume and physics chunks, the state prop's event and
+  callback data), and its agreement on Topology. Only the names and the id each belongs to were read
+  from it; it gives no licence, so nothing else was taken, and the editor was not run or taken apart.
 * The PS2's VIF command set, as documented for emulators such as PCSX2, to read the vector-unit packets.
 * The [glTF 2.0 specification](https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html) (Khronos), which
   `p3d_gltf.py` writes, and its

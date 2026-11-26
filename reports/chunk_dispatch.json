@@ -46,8 +46,6 @@
     "0x0001700B",
     "0x0001700C",
     "0x0001700D",
-    "0x00018003",
-    "0x0001800E",
     "0x00018020",
     "0x00019003",
     "0x00019004",
@@ -60,17 +58,10 @@
     "0x00121400",
     "0x00121401",
     "0x00121402",
-    "0x07000003",
-    "0x07000006",
-    "0x07000007",
-    "0x07000008",
-    "0x07016000",
     "0x08011001",
     "0x08011002",
     "0x08011003",
     "0x08011004",
-    "0x08020004",
-    "0x08020005",
     "0x08020006",
     "0x08020007",
     "0x08020009",
@@ -94,7 +85,7 @@
        "at": "0x0003209C",
        "calls": [
         "sub_00240570",
-        "sub_00027590"
+        "OperatorNew"
        ]
       },
       {
@@ -103,7 +94,7 @@
        "at": "0x0003210C",
        "calls": [
         "sub_00240570",
-        "sub_00027590"
+        "OperatorNew"
        ]
       },
       {
@@ -112,7 +103,7 @@
        "at": "0x00032199",
        "calls": [
         "sub_00240570",
-        "sub_00027590"
+        "OperatorNew"
        ]
       },
       {
@@ -156,7 +147,7 @@
        "chunk": "",
        "at": "0x001C6842",
        "calls": [
-        "sub_000275B0",
+        "AllocateInHeap",
         "sub_001C5750"
        ]
       }
@@ -193,7 +184,7 @@
      "cases": [
       {
        "id": "0x00018003",
-       "chunk": "",
+       "chunk": "Frontend Layer",
        "at": "0x0024CE73",
        "calls": [
         "sub_0024CB70",
@@ -249,7 +240,7 @@
      "cases": [
       {
        "id": "0x0001800E",
-       "chunk": "",
+       "chunk": "Frontend Language",
        "at": "0x0024DEBE",
        "calls": [
         "sub_0024D5B0"
@@ -486,7 +477,7 @@
       },
       {
        "id": "0x08020004",
-       "chunk": "",
+       "chunk": "State Prop Event Data",
        "at": "0x0026F206",
        "calls": [
         "sub_00240570",
@@ -495,7 +486,7 @@
       },
       {
        "id": "0x08020005",
-       "chunk": "",
+       "chunk": "State Prop Callback Data",
        "at": "0x0026F29C",
        "calls": [
         "sub_00240570",
@@ -607,7 +598,7 @@
        "at": "0x00270ED6",
        "calls": [
         "sub_00240F00",
-        "sub_002FC034"
+        "__RTDynamicCast"
        ]
       },
       {
@@ -636,7 +627,7 @@
        "at": "0x002713E2",
        "calls": [
         "sub_00240F00",
-        "sub_002FC034"
+        "__RTDynamicCast"
        ]
       }
      ]
@@ -656,7 +647,7 @@
        "at": "0x00271624",
        "calls": [
         "sub_00240F00",
-        "sub_002FC034"
+        "__RTDynamicCast"
        ]
       }
      ]
@@ -676,7 +667,7 @@
        "at": "0x00271813",
        "calls": [
         "sub_00240F00",
-        "sub_002FC034"
+        "__RTDynamicCast"
        ]
       }
      ]
@@ -714,7 +705,7 @@
        "at": "0x00271E5A",
        "calls": [
         "sub_00240F00",
-        "sub_002FC034"
+        "__RTDynamicCast"
        ]
       },
       {
@@ -845,7 +836,7 @@
        "at": "0x00277AB6",
        "calls": [
         "sub_00240F00",
-        "sub_002FC034"
+        "__RTDynamicCast"
        ]
       },
       {
@@ -895,7 +886,7 @@
       },
       {
        "id": "0x00010021",
-       "chunk": "Vertex Precision (?)",
+       "chunk": "Vertex Compression Hint",
        "at": "0x002783F8",
        "calls": [
         "sub_00240570",
@@ -908,7 +899,7 @@
        "at": "0x00278598",
        "calls": [
         "sub_00240F00",
-        "sub_002FC034"
+        "__RTDynamicCast"
        ]
       },
       {
@@ -1115,7 +1106,7 @@
        "chunk": "",
        "at": "0x0027D34D",
        "calls": [
-        "sub_00027600",
+        "OperatorDelete",
         "sub_00240570"
        ]
       }
@@ -1142,7 +1133,7 @@
        "at": "0x0027E58E",
        "calls": [
         "sub_002A9290",
-        "sub_00027600"
+        "OperatorDelete"
        ]
       },
       {
@@ -1160,7 +1151,7 @@
        "at": "0x0027E8B8",
        "calls": [
         "sub_00240570",
-        "sub_00027590"
+        "OperatorNew"
        ]
       }
      ]
@@ -1329,7 +1320,7 @@
       },
       {
        "id": "0x00010021",
-       "chunk": "Vertex Precision (?)",
+       "chunk": "Vertex Compression Hint",
        "at": "0x002801DB",
        "calls": [
         "sub_00240570",
@@ -1342,7 +1333,7 @@
        "at": "0x0028037B",
        "calls": [
         "sub_00240F00",
-        "sub_002FC034"
+        "__RTDynamicCast"
        ]
       },
       {
@@ -1704,7 +1695,7 @@
        "at": "0x002948FE",
        "calls": [
         "sub_0003AEF0",
-        "sub_00244450"
+        "AllocateFromHeap"
        ]
       },
       {
@@ -1731,7 +1722,7 @@
        "at": "0x00294A47",
        "calls": [
         "sub_0003AEF0",
-        "sub_00027590"
+        "OperatorNew"
        ]
       },
       {
@@ -1817,7 +1808,7 @@
       },
       {
        "id": "0x0001001C",
-       "chunk": "Extra Colour List (?)",
+       "chunk": "Colour Set",
        "at": "0x00294B3F",
        "calls": [
         "sub_00240570",
@@ -1953,7 +1944,7 @@
        "at": "0x00295332",
        "calls": [
         "sub_00240570",
-        "sub_00027590"
+        "OperatorNew"
        ]
       },
       {
@@ -2039,7 +2030,7 @@
       },
       {
        "id": "0x0001001C",
-       "chunk": "Extra Colour List (?)",
+       "chunk": "Colour Set",
        "at": "0x0029546B",
        "calls": [
         "sub_00240570",
@@ -2129,43 +2120,43 @@
      "cases": [
       {
        "id": "0x07000003",
-       "chunk": "",
+       "chunk": "Collision Vertices",
        "at": "0x002F77F0",
        "calls": [
         "sub_00240570",
-        "sub_00027590"
+        "OperatorNew"
        ]
       },
       {
        "id": "0x07000006",
-       "chunk": "",
+       "chunk": "Collision Triangles",
        "at": "0x002F76ED",
        "calls": [
         "sub_00240570",
-        "sub_00027590"
+        "OperatorNew"
        ]
       },
       {
        "id": "0x07000007",
-       "chunk": "",
+       "chunk": "Collision Neighbours",
        "at": "0x002F785C",
        "calls": [
         "sub_00240570",
-        "sub_00027590"
+        "OperatorNew"
        ]
       },
       {
        "id": "0x07000008",
-       "chunk": "",
+       "chunk": "Collision Search Tree",
        "at": "0x002F7965",
        "calls": [
         "sub_00240570",
-        "sub_00027590"
+        "OperatorNew"
        ]
       },
       {
        "id": "0x07016000",
-       "chunk": "",
+       "chunk": "Collision Triangle Sets",
        "at": "0x002F794F",
        "calls": []
       }
