@@ -317,7 +317,17 @@
     var total = v.total + (q ? q.total : 0);
     $('sb-verified').textContent = fmt(v.total);
     $('sb-total').textContent = q ? fmt(total) : 'about 21,000';
-    var p = q ? pct(v.total, total) : 0;
+    // The headline is the share of the code by size: a function can be 6 bytes or 6,000, so the share of
+    // functions by count runs far ahead of the work that is done while the small ones go first. Both are
+    // shown under the line at one size. A progress file without sizes falls back to the count.
+    var byCount = q ? pct(v.total, total) : 0;
+    var bySize = q && q.bytes ? pct(v.bytes || 0, (v.bytes || 0) + q.bytes) : null;
+    var p = bySize === null ? byCount : bySize;
+    $('sb-measures').hidden = bySize === null;
+    if (bySize !== null) {
+      $('sb-size-pct').textContent = fmtPct(bySize) + '%';
+      $('sb-count-pct').textContent = fmtPct(byCount) + '%';
+    }
     if (q) {
       $('sb-pct').textContent = fmtPct(p) + '%';
       if (p >= 100) $('claim').textContent = 'The world is yours.';
@@ -346,8 +356,9 @@
       $('sb-stubs').textContent = (stubsAll ? fmt(v.stubs || 0) + ' of the ' + fmt(stubsAll)
           + ' start-up and shutdown stubs are among them (one-liners the compiler writes for global objects); without them, '
           + fmt(restDone) + ' of ' + fmt(rest) + ' (' + fmtPct(pct(restDone, rest)) + '%). ' : '')
-        + (q.bytes ? 'By size, the rebuilt functions are ' + fmtPct(pct(v.bytes, v.bytes + q.bytes))
-          + '% of the released game\'s code: the large functions are still to come.' : '');
+        + (q.bytes ? 'By size that is ' + fmt(v.bytes) + ' of ' + fmt(v.bytes + q.bytes) + ' bytes, '
+          + fmtPct(pct(v.bytes, v.bytes + q.bytes))
+          + '% of the released game\'s code: the small functions went first and the large ones are still to come.' : '');
     }
     // The prototype (unreleased code) has its own row once it is in the queue; the headline is the released game.
     $('proto-row').hidden = !((v.proto || 0) + (q && q.proto ? q.proto : 0));
