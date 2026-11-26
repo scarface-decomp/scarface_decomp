@@ -337,6 +337,30 @@ def cmd_describe_keep(args) -> int:
     return 0 if not bad else 1
 
 
+_CLASS_HINTS = None
+
+
+def class_hint(b: str, va: int) -> str:
+    """What reports/class_hints_xb.json says about an Xbox function with no class of its own ("" for none):
+    a lead from published research, to check against the code."""
+    global _CLASS_HINTS
+    if b != "xb":
+        return ""
+    if _CLASS_HINTS is None:
+        try:
+            rows = json.loads((ROOT / "reports" / "class_hints_xb.json").read_text(encoding="utf-8")).get("hints", [])
+            _CLASS_HINTS = {int(r[0], 16): r for r in rows}
+        except (OSError, ValueError, IndexError):
+            _CLASS_HINTS = {}
+    r = _CLASS_HINTS.get(va)
+    if not r:
+        return ""
+    how = {"vtable": "it is in that class's virtual table", "ctor/vtref": "it writes that class's virtual table pointer",
+           "callers": "everything that calls it is a method of that class, so it may be a helper and not a member"}
+    return (f"its PC twin ({r[3]}) is attributed to {r[1]} by scarface-p3d's coverage table: "
+            f"{how.get(r[2], r[2])}. Check it against the code.")
+
+
 def cmd_packet(args) -> int:
     import decompme as DME
     from disasm_synth import disassemble, synthesize_cpp
@@ -364,6 +388,9 @@ def cmd_packet(args) -> int:
         print(f"name on record: {own['name']}  ({own.get('why', '')})")
     for hint in codegen_hints(b, tb):
         print("hint: " + hint)
+    lead = class_hint(b, va)
+    if lead:
+        print("lead: " + lead)
     print("\ntarget bytes:\n  " + " ".join(f"{x:02X}" for x in tb[:512]) + (" ..." if size > 512 else ""))
     print("\ndisassembly:")
     for ln in lines:

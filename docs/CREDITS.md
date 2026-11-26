@@ -75,6 +75,11 @@ authors are credited in the commit history. Thank you.
   project as the specs in `docs/cleanroom/`, each checked on the game's own files
   ([CLEAN_ROOM.md](CLEAN_ROOM.md)). Since that date any contributor may read it; anything taken from it
   is checked against the game and named here.
+* From the same research, since 25 November 2026: its list of the PC game's functions (`re/idb_funcs.txt`) and
+  its table of which class each belongs to (`re/coverage_funcs.txt`). The list is how the whole PC game was
+  paired with the Xbox one (`reports/pairing_xb_pc_study.json`, 6,069 pairs), and the table gives 1,943 Xbox
+  functions that had no class a lead to one (`reports/class_hints_xb.json`). Where the project already knew
+  the class, the table's virtual-table attributions agreed for 1,312 of 1,509 pairs. No name was taken.
 * The fonts of the website and the portal: [Anton](https://github.com/googlefonts/AntonFont) (The Anton
   Project Authors), [Josefin Sans](https://github.com/ThomasJockin/JosefinSansFont-master) (The Josefin
   Sans Project Authors) and Marcellus (Brian J. Bonislawsky, Astigmatic), each under the SIL Open Font

@@ -139,3 +139,27 @@ def test_describe_keep_takes_only_good_new_descriptions(monkeypatch, tmp_path):
     assert A.main(["describe-keep", str(f)]) == 1                      # some were turned down
     kept = json.loads((tmp_path / "to_submit" / "descriptions_bob.json").read_text(encoding="utf-8"))
     assert kept["by"] == "Claude for bob" and list(kept["descriptions"]) == ["xb:0x00011000"]
+
+
+def test_packet_gives_a_lead_to_a_class_from_published_research(monkeypatch, tmp_path):
+    (tmp_path / "reports").mkdir()
+    (tmp_path / "reports" / "class_hints_xb.json").write_text(json.dumps({"hints": [
+        ["0x000C6F10", "SaveGameManagerFlowClient", "callers", "0x00484D60"],
+        ["0x00011000", "Weapon", "vtable", "0x00412000"]]}))
+    monkeypatch.setattr(A, "ROOT", tmp_path)
+    monkeypatch.setattr(A, "_CLASS_HINTS", None)
+    lead = A.class_hint("xb", 0x000C6F10)
+    assert "SaveGameManagerFlowClient" in lead and "0x00484D60" in lead and "may be a helper" in lead
+    assert "virtual table" in A.class_hint("xb", 0x00011000)
+    assert A.class_hint("xb", 0x00012345) == "" and A.class_hint("pc", 0x000C6F10) == ""
+
+
+def test_the_class_leads_file_is_what_it_says():
+    root = Path(__file__).resolve().parents[2]
+    hints = json.loads((root / "reports" / "class_hints_xb.json").read_text(encoding="utf-8"))
+    pairs = json.loads((root / "reports" / "pairing_xb_pc_study.json").read_text(encoding="utf-8"))
+    assert hints["count"] == len(hints["hints"]) == sum(hints["by"].values())
+    assert pairs["paired"] == len(pairs["pairs"]) == sum(pairs["by"].values())
+    twin = {x: y for x, y, _size, _how in pairs["pairs"]}
+    assert all(twin.get(x) == pc and by in ("vtable", "ctor/vtref", "callers") and cls for x, cls, by, pc in hints["hints"])
+    assert all(0x401000 <= int(y, 16) < 0x72EADC for y in twin.values())     # the PC game's own code, nothing after it

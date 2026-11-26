@@ -59,6 +59,10 @@ the work that needs neither: **writing descriptions** (below).
   `/arch:SSE`, or `/TC` for a public C library). `keep` writes both into the file's `// verify:` line, and recording uses them.
 - `packet` prints `hint:` lines when the function's own instructions say how its source was written
   (an 8-byte-aligned local, double `sqrt()` next to SSE code); `docs/METHODOLOGY.md` section 5 explains them.
+- `packet` prints a `lead:` line when published research ties an Xbox function with no class of its own to one
+  (`reports/class_hints_xb.json`, from scarface-p3d's coverage table through the PC game's twin). It says how
+  the tie was made. "Everything that calls it is a method of that class" often means a helper, not a member:
+  check a lead against the code before you use it.
 - `packet` prints up to three functions of the same class that are already matched, then up to three
   matched functions with the most similar instructions (score 0.6 to 1.0; 1.00 means the same
   instructions with other registers, offsets or addresses). Start from the nearest one and change what
