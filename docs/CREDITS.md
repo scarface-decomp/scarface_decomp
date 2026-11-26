@@ -23,6 +23,10 @@ authors are credited in the commit history. Thank you.
   its decompression side. The published source files are in `reconstructed_src/include/zlib-1.2.1/`,
   unchanged, with the library's README and licence text; the game's zlib functions are matched by
   compiling them as C (SPEC-014 §5.3).
+* The Unicode Consortium's public reference conversion between UTF-8, UTF-16 and UTF-32 (`ConvertUTF.c`):
+  the game's text conversion (0x002A9310 to 0x002A96E2 on Xbox) follows it, in a version without the
+  later check on 0xED, and with a fallback character added. Knowing the algorithm made the game's five
+  functions quick to read; they were written from the game's bytes, not copied from the published file.
 * The Microsoft Visual C++ Toolkit 2003 (cl.exe 13.10.3052 or 13.10.3077), which each contributor supplies.
 * Prior matching-decompilation projects whose methods informed this one, among them
   [fnv_decomp](https://github.com/momusdigital/fnv_decomp) (Fallout: New Vegas, MSVC),

@@ -97,6 +97,29 @@ def test_function_extent(tiny_xbe):
     assert e.ok and e.size == 6
 
 
+def test_a_number_someone_looked_at_is_not_a_hard_coded_address(tmp_path, monkeypatch):
+    """U+10FFFF, Unicode's last code point, lies inside the Xbox game's code range. reports/numbers_not_addresses.json
+    lists it for the one function that compares against it; anywhere else, and as memory to read, it still counts."""
+    import json
+    from pathlib import Path
+    from types import SimpleNamespace as NS
+    image = NS(image_base=0x10000, path=Path("Default.XBE"), sections=[NS(va=0x11000, vsize=0x300000, raw_size=0x300000)])
+    listed = tmp_path / "numbers.json"
+    listed.write_text(json.dumps({"numbers": [{"file": "default.xbe", "va": "0x002A9610", "value": "0x0010FFFF", "why": "w"},
+                                              {"file": "game.xbe", "va": "0x002A9610", "value": "0x00110000"}, {"junk": 1}]}))
+    monkeypatch.setattr(MV, "NUMBERS_FILE", listed)
+    assert MV.reviewed_numbers(image, 0x2A9610) == {0x10FFFF}
+    assert MV.reviewed_numbers(image, 0x2A9430) == set() and MV.reviewed_numbers(image, None) == set()
+    monkeypatch.setattr(MV, "NUMBERS_FILE", tmp_path / "missing.json")
+    assert MV.reviewed_numbers(image, 0x2A9610) == set()
+
+    find = lambda code, numbers=None: MV.find_hardcoded_addresses(bytes.fromhex(code), set(), image, numbers)
+    assert find("3D FF FF 10 00") == ["+0x0: cmp eax, 0x10ffff"]             # not listed: an address
+    assert find("3D FF FF 10 00", {0x10FFFF}) == []                          # cmp eax, 0x10FFFF, listed
+    assert find("3D 00 00 11 00", {0x10FFFF}) == ["+0x0: cmp eax, 0x110000"]
+    assert len(find("A1 FF FF 10 00", {0x10FFFF})) == 1                      # mov eax, [0x10FFFF]: memory at it
+
+
 # ---------------------------------------------------------------- hard-coded address rewrite
 
 def test_hardcoded_shapes():

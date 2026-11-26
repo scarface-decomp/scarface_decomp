@@ -5,8 +5,15 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-25T20:57:34Z</updated>
+  <updated>2026-11-25T20:58:00Z</updated>
   <author><name>Scarface decomp contributors</name></author>
+  <entry>
+    <title>sub_00284320 (Xbox prototype, 172 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00284320"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00284320</id>
+    <updated>2026-11-25T20:58:00Z</updated>
+    <summary>0x00284320 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
   <entry>
     <title>sub_002840F0 (Xbox prototype, 52 bytes) by RRutherrfordd (Founder)</title>
     <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002840F0"/>
@@ -349,12 +356,5 @@
     <id>tag:scarface-decomp.pages.dev,2026:proto:0x00074ED0</id>
     <updated>2026-11-25T20:42:40Z</updated>
     <summary>0x00074ED0 in the Xbox prototype version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00250E80 (Xbox, 35 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00250E80"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00250E80</id>
-    <updated>2026-11-25T20:42:01Z</updated>
-    <summary>Rounds a number up to a multiple of a step; a step of zero, or a number already on a multiple, leaves it as it is. 0x00250E80 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

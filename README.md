@@ -23,7 +23,7 @@ meant for modding research, engine bug fixing and preservation.
 | :--- | ---: | ---: | ---: |
 | Verified functions | 11,752 | 765 | **12,517** |
 
-Plus 11,016 in the April 2006 Xbox prototype (`game.xbe`), unreleased code, counted on its own.
+Plus 11,017 in the April 2006 Xbox prototype (`game.xbe`), unreleased code, counted on its own.
 
 Plus 3,793 in the PS2 game (`SLUS_211.11` and its overlays), built with its own compiler, counted on its own.
 

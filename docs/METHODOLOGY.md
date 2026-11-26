@@ -62,10 +62,12 @@ executable, `.rdata` and `.data` included.
   already passes arguments in registers to a `static` function whose address is never taken. zlib's
   `crc32` (0x002C6E60) and its static helper (0x002C6B80, arguments in EAX, ECX and EDX) match from an
   ordinary single-file compile.
-* Link-time code generation: the retail Xbox program was linked with it (SPEC-014 §5.5). A few functions
-  take an argument in EAX, ESI, EDI or EBX, which this compiler only does then. Such a function and its
-  callers cannot be matched by compiling one file; `reports/exam_regarg_xb.json` lists 55 leads (seven
-  are false: already matched from ordinary compiles). Everything else compiles the same without it.
+* Link-time code generation: there is no evidence of it. SPEC-014 §5.5 once read register arguments as
+  proof of it; the examiner withdrew that on 25 November 2026, after the save drive's text converter
+  (0x002BFA00, arguments in ECX and EAX) and its caller matched from one ordinary file. A function that
+  takes an argument in a register is one only its own file can see (`static`, or a `static` template):
+  write it in the same file as its callers and the compiler picks the registers itself.
+  `reports/exam_regarg_xb.json` lists 55 such leads (seven of them false).
 * No `/EHsc` on Xbox: the game and engine code has no C++ exception frame (no function sets the
   exception list at `fs:[0]`; the 49 exception stubs belong to a Microsoft library), and all 22,626
   verified Xbox functions (11,678 retail, 10,948 prototype) still match with the switch removed. New
