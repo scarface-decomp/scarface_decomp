@@ -1,4 +1,4 @@
-# SPEC-016: `core::XboxSaveDrive`, the Xbox save-file drive (parts 1 and 2a)
+# SPEC-016: `core::XboxSaveDrive`, the Xbox save-file drive (parts 1, 2a and 2b)
 
 **Examiner:** Claude (AI assistant) for RRutherrfordd, 2026-11-25.
 **Outside material read:** leaked source, read directly: the save-drive source file and header of the 2003
@@ -214,7 +214,7 @@ Suggested names in this part are the examiner's own wording; rename freely.
 | 0x396CB7 | `XUnmountMU(port, slot)` |
 | 0x30A4EB | closes a directory-search handle (one argument) |
 | 0x250E80 | `__cdecl`, two arguments (value, 0x4000): used to round a size |
-| 0x244450 | the engine's allocating `new` (size, allocator) |
+| 0x244450 | the engine's allocating `new` (allocator, size); see §8 |
 
 ### 7.3 0x2BF6A0: refresh the memory-unit state (96 bytes)
 
@@ -289,8 +289,194 @@ Suggested names in this part are the examiner's own wording; rename freely.
 * **Signature:** `__cdecl`. If the first argument is 0, return −3. If the second is 0, return −2.
   Otherwise call 0x2BFA00 with three arguments and return its result. What 0x2BFA00 does was not read.
 
-## 8. Still to come (part 2b)
+## 8. Questions and answers (from the implementer's attempts, 2026-11-25)
 
-The constructor (0x2BFB50), the save-file open (0x2C09C0, 1,280 bytes), file initialisation (0x2C0210),
-the signed block read and write (0x2C04C0, 0x2C06B0), the directory search (0x2C1180, 0x2C1300), and the
-members at 0x2BFA00, 0x2BFAA0, 0x2C0EC0, 0x2C0F80, 0x2C1020 and 0x2C10E0.
+Twelve of the thirteen functions in §2 to §7 are verified. Sizes given in this spec are padded extents
+(to the next function); the verified code sizes are in the registry. What the attempts established:
+
+* **Has-changed carries its own guard** (0x2BFF10). The "port ≥ 0 and slot ≥ 0" test of §3 step 3 is
+  inside the always-expanded has-changed helper, which returns false for a negative argument. Witness:
+  `setne cl; test cl, cl` at 0x2BFF5C, the merged result of two return paths. Clear-changed has no guard.
+* **Is-present** (0x2BF700) is the mirror: it returns true for a negative argument. It is not a witness
+  for the inlining level; the call is kept under every setting tried.
+* **The core library is built with the default inlining level.** The translate function (§2) is an
+  ordinary out-of-class member defined above mount; `/O2` expands its 0x48F case into mount as the game
+  has it, and `/Ob1` does not. This corrects the examiner's reading in the note of 25 November.
+* **0x2C0100:** the file-size failure and the signature failure are two separate `if` statements; the
+  shared tail is the optimiser's merge. Steps 6 and 7 are one `||`. The signature is stored by structure
+  assignment through a cast pointer.
+* **0x2C0760:** the error-recording member 0x2C0030 is an ordinary out-of-class member (it stores the
+  translation and returns whether it is zero); the compiler expands it at 0x2C07A7 and 0x2C08D6 and calls
+  it at 0x2C0884. The compare is `memcmp(computed, stored)`; the locals are declared stored, then computed.
+* **0x2BF6A0:** two `unsigned char` locals hold the folded masks.
+* **0x2BF730 / 0x2BF8A0:** the divisor is written `0x2000 - 20`; the numerator is
+  `size + 4 + divisor - 1`. 0x2BF8A0 is virtual (slot 6).
+* **0x2BF7A0** calls an inline function with 0x2BF760's body.
+* **0x2BF930** gets port and slot through an in-class inline helper taking two `int*`.
+* **0x2C0090 (correction to §7.2):** the allocator 0x244450 takes (allocator, size), in that order. The
+  constructor 0x2BFB50 takes (name, allocator).
+
+## 9. The class's virtual tables (from the constructor's stores, 0x2BFB50)
+
+| Table | Stored at | Slots | What it is |
+| :--- | :--- | ---: | :--- |
+| 0x3DB584 | +0 | 24 | the main table |
+| 0x3DB56C | +0xC | 3 | a second base: 0x2BF800, 0x2BF810, 0x2BFD40 (all verified) |
+| 0x3DB55C | +0xD8 | 3 | the signed-read interface: slot 0 = 0x2C0F80 (§10.4); 0x2BF880; 0x2BF890 |
+| 0x3DB54C | +0xDC | 3 | the signed-write interface: slot 0 = 0x2C1020 (§10.5); 0x2BF880; 0x2BF890 |
+
+The two interfaces' own tables (0x3DB52C, 0x3DB53C: three pure slots each) are stored first by their
+inlined base constructors.
+
+Main table, slot → function (open ones marked):
+
+| Slot | VA | | Slot | VA | |
+| ---: | :--- | :--- | ---: | :--- | :--- |
+| 0 | 0x2AC390 | open, inherited | 12 | 0x2BF840 | |
+| 1 | 0x2C1450 | | 13 | 0x2C0EC0 | open, §10.6 |
+| 2 | 0x2D5920 | | 14 | 0x2BFCF0 | open, §10.8 |
+| 3 | 0x2C00D0 | | 15 | 0x2BFD10 | |
+| 4 | 0x2AC8C0 | open, inherited | 16 | 0x1284A0 | |
+| 5 | 0x2BF830 | | 17, 18 | 0x14F2D0 | |
+| 6 | 0x2BF8A0 | §7.6 | 19 | 0x2C10E0 | open, §10.7 |
+| 7 | 0x4A770 | | 20 | 0x2C1180 | open, part 2c |
+| 8 | 0x2BF820 | | 21 | 0x2C1300 | open, part 2c |
+| 9 | 0x2C0900 | open, part 2c | 22 | 0x2BFD50 | |
+| 10 | 0x29D8F0 | | 23 | 0x22710 | |
+| 11 | 0x2C09C0 | open, part 2c | | | |
+
+**Not virtual** (reached only by direct calls): 0x2BFE10, 0x2BFF10, 0x2BF930, 0x2C0030, 0x2C0100,
+0x2C0760, 0x2BF8F0, 0x2BF9C0, 0x2C0210, 0x2C04C0, 0x2C06B0. **Not members:** 0x2BF730, 0x2BF760,
+0x2BF7A0, 0x2BFA00, 0x2BFAA0, 0x2C0090, 0x2C0480, and the state object's 0x2BF6A0 and 0x2BF700.
+
+**A start to remove:** 0x2C0920 is not a function. The slot-9 function begins at 0x2C0900, calls
+0x2C04C0 at 0x2C0903 and runs on through 0x2C0920 to 0x2C09C0.
+
+### 9.1 More layout
+
+| Offset | Type | Role | Witness |
+| :--- | :--- | :--- | :--- |
+| +0xFC | 4 file handles | files whose first block still needs its size written | 0x2C0EE6: loop of 4, unsigned counter; cleared to 0xFFFFFFFF at 0x2C0F56 |
+
+So the tail of the object is: +0xE4 open-file count, +0xE8 name (17 bytes), +0xF9 mounted, +0xFA drive
+letter, +0xFC the four handles, +0x10C the search pool, end 0x92C.
+
+## 10. Part 2b: text conversion, signed read and write, commit, delete
+
+### 10.1 0x2BFA00: 16-bit text to 8-bit text, with a size limit (160 bytes, open)
+
+* **Arguments:** destination (`char*`) in ECX, source (pointer to 16-bit characters) in EAX, then three
+  on the stack, cleaned by the caller: A (passed through), the destination's capacity in bytes, C
+  (passed through). Returns `int`.
+* **Callers:** 0x2C0480 (§10.3) and 0x2C06B0, both in this file.
+* **Steps:**
+  1. If source and destination are the same pointer, return −5.
+  2. `written = 0`. While the source's current 16-bit unit is not zero:
+     1. Decode one character: 0x2A95A0(source, &unitsBytes, &character, C), `__cdecl`, returns bool. If
+        false, return −2.
+     2. Encode it: 0x2A9430(character, destination, capacity − written − 1, A, &produced, C), `__cdecl`,
+        returns `int`. If the result is not 0: when it is −1, store a zero byte at the destination first;
+        in both cases return the result.
+     3. `source` advances by `unitsBytes` bytes; `destination` and `written` advance by `produced`.
+  3. Store a zero byte at the destination and return 0.
+* **Locals:** three 32-bit values (frame 0xC): the decoded character, the source bytes consumed, the
+  bytes produced.
+* **Codegen:** `written` is kept in EBX and zeroed with `xor`; the loop test is at the bottom, with a
+  separate first test before the loop.
+
+### 10.2 0x2BFAA0: 8-bit text to 16-bit text (176 bytes, open)
+
+The mirror image of §10.1, same shape instruction for instruction:
+
+* Destination (16-bit) in ECX, source (`char*`) in EAX, the same three stack arguments.
+* The loop runs while the source byte is not zero.
+* Decode with 0x2A93A0, encode with 0x2A9610, same argument lists.
+* The room passed to the encoder is `capacity − written − 2`.
+* The terminator stored is a 16-bit zero, on the normal exit and on the −1 exit.
+* **Callers:** 0x2C09C0, 0x2C10E0 and 0x2C1180.
+
+The two functions differ only in the character types and the helper pair, so one template, or two copies
+of one function, are both possible sources. Try a function template over the two character types first.
+
+### 10.3 0x2C0480: checked entry to §10.1 (64 bytes, open)
+
+* **Signature:** `__cdecl`, five arguments (destination, source, A, capacity, C).
+* **Steps:** destination null → −3; source null → −2; otherwise call §10.1 with destination in ECX,
+  source in EAX and the last three arguments pushed in order, and return its result.
+* **Caller:** 0x2C04C0 only. 0x2C06B0 calls §10.1 directly (this wrapper expanded there).
+
+**On the register arguments.** Whether Visual C++ 7.1 gives a file-local function this convention under
+plain `/O2`, or only with link-time code generation, is the open question from the previous round.
+These two functions settle it with one compile: put §10.1 (as `static`) and §10.3 in one file under
+`/O2` with no `/GL`. If the call site comes out as the game's (`mov ecx`, `mov eax`, three pushes,
+`add esp, 0xC`), file-local functions get it without link-time code generation and the examiner's
+claim of 24 November is withdrawn for every file-local case. If it comes out as an ordinary five-push
+call, the claim stands.
+
+### 10.4 0x2C0F80: read part of a signed block (160 bytes, open; signed-read interface slot 0)
+
+* **Signature:** member reached through the interface at +0xD8 (the function subtracts 0xD8 from ECX to
+  get the object). Seven stack arguments: handle, file name (unused), block, position, byte count,
+  destination, memory-space value (unused). `ret 0x1C`. Returns a 32-bit status: 1 = done, 0 = failed.
+* **Steps:**
+  1. If mount (§3) fails, return 0.
+  2. `size = GetFileSize(handle, NULL)`; on 0xFFFFFFFF record the translated `GetLastError()` and return 0.
+  3. If `block * 0x2000 >= size` (unsigned): last error = 0; return 1.
+  4. If load-block (§5) with (handle, block) fails, return 0.
+  5. Copy `count` bytes from `buffer + position` to the destination (`memcpy`: `rep movsd` then
+     `rep movsb`). Last error = 0; return 1.
+* **Codegen:** the last-error store is written relative to the interface pointer (`[ebx - 8]`).
+
+### 10.5 0x2C1020: write part of a signed block (192 bytes, open; signed-write interface slot 0)
+
+* **Signature:** as §10.4 through the interface at +0xDC, with eight stack arguments: handle, file name
+  (unused), block, position, byte count, source, pointer to a size result, memory-space value (unused).
+  `ret 0x20`.
+* **Steps:**
+  1. If mount fails, return 0.
+  2. `size = GetFileSize(handle, NULL)`; on 0xFFFFFFFF record the translated error and return 0.
+  3. If load-block with (handle, block) fails, return 0.
+  4. Buffer state = 0. Copy `count` bytes from the source to `buffer + position`. Buffer state = 2.
+  5. Store through the size pointer: `size − 20 * ((size + 0x1FFF) >> 13)`.
+  6. Last error = 0; return 1.
+* **Scarface-only:** step 5 counts one signature per 0x2000 bytes of file. It is not §7.5's formula.
+* **Codegen:** both stores to the buffer state survive, either side of the copy, so the state variable
+  behaves as if it cannot be folded (the same as in §4 and §5).
+
+### 10.6 0x2C0EC0: commit a file (192 bytes, open; main-table slot 13)
+
+* **Signature:** member, (handle, file name unused), `ret 8`. Returns the same 32-bit status.
+* **Steps:**
+  1. If mount fails or write-back (§4) fails, return 0.
+  2. Look through the four handles at +0xFC for one equal to the cached handle (`for` with an unsigned
+     counter below 4). If none matches, go to step 6.
+  3. If load-block with (handle, 0) fails, return 0.
+  4. `size = GetFileSize(handle, NULL)`; on 0xFFFFFFFF record the translated error and return 0.
+  5. Store `size` as the first 32-bit value of the buffer; buffer state = 2; if write-back fails, return
+     0; set that list entry to 0xFFFFFFFF.
+  6. Last error = 0; return 1.
+
+### 10.7 0x2C10E0: delete a save (160 bytes, open; main-table slot 19)
+
+* **Signature:** member, one argument (the save's name, `const char*`), `ret 4`. Frame 0x208.
+* **Steps:**
+  1. If mount fails, return 0.
+  2. Build a 4-character drive string in a local: the drive letter (+0xFA), `':'`, `'\\'`, zero.
+  3. If the name is not null, convert it to 16-bit text in a 0x204-byte local with §10.2 (stack
+     arguments 0, 0x202, 0).
+  4. Call 0x30A2CA with (drive string, 16-bit name). If the result is not 0: last error =
+     translate(result); return 0.
+  5. Last error = 0; return 1.
+* 0x30A2CA is expected to be `XDeleteSaveGame`; confirm against your library names.
+* **Scarface-only:** the name is converted directly, with no path building, and may be null.
+
+### 10.8 0x2BFCF0: slot 14, a forward (32 bytes, open)
+
+Takes two stack arguments. It moves them up one place, puts `this` in the first place, adds 0xD8 to ECX
+(the signed-read interface) and jumps to 0x2CC160. So it is "call 0x2CC160 on the read interface with
+(this, a, b)" written as a tail call.
+
+## 11. Still to come (part 2c)
+
+File initialisation (0x2C0210), 0x2C04C0 and 0x2C06B0, the slot-9 function (0x2C0900 to 0x2C09C0), the
+save-file open (0x2C09C0), the directory search (0x2C1180, 0x2C1300) and the constructor (0x2BFB50).

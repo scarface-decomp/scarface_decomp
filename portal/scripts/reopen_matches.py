@@ -35,7 +35,7 @@ def apply(registry: dict, reopened: dict) -> list:
         e = entries.pop(row["key"], None)
         if e is None:
             continue
-        row["was"] = {k: e[k] for k in KEPT if k in e}
+        row.setdefault("was", {k: e[k] for k in KEPT if k in e})    # keep the first record if it came back
         removed.append(row["key"])
     return removed
 

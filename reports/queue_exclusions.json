@@ -29,6 +29,11 @@
     "why": "inside extent of 0x2397e9"
    },
    {
+    "va": "0x002C0920",
+    "kind": "nonstart",
+    "why": "inside core::XboxSaveDrive's slot-9 function, which starts at 0x002C0900 and runs to 0x002C09B5; the only reference is the four bytes of the text \" \\t,\" at 0x003D33A0, read as a pointer (examiner, SPEC-016 section 9; re-checked)"
+   },
+   {
     "va": "0x002C8395",
     "kind": "nonstart",
     "why": "not a function start: the end of zlib's inflate (0x002C70E0, 5,204 bytes with its switch tables), which matches the public source as one function"

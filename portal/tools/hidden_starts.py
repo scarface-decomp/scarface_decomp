@@ -9,7 +9,10 @@ Functions the work queue can't find by following calls and vtables, read from th
   `push [esp+4]; call _onexit`);
 - class field accessors: the setter and getter of every field reports/fields.json lists;
 - adjustors in second vtables: `sub ecx,N; jmp F` / `add ecx,-N; jmp F` in a vtable whose
-  CompleteObjectLocator offset is not 0.
+  CompleteObjectLocator offset is not 0;
+- functions reached only by another function's closing jump (a call written as `jmp`): the jump is an
+  instruction of a known function, and its target is not known, starts on a 16-byte line right after
+  padding, and is outside every known function.
 
 And what must never be a start: the exception-handling stubs (`mov eax, FuncInfo; jmp __CxxFrameHandler`)
 and the unwind funclets their FuncInfo records point at. Those go to reports/queue_exclusions.json as
@@ -35,7 +38,7 @@ HERE = Path(__file__).resolve().parent
 if str(HERE) not in sys.path:
     sys.path.insert(0, str(HERE))
 
-from sf_binaries import BinaryImage  # noqa: E402
+from sf_binaries import BinaryImage, collect_call_targets, function_extent, not_compiled_reason  # noqa: E402
 
 ROOT = HERE.parent.parent
 FILES = {"xb": "default.xbe", "proto": "game.xbe"}
@@ -232,6 +235,93 @@ def eh(im: Img, frame_handler: Optional[int]) -> Tuple[Set[int], Set[int]]:
 
 # ---------------------------------------------------------------------------- putting it together
 
+# ---------------------------------------------------------------------------- closing jumps
+
+def known_starts(im: Img, b: str) -> Tuple[Set[int], Set[int]]:
+    """(the starts the project already has for this version, the ones among them that are not the game's own
+    code). From the tracked lists, every `call` target and every vtable slot: what the queue is built from."""
+    def load(name: str) -> dict:
+        try:
+            return json.loads((ROOT / "reports" / name).read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            return {}
+    game: Set[int] = set(collect_call_targets(im.img))
+    for _vt, _off, slots in vtables(im):
+        game.update(slots)
+    game.update(int(v, 16) for v in load("extra_function_starts.json").get("starts", {}).get(b, []))
+    game.update(int(str(f["va"]).split()[-1], 16) for f in load("known_functions.json").get("functions", [])
+                if f.get("bin") == b)
+    game.update(int(k.split(":")[1], 16) for k in load("verified_registry.json") if k.startswith(b + ":"))
+    library = load("library_functions.json")
+    other = {int(v, 16) for part in ("functions", "in_library_sections") for v in library.get(part, {}).get(b, [])}
+    other.update(int(r["va"], 16) for r in load("queue_exclusions.json").get("starts", {}).get(b, []))
+    return game | other, other
+
+
+def instruction_starts(im: Img, start: int, size: int) -> Set[int]:
+    """Where the instructions of start..start+size begin, read in a line from the start."""
+    import capstone
+    md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+    return {i.address for i in md.disasm(im.img.read(start, size) or b"", start)}
+
+
+def padding_ends_at(im: Img, start: int, va: int) -> bool:
+    """True when, reading the instructions in a line from start, the one just before va is padding (int3). The
+    compiler pads only between functions, so what follows is another function, even where the size worked out
+    for the one at start ran on into it by following its closing jump."""
+    import capstone
+    md = capstone.Cs(capstone.CS_ARCH_X86, capstone.CS_MODE_32)
+    last = None
+    for i in md.disasm(im.img.read(start, va - start) or b"", start):
+        last = i
+    return bool(last and last.address == va - 1 and last.mnemonic == "int3")
+
+
+def closing_jump_targets(im: Img, known: Set[int], not_game: Set[int]) -> Dict[int, int]:
+    """{target: the function that jumps to it} for functions only reached by another one's closing jump."""
+    import bisect
+    order = sorted(known)
+    extents: Dict[int, int] = {}
+
+    def owner(va: int) -> Optional[int]:
+        """The known function va is inside, if any."""
+        at = bisect.bisect_right(order, va) - 1
+        if at < 0:
+            return None
+        f = order[at]
+        if f in not_game:
+            return f if va == f else None
+        if f not in extents:
+            e = function_extent(im.img, f, known)
+            extents[f] = e.size if e.ok else 0
+        return f if va < f + extents[f] else None
+
+    out: Dict[int, int] = {}
+    for base, code in im.code_blobs():
+        at = code.find(b"\xE9")
+        while 0 <= at <= len(code) - 5:
+            target = (base + at + 5 + struct.unpack_from("<i", code, at + 1)[0]) & 0xFFFFFFFF
+            here = base + at
+            at = code.find(b"\xE9", at + 1)
+            if target % 16 or target in known or target in out or not im.code(target):
+                continue
+            if im.img.read(target - 1, 1) != b"\xCC":
+                continue
+            below = order[bisect.bisect_right(order, target) - 1] if order and order[0] <= target else None
+            if below in not_game:
+                continue                      # inside a library function
+            inside = owner(target)
+            if inside is not None and not padding_ends_at(im, inside, target):
+                continue                      # part of a known function: a jump within it
+            f = owner(here)
+            if f is None or f in not_game or here not in instruction_starts(im, f, here - f + 5):
+                continue                      # the E9 is not an instruction of a known function of the game's
+            e = function_extent(im.img, target, known | {target})
+            if e.ok and e.size and not not_compiled_reason(im.img, target, e.size):
+                out[target] = f
+    return out
+
+
 def names_by_address(b: str) -> Dict[str, int]:
     try:
         names = json.loads((ROOT / "reports" / "names.json").read_text(encoding="utf-8"))["names"]
@@ -255,6 +345,7 @@ def scan(bin_dir: Path) -> Dict[str, dict]:
             "atexit stubs": atexit_stubs(im, atexit),
             "field accessors": field_accessors(ROOT / "reports" / "fields.json", b),
             "adjustors": set(adjustors(im)),
+            "reached by a closing jump": set(closing_jump_targets(im, *known_starts(im, b))),
         }
         never = stubs | funclets
         for k in found:
