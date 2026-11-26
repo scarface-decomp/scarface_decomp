@@ -364,32 +364,21 @@ The 15 functions:
 | 0x28F3E0 | 128 | vtable slot 7; aligned allocation |
 | 0x28F460 | 336 | the public aligned-allocate function |
 
-### 5.5 The program was linked with link-time code generation
+### 5.5 Functions with arguments in registers (corrected 25 November 2026)
 
-Some functions receive an argument in EAX, or in ESI, EDI or EBX, which Visual C++ 7.1 does only when
-it generates code at link time (`/GL` when compiling, `/LTCG` when linking). Checked by hand:
+Some functions receive arguments in EAX, ECX, EDX, ESI, EDI or EBX. An earlier version of this section
+read that as evidence of link-time code generation. That was wrong and is withdrawn: Visual C++ 7.1
+gives a function with internal linkage (`static`, or in an unnamed namespace) a convention of its own
+at plain `/O2`, choosing the registers itself. The implementer reproduced 0x2BFA00 and its caller
+0x2C0480 that way, and 0x2A9310 with a different register pair.
 
-| VA | Where | What arrives in a register |
-| :--- | :--- | :--- |
-| 0x28E610 | allocator | the state, in EAX; one caller (0x28E77E) |
-| 0x2C65A0, 0x2C6510 | libpng's error functions | a pointer in EAX |
-| 0x2988A0, 0x298A40 | drawing: pixel converters | EAX and ESI; EAX and EBX |
-| 0x2BFA00 | `core::XboxSaveDrive` range | EAX, with ECX |
-| 0x13700 | game code | EAX, with ECX; two callers |
+What it means for matching:
 
-`reports/exam_regarg_xb.json` lists 55 candidates found by rule (EAX read before it is written, and a
-caller that loads EAX just before the call). The rule is not exact: seven of the 55 are already
-verified from ordinary compiles, so treat the list as leads.
-
-What follows for matching:
-
-* A function with a register argument, and each of its callers, cannot be reproduced by compiling one
-  file to an object file. They need the compiler run with `/GL` and a link step with `/LTCG`, with
-  caller and callee together.
-* Everything else compiles the same with or without it, which is why ordinary compiles match.
-* Under link-time code generation the compiler can expand functions across files. The program still
-  makes 2,010 direct calls from game code to trivial functions of two or three instructions that are
-  neither virtual nor address-taken (for example 0x19120 calls 0x189D0 three times). With the default
-  inlining level those calls would have been expanded, so **game code was built with `/Ob1`**: only
-  functions marked `inline` or defined in their class are expanded. This settles SPEC-013 §3 item 1
-  as likely; a compile of 0x19120 and 0x189D0 in one file under both settings confirms it.
+* A function with register arguments is file-local. Write it `static` in the same file as its callers
+  and the compiler reproduces the convention.
+* The registers do not follow parameter order. Do not read the parameter list from them.
+* `reports/exam_regarg_xb.json` is a list of leads to file-local functions, not of anything needing
+  special build settings.
+* Nothing here says anything about the inlining level. The argument this section used to make for
+  `/Ob1` in game code is withdrawn with it; the core library is known to use the default level
+  (SPEC-016 §8).
