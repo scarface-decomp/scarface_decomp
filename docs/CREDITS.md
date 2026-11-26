@@ -39,6 +39,8 @@ authors are credited in the commit history. Thank you.
   `.rcf` archives), [Broken Face](https://github.com/sulzbals/BrokenFace) by sulzbals and Meth0d's
   write-up on Scarface's compiled TorqueScript (layout of `.cso` / `.dso`). Their documentation was
   read; no code was copied.
+* For the model format: Lucas' Pure3D Editor 4 by Lucas Cardellini (Donut Team). Its names for fifteen
+  Pure3D chunks are used ([FORMATS.md](FORMATS.md)); only names and ids were read from it, and no code.
 * The [Scarface Remastered Project](https://www.nexusmods.com/scarfacetheworldisyours/mods/6) by Neoxaero,
   with sulzbals, Talon and DomenicoPe: the mod that keeps the PC game playable and looking its best, and the
   community this project grew beside. None of it is part of this project or shipped with it, at its

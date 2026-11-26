@@ -38,9 +38,9 @@ NAMES: Dict[int, str] = {
     0x10008: "Colour List", 0x1000A: "Index List", 0x1000B: "Matrix List", 0x1000C: "Weight List",
     0x1000D: "Matrix Palette", 0x10010: "Packed Normal List", 0x10011: "Vertex Shader",
     0x10012: "Memory Image Vertex List", 0x10013: "Memory Image Index List",
-    0x10014: "Memory Image Vertex Description", 0x10017: "Render Status", 0x1001B: "Topology (?)",
+    0x10014: "Memory Image Vertex Description", 0x10017: "Render Status", 0x1001B: "Topology",
     0x1001C: "Colour Set",
-    0x10020: "Primitive Group", 0x10021: "Vertex Precision (?)",
+    0x10020: "Primitive Group",
     0x11000: "Shader", 0x11002: "Shader Texture Parameter", 0x11003: "Shader Integer Parameter",
     0x11004: "Shader Float Parameter", 0x11005: "Shader Colour Parameter",
     0x18000: "Frontend Project", 0x18001: "Frontend Screen", 0x18002: "Frontend Page",
@@ -79,6 +79,16 @@ NAMES: Dict[int, str] = {
     0x8800181: "Game Group", 0x8800201: "Water Shallow Area", 0x8800202: "Water Obstacle", 0x8800203: "Water Dock",
     0x9900190: "Script Object Data", 0x9900191: "Game Group Data", 0x9900192: "Script Object Property (?)",
     0x9900194: "Script Object Property Value (?)",
+    # Chunks the game's files or loaders have that neither list above names. The names are the ones Lucas'
+    # Pure3D Editor 4 (Lucas Cardellini, Donut Team) shows for these ids, its "Scarface Test" build included;
+    # the ids themselves are from the game (docs/FORMATS.md says where each is).
+    0x1001D: "Mesh Stats", 0x10021: "Vertex Compression Hint",
+    0x18003: "Frontend Layer", 0x1800E: "Frontend Language",
+    0x7010001: "Collision Volume", 0x7010003: "Collision Cylinder", 0x7010007: "Collision Vector",
+    0x7010021: "Collision Volume Owner", 0x7010022: "Collision Volume Owner Name",
+    0x7010023: "Collision Object Attribute",
+    0x7011001: "Physics Inertia Matrix", 0x7011002: "Physics Vector", 0x7011020: "Physics Joint",
+    0x8020004: "State Prop Event Data", 0x8020005: "State Prop Callback Data",
     # A light's sub-chunks, the draw-order key and the sky's vertex-colour sets: descriptive names of ours,
     # from the clean-room spec docs/cleanroom/SPEC-001-lights-sky-streaming.md.
     0x13001: "Light Direction", 0x13002: "Light Position", 0x13003: "Light Spot Cone",
