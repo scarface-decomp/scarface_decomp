@@ -666,6 +666,9 @@ def test_withdrawn_matches_are_out_of_the_registry_and_stay_out():
     assert RM.apply(registry, reopened) == ["pc:0x006DED30"] and list(registry["entries"]) == ["pc:0x006DE620"]
     assert reopened["matches"][0]["was"] == {"size": 6, "symbol": "sub_006DED30", "verified_by": "A", "verified_at": "t"}
     assert RM.apply(registry, reopened) == []                              # a second run changes nothing
+    # recorded again by mistake and withdrawn again: the first record of who matched it is kept
+    registry["entries"]["pc:0x006DED30"] = {"size": 6, "symbol": "sub_006DED30", "verified_by": "B", "verified_at": "later"}
+    assert RM.apply(registry, reopened) == ["pc:0x006DED30"] and reopened["matches"][0]["was"]["verified_by"] == "A"
 
     spec = importlib.util.spec_from_file_location("check_repo", root / "portal" / "scripts" / "check_repo.py")
     CR = importlib.util.module_from_spec(spec)
@@ -673,3 +676,23 @@ def test_withdrawn_matches_are_out_of_the_registry_and_stay_out():
     out = CR.withdrawn_matches()
     real = json.loads((root / "reports" / "verified_registry.json").read_text(encoding="utf-8"))["entries"]
     assert len(out) == 37 and "pc:0x006DED30" in out and not set(out) & set(real)     # 17 withdrawn + 27 listed, 7 in both
+
+
+def test_starts_listed_as_not_functions_cannot_be_recorded(S, tmp_path, monkeypatch):
+    """A queue built before a start was listed in reports/queue_exclusions.json, or before its match was
+    withdrawn (reports/reopened_matches.json), still holds it. It must not be matched again, by hand or by
+    copying a look-alike's code onto it: that is how seven withdrawn matches came back once."""
+    (tmp_path / "queue_exclusions.json").write_text(json.dumps(
+        {"starts": {"pc": [{"va": "0x006DEC00", "kind": "protection", "why": "x"}, {"kind": "broken row"}]}}))
+    (tmp_path / "reopened_matches.json").write_text(json.dumps({"matches": [{"key": "pc:0x006DED30"}, "junk"]}))
+    monkeypatch.setattr(S, "REPORTS_DIR", tmp_path)
+    assert S.never_queued() == {"pc:0x006DEC00", "pc:0x006DED30"}
+    monkeypatch.setattr(S, "REPORTS_DIR", tmp_path / "nothing here")
+    assert S.never_queued() == set()
+
+    monkeypatch.setattr(S, "NEVER_QUEUED", {"pc:0x006DEC00"})
+    monkeypatch.setattr(S, "REGISTRY", {"entries": {}})
+    t = {"id": "pc_006DEC00", "bin": "pc", "fva_int": 0x6DEC00, "size": 5, "symbol": "sub_006DEC00", "flags": "/O2"}
+    with pytest.raises(ValueError, match="not a function to match"):
+        S.record_verified(t, "void f() {}", "Someone", "a tool", {}, write=False)
+    assert S.REGISTRY["entries"] == {}

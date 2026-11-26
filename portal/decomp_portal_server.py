@@ -524,6 +524,27 @@ def starts_not_queued(tasks: list, have) -> int:
     return n
 
 
+NEVER_QUEUED: set = set()      # filled by load_tasks
+
+
+def never_queued() -> set:
+    """Keys of the starts that are not functions to match: reports/queue_exclusions.json (library code, false
+    starts, functions the copy protection cut into) and the matches withdrawn in reports/reopened_matches.json.
+    A queue built before one was listed still holds it; left in, it could be matched again, or have a
+    look-alike's code copied onto it."""
+    out = set()
+    for b, rows in (read_json(REPORTS_DIR / "queue_exclusions.json", {}) or {}).get("starts", {}).items():
+        for r in rows:
+            try:
+                out.add(f"{b}:0x{int(str(r['va']), 16):08X}")
+            except (KeyError, TypeError, ValueError):
+                pass
+    for r in (read_json(REPORTS_DIR / "reopened_matches.json", {}) or {}).get("matches", []):
+        if isinstance(r, dict) and r.get("key"):
+            out.add(r["key"])
+    return out
+
+
 def load_tasks() -> None:
     global ALL_TASKS, TASK_BY_ID
     tasks = read_json(QUEUE_JSON, None)
@@ -557,10 +578,15 @@ def load_tasks() -> None:
             print("[*] Grouping look-alike functions (once; about 15 seconds)...")
             LA.annotate([t for t in tasks if "fva_int" in t], images)
             write_json(QUEUE_JSON, tasks)
+    NEVER_QUEUED.clear()
+    NEVER_QUEUED.update(never_queued())
+    left_out = NEVER_QUEUED
     out = []
     for t in tasks:
         if "fva_int" not in t or t.get("bin") not in BINARIES:
             continue
+        if task_key(t) in left_out and task_key(t) not in verified:
+            continue                                # in a queue built before it was listed as not a function
         t.update(tier_meta(int(t.get("size", 1))))
         if PO.is_ps2(t["bin"]):
             t["flags"] = recorded_flags(t)         # a queue built before the lane's flags changed says the old ones
@@ -1335,6 +1361,9 @@ def clean_what(text) -> str:
 def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, ported_from: str = "",
                     write: bool = True, what: str = "", how: str = "") -> None:
     key = task_key(t)
+    if key in NEVER_QUEUED:
+        raise ValueError(f"{key} is listed as not a function to match (reports/queue_exclusions.json or "
+                         "reports/reopened_matches.json), so no match of it is recorded")
     REGISTRY["entries"][key] = {
         "bin": t["bin"], "va": f"0x{t['fva_int']:08X}", "size": int(t["size"]), "symbol": t["symbol"],
         "match": t.get("match_substr", ""),
