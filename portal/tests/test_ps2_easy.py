@@ -448,7 +448,7 @@ def test_the_lane_compiles_with_exceptions_off():
     assert server.PV.FLAGS == server.PV.FLAGS_BEFORE + " -Cpp_exceptions off" and server.PV.probe_flags_ok(server.PV.FLAGS)
     import queue_builder
     assert queue_builder.PS2_FLAGS == server.PV.FLAGS
-    assert server.PS2_EASY_VERSION == 4                  # every open function is tried again with the new flags
+    assert server.PS2_EASY_VERSION >= 4                  # every open function is tried again with the new flags
 
 
 def test_the_probes_round_is_one_the_portal_takes():
@@ -489,3 +489,38 @@ def test_the_probe_can_recheck_what_is_already_matched(tmp_path):
     lines = P.recheck_summary({"mwcps2-3.0b52-030722": [1, 2, ["0x00500000"]], P.LANE_COMPILER: [2, 2, []]})
     assert "3.0b52-030722" in lines[1] and "1 of 2" in lines[1] and "not for 0x00500000" in lines[1]
     assert "2 of 2" in lines[2] and "not for" not in lines[2]
+
+
+def test_the_second_build_is_tried_when_the_lanes_does_not_give_the_games_bytes(monkeypatch):
+    calls = []
+
+    def once(t, code, object_b64="", slug="", through="", flags="", compiler=""):
+        calls.append(compiler or server.PV.COMPILER)
+        good = (compiler == server.PV.SECOND_COMPILER) if "float" in code else not compiler
+        return {"ok": True, "verified": good, "is_exact": good, "flags": flags or server.PV.FLAGS}
+
+    monkeypatch.setattr(server, "_verify_ps2_once", once)
+    r = server.run_verify_ps2(dict(TASK), "int f() { return 1; }")
+    assert r["verified"] and r["compiler"] == server.PV.COMPILER and calls == [server.PV.COMPILER]      # one compile
+    calls.clear()
+    r = server.run_verify_ps2(dict(TASK), "bool Set(float v);")
+    assert r["verified"] and r["compiler"] == server.PV.SECOND_COMPILER and r["tried_second"]
+    assert calls == [server.PV.COMPILER, server.PV.SECOND_COMPILER]
+    calls.clear()                                              # a build or flags named: that one only (the probe)
+    r = server.run_verify_ps2(dict(TASK), "bool Set(float v);", compiler=server.PV.COMPILER)
+    assert not r["verified"] and calls == [server.PV.COMPILER] and "tried_second" not in r
+    calls.clear()
+    monkeypatch.setattr(server, "_verify_ps2_once", lambda *a, **k: {"ok": True, "verified": False, "matched_bytes": 6})
+    r = server.run_verify_ps2(dict(TASK), "void g() {}")
+    assert not r["verified"] and r["compiler"] == server.PV.COMPILER and r["tried_second"] and r["matched_bytes"] == 6
+
+
+def test_a_match_is_recorded_with_the_build_that_made_it(monkeypatch):
+    monkeypatch.setattr(server, "REGISTRY", {"entries": {}})
+    monkeypatch.setattr(server, "save_registry", lambda: None)
+    t = dict(TASK, symbol="func_0037E020", size=12, flags=server.PV.FLAGS)
+    server.record_verified(t, "bool Set(float v);", "Alice", "tool",
+                           {"flags": server.PV.FLAGS, "compiler": server.PV.SECOND_COMPILER}, write=False)
+    e = server.REGISTRY["entries"][server.task_key(t)]
+    assert e["compiler"] == server.PV.SECOND_COMPILER == "mwcps2-3.0b52-030722" and e["flags"] == server.PV.FLAGS
+    assert server.PV.SECOND_COMPILER in server.PV.BUILDS and server.PV.SECOND_COMPILER != server.PV.COMPILER

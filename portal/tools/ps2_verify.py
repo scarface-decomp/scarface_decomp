@@ -46,6 +46,11 @@ COMPILER = "mwcps2-3.0.1b103-040528"
 # -Cpp_exceptions off: with exceptions on, a function that may have to be unwound keeps its stack frame, so
 # its last call stays a call; the game jumps instead, in 1,772 functions (docs/PS2.md, the probe).
 FLAGS = "-O3 -lang c++ -str readonly -Cpp_exceptions off"
+# The second build, tried when COMPILER's object is not the game's bytes. No build decomp.me has makes all of
+# what the game's code has (docs/PS2.md, "Where the compiler question stands"): COMPILER writes its float
+# code, this one (the last of the 3.0 line) orders instructions and picks registers the way the game does.
+# A match says which of the two made it.
+SECOND_COMPILER = "mwcps2-3.0b52-030722"
 # What the lane used until 25 November 2026. Matches recorded with it stay as recorded: none of them calls
 # anything, and code that calls nothing is the same with exceptions on or off.
 FLAGS_BEFORE = "-O3 -lang c++ -str readonly"
