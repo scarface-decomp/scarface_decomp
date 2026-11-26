@@ -5,356 +5,356 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-25T19:11:16Z</updated>
+  <updated>2026-11-25T20:57:34Z</updated>
   <author><name>Scarface decomp contributors</name></author>
   <entry>
-    <title>func_006E3BD0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x006E3BD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x006E3BD0</id>
-    <updated>2026-11-25T19:11:16Z</updated>
-    <summary>0x006E3BD0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_002840F0 (Xbox prototype, 52 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002840F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002840F0</id>
+    <updated>2026-11-25T20:57:34Z</updated>
+    <summary>0x002840F0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00619B60 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00619B60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00619B60</id>
-    <updated>2026-11-25T19:11:16Z</updated>
-    <summary>0x00619B60 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>core::XboxSaveDrive::vfunc_14 (Xbox prototype, 31 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00283960"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00283960</id>
+    <updated>2026-11-25T20:57:15Z</updated>
+    <summary>0x00283960 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D39C0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D39C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D39C0</id>
-    <updated>2026-11-25T19:11:07Z</updated>
-    <summary>0x004D39C0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_00283710 (Xbox prototype, 165 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00283710"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00283710</id>
+    <updated>2026-11-25T20:56:54Z</updated>
+    <summary>0x00283710 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D1DF0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D1DF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D1DF0</id>
-    <updated>2026-11-25T19:11:07Z</updated>
-    <summary>0x004D1DF0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_00283670 (Xbox prototype, 160 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00283670"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00283670</id>
+    <updated>2026-11-25T20:56:31Z</updated>
+    <summary>0x00283670 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D1DD0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D1DD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D1DD0</id>
-    <updated>2026-11-25T19:11:06Z</updated>
-    <summary>0x004D1DD0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0020DC00 (Xbox prototype, 35 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0020DC00"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0020DC00</id>
+    <updated>2026-11-25T20:56:11Z</updated>
+    <summary>0x0020DC00 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D1DB0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D1DB0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D1DB0</id>
-    <updated>2026-11-25T19:11:06Z</updated>
-    <summary>0x004D1DB0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_006DEBB0 (PC, 35 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006DEBB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006DEBB0</id>
+    <updated>2026-11-25T20:56:11Z</updated>
+    <summary>0x006DEBB0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D1530 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D1530"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D1530</id>
-    <updated>2026-11-25T19:11:06Z</updated>
-    <summary>0x004D1530 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0020DBE0 (Xbox prototype, 20 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0020DBE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0020DBE0</id>
+    <updated>2026-11-25T20:55:49Z</updated>
+    <summary>0x0020DBE0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D1480 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D1480"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D1480</id>
-    <updated>2026-11-25T19:11:06Z</updated>
-    <summary>0x004D1480 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_006DEBE0 (PC, 20 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006DEBE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006DEBE0</id>
+    <updated>2026-11-25T20:55:49Z</updated>
+    <summary>0x006DEBE0 in the PC version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D10A0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D10A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D10A0</id>
-    <updated>2026-11-25T19:11:06Z</updated>
-    <summary>0x004D10A0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_00295CB0 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00295CB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00295CB0</id>
+    <updated>2026-11-25T20:55:28Z</updated>
+    <summary>0x00295CB0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D1080 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D1080"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D1080</id>
-    <updated>2026-11-25T19:11:06Z</updated>
-    <summary>0x004D1080 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_00295C80 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00295C80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00295C80</id>
+    <updated>2026-11-25T20:55:28Z</updated>
+    <summary>0x00295C80 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D1060 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D1060"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D1060</id>
-    <updated>2026-11-25T19:11:06Z</updated>
-    <summary>0x004D1060 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0020DB70 (Xbox prototype, 23 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0020DB70"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0020DB70</id>
+    <updated>2026-11-25T20:55:08Z</updated>
+    <summary>0x0020DB70 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D1040 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D1040"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D1040</id>
-    <updated>2026-11-25T19:10:47Z</updated>
-    <summary>0x004D1040 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_001FFE20 (Xbox prototype, 7 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001FFE20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001FFE20</id>
+    <updated>2026-11-25T20:54:48Z</updated>
+    <summary>0x001FFE20 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D1020 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D1020"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D1020</id>
-    <updated>2026-11-25T19:10:47Z</updated>
-    <summary>0x004D1020 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_001E3070 (Xbox prototype, 7 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001E3070"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001E3070</id>
+    <updated>2026-11-25T20:54:28Z</updated>
+    <summary>0x001E3070 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D0D70 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D0D70"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D0D70</id>
-    <updated>2026-11-25T19:10:47Z</updated>
-    <summary>0x004D0D70 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_001DE000 (Xbox prototype, 11 bytes) by NoahBPeterson</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x001DE000"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x001DE000</id>
+    <updated>2026-11-25T20:54:09Z</updated>
+    <summary>0x001DE000 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D0D50 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D0D50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D0D50</id>
-    <updated>2026-11-25T19:10:47Z</updated>
-    <summary>0x004D0D50 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_00169B70 (Xbox prototype, 8 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00169B70"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00169B70</id>
+    <updated>2026-11-25T20:53:49Z</updated>
+    <summary>0x00169B70 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D0C50 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D0C50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D0C50</id>
-    <updated>2026-11-25T19:10:47Z</updated>
-    <summary>0x004D0C50 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_00169B60 (Xbox prototype, 8 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00169B60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00169B60</id>
+    <updated>2026-11-25T20:53:29Z</updated>
+    <summary>0x00169B60 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D0C40 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D0C40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D0C40</id>
-    <updated>2026-11-25T19:10:46Z</updated>
-    <summary>0x004D0C40 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0012F340 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0012F340"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0012F340</id>
+    <updated>2026-11-25T20:53:09Z</updated>
+    <summary>0x0012F340 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004D0C30 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004D0C30"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004D0C30</id>
-    <updated>2026-11-25T19:10:46Z</updated>
-    <summary>0x004D0C30 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_002CC250 (Xbox, 246 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CC250"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CC250</id>
+    <updated>2026-11-25T20:52:49Z</updated>
+    <summary>Writes bytes to a signed save file block by block: the rest of the first block, whole blocks, then what is left; reports the count written. 0x002CC250 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CFD60 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CFD60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CFD60</id>
-    <updated>2026-11-25T19:10:46Z</updated>
-    <summary>0x004CFD60 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0010A770 (Xbox prototype, 6 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0010A770"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0010A770</id>
+    <updated>2026-11-25T20:52:30Z</updated>
+    <summary>0x0010A770 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CFD10 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CFD10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CFD10</id>
-    <updated>2026-11-25T19:10:46Z</updated>
-    <summary>0x004CFD10 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0010A6F0 (Xbox prototype, 6 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0010A6F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0010A6F0</id>
+    <updated>2026-11-25T20:52:29Z</updated>
+    <summary>0x0010A6F0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CFCF0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CFCF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CFCF0</id>
-    <updated>2026-11-25T19:10:41Z</updated>
-    <summary>0x004CFCF0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_002CC160 (Xbox, 233 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CC160"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CC160</id>
+    <updated>2026-11-25T20:52:10Z</updated>
+    <summary>Reads bytes from a signed save file block by block: the rest of the first block, whole blocks, then what is left; reports the count read. 0x002CC160 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CFCE0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CFCE0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CFCE0</id>
-    <updated>2026-11-25T19:10:37Z</updated>
-    <summary>0x004CFCE0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_00102820 (Xbox prototype, 38 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00102820"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00102820</id>
+    <updated>2026-11-25T20:51:50Z</updated>
+    <summary>0x00102820 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CFCA0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CFCA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CFCA0</id>
-    <updated>2026-11-25T19:10:32Z</updated>
-    <summary>0x004CFCA0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_000EDC20 (Xbox prototype, 21 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000EDC20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000EDC20</id>
+    <updated>2026-11-25T20:51:30Z</updated>
+    <summary>0x000EDC20 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CFC90 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CFC90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CFC90</id>
-    <updated>2026-11-25T19:10:27Z</updated>
-    <summary>0x004CFC90 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_000EB410 (Xbox prototype, 24 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000EB410"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000EB410</id>
+    <updated>2026-11-25T20:51:09Z</updated>
+    <summary>0x000EB410 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CFC50 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CFC50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CFC50</id>
-    <updated>2026-11-25T19:10:22Z</updated>
-    <summary>0x004CFC50 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>core::XboxSaveDrive::vfunc_19 (Xbox, 145 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C10E0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C10E0</id>
+    <updated>2026-11-25T20:50:44Z</updated>
+    <summary>Deletes a save by name from the memory unit: mounts the unit, turns the name into 16-bit text and asks the system to delete it. 0x002C10E0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CFC40 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CFC40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CFC40</id>
-    <updated>2026-11-25T19:10:18Z</updated>
-    <summary>0x004CFC40 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_000C6BA0 (Xbox prototype, 11 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000C6BA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000C6BA0</id>
+    <updated>2026-11-25T20:50:21Z</updated>
+    <summary>0x000C6BA0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CFC00 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CFC00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CFC00</id>
-    <updated>2026-11-25T19:10:13Z</updated>
-    <summary>0x004CFC00 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>core::XboxSaveDrive::vfunc_00 (Xbox, 190 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C1020"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C1020</id>
+    <updated>2026-11-25T20:49:41Z</updated>
+    <summary>Writes part of one signed block of a save file through the shared buffer, marks the block changed and reports the file's size less its signatures. 0x002C1020 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CFBF0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CFBF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CFBF0</id>
-    <updated>2026-11-25T19:10:08Z</updated>
-    <summary>0x004CFBF0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_000C4D80 (Xbox prototype, 60 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000C4D80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000C4D80</id>
+    <updated>2026-11-25T20:49:41Z</updated>
+    <summary>0x000C4D80 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CEEF0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CEEF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CEEF0</id>
-    <updated>2026-11-25T19:10:03Z</updated>
-    <summary>0x004CEEF0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_000BAED0 (Xbox prototype, 11 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000BAED0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000BAED0</id>
+    <updated>2026-11-25T20:49:21Z</updated>
+    <summary>0x000BAED0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CEEE0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CEEE0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CEEE0</id>
-    <updated>2026-11-25T19:10:03Z</updated>
-    <summary>0x004CEEE0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>core::XboxSaveDrive::vfunc_00 (Xbox, 152 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C0F80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C0F80</id>
+    <updated>2026-11-25T20:48:40Z</updated>
+    <summary>Reads part of one signed block of a save file: mounts the unit, loads the block into the shared buffer and copies the bytes out. 0x002C0F80 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CEED0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CEED0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CEED0</id>
-    <updated>2026-11-25T19:10:03Z</updated>
-    <summary>0x004CEED0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_000B9020 (Xbox prototype, 58 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000B9020"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000B9020</id>
+    <updated>2026-11-25T20:48:39Z</updated>
+    <summary>0x000B9020 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CE3E0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CE3E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CE3E0</id>
-    <updated>2026-11-25T19:09:58Z</updated>
-    <summary>0x004CE3E0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_000B89D0 (Xbox prototype, 54 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000B89D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000B89D0</id>
+    <updated>2026-11-25T20:48:20Z</updated>
+    <summary>0x000B89D0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CE3C0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CE3C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CE3C0</id>
-    <updated>2026-11-25T19:09:58Z</updated>
-    <summary>0x004CE3C0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_000B5F30 (Xbox prototype, 80 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000B5F30"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000B5F30</id>
+    <updated>2026-11-25T20:48:00Z</updated>
+    <summary>0x000B5F30 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CDEA0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CDEA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CDEA0</id>
-    <updated>2026-11-25T19:09:58Z</updated>
-    <summary>0x004CDEA0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>core::XboxSaveDrive::vfunc_13 (Xbox, 182 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C0EC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C0EC0</id>
+    <updated>2026-11-25T20:47:40Z</updated>
+    <summary>Commits a save file: writes the cached block back and, for a file whose first block still needs it, stores the file's size in block 0. 0x002C0EC0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CD070 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CD070"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CD070</id>
-    <updated>2026-11-25T19:09:58Z</updated>
-    <summary>0x004CD070 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_000B3120 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000B3120"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000B3120</id>
+    <updated>2026-11-25T20:47:20Z</updated>
+    <summary>0x000B3120 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004CCE90 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004CCE90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004CCE90</id>
-    <updated>2026-11-25T19:09:58Z</updated>
-    <summary>0x004CCE90 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>core::XboxSaveDrive::vfunc_09 (Xbox, 181 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C0900"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C0900</id>
+    <updated>2026-11-25T20:46:59Z</updated>
+    <summary>Ends a save-drive operation: records wrong or no media if the unit was swapped with files open, else clears its changed mark; true if no error. 0x002C0900 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004C6C20 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004C6C20"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004C6C20</id>
-    <updated>2026-11-25T19:09:38Z</updated>
-    <summary>0x004C6C20 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_000ABE20 (Xbox prototype, 64 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x000ABE20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x000ABE20</id>
+    <updated>2026-11-25T20:46:40Z</updated>
+    <summary>0x000ABE20 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004B9100 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004B9100"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004B9100</id>
-    <updated>2026-11-25T19:09:34Z</updated>
-    <summary>0x004B9100 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0009F980 (Xbox prototype, 41 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0009F980"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0009F980</id>
+    <updated>2026-11-25T20:46:20Z</updated>
+    <summary>0x0009F980 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_004B8D60 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x004B8D60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x004B8D60</id>
-    <updated>2026-11-25T19:09:34Z</updated>
-    <summary>0x004B8D60 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_002C06B0 (Xbox, 172 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C06B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C06B0</id>
+    <updated>2026-11-25T20:46:00Z</updated>
+    <summary>Turns one step of a save-game search into a directory entry: end of list, an error, a skip if the name lacks the wanted start, or the name as 8-bit text. 0x002C06B0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00493370 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00493370"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00493370</id>
-    <updated>2026-11-25T19:09:33Z</updated>
-    <summary>0x00493370 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0009EDC0 (Xbox prototype, 26 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0009EDC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0009EDC0</id>
+    <updated>2026-11-25T20:45:40Z</updated>
+    <summary>0x0009EDC0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00493360 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00493360"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00493360</id>
-    <updated>2026-11-25T19:09:29Z</updated>
-    <summary>0x00493360 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_002C0480 (Xbox, 52 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C0480"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C0480</id>
+    <updated>2026-11-25T20:45:01Z</updated>
+    <summary>Checks that the destination and the source are not null (returning -3 or -2), then converts 16-bit text to 8-bit text. 0x002C0480 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00493350 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00493350"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00493350</id>
-    <updated>2026-11-25T19:09:24Z</updated>
-    <summary>0x00493350 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0009EC80 (Xbox prototype, 33 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0009EC80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0009EC80</id>
+    <updated>2026-11-25T20:45:01Z</updated>
+    <summary>0x0009EC80 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_00493340 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x00493340"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x00493340</id>
-    <updated>2026-11-25T19:09:19Z</updated>
-    <summary>0x00493340 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0008F810 (Xbox prototype, 15 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0008F810"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0008F810</id>
+    <updated>2026-11-25T20:44:41Z</updated>
+    <summary>0x0008F810 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_003F12B0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003F12B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003F12B0</id>
-    <updated>2026-11-25T19:09:14Z</updated>
-    <summary>0x003F12B0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>core::XboxSaveDrive::vfunc_14 (Xbox, 31 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002BFCF0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002BFCF0</id>
+    <updated>2026-11-25T20:44:21Z</updated>
+    <summary>Reads from a signed save file by handing the request to the signed-read helper, with this drive supplying the blocks. 0x002BFCF0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_003F0F20 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003F0F20"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003F0F20</id>
-    <updated>2026-11-25T19:09:14Z</updated>
-    <summary>0x003F0F20 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_0008F460 (Xbox prototype, 26 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0008F460"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0008F460</id>
+    <updated>2026-11-25T20:44:00Z</updated>
+    <summary>0x0008F460 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_003F0C30 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003F0C30"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003F0C30</id>
-    <updated>2026-11-25T19:09:14Z</updated>
-    <summary>0x003F0C30 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_002BFAA0 (Xbox, 165 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002BFAA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002BFAA0</id>
+    <updated>2026-11-25T20:43:40Z</updated>
+    <summary>Converts 8-bit text to 16-bit text one character at a time, stopping with an error when the destination is full. 0x002BFAA0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_003F0C20 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003F0C20"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003F0C20</id>
-    <updated>2026-11-25T19:09:14Z</updated>
-    <summary>0x003F0C20 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_00085200 (Xbox prototype, 27 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00085200"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00085200</id>
+    <updated>2026-11-25T20:43:20Z</updated>
+    <summary>0x00085200 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_003F0C10 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003F0C10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003F0C10</id>
-    <updated>2026-11-25T19:09:14Z</updated>
-    <summary>0x003F0C10 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_002BFA00 (Xbox, 160 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002BFA00"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002BFA00</id>
+    <updated>2026-11-25T20:43:01Z</updated>
+    <summary>Converts 16-bit text to 8-bit text one character at a time, stopping with an error when the destination is full. 0x002BFA00 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_003EDFA0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003EDFA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003EDFA0</id>
-    <updated>2026-11-25T19:09:09Z</updated>
-    <summary>0x003EDFA0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_00074ED0 (Xbox prototype, 18 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00074ED0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00074ED0</id>
+    <updated>2026-11-25T20:42:40Z</updated>
+    <summary>0x00074ED0 in the Xbox prototype version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>func_003ECAA0 (PS2, 12 bytes) by RRutherfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=ps2%3A0x003ECAA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:ps2:0x003ECAA0</id>
-    <updated>2026-11-25T19:09:09Z</updated>
-    <summary>0x003ECAA0 in the PS2 version, matched byte for byte with its original.</summary>
+    <title>sub_00250E80 (Xbox, 35 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00250E80"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00250E80</id>
+    <updated>2026-11-25T20:42:01Z</updated>
+    <summary>Rounds a number up to a multiple of a step; a step of zero, or a number already on a multiple, leaves it as it is. 0x00250E80 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

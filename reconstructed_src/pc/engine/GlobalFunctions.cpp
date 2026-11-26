@@ -1,13 +1,57 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (275 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (277 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 275 of 666 functions matched (41.29%). NOT COMPLETE YET.
-// The 391 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 277 of 666 functions matched (41.59%). NOT COMPLETE YET.
+// The 389 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
 // every other block compiles on its own. The file as a whole is not one translation unit.
 // ============================================================================
+
+// ============================================================================
+// [VERIFIED] sub_006DEBB0 (0x006DEBB0, 35 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00250E80 (0x00250E80), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006DEBB0
+// what: Rounds a number up to a multiple of a step; a step of zero, or a number already on a multiple, leaves it as it is.
+// tool: Claude (from the bytes)
+
+unsigned int __cdecl sub_006DEBB0(unsigned int value, unsigned int step)
+{
+    if (step != 0)
+    {
+        unsigned int over = value % step;
+        if (over != 0)
+        {
+            return value - over + step;
+        }
+    }
+    return value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006DEBE0 (0x006DEBE0, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00250E60 (0x00250E60), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006DEBE0
+// what: Rounds a number down to a multiple of a step; a step of zero leaves it as it is.
+// tool: Claude (from the bytes)
+
+unsigned int __cdecl sub_006DEBE0(unsigned int value, unsigned int step)
+{
+    if (step != 0)
+    {
+        value = value / step * step;
+    }
+    return value;
+}
 
 // ============================================================================
 // [VERIFIED] sub_006DEC90 (0x006DEC90, 24 B)

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (7342 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (7365 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,342 of 15,477 functions matched (47.44%). NOT COMPLETE YET.
-// The 8,135 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7,365 of 15,477 functions matched (47.59%). NOT COMPLETE YET.
+// The 8,112 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -14405,6 +14405,28 @@ void __cdecl sub_00047FE0(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00047FF0 (0x00047FF0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00047E50 (0x00047E50), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00047FF0 (0x00047FF0, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0004C360();
+};
+
+extern "C" int DAT_00475768;
+
+void __cdecl sub_00047FF0(void)
+{
+    ((Object*)DAT_00475768)->sub_0004C360();
+}
+
+// ============================================================================
 // [VERIFIED] sub_00048000 (0x00048000, 17 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -14437,6 +14459,28 @@ void __cdecl sub_00048000(int a1)
 
 void __cdecl sub_00048010(void)
 {
+}
+
+// ============================================================================
+// [VERIFIED] sub_00048020 (0x00048020, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00047E50 (0x00047E50), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00048020 (0x00048020, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0004C3B0();
+};
+
+extern "C" int DAT_00475768;
+
+void __cdecl sub_00048020(void)
+{
+    ((Object*)DAT_00475768)->sub_0004C3B0();
 }
 
 // ============================================================================
@@ -18931,6 +18975,24 @@ extern "C" bool DAT_0041D831;
 bool __cdecl sub_00055D70(bool a1)
 {
     DAT_0041D831 = a1;
+    return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00055D80 (0x00055D80, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00011710 (0x00011710), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00055D80 (0x00055D80, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_0041D830;
+
+bool __cdecl sub_00055D80(bool a1)
+{
+    DAT_0041D830 = a1;
     return a1;
 }
 
@@ -35508,6 +35570,30 @@ Class_00094C40* Class_00094C40::sub_00094C40(int a1)
     }
 L_24:
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00094C70 (0x00094C70, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_000732F0 (0x000732F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00094C70 (0x00094C70, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003A440C[];
+
+class Class_00094C70
+{
+public:
+    void sub_00094C70();
+    int m_Field00; // +0x00
+};
+
+void Class_00094C70::sub_00094C70()
+{
+    m_Field00 = (int)DAT_003A440C;
 }
 
 // ============================================================================
@@ -53550,6 +53636,23 @@ bool __cdecl sub_000CA9D0(bool a1)
 {
     DAT_004870B0 = a1;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_000CA9E0 (0x000CA9E0, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_0001E670 (0x0001E670), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_000CA9E0 (0x000CA9E0, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_004870B0;
+
+bool __cdecl sub_000CA9E0(void)
+{
+    return DAT_004870B0;
 }
 
 // ============================================================================
@@ -105544,6 +105647,23 @@ void __cdecl sub_001A0FF0(int a1, int a2, bool a3)
 }
 
 // ============================================================================
+// [VERIFIED] sub_001A1010 (0x001A1010, 6 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_0001E670 (0x0001E670), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001A1010 (0x001A1010, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_0048C2EC;
+
+bool __cdecl sub_001A1010(void)
+{
+    return DAT_0048C2EC;
+}
+
+// ============================================================================
 // [VERIFIED] sub_001A1020 (0x001A1020, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -114391,6 +114511,30 @@ extern "C" int DAT_0048F1A8;
 int __cdecl sub_001D6530(void)
 {
     DAT_0048F1A8 = 0;
+    DAT_0048F198 = 0;
+    DAT_0048F19C = 0;
+    DAT_0048F1A0 = 0;
+    DAT_0048F1A4 = 0;
+    return 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_001D6550 (0x001D6550, 23 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_0019E5E0 (Proto 0x0019E5E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_001D6550 (Proto 0x001D6550, 23 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0048F19C;
+extern "C" int DAT_0048F1A0;
+extern "C" int DAT_0048F1A4;
+extern "C" int DAT_0048F198;
+
+int __cdecl sub_001D6550(void)
+{
     DAT_0048F198 = 0;
     DAT_0048F19C = 0;
     DAT_0048F1A0 = 0;
@@ -135773,6 +135917,23 @@ void __cdecl sub_0022D890(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0022D8A0 (0x0022D8A0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_0001E680 (0x0001E680), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0022D8A0 (0x0022D8A0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_0049200F;
+
+void __cdecl sub_0022D8A0(void)
+{
+    DAT_0049200F = true;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0022D980 (0x0022D980, 40 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -139614,6 +139775,28 @@ int __cdecl sub_0023FC60(void)
     DAT_00492E84 = 0;
     DAT_00458124 = 0;
     return r_eax;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0023FCD0 (0x0023FCD0, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_001749D0 (Proto 0x001749D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0023FCD0
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0023FCD0 (Proto 0x0023FCD0, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00492E90;
+
+int __cdecl sub_0023FCD0(void)
+{
+    return DAT_00492E90 != 0;
 }
 
 // ============================================================================
@@ -143659,6 +143842,28 @@ unsigned short __cdecl sub_0024D330(void)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0024D340 (0x0024D340, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_001749D0 (Proto 0x001749D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: proto
+// va: 0x0024D340
+// what: 
+// tool: the portal's starter code (no AI)
+
+// sub_0024D340 (Proto 0x0024D340, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_00493FF8;
+
+int __cdecl sub_0024D340(void)
+{
+    return DAT_00493FF8 != 0;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0024D460 (0x0024D460, 40 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -143886,6 +144091,29 @@ public:
 void Class_0024E3F0::sub_0024E3F0()
 {
     sub_00248C70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0024E400 (0x0024E400, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0024E400 (0x0024E400, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00248D20(void);
+
+class Class_0024E400
+{
+public:
+    void sub_0024E400();
+};
+
+void Class_0024E400::sub_0024E400()
+{
+    sub_00248D20();
 }
 
 // ============================================================================
@@ -144286,6 +144514,48 @@ public:
 int Class_00250E50::sub_00250E50(int a1)
 {
     return *(int*)(m_Field14 + (a1 * 4));
+}
+
+// ============================================================================
+// [VERIFIED] sub_00250E60 (0x00250E60, 20 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Rounds a number down to a multiple of a step; a step of zero leaves it as it is.
+// ============================================================================
+// bin: xb
+// va: 0x00250E60
+// what: Rounds a number down to a multiple of a step; a step of zero leaves it as it is.
+// tool: Claude (from the bytes)
+
+unsigned int __cdecl sub_00250E60(unsigned int value, unsigned int step)
+{
+    if (step != 0)
+    {
+        value = value / step * step;
+    }
+    return value;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00250E80 (0x00250E80, 35 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Rounds a number up to a multiple of a step; a step of zero, or a number already on a multiple, leaves it as it is.
+// ============================================================================
+// bin: xb
+// va: 0x00250E80
+// what: Rounds a number up to a multiple of a step; a step of zero, or a number already on a multiple, leaves it as it is.
+// tool: Claude (from the bytes)
+
+unsigned int __cdecl sub_00250E80(unsigned int value, unsigned int step)
+{
+    if (step != 0)
+    {
+        unsigned int over = value % step;
+        if (over != 0)
+        {
+            return value - over + step;
+        }
+    }
+    return value;
 }
 
 // ============================================================================
@@ -148766,6 +149036,32 @@ Class_002731C0* Class_002731C0::sub_002731C0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002731F0 (0x002731F0, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_000217F0 (0x000217F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002731F0 (0x002731F0, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003D72DC[];
+extern "C" void __cdecl sub_002A6940(void);
+
+class Class_002731F0
+{
+public:
+    void sub_002731F0();
+    int m_Field00; // +0x00
+};
+
+void Class_002731F0::sub_002731F0()
+{
+    m_Field00 = (int)DAT_003D72DC;
+    sub_002A6940();
+}
+
+// ============================================================================
 // [VERIFIED] sub_00273200 (0x00273200, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -152690,6 +152986,30 @@ Class_00298410* Class_00298410::sub_00298410()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00298420 (0x00298420, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_000732F0 (0x000732F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00298420 (0x00298420, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003D9230[];
+
+class Class_00298420
+{
+public:
+    void sub_00298420();
+    int m_Field00; // +0x00
+};
+
+void Class_00298420::sub_00298420()
+{
+    m_Field00 = (int)DAT_003D9230;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00299400 (0x00299400, 171 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -156562,6 +156882,34 @@ void Class_002AC710::sub_002AC710()
 }
 
 // ============================================================================
+// [VERIFIED] sub_002AC720 (0x002AC720, 11 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002AC690 (0x002AC690), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002AC720 (0x002AC720, 11 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct FieldD4
+{
+    void sub_002C1730();
+};
+
+class Class_002AC720
+{
+public:
+    void sub_002AC720();
+    char m_pad00[0xD4];
+    FieldD4* m_FieldD4; // +0xD4
+};
+
+void Class_002AC720::sub_002AC720()
+{
+    m_FieldD4->sub_002C1730();
+}
+
+// ============================================================================
 // [VERIFIED] sub_002AC730 (0x002AC730, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -158299,6 +158647,166 @@ bool XboxSaveDrive::sub_002BF9C0(const unsigned short* text, const unsigned shor
 }
 
 // ============================================================================
+// [VERIFIED] sub_002BFA00 (0x002BFA00, 160 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Converts 16-bit text to 8-bit text one character at a time, stopping with an error when the destination is full.
+// ============================================================================
+// bin: xb
+// va: 0x002BFA00
+// what: Converts 16-bit text to 8-bit text one character at a time, stopping with an error when the destination is full.
+// tool: Claude (from SPEC-016)
+
+extern "C" bool __cdecl sub_002A95A0(const unsigned short* source, int* consumed, unsigned int* character, int c);
+extern "C" int __cdecl sub_002A9430(unsigned int character, char* destination, int room, int a, int* produced, int c);
+
+// 16-bit text to 8-bit text, one character at a time (SPEC-016 section 10.1). File-local: the compiler
+// passes its first two arguments in ECX and EAX.
+static int sub_002BFA00(char* destination, const unsigned short* source, int a, int capacity, int c)
+{
+    if ((const void*)source == (const void*)destination)
+    {
+        return -5;
+    }
+    const unsigned short* in = source;
+    char* out = destination;
+    int written = 0;
+    while (*in != 0)
+    {
+        unsigned int character;
+        int consumed;
+        int produced;
+        if (!sub_002A95A0(in, &consumed, &character, c))
+        {
+            return -2;
+        }
+        int result = sub_002A9430(character, out, capacity - written - 1, a, &produced, c);
+        if (result != 0)
+        {
+            if (result == -1)
+            {
+                *out = 0;
+                return -1;
+            }
+            return result;
+        }
+        in = (const unsigned short*)((const char*)in + consumed);
+        out += produced;
+        written += produced;
+    }
+    *out = 0;
+    return 0;
+}
+
+int __cdecl sub_002C0480(char* destination, const unsigned short* source, int a, int capacity, int c)
+{
+    if (destination == 0)
+    {
+        return -3;
+    }
+    if (source == 0)
+    {
+        return -2;
+    }
+    return sub_002BFA00(destination, source, a, capacity, c);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002BFAA0 (0x002BFAA0, 165 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Converts 8-bit text to 16-bit text one character at a time, stopping with an error when the destination is full.
+// ============================================================================
+// bin: xb
+// va: 0x002BFAA0
+// what: Converts 8-bit text to 16-bit text one character at a time, stopping with an error when the destination is full.
+// tool: Claude (from SPEC-016)
+
+extern "C" bool __cdecl sub_002A93A0(const char* source, int* consumed, unsigned int* character, int c);
+extern "C" int __cdecl sub_002A9610(unsigned int character, unsigned short* destination, int room, int a, int* produced, int c);
+extern "C" unsigned int __stdcall sub_0030A2CA(const char* drive, const unsigned short* name);     // XDeleteSaveGame
+
+// 8-bit text to 16-bit text, one character at a time (SPEC-016 section 10.2). File-local: the compiler
+// passes its first two arguments in ECX and EAX.
+static int sub_002BFAA0(unsigned short* destination, const char* source, int a, int capacity, int c)
+{
+    if ((const void*)source == (const void*)destination)
+    {
+        return -5;
+    }
+    const char* in = source;
+    unsigned short* out = destination;
+    int written = 0;
+    while (*in != 0)
+    {
+        unsigned int character;
+        int consumed;
+        int produced;
+        if (!sub_002A93A0(in, &consumed, &character, c))
+        {
+            return -2;
+        }
+        int result = sub_002A9610(character, out, capacity - written - 2, a, &produced, c);
+        if (result != 0)
+        {
+            if (result == -1)
+            {
+                *out = 0;
+                return -1;
+            }
+            return result;
+        }
+        in += consumed;
+        out = (unsigned short*)((char*)out + produced);
+        written += produced;
+    }
+    *out = 0;
+    return 0;
+}
+
+namespace core
+{
+    class XboxSaveDrive
+    {
+    public:
+        int sub_002BFE10(unsigned int code);
+        bool sub_002BFF10();
+        int vfunc_19(const char* name);
+
+        char m_pad00[0xD0];
+        int m_LastError;            // +0xD0
+        char m_padD4[0x26];
+        char m_DriveLetter;         // +0xFA
+    };
+}
+
+int core::XboxSaveDrive::vfunc_19(const char* name)
+{
+    if (!sub_002BFF10())
+    {
+        return 0;
+    }
+
+    char drive[4];
+    unsigned short wideName[0x102];
+    drive[0] = m_DriveLetter;
+    drive[1] = ':';
+    drive[2] = '\\';
+    drive[3] = 0;
+    if (name != 0)
+    {
+        sub_002BFAA0(wideName, name, 0, 0x202, 0);
+    }
+
+    unsigned int code = sub_0030A2CA(drive, wideName);
+    if (code != 0)
+    {
+        m_LastError = sub_002BFE10(code);
+        return 0;
+    }
+    m_LastError = 0;
+    return 1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002BFD90 (0x002BFD90, 125 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -158773,6 +159281,197 @@ bool XboxSaveDrive::sub_002C0100()
 
     DAT_004BFE44 = 1;
     return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C0480 (0x002C0480, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Checks that the destination and the source are not null (returning -3 or -2), then converts 16-bit text to 8-bit text.
+// ============================================================================
+// bin: xb
+// va: 0x002C0480
+// what: Checks that the destination and the source are not null (returning -3 or -2), then converts 16-bit text to 8-bit text.
+// tool: Claude (from SPEC-016)
+
+extern "C" bool __cdecl sub_002A95A0(const unsigned short* source, int* consumed, unsigned int* character, int c);
+extern "C" int __cdecl sub_002A9430(unsigned int character, char* destination, int room, int a, int* produced, int c);
+
+// 16-bit text to 8-bit text, one character at a time (SPEC-016 section 10.1). File-local: the compiler
+// passes its first two arguments in ECX and EAX.
+static int sub_002BFA00(char* destination, const unsigned short* source, int a, int capacity, int c)
+{
+    if ((const void*)source == (const void*)destination)
+    {
+        return -5;
+    }
+    const unsigned short* in = source;
+    char* out = destination;
+    int written = 0;
+    while (*in != 0)
+    {
+        unsigned int character;
+        int consumed;
+        int produced;
+        if (!sub_002A95A0(in, &consumed, &character, c))
+        {
+            return -2;
+        }
+        int result = sub_002A9430(character, out, capacity - written - 1, a, &produced, c);
+        if (result != 0)
+        {
+            if (result == -1)
+            {
+                *out = 0;
+                return -1;
+            }
+            return result;
+        }
+        in = (const unsigned short*)((const char*)in + consumed);
+        out += produced;
+        written += produced;
+    }
+    *out = 0;
+    return 0;
+}
+
+int __cdecl sub_002C0480(char* destination, const unsigned short* source, int a, int capacity, int c)
+{
+    if (destination == 0)
+    {
+        return -3;
+    }
+    if (source == 0)
+    {
+        return -2;
+    }
+    return sub_002BFA00(destination, source, a, capacity, c);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C06B0 (0x002C06B0, 172 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Turns one step of a save-game search into a directory entry: end of list, an error, a skip if the name lacks the wanted start, or the name as 8-bit text.
+// ============================================================================
+// bin: xb
+// va: 0x002C06B0
+// what: Turns one step of a save-game search into a directory entry: end of list, an error, a skip if the name lacks the wanted start, or the name as 8-bit text.
+// tool: Claude (from the bytes; SPEC-016 sections 10.1 and 10.3)
+
+extern "C" unsigned int __stdcall sub_00234B47();       // GetLastError
+
+extern "C" bool __cdecl sub_002A95A0(const unsigned short* source, int* consumed, unsigned int* character, int c);
+extern "C" int __cdecl sub_002A9430(unsigned int character, char* destination, int room, int a, int* produced, int c);
+
+// 16-bit text to 8-bit text, one character at a time (SPEC-016 section 10.1). File-local: the compiler
+// passes its first two arguments in ECX and EAX.
+static int sub_002BFA00(char* destination, const unsigned short* source, int a, int capacity, int c)
+{
+    if ((const void*)source == (const void*)destination)
+    {
+        return -5;
+    }
+    const unsigned short* in = source;
+    char* out = destination;
+    int written = 0;
+    while (*in != 0)
+    {
+        unsigned int character;
+        int consumed;
+        int produced;
+        if (!sub_002A95A0(in, &consumed, &character, c))
+        {
+            return -2;
+        }
+        int result = sub_002A9430(character, out, capacity - written - 1, a, &produced, c);
+        if (result != 0)
+        {
+            if (result == -1)
+            {
+                *out = 0;
+                return -1;
+            }
+            return result;
+        }
+        in = (const unsigned short*)((const char*)in + consumed);
+        out += produced;
+        written += produced;
+    }
+    *out = 0;
+    return 0;
+}
+
+int __cdecl sub_002C0480(char* destination, const unsigned short* source, int a, int capacity, int c)
+{
+    if (destination == 0)
+    {
+        return -3;
+    }
+    if (source == 0)
+    {
+        return -2;
+    }
+    return sub_002BFA00(destination, source, a, capacity, c);
+}
+
+// What the system's save-game search fills in; only the save's name is used here.
+struct SaveGameFindData
+{
+    char m_pad000[0x244];
+    unsigned short m_SaveName[0x80];    // +0x244
+};
+
+// One directory entry handed back to the caller.
+struct DirectoryEntry
+{
+    int m_Kind;             // +0x0: 2 = no more entries, 3 = a file
+    char m_Name[0x101];     // +0x4
+};
+
+namespace core
+{
+    class XboxSaveDrive
+    {
+    public:
+        int sub_002BFE10(unsigned int code);
+        bool sub_002BF9C0(const unsigned short* prefix, const unsigned short* text);
+        int sub_002C06B0(DirectoryEntry* entry, SaveGameFindData* found, void* search, const unsigned short* prefix);
+
+        char m_pad00[0xD0];
+        int m_LastError;            // +0xD0
+    };
+}
+
+int core::XboxSaveDrive::sub_002C06B0(DirectoryEntry* entry, SaveGameFindData* found, void* search,
+                                      const unsigned short* prefix)
+{
+    if (search == (void*)0xFFFFFFFF)
+    {
+        unsigned int code = sub_00234B47();
+        if (code == 18)
+        {
+            entry->m_Name[0] = 0;
+            entry->m_Kind = 2;
+        }
+        else
+        {
+            m_LastError = sub_002BFE10(code);
+            return 1;
+        }
+    }
+    else
+    {
+        if (sub_002BF9C0(found->m_SaveName, prefix))
+        {
+            sub_002C0480(entry->m_Name, found->m_SaveName, 0, 0x101, 0);
+            entry->m_Kind = 3;
+        }
+        else
+        {
+            return 2;       // not one of ours: the caller goes on to the next
+        }
+    }
+    m_LastError = 0;
+    return 0;
 }
 
 // ============================================================================
@@ -159818,6 +160517,153 @@ int Class_002CC120::sub_002CC120(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002CC160 (0x002CC160, 233 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Reads bytes from a signed save file block by block: the rest of the first block, whole blocks, then what is left; reports the count read.
+// ============================================================================
+// bin: xb
+// va: 0x002CC160
+// what: Reads bytes from a signed save file block by block: the rest of the first block, whole blocks, then what is left; reports the count read.
+// tool: Claude (from the bytes; the caller is in SPEC-016 section 10.8)
+
+extern "C" unsigned int __cdecl sub_00250E60(unsigned int value, unsigned int step);   // rounds value down to a multiple of step
+
+namespace core
+{
+    // The signed-read interface (SPEC-016 section 9): the drive supplies the three virtual functions.
+    class SignedRead
+    {
+    public:
+        virtual int vfunc_00(void* file, const char* name, unsigned int block, unsigned int position,
+                             unsigned int count, void* to, int space) = 0;
+        virtual unsigned int vfunc_01() = 0;            // bytes of data in one block
+        virtual unsigned int vfunc_02(void* file) = 0;  // bytes in front of the data in the file
+
+        int sub_002CC160(void* drive, void* file, const char* name, unsigned int position, void* to,
+                         unsigned int count, unsigned int* done, int space);
+    };
+}
+
+int core::SignedRead::sub_002CC160(void* drive, void* file, const char* name, unsigned int position, void* to,
+                                   unsigned int count, unsigned int* done, int space)
+{
+    unsigned int blockData = vfunc_01();
+    position += vfunc_02(file);
+    unsigned int block = position / blockData;
+    unsigned int offset = position - sub_00250E60(position, blockData);
+    unsigned int part = blockData - offset;
+    if (part >= count)
+    {
+        part = count;
+    }
+
+    int result = vfunc_00(file, name, block, offset, part, to, space);
+    if (result != 1)
+    {
+        return result;
+    }
+    unsigned int left = count - part;
+    block++;
+    char* out = (char*)to + part;
+
+    while (left >= blockData)
+    {
+        result = vfunc_00(file, name, block, 0, blockData, out, space);
+        if (result != 1)
+        {
+            return result;
+        }
+        left -= blockData;
+        block++;
+        out += blockData;
+    }
+    if (left > 0)
+    {
+        result = vfunc_00(file, name, block, 0, left, out, space);
+        if (result != 1)
+        {
+            return result;
+        }
+    }
+    *done = count;
+    return 1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002CC250 (0x002CC250, 246 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Writes bytes to a signed save file block by block: the rest of the first block, whole blocks, then what is left; reports the count written.
+// ============================================================================
+// bin: xb
+// va: 0x002CC250
+// what: Writes bytes to a signed save file block by block: the rest of the first block, whole blocks, then what is left; reports the count written.
+// tool: Claude (from the bytes; its twin for reading is 0x002CC160)
+
+extern "C" unsigned int __cdecl sub_00250E60(unsigned int value, unsigned int step);   // rounds value down to a multiple of step
+
+namespace core
+{
+    // The signed-write interface (SPEC-016 section 9): the drive supplies the three virtual functions.
+    class SignedWrite
+    {
+    public:
+        virtual int vfunc_00(void* file, const char* name, unsigned int block, unsigned int position,
+                             unsigned int count, const void* from, unsigned int* dataSize, int space) = 0;
+        virtual unsigned int vfunc_01() = 0;            // bytes of data in one block
+        virtual unsigned int vfunc_02(void* file) = 0;  // bytes in front of the data in the file
+
+        int sub_002CC250(void* drive, void* file, const char* name, unsigned int position, const void* from,
+                         unsigned int count, unsigned int* done, unsigned int* dataSize, int space);
+    };
+}
+
+int core::SignedWrite::sub_002CC250(void* drive, void* file, const char* name, unsigned int position,
+                                    const void* from, unsigned int count, unsigned int* done,
+                                    unsigned int* dataSize, int space)
+{
+    unsigned int blockData = vfunc_01();
+    position += vfunc_02(file);
+    unsigned int block = position / blockData;
+    unsigned int offset = position - sub_00250E60(position, blockData);
+    unsigned int part = blockData - offset;
+    if (part >= count)
+    {
+        part = count;
+    }
+
+    int result = vfunc_00(file, name, block, offset, part, from, dataSize, space);
+    if (result != 1)
+    {
+        return result;
+    }
+    unsigned int left = count - part;
+    block++;
+    const char* in = (const char*)from + part;
+
+    while (left >= blockData)
+    {
+        result = vfunc_00(file, name, block, 0, blockData, in, dataSize, space);
+        if (result != 1)
+        {
+            return result;
+        }
+        left -= blockData;
+        block++;
+        in += blockData;
+    }
+    if (left > 0)
+    {
+        result = vfunc_00(file, name, block, 0, left, in, dataSize, space);
+        if (result != 1)
+        {
+            return result;
+        }
+    }
+    *done = count;
+    return 1;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002CC350 (0x002CC350, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -160618,6 +161464,30 @@ Class_002CF9F0* Class_002CF9F0::sub_002CF9F0(int a1, int a2)
     m_Field04 = a1;
     m_Field08 = a2;
     return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002CFA10 (0x002CFA10, 7 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_000732F0 (0x000732F0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002CFA10 (0x002CFA10, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" char DAT_003DFD60[];
+
+class Class_002CFA10
+{
+public:
+    void sub_002CFA10();
+    int m_Field00; // +0x00
+};
+
+void Class_002CFA10::sub_002CFA10()
+{
+    m_Field00 = (int)DAT_003DFD60;
 }
 
 // ============================================================================

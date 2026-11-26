@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/XboxSaveDrive.cpp (12 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/XboxSaveDrive.cpp (13 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 12 of 21 functions matched (57.14%). NOT COMPLETE YET.
-// The 9 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 13 of 21 functions matched (61.90%). NOT COMPLETE YET.
+// The 8 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -236,6 +236,55 @@ unsigned int core::XboxSaveDrive::vfunc_06(SaveInfo* info, unsigned int size)
         needed += 0x4000;
     }
     return needed;
+}
+
+// ============================================================================
+// [VERIFIED] core::XboxSaveDrive::vfunc_14 (0x00283960, 31 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as core::XboxSaveDrive::vfunc_14 (0x002BFCF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00283960
+// what: Reads from a signed save file by handing the request to the signed-read helper, with this drive supplying the blocks.
+// tool: Claude (from SPEC-016)
+
+namespace core
+{
+    class XboxSaveDrive;
+
+    // The part of the object in front of the two interfaces (SPEC-016 section 9).
+    class DriveFront
+    {
+    public:
+        virtual void Front00();
+
+        char m_pad04[0xD4];
+    };
+
+    // The signed-read interface, at +0xD8.
+    class SignedRead
+    {
+    public:
+        virtual int Read00() = 0;
+
+        int sub_0028EB40(XboxSaveDrive* drive, void* file, const char* name, unsigned int position, void* to,
+                         unsigned int count, unsigned int* done, int space);
+    };
+
+    class XboxSaveDrive : public DriveFront, public SignedRead
+    {
+    public:
+        virtual int Read00();
+        int vfunc_14(void* file, const char* name, int unused, unsigned int position, void* to, unsigned int count,
+                     unsigned int* done, int space);
+    };
+}
+
+int core::XboxSaveDrive::vfunc_14(void* file, const char* name, int unused, unsigned int position, void* to,
+                                  unsigned int count, unsigned int* done, int space)
+{
+    return SignedRead::sub_0028EB40(this, file, name, position, to, count, done, space);
 }
 
 // ============================================================================
