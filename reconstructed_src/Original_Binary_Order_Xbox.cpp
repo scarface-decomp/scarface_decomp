@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11,752 of 22,239 functions matched (52.84%). NOT COMPLETE YET.
-// The 10,487 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 11,760 of 22,239 functions matched (52.88%). NOT COMPLETE YET.
+// The 10,479 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -334134,12 +334134,408 @@ void CollisionBehaviourTypeGroup::vfunc_10()
 
 // [TODO] 0x002A92A0 sub_002A92A0 (58 B)
 // [TODO] 0x002A92E0 sub_002A92E0 (36 B)
-// [TODO] 0x002A9310 sub_002A9310 (132 B)
-// [TODO] 0x002A93A0 sub_002A93A0 (132 B)
-// [TODO] 0x002A9430 sub_002A9430 (232 B)
+// ============================================================================
+// [VERIFIED] sub_002A9310 (0x002A9310, 132 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Says whether a run of one to four bytes is a legal UTF-8 sequence, checking the bytes from the last one back and then the first.
+// ============================================================================
+// bin: xb
+// va: 0x002A9310
+// what: Says whether a run of one to four bytes is a legal UTF-8 sequence, checking the bytes from the last one back and then the first.
+// tool: Claude (from the bytes; the game follows Unicode's public reference conversion)
+
+extern "C" const char DAT_003DA5B8[];           // for each first byte: how many bytes follow it
+extern "C" const unsigned int DAT_003DA598[];   // for each count of following bytes: what to take off the sum
+
+// Is this a legal UTF-8 sequence of the given length? File-local: the compiler passes both arguments in
+// registers.
+static bool sub_002A9310(const unsigned char* text, int length)
+{
+    unsigned char value;
+    const unsigned char* at = text + length;
+    switch (length)
+    {
+    default:
+        return false;
+    // each case falls through to the next: the bytes are checked from the last one back
+    case 4:
+        if ((value = *--at) < 0x80 || value > 0xBF)
+        {
+            return false;
+        }
+    case 3:
+        if ((value = *--at) < 0x80 || value > 0xBF)
+        {
+            return false;
+        }
+    case 2:
+        if ((value = *--at) > 0xBF)
+        {
+            return false;
+        }
+        switch (*text)
+        {
+        case 0xE0:
+            if (value < 0xA0)
+            {
+                return false;
+            }
+            break;
+        case 0xF0:
+            if (value < 0x90)
+            {
+                return false;
+            }
+            break;
+        case 0xF4:
+            if (value > 0x8F)
+            {
+                return false;
+            }
+            break;
+        default:
+            if (value < 0x80)
+            {
+                return false;
+            }
+        }
+    case 1:
+        if (*text >= 0x80 && *text < 0xC2)
+        {
+            return false;
+        }
+    }
+    if (*text > 0xF4)
+    {
+        return false;
+    }
+    return true;
+}
+
+bool __cdecl sub_002A93A0(const unsigned char* text, int* bytes, unsigned int* character, int unused)
+{
+    unsigned int value = 0;
+    int more = DAT_003DA5B8[*text];
+    if (!sub_002A9310(text, more + 1))
+    {
+        return false;
+    }
+    switch (more)
+    {
+    // each case falls through to the next
+    case 3:
+        value += *text++;
+        value <<= 6;
+    case 2:
+        value += *text++;
+        value <<= 6;
+    case 1:
+        value += *text++;
+        value <<= 6;
+    case 0:
+        value += *text++;
+    }
+    value -= DAT_003DA598[more];
+    if (bytes != 0)
+    {
+        *bytes = more + 1;
+    }
+    if (character != 0)
+    {
+        *character = value;
+    }
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A93A0 (0x002A93A0, 132 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Reads one character from UTF-8 text (one to four bytes), giving the character and the bytes it took; false for a sequence that is not legal UTF-8.
+// ============================================================================
+// bin: xb
+// va: 0x002A93A0
+// what: Reads one character from UTF-8 text (one to four bytes), giving the character and the bytes it took; false for a sequence that is not legal UTF-8.
+// tool: Claude (from the bytes; the game follows Unicode's public reference conversion)
+
+extern "C" const char DAT_003DA5B8[];           // for each first byte: how many bytes follow it
+extern "C" const unsigned int DAT_003DA598[];   // for each count of following bytes: what to take off the sum
+
+// Is this a legal UTF-8 sequence of the given length? File-local: the compiler passes both arguments in
+// registers.
+static bool sub_002A9310(const unsigned char* text, int length)
+{
+    unsigned char value;
+    const unsigned char* at = text + length;
+    switch (length)
+    {
+    default:
+        return false;
+    // each case falls through to the next: the bytes are checked from the last one back
+    case 4:
+        if ((value = *--at) < 0x80 || value > 0xBF)
+        {
+            return false;
+        }
+    case 3:
+        if ((value = *--at) < 0x80 || value > 0xBF)
+        {
+            return false;
+        }
+    case 2:
+        if ((value = *--at) > 0xBF)
+        {
+            return false;
+        }
+        switch (*text)
+        {
+        case 0xE0:
+            if (value < 0xA0)
+            {
+                return false;
+            }
+            break;
+        case 0xF0:
+            if (value < 0x90)
+            {
+                return false;
+            }
+            break;
+        case 0xF4:
+            if (value > 0x8F)
+            {
+                return false;
+            }
+            break;
+        default:
+            if (value < 0x80)
+            {
+                return false;
+            }
+        }
+    case 1:
+        if (*text >= 0x80 && *text < 0xC2)
+        {
+            return false;
+        }
+    }
+    if (*text > 0xF4)
+    {
+        return false;
+    }
+    return true;
+}
+
+bool __cdecl sub_002A93A0(const unsigned char* text, int* bytes, unsigned int* character, int unused)
+{
+    unsigned int value = 0;
+    int more = DAT_003DA5B8[*text];
+    if (!sub_002A9310(text, more + 1))
+    {
+        return false;
+    }
+    switch (more)
+    {
+    // each case falls through to the next
+    case 3:
+        value += *text++;
+        value <<= 6;
+    case 2:
+        value += *text++;
+        value <<= 6;
+    case 1:
+        value += *text++;
+        value <<= 6;
+    case 0:
+        value += *text++;
+    }
+    value -= DAT_003DA598[more];
+    if (bytes != 0)
+    {
+        *bytes = more + 1;
+    }
+    if (character != 0)
+    {
+        *character = value;
+    }
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A9430 (0x002A9430, 232 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Writes one character as UTF-8 (one to four bytes) if there is room; a character out of range is replaced by the fallback character given.
+// ============================================================================
+// bin: xb
+// va: 0x002A9430
+// what: Writes one character as UTF-8 (one to four bytes) if there is room; a character out of range is replaced by the fallback character given.
+// tool: Claude (from the bytes; the game follows Unicode's public reference conversion)
+
+extern "C" const unsigned char DAT_003DA5B0[];      // for each length: the marker bits of the first byte
+
+int __cdecl sub_002A9430(unsigned int character, char* to, unsigned int room, int fallback, int* bytes,
+                         int unused)
+{
+    unsigned int count;
+    if (character < 0x80)
+    {
+        count = 1;
+    }
+    else if (character < 0x800)
+    {
+        count = 2;
+    }
+    else if (character < 0x10000)
+    {
+        count = 3;
+    }
+    else if (character < 0x200000)
+    {
+        count = 4;
+    }
+    else
+    {
+        if (fallback == 0)
+        {
+            return -4;
+        }
+        // not a character: write the fallback instead, with no fallback of its own
+        int result = sub_002A9430(fallback, to, room, 0, bytes, unused);
+        if (result == -2)
+        {
+            result = -6;
+        }
+        return result;
+    }
+
+    if (room < count)
+    {
+        return -1;
+    }
+
+    to += count;
+    switch (count)
+    {
+    // each case falls through to the next: the bytes are written from the last one back
+    case 4:
+        *--to = (char)((character & 0x3F) | 0x80);
+        character >>= 6;
+    case 3:
+        *--to = (char)((character & 0x3F) | 0x80);
+        character >>= 6;
+    case 2:
+        *--to = (char)((character & 0x3F) | 0x80);
+        character >>= 6;
+    case 1:
+        *--to = (char)(character | DAT_003DA5B0[count]);
+    }
+    *bytes = count;
+    return 0;
+}
+
 // [TODO] 0x002A9520 sub_002A9520 (115 B)
-// [TODO] 0x002A95A0 sub_002A95A0 (103 B)
-// [TODO] 0x002A9610 sub_002A9610 (210 B)
+// ============================================================================
+// [VERIFIED] sub_002A95A0 (0x002A95A0, 103 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Reads one character from UTF-16 text (one unit, or a surrogate pair), giving the character and the bytes it took; false for a surrogate out of place.
+// ============================================================================
+// bin: xb
+// va: 0x002A95A0
+// what: Reads one character from UTF-16 text (one unit, or a surrogate pair), giving the character and the bytes it took; false for a surrogate out of place.
+// tool: Claude (from the bytes; UTF-16 is public)
+
+bool __cdecl sub_002A95A0(const unsigned short* text, int* bytes, unsigned int* character, int unused)
+{
+    unsigned int value = text[0];
+    int units = 1;
+    if (value >= 0xD800 && value <= 0xDBFF)
+    {
+        unsigned int low = text[1];
+        if (low < 0xDC00 || low > 0xDFFF)
+        {
+            return false;
+        }
+        value = 0x10000 + ((value - 0xD800) << 10) + (low - 0xDC00);
+        units = 2;
+    }
+    else if (value >= 0xDC00 && value <= 0xDFFF)
+    {
+        return false;
+    }
+    if (bytes != 0)
+    {
+        *bytes = units * 2;
+    }
+    if (character != 0)
+    {
+        *character = value;
+    }
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002A9610 (0x002A9610, 210 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Writes one character as UTF-16 (one unit or a surrogate pair) if there is room; a character out of range is replaced by the fallback character given.
+// ============================================================================
+// bin: xb
+// va: 0x002A9610
+// what: Writes one character as UTF-16 (one unit or a surrogate pair) if there is room; a character out of range is replaced by the fallback character given.
+// tool: Claude (from the bytes; UTF-16 is public)
+
+int __cdecl sub_002A9610(unsigned int character, unsigned short* to, unsigned int room, int fallback,
+                         int* bytes, int unused)
+{
+    int units;
+    if (character <= 0xFFFF)
+    {
+        units = 1;
+    }
+    else if (character < 0x10FFFF)
+    {
+        units = 2;
+    }
+    else
+    {
+        // not a character: write the fallback instead, with no fallback of its own
+        int result = sub_002A9610(fallback, to, room, 0, bytes, unused);
+        if (result == -2)
+        {
+            result = -6;
+        }
+        return result;
+    }
+
+    if (room < (unsigned int)(units * 2))
+    {
+        return -1;
+    }
+
+    if (character <= 0xFFFF)
+    {
+        if (character >= 0xD800 && character <= 0xDFFF)
+        {
+            return -2;
+        }
+        to[0] = (unsigned short)character;
+    }
+    else if (character < 0x10FFFF)
+    {
+        character -= 0x10000;
+        *to++ = (unsigned short)((character >> 10) + 0xD800);
+        *to = (unsigned short)((character & 0x3FF) + 0xDC00);
+    }
+    else
+    {
+        if (fallback == 0)
+        {
+            return -4;
+        }
+        to[0] = (unsigned short)(fallback & 0xFF);
+    }
+    *bytes = units * 2;
+    return 0;
+}
+
 // [TODO] 0x002A96F0 sub_002A96F0 (178 B)
 // [TODO] 0x002A97B0 sub_002A97B0 (129 B)
 // [TODO] 0x002A9840 sub_002A9840 (50 B)
@@ -344174,7 +344570,153 @@ bool XboxSaveDrive::sub_002C0100()
     return true;
 }
 
-// [TODO] 0x002C0210 sub_002C0210 (616 B)
+// ============================================================================
+// [VERIFIED] sub_002C0210 (0x002C0210, 616 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Writes out a new save file's blocks, zero-filled, each with its signature; the first block can hold the file's size. Leaves the last block in the shared buffer.
+// ============================================================================
+// bin: xb
+// va: 0x002C0210
+// what: Writes out a new save file's blocks, zero-filled, each with its signature; the first block can hold the file's size. Leaves the last block in the shared buffer.
+// tool: Claude (from SPEC-016)
+
+extern "C" void* __cdecl memset(void* to, int value, unsigned int count);
+#pragma intrinsic(memset)
+
+// A block's signature: 20 bytes (SPEC-016 section 4).
+struct Signature
+{
+    unsigned int m_Words[5];
+};
+
+const unsigned int BLOCK = 0x2000;
+const unsigned int BLOCK_DATA = BLOCK - sizeof(Signature);
+
+extern "C" char* DAT_004BFE38;          // the transfer buffer: one block, 0x2000 bytes
+extern "C" void* DAT_004BFE3C;          // the file whose block is in the buffer
+extern "C" unsigned int DAT_004BFE40;   // which block of that file
+extern "C" int DAT_004BFE44;            // 0 = nothing valid, 1 = valid and unchanged, 2 = changed and not yet written
+
+extern "C" unsigned int __stdcall sub_0023383D(void* file, int distance, int* high, unsigned int from);            // SetFilePointer
+extern "C" int __stdcall sub_002336E3(void* file, const void* data, unsigned int count, unsigned int* done, void* overlapped);   // WriteFile
+extern "C" unsigned int __stdcall sub_00234B47();                                                                  // GetLastError
+extern "C" void* __stdcall sub_0023949C(unsigned int flags);                                                       // XCalculateSignatureBegin
+extern "C" unsigned int __stdcall sub_002394B0(void* handle, const void* data, unsigned int size);                 // XCalculateSignatureUpdate
+extern "C" unsigned int __stdcall sub_002394FE(void* handle, Signature* signature);                                // XCalculateSignatureEnd
+
+// The signature of a run of bytes.
+bool __cdecl sub_002BF760(const void* data, unsigned int size, Signature* signature)
+{
+    void* handle = sub_0023949C(0);
+    if (handle == (void*)0xFFFFFFFF)
+    {
+        return false;
+    }
+    sub_002394B0(handle, data, size);
+    sub_002394FE(handle, signature);
+    return true;
+}
+
+namespace core
+{
+    class XboxSaveDrive
+    {
+    public:
+        int sub_002BFE10(unsigned int code);
+        bool sub_002C0030(unsigned int code);
+        bool sub_002C0100();
+        bool sub_002C0210(void* file, unsigned int size, bool validHeader);
+
+        char m_pad00[0xD0];
+        int m_LastError;            // +0xD0
+    };
+}
+
+bool core::XboxSaveDrive::sub_002C0030(unsigned int code)
+{
+    m_LastError = sub_002BFE10(code);
+    return m_LastError == 0;
+}
+
+bool core::XboxSaveDrive::sub_002C0210(void* file, unsigned int size, bool validHeader)
+{
+    if (!sub_002C0100())
+    {
+        return false;
+    }
+    DAT_004BFE44 = 0;
+    memset(DAT_004BFE38, 0, BLOCK);
+
+    unsigned int remaining = size;
+    if (validHeader)
+    {
+        *(unsigned int*)DAT_004BFE38 = size;
+    }
+
+    Signature signature;
+    if (size > BLOCK)
+    {
+        if (!sub_002BF760(DAT_004BFE38, BLOCK_DATA, &signature))
+        {
+            sub_002C0030(sub_00234B47());
+            return false;
+        }
+        *(Signature*)(DAT_004BFE38 + BLOCK_DATA) = signature;
+    }
+
+    if (sub_0023383D(file, 0, 0, 0) != 0)
+    {
+        sub_002C0030(sub_00234B47());
+        return false;
+    }
+
+    unsigned int written;
+    unsigned int block = 0;
+    while (remaining > BLOCK)
+    {
+        if (!sub_002336E3(file, DAT_004BFE38, BLOCK, &written, 0))
+        {
+            sub_002C0030(sub_00234B47());
+            return false;
+        }
+        if (block == 0 && validHeader)
+        {
+            // only the first block holds the size: the ones after it start with zero
+            *(unsigned int*)DAT_004BFE38 = 0;
+            if (!sub_002BF760(DAT_004BFE38, BLOCK_DATA, &signature))
+            {
+                sub_002C0030(sub_00234B47());
+                return false;
+            }
+            *(Signature*)(DAT_004BFE38 + BLOCK_DATA) = signature;
+        }
+        remaining -= BLOCK;
+        block++;
+    }
+
+    if (remaining > 0)
+    {
+        *(unsigned int*)DAT_004BFE38 = 0;
+        if (!sub_002BF760(DAT_004BFE38, remaining - sizeof(Signature), &signature))
+        {
+            sub_002C0030(sub_00234B47());
+            return false;
+        }
+        *(Signature*)(DAT_004BFE38 + remaining - sizeof(Signature)) = signature;
+        if (!sub_002336E3(file, DAT_004BFE38, remaining, &written, 0))
+        {
+            sub_002C0030(sub_00234B47());
+            return false;
+        }
+        block++;
+    }
+
+    DAT_004BFE3C = file;
+    DAT_004BFE40 = block - 1;
+    DAT_004BFE44 = 1;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] sub_002C0480 (0x002C0480, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -344239,7 +344781,187 @@ int __cdecl sub_002C0480(char* destination, const unsigned short* source, int a,
     return sub_002BFA00(destination, source, a, capacity, c);
 }
 
-// [TODO] 0x002C04C0 sub_002C04C0 (490 B)
+// ============================================================================
+// [VERIFIED] sub_002C04C0 (0x002C04C0, 490 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Refreshes the drive's media information: checks the memory unit is there and mounted, reads its name, then its free space and sector size.
+// ============================================================================
+// bin: xb
+// va: 0x002C04C0
+// what: Refreshes the drive's media information: checks the memory unit is there and mounted, reads its name, then its free space and sector size.
+// tool: Claude (from SPEC-016)
+
+extern "C" void* __cdecl memset(void* to, int value, unsigned int count);
+#pragma intrinsic(memset)
+
+// The memory units' state: which are present and which have changed (SPEC-016 section 1.2).
+class MemoryUnits
+{
+public:
+    void sub_002BF6A0();                    // refresh both masks from the system
+
+    bool IsPresent(int port, int slot)
+    {
+        if (port < 0 || slot < 0)
+        {
+            return true;
+        }
+        return (m_Present & (unsigned char)(1 << (port + slot * 4))) != 0;
+    }
+
+    bool HasChanged(int port, int slot)
+    {
+        if (port < 0 || slot < 0)
+        {
+            return false;
+        }
+        return (m_Changed & (unsigned char)(1 << (port + slot * 4))) != 0;
+    }
+
+    unsigned char m_Present; // +0x0
+    unsigned char m_Changed; // +0x1
+};
+
+extern "C" MemoryUnits DAT_004BDDF0;
+
+struct Size64
+{
+    unsigned int m_Low;     // +0x0
+    unsigned int m_High;    // +0x4
+};
+
+extern "C" unsigned int __stdcall sub_0023699D(char driveLetter, unsigned short* name, unsigned int nameLength);   // XMUNameFromDriveLetter
+extern "C" int __stdcall sub_002363D3(const char* drive, Size64* freeToCaller, Size64* total, Size64* totalFree);  // GetDiskFreeSpaceExA
+extern "C" unsigned int __stdcall sub_00236902(const char* drive);                                                 // XGetDiskSectorSizeA
+extern "C" unsigned int __stdcall sub_00234B47();                                                                  // GetLastError
+
+int __cdecl sub_002C0480(char* destination, const unsigned short* source, int a, int capacity, int c);
+
+namespace core
+{
+    class XboxSaveDrive
+    {
+    public:
+        int sub_002BFE10(unsigned int code);
+        bool sub_002BFF10();
+        void sub_002BF930();
+        void sub_002C04C0();
+
+        void GetPortAndSlot(int* port, int* slot)
+        {
+            if (m_Name[0] == 'U')
+            {
+                *port = -1;
+                *slot = -1;
+            }
+            else
+            {
+                *port = m_Name[7] - '1';
+                *slot = m_Name[8] - 'A';
+            }
+        }
+
+        char m_pad00[0x7C];
+        int m_MediaState;           // +0x7C: the error value again (SPEC-016 section 12.1)
+        unsigned int m_FreeBytes;   // +0x80
+        unsigned int m_FreeSectors; // +0x84
+        unsigned int m_SectorSize;  // +0x88
+        char m_VolumeName[0x41];    // +0x8C
+        char m_padCD[0x3];
+        int m_LastError;            // +0xD0
+        char m_padD4[0x10];
+        unsigned int m_OpenFiles;   // +0xE4
+        char m_Name[0x11];          // +0xE8
+        bool m_Mounted;             // +0xF9
+        char m_DriveLetter;         // +0xFA
+    };
+}
+
+void core::XboxSaveDrive::sub_002C04C0()
+{
+    m_SectorSize = 0x200;
+    m_FreeBytes = 0;
+    m_FreeSectors = 0;
+
+    if (m_DriveLetter != 'U')
+    {
+        m_VolumeName[0] = 0;
+
+        int port;
+        int slot;
+        GetPortAndSlot(&port, &slot);
+        DAT_004BDDF0.sub_002BF6A0();
+        if (DAT_004BDDF0.HasChanged(port, slot))
+        {
+            sub_002BF930();
+        }
+        if (DAT_004BDDF0.IsPresent(port, slot))
+        {
+            if (!sub_002BFF10())
+            {
+                m_MediaState = m_LastError;
+                return;
+            }
+
+            unsigned short wideName[0x20];
+            int code = sub_002BFE10(sub_0023699D(m_DriveLetter, wideName, 0x20));
+            if (code != 0)
+            {
+                m_MediaState = code;
+                m_VolumeName[0] = 0;
+                return;
+            }
+            memset(m_VolumeName, 0, sizeof(m_VolumeName));
+            sub_002C0480(m_VolumeName, wideName, 0, sizeof(m_VolumeName), 0);
+        }
+        else
+        {
+            m_MediaState = 4;       // no media
+            m_LastError = 4;
+            return;
+        }
+    }
+
+    char drive[4];
+    Size64 freeToCaller;
+    Size64 totalFree;
+    Size64 total;
+    drive[0] = m_DriveLetter;
+    drive[1] = ':';
+    drive[2] = '\\';
+    drive[3] = 0;
+    if (!sub_002363D3(drive, &freeToCaller, &total, &totalFree))
+    {
+        m_VolumeName[0] = 0;
+        int error = sub_002BFE10(sub_00234B47());
+        m_MediaState = error;
+        m_LastError = error;
+        return;
+    }
+    m_MediaState = 0;
+    m_LastError = 0;
+
+    if (freeToCaller.m_High != 0)
+    {
+        m_FreeBytes = 0xFFFFFFFF;
+    }
+    else
+    {
+        m_FreeBytes = freeToCaller.m_Low;
+    }
+
+    unsigned int sectorSize = sub_00236902(drive);
+    if (sectorSize != 0)
+    {
+        m_SectorSize = sectorSize;
+    }
+    else
+    {
+        m_SectorSize = 0x200;
+    }
+    m_FreeSectors = m_FreeBytes / m_SectorSize;
+}
+
 // ============================================================================
 // [VERIFIED] sub_002C06B0 (0x002C06B0, 172 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -344959,7 +345681,104 @@ int core::XboxSaveDrive::vfunc_19(const char* name)
 
 // [TODO] 0x002C1180 core::XboxSaveDrive::vfunc_20 (378 B)
 // [TODO] 0x002C1300 core::XboxSaveDrive::vfunc_21 (220 B)
-// [TODO] 0x002C13E0 sub_002C13E0 (107 B)
+// ============================================================================
+// [VERIFIED] sub_002C13E0 (0x002C13E0, 107 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: core::DriveThread's destructor: sets the quit flag, wakes the thread, waits for it and destroys it, closes two semaphores, then restores the base tables.
+// ============================================================================
+// bin: xb
+// va: 0x002C13E0
+// what: core::DriveThread's destructor: sets the quit flag, wakes the thread, waits for it and destroys it, closes two semaphores, then restores the base tables.
+// tool: Claude (from SPEC-016 section 12.4)
+
+extern "C" char DAT_0039E22C[];     // a base class's table
+extern "C" char DAT_0039F08C[];     // a base class's table
+extern "C" char DAT_003DAC24[];     // core::SafeRefCount's table
+extern "C" char DAT_003DB5F0[];     // core::DriveThread's table for the part at +0xC
+extern "C" char DAT_003DB600[];     // core::DriveThread's table for the part at +0x4
+extern "C" char DAT_003DB608[];     // core::DriveThread's main table
+extern "C" void* DAT_0045894C;      // the allocator in use
+
+// The two base parts whose destructors the compiler expanded at the end (SPEC-016 section 12.4).
+struct RefCountPart
+{
+    void* m_Table;      // +0x0
+};
+
+struct AllocatedPart
+{
+    void* m_Table;      // +0x0
+    void* m_Allocator;  // +0x4
+};
+
+inline void DestroyRefCount(RefCountPart* part)
+{
+    part->m_Table = DAT_003DAC24;
+}
+
+inline void DestroyAllocated(AllocatedPart* part)
+{
+    DAT_0045894C = part->m_Allocator;
+    part->m_Table = DAT_0039F08C;
+}
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// The system thread and what goes with it (0x4C bytes are used here; its functions know the rest).
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+void __cdecl sub_00283BB0(Semaphore* semaphore);    // close its handle
+void __cdecl sub_00283AF0(Thread* thread);
+void __cdecl sub_00283DD0(Thread* thread);          // wait for the thread to end and destroy it
+
+namespace core
+{
+    class DriveThread
+    {
+    public:
+        void sub_002C13E0();
+
+        void* m_Table00;        // +0x00
+        void* m_Table04;        // +0x04
+        void* m_Allocator;      // +0x08
+        void* m_Table0C;        // +0x0C
+        char m_pad10[0x8];
+        Thread m_Thread;        // +0x18
+        bool m_Quit;            // +0x64
+        char m_pad65[0x3];
+        Semaphore m_Wake;       // +0x68
+        char m_pad6C[0x4C];
+        Semaphore m_FieldB8;    // +0xB8
+    };
+}
+
+void core::DriveThread::sub_002C13E0()
+{
+    m_Table00 = DAT_003DB608;
+    m_Table04 = DAT_003DB600;
+    m_Table0C = DAT_003DB5F0;
+
+    m_Quit = true;
+    sub_00283BD0(&m_Wake);
+    sub_00283AF0(&m_Thread);
+    sub_00283DD0(&m_Thread);
+    sub_00283BB0(&m_Wake);
+    sub_00283BB0(&m_FieldB8);
+
+    // the base classes' destructors
+    DestroyRefCount((RefCountPart*)&m_Table0C);
+    DestroyAllocated((AllocatedPart*)&m_Table04);
+    m_Table00 = DAT_0039E22C;
+}
+
 // ============================================================================
 // [VERIFIED] core::Drive::vfunc_01 (0x002C1450, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

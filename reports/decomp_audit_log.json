@@ -1,5 +1,165 @@
 [
   {
+    "time": "2026-11-25 21:45:16",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002C13E0",
+    "va": "0x002C13E0",
+    "bytes": "107/107 B"
+  },
+  {
+    "time": "2026-11-25 21:44:55",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002C04C0",
+    "va": "0x002C04C0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:44:36",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002C04C0",
+    "va": "0x002C04C0",
+    "bytes": "490/490 B"
+  },
+  {
+    "time": "2026-11-25 21:44:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002C0210",
+    "va": "0x002C0210",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:43:57",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002C0210",
+    "va": "0x002C0210",
+    "bytes": "616/616 B"
+  },
+  {
+    "time": "2026-11-25 21:43:37",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002A9610",
+    "va": "0x002A9610",
+    "bytes": "210/210 B"
+  },
+  {
+    "time": "2026-11-25 21:43:17",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002A95A0",
+    "va": "0x002A95A0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:42:57",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002A95A0",
+    "va": "0x002A95A0",
+    "bytes": "103/103 B"
+  },
+  {
+    "time": "2026-11-25 21:42:38",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002A9430",
+    "va": "0x002A9430",
+    "bytes": "232/232 B"
+  },
+  {
+    "time": "2026-11-25 21:42:18",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002A93A0",
+    "va": "0x002A93A0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:41:58",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002A93A0",
+    "va": "0x002A93A0",
+    "bytes": "132/132 B"
+  },
+  {
+    "time": "2026-11-25 21:41:39",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002A9310",
+    "va": "0x002A9310",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:41:19",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "sub_002A9310",
+    "va": "0x002A9310",
+    "bytes": "132/132 B"
+  },
+  {
+    "time": "2026-11-25 21:40:59",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002CC250",
+    "va": "0x002CC250",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:40:39",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of sub_002CC160",
+    "va": "0x002CC160",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:40:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of core::XboxSaveDrive::vfunc_19",
+    "va": "0x002C10E0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:40:01",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of core::XboxSaveDrive::vfunc_00",
+    "va": "0x002C1020",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:39:41",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of core::XboxSaveDrive::vfunc_00",
+    "va": "0x002C0F80",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:39:20",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of core::XboxSaveDrive::vfunc_13",
+    "va": "0x002C0EC0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-25 21:38:43",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "1 look-alike(s) of core::XboxSaveDrive::vfunc_09",
+    "va": "0x002C0900",
+    "bytes": "same code, own addresses"
+  },
+  {
     "time": "2026-11-25 20:58:00",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
@@ -1838,165 +1998,5 @@
     "symbol": "sub_002F4860",
     "va": "Proto 0x002F4860",
     "bytes": "26/26 B"
-  },
-  {
-    "time": "2026-11-24 11:33:02",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F36C0",
-    "va": "Proto 0x002F36C0",
-    "bytes": "26/26 B"
-  },
-  {
-    "time": "2026-11-24 11:32:15",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3490",
-    "va": "Proto 0x002F3490",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:31:51",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3450",
-    "va": "Proto 0x002F3450",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:31:28",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3410",
-    "va": "Proto 0x002F3410",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:31:04",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F33D0",
-    "va": "Proto 0x002F33D0",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:30:40",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3390",
-    "va": "Proto 0x002F3390",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:30:17",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3350",
-    "va": "Proto 0x002F3350",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:29:53",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3310",
-    "va": "Proto 0x002F3310",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:29:30",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F32D0",
-    "va": "Proto 0x002F32D0",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:29:06",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3290",
-    "va": "Proto 0x002F3290",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:28:42",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3250",
-    "va": "Proto 0x002F3250",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:28:19",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3210",
-    "va": "Proto 0x002F3210",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:27:55",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F31D0",
-    "va": "Proto 0x002F31D0",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:27:31",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3190",
-    "va": "Proto 0x002F3190",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:27:07",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3150",
-    "va": "Proto 0x002F3150",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:26:44",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3110",
-    "va": "Proto 0x002F3110",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:26:20",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F30D0",
-    "va": "Proto 0x002F30D0",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:25:56",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F3000",
-    "va": "Proto 0x002F3000",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:25:32",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F2F80",
-    "va": "Proto 0x002F2F80",
-    "bytes": "50/50 B"
-  },
-  {
-    "time": "2026-11-24 11:25:09",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "sub_002F2EC0",
-    "va": "Proto 0x002F2EC0",
-    "bytes": "50/50 B"
   }
 ]
