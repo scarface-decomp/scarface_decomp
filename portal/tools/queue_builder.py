@@ -30,7 +30,7 @@ from sf_binaries import (BinaryImage, Extent, collect_call_targets, function_ext
                          settle_overlaps)
 
 # Bumped when the checks that keep data out of the queue change; the portal re-checks older queues.
-CODE_CHECK = 3
+CODE_CHECK = 4
 
 PC_FLAGS = "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
 # Only this part of the retail PC .text is stored as plaintext (the rest is not readable code),

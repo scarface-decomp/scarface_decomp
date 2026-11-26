@@ -1,7 +1,7 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 780 of 1,514 functions matched (51.52%). NOT COMPLETE YET.
+// PROGRESS: 763 of 1,497 functions matched (50.97%). NOT COMPLETE YET.
 // The 734 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
@@ -453,29 +453,6 @@ ControllerSystemDirectInput* ControllerSystemDirectInput::vfunc_03(int a1)
 // [TODO] 0x006DE930 sub_006DE930 (43 B)
 // [TODO] 0x006DEBB0 sub_006DEBB0 (35 B)
 // [TODO] 0x006DEBE0 sub_006DEBE0 (20 B)
-// ============================================================================
-// [VERIFIED] sub_006DEC00 (0x006DEC00, 5 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006DEC00 (0x006DEC00, 5 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" void __cdecl sub_0041135C(void);
-
-class Class_006DEC00
-{
-public:
-    void sub_006DEC00();
-};
-
-void Class_006DEC00::sub_006DEC00()
-{
-    sub_0041135C();
-}
-
 // [TODO] 0x006DEC30 sub_006DEC30 (84 B)
 // ============================================================================
 // [VERIFIED] sub_006DEC90 (0x006DEC90, 24 B)
@@ -498,29 +475,6 @@ void __cdecl sub_006DEC90(void)
 }
 
 // [TODO] 0x006DECB0 sub_006DECB0 (118 B)
-// ============================================================================
-// [VERIFIED] sub_006DED30 (0x006DED30, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00012130 (0x00012130), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006DED30 (0x006DED30, 6 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB0BD8;
-
-class Class_006DED30
-{
-public:
-    void sub_006DED30();
-};
-
-void Class_006DED30::sub_006DED30()
-{
-    ((void (__cdecl*)(void))DAT_00FB0BD8)();
-}
-
 // ============================================================================
 // [VERIFIED] sub_006DEDF0 (0x006DEDF0, 1 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -1295,29 +1249,6 @@ extern "C" int DAT_0085CD34;
 int __cdecl sub_006DF960(void)
 {
     return DAT_0085CD34;
-}
-
-// ============================================================================
-// [VERIFIED] sub_006DF970 (0x006DF970, 5 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006DF970 (0x006DF970, 5 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" void __cdecl sub_0042C0C6(void);
-
-class Class_006DF970
-{
-public:
-    void sub_006DF970();
-};
-
-void Class_006DF970::sub_006DF970()
-{
-    sub_0042C0C6();
 }
 
 // [TODO] 0x006DF9E0 sub_006DF9E0 (191 B)
@@ -4879,31 +4810,6 @@ bool File::vfunc_30()
 }
 
 // ============================================================================
-// [VERIFIED] core::File::vfunc_17 (0x006E51B0, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Calls the function whose address is kept in a global.
-// ============================================================================
-// bin: pc
-// va: 0x006E51B0
-// what: Calls the function whose address is kept in a global.
-// tool: Claude Opus 5.5 (transplanted from pc:0x006DED30, nearest by portal/tools/similar.py)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB0444;
-
-class Class_006E51B0
-{
-public:
-    void sub_006E51B0();
-};
-
-void Class_006E51B0::sub_006E51B0()
-{
-    ((void (__cdecl*)(void))DAT_00FB0444)();
-}
-
-// ============================================================================
 // [VERIFIED] core::File::vfunc_31 (0x006E51C0, 13 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -7208,29 +7114,6 @@ bool Class_006E6360::sub_006E6360()
 }
 
 // ============================================================================
-// [VERIFIED] sub_006E6370 (0x006E6370, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00012130 (0x00012130), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006E6370 (0x006E6370, 6 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB0E38;
-
-class Class_006E6370
-{
-public:
-    void sub_006E6370();
-};
-
-void Class_006E6370::sub_006E6370()
-{
-    ((void (__cdecl*)(void))DAT_00FB0E38)();
-}
-
-// ============================================================================
 // [VERIFIED] sub_006E6380 (0x006E6380, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -7975,29 +7858,6 @@ int Class_006E6A10::sub_006E6A10()
         m_Field10 = *(int*)(r_eax + 100);
     }
     return r_eax;
-}
-
-// ============================================================================
-// [VERIFIED] sub_006E6A20 (0x006E6A20, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00012130 (0x00012130), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006E6A20 (0x006E6A20, 6 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB09A0;
-
-class Class_006E6A20
-{
-public:
-    void sub_006E6A20();
-};
-
-void Class_006E6A20::sub_006E6A20()
-{
-    ((void (__cdecl*)(void))DAT_00FB09A0)();
 }
 
 // [TODO] 0x006E6A40 sub_006E6A40 (64 B)
@@ -9377,29 +9237,6 @@ Class_006E9550* Class_006E9550::sub_006E9550(int a1, int a2, int a3)
 }
 
 // [TODO] 0x006E95A0 sub_006E95A0 (167 B)
-// ============================================================================
-// [VERIFIED] sub_006E9650 (0x006E9650, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00012130 (0x00012130), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006E9650 (0x006E9650, 6 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB066C;
-
-class Class_006E9650
-{
-public:
-    void sub_006E9650();
-};
-
-void Class_006E9650::sub_006E9650()
-{
-    ((void (__cdecl*)(void))DAT_00FB066C)();
-}
-
 // [TODO] 0x006E9660 sub_006E9660 (234 B)
 // [TODO] 0x006E9750 sub_006E9750 (98 B)
 // ============================================================================
@@ -10931,29 +10768,6 @@ void OmHalStream::vfunc_12()
 }
 
 // ============================================================================
-// [VERIFIED] sub_006EC620 (0x006EC620, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00012130 (0x00012130), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006EC620 (0x006EC620, 6 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB0390;
-
-class Class_006EC620
-{
-public:
-    void sub_006EC620();
-};
-
-void Class_006EC620::sub_006EC620()
-{
-    ((void (__cdecl*)(void))DAT_00FB0390)();
-}
-
-// ============================================================================
 // [VERIFIED] sub_006EC630 (0x006EC630, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -11034,29 +10848,6 @@ EntityLoader* EntityLoader::vfunc_03(int a1)
 }
 
 // [TODO] 0x006EC6A0 om::EntityLoader::vfunc_04 (245 B)
-// ============================================================================
-// [VERIFIED] sub_006EC7A0 (0x006EC7A0, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00012130 (0x00012130), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006EC7A0 (0x006EC7A0, 6 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB4BA0;
-
-class Class_006EC7A0
-{
-public:
-    void sub_006EC7A0();
-};
-
-void Class_006EC7A0::sub_006EC7A0()
-{
-    ((void (__cdecl*)(void))DAT_00FB4BA0)();
-}
-
 // ============================================================================
 // [VERIFIED] sub_006EC7B0 (0x006EC7B0, 19 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -11696,29 +11487,6 @@ L_39:
 // [TODO] 0x006ED9A0 sub_006ED9A0 (143 B)
 // [TODO] 0x006EDA30 audio::Sequence::vfunc_06 (110 B)
 // [TODO] 0x006EDB60 sub_006EDB60 (12 B)
-// ============================================================================
-// [VERIFIED] sub_006EDCA0 (0x006EDCA0, 5 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006EDCA0 (0x006EDCA0, 5 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" void __cdecl sub_004897A5(void);
-
-class Class_006EDCA0
-{
-public:
-    void sub_006EDCA0();
-};
-
-void Class_006EDCA0::sub_006EDCA0()
-{
-    sub_004897A5();
-}
-
 // ============================================================================
 // [VERIFIED] sub_006EDCB0 (0x006EDCB0, 18 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -12540,29 +12308,6 @@ extern "C" void __cdecl sub_006EE890(int, int);
 void __cdecl sub_006EE9D0(int a1)
 {
     sub_006EE890((int)DAT_007F69A8, a1);
-}
-
-// ============================================================================
-// [VERIFIED] sub_006EE9F0 (0x006EE9F0, 5 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006EE9F0 (0x006EE9F0, 5 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" void __cdecl sub_00424301(void);
-
-class Class_006EE9F0
-{
-public:
-    void sub_006EE9F0();
-};
-
-void Class_006EE9F0::sub_006EE9F0()
-{
-    sub_00424301();
 }
 
 // ============================================================================
@@ -15535,29 +15280,6 @@ HalRadicalAdpcmDecodeStream* HalRadicalAdpcmDecodeStream::vfunc_17(int a1)
 
 // [TODO] 0x006F5690 sub_006F5690 (72 B)
 // [TODO] 0x006F56E0 sub_006F56E0 (69 B)
-// ============================================================================
-// [VERIFIED] sub_006F5730 (0x006F5730, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00012130 (0x00012130), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006F5730 (0x006F5730, 6 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB100C;
-
-class Class_006F5730
-{
-public:
-    void sub_006F5730();
-};
-
-void Class_006F5730::sub_006F5730()
-{
-    ((void (__cdecl*)(void))DAT_00FB100C)();
-}
-
 // ============================================================================
 // [VERIFIED] audio::SeqEvent::vfunc_00 (0x006F5740, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -23870,29 +23592,6 @@ void Class_006FF570::sub_006FF570()
 // [TODO] 0x006FF8A0 sub_006FF8A0 (134 B)
 // [TODO] 0x006FF930 sub_006FF930 (14 B)
 // ============================================================================
-// [VERIFIED] sub_006FFB20 (0x006FFB20, 5 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_006FFB20 (0x006FFB20, 5 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" void __cdecl sub_00490965(void);
-
-class Class_006FFB20
-{
-public:
-    void sub_006FFB20();
-};
-
-void Class_006FFB20::sub_006FFB20()
-{
-    sub_00490965();
-}
-
-// ============================================================================
 // [VERIFIED] sub_007001D0 (0x007001D0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -24145,29 +23844,6 @@ L_06:
     }
 L_27:
     return r_eax;
-}
-
-// ============================================================================
-// [VERIFIED] sub_007003E0 (0x007003E0, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00012130 (0x00012130), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_007003E0 (0x007003E0, 6 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB1258;
-
-class Class_007003E0
-{
-public:
-    void sub_007003E0();
-};
-
-void Class_007003E0::sub_007003E0()
-{
-    ((void (__cdecl*)(void))DAT_00FB1258)();
 }
 
 // [TODO] 0x00700660 sub_00700660 (125 B)
@@ -24969,29 +24645,6 @@ RenderStrategyBink* RenderStrategyBink::vfunc_03(int a1)
 }
 
 // [TODO] 0x00701BC0 movie::RenderStrategyBink::vfunc_07 (746 B)
-// ============================================================================
-// [VERIFIED] sub_00702090 (0x00702090, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00012130 (0x00012130), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_00702090 (0x00702090, 6 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB4980;
-
-class Class_00702090
-{
-public:
-    void sub_00702090();
-};
-
-void Class_00702090::sub_00702090()
-{
-    ((void (__cdecl*)(void))DAT_00FB4980)();
-}
-
 // [TODO] 0x007021C0 sub_007021C0 (35 B)
 // [TODO] 0x007025A0 movie::BinkCallback::vfunc_04 (218 B)
 // ============================================================================
@@ -25285,29 +24938,6 @@ void Class_007027E6::sub_007027E6()
     ((void (__cdecl*)(void))DAT_0072F214)();
 }
 
-// ============================================================================
-// [VERIFIED] sub_00702810 (0x00702810, 5 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_00702810 (0x00702810, 5 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" void __cdecl sub_0041EA26(void);
-
-class Class_00702810
-{
-public:
-    void sub_00702810();
-};
-
-void Class_00702810::sub_00702810()
-{
-    sub_0041EA26();
-}
-
 // [TODO] 0x0070284D sub_0070284D (74 B)
 // [TODO] 0x00702897 sub_00702897 (24 B)
 // [TODO] 0x007028AF sub_007028AF (47 B)
@@ -25407,29 +25037,6 @@ public:
 void Class_00702E0C::sub_00702E0C()
 {
     ((void (__cdecl*)(void))DAT_0072F16C)();
-}
-
-// ============================================================================
-// [VERIFIED] sub_00702E14 (0x00702E14, 5 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// ============================================================================
-// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
-// its addresses and names were swapped for this function's.
-// sub_00702E14 (0x00702E14, 5 bytes)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" void __cdecl sub_0049AB8F(void);
-
-class Class_00702E14
-{
-public:
-    void sub_00702E14();
-};
-
-void Class_00702E14::sub_00702E14()
-{
-    sub_0049AB8F();
 }
 
 // [TODO] 0x00702E4F sub_00702E4F (17 B)
