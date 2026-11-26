@@ -523,3 +523,47 @@ def test_the_frame_controllers_mode_cycles_and_for_ever():
     assert (got["mode"], got["cycles"], got["animation"]) == (3, 2.0, "PTRN_door_opening")
     data = fc(1, b"HOLD", 5, 1)                                        # for ever: the cycles don't count
     assert P.fields(data, P.read_tree(data)[0])["cycles"] == 0
+
+
+def test_an_objects_collision_shapes_and_rigid_body():
+    """The collision object of a prop (a box, a cylinder and a sphere under one volume) and its rigid body with
+    one joint: the fields p3d.py reads from each chunk. Made-up values."""
+    vec = lambda *v: chunk(0x07010007, struct.pack("<3f", *v))
+    box = chunk(0x07010004, struct.pack("<3f", 0.5, 1.0, 2.0), vec(1, 2, 3) + vec(1, 0, 0) + vec(0, 1, 0) + vec(0, 0, 1))
+    cylinder = chunk(0x07010003, struct.pack("<2fH", 0.25, 2.0, 1), vec(0, 0, 0) + vec(0, 1, 0))
+    sphere = chunk(0x07010002, struct.pack("<f", 0.75), vec(4, 5, 6))
+    inner = [chunk(0x07010001, struct.pack("<IiI", n, -1, 0), shape) for n, shape in enumerate((box, cylinder, sphere), 1)]
+    volume = chunk(0x07010001, struct.pack("<IiI", 0, 0, 3), chunk(0x07010006, struct.pack("<I", 0)) + b"".join(inner))
+    owner = chunk(0x07010021, struct.pack("<I", 1), chunk(0x07010022, text("crate_A")))
+    attribute = chunk(0x07010023, struct.pack("<HIHHHHIII", 1, 0, 1, 1, 0, 1, 7, 8, 9))
+    collision = chunk(0x07010000, text("crate_A") + struct.pack("<I", 1) + text("DefaultMaterial") + struct.pack("<II", 4, 1),
+                      owner + volume + attribute)
+    mass = chunk(0x07011002, struct.pack("<3f", 0.0, 0.5, 0.0)) + chunk(0x07011001, struct.pack("<6f", 9, 0, 0, 8, 0, 7))
+    joint = chunk(0x07011020, struct.pack("<i4fi", 0, 4.5, 0.75, 2.0, 0.5, 1), mass)
+    body = chunk(0x07011000, text("crate_A") + struct.pack("<I", 1) + b"\0" + struct.pack("<Iff", 1, 4.5, 1.0), joint)
+    data = p3d(collision, body, chunk(0x07010025, text("dock_pocket") + struct.pack("<I", 1)))
+    tree = P.read_tree(data)
+    got = {}
+    for c in P.walk(tree):
+        got.setdefault(c.id, []).append(P.fields(data, c))
+    assert [P.NAMES[i] for i in (0x07010002, 0x07010004, 0x07010006)] == ["Collision Sphere", "Collision Box", "Collision Aligned Box"]
+    assert got[0x07010000] == [{"name": "crate_A", "version": 1, "material": "DefaultMaterial", "sub-objects": 4, "owners": 1}]
+    assert got[0x07010021] == [{"names": 1}] and got[0x07010022] == [{"name": "crate_A"}]
+    assert got[0x07010001][0] == {"object reference": 0, "owner": 0, "volumes inside": 3}
+    assert got[0x07010001][1] == {"object reference": 1, "owner": -1, "volumes inside": 0}
+    assert got[0x07010004] == [{"half sizes": (0.5, 1.0, 2.0)}]
+    assert got[0x07010003] == [{"radius": 0.25, "half length": 2.0, "flat ends": True}]
+    assert got[0x07010002] == [{"radius": 0.75}]
+    assert got[0x07010007][0] == {"vector": (1.0, 2.0, 3.0)} and len(got[0x07010007]) == 7
+    assert got[0x07010023] == [{"static": True, "default area": 0, "can roll": True, "can slide": True, "can spin": False,
+                                "can bounce": True, "extra": (7, 8, 9)}]
+    assert got[0x07010025] == [{"name": "dock_pocket", "version": 1}]
+    assert got[0x07011000] == [{"name": "crate_A", "version": 1, "material": "", "joints": 1, "volume": 4.5,
+                                "resting sensitivity": 1.0}]
+    assert got[0x07011020] == [{"joint": 0, "volume": 4.5, "stiffness": 0.75, "largest angle": 2.0, "smallest angle": 0.5,
+                                "freedom": "hinge"}]
+    assert got[0x07011001] == [{"xx": 9.0, "xy": 0.0, "xz": 0.0, "yy": 8.0, "yz": 0.0, "zz": 7.0}]
+    assert got[0x07011002] == [{"vector": (0.0, 0.5, 0.0)}]
+    hint = P.read_tree(p3d(chunk(0x00010021, struct.pack("<8I", 0, 32, 32, 32, 32, 8, 16, 32))))
+    f = P.fields(p3d(chunk(0x00010021, struct.pack("<8I", 0, 32, 32, 32, 32, 8, 16, 32))), hint[0])
+    assert (f["version"], f["normal bits"], f["colour bits"], f["position bits"]) == (0, 8, 16, 32)
