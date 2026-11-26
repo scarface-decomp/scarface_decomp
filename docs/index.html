@@ -95,6 +95,10 @@
     .tube > span { position: absolute; inset: 0 auto 0 0; width: 0; min-width: 0; background: var(--blood);
                    box-shadow: 0 0 14px rgba(234,68,77,0.45);
                    transition: width 1.6s cubic-bezier(.2,.7,.2,1) .9s; }
+    .measures { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 56px; margin-top: 26px; }
+    .measures dd { font-family: var(--head); font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1; color: var(--white);
+                   font-variant-numeric: tabular-nums; }
+    .measures dt { color: var(--grey); font-size: 0.95rem; margin-top: 6px; }
     .count { margin-top: 16px; font-size: 1.08rem; }
     .count-extra { margin-top: 6px; font-size: 0.92rem; color: var(--grey); }
     .facts { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 44px; margin-top: 28px; }
@@ -324,7 +328,11 @@
         <p class="lede">Fans rebuilding the 2006 game's source code, one function at a time, so it can be preserved, fixed and modded.</p>
 
         <p class="claim" id="claim">The world is <span id="sb-pct">…</span> yours.</p>
-        <div class="tube" role="progressbar" aria-label="Share of the game rebuilt" aria-valuemin="0" aria-valuemax="100" id="sb-bar-outer"><span id="sb-bar"></span></div>
+        <div class="tube" role="progressbar" aria-label="Share of the game's code rebuilt, by size" aria-valuemin="0" aria-valuemax="100" id="sb-bar-outer"><span id="sb-bar"></span></div>
+        <dl class="measures" id="sb-measures" hidden>
+          <div><dd id="sb-size-pct">…</dd><dt>of the game's code, by size</dt></div>
+          <div><dd id="sb-count-pct">…</dd><dt>of its functions, by count</dt></div>
+        </dl>
         <p class="count"><span id="sb-verified">…</span> of <span id="sb-total">…</span> functions rebuilt so far.</p>
         <p class="count-extra" id="sb-stubs" hidden></p>
         <p class="count-extra" id="sb-proto" hidden></p>
