@@ -35477,6 +35477,11 @@
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map",
       "why": "The same 261 bytes as _XMountUtilityDrive@4 (xapilib) in that build, addresses apart, and found only once in this program."
     },
+    "xb:0x00236817": {
+      "name": "XFormatUtilityDrive",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction; identified by the clean-room examiner from this game's bytes and the public Xbox API (round of 2026-11-26)",
+      "why": "Opens and reads the utility partition's link through kernel exports 203 and 215 (cells 0x39D2E8, 0x39D2E4), takes the cluster size 0x4000 shifted by the top two bits of the title's flags at 0x10124, and formats through XapiFormatFATVolumeEx (0x239877). Number 74 of library 1."
+    },
     "xb:0x002368A5": {
       "name": "XUnmountAlternateTitleA",
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map",
@@ -35501,6 +35506,11 @@
       "name": "HeapFree",
       "by": "symcov: [XBOX] The Red Star (Beta) [2004-07-17] (MAP)/default.xbe",
       "why": "The same 23 bytes as _HeapFree@12 in that build (the symcov report compares code with the addresses masked), and the report names no other function for this code."
+    },
+    "xb:0x00236AE4": {
+      "name": "LocalAlloc",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction; identified by the clean-room examiner from this game's bytes and the public Xbox API (round of 2026-11-26)",
+      "why": "Takes flags and a byte count and calls RtlAllocateHeap (0x237FD9) on the process heap at 0x4C5ED4 with (flags >> 3) & 8; LocalFree (0x236B01) is the next function. Number 45 of library 2."
     },
     "xb:0x00236B01": {
       "name": "LocalFree",
@@ -35676,6 +35686,11 @@
       "name": "XMemAllocDefault",
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map",
       "why": "The same 160 bytes as _XMemAllocDefault@8 (xapilib) in that build, addresses apart, and found only once in this program."
+    },
+    "xb:0x002395E3": {
+      "name": "XMemFreeDefault",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction; identified by the clean-room examiner from this game's bytes and the public Xbox API (round of 2026-11-26)",
+      "why": "Takes an address and attributes: with bit 31 of the attributes set it calls the physical free (0x239C84), otherwise LocalFree (0x236B01); ret 8. Number 106 of library 1."
     },
     "xb:0x002395FD": {
       "name": "XapiNukeDirectoryFromHandle",
@@ -37802,6 +37817,16 @@
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map",
       "why": "The same 41 bytes as _XGetVideoStandard@0 (xapilib) in that build, addresses apart, and found only once in this program."
     },
+    "xb:0x003095CF": {
+      "name": "wvsprintfA",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction; identified by the clean-room examiner from this game's bytes and the public Xbox API (round of 2026-11-26)",
+      "why": "__stdcall with three arguments that forwards them to the C library's vsprintf (0x2FB789) and returns its result; ret 0xC. Number 364 or 365 of library 2 (the wide twin has the same shape; this one calls the narrow vsprintf)."
+    },
+    "xb:0x003095E6": {
+      "name": "wsprintfA",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction; identified by the clean-room examiner from this game's bytes and the public Xbox API (round of 2026-11-26)",
+      "why": "__cdecl: takes the address of its third argument as the argument list and calls wvsprintfA (0x3095CF). Number 366 of library 2."
+    },
     "xb:0x003095F9": {
       "name": "XapiReadFromStDb",
       "by": "symcov: [XBOX] The Red Star (Beta) [2004-07-17] (MAP)/default.xbe",
@@ -37926,6 +37951,11 @@
       "name": "IsBadCodePtr",
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map (examiner's link proof)",
       "why": "The same 14 bytes (addresses masked) as _IsBadCodePtr@4 (xapilib:process.obj) in that build, and that symbol is found once."
+    },
+    "xb:0x0030A65F": {
+      "name": "XGetAVPack",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction; identified by the clean-room examiner from this game's bytes and the public Xbox API (round of 2026-11-26)",
+      "why": "Three instructions: reads kernel export 356 (HalBootSMCVideoMode) through the import cell at 0x39D3BC and returns the value. Number 41 of library 1 in the sibling games' lists."
     },
     "xb:0x0030A66F": {
       "name": "prvAdaptTrigToSubframeConfig_XDS",

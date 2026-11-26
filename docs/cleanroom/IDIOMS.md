@@ -37,3 +37,30 @@ I11. `new T(args)` THROUGH A CLASS ALLOCATOR: `p = Alloc(sizeof T); r = p ? ctor
     joined before the use (functions with a frame). [SPEC-019.]
 I12. DATA-ONLY STARTS: entry stubs are reached by `push imm32`; scan found 128. [yours, section 6.]
 ```
+
+## Added by the implementer
+
+Each of these was measured by compiling; none needed outside reading.
+
+```text
+I13. A CALL TO A FUNCTION DEFINED EARLIER IN THE SAME FILE THAT WRITES NO MEMORY does not make the compiler
+    forget what it read: a value read through a pointer before the call stays in its register after it.
+    Declared only, the same call forces a reload, and that can move every register after it.
+    [0x2C09C0: with 0x2BF730 defined in the file, 447 -> 1070 of 1279 bytes; EDI keeps `*out` across the
+    call at +0x35E.]
+I14. STORES ARE SCHEDULED. A store whose value is an argument just loaded into a scratch register can be
+    emitted ahead of earlier stores of constants. Write the members in declared order; the byte order is the
+    compiler's. [0x2AB470, 0x2AB570: `+0x10 = priority` sits between the two +4 table stores in the bytes
+    and after `m_Drive = drive` in the source.]
+I15. A BASE THAT IS ONLY A TABLE keeps its table store when its inline constructor helper RETURNS the part
+    pointer; a void helper on a one-field struct loses it. Refines I4. [0x2AB470, 0x2AB570: core::IMutable's
+    table at +4, with core::IFile's at +0 dropped as in I4.]
+I16. A COPY OF A VALUE HANDED BACK THROUGH A POINTER is taken into a local before the branch that uses it
+    (`size = openSize; if (create) ...`); the copy stays in a callee-saved register across later calls and
+    the address-taken original stays on the stack. [0x2C09C0 +0x422, EDI; also what makes the zero
+    register EBP.]
+I17. REQUEST POSTING (I11's D and J) is one source: `T* m = (T*)Alloc(sizeof(T)); T* r = m ? m->ctor(args)
+    : 0; drive->Queue(r, m_Priority, atHead);`. D comes out in functions without a frame, J in functions
+    with one. No second form was needed. [28 functions of SPEC-019.]
+I18. `flags & 0x80` on a 32-bit return value compiles to `test al, al; jns`. [0x2AB340 and pattern S.]
+```

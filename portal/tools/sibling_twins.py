@@ -58,10 +58,11 @@ def shapes(img: BinaryImage, starts: Set[int], known: Optional[Set[int]] = None)
         if not code:
             continue
         try:
-            shape, _relocs = LA.signature(code, va, img)
+            shape, relocs = LA.signature(code, va, img)
         except Exception:
             continue
         out[va] = (shape, e.size)
+        _ADDRESSES.setdefault(id(img), {})[va] = [r.offset for r in relocs]     # for identities(): found once
     return out
 
 
@@ -111,18 +112,91 @@ def xtl_ids(img: BinaryImage) -> List[Tuple[int, int, int]]:
     return out
 
 
+_IDENTITIES: Dict[int, tuple] = {}
+_ADDRESSES: Dict[int, Dict[int, List[int]]] = {}       # {id(image): {start: where its code holds addresses}}
+KERNEL_KEYS = (0x5B6D40B6, 0xEFB1F152)       # what a retail and a debug program XOR the table's address with
+STUB = 32                                    # up to this many bytes a function is mostly the addresses in it
+
+
+def kernel_cells(img: BinaryImage) -> Dict[int, int]:
+    """{address of an import cell: the number of the kernel function it stands for}. An Xbox program reaches
+    the kernel through a table of cells the loader fills in; in the file each cell holds 0x80000000 + the
+    kernel function's number and a zero ends the table. The header gives the table's address at 0x158,
+    XORed with a key. {} for a program without one."""
+    head = img.data[0x158:0x15C]
+    if len(head) < 4 or img.data[:4] != b"XBEH":
+        return {}
+    for key in KERNEL_KEYS:
+        at = struct.unpack("<I", head)[0] ^ key
+        if img.section_of(at) is None:
+            continue
+        out: Dict[int, int] = {}
+        while len(out) < 512:
+            raw = img.read(at + 4 * len(out), 4)
+            cell = struct.unpack("<I", raw)[0] if raw and len(raw) == 4 else 0
+            if not cell & 0x80000000:
+                break
+            out[at + 4 * len(out)] = cell & 0x7FFFFFFF
+        if out:
+            return out
+    return {}
+
+
+def identities(img: BinaryImage, mine: Dict[int, Tuple[str, int]]) -> Dict[int, str]:
+    """{start: identity}: the shape, plus what the shape leaves out and a library function is told by. Two
+    library functions can be the same bytes apart from one address: which kernel function they reach
+    (`mov eax, [cell]; mov eax, [eax]; ret` is both GetTickCount and XGetAVPack), or which function a
+    forwarder calls. So the identity adds the kernel functions' numbers, in the order the code uses them,
+    and for a function of up to STUB bytes the same of each function it calls."""
+    cached = _IDENTITIES.get(id(img))
+    if cached is not None and cached[0] is mine:
+        return cached[1]
+    cells = kernel_cells(img)
+    first: Dict[int, str] = {}
+    calls: Dict[int, List[int]] = {}
+    for va, (shape, size) in mine.items():
+        code = img.read(va, size) or b""
+        offsets = _ADDRESSES.get(id(img), {}).get(va)
+        if offsets is None:
+            try:
+                offsets = [r.offset for r in LA.signature(code, va, img)[1]]
+            except Exception:
+                offsets = []
+        reached = []
+        for at in offsets:
+            if at + 4 > len(code):
+                continue
+            value = struct.unpack_from("<I", code, at)[0]
+            if value in cells:
+                reached.append(f"|k{cells[value]}")
+            elif size <= STUB and at and code[at - 1] in (0xE8, 0xE9):
+                calls.setdefault(va, []).append((va + at + 4 + struct.unpack_from("<i", code, at)[0]) & 0xFFFFFFFF)
+        first[va] = shape + "".join(reached)
+    out = {va: ident + "".join("|c" + hashlib.sha1(first.get(callee, "?").encode("ascii")).hexdigest()[:12]
+                               for callee in calls.get(va, []))
+           for va, ident in first.items()}
+    _IDENTITIES[id(img)] = (mine, out)          # one program's shapes are asked about once for each sibling
+    return out
+
+
 def library_ids(target: Dict[int, Tuple[str, int]], sibling_img: BinaryImage,
-                sibling: Dict[int, Tuple[str, int]]) -> Dict[int, List[Tuple[int, int]]]:
+                sibling: Dict[int, Tuple[str, int]], target_img: Optional[BinaryImage] = None
+                ) -> Dict[int, List[Tuple[int, int]]]:
     """{target va: [(library, number), ...]} for the sibling's numbered library functions that the target has
-    too, where exactly one target function has the shape. Two numbers on one address means the sibling has
-    two library functions of that shape (they differ only in which kernel function they call)."""
-    by_shape: Dict[str, List[int]] = defaultdict(list)
-    for va, (shape, _size) in target.items():
-        by_shape[shape].append(va)
+    too, where exactly one target function has the same identity (identities: the shape, the kernel
+    functions it reaches and, for a stub, what it calls). Without `target_img` only the shape is compared.
+    Two numbers on one address means the sibling has two library functions that cannot be told apart."""
+    theirs = identities(sibling_img, sibling)
+    mine = identities(target_img, target) if target_img is not None else {va: v[0] for va, v in target.items()}
+    if target_img is None:
+        theirs = {va: v[0] for va, v in sibling.items()}
+    by_identity: Dict[str, List[int]] = defaultdict(list)
+    for va, ident in mine.items():
+        by_identity[ident].append(va)
     out: Dict[int, List[Tuple[int, int]]] = defaultdict(list)
     for lib, number, va in xtl_ids(sibling_img):
-        if va in sibling and len(by_shape.get(sibling[va][0], [])) == 1:
-            out[by_shape[sibling[va][0]][0]].append((lib, number))
+        if va in theirs and len(by_identity.get(theirs[va], [])) == 1:
+            out[by_identity[theirs[va]][0]].append((lib, number))
     return dict(out)
 
 
@@ -192,10 +266,50 @@ def build(bin_dir: Path, sibling_paths: Dict[str, Path], progress=print) -> dict
         out["functions"][b] = [{"va": f"0x{va:08X}", "size": d["size"],
                                 "in": {k: (f"0x{v:08X}" if v is not None else None) for k, v in sorted(d["in"].items())}}
                                for va, d in sorted(found.items())]
-        per_sibling = {key: library_ids(mine, simg, sib_shapes[key]) for key, simg in sib_imgs.items()}
+        per_sibling = {key: library_ids(mine, simg, sib_shapes[key], img) for key, simg in sib_imgs.items()}
         out["library_ids"][b] = merge_library_ids(per_sibling, {int(k.split(":")[1], 16): v.get("name")
                                                                 for k, v in names.items() if k.startswith(b + ":")})
     return out
+
+
+def open_by_class(report: dict, tasks: List[dict], verified: Set[str], b: str = "xb") -> List[dict]:
+    """The shared functions of one program that are still open, by the class whose table they sit in
+    (the queue's `Class::vfunc_NN` symbols; everything else is under ""), most bytes first. For choosing
+    which class to describe next: a class here is engine code that older source of the same engine may fit."""
+    by_va = {t["fva_int"]: t for t in tasks if t.get("bin") == b and "fva_int" in t}
+    groups: Dict[str, List[dict]] = defaultdict(list)
+    for row in report.get("functions", {}).get(b, []):
+        va = int(row["va"], 16)
+        t = by_va.get(va)
+        if t is None or f"{b}:0x{va:08X}" in verified:
+            continue
+        cls = t["symbol"].rsplit("::", 1)[0] if "::" in t.get("symbol", "") else ""
+        groups[cls].append({"va": row["va"], "size": int(row["size"])})
+    out = [{"class": cls, "open": len(rows), "bytes": sum(r["size"] for r in rows),
+            "functions": [r["va"] for r in sorted(rows, key=lambda r: r["va"])]}
+           for cls, rows in groups.items()]
+    return sorted(out, key=lambda r: (r["class"] == "", -r["bytes"], r["class"]))
+
+
+def write_classes(report_path: Path, out_path: Path) -> int:
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    tasks = json.loads((ROOT / "reports" / "full_remaining_queue.json").read_text(encoding="utf-8"))
+    verified = set(json.loads((ROOT / "reports" / "verified_registry.json").read_text(encoding="utf-8"))["entries"])
+    for waiting in (ROOT / "reports" / "to_submit").glob("*_????????.cpp"):       # matched, not recorded yet
+        b, _, va = waiting.stem.partition("_")
+        verified.add(f"{b}:0x{va}")
+    rows = open_by_class(report, tasks, verified)
+    out = {"schema": "scarface_open_shared_by_class_v1",
+           "what": "Open Xbox functions that a sibling game has too (reports/sibling_twins.json), by the class whose "
+                   "table they sit in, most bytes first; the last row is the ones in no table. Written by "
+                   "portal/tools/sibling_twins.py --classes from the work queue, the registry and the matches "
+                   "waiting in reports/to_submit on the day in `as_of`; it is a snapshot for planning and goes "
+                   "out of date as functions are matched.",
+           "as_of": time.strftime("%Y-%m-%d"), "classes": len([r for r in rows if r["class"]]),
+           "open": sum(r["open"] for r in rows), "bytes": sum(r["bytes"] for r in rows), "xb": rows}
+    out_path.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
+    print(f"{out['open']:,} open shared functions ({out['bytes']:,} bytes) in {out['classes']:,} classes -> {out_path.name}")
+    return 0
 
 
 def main(argv=None) -> int:
@@ -204,7 +318,12 @@ def main(argv=None) -> int:
                     help="another game's default.xbe from your own copy, e.g. crash=D:/ctr/default.xbe")
     ap.add_argument("--bin-dir", type=Path, default=ROOT / "binaries")
     ap.add_argument("--out", type=Path, default=OUT)
+    ap.add_argument("--classes", action="store_true",
+                    help="from the report already written, list the open shared functions by class "
+                         "(reports/open_shared_by_class.json); needs no sibling program")
     a = ap.parse_args(argv)
+    if a.classes:
+        return write_classes(a.out, a.out.with_name("open_shared_by_class.json"))
     paths = {}
     for s in a.sibling:
         key, _, p = s.partition("=")
