@@ -14070,42 +14070,6 @@
     }
    },
    {
-    "va": "0x00309449",
-    "size": 140,
-    "in": {
-     "crash": "0x0020634B",
-     "hulk": "0x0035547E",
-     "hulk_eu": "0x00350E1E"
-    }
-   },
-   {
-    "va": "0x003094D5",
-    "size": 19,
-    "in": {
-     "crash": "0x002063D7",
-     "hulk": "0x0035550A",
-     "hulk_eu": "0x00350EAA"
-    }
-   },
-   {
-    "va": "0x003094E8",
-    "size": 63,
-    "in": {
-     "crash": "0x002063EA",
-     "hulk": "0x0035551D",
-     "hulk_eu": "0x00350EBD"
-    }
-   },
-   {
-    "va": "0x00309527",
-    "size": 54,
-    "in": {
-     "crash": "0x00206429",
-     "hulk": "0x00355563",
-     "hulk_eu": "0x00350F03"
-    }
-   },
-   {
     "va": "0x0030ABB0",
     "size": 22,
     "in": {
@@ -35933,16 +35897,13 @@
      {
       "library": 1,
       "number": 41
-     },
-     {
-      "library": 2,
-      "number": 181
      }
     ],
     "from": [
      "crash",
      "hulk_eu"
-    ]
+    ],
+    "name": "XGetAVPack"
    },
    {
     "va": "0x003095A6",
@@ -36053,7 +36014,8 @@
     "from": [
      "crash",
      "hulk_eu"
-    ]
+    ],
+    "name": "XFormatUtilityDrive"
    },
    {
     "va": "0x00239076",
@@ -36140,6 +36102,19 @@
     "name": "XPhysicalAlloc"
    },
    {
+    "va": "0x00239C84",
+    "ids": [
+     {
+      "library": 1,
+      "number": 103
+     }
+    ],
+    "from": [
+     "crash",
+     "hulk_eu"
+    ]
+   },
+   {
     "va": "0x00239543",
     "ids": [
      {
@@ -36164,7 +36139,8 @@
     "from": [
      "crash",
      "hulk_eu"
-    ]
+    ],
+    "name": "XMemFreeDefault"
    },
    {
     "va": "0x0023949C",
@@ -36247,7 +36223,8 @@
     "from": [
      "crash",
      "hulk_eu"
-    ]
+    ],
+    "name": "LocalAlloc"
    },
    {
     "va": "0x00236B01",
@@ -36478,10 +36455,6 @@
     "ids": [
      {
       "library": 2,
-      "number": 124
-     },
-     {
-      "library": 2,
       "number": 125
      }
     ],
@@ -36630,6 +36603,20 @@
      "hulk_eu"
     ],
     "name": "SetFilePointer"
+   },
+   {
+    "va": "0x00233A9F",
+    "ids": [
+     {
+      "library": 2,
+      "number": 161
+     }
+    ],
+    "from": [
+     "crash",
+     "hulk_eu"
+    ],
+    "name": "CloseHandle"
    },
    {
     "va": "0x002344F0",
@@ -36847,16 +36834,13 @@
      {
       "library": 2,
       "number": 364
-     },
-     {
-      "library": 2,
-      "number": 365
      }
     ],
     "from": [
      "crash",
      "hulk_eu"
-    ]
+    ],
+    "name": "wvsprintfA"
    },
    {
     "va": "0x003095E6",
@@ -36869,7 +36853,8 @@
     "from": [
      "crash",
      "hulk_eu"
-    ]
+    ],
+    "name": "wsprintfA"
    }
   ],
   "proto": [
@@ -37015,10 +37000,6 @@
      {
       "library": 1,
       "number": 41
-     },
-     {
-      "library": 2,
-      "number": 181
      }
     ],
     "from": [
@@ -37214,6 +37195,19 @@
      "hulk_eu"
     ],
     "name": "XPhysicalAlloc"
+   },
+   {
+    "va": "0x001F76F4",
+    "ids": [
+     {
+      "library": 1,
+      "number": 103
+     }
+    ],
+    "from": [
+     "crash",
+     "hulk_eu"
+    ]
    },
    {
     "va": "0x001F6FBB",
@@ -37539,10 +37533,6 @@
    {
     "va": "0x001F1E99",
     "ids": [
-     {
-      "library": 2,
-      "number": 124
-     },
      {
       "library": 2,
       "number": 125
@@ -37915,10 +37905,6 @@
      {
       "library": 2,
       "number": 364
-     },
-     {
-      "library": 2,
-      "number": 365
      }
     ],
     "from": [
