@@ -84,7 +84,8 @@ NAMES: Dict[int, str] = {
     # the ids themselves are from the game (docs/FORMATS.md says where each is).
     0x1001D: "Mesh Stats", 0x10021: "Vertex Compression Hint",
     0x18003: "Frontend Layer", 0x1800E: "Frontend Language",
-    0x7010001: "Collision Volume", 0x7010003: "Collision Cylinder", 0x7010007: "Collision Vector",
+    0x7010001: "Collision Volume", 0x7010002: "Collision Sphere", 0x7010003: "Collision Cylinder",
+    0x7010004: "Collision Box", 0x7010006: "Collision Aligned Box", 0x7010007: "Collision Vector",
     0x7010021: "Collision Volume Owner", 0x7010022: "Collision Volume Owner Name",
     0x7010023: "Collision Object Attribute",
     0x7011001: "Physics Inertia Matrix", 0x7011002: "Physics Vector", 0x7011020: "Physics Joint",
@@ -221,6 +222,16 @@ class _R:
 
     def u32(self) -> int:
         v = struct.unpack_from("<I", self.d, self.p)[0]
+        self.p += 4
+        return v
+
+    def u16(self) -> int:
+        v = struct.unpack_from("<H", self.d, self.p)[0]
+        self.p += 2
+        return v
+
+    def i32(self) -> int:
+        v = struct.unpack_from("<i", self.d, self.p)[0]
         self.p += 4
         return v
 
@@ -775,6 +786,77 @@ def _generator_fields(kind: int):
 
 
 
+# An object's collision shapes and its rigid body. The layouts are the ones Radical used in The Simpsons: Hit &
+# Run, as Proddy's NetP3DLib (MIT) and Lucas' Pure3D Editor 4 describe them; every one was checked on all of
+# the PC game's files (docs/FORMATS.md, "Objects' collision and rigid bodies").
+
+JOINT_FREEDOM = {0: "fixed", 1: "hinge", 3: "ball and socket"}
+
+
+def _collision_object(r: _R) -> dict:
+    return {"name": r.text(), "version": r.u32(), "material": r.text(), "sub-objects": r.u32(), "owners": r.u32()}
+
+
+def _collision_volume(r: _R) -> dict:
+    return {"object reference": r.u32(), "owner": r.i32(), "volumes inside": r.u32()}
+
+
+def _collision_sphere(r: _R) -> dict:
+    return {"radius": r.f32()}
+
+
+def _collision_cylinder(r: _R) -> dict:
+    return {"radius": r.f32(), "half length": r.f32(), "flat ends": bool(r.u16())}
+
+
+def _collision_box(r: _R) -> dict:
+    return {"half sizes": r.floats(3)}
+
+
+def _vector(r: _R) -> dict:
+    return {"vector": r.floats(3)}
+
+
+def _volume_owner(r: _R) -> dict:
+    return {"names": r.u32()}
+
+
+def _collision_attribute(r: _R) -> dict:
+    out = {"static": bool(r.u16()), "default area": r.u32()}
+    for name in ("can roll", "can slide", "can spin", "can bounce"):
+        out[name] = bool(r.u16())
+    out["extra"] = (r.u32(), r.u32(), r.u32())
+    return out
+
+
+def _name_and_version(r: _R) -> dict:
+    return {"name": r.text(), "version": r.u32()}
+
+
+def _rigid_body(r: _R) -> dict:
+    return {"name": r.text(), "version": r.u32(), "material": r.text(), "joints": r.u32(), "volume": r.f32(),
+            "resting sensitivity": r.f32()}
+
+
+def _inertia(r: _R) -> dict:
+    return dict(zip(("xx", "xy", "xz", "yy", "yz", "zz"), r.floats(6)))
+
+
+def _physics_joint(r: _R) -> dict:
+    out = {"joint": r.i32(), "volume": r.f32(), "stiffness": r.f32(), "largest angle": r.f32(), "smallest angle": r.f32()}
+    kind = r.i32()
+    out["freedom"] = JOINT_FREEDOM.get(kind, str(kind))
+    return out
+
+
+def _compression_hint(r: _R) -> dict:
+    out = {"version": r.u32()}
+    for name in ("UV 1 bits", "UV 2 bits", "UV 3 bits", "UV 4 bits", "normal bits", "colour bits", "position bits"):
+        out[name] = r.u32()
+    return out
+
+
+
 
 FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x7000: _history,
@@ -798,6 +880,11 @@ FIELDS: Dict[int, Callable[[_R], dict]] = {
     0x802000D: _state_prop_data, 0x802000E: _prop_state, 0x8020002: _part_visibility, 0x8020003: _prop_animation,
     0x8020008: _prop_property, 0x802000B: _prop_effect, 0x8800009: _zone_entry, 0x880000A: _occluder,
     0x8800000: _model_record, 0x8800001: _model_record,
+    0x7010000: _collision_object, 0x7010001: _collision_volume, 0x7010002: _collision_sphere,
+    0x7010003: _collision_cylinder, 0x7010004: _collision_box, 0x7010007: _vector, 0x7010021: _volume_owner,
+    0x7010022: _name_only, 0x7010023: _collision_attribute, 0x7010025: _name_and_version,
+    0x7011000: _rigid_body, 0x7011001: _inertia, 0x7011002: _vector, 0x7011020: _physics_joint,
+    0x10021: _compression_hint,
 }
 FIELDS[0x1580C], FIELDS[0x15900] = _system_fields, _emitter_fields
 for _cid in PARTICLE_GENERATOR_FLOATS:

@@ -1273,9 +1273,11 @@ the camera and keys their colour.
 
 ### Ids seen but not worked out
 
-`0x00010021` Vertex Compression Hint (u32 0, then seven u32: 32 on the PC and Xbox, 8 or 16 on the PS2,
-which fits the name: the bits each kind of vertex data is stored in), `0x0001001D` Mesh Stats (u32 1, 3,
-1, 0 in every mesh), `0x00121008` (u32 2),
+`0x00010021` Vertex Compression Hint (u32 version, 0, then seven u32: 32 on the PC and Xbox, 8 or 16 on
+the PS2. Lucas' Pure3D Editor 4 names them the sizes of UV sets 1 to 4, the normal, the colour and the
+position, in that order; `p3d.py` shows them so, though with 32 in every PC file the order is not checked
+here), `0x0001001D` Mesh Stats (u32 1, 3, 1, 0 in every mesh; the editor names a version, "is rendered"
+and "is collision" among them), `0x00121008` (u32 2),
 `0x00121402` (u32 0, 0), `0x01000001`, the fields of the loaders' chunks not written up above.
 
 ## Cutscenes (`art/nis/`)
@@ -1623,6 +1625,27 @@ collision: other systems (navigation, traffic) may read them.
 The collision floors match where the scripts stand people: Jerry's office in the Coconut Grove bank is at
 y 13.84 in `luxurybank_02_shell`'s collision, the script stands him at 13.8.
 
-Objects' collision (`0x07010000`, an animal's or a prop's: `0x07010021` > `0x07010022`, `0x07010001` >
-`0x07010003` > `0x07010007`, `0x07010023`) and rigid bodies (`0x07011000` > `0x07011020` > `0x07011001`,
-`0x07011002`) are listed but not read yet.
+### Objects' collision and rigid bodies
+
+An animal or a prop that can be hit has a **Collision Object** (`0x07010000`), and many also a **Rigid
+Body** (`0x07011000`): 58 of the PC game's files hold 116 collision objects and 55 rigid bodies. The layouts are the ones Radical used in *The Simpsons: Hit & Run*; `p3d.py` reads them, and
+every statement here was checked on all of the PC files.
+
+| Chunk | Holds |
+| :--- | :--- |
+| `0x07010000` Collision Object | name, u32 version (1), material name (`DefaultMaterial` in 57, empty in 59), u32 sub-objects, u32 owners; then one Collision Volume Owner per owner (in all 116), one Collision Volume and one Collision Object Attribute |
+| `0x07010021` Collision Volume Owner | u32 names; a `0x07010022` Collision Volume Owner Name (a text) for each (in all 184) |
+| `0x07010001` Collision Volume | u32 object reference, i32 owner (−1 for none), u32 how many Collision Volumes are inside it; then one shape, or an Aligned Box followed by those volumes (in a World Collision Object, the Collision Mesh) |
+| `0x07010002` Collision Sphere | f32 radius; one Collision Vector: the centre |
+| `0x07010003` Collision Cylinder | f32 radius, f32 half length, u16 flat ends (1 in 13 of 63, else rounded); two Collision Vectors: the centre and the axis (a unit vector) |
+| `0x07010004` Collision Box | three f32 half sizes; four Collision Vectors: the centre and the three axes (unit vectors at right angles, in all 134) |
+| `0x07010006` Collision Aligned Box | u32, 0 in all 71: the box that groups the volumes after it |
+| `0x07010007` Collision Vector | x, y, z |
+| `0x07010023` Collision Object Attribute | u16 static (1 in 56 of 116), u32 default area (0), u16 can roll, can slide, can spin, can bounce (1 in all), three u32 (0) |
+| `0x07011000` Rigid Body | name, u32 version (1), material name (empty in all), u32 joints, f32 volume, f32 resting sensitivity (1.0 in all); then a Physics Vector and a Physics Inertia Matrix of its own, or Physics Joints. The joints number is not the count of Physics Joint chunks under it: the two agree in only 10 of the 55 |
+| `0x07011020` Physics Joint | i32 joint number, f32 volume, f32 stiffness, f32 largest angle, f32 smallest angle, i32 freedom (0 fixed in 45, 1 hinge in 87; *Hit & Run* also has 3, ball and socket); then its Physics Vector and Physics Inertia Matrix |
+| `0x07011001` Physics Inertia Matrix | six f32: xx, xy, xz, yy, yz, zz (the matrix is symmetric) |
+| `0x07011002` Physics Vector | x, y, z (by its place, the centre of mass) |
+
+The names of the fields are those of Proddy's [NetP3DLib](https://github.com/Hampo/NetP3DLib) (MIT) and of
+Lucas' Pure3D Editor 4, which agree; the counts and the checks on the vectors are from the game's files.
