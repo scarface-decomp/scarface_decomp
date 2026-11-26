@@ -63,6 +63,10 @@ the work that needs neither: **writing descriptions** (below).
   (`reports/class_hints_xb.json`, from scarface-p3d's coverage table through the PC game's twin). It says how
   the tie was made. "Everything that calls it is a method of that class" often means a helper, not a member:
   check a lead against the code before you use it.
+- A second `lead:` line says what ThirteenAG's Scarface Fusion Fix (MIT) does with the function, where it
+  touches it (`reports/fusionfix_leads_xb.json`): the name the fix calls it by, or that the fix hooks or
+  patches it, with the fix's file and line. The same file lists six of the game's variables the fix names.
+  They are leads to what something is for, not names to record.
 - `packet` prints up to three functions of the same class that are already matched, then up to three
   matched functions with the most similar instructions (score 0.6 to 1.0; 1.00 means the same
   instructions with other registers, offsets or addresses). Start from the nearest one and change what

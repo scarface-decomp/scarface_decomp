@@ -163,3 +163,22 @@ def test_the_class_leads_file_is_what_it_says():
     twin = {x: y for x, y, _size, _how in pairs["pairs"]}
     assert all(twin.get(x) == pc and by in ("vtable", "ctor/vtref", "callers") and cls for x, cls, by, pc in hints["hints"])
     assert all(0x401000 <= int(y, 16) < 0x72EADC for y in twin.values())     # the PC game's own code, nothing after it
+
+
+def test_packet_gives_a_lead_from_a_published_fix(monkeypatch, tmp_path):
+    (tmp_path / "reports").mkdir()
+    (tmp_path / "reports" / "fusionfix_leads_xb.json").write_text(json.dumps({"functions": [
+        {"xb": "0x00023EC0", "hooks": [{"kind": "call", "name": "findObject", "file": "HUD.ixx", "line": 336}]},
+        {"xb": "0x00177180", "hooks": [{"kind": "start", "name": "UpdateRageBar", "file": "FramerateVigilante.ixx", "line": 88},
+                                       {"kind": "patch", "name": "", "file": "Input.ixx", "line": 309, "note": "walk key"}]}]}))
+    monkeypatch.setattr(A, "ROOT", tmp_path)
+    monkeypatch.setattr(A, "_FIX_LEADS", None)
+    lead = A.fix_lead("xb", 0x00023EC0)
+    assert "calls this function as `findObject` (HUD.ixx line 336)" in lead and lead.endswith("Check it against the code.")
+    both = A.fix_lead("xb", 0x00177180)
+    assert "hooks this function's start with its own `UpdateRageBar`" in both
+    assert "changes something inside this function (Input.ixx line 309: walk key)" in both
+    assert A.fix_lead("xb", 0x00012345) == "" and A.fix_lead("pc", 0x00023EC0) == ""
+    monkeypatch.setattr(A, "_FIX_LEADS", None)
+    monkeypatch.setattr(A, "ROOT", tmp_path / "nothing here")
+    assert A.fix_lead("xb", 0x00023EC0) == ""
