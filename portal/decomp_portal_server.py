@@ -1200,7 +1200,24 @@ def ps2_compile(t: dict, cpp_code: str, through: str = "", bridge_only: bool = F
 
 def run_verify_ps2(t: dict, cpp_code: str, object_b64: str = "", slug: str = "", through: str = "",
                    flags: str = "", compiler: str = "") -> dict:
-    """Compile on decomp.me with the PS2 compiler, then compare the object with the game here. The object
+    """Compile for the PS2 and compare with the game. With no build or flags named, the lane's build is tried
+    first and, when what it makes is not the game's bytes, the second build (PV.SECOND_COMPILER). The result
+    says which build made it ("compiler") and whether the second was tried ("tried_second")."""
+    first = _verify_ps2_once(t, cpp_code, object_b64, slug, through, flags, compiler)
+    if first.get("ok"):
+        first["compiler"] = compiler or PV.COMPILER
+    if compiler or flags or object_b64 or not first.get("ok") or first.get("verified"):
+        return first
+    second = _verify_ps2_once(t, cpp_code, "", slug, through, "", PV.SECOND_COMPILER)
+    first["tried_second"] = not second.get("compiler_unavailable")
+    if second.get("ok") and second.get("verified") and not second.get("reloc_unverified"):
+        return dict(second, compiler=PV.SECOND_COMPILER, tried_second=True)
+    return first
+
+
+def _verify_ps2_once(t: dict, cpp_code: str, object_b64: str = "", slug: str = "", through: str = "",
+                     flags: str = "", compiler: str = "") -> dict:
+    """Compile on decomp.me with one PS2 build, then compare the object with the game here. The object
     comes either from here (when this computer can reach decomp.me's API) or from the page, which compiled
     it through decomp.me in the browser (object_b64)."""
     violations = check_genuine_cpp(cpp_code)
@@ -1322,7 +1339,8 @@ def record_verified(t: dict, cpp_code: str, user: str, tool: str, res: dict, por
         "bin": t["bin"], "va": f"0x{t['fva_int']:08X}", "size": int(t["size"]), "symbol": t["symbol"],
         "match": t.get("match_substr", ""),
         "flags": res.get("flags") or t["flags"], "source": "portal", "verified_by": user, "tool_used": tool,
-        "verified_at": stamp(), "compiler": PV.COMPILER if PO.is_ps2(t["bin"]) else compiler_build(), "code": cpp_code.strip(),
+        "verified_at": stamp(), "compiler": (res.get("compiler") or PV.COMPILER) if PO.is_ps2(t["bin"]) else compiler_build(),
+        "code": cpp_code.strip(),
         "note": f"{res.get('reloc_unverified', 0)} external relocation(s) unchecked" if res.get("reloc_unverified") else "",
     }
     if ported_from:
@@ -1379,7 +1397,8 @@ def revise_verified(t: dict, cpp_code: str, user: str, res: dict, clearer: bool 
         was, now = READ.grade(e.get("code") or "")["left"], READ.grade(new)["left"]
         if now >= was:
             return f"It leaves {now} thing(s) to name; the stored text leaves {was}."
-    e.update(code=new, revised_by=user, revised_at=stamp(), compiler=PV.COMPILER if PO.is_ps2(t["bin"]) else compiler_build())
+    e.update(code=new, revised_by=user, revised_at=stamp(),
+             compiler=(res.get("compiler") or PV.COMPILER) if PO.is_ps2(t["bin"]) else compiler_build())
     save_registry()
     return ""
 
@@ -1708,7 +1727,7 @@ def start_easy_pass(user: str) -> dict:
 # made from the same text is reused, and real compiles are spaced out and capped: decomp.me is a shared,
 # free service, and this must stay a light user of it.
 PS2_EASY_TOOL = "the portal's starter code for PS2 (no AI)"
-PS2_EASY_VERSION = 4          # 3: functions that end in a jump (tail calls, virtual forwards); 4: exceptions off
+PS2_EASY_VERSION = 5          # 3: functions that end in a jump; 4: exceptions off; 5: the second build
 PS2_EASY_JSON = PRIVATE_DIR / "ps2_easy_pass.json"        # the scratch compiled through, and what was tried (gitignored)
 PS2_EASY_PAUSE = float(os.environ.get("SCARFACE_PS2_EASY_PAUSE", "2"))     # seconds between real compiles
 PS2_EASY_MAX = int(os.environ.get("SCARFACE_PS2_EASY_MAX", "400"))         # real compiles a run
@@ -1789,14 +1808,18 @@ def ps2_easy_pass(user: str) -> dict:
                 continue                                   # nothing to try yet: not counted, not remembered
             hit, unavailable = None, False
             for code in codes:
-                key = _ps2_key(*[x.replace("\r\n", "\n") for x in DME._inline_project_includes(code, [INCLUDE_DIR])])
-                real = key not in PS2_OBJECTS
+                text = [x.replace("\r\n", "\n") for x in DME._inline_project_includes(code, [INCLUDE_DIR])]
+                real = _ps2_key(*text) not in PS2_OBJECTS
+                real_second = _ps2_key(*text, "", PV.SECOND_COMPILER) not in PS2_OBJECTS
                 res = run_verify_ps2(t, code, through=state.get("slug", ""))
                 if res.get("compiler_unavailable") and not PS2EASY["stop"] and BRIDGE.wait_connected(PS2_EASY_WAIT):
                     res = run_verify_ps2(t, code, through=state.get("slug", ""))     # the tab came back: once more
                 if res.get("compiler_unavailable"):
                     unavailable = True
                     break
+                if real_second and res.get("tried_second"):
+                    PS2EASY["compiles"] += 1                   # the second build was asked too
+                    time.sleep(PS2_EASY_PAUSE)
                 if real:
                     PS2EASY["compiles"] += 1
                     if not state.get("slug") and _SLUG_RE.match(t.get("decompme_slug", "") or ""):

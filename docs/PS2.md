@@ -11,7 +11,7 @@ The project doesn't ship the compiler. decomp.me runs it:
 
 | | |
 | :--- | :--- |
-| Compiler | Metrowerks CodeWarrior for PS2, 3.0.1 build 103 (`mwcps2-3.0.1b103-040528` on decomp.me) |
+| Compiler | Metrowerks CodeWarrior for PS2, 3.0.1 build 103 (`mwcps2-3.0.1b103-040528` on decomp.me); when that build's code is not the game's, 3.0 build 52 (`mwcps2-3.0b52-030722`) is tried. Each match records which build made it. "Two builds" below says why. |
 | Flags | `-O3 -lang c++ -str readonly -Cpp_exceptions off` (until 25 November 2026 without the last two words; see "What the first run showed") |
 | Where it runs | decomp.me, through its compile endpoint (nothing is saved there by checking); on your computer if you hold a licence for the compiler (below) |
 | Where it is checked | the portal on your computer, against your own `binaries/SLUS_211.11` |
@@ -211,6 +211,25 @@ census, and the examiner's round (Q55 to Q67) is checking it against the whole p
 
 What this means for the lane today: build 103 with exceptions off gives the game's bytes for the small
 functions matched so far, and will not for float-heavy code or for the shapes in the first three rows.
+
+### Two builds
+
+Since 25 November 2026 the portal compiles a PS2 submission with build 103 and, when that does not give
+the game's bytes, with 3.0 build 52. Neither is the game's compiler, and the table above says what each
+gets right: build 103 the float code, build 52 the order of instructions and the choice of registers. A
+match made by build 52 says so in the registry (`compiler`) and in its block in `reconstructed_src/`
+(`Build:`).
+
+What that claim is and is not:
+
+* It is: this C++, compiled by a named, real build of the game's compiler family, gives the game's exact
+  bytes with every address checked.
+* It is not: proof that the game was built with that build. If the game's own build turns up, every match
+  is compiled again with it (`--recheck` below does that for a sample today).
+* `--recheck` found both builds give the game's bytes for 30 of 30 already-matched functions (one for each
+  way of writing one), so the small functions do not tell the two apart. That run also showed the matches
+  recorded before exceptions were turned off still hold.
+* Code that needs both at once (float sums in source order with `$at`, say) matches on neither build.
 
 ### Checking another build against what is matched
 

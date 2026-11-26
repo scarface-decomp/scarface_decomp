@@ -45,7 +45,9 @@ for _o in ps2_overlay.OVERLAYS:
     BIN_INFO[_o.bin] = (f"Original_Binary_Order_PS2_{_stem}.cpp", _o.bin.replace("ps2", "ps2_", 1),
                         f"Retail PS2 overlay {_o.file} ({_o.label}), loaded at 0x845480")
 # Without the flags: every function's own header line gives the ones it was compiled with (the lane's changed once).
-PS2_CODEWARRIOR = "Metrowerks CodeWarrior for PS2 3.0.1 (decomp.me: mwcps2-3.0.1b103-040528)"
+PS2_BUILD = "mwcps2-3.0.1b103-040528"
+PS2_CODEWARRIOR = (f"Metrowerks CodeWarrior for PS2 (decomp.me: {PS2_BUILD}, or the build a block names: "
+                   "docs/PS2.md says why there are two)")
 # The PS2 game has its own compiler; everything else was built with Visual C++ 2003.
 BIN_COMPILER = {b: PS2_CODEWARRIOR for b in ("ps2",) + ps2_overlay.BINS}
 
@@ -87,6 +89,8 @@ def _block(key: str, e: dict) -> str:
     if e.get("revised_by"):
         by += f" | Cleaned up by: {e['revised_by']}"
     note = f" | {e['note']}" if e.get("note") else ""
+    if str(e.get("compiler") or "").startswith("mwcps2-") and e["compiler"] != PS2_BUILD:
+        note += f" | Build: {e['compiler']}"               # the PS2 lane's second build made this one
     if e.get("excerpt"):
         note += f" | excerpt from reconstructed_src/{e.get('source', '')}"
     what = " ".join(str(e.get("what") or "").split())
