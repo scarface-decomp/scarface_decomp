@@ -1,4 +1,4 @@
-# SPEC-016: `core::XboxSaveDrive`, the Xbox save-file drive (parts 1 to 2c)
+# SPEC-016: `core::XboxSaveDrive`, the Xbox save-file drive (parts 1 to 2e)
 
 **Examiner:** Claude (AI assistant) for RRutherrfordd, 2026-11-25.
 **Outside material read:** leaked source, read directly: the save-drive source file and header of the 2003
@@ -615,7 +615,327 @@ this part. What the attempts established:
      global 0x45894C (the current allocator); store 0x39F08C at +4 and 0x39E22C at +0.
 * 0x283BD0, 0x283DD0 and 0x283BB0 are verified already; 0x283AF0 (32 bytes) is open.
 
-## 13. Still to come (part 2d)
+## 13. Questions and answers, third round (2026-11-25)
 
-The directory search (0x2C1180, 0x2C1300), the constructor (0x2BFB50) and the save-file open
-(0x2C09C0).
+All three functions of §12 are verified. What the attempts established:
+
+* **0x2C04C0:** §12.2's step 2.5 is the `else` of `if (is-present) { mount; name; convert } else {
+  state = 4; last error = 4; return; }`. The compiler places an `else` block that ends in a return after
+  the next block that ends in a return, which is why it sits at 0x2C0633. The locals are declared in the
+  order drive string, free-to-caller, total-free, total.
+* **0x2C0210:** 0x2BF760 and 0x2C0030 are ordinary functions in the file, each called at every site in
+  the source; the compiler expands some and calls others, as §12.3 lists.
+* **0x2C13E0:** the two base destructors are real base-class destructors, expanded, each working on its
+  own sub-object.
+* **The text helpers** (0x2A9310, 0x2A93A0, 0x2A9430, 0x2A95A0, 0x2A9610) are verified from the bytes.
+  The stack argument called A in §10.1 is the fallback character; C is passed through and never read.
+* **Register arguments are not positional.** The compiler chooses the registers for a file-local
+  function; writing callee and callers in one file reproduces its choice. Parameter order cannot be
+  read from the registers.
+
+## 14. Part 2d: the constructor and the directory search
+
+### 14.1 More layout and file-scope variables
+
+| Offset | Type | Role | Witness |
+| :--- | :--- | :--- | :--- |
+| +4 | table pointer | a second table of the front part, 0x3DB57C | 0x2BFB76 |
+| +0xD4 | pointer | the shared drive thread (last member of the front part) | 0x2BFC33, 0x2BFC4C |
+| +0xE0 | unsigned int | capability flags: 0xC3 for the `U:` drive, 0xC7 otherwise | 0x2BFC6E, 0x2BFC8E |
+| +0xE8 | char[0x11] | drive name: 0x10 characters copied, then a zero at +0xF8 | 0x2BFC98, 0x2BFCA7 |
+
+| Address | Role |
+| :--- | :--- |
+| 0x4BFE48 | a `bool` tested before the one-time set-up. Nothing in the constructor ever sets it |
+| 0x4BDDF8 | the raw space for the transfer buffer (the buffer pointer is this address rounded up to 0x20) |
+| 0x4BFE18 | the mutex shared with the drive thread |
+| 0x4BFE34 | pointer to the one shared `core::DriveThread` (0xCC bytes) |
+
+### 14.2 0x2BFB50: the constructor (416 bytes padded, open)
+
+* **Signature:** member, (drive name, allocator), returns `this`. `ret 8`.
+* **Order of events:**
+  1. Call the front part's constructor, 0x2AC7E0 (`core::Drive`), out of line.
+  2. The two interface constructors, expanded: +0xD8 ← 0x3DB52C, +0xDC ← 0x3DB53C.
+  3. This class's tables: +0 ← 0x3DB584, +4 ← 0x3DB57C, +0xC ← 0x3DB56C, +0xD8 ← 0x3DB55C, +0xDC ←
+     0x3DB54C.
+  4. Member initialisers, in this order: open-file count (+0xE4) = 0; mounted (+0xF9) = false; drive
+     letter (+0xFA) = 0.
+  5. Call 0x250EB0 (no arguments).
+  6. If the `bool` at 0x4BFE48 is false: initialise the memory-unit state (expanded: `XGetDevices`
+     through 0x396641 with the type object 0x395660, folded to 8 bits as in §7.3, stored as the
+     present mask; changed mask = 0), then buffer pointer = 0x250E80(0x4BDDF8, 0x20).
+  7. If the shared thread pointer (0x4BFE34) is null:
+     1. 0x283B60(&mutex).
+     2. Store the allocator in the global 0x45894C; allocate 0xCC bytes with 0x244450(allocator, 0xCC).
+     3. If that gave memory, construct the thread: 0x2C1B00 on it with (&mutex, allocator). Store
+        the result (or null) in 0x4BFE34 and in +0xD4.
+
+     Otherwise: store the shared pointer in +0xD4 and call its slot 0 (add a reference).
+  8. Compare the drive name with the text `"U:"` (0x3A537C; three bytes including the terminator,
+     emitted as `repe cmpsb`). If equal: capabilities = 0xC3; mounted = true; drive letter = `'U'`;
+     volume name's first character (+0x8C) = 0. Otherwise capabilities = 0xC7.
+  9. Copy the name: 0x2FC450(this + 0xE8, name, 0x10), then +0xF8 = 0.
+  10. Set to 0xFFFFFFFF, in this order: the four handles at +0xFC to +0x108, then the four pool
+      handles at +0x310, +0x518, +0x720, +0x928.
+* **Codegen notes:**
+  * EBX holds 0 from 0x2BFB6D onward and supplies every zero store.
+  * In step 10, EAX is set once with `or eax, -1`; the first four stores come before the
+    `add esp, 0xC` that cleans up step 9's call.
+  * The two loops of step 10 are fully unrolled.
+  * In step 7 the "construct or null" is the usual null-checked placement form.
+
+### 14.3 0x2C1300: find the next save (224 bytes padded, open; main-table slot 21)
+
+* **Signature:** member, (pointer to a search index, pointer to a directory entry), `ret 8`. Returns
+  the 32-bit status. Frame 0x344 (the find-data structure).
+* **Steps:**
+  1. `entry = pool[*index]`. If its handle is 0xFFFFFFFF: last error = 1; return 0.
+  2. If mount fails, return 0 (it jumps back to step 1's `xor eax, eax` exit).
+  3. Loop:
+     1. Call 0x30A4A4 (expected `XFindNextSaveGame`) with the entry's handle and the find data.
+     2. If it returned 0: `code = GetLastError()`. If `code` is 0x12: entry name's first character
+        (directory entry +4) = 0; directory entry's kind (+0) = 2; last error = 0; return 1.
+        Otherwise last error = translate(`code`); return 0.
+     3. Otherwise `r` = 0x2C06B0(directory entry, find data, handle, the pool entry's text at
+        +0x10C). `r == 0`: return 1. `r == 1`: return 0. `r == 2`: go round again. Anything else:
+        last error = 0; return 1.
+* **Checked wrappers and +0x7C:** 0x2C06B0 is called at 0x2C137B, and its "no more files" branch is
+  also present expanded at 0x2C13A9 (step 3.2). +0x7C is not written.
+* **Placement:** step 1's failure is inline (0x2C1322). Step 3.2 sits after the success return
+  (0x2C13A9, behind the `ret` at 0x2C13A6). The loop top is padded to 0x2C1350.
+
+### 14.4 0x2C1180: find the first save (384 bytes padded, open; main-table slot 20)
+
+* **Signature:** member, four arguments (search text, directory entry, pointer to a search index,
+  `bool` first-search), `ret 0x10`. Returns the 32-bit status. Frame 0x54C.
+* **Steps:**
+  1. If mount fails, return 0 (inline, 0x2C1192).
+  2. Build the drive string (letter, `':'`, `'\\'`, zero).
+  3. If the search text is not null, convert it to 16-bit text in a local with 0x2BFAA0 (stack
+     arguments 0, 0x202, 0).
+  4. `slot = -1`. If first-search is false and `pool[*index]`'s handle is not 0xFFFFFFFF: `slot =
+     *index`; if that entry's handle is not 0xFFFFFFFF, close it (0x30A4EB) and set it to 0xFFFFFFFF.
+     Otherwise: look for the first of the four pool entries whose handle is 0xFFFFFFFF (unsigned
+     counter below 4) and take its number.
+  5. `entry = pool[slot]`. `entry.handle` = 0x30A39A(drive string, find data) (expected
+     `XFindFirstSaveGame`).
+  6. Copy the 16-bit search text into the entry's text with 0x283A90 (three arguments, the last
+     0x202).
+  7. `*index = slot`.
+  8. `r` = 0x2C06B0(directory entry, find data, entry.handle, entry's text). `r == 0`: return 1.
+     `r == 1`: entry.handle = 0xFFFFFFFF; return 0. Otherwise: return the result of this object's
+     slot 21 (find-next) called with (index pointer, directory entry).
+* **Checked wrappers and +0x7C:** the checked wrapper around 0x2BFAA0 is expanded at step 3;
+  0x2C06B0 is called at 0x2C12A4. +0x7C is not written.
+* **Placement:** all three outcomes of step 8 are in source order (0x2C12B0, 0x2C12C4, 0x2C12DD).
+* **Scarface-only:** the pool entry's text is 16-bit (0x204 bytes), and the search text is converted
+  directly with no path building.
+* The argument order of the calls in steps 5, 6 and 8 has since been checked against the pushes
+  (0x2C124D to 0x2C12A4, and 0x2C12E6 for slot 21) and is as written.
+
+## 15. Part 2e: open a save file (0x2C09C0, 1,280 bytes padded, open; main-table slot 11)
+
+The last open function of the class. Nothing in it writes +0x7C.
+
+### 15.1 Signature and data
+
+* **Signature:** member, seven stack arguments, `ret 0x1C`. Returns the 32-bit status (0 = failed,
+  1 = done), as the other slots do. Argument order, read from the frame offsets:
+
+  | # | Type | Role |
+  | :--- | :--- | :--- |
+  | 1 | `const char*` | the save's name; may be null |
+  | 2 | 32-bit enum | open mode: 0 = open existing, 1 = open always, 3 = create always (2 gets no special handling) |
+  | 3 | `bool` | write access |
+  | 4 | pointer to a structure | the save's picture: +0 pointer to the data, +4 its size in bytes (the structure §7.6 reads) |
+  | 5 | `unsigned int` | the largest size the save's data may reach |
+  | 6 | pointer to a file handle | out |
+  | 7 | `unsigned int*` | out: the data size of the opened file |
+
+* **File-scope variables new here.** Both are pointer variables in `.data`, read through memory each
+  time, so each is a non-`const` `const char*` variable and not an array:
+
+  | Address | Points to | Role |
+  | :--- | :--- | :--- |
+  | 0x461ABC | 0x3DB518 `"SaveImage.xbx"` | the picture's file name |
+  | 0x461AC0 | 0x3DB50C `"save.dat"` | the data file's name |
+
+  Literals: 0x3DB5E4 `"D:\\%s"`, 0x3A28A4 `"%s%s"` (shared with other code).
+
+* **Frame, 0x434 bytes.** Offsets from ESP after the `sub`, before any push:
+
+  | Offset | Size | What |
+  | :--- | :--- | :--- |
+  | +0x003 | 1 | the `bool` "create" |
+  | +0x004 | 4 | drive string |
+  | +0x008 | 4 | bytes written (step 9), and later the opened file's size (step 13): one slot, two lifetimes |
+  | +0x00C | 4 | share mode |
+  | +0x010 | 4 | access mode |
+  | +0x014 | 8 | free bytes for the caller |
+  | +0x01C | 8 | total bytes |
+  | +0x024 | 8 | total free bytes |
+  | +0x02C | 0x104 | the save's directory path, 8-bit |
+  | +0x130 | 0x80 | copy destination (step 9, no-picture branch) |
+  | +0x1B0 | 0x80 | copy source (same branch) |
+  | +0x230 | 0x204 | the save's name, 16-bit |
+
+* **Callees** (argument order from the pushes; system names are the repository's own):
+
+  | VA | Call |
+  | :--- | :--- |
+  | 0x30A067 | `XCreateSaveGame(drive, name16, disposition, 0, path, 0x104)` |
+  | 0x30A2CA | `XDeleteSaveGame(drive, name16)` |
+  | 0x2363D3 | `GetDiskFreeSpaceExA(drive, &forCaller, &total, &totalFree)` |
+  | 0x233ABD | `CreateFileA(path, access, share, NULL, disposition, 0x80, NULL)` |
+  | 0x2337B9 | `SetEndOfFile(handle)` |
+  | 0x233A9F | closes a file handle (one argument); expected `CloseHandle` |
+  | 0x233F2A | `CopyFileA(from, to, FALSE)` |
+  | 0x2FB7E0 | `sprintf` |
+  | `[table + 0x18]` | this object's slot 6 (§7.6), called through the table with (picture structure, largest size) |
+  | 0x2BF730 | §7.5, `__cdecl`, called with the largest size |
+  | 0x2C0210 | §12.3, with (handle, file size, `writeAccess == false`) |
+  | 0x2C0050 | member, verified: (handle, `unsigned int*` size out), returns bool |
+  | 0x2C0760 | §5, with (handle, 0) |
+
+### 15.2 Steps
+
+"Record(x)" below means the error-recording member 0x2C0030 applied to x. "Fail" means return 0.
+
+1. If mount (§3) fails, fail.
+2. Drive string = drive letter (+0xFA), `':'`, `'\\'`, zero: four single-byte stores.
+3. If the name is not null, convert it to 16-bit text in the +0x230 local with §10.2 (stack arguments
+   0, 0x202, 0). The checked wrapper is expanded, as in §10.7 and §14.4.
+4. `access = writeAccess ? 0xC0000000 : 0x80000000`; `share = writeAccess ? 3 : 1`. Both are stored
+   to their locals here and read back at step 12.
+5. `code = XCreateSaveGame(drive, name16, 3, 0, path, 0x104)`. If `code` is neither 0 nor 3:
+   Record(`code`); fail.
+6. `length = strlen(path)` (expanded).
+7. `create = !(code != 3 && (mode == 0 || mode == 1))`, kept as a byte on the stack. The bytes test
+   `code == 3` first, then `mode == 0`, then `mode == 1`, and store the constant 0 or 1.
+8. Mode handling, an `if` / `else if` chain in this order:
+   * `mode == 3`: if `code != 3`: if Record(`XDeleteSaveGame(drive, name16)`) is false, fail.
+   * `mode == 0`: if `code == 3`: Record(`code`); fail.
+9. **Only if create:**
+   1. If `GetDiskFreeSpaceExA(...)` returns 0: Record(`GetLastError()`); fail.
+   2. `free = forCaller.high != 0 ? 0xFFFFFFFF : forCaller.low`.
+   3. If `free <` slot 6(picture, largest size) (unsigned): last error = 7; fail.
+   4. If Record(`XCreateSaveGame(drive, name16, 1, 0, path, 0x104)`) is false, fail.
+   5. `length = strlen(path)` again.
+   6. **If the picture's data pointer is not null:**
+      1. `strcpy(path + length, picture file name)` (expanded).
+      2. `h = CreateFileA(path, 0xC0000000, 3, NULL, 2, 0x80, NULL)`. If it is 0xFFFFFFFF:
+         Record(`GetLastError()`); fail.
+      3. `written = 0`. Then one condition of four parts joined with `||`, in this order:
+         `SetFilePointer(h, size, NULL, 0) != size`; `!SetEndOfFile(h)`;
+         `SetFilePointer(h, 0, NULL, 0) != 0`; `!WriteFile(h, data, size, &written, NULL)`.
+         If any is true: close `h`; Record(`GetLastError()`); fail.
+      4. Close `h`.
+
+      **Otherwise** (Scarface-only branch):
+      1. `sprintf(source, "D:\\%s", picture file name)`.
+      2. `sprintf(destination, "%s%s", path, picture file name)`.
+      3. `CopyFileA(source, destination, FALSE)`. The result is not looked at.
+10. `strcpy(path + length, data file name)` (expanded).
+11. `*handleOut = CreateFileA(path, 0xC0000000, 3, NULL, create ? 1 : 3, 0x80, NULL)`.
+    * If it is 0xFFFFFFFF: Record(`GetLastError()`); **then last error = 0xC**; fail.
+    * Otherwise, if create: `fileSize` = 0x2BF730(largest size). One condition of three parts joined
+      with `||`: `SetFilePointer(*handleOut, fileSize, NULL, 0) != fileSize`;
+      `!SetEndOfFile(*handleOut)`; `!`0x2C0210(`*handleOut`, `fileSize`, `writeAccess == false`). If
+      any is true: close `*handleOut`; Record(`GetLastError()`); fail.
+    * Close `*handleOut`.
+12. `*handleOut = CreateFileA(path, access, share, NULL, 3, 0x80, NULL)`. If it is 0xFFFFFFFF: close
+    `*handleOut`; Record(`GetLastError()`); fail.
+13. If 0x2C0050(`*handleOut`, `&openSize`) is false: close `*handleOut`; fail.
+14. **If create:** look through the four handles at +0xFC with an unsigned counter below 4; at the
+    first that is 0xFFFFFFFF, store `*handleOut` there and stop.
+
+    **Otherwise:**
+    1. If `openSize < 0x18`: close `*handleOut`; buffer state (0x4BFE44) = 0; last error = 0xC; fail.
+    2. If load-block (§5) with (`*handleOut`, 0) fails: close `*handleOut`; fail.
+    3. If the first 32-bit value in the buffer is not `openSize`: the same three statements as 14.1,
+       and fail.
+15. `*sizeOut = openSize - ((openSize + 0x1FFF) >> 13) * 20 - 4`. Open-file count (+0xE4) += 1. Last
+    error = 0. Return 1.
+
+### 15.3 Where each helper is called and where it is expanded
+
+| Helper | Called at | Expanded at |
+| :--- | :--- | :--- |
+| mount, 0x2BFF10 | 0x2C09C9 | |
+| checked wrapper around 0x2BFAA0 | | 0x2C09E7 (the null test, then the call at 0x2C0A0A) |
+| Record, 0x2C0030 | 0x2C0B04 (step 8, mode 0), 0x2C0BAD (9.4), 0x2C0DA0 (the shared exit), 0x2C0EA1 (step 11) | 0x2C0A67 (step 5; result unused), 0x2C0AD8 (step 8, mode 3; tests the translated value for zero) |
+| slot 6 | 0x2C0B6A, through the table | |
+| 0x2BF730 | 0x2C0D1E | |
+| "table size" in step 15 | | 0x2C0E05. The same expression is in the verified 0x2C1020 at 0x2C10A3; write it as you did there |
+| the step 14.3 compare | | 0x2C0E76 |
+| `strlen`, `strcpy` | | every use |
+
+### 15.4 Where the failure branches sit
+
+Written as B3 asks: each `if` whose failure returns, and where its block is in the bytes.
+
+| Step | Failure block | Placement |
+| :--- | :--- | :--- |
+| 1 | none of its own | jumps to 0x2C0A75, the `xor eax, eax` at the end of step 5's block |
+| 5 | 0x2C0A67 | inline; the pass path jumps over it to 0x2C0A81 |
+| 8, mode 3 | 0x2C0AEA | inline |
+| 8, mode 0 | 0x2C0B01 | inline |
+| 9.1 | 0x2C0D98 | far: the shared exit (below) |
+| 9.3 | 0x2C0B71 | inline |
+| 9.4 | 0x2C0EB0 | far: the last bytes of the function (pops and return only) |
+| 9.6.2 | 0x2C0D98 | far: the shared exit |
+| 9.6.3 | 0x2C0C65 | `push esi; jmp 0x2C0D93`, directly after the pass path's `jmp 0x2C0CBB` |
+| 11, open failed | 0x2C0E99 | far, behind step 14; it falls into the `last error = 0xC` store at 0x2C0EA6 |
+| 11, the three-part condition | 0x2C0D5F | `mov edx, [esi]; push edx; jmp 0x2C0D93`, directly after the condition |
+| 12 | 0x2C0D92 | inline. **This is where the shared exit physically is:** `push eax` (0x2C0D92), close (0x2C0D93), `GetLastError` (0x2C0D98), Record, return 0 |
+| 13 | 0x2C0DC5 | inline |
+| 14.1 | 0x2C0E89 | behind 14.3's compare, shared with it |
+| 14.2 | 0x2C0E5F | inline |
+| 14.3 | 0x2C0E89 | falls into it; the pass path jumps back to step 15 at 0x2C0DFE |
+
+Order of the last blocks: step 15 with the success return (0x2C0DFE to 0x2C0E3D); the body of step
+14's "found a free entry" (0x2C0E40, jumps back); step 14's `else` (0x2C0E4B); the corrupt block
+(0x2C0E89); step 11's open-failed block (0x2C0E99); the shared `last error = 0xC` (0x2C0EA6); the
+shared pops and return (0x2C0EB0).
+
+So: the close / get-last-error / record / return sequence is written out in full at each of steps
+9.6.3, 11 and 12, and the compiler merges the copies into step 12's. Steps 9.1 and 9.6.2 have the same
+sequence without the close and enter it one call later. 14.1 and 14.3 are two written copies merged the
+same way, and step 11's open-failed block shares their last statement.
+
+### 15.5 Codegen notes
+
+* `this` is in EBX for the whole function. ESI, EBP and EDI are pushed late, at 0x2C0A85, 0x2C0AA3
+  and 0x2C0B1D; the compiler does that itself once the early returns are in place.
+* The `strlen` loop at step 6 is padded to 0x2C0A90 with a 7-byte `lea esp, [esp]`.
+* Step 4 is branch-free: `neg` / `sbb` / `and 0x40000000` / `add 0x80000000` for the access mode,
+  `setne` then `lea edx, [edx + edx + 1]` for the share mode. Its stores are interleaved with step
+  5's pushes.
+* Step 11's disposition is `sete` then `lea edx, [edx + edx + 1]` on the create byte.
+* Step 8's `code != 3` test is `cmp eax, esi` (mode is known to be 3 there).
+* EBP holds `length` up to step 10, `fileSize` inside step 11, and zero from 0x2C0D74 onward: it
+  supplies the two NULL arguments at step 12, the block number at 14.2, the buffer state at 14.1
+  and the last error at step 15.
+* Step 11's first `SetFilePointer` passes the handle from a register (EDI); every later use
+  re-reads `*handleOut`.
+* Step 9.6.3's `WriteFile` passes its final NULL as `push eax` (EAX is the zero just tested).
+* The no-picture branch cleans the stack once for both `sprintf` calls (`add esp, 0x1C`).
+* Step 14.3 reads `openSize` through its address (`lea edx, [openSize]; cmp ecx, [edx]`) although
+  EDI holds the value. That is what a 4-byte `memcmp(buffer, &openSize, 4)` leaves; if `memcmp` gives
+  a string compare instead, compare through two `unsigned int*`.
+* Step 15's stores, in order: `*sizeOut`; read the count; last error = 0; count + 1; EAX = 1.
+
+### 15.6 Where Scarface differs from 2003 (facts about Scarface)
+
+* No path building: the drive string comes from +0xFA, and the name is converted directly and may be
+  null (the 16-bit local is then used unset).
+* The save's name is 16-bit text of 0x102 characters, made by §10.2.
+* The two file names are pointer variables, with Scarface's own values.
+* The whole no-picture branch of step 9.6.
+* Step 11 overwrites the recorded error with 0xC when the data file cannot be opened.
+* Slot 6 is reached through the table; the file size comes from a call to 0x2BF730.
+
+## 16. Status
+
+Every function of the class is now specified. Still open: no second reviewer has read the page.

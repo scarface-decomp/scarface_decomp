@@ -36572,7 +36572,8 @@
     "from": [
      "crash",
      "hulk_eu"
-    ]
+    ],
+    "name": "WriteFile"
    },
    {
     "va": "0x002335F6",
@@ -36585,7 +36586,8 @@
     "from": [
      "crash",
      "hulk_eu"
-    ]
+    ],
+    "name": "ReadFile"
    },
    {
     "va": "0x002339FF",
