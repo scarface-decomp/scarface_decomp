@@ -622,3 +622,54 @@ def test_a_function_compiled_alongside_is_checked_by_its_bytes():
     assert not MV.same_code_there(coff, NS(section=0, value=0), image, 0x11000)     # defined elsewhere
     there[0] = 0x90
     assert not MV.same_code_there(coff, sym, image, 0x11000)            # other code at that address
+
+
+def test_a_jump_through_the_copy_protections_section_is_not_the_games_code():
+    """The retail PC file: the protection overwrote some functions' bytes with `jmp [pointer in its own
+    section]`. Such bytes are not a function to match, wherever in it the jump is."""
+    import struct
+    from types import SimpleNamespace
+    from sf_binaries import not_compiled_reason
+
+    class Img:
+        kind = "pe"
+
+        def __init__(self, code, wrapped=True):
+            self.code, self.wrapped = code, wrapped
+
+        def read(self, va, n):
+            return self.code[va - 0x1000:va - 0x1000 + n]
+
+        def protection_sections(self):
+            return [SimpleNamespace(va=0xF81000, vsize=0xE31F1, raw_size=0xE3200)] if self.wrapped else []
+
+    stub = b"\xFF\x25" + struct.pack("<I", 0xFB0BD8)                      # jmp dword ptr [0xFB0BD8]
+    assert "copy protection" in not_compiled_reason(Img(stub), 0x1000, 6)
+    inside = b"\x8B\x44\x24\x04" + stub                                    # mov eax, [esp+4]; then the jump
+    assert "+0x4" in not_compiled_reason(Img(inside), 0x1000, 10)
+    assert not_compiled_reason(Img(stub, wrapped=False), 0x1000, 6) == ""     # a plain program: a tail call through a pointer
+    own = b"\xFF\x25" + struct.pack("<I", 0x72F320)                       # through the game's own import table
+    assert not_compiled_reason(Img(own), 0x1000, 6) == ""
+
+
+def test_withdrawn_matches_are_out_of_the_registry_and_stay_out():
+    import importlib.util
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[2]
+    spec = importlib.util.spec_from_file_location("reopen_matches", root / "portal" / "scripts" / "reopen_matches.py")
+    RM = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(RM)
+    registry = {"entries": {"pc:0x006DED30": {"size": 6, "symbol": "sub_006DED30", "verified_by": "A", "verified_at": "t",
+                                              "code": "void f();"},
+                            "pc:0x006DE620": {"size": 40}}}
+    reopened = {"matches": [{"key": "pc:0x006DED30", "kind": "protection", "why": "w"}, {"key": "pc:0x00000001", "why": "gone already"}]}
+    assert RM.apply(registry, reopened) == ["pc:0x006DED30"] and list(registry["entries"]) == ["pc:0x006DE620"]
+    assert reopened["matches"][0]["was"] == {"size": 6, "symbol": "sub_006DED30", "verified_by": "A", "verified_at": "t"}
+    assert RM.apply(registry, reopened) == []                              # a second run changes nothing
+
+    spec = importlib.util.spec_from_file_location("check_repo", root / "portal" / "scripts" / "check_repo.py")
+    CR = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(CR)
+    out = CR.withdrawn_matches()
+    real = json.loads((root / "reports" / "verified_registry.json").read_text(encoding="utf-8"))["entries"]
+    assert len(out) == 37 and "pc:0x006DED30" in out and not set(out) & set(real)     # 17 withdrawn + 27 listed, 7 in both

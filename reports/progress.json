@@ -3,12 +3,12 @@
   "updated_at": "2026-11-25 16:45:32",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
-    "pc": 780,
+    "pc": 763,
     "xb": 11716,
     "proto": 10955,
     "ps2": 3732,
-    "total": 12496,
-    "bytes": 450042,
+    "total": 12479,
+    "bytes": 449947,
     "ps2_bytes": 35300,
     "stubs": 2172
   },
@@ -21,10 +21,10 @@
   },
   "source": {
     "member_functions": {
-      "pc": 489,
+      "pc": 488,
       "xb": 4380,
       "proto": 4342,
-      "total": 4869
+      "total": 4868
     },
     "shared_class": {
       "pc": 159,
@@ -40,13 +40,13 @@
     }
   },
   "described": {
-    "pc": 60,
+    "pc": 59,
     "xb": 2696,
     "proto": 1207,
     "ps2": 0,
-    "total": 2756,
+    "total": 2755,
     "how": {
-      "human": 450,
+      "human": 449,
       "read": 169,
       "bound": 0,
       "shape": 2106,
@@ -54,14 +54,14 @@
     }
   },
   "size_buckets": {
-    "1-9 B": 2105,
+    "1-9 B": 2088,
     "10-19 B": 1787,
     "20-39 B": 4552,
     "40-79 B": 3174,
     "80+ B": 878
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 20693,
+    "RRutherrfordd (Founder)": 20676,
     "NoahBPeterson": 5406,
     "RRutherfordd (Founder)": 976,
     "lemiur": 108

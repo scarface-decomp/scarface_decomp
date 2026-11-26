@@ -1,0 +1,227 @@
+{
+  "schema": "scarface_reopened_matches_v1",
+  "note": "Matches taken out of reports/verified_registry.json again because the bytes they were checked against are not the game's code (portal/scripts/reopen_matches.py; docs/GAME_VERSIONS.md). 'was' is what the registry held.",
+  "matches": [
+    {
+      "key": "pc:0x006DEC00",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these 5 bytes are a jump into the encrypted part of the code, which the copy protection put there in place of the function's first bytes: a copy of the same build with the protection removed has the function's own code here. The match was a match of the protection's jump.",
+      "was": {
+        "size": 5,
+        "symbol": "sub_006DEC00",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-10 23:50:04",
+        "tool_used": "gemini-3.8-flash",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006DED30",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these bytes are a jump through a pointer inside the copy protection's own section (.securom), which the protection put there in place of the function's first bytes. The match was a match of the protection's jump, not of the game's function.",
+      "was": {
+        "size": 6,
+        "symbol": "sub_006DED30",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-13 09:56:47",
+        "tool_used": "Claude Opus 5.5",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006DF970",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these 5 bytes are a jump into the encrypted part of the code, which the copy protection put there in place of the function's first bytes: a copy of the same build with the protection removed has the function's own code here. The match was a match of the protection's jump.",
+      "was": {
+        "size": 5,
+        "symbol": "sub_006DF970",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-10 23:50:05",
+        "tool_used": "gemini-3.8-flash",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006E51B0",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these bytes are a jump through a pointer inside the copy protection's own section (.securom), which the protection put there in place of the function's first bytes. The match was a match of the protection's jump, not of the game's function.",
+      "was": {
+        "size": 6,
+        "symbol": "core::File::vfunc_17",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-22 00:27:49",
+        "tool_used": "Claude Opus 5.5 (transplanted from pc:0x006DED30, nearest by portal/tools/similar.py)",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006E6370",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these bytes are a jump through a pointer inside the copy protection's own section (.securom), which the protection put there in place of the function's first bytes. The match was a match of the protection's jump, not of the game's function.",
+      "was": {
+        "size": 6,
+        "symbol": "sub_006E6370",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-13 09:56:47",
+        "tool_used": "Claude Opus 5.5",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006E6A20",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these bytes are a jump through a pointer inside the copy protection's own section (.securom), which the protection put there in place of the function's first bytes. The match was a match of the protection's jump, not of the game's function.",
+      "was": {
+        "size": 6,
+        "symbol": "sub_006E6A20",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-13 09:56:47",
+        "tool_used": "Claude Opus 5.5",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006E9650",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these bytes are a jump through a pointer inside the copy protection's own section (.securom), which the protection put there in place of the function's first bytes. The match was a match of the protection's jump, not of the game's function.",
+      "was": {
+        "size": 6,
+        "symbol": "sub_006E9650",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-13 09:56:47",
+        "tool_used": "Claude Opus 5.5",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006EC620",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these bytes are a jump through a pointer inside the copy protection's own section (.securom), which the protection put there in place of the function's first bytes. The match was a match of the protection's jump, not of the game's function.",
+      "was": {
+        "size": 6,
+        "symbol": "sub_006EC620",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-13 09:56:48",
+        "tool_used": "Claude Opus 5.5",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006EC7A0",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these bytes are a jump through a pointer inside the copy protection's own section (.securom), which the protection put there in place of the function's first bytes. The match was a match of the protection's jump, not of the game's function.",
+      "was": {
+        "size": 6,
+        "symbol": "sub_006EC7A0",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-13 09:56:48",
+        "tool_used": "Claude Opus 5.5",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006EDCA0",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these 5 bytes are a jump into the encrypted part of the code, which the copy protection put there in place of the function's first bytes: a copy of the same build with the protection removed has the function's own code here. The match was a match of the protection's jump.",
+      "was": {
+        "size": 5,
+        "symbol": "sub_006EDCA0",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-10 23:50:14",
+        "tool_used": "gemini-3.8-flash",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006EE9F0",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these 5 bytes are a jump into the encrypted part of the code, which the copy protection put there in place of the function's first bytes: a copy of the same build with the protection removed has the function's own code here. The match was a match of the protection's jump.",
+      "was": {
+        "size": 5,
+        "symbol": "sub_006EE9F0",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-10 23:50:17",
+        "tool_used": "gemini-3.8-flash",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006F5730",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these bytes are a jump through a pointer inside the copy protection's own section (.securom), which the protection put there in place of the function's first bytes. The match was a match of the protection's jump, not of the game's function.",
+      "was": {
+        "size": 6,
+        "symbol": "sub_006F5730",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-13 09:56:48",
+        "tool_used": "Claude Opus 5.5",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x006FFB20",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these 5 bytes are a jump into the encrypted part of the code, which the copy protection put there in place of the function's first bytes: a copy of the same build with the protection removed has the function's own code here. The match was a match of the protection's jump.",
+      "was": {
+        "size": 5,
+        "symbol": "sub_006FFB20",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-10 23:50:18",
+        "tool_used": "gemini-3.8-flash",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x007003E0",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these bytes are a jump through a pointer inside the copy protection's own section (.securom), which the protection put there in place of the function's first bytes. The match was a match of the protection's jump, not of the game's function.",
+      "was": {
+        "size": 6,
+        "symbol": "sub_007003E0",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-13 09:56:48",
+        "tool_used": "Claude Opus 5.5",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x00702090",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these bytes are a jump through a pointer inside the copy protection's own section (.securom), which the protection put there in place of the function's first bytes. The match was a match of the protection's jump, not of the game's function.",
+      "was": {
+        "size": 6,
+        "symbol": "sub_00702090",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-13 09:56:48",
+        "tool_used": "Claude Opus 5.5",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x00702810",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these 5 bytes are a jump into the encrypted part of the code, which the copy protection put there in place of the function's first bytes: a copy of the same build with the protection removed has the function's own code here. The match was a match of the protection's jump.",
+      "was": {
+        "size": 5,
+        "symbol": "sub_00702810",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-10 23:50:20",
+        "tool_used": "gemini-3.8-flash",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    },
+    {
+      "key": "pc:0x00702E14",
+      "kind": "protection",
+      "why": "In the accepted Scarface.exe these 5 bytes are a jump into the encrypted part of the code, which the copy protection put there in place of the function's first bytes: a copy of the same build with the protection removed has the function's own code here. The match was a match of the protection's jump.",
+      "was": {
+        "size": 5,
+        "symbol": "sub_00702E14",
+        "verified_by": "RRutherrfordd (Founder)",
+        "verified_at": "2026-11-10 23:50:22",
+        "tool_used": "gemini-3.8-flash",
+        "flags": "/O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4"
+      }
+    }
+  ]
+}

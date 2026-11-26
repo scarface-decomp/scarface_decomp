@@ -109,6 +109,13 @@ class BinaryImage:
     def code_sections(self) -> List[Section]:
         return [s for s in self.sections if s.is_code]
 
+    def protection_sections(self) -> List[Section]:
+        """A PE file's sections that the game's own linker did not make: the ones a copy-protection wrapper
+        added after it (the retail PC game has four). Empty for an XBE and for a plain PE file."""
+        if self.kind != "pe":
+            return []
+        return [s for s in self.sections if s.name.lower() not in LINKER_SECTIONS]
+
     def game_code_sections(self) -> List[Section]:
         """Code written by the game's developers: excludes the Xbox XDK / Bink library sections."""
         return [s for s in self.sections if s.is_code and not s.library]
@@ -138,6 +145,10 @@ def _cs():
 
 # Instructions Visual C++ never generates from C++ in 32-bit code. Where one of them is reached from a
 # "function" start, the start is really data or the middle of an instruction, and no C++ can match it.
+# The sections Microsoft's linker writes into a program. Anything else in a PE file was added afterwards.
+LINKER_SECTIONS = frozenset({".text", ".rdata", ".data", ".rsrc", ".reloc", ".idata", ".edata", ".tls", ".bss",
+                             ".crt", ".pdata", ".debug", "init", "page"})
+
 NEVER_COMPILED = frozenset({
     "retf", "iret", "iretd", "into", "bound", "arpl", "les", "lds", "lss", "lfs", "lgs", "daa", "das", "aaa",
     "aas", "aam", "aad", "salc", "int1", "enter", "sal", "pushal", "popal"})
@@ -160,6 +171,8 @@ def not_compiled_reason(img: "BinaryImage", start: int, size: int) -> str:
     md = _cs()
     work = [start]
     seen: Set[int] = set()
+    wrapper = [(sec.va, sec.va + max(sec.vsize, sec.raw_size)) for sec in img.protection_sections()] \
+        if hasattr(img, "protection_sections") else []
     while work:
         addr = work.pop()
         if addr in seen or not (start <= addr < end):
@@ -172,6 +185,12 @@ def not_compiled_reason(img: "BinaryImage", start: int, size: int) -> str:
             mn = insn.mnemonic
             if mn in NEVER_COMPILED:
                 return f"'{mn}' at +0x{insn.address - start:X}: the compiler never makes that, so these bytes are not a function"
+            if wrapper and mn == "jmp" and insn.operands and insn.operands[0].type == X.X86_OP_MEM:
+                m = insn.operands[0].mem
+                if not m.base and not m.index and any(lo <= (m.disp & 0xFFFFFFFF) < hi for lo, hi in wrapper):
+                    # the retail PC game: the protection overwrote the game's code here with a jump of its own
+                    return (f"'jmp' at +0x{insn.address - start:X} goes through a pointer inside the copy protection's own "
+                            "section: the protection put it there in place of the game's code")
             if mn == "ret" and insn.operands and insn.operands[0].imm % 4:
                 # arguments are pushed four bytes at a time, so a function never pops an odd count: these
                 # bytes are the middle of another instruction that happens to read as a return

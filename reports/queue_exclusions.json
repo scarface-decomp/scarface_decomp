@@ -1,6 +1,6 @@
 {
  "schema": "scarface_queue_exclusions_v1",
- "note": "Starts the queue leaves out that reports/library_functions.json does not cover. library: a Microsoft library function (C runtime, XAPILIB) found byte for byte in another game's build with the same SDK, which reports/library_functions.json missed. bink: RAD Bink, third-party code linked into the Xbox game's own section (called from the BINK section, padded with 0x90 where the game's compiler pads with 0xCC). nonstart: not the start of a function (an exception-handling funclet that reads its parent's frame, a label inside another function, a misaligned decode, or a shared tail). From the examiner's A1 pass over default.xbe; a matched function is never left out.",
+ "note": "Starts the queue leaves out that reports/library_functions.json does not cover. library: a Microsoft library function (C runtime, XAPILIB) found byte for byte in another game's build with the same SDK, which reports/library_functions.json missed. bink: RAD Bink, third-party code linked into the Xbox game's own section (called from the BINK section, padded with 0x90 where the game's compiler pads with 0xCC). nonstart: not the start of a function (an exception-handling funclet that reads its parent's frame, a label inside another function, a misaligned decode, or a shared tail). protection (PC only): the copy protection replaced part of the function with a jump of its own, so the accepted file does not hold the game's code there (docs/GAME_VERSIONS.md); the ones that jump through a pointer in the protection's own section are found by the portal itself and are not listed. From the examiner's A1 pass over default.xbe; a matched function is never left out.",
  "starts": {
   "xb": [
    {
@@ -2134,6 +2134,143 @@
     "va": "0x002DF9FE",
     "kind": "nonstart",
     "why": "exception-handling stub: mov eax, FuncInfo; jmp __CxxFrameHandler (compiler-made)"
+   }
+  ],
+  "pc": [
+   {
+    "va": "0x006DE900",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x23): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006DEC00",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x0): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006DF090",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x6): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006DF6E0",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x1D): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006DF970",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x0): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006DFAA0",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x3): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006E3670",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x1): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006E4CC0",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x1): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006E6F50",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x8): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006E7ED0",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0xE): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006EB750",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x3): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006EB9D0",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0xC): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006EBAE0",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x13): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006ECBD0",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x40): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006ED350",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x2B): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006EDCA0",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x0): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006EE580",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x25): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006EE890",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x9): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006EE9F0",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x0): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006EFE00",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0xD): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006F2B30",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x2B): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006FF7B0",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x1E): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x006FFB20",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x0): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x00700830",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x196): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x00700B50",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x3): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x00702810",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x0): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
+   },
+   {
+    "va": "0x00702E14",
+    "kind": "protection",
+    "why": "The copy protection's jump is in this function's bytes in the accepted Scarface.exe (at +0x0): a jump into the encrypted part of the code where a copy of the same build with the protection removed has the game's own instructions. It cannot be matched against the accepted file."
    }
   ]
  }

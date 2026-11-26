@@ -39,6 +39,27 @@ FORBIDDEN = ["*.exe", "*.xbe", "*.rcf", "*.bik", "*.iso", "*.7z", "*.zip", "*.ob
 VA_RE = re.compile(r"^0x[0-9A-F]{8}$")
 
 
+def withdrawn_matches() -> dict:
+    """{registry key: kind} for the matches that must not be in the registry: the ones taken out again
+    (reports/reopened_matches.json) and the functions the copy protection overwrote in the accepted PC file
+    (reports/queue_exclusions.json, kind "protection"). Their bytes there are not the game's code."""
+    out = {}
+    try:
+        for row in json.loads((ROOT / "reports" / "reopened_matches.json").read_text(encoding="utf-8")).get("matches", []):
+            out[row["key"]] = row.get("kind", "withdrawn")
+    except (OSError, ValueError, KeyError):
+        pass
+    try:
+        ex = json.loads((ROOT / "reports" / "queue_exclusions.json").read_text(encoding="utf-8"))
+        for b, rows in (ex.get("starts") or {}).items():
+            for r in rows:
+                if r.get("kind") == "protection":
+                    out[f"{b}:0x{int(r['va'], 16):08X}"] = "protection"
+    except (OSError, ValueError, KeyError):
+        pass
+    return out
+
+
 def check_registry(problems: list) -> dict:
     p = ROOT / "reports" / "verified_registry.json"
     try:
@@ -56,6 +77,7 @@ def check_registry(problems: list) -> dict:
         if name not in ACCEPTED_GAME_FILES or digest not in ACCEPTED_GAME_FILES[name][0]:
             problems.append(f"registry: verified against {name or lane} {digest[:12]}..., which is not an accepted "
                             "game version (docs/GAME_VERSIONS.md)")
+    withdrawn = withdrawn_matches()
     for key, e in entries.items():
         where = f"registry {key}"
         if e.get("bin") not in NAMES.BINS:
@@ -70,6 +92,8 @@ def check_registry(problems: list) -> dict:
             flags = flags[4:]
         if not flags.startswith(want):
             problems.append(f"{where}: unexpected flags {e.get('flags')!r}")
+        if key in withdrawn:
+            problems.append(f"{where}: this match was withdrawn (reports/reopened_matches.json: {withdrawn[key]})")
         what = e.get("what")
         if what is not None and (not isinstance(what, str) or len(what) > 160 or "\n" in what or what != what.strip()):
             problems.append(f"{where}: 'what' must be one line of at most 160 characters")

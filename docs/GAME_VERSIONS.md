@@ -25,6 +25,22 @@ Start with `default.xbe`: the whole Xbox game can be read, so almost all of the 
 only about 1,500 of its functions can be worked on), and `game.xbe` adds the prototype's. The portal
 also runs with only `Scarface.exe`, but then there is much less to do.
 
+**The copy protection's jumps in `Scarface.exe`.** Even in the readable part, the accepted file is not
+always the game's code. In 94 places the protection overwrote the game's instructions with a jump of its
+own: 63 jump through a pointer inside the protection's own sections, and 31 jump into the encrypted part.
+84 functions hold one of them, 17 right at their start. Those 17 had been recorded as matched: what
+matched was the protection's five or six bytes, so they were withdrawn on 25 November 2026
+(`reports/reopened_matches.json`, with who had recorded each and when). The other 67 were open tasks that
+could never have been matched honestly. All 84 are out of the work queue:
+
+* a jump through a pointer in the protection's sections is recognised by the portal from the accepted
+  file alone;
+* a jump into the encrypted part looks like any other jump there, so those 27 functions are listed in
+  `reports/queue_exclusions.json`. They were told apart by comparing with a copy of the same build that
+  has the protection removed (same link time; not in the repository, and not a file a match is checked
+  against). In that copy the other 763 matched PC functions have the same bytes, apart from the
+  addresses of imported Windows functions, which its rebuilt import table moves.
+
 You don't need the files on their own: the portal also takes them out of the downloads they came in,
 including `Scarface.exe` 1.00.2 from the official 1.00.2 patch, which carries the whole file (see
 [binaries/README.md](../binaries/README.md)). To check yours, start the portal, or run

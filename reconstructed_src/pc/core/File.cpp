@@ -1,7 +1,7 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/File.cpp (18 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/File.cpp (17 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 18 of 32 functions matched (56.25%). NOT COMPLETE YET.
+// PROGRESS: 17 of 31 functions matched (54.84%). NOT COMPLETE YET.
 // The 14 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
@@ -629,31 +629,6 @@ bool File::vfunc_30()
     return m_Field160;
 }
 
-}
-
-// ============================================================================
-// [VERIFIED] core::File::vfunc_17 (0x006E51B0, 6 B)
-// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
-// What it does: Calls the function whose address is kept in a global.
-// ============================================================================
-// bin: pc
-// va: 0x006E51B0
-// what: Calls the function whose address is kept in a global.
-// tool: Claude Opus 5.5 (transplanted from pc:0x006DED30, nearest by portal/tools/similar.py)
-// Starter code written from the disassembly. Names and types are guesses; rename and
-// retype them as you work it out. Calls and globals already use their real addresses.
-
-extern "C" int DAT_00FB0444;
-
-class Class_006E51B0
-{
-public:
-    void sub_006E51B0();
-};
-
-void Class_006E51B0::sub_006E51B0()
-{
-    ((void (__cdecl*)(void))DAT_00FB0444)();
 }
 
 // ============================================================================
