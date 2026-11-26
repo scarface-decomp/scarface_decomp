@@ -251,6 +251,9 @@ These were each confirmed by compiling variants and comparing against the game.
   base's constructor as an inline helper on a small struct of its own and call it with a cast
   (`ConstructSafeRefCount((SafeRefCountPart*)&m_Table0C)`). (0x2C1B00)
 
+The idioms of this game's own source (how its authors wrote flag getters, constructors, request
+posting and failure exits) are kept as a numbered list in [cleanroom/IDIOMS.md](cleanroom/IDIOMS.md).
+
 ## 6. Re-verification
 
 `portal/scripts/reverify_all.py` compiles every claim in `reconstructed_src/` (hand-written files and the
