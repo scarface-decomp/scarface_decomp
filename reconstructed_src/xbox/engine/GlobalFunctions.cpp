@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (7336 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (7342 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,336 of 15,290 functions matched (47.98%). NOT COMPLETE YET.
-// The 7,954 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7,342 of 15,290 functions matched (48.02%). NOT COMPLETE YET.
+// The 7,948 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -158003,6 +158003,42 @@ void Class_002BE710::sub_002BE710()
 }
 
 // ============================================================================
+// [VERIFIED] sub_002BF6A0 (0x002BF6A0, 90 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Asks the system which memory units were inserted or removed and updates the present and changed masks.
+// ============================================================================
+// bin: xb
+// va: 0x002BF6A0
+// what: Asks the system which memory units were inserted or removed and updates the present and changed masks.
+// tool: Claude (from SPEC-016)
+
+extern "C" int __stdcall sub_00396663(void* type, unsigned int* inserted, unsigned int* removed);    // XGetDeviceChanges
+extern "C" char DAT_00395660[];     // the memory-unit device type
+
+// The memory units' state: which are present and which have changed (SPEC-016 section 1.2).
+class MemoryUnits
+{
+public:
+    void sub_002BF6A0();
+    unsigned char m_Present; // +0x0
+    unsigned char m_Changed; // +0x1
+};
+
+void MemoryUnits::sub_002BF6A0()
+{
+    unsigned int inserted;
+    unsigned int removed;
+
+    if (sub_00396663(DAT_00395660, &inserted, &removed))
+    {
+        unsigned char in = (unsigned char)((inserted & 0xF) | ((inserted >> 12) & 0xF0));
+        unsigned char out = (unsigned char)((removed & 0xF) | ((removed >> 12) & 0xF0));
+        m_Present ^= in ^ out;
+        m_Changed |= in | out;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_002BF700 (0x002BF700, 41 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
 // What it does: Says whether the memory unit at a port and slot is present; a negative port or slot counts as present.
@@ -158031,6 +158067,23 @@ bool MemoryUnits::sub_002BF700(int port, int slot)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002BF730 (0x002BF730, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Gives the size a save takes on the memory unit: its data, a 4-byte header and one 20-byte signature for each block.
+// ============================================================================
+// bin: xb
+// va: 0x002BF730
+// what: Gives the size a save takes on the memory unit: its data, a 4-byte header and one 20-byte signature for each block.
+// tool: Claude (from SPEC-016)
+
+const unsigned int BLOCK_DATA = 0x2000 - 20;     // a block less its signature
+
+unsigned int __cdecl sub_002BF730(unsigned int size)
+{
+    return size + 4 + 20 * ((size + 4 + BLOCK_DATA - 1) / BLOCK_DATA);
+}
+
+// ============================================================================
 // [VERIFIED] sub_002BF760 (0x002BF760, 50 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -158055,6 +158108,51 @@ bool __cdecl sub_002BF760(int a1, int a2, int a3)
     sub_002394B0(r_esi, a1, a2);
     sub_002394FE(r_esi, a3);
     return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002BF7A0 (0x002BF7A0, 87 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Computes the 20-byte signature of the block in the shared save buffer, leaving out the signature's own place at the end.
+// ============================================================================
+// bin: xb
+// va: 0x002BF7A0
+// what: Computes the 20-byte signature of the block in the shared save buffer, leaving out the signature's own place at the end.
+// tool: Claude (from SPEC-016)
+
+struct Signature
+{
+    unsigned int m_Words[5];
+};
+
+extern "C" char* DAT_004BFE38;          // the transfer buffer: one block, 0x2000 bytes
+extern "C" unsigned int DAT_004BFE40;   // which block of the file is in it
+
+extern "C" void* __stdcall sub_0023949C(unsigned int flags);                                    // XCalculateSignatureBegin
+extern "C" unsigned int __stdcall sub_002394B0(void* handle, const void* data, unsigned int size);   // XCalculateSignatureUpdate
+extern "C" unsigned int __stdcall sub_002394FE(void* handle, void* signature);                  // XCalculateSignatureEnd
+
+inline bool Sign(const void* data, unsigned int size, Signature* signature)
+{
+    void* handle = sub_0023949C(0);
+    if (handle == (void*)0xFFFFFFFF)
+    {
+        return false;
+    }
+    sub_002394B0(handle, data, size);
+    sub_002394FE(handle, signature);
+    return true;
+}
+
+bool __cdecl sub_002BF7A0(unsigned int fileSize, Signature* signature)
+{
+    unsigned int start = DAT_004BFE40 * 0x2000;
+    unsigned int end = start + 0x2000;
+    if (end >= fileSize)
+    {
+        end = fileSize;
+    }
+    return Sign(DAT_004BFE38, end - start - 20, signature);
 }
 
 // ============================================================================
@@ -158094,6 +158192,110 @@ int Class_002BF8F0::sub_002BF8F0(int a1, int a2)
     r_ecx -= 65;
     *(int*)a2 = r_ecx;
     return a1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002BF930 (0x002BF930, 133 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Unmounts the save drive's memory unit: closes any directory searches still open, then unmounts the unit.
+// ============================================================================
+// bin: xb
+// va: 0x002BF930
+// what: Unmounts the save drive's memory unit: closes any directory searches still open, then unmounts the unit.
+// tool: Claude (from SPEC-016)
+
+extern "C" int __stdcall sub_0030A4EB(void* search);                            // XFindClose
+extern "C" unsigned int __stdcall sub_00396CB7(int port, int slot);             // XUnmountMU
+
+// One directory search in progress: the pattern and the system's handle (SPEC-016 section 7.1).
+struct Search
+{
+    char m_Pattern[0x204];  // +0x0
+    void* m_Handle;         // +0x204
+};
+
+class XboxSaveDrive
+{
+public:
+    void sub_002BF930();
+
+    void GetPortAndSlot(int* port, int* slot)
+    {
+        if (m_Name[0] == 'U')
+        {
+            *port = -1;
+            *slot = -1;
+        }
+        else
+        {
+            *port = m_Name[7] - '1';
+            *slot = m_Name[8] - 'A';
+        }
+    }
+
+    char m_pad00[0xE8];
+    char m_Name[0x11];          // +0xE8
+    bool m_Mounted;             // +0xF9
+    char m_DriveLetter;         // +0xFA
+    char m_padFB[0x11];
+    Search m_Searches[4];       // +0x10C
+};
+
+void XboxSaveDrive::sub_002BF930()
+{
+    if (m_DriveLetter == 'U')
+    {
+        return;
+    }
+    if (!m_Mounted)
+    {
+        return;
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (m_Searches[i].m_Handle != (void*)0xFFFFFFFF)
+        {
+            sub_0030A4EB(m_Searches[i].m_Handle);
+            m_Searches[i].m_Handle = (void*)0xFFFFFFFF;
+        }
+    }
+
+    int port;
+    int slot;
+    GetPortAndSlot(&port, &slot);
+    sub_00396CB7(port, slot);
+    m_Mounted = false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002BF9C0 (0x002BF9C0, 57 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Says whether one wide-character string starts with another.
+// ============================================================================
+// bin: xb
+// va: 0x002BF9C0
+// what: Says whether one wide-character string starts with another.
+// tool: Claude (from SPEC-016)
+
+class XboxSaveDrive
+{
+public:
+    bool sub_002BF9C0(const unsigned short* text, const unsigned short* prefix);
+};
+
+bool XboxSaveDrive::sub_002BF9C0(const unsigned short* text, const unsigned short* prefix)
+{
+    while (*prefix != 0)
+    {
+        if (*text == 0 || *text != *prefix)
+        {
+            return false;
+        }
+        prefix++;
+        text++;
+    }
+    return true;
 }
 
 // ============================================================================
@@ -158459,6 +158661,34 @@ bool Class_002C0050::sub_002C0050(int a1, int a2)
         return false;
     }
     return true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C0090 (0x002C0090, 60 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Creates the Xbox save drive: remembers the allocator, allocates the object from it and constructs it with the drive's name.
+// ============================================================================
+// bin: xb
+// va: 0x002C0090
+// what: Creates the Xbox save drive: remembers the allocator, allocates the object from it and constructs it with the drive's name.
+// tool: Claude (from SPEC-016)
+
+extern "C" void* DAT_0045894C;      // the allocator the save drive was made with
+void* __cdecl sub_00244450(void* allocator, unsigned int size);     // AllocateFromHeap
+
+class XboxSaveDrive
+{
+public:
+    XboxSaveDrive* sub_002BFB50(const char* name, void* allocator);    // the constructor
+    char m_Data[0x92C];
+};
+
+// What `new (allocator) XboxSaveDrive(name, allocator)` compiles to, with the constructor called by its address name.
+void __cdecl sub_002C0090(XboxSaveDrive** result, const char* name, void* allocator)
+{
+    DAT_0045894C = allocator;
+    XboxSaveDrive* memory = (XboxSaveDrive*)sub_00244450(allocator, sizeof(XboxSaveDrive));
+    *result = memory ? memory->sub_002BFB50(name, allocator) : 0;
 }
 
 // ============================================================================

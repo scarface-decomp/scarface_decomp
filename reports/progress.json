@@ -1,15 +1,15 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-25 16:45:32",
+  "updated_at": "2026-11-25 19:11:16",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
-    "pc": 763,
-    "xb": 11716,
-    "proto": 10955,
-    "ps2": 3732,
-    "total": 12479,
-    "bytes": 449947,
-    "ps2_bytes": 35300,
+    "pc": 770,
+    "xb": 11723,
+    "proto": 10962,
+    "ps2": 3793,
+    "total": 12493,
+    "bytes": 450517,
+    "ps2_bytes": 36032,
     "stubs": 2172
   },
   "readable": {
@@ -22,9 +22,9 @@
   "source": {
     "member_functions": {
       "pc": 488,
-      "xb": 4380,
-      "proto": 4342,
-      "total": 4868
+      "xb": 4381,
+      "proto": 4343,
+      "total": 4869
     },
     "shared_class": {
       "pc": 159,
@@ -41,12 +41,12 @@
   },
   "described": {
     "pc": 59,
-    "xb": 2696,
+    "xb": 2703,
     "proto": 1207,
     "ps2": 0,
-    "total": 2755,
+    "total": 2762,
     "how": {
-      "human": 449,
+      "human": 456,
       "read": 169,
       "bound": 0,
       "shape": 2106,
@@ -54,32 +54,32 @@
     }
   },
   "size_buckets": {
-    "1-9 B": 2088,
+    "1-9 B": 2095,
     "10-19 B": 1787,
-    "20-39 B": 4552,
-    "40-79 B": 3174,
-    "80+ B": 878
+    "20-39 B": 4553,
+    "40-79 B": 3177,
+    "80+ B": 881
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 20676,
+    "RRutherrfordd (Founder)": 20697,
     "NoahBPeterson": 5406,
-    "RRutherfordd (Founder)": 976,
+    "RRutherfordd (Founder)": 1037,
     "lemiur": 108
   },
   "unattributed": 0,
   "queue": {
-    "pc": 734,
-    "xb": 10337,
-    "proto": 9762,
-    "ps2": 20565,
-    "total": 11071,
+    "pc": 687,
+    "xb": 10330,
+    "proto": 9755,
+    "ps2": 20504,
+    "total": 11017,
     "tiers": {
-      "TIER_1_QUICK": 194,
-      "TIER_2_SMALL": 831,
-      "TIER_3_MEDIUM": 2410,
-      "TIER_4_LARGE": 7636
+      "TIER_1_QUICK": 169,
+      "TIER_2_SMALL": 822,
+      "TIER_3_MEDIUM": 2402,
+      "TIER_4_LARGE": 7624
     },
-    "bytes": 2618263,
+    "bytes": 2612595,
     "stubs": 101
   },
   "good_first": [
@@ -138,15 +138,6 @@
       "kind": "named"
     },
     {
-      "id": "pc_006E4610",
-      "bin": "pc",
-      "va": "PC 0x006E4610",
-      "symbol": "sub_006E4610",
-      "size": 9,
-      "why": "matching it also matches its 2 look-alikes",
-      "kind": "group"
-    },
-    {
       "id": "xb_0015C6C0",
       "bin": "xb",
       "va": "0x0015C6C0",
@@ -171,6 +162,15 @@
       "symbol": "sub_00178210",
       "size": 12,
       "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_00315AB0",
+      "bin": "xb",
+      "va": "0x00315AB0",
+      "symbol": "sub_00315AB0",
+      "size": 15,
+      "why": "matching it also matches its 9 look-alikes",
       "kind": "group"
     }
   ]

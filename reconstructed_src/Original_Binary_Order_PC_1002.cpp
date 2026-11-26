@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 763 of 1,497 functions matched (50.97%). NOT COMPLETE YET.
-// The 734 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 770 of 1,457 functions matched (52.85%). NOT COMPLETE YET.
+// The 687 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -453,6 +453,29 @@ ControllerSystemDirectInput* ControllerSystemDirectInput::vfunc_03(int a1)
 // [TODO] 0x006DE930 sub_006DE930 (43 B)
 // [TODO] 0x006DEBB0 sub_006DEBB0 (35 B)
 // [TODO] 0x006DEBE0 sub_006DEBE0 (20 B)
+// ============================================================================
+// [VERIFIED] sub_006DEC00 (0x006DEC00, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006DEC00 (0x006DEC00, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0041135C(void);
+
+class Class_006DEC00
+{
+public:
+    void sub_006DEC00();
+};
+
+void Class_006DEC00::sub_006DEC00()
+{
+    sub_0041135C();
+}
+
 // [TODO] 0x006DEC30 sub_006DEC30 (84 B)
 // ============================================================================
 // [VERIFIED] sub_006DEC90 (0x006DEC90, 24 B)
@@ -697,7 +720,6 @@ int __cdecl sub_006DF2B0(int a1, int a2, int a3, __int64 a4)
 }
 
 // [TODO] 0x006DF310 sub_006DF310 (141 B)
-// [TODO] 0x006DF3A0 sub_006DF3A0 (7 B)
 // ============================================================================
 // [VERIFIED] sub_006DF3E0 (0x006DF3E0, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -1249,6 +1271,29 @@ extern "C" int DAT_0085CD34;
 int __cdecl sub_006DF960(void)
 {
     return DAT_0085CD34;
+}
+
+// ============================================================================
+// [VERIFIED] sub_006DF970 (0x006DF970, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006DF970 (0x006DF970, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0042C0C6(void);
+
+class Class_006DF970
+{
+public:
+    void sub_006DF970();
+};
+
+void Class_006DF970::sub_006DF970()
+{
+    sub_0042C0C6();
 }
 
 // [TODO] 0x006DF9E0 sub_006DF9E0 (191 B)
@@ -1910,9 +1955,7 @@ String::String() {}                  // building one is what makes the compiler 
 }
 
 // [TODO] 0x006E05D0 sub_006E05D0 (47 B)
-// [TODO] 0x006E0680 sub_006E0680 (241 B)
 // [TODO] 0x006E0780 sub_006E0780 (60 B)
-// [TODO] 0x006E07C0 sub_006E07C0 (19 B)
 // ============================================================================
 // [VERIFIED] core::MemoryDlAllocator::vfunc_00 (0x006E0930, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
@@ -2011,7 +2054,6 @@ public:
 MemoryDlAllocator::MemoryDlAllocator() {}                  // building one is what makes the compiler write its tables and the thunk
 }
 
-// [TODO] 0x006E0AD0 sub_006E0AD0 (215 B)
 // [TODO] 0x006E0BB0 core::MemoryDlAllocator::vfunc_05 (200 B)
 // [TODO] 0x006E0C80 core::MemoryDlAllocator::vfunc_04 (133 B)
 // ============================================================================
@@ -2048,7 +2090,6 @@ L_29:
     return r_eax;
 }
 
-// [TODO] 0x006E0D40 sub_006E0D40 (9 B)
 // [TODO] 0x006E11C0 sub_006E11C0 (493 B)
 // [TODO] 0x006E13B0 core::MemoryDlAllocator::vfunc_07 (117 B)
 // [TODO] 0x006E1430 sub_006E1430 (331 B)
@@ -2062,7 +2103,6 @@ L_29:
 // [TODO] 0x006E1780 sub_006E1780 (25 B)
 // [TODO] 0x006E1820 sub_006E1820 (802 B)
 // [TODO] 0x006E1B50 sub_006E1B50 (60 B)
-// [TODO] 0x006E1B90 sub_006E1B90 (19 B)
 // ============================================================================
 // [VERIFIED] core::MemoryDlAllocator::vfunc_02 (0x006E1CF0, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2211,7 +2251,6 @@ MemorySmallDlAllocator::MemorySmallDlAllocator() {}                  // building
 // [TODO] 0x006E1EF0 sub_006E1EF0 (724 B)
 // [TODO] 0x006E21D0 core::MemorySmallDlAllocator::vfunc_04 (167 B)
 // [TODO] 0x006E2280 sub_006E2280 (232 B)
-// [TODO] 0x006E2370 sub_006E2370 (2613 B)
 // [TODO] 0x006E2DB0 sub_006E2DB0 (673 B)
 // [TODO] 0x006E3060 core::MemorySmallDlAllocator::vfunc_07 (151 B)
 // [TODO] 0x006E3100 sub_006E3100 (482 B)
@@ -3419,7 +3458,6 @@ DriveCompletionRequest* DriveCompletionRequest::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006E4610 sub_006E4610 (9 B)
 // ============================================================================
 // [VERIFIED] sub_006E4670 (0x006E4670, 44 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -3822,7 +3860,6 @@ Class_006E4960* Class_006E4960::sub_006E4960(int a1)
     return this;
 }
 
-// [TODO] 0x006E4980 sub_006E4980 (9 B)
 // ============================================================================
 // [VERIFIED] sub_006E49E0 (0x006E49E0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -5057,7 +5094,6 @@ File* File::vfunc_03(int a1)
 }
 
 // [TODO] 0x006E5250 sub_006E5250 (248 B)
-// [TODO] 0x006E5350 sub_006E5350 (23 B)
 // [TODO] 0x006E5450 sub_006E5450 (47 B)
 // ============================================================================
 // [VERIFIED] sub_006E5480 (0x006E5480, 44 B)
@@ -7064,7 +7100,6 @@ void __cdecl sub_006E6000(int a1, int a2, int a3, int a4)
 }
 
 // [TODO] 0x006E6070 core::Drive::vfunc_00 (23 B)
-// [TODO] 0x006E60C0 sub_006E60C0 (22 B)
 // [TODO] 0x006E60E0 sub_006E60E0 (36 B)
 // ============================================================================
 // [VERIFIED] sub_006E6110 (0x006E6110, 4 B)
@@ -7734,7 +7769,6 @@ void CementLibrary::vfunc_06(int a1, int a2)
 }
 
 // [TODO] 0x006E6790 sub_006E6790 (62 B)
-// [TODO] 0x006E67D0 sub_006E67D0 (52 B)
 // [TODO] 0x006E6810 core::CementLibrary::vfunc_08 (151 B)
 // ============================================================================
 // [VERIFIED] core::CementLibrary::vfunc_09 (0x006E68B0, 51 B)
@@ -8476,9 +8510,7 @@ int Win32Drive::vfunc_22(int a1)
 
 }
 
-// [TODO] 0x006E74F0 sub_006E74F0 (13 B)
 // [TODO] 0x006E75D0 sub_006E75D0 (150 B)
-// [TODO] 0x006E7670 sub_006E7670 (138 B)
 // [TODO] 0x006E7730 sub_006E7730 (116 B)
 // ============================================================================
 // [VERIFIED] core::Win32Drive::vfunc_00 (0x006E77B0, 8 B)
@@ -8933,7 +8965,6 @@ void Class_006E81C0::sub_006E81C0(bool a1)
 }
 
 // [TODO] 0x006E81E0 sub_006E81E0 (154 B)
-// [TODO] 0x006E8280 sub_006E8280 (21 B)
 // ============================================================================
 // [VERIFIED] core::DriveThread::vfunc_00 (0x006E82C0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9112,11 +9143,9 @@ Class_006E9280* Class_006E9280::sub_006E9280(int a1)
     return this;
 }
 
-// [TODO] 0x006E92A0 sub_006E92A0 (31 B)
 // [TODO] 0x006E9340 sub_006E9340 (96 B)
 // [TODO] 0x006E93A0 sub_006E93A0 (162 B)
 // [TODO] 0x006E9450 sub_006E9450 (121 B)
-// [TODO] 0x006E94D0 sub_006E94D0 (14 B)
 // ============================================================================
 // [VERIFIED] sub_006E94F0 (0x006E94F0, 54 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G7 /Gd /GR /EHsc /Zp4
@@ -9238,7 +9267,6 @@ Class_006E9550* Class_006E9550::sub_006E9550(int a1, int a2, int a3)
 
 // [TODO] 0x006E95A0 sub_006E95A0 (167 B)
 // [TODO] 0x006E9660 sub_006E9660 (234 B)
-// [TODO] 0x006E9750 sub_006E9750 (98 B)
 // ============================================================================
 // [VERIFIED] sub_006E97D0 (0x006E97D0, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9311,7 +9339,6 @@ int GameMemorySegmentCollection::vfunc_02()
 
 // [TODO] 0x006E9830 sub_006E9830 (17 B)
 // [TODO] 0x006E9850 content::LoadInventory::vfunc_04 (126 B)
-// [TODO] 0x006E9970 sub_006E9970 (16 B)
 // ============================================================================
 // [VERIFIED] sub_006E9A10 (0x006E9A10, 33 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -9544,7 +9571,6 @@ int Class_006E9F50::sub_006E9F50()
     return 1;
 }
 
-// [TODO] 0x006E9F60 sub_006E9F60 (21 B)
 // [TODO] 0x006EA020 sub_006EA020 (64 B)
 // ============================================================================
 // [VERIFIED] sub_006EA060 (0x006EA060, 33 B)
@@ -10104,10 +10130,8 @@ void Class_006EB0F0::sub_006EB0F0(int a1)
     ((void (__cdecl*)(int, int, int))DAT_0072F204)((int)this, a1, 127);
 }
 
-// [TODO] 0x006EB110 sub_006EB110 (7 B)
 // [TODO] 0x006EB150 sub_006EB150 (242 B)
 // [TODO] 0x006EB250 sub_006EB250 (162 B)
-// [TODO] 0x006EB300 sub_006EB300 (10 B)
 // ============================================================================
 // [VERIFIED] sub_006EB350 (0x006EB350, 16 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -10272,7 +10296,6 @@ LoadRequest* LoadRequest::vfunc_03(int a1)
 
 }
 
-// [TODO] 0x006EB5D0 sub_006EB5D0 (71 B)
 // ============================================================================
 // [VERIFIED] sub_006EB620 (0x006EB620, 5 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -10393,7 +10416,6 @@ void Class_006EB6E0::sub_006EB6E0(int a1)
 // [TODO] 0x006EB7A0 sub_006EB7A0 (83 B)
 // [TODO] 0x006EB800 sub_006EB800 (69 B)
 // [TODO] 0x006EB850 sub_006EB850 (103 B)
-// [TODO] 0x006EB8C0 sub_006EB8C0 (127 B)
 // [TODO] 0x006EB940 sub_006EB940 (104 B)
 // ============================================================================
 // [VERIFIED] sub_006EB9B0 (0x006EB9B0, 19 B)
@@ -10872,7 +10894,6 @@ void __cdecl sub_006EC7B0(int a1)
 // [TODO] 0x006EC960 om::MetaType<GlobalVehicleSound>::vfunc_02 (199 B)
 // [TODO] 0x006ECA30 sub_006ECA30 (88 B)
 // [TODO] 0x006ECA90 sub_006ECA90 (46 B)
-// [TODO] 0x006ECAC0 sub_006ECAC0 (15 B)
 // ============================================================================
 // [VERIFIED] sub_006ECB50 (0x006ECB50, 48 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -11142,7 +11163,6 @@ L_42:
 // [TODO] 0x006ECE00 GlobalVehicleSound::vfunc_08 (488 B)
 // [TODO] 0x006ECFF0 sub_006ECFF0 (115 B)
 // [TODO] 0x006ED070 om::TRbTree<om::EntityTypeBase, 28>::Comp<om::EntityTypeBase, 28, unsigned int>::vfunc_00 (35 B)
-// [TODO] 0x006ED0A0 sub_006ED0A0 (9 B)
 // ============================================================================
 // [VERIFIED] sub_006ED0C0 (0x006ED0C0, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -11486,7 +11506,29 @@ L_39:
 
 // [TODO] 0x006ED9A0 sub_006ED9A0 (143 B)
 // [TODO] 0x006EDA30 audio::Sequence::vfunc_06 (110 B)
-// [TODO] 0x006EDB60 sub_006EDB60 (12 B)
+// ============================================================================
+// [VERIFIED] sub_006EDCA0 (0x006EDCA0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EDCA0 (0x006EDCA0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_004897A5(void);
+
+class Class_006EDCA0
+{
+public:
+    void sub_006EDCA0();
+};
+
+void Class_006EDCA0::sub_006EDCA0()
+{
+    sub_004897A5();
+}
+
 // ============================================================================
 // [VERIFIED] sub_006EDCB0 (0x006EDCB0, 18 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -11565,7 +11607,6 @@ ContentStream* ContentStream::vfunc_00(int a1)
 
 }
 
-// [TODO] 0x006EDEA0 sub_006EDEA0 (13 B)
 // ============================================================================
 // [VERIFIED] sub_006EDEF0 (0x006EDEF0, 81 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -12308,6 +12349,29 @@ extern "C" void __cdecl sub_006EE890(int, int);
 void __cdecl sub_006EE9D0(int a1)
 {
     sub_006EE890((int)DAT_007F69A8, a1);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006EE9F0 (0x006EE9F0, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006EE9F0 (0x006EE9F0, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00424301(void);
+
+class Class_006EE9F0
+{
+public:
+    void sub_006EE9F0();
+};
+
+void Class_006EE9F0::sub_006EE9F0()
+{
+    sub_00424301();
 }
 
 // ============================================================================
@@ -13054,7 +13118,6 @@ int __cdecl sub_006EF990(int a1, int a2)
     return a2;
 }
 
-// [TODO] 0x006EF9A0 sub_006EF9A0 (34 B)
 // ============================================================================
 // [VERIFIED] sub_006EF9E0 (0x006EF9E0, 35 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -13170,7 +13233,6 @@ int __cdecl sub_006EFC80(int a1, int a2)
     return *(int*)(a1 + (a2 * 4) + 92);
 }
 
-// [TODO] 0x006EFC90 sub_006EFC90 (11 B)
 // [TODO] 0x006EFCB0 sub_006EFCB0 (44 B)
 // ============================================================================
 // [VERIFIED] sub_006EFCE0 (0x006EFCE0, 8 B)
@@ -13569,7 +13631,6 @@ void StreamPlayerAllocator::vfunc_01(int a1, int a2)
 // [TODO] 0x006F0D70 sub_006F0D70 (103 B)
 // [TODO] 0x006F0DE0 om::TRbTree<audio::SeqPlayerTrack, 0>::Comp<audio::SeqPlayerTrack, 0, om::Name<om::CaseSensitive32BitKey>>::vfunc_00 (34 B)
 // [TODO] 0x006F0E10 om::TRbTree<audio::SeqPlayerLayer, 0>::Comp<audio::SeqPlayerLayer, 0, om::Name<om::CaseSensitive32BitKey>>::vfunc_00 (29 B)
-// [TODO] 0x006F0F30 sub_006F0F30 (189 B)
 // [TODO] 0x006F0FF0 sub_006F0FF0 (128 B)
 // ============================================================================
 // [VERIFIED] sub_006F1070 (0x006F1070, 34 B)
@@ -13602,7 +13663,6 @@ void Class_006F1070::sub_006F1070(int a1)
     }
 }
 
-// [TODO] 0x006F1340 sub_006F1340 (10 B)
 // [TODO] 0x006F1350 sub_006F1350 (51 B)
 // ============================================================================
 // [VERIFIED] sub_006F1390 (0x006F1390, 15 B)
@@ -13673,10 +13733,8 @@ int __cdecl sub_006F13E0(int a1, int a2)
 }
 
 // [TODO] 0x006F1410 sub_006F1410 (41 B)
-// [TODO] 0x006F1440 sub_006F1440 (40 B)
 // [TODO] 0x006F1490 sub_006F1490 (71 B)
 // [TODO] 0x006F1560 sub_006F1560 (111 B)
-// [TODO] 0x006F15D0 sub_006F15D0 (10 B)
 // [TODO] 0x006F1600 sub_006F1600 (50 B)
 // [TODO] 0x006F1640 sub_006F1640 (37 B)
 // [TODO] 0x006F1670 sub_006F1670 (72 B)
@@ -13896,14 +13954,10 @@ int Class_006F1840::sub_006F1840()
 
 // [TODO] 0x006F1860 sub_006F1860 (72 B)
 // [TODO] 0x006F18B0 sub_006F18B0 (111 B)
-// [TODO] 0x006F1920 sub_006F1920 (9 B)
-// [TODO] 0x006F1CB0 sub_006F1CB0 (312 B)
 // [TODO] 0x006F1DF0 sub_006F1DF0 (85 B)
-// [TODO] 0x006F1E50 sub_006F1E50 (17 B)
 // [TODO] 0x006F1EF0 sub_006F1EF0 (396 B)
 // [TODO] 0x006F2080 sub_006F2080 (357 B)
 // [TODO] 0x006F21F0 sub_006F21F0 (127 B)
-// [TODO] 0x006F2270 sub_006F2270 (8 B)
 // [TODO] 0x006F22D0 sub_006F22D0 (58 B)
 // [TODO] 0x006F2310 sub_006F2310 (22 B)
 // [TODO] 0x006F2330 sub_006F2330 (71 B)
@@ -13998,8 +14052,6 @@ int Class_006F2570::sub_006F2570(int a1)
 
 // [TODO] 0x006F25C0 sub_006F25C0 (55 B)
 // [TODO] 0x006F2600 sub_006F2600 (603 B)
-// [TODO] 0x006F2860 sub_006F2860 (439 B)
-// [TODO] 0x006F2A20 sub_006F2A20 (19 B)
 // [TODO] 0x006F2A40 sub_006F2A40 (168 B)
 // [TODO] 0x006F2B30 sub_006F2B30 (151 B)
 // ============================================================================
@@ -14174,7 +14226,6 @@ void Class_006F2F00::sub_006F2F00()
 // [TODO] 0x006F2F30 sub_006F2F30 (451 B)
 // [TODO] 0x006F3100 audio::Clip::vfunc_06 (143 B)
 // [TODO] 0x006F3260 om::TRbTree<om::MetaAttribBase, 4>::Comp<om::MetaAttribBase, 4, const char*>::vfunc_00 (71 B)
-// [TODO] 0x006F32B0 sub_006F32B0 (52 B)
 // [TODO] 0x006F3300 sub_006F3300 (44 B)
 // [TODO] 0x006F3330 sub_006F3330 (31 B)
 // [TODO] 0x006F3350 sub_006F3350 (21 B)
@@ -14570,7 +14621,6 @@ void __cdecl sub_006F3D30(int a1, int a2, int a3, int a4)
     sub_006F3C90(a1 + 12, *(int*)(a1 + 20) + (((((((unsigned int)*(int*)(a1 + 12)) >> 4) & 31) * a3) + a2) * 2), *(int*)(a1 + (a2 * 4) + 40), a3, a4);
 }
 
-// [TODO] 0x006F3D70 sub_006F3D70 (11 B)
 // [TODO] 0x006F3E30 sub_006F3E30 (181 B)
 // [TODO] 0x006F4010 sub_006F4010 (595 B)
 // [TODO] 0x006F4270 sub_006F4270 (59 B)
@@ -15588,7 +15638,6 @@ void Class_006F59B0::sub_006F59B0()
 // [TODO] 0x006F5A60 audio::SeqEventContainer::vfunc_00 (90 B)
 // [TODO] 0x006F5AC0 audio::SeqEventContainer::vfunc_01 (173 B)
 // [TODO] 0x006F5B70 audio::SeqEventContainer::vfunc_05 (59 B)
-// [TODO] 0x006F5BB0 sub_006F5BB0 (21 B)
 // ============================================================================
 // [VERIFIED] audio::SeqEventTypeBase::vfunc_00 (0x006F5C10, 61 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -23298,7 +23347,6 @@ unsigned short Class_006FDA00::sub_006FDA00()
 }
 
 // [TODO] 0x006FDA10 sub_006FDA10 (221 B)
-// [TODO] 0x006FDAF0 sub_006FDAF0 (24 B)
 // [TODO] 0x006FDB80 sub_006FDB80 (40 B)
 // [TODO] 0x006FDBB0 sub_006FDBB0 (179 B)
 // [TODO] 0x006FDC70 sub_006FDC70 (336 B)
@@ -23590,7 +23638,29 @@ void Class_006FF570::sub_006FF570()
 // [TODO] 0x006FF740 sub_006FF740 (98 B)
 // [TODO] 0x006FF7B0 sub_006FF7B0 (35 B)
 // [TODO] 0x006FF8A0 sub_006FF8A0 (134 B)
-// [TODO] 0x006FF930 sub_006FF930 (14 B)
+// ============================================================================
+// [VERIFIED] sub_006FFB20 (0x006FFB20, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_006FFB20 (0x006FFB20, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_00490965(void);
+
+class Class_006FFB20
+{
+public:
+    void sub_006FFB20();
+};
+
+void Class_006FFB20::sub_006FFB20()
+{
+    sub_00490965();
+}
+
 // ============================================================================
 // [VERIFIED] sub_007001D0 (0x007001D0, 13 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -24938,6 +25008,29 @@ void Class_007027E6::sub_007027E6()
     ((void (__cdecl*)(void))DAT_0072F214)();
 }
 
+// ============================================================================
+// [VERIFIED] sub_00702810 (0x00702810, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00702810 (0x00702810, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0041EA26(void);
+
+class Class_00702810
+{
+public:
+    void sub_00702810();
+};
+
+void Class_00702810::sub_00702810()
+{
+    sub_0041EA26();
+}
+
 // [TODO] 0x0070284D sub_0070284D (74 B)
 // [TODO] 0x00702897 sub_00702897 (24 B)
 // [TODO] 0x007028AF sub_007028AF (47 B)
@@ -25037,6 +25130,29 @@ public:
 void Class_00702E0C::sub_00702E0C()
 {
     ((void (__cdecl*)(void))DAT_0072F16C)();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00702E14 (0x00702E14, 5 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00023D40 (0x00023D40), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00702E14 (0x00702E14, 5 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_0049AB8F(void);
+
+class Class_00702E14
+{
+public:
+    void sub_00702E14();
+};
+
+void Class_00702E14::sub_00702E14()
+{
+    sub_0049AB8F();
 }
 
 // [TODO] 0x00702E4F sub_00702E4F (17 B)
@@ -25750,7 +25866,6 @@ void d3dPrimBufferStream::vfunc_24()
 
 }
 
-// [TODO] 0x00703DE0 sub_00703DE0 (9 B)
 // ============================================================================
 // [VERIFIED] sub_00703F80 (0x00703F80, 77 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -27799,7 +27914,6 @@ void __cdecl sub_00707D80(void)
 }
 
 // [TODO] 0x00707D90 pure3d::d3dCharacterShader::vfunc_25 (58 B)
-// [TODO] 0x00707DD0 sub_00707DD0 (50 B)
 // [TODO] 0x00707E60 sub_00707E60 (57 B)
 // ============================================================================
 // [VERIFIED] pure3d::d3dVehicleShader::vfunc_04 (0x00707EA0, 6 B)

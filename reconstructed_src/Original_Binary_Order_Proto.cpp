@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 10,955 of 20,717 functions matched (52.88%). NOT COMPLETE YET.
-// The 9,762 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 10,962 of 20,717 functions matched (52.91%). NOT COMPLETE YET.
+// The 9,755 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -311629,7 +311629,43 @@ L_28:
 }
 
 // [TODO] 0x002832D0 sub_002832D0 (60 B)
-// [TODO] 0x00283310 sub_00283310 (90 B)
+// ============================================================================
+// [VERIFIED] sub_00283310 (0x00283310, 90 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002BF6A0 (0x002BF6A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00283310
+// what: Asks the system which memory units were inserted or removed and updates the present and changed masks.
+// tool: Claude (from SPEC-016)
+
+extern "C" int __stdcall sub_00375A63(void* type, unsigned int* inserted, unsigned int* removed);    // XGetDeviceChanges
+extern "C" char DAT_00374A60[];     // the memory-unit device type
+
+// The memory units' state: which are present and which have changed (SPEC-016 section 1.2).
+class MemoryUnits
+{
+public:
+    void sub_00283310();
+    unsigned char m_Present; // +0x0
+    unsigned char m_Changed; // +0x1
+};
+
+void MemoryUnits::sub_00283310()
+{
+    unsigned int inserted;
+    unsigned int removed;
+
+    if (sub_00375A63(DAT_00374A60, &inserted, &removed))
+    {
+        unsigned char in = (unsigned char)((inserted & 0xF) | ((inserted >> 12) & 0xF0));
+        unsigned char out = (unsigned char)((removed & 0xF) | ((removed >> 12) & 0xF0));
+        m_Present ^= in ^ out;
+        m_Changed |= in | out;
+    }
+}
+
 // ============================================================================
 // [VERIFIED] sub_00283370 (0x00283370, 41 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -311659,7 +311695,24 @@ bool MemoryUnits::sub_00283370(int port, int slot)
     return (m_Present & (unsigned char)(1 << (port + slot * 4))) != 0;
 }
 
-// [TODO] 0x002833A0 sub_002833A0 (36 B)
+// ============================================================================
+// [VERIFIED] sub_002833A0 (0x002833A0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002BF730 (0x002BF730), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002833A0
+// what: Gives the size a save takes on the memory unit: its data, a 4-byte header and one 20-byte signature for each block.
+// tool: Claude (from SPEC-016)
+
+const unsigned int BLOCK_DATA = 0x2000 - 20;     // a block less its signature
+
+unsigned int __cdecl sub_002833A0(unsigned int size)
+{
+    return size + 4 + 20 * ((size + 4 + BLOCK_DATA - 1) / BLOCK_DATA);
+}
+
 // ============================================================================
 // [VERIFIED] sub_002833D0 (0x002833D0, 50 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -311685,7 +311738,52 @@ bool __cdecl sub_002833D0(int a1, int a2, int a3)
     return true;
 }
 
-// [TODO] 0x00283410 sub_00283410 (87 B)
+// ============================================================================
+// [VERIFIED] sub_00283410 (0x00283410, 87 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002BF7A0 (0x002BF7A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00283410
+// what: Computes the 20-byte signature of the block in the shared save buffer, leaving out the signature's own place at the end.
+// tool: Claude (from SPEC-016)
+
+struct Signature
+{
+    unsigned int m_Words[5];
+};
+
+extern "C" char* DAT_00490A68;          // the transfer buffer: one block, 0x2000 bytes
+extern "C" unsigned int DAT_00490A70;   // which block of the file is in it
+
+extern "C" void* __stdcall sub_001F6F14(unsigned int flags);                                    // XCalculateSignatureBegin
+extern "C" unsigned int __stdcall sub_001F6F28(void* handle, const void* data, unsigned int size);   // XCalculateSignatureUpdate
+extern "C" unsigned int __stdcall sub_001F6F76(void* handle, void* signature);                  // XCalculateSignatureEnd
+
+inline bool Sign(const void* data, unsigned int size, Signature* signature)
+{
+    void* handle = sub_001F6F14(0);
+    if (handle == (void*)0xFFFFFFFF)
+    {
+        return false;
+    }
+    sub_001F6F28(handle, data, size);
+    sub_001F6F76(handle, signature);
+    return true;
+}
+
+bool __cdecl sub_00283410(unsigned int fileSize, Signature* signature)
+{
+    unsigned int start = DAT_00490A70 * 0x2000;
+    unsigned int end = start + 0x2000;
+    if (end >= fileSize)
+    {
+        end = fileSize;
+    }
+    return Sign(DAT_00490A68, end - start - 20, signature);
+}
+
 // ============================================================================
 // [VERIFIED] core::XboxSaveDrive::vfunc_00 (0x00283470, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -311904,7 +312002,50 @@ int XboxSaveDrive::vfunc_01()
 
 }
 
-// [TODO] 0x00283510 core::XboxSaveDrive::vfunc_06 (72 B)
+// ============================================================================
+// [VERIFIED] core::XboxSaveDrive::vfunc_06 (0x00283510, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as core::XboxSaveDrive::vfunc_06 (0x002BF8A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00283510
+// what: Gives the space a new save of a given size needs on the memory unit, rounded to 0x4000 with room for the directory.
+// tool: Claude (from SPEC-016)
+
+const unsigned int BLOCK_DATA = 0x2000 - 20;     // a block less its signature
+
+extern "C" unsigned int __cdecl sub_0020DC00(unsigned int value, unsigned int step);
+
+inline unsigned int SizeOnDisk(unsigned int size)
+{
+    return size + 4 + 20 * ((size + 4 + BLOCK_DATA - 1) / BLOCK_DATA);
+}
+
+struct SaveInfo
+{
+    int m_Field0; // +0x0
+};
+
+namespace core
+{
+    class XboxSaveDrive
+    {
+    public:
+        unsigned int vfunc_06(SaveInfo* info, unsigned int size);
+    };
+}
+
+unsigned int core::XboxSaveDrive::vfunc_06(SaveInfo* info, unsigned int size)
+{
+    unsigned int needed = sub_0020DC00(SizeOnDisk(size), 0x4000) + 0x8000;
+    if (info->m_Field0 != 0)
+    {
+        needed += 0x4000;
+    }
+    return needed;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00283560 (0x00283560, 63 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -311942,8 +312083,112 @@ int Class_00283560::sub_00283560(int a1, int a2)
     return a1;
 }
 
-// [TODO] 0x002835A0 sub_002835A0 (133 B)
-// [TODO] 0x00283630 sub_00283630 (57 B)
+// ============================================================================
+// [VERIFIED] sub_002835A0 (0x002835A0, 133 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002BF930 (0x002BF930), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002835A0
+// what: Unmounts the save drive's memory unit: closes any directory searches still open, then unmounts the unit.
+// tool: Claude (from SPEC-016)
+
+extern "C" int __stdcall sub_002D8686(void* search);                            // XFindClose
+extern "C" unsigned int __stdcall sub_003760B7(int port, int slot);             // XUnmountMU
+
+// One directory search in progress: the pattern and the system's handle (SPEC-016 section 7.1).
+struct Search
+{
+    char m_Pattern[0x204];  // +0x0
+    void* m_Handle;         // +0x204
+};
+
+class XboxSaveDrive
+{
+public:
+    void sub_002835A0();
+
+    void GetPortAndSlot(int* port, int* slot)
+    {
+        if (m_Name[0] == 'U')
+        {
+            *port = -1;
+            *slot = -1;
+        }
+        else
+        {
+            *port = m_Name[7] - '1';
+            *slot = m_Name[8] - 'A';
+        }
+    }
+
+    char m_pad00[0xE8];
+    char m_Name[0x11];          // +0xE8
+    bool m_Mounted;             // +0xF9
+    char m_DriveLetter;         // +0xFA
+    char m_padFB[0x11];
+    Search m_Searches[4];       // +0x10C
+};
+
+void XboxSaveDrive::sub_002835A0()
+{
+    if (m_DriveLetter == 'U')
+    {
+        return;
+    }
+    if (!m_Mounted)
+    {
+        return;
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        if (m_Searches[i].m_Handle != (void*)0xFFFFFFFF)
+        {
+            sub_002D8686(m_Searches[i].m_Handle);
+            m_Searches[i].m_Handle = (void*)0xFFFFFFFF;
+        }
+    }
+
+    int port;
+    int slot;
+    GetPortAndSlot(&port, &slot);
+    sub_003760B7(port, slot);
+    m_Mounted = false;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00283630 (0x00283630, 57 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002BF9C0 (0x002BF9C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00283630
+// what: Says whether one wide-character string starts with another.
+// tool: Claude (from SPEC-016)
+
+class XboxSaveDrive
+{
+public:
+    bool sub_00283630(const unsigned short* text, const unsigned short* prefix);
+};
+
+bool XboxSaveDrive::sub_00283630(const unsigned short* text, const unsigned short* prefix)
+{
+    while (*prefix != 0)
+    {
+        if (*text == 0 || *text != *prefix)
+        {
+            return false;
+        }
+        prefix++;
+        text++;
+    }
+    return true;
+}
+
 // [TODO] 0x00283670 sub_00283670 (160 B)
 // [TODO] 0x00283710 sub_00283710 (165 B)
 // [TODO] 0x002837C0 sub_002837C0 (410 B)
@@ -312470,7 +312715,35 @@ bool Class_00283CC0::sub_00283CC0(int a1, int a2)
     return true;
 }
 
-// [TODO] 0x00283D00 sub_00283D00 (60 B)
+// ============================================================================
+// [VERIFIED] sub_00283D00 (0x00283D00, 60 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002C0090 (0x002C0090), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00283D00
+// what: Creates the Xbox save drive: remembers the allocator, allocates the object from it and constructs it with the drive's name.
+// tool: Claude (from SPEC-016)
+
+extern "C" void* DAT_00429338;      // the allocator the save drive was made with
+void* __cdecl sub_002018F0(void* allocator, unsigned int size);     // AllocateFromHeap
+
+class XboxSaveDrive
+{
+public:
+    XboxSaveDrive* sub_002837C0(const char* name, void* allocator);    // the constructor
+    char m_Data[0x92C];
+};
+
+// What `new (allocator) XboxSaveDrive(name, allocator)` compiles to, with the constructor called by its address name.
+void __cdecl sub_00283D00(XboxSaveDrive** result, const char* name, void* allocator)
+{
+    DAT_00429338 = allocator;
+    XboxSaveDrive* memory = (XboxSaveDrive*)sub_002018F0(allocator, sizeof(XboxSaveDrive));
+    *result = memory ? memory->sub_002837C0(name, allocator) : 0;
+}
+
 // ============================================================================
 // [VERIFIED] core::XboxSaveDrive::vfunc_03 (0x00283D40, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

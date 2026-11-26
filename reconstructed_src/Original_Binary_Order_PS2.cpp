@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PS2 SLUS_211.11, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 3,594 of 23,567 functions matched (15.25%). NOT COMPLETE YET.
-// The 19,973 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 3,655 of 23,567 functions matched (15.51%). NOT COMPLETE YET.
+// The 19,912 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Metrowerks CodeWarrior for PS2 (decomp.me: mwcps2-3.0.1b103-040528, or the build a block names: docs/PS2.md says why there are two).
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -2270,21 +2270,93 @@ void Object::Set(float value)
 // [TODO] 0x0038EB40 func_0038EB40 (68 B)
 // [TODO] 0x0038EB90 func_0038EB90 (80 B)
 // [TODO] 0x0038EBE0 func_0038EBE0 (80 B)
-// [TODO] 0x0038EC30 func_0038EC30 (12 B)
+// ============================================================================
+// [VERIFIED] func_0038EC30 (0x0038EC30, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_0047EEF0 and lets it return to this function's caller (the call is a jump).
+extern int D_0081DFE8[];
+extern "C" void func_0047EEF0(int);
+
+void Forward()
+{
+    func_0047EEF0(D_0081DFE8[0]);
+}
+
 // [TODO] 0x0038EC40 func_0038EC40 (124 B)
 // [TODO] 0x0038ECC0 func_0038ECC0 (24 B)
 // [TODO] 0x0038ECE0 func_0038ECE0 (32 B)
-// [TODO] 0x0038ED00 func_0038ED00 (12 B)
+// ============================================================================
+// [VERIFIED] func_0038ED00 (0x0038ED00, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_0047E5B0 and lets it return to this function's caller (the call is a jump).
+extern int D_0081DFE8[];
+extern "C" void func_0047E5B0(int);
+
+void Forward()
+{
+    func_0047E5B0(D_0081DFE8[0]);
+}
+
 // [TODO] 0x0038ED10 func_0038ED10 (52 B)
 // [TODO] 0x0038ED50 func_0038ED50 (88 B)
-// [TODO] 0x0038EDB0 func_0038EDB0 (12 B)
+// ============================================================================
+// [VERIFIED] func_0038EDB0 (0x0038EDB0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_0047F530 and lets it return to this function's caller (the call is a jump).
+extern int D_0081DFE8[];
+extern "C" void func_0047F530(int);
+
+void Forward()
+{
+    func_0047F530(D_0081DFE8[0]);
+}
+
 // [TODO] 0x0038EDC0 func_0038EDC0 (152 B)
 // [TODO] 0x0038EE60 func_0038EE60 (228 B)
 // [TODO] 0x0038EF50 func_0038EF50 (20 B)
-// [TODO] 0x0038EF70 func_0038EF70 (12 B)
-// [TODO] 0x0038EF80 func_0038EF80 (12 B)
+// ============================================================================
+// [VERIFIED] func_0038EF70 (0x0038EF70, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_00480230 and lets it return to this function's caller (the call is a jump).
+extern int D_0081DFE8[];
+extern "C" void func_00480230(int);
+
+void Forward()
+{
+    func_00480230(D_0081DFE8[0]);
+}
+
+// ============================================================================
+// [VERIFIED] func_0038EF80 (0x0038EF80, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_004803A0 and lets it return to this function's caller (the call is a jump).
+extern int D_0081DFE8[];
+extern "C" void func_004803A0(int);
+
+void Forward()
+{
+    func_004803A0(D_0081DFE8[0]);
+}
+
 // [TODO] 0x0038EF90 func_0038EF90 (16 B)
-// [TODO] 0x0038EFA0 func_0038EFA0 (12 B)
+// ============================================================================
+// [VERIFIED] func_0038EFA0 (0x0038EFA0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_00480530 and lets it return to this function's caller (the call is a jump).
+extern int D_0081DFE8[];
+extern "C" void func_00480530(int);
+
+void Forward()
+{
+    func_00480530(D_0081DFE8[0]);
+}
+
 // [TODO] 0x0038EFB0 func_0038EFB0 (120 B)
 // [TODO] 0x0038F030 func_0038F030 (96 B)
 // [TODO] 0x0038F090 func_0038F090 (68 B)
@@ -3109,7 +3181,25 @@ float Object::Get()
     return m_FieldC;
 }
 
-// [TODO] 0x00392940 func_00392940 (12 B)
+// ============================================================================
+// [VERIFIED] func_00392940 (0x00392940, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0xC of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0xC];
+    float m_FieldC; // +0xC
+};
+
+bool Object::Set(float value)
+{
+    m_FieldC = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_00392950 (0x00392950, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -3128,7 +3218,25 @@ float Object::Get()
     return m_Field10;
 }
 
-// [TODO] 0x00392960 func_00392960 (12 B)
+// ============================================================================
+// [VERIFIED] func_00392960 (0x00392960, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+bool Object::Set(float value)
+{
+    m_Field10 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_00392970 (0x00392970, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -3228,8 +3336,44 @@ int Object::Get()
 }
 
 // [TODO] 0x00392AA0 func_00392AA0 (68 B)
-// [TODO] 0x00392AF0 func_00392AF0 (12 B)
-// [TODO] 0x00392B00 func_00392B00 (12 B)
+// ============================================================================
+// [VERIFIED] func_00392AF0 (0x00392AF0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+bool Object::Set(float value)
+{
+    m_Field18 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_00392B00 (0x00392B00, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x14 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x14];
+    float m_Field14; // +0x14
+};
+
+bool Object::Set(float value)
+{
+    m_Field14 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_00392B10 (0x00392B10, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -11482,7 +11626,25 @@ void Forward()
 // [TODO] 0x003EBD00 func_003EBD00 (624 B)
 // [TODO] 0x003EBF70 func_003EBF70 (96 B)
 // [TODO] 0x003EBFD0 func_003EBFD0 (112 B)
-// [TODO] 0x003EC040 func_003EC040 (12 B)
+// ============================================================================
+// [VERIFIED] func_003EC040 (0x003EC040, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x28 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x28];
+    float m_Field28; // +0x28
+};
+
+bool Object::Set(float value)
+{
+    m_Field28 = value;
+    return true;
+}
+
 // [TODO] 0x003EC050 func_003EC050 (32 B)
 // ============================================================================
 // [VERIFIED] func_003EC070 (0x003EC070, 8 B)
@@ -11619,7 +11781,25 @@ bool Object::Set(int value)
     return true;
 }
 
-// [TODO] 0x003ECAA0 func_003ECAA0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003ECAA0 (0x003ECAA0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x24 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x24];
+    float m_Field24; // +0x24
+};
+
+bool Object::Set(float value)
+{
+    m_Field24 = value;
+    return true;
+}
+
 // [TODO] 0x003ECAB0 func_003ECAB0 (32 B)
 // ============================================================================
 // [VERIFIED] func_003ECAD0 (0x003ECAD0, 8 B)
@@ -11965,7 +12145,25 @@ void Forward()
 }
 
 // [TODO] 0x003EDD90 func_003EDD90 (520 B)
-// [TODO] 0x003EDFA0 func_003EDFA0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003EDFA0 (0x003EDFA0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x24 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x24];
+    float m_Field24; // +0x24
+};
+
+bool Object::Set(float value)
+{
+    m_Field24 = value;
+    return true;
+}
+
 // [TODO] 0x003EDFB0 func_003EDFB0 (32 B)
 // ============================================================================
 // [VERIFIED] func_003EDFD0 (0x003EDFD0, 8 B)
@@ -12738,9 +12936,63 @@ bool Object::Set(int value)
     return true;
 }
 
-// [TODO] 0x003F0C10 func_003F0C10 (12 B)
-// [TODO] 0x003F0C20 func_003F0C20 (12 B)
-// [TODO] 0x003F0C30 func_003F0C30 (12 B)
+// ============================================================================
+// [VERIFIED] func_003F0C10 (0x003F0C10, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+bool Object::Set(float value)
+{
+    m_Field1C = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F0C20 (0x003F0C20, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+bool Object::Set(float value)
+{
+    m_Field18 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_003F0C30 (0x003F0C30, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x14 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x14];
+    float m_Field14; // +0x14
+};
+
+bool Object::Set(float value)
+{
+    m_Field14 = value;
+    return true;
+}
+
 // [TODO] 0x003F0C40 func_003F0C40 (76 B)
 // [TODO] 0x003F0C90 func_003F0C90 (112 B)
 // [TODO] 0x003F0D00 func_003F0D00 (72 B)
@@ -12760,7 +13012,25 @@ void Forward()
 }
 
 // [TODO] 0x003F0D80 func_003F0D80 (416 B)
-// [TODO] 0x003F0F20 func_003F0F20 (12 B)
+// ============================================================================
+// [VERIFIED] func_003F0F20 (0x003F0F20, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+bool Object::Set(float value)
+{
+    m_Field18 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_003F0F30 (0x003F0F30, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -12798,7 +13068,25 @@ void Forward()
 }
 
 // [TODO] 0x003F10A0 func_003F10A0 (520 B)
-// [TODO] 0x003F12B0 func_003F12B0 (12 B)
+// ============================================================================
+// [VERIFIED] func_003F12B0 (0x003F12B0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+bool Object::Set(float value)
+{
+    m_Field1C = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_003F12C0 (0x003F12C0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -23153,10 +23441,58 @@ void Object::Set()
 // [TODO] 0x004932C0 func_004932C0 (16 B)
 // [TODO] 0x004932D0 func_004932D0 (76 B)
 // [TODO] 0x00493320 func_00493320 (28 B)
-// [TODO] 0x00493340 func_00493340 (12 B)
-// [TODO] 0x00493350 func_00493350 (12 B)
-// [TODO] 0x00493360 func_00493360 (12 B)
-// [TODO] 0x00493370 func_00493370 (12 B)
+// ============================================================================
+// [VERIFIED] func_00493340 (0x00493340, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_00493C90 and lets it return to this function's caller (the call is a jump).
+extern int D_0081EA00[];
+extern "C" void func_00493C90(int);
+
+void Forward()
+{
+    func_00493C90(D_0081EA00[0]);
+}
+
+// ============================================================================
+// [VERIFIED] func_00493350 (0x00493350, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_00493D00 and lets it return to this function's caller (the call is a jump).
+extern int D_0081EA00[];
+extern "C" void func_00493D00(int);
+
+void Forward()
+{
+    func_00493D00(D_0081EA00[0]);
+}
+
+// ============================================================================
+// [VERIFIED] func_00493360 (0x00493360, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_00493D80 and lets it return to this function's caller (the call is a jump).
+extern int D_0081EA00[];
+extern "C" void func_00493D80(int);
+
+void Forward()
+{
+    func_00493D80(D_0081EA00[0]);
+}
+
+// ============================================================================
+// [VERIFIED] func_00493370 (0x00493370, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_00493D90 and lets it return to this function's caller (the call is a jump).
+extern int D_0081EA00[];
+extern "C" void func_00493D90(int);
+
+void Forward()
+{
+    func_00493D90(D_0081EA00[0]);
+}
+
 // [TODO] 0x00493380 func_00493380 (56 B)
 // [TODO] 0x004933C0 func_004933C0 (56 B)
 // [TODO] 0x00493400 func_00493400 (84 B)
@@ -24929,7 +25265,25 @@ void Forward()
 }
 
 // [TODO] 0x004B8C10 func_004B8C10 (336 B)
-// [TODO] 0x004B8D60 func_004B8D60 (12 B)
+// ============================================================================
+// [VERIFIED] func_004B8D60 (0x004B8D60, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x14 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x14];
+    float m_Field14; // +0x14
+};
+
+bool Object::Set(float value)
+{
+    m_Field14 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004B8D70 (0x004B8D70, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -24968,7 +25322,25 @@ void Forward()
 }
 
 // [TODO] 0x004B8FB0 func_004B8FB0 (336 B)
-// [TODO] 0x004B9100 func_004B9100 (12 B)
+// ============================================================================
+// [VERIFIED] func_004B9100 (0x004B9100, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x14 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x14];
+    float m_Field14; // +0x14
+};
+
+bool Object::Set(float value)
+{
+    m_Field14 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004B9110 (0x004B9110, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -25950,7 +26322,25 @@ float Object::Get()
 }
 
 // [TODO] 0x004C6AA0 func_004C6AA0 (384 B)
-// [TODO] 0x004C6C20 func_004C6C20 (12 B)
+// ============================================================================
+// [VERIFIED] func_004C6C20 (0x004C6C20, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x20 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+bool Object::Set(float value)
+{
+    m_Field20 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004C6C30 (0x004C6C30, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -26328,7 +26718,25 @@ unsigned char Object::Get()
     return m_Field1C;
 }
 
-// [TODO] 0x004CCE90 func_004CCE90 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CCE90 (0x004CCE90, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+bool Object::Set(float value)
+{
+    m_Field18 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004CCEA0 (0x004CCEA0, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -26408,7 +26816,25 @@ unsigned char Object::Get()
     return m_Field20;
 }
 
-// [TODO] 0x004CD070 func_004CD070 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CD070 (0x004CD070, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+bool Object::Set(float value)
+{
+    m_Field1C = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004CD080 (0x004CD080, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -26636,7 +27062,25 @@ int* Object::Get()
 // [TODO] 0x004CDE00 func_004CDE00 (64 B)
 // [TODO] 0x004CDE40 func_004CDE40 (36 B)
 // [TODO] 0x004CDE70 func_004CDE70 (48 B)
-// [TODO] 0x004CDEA0 func_004CDEA0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CDEA0 (0x004CDEA0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x18 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x18];
+    float m_Field18; // +0x18
+};
+
+bool Object::Set(float value)
+{
+    m_Field18 = value;
+    return true;
+}
+
 // [TODO] 0x004CDEB0 func_004CDEB0 (36 B)
 // [TODO] 0x004CDEE0 func_004CDEE0 (16 B)
 // [TODO] 0x004CDEF0 func_004CDEF0 (32 B)
@@ -26813,7 +27257,25 @@ bool Object::Set(char value)
     return true;
 }
 
-// [TODO] 0x004CE3C0 func_004CE3C0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CE3C0 (0x004CE3C0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x24 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x24];
+    float m_Field24; // +0x24
+};
+
+bool Object::Set(float value)
+{
+    m_Field24 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004CE3D0 (0x004CE3D0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -26832,7 +27294,25 @@ float Object::Get()
     return m_Field24;
 }
 
-// [TODO] 0x004CE3E0 func_004CE3E0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CE3E0 (0x004CE3E0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x20 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+bool Object::Set(float value)
+{
+    m_Field20 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004CE3F0 (0x004CE3F0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27028,9 +27508,63 @@ int* Object::Get()
     return &m_Field30;
 }
 
-// [TODO] 0x004CEED0 func_004CEED0 (12 B)
-// [TODO] 0x004CEEE0 func_004CEEE0 (12 B)
-// [TODO] 0x004CEEF0 func_004CEEF0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CEED0 (0x004CEED0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x2C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x2C];
+    float m_Field2C; // +0x2C
+};
+
+bool Object::Set(float value)
+{
+    m_Field2C = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CEEE0 (0x004CEEE0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x28 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x28];
+    float m_Field28; // +0x28
+};
+
+bool Object::Set(float value)
+{
+    m_Field28 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CEEF0 (0x004CEEF0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x24 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x24];
+    float m_Field24; // +0x24
+};
+
+bool Object::Set(float value)
+{
+    m_Field24 = value;
+    return true;
+}
+
 // [TODO] 0x004CEF00 func_004CEF00 (40 B)
 // [TODO] 0x004CEF30 func_004CEF30 (40 B)
 // [TODO] 0x004CEF60 func_004CEF60 (40 B)
@@ -27091,8 +27625,44 @@ bool Object::Set(char value)
     return true;
 }
 
-// [TODO] 0x004CFBF0 func_004CFBF0 (12 B)
-// [TODO] 0x004CFC00 func_004CFC00 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CFBF0 (0x004CFBF0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x6C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x6C];
+    float m_Field6C; // +0x6C
+};
+
+bool Object::Set(float value)
+{
+    m_Field6C = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFC00 (0x004CFC00, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x68 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x68];
+    float m_Field68; // +0x68
+};
+
+bool Object::Set(float value)
+{
+    m_Field68 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004CFC10 (0x004CFC10, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27149,8 +27719,44 @@ bool Object::Set(char value)
     return true;
 }
 
-// [TODO] 0x004CFC40 func_004CFC40 (12 B)
-// [TODO] 0x004CFC50 func_004CFC50 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CFC40 (0x004CFC40, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x5C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x5C];
+    float m_Field5C; // +0x5C
+};
+
+bool Object::Set(float value)
+{
+    m_Field5C = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFC50 (0x004CFC50, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x58 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x58];
+    float m_Field58; // +0x58
+};
+
+bool Object::Set(float value)
+{
+    m_Field58 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004CFC60 (0x004CFC60, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27207,8 +27813,44 @@ bool Object::Set(char value)
     return true;
 }
 
-// [TODO] 0x004CFC90 func_004CFC90 (12 B)
-// [TODO] 0x004CFCA0 func_004CFCA0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CFC90 (0x004CFC90, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x4C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x4C];
+    float m_Field4C; // +0x4C
+};
+
+bool Object::Set(float value)
+{
+    m_Field4C = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFCA0 (0x004CFCA0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x48 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x48];
+    float m_Field48; // +0x48
+};
+
+bool Object::Set(float value)
+{
+    m_Field48 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004CFCB0 (0x004CFCB0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27265,8 +27907,44 @@ bool Object::Set(char value)
     return true;
 }
 
-// [TODO] 0x004CFCE0 func_004CFCE0 (12 B)
-// [TODO] 0x004CFCF0 func_004CFCF0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CFCE0 (0x004CFCE0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x3C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x3C];
+    float m_Field3C; // +0x3C
+};
+
+bool Object::Set(float value)
+{
+    m_Field3C = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004CFCF0 (0x004CFCF0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x38 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x38];
+    float m_Field38; // +0x38
+};
+
+bool Object::Set(float value)
+{
+    m_Field38 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004CFD00 (0x004CFD00, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27285,7 +27963,25 @@ int* Object::Get()
     return &m_Field34;
 }
 
-// [TODO] 0x004CFD10 func_004CFD10 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CFD10 (0x004CFD10, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x30 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x30];
+    float m_Field30; // +0x30
+};
+
+bool Object::Set(float value)
+{
+    m_Field30 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004CFD20 (0x004CFD20, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27325,7 +28021,25 @@ bool Object::Set(char value)
 }
 
 // [TODO] 0x004CFD40 func_004CFD40 (32 B)
-// [TODO] 0x004CFD60 func_004CFD60 (12 B)
+// ============================================================================
+// [VERIFIED] func_004CFD60 (0x004CFD60, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x2C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x2C];
+    float m_Field2C; // +0x2C
+};
+
+bool Object::Set(float value)
+{
+    m_Field2C = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004CFD70 (0x004CFD70, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27581,9 +28295,63 @@ void Forward()
 }
 
 // [TODO] 0x004D0940 func_004D0940 (748 B)
-// [TODO] 0x004D0C30 func_004D0C30 (12 B)
-// [TODO] 0x004D0C40 func_004D0C40 (12 B)
-// [TODO] 0x004D0C50 func_004D0C50 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D0C30 (0x004D0C30, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x28 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x28];
+    float m_Field28; // +0x28
+};
+
+bool Object::Set(float value)
+{
+    m_Field28 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D0C40 (0x004D0C40, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x24 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x24];
+    float m_Field24; // +0x24
+};
+
+bool Object::Set(float value)
+{
+    m_Field24 = value;
+    return true;
+}
+
+// ============================================================================
+// [VERIFIED] func_004D0C50 (0x004D0C50, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x20 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+bool Object::Set(float value)
+{
+    m_Field20 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D0C60 (0x004D0C60, 12 B)
 // By: RRutherrfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27644,7 +28412,25 @@ int Number()
 
 // [TODO] 0x004D0CA0 func_004D0CA0 (96 B)
 // [TODO] 0x004D0D00 func_004D0D00 (68 B)
-// [TODO] 0x004D0D50 func_004D0D50 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D0D50 (0x004D0D50, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x20 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+bool Object::Set(float value)
+{
+    m_Field20 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D0D60 (0x004D0D60, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27663,7 +28449,25 @@ float Object::Get()
     return m_Field20;
 }
 
-// [TODO] 0x004D0D70 func_004D0D70 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D0D70 (0x004D0D70, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+bool Object::Set(float value)
+{
+    m_Field1C = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D0D80 (0x004D0D80, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27724,7 +28528,25 @@ int Number()
 
 // [TODO] 0x004D0F80 func_004D0F80 (96 B)
 // [TODO] 0x004D0FE0 func_004D0FE0 (64 B)
-// [TODO] 0x004D1020 func_004D1020 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D1020 (0x004D1020, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x2C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x2C];
+    float m_Field2C; // +0x2C
+};
+
+bool Object::Set(float value)
+{
+    m_Field2C = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D1030 (0x004D1030, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27743,7 +28565,25 @@ float Object::Get()
     return m_Field2C;
 }
 
-// [TODO] 0x004D1040 func_004D1040 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D1040 (0x004D1040, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x28 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x28];
+    float m_Field28; // +0x28
+};
+
+bool Object::Set(float value)
+{
+    m_Field28 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D1050 (0x004D1050, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27762,7 +28602,25 @@ float Object::Get()
     return m_Field28;
 }
 
-// [TODO] 0x004D1060 func_004D1060 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D1060 (0x004D1060, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x24 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x24];
+    float m_Field24; // +0x24
+};
+
+bool Object::Set(float value)
+{
+    m_Field24 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D1070 (0x004D1070, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27781,7 +28639,25 @@ float Object::Get()
     return m_Field24;
 }
 
-// [TODO] 0x004D1080 func_004D1080 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D1080 (0x004D1080, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x20 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+bool Object::Set(float value)
+{
+    m_Field20 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D1090 (0x004D1090, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27800,7 +28676,25 @@ float Object::Get()
     return m_Field20;
 }
 
-// [TODO] 0x004D10A0 func_004D10A0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D10A0 (0x004D10A0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+bool Object::Set(float value)
+{
+    m_Field1C = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D10B0 (0x004D10B0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -27905,7 +28799,25 @@ int Object::Get()
     return m_Field14;
 }
 
-// [TODO] 0x004D1480 func_004D1480 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D1480 (0x004D1480, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x38 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x38];
+    float m_Field38; // +0x38
+};
+
+bool Object::Set(float value)
+{
+    m_Field38 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D1490 (0x004D1490, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -28000,7 +28912,25 @@ unsigned char Object::Get()
 
 // [TODO] 0x004D14E0 func_004D14E0 (40 B)
 // [TODO] 0x004D1510 func_004D1510 (28 B)
-// [TODO] 0x004D1530 func_004D1530 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D1530 (0x004D1530, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x20 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x20];
+    float m_Field20; // +0x20
+};
+
+bool Object::Set(float value)
+{
+    m_Field20 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D1540 (0x004D1540, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -28332,7 +29262,25 @@ unsigned char Object::Get()
     return m_Field30;
 }
 
-// [TODO] 0x004D1DB0 func_004D1DB0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D1DB0 (0x004D1DB0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x2C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x2C];
+    float m_Field2C; // +0x2C
+};
+
+bool Object::Set(float value)
+{
+    m_Field2C = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D1DC0 (0x004D1DC0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -28351,7 +29299,25 @@ float Object::Get()
     return m_Field2C;
 }
 
-// [TODO] 0x004D1DD0 func_004D1DD0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D1DD0 (0x004D1DD0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x28 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x28];
+    float m_Field28; // +0x28
+};
+
+bool Object::Set(float value)
+{
+    m_Field28 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D1DE0 (0x004D1DE0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -28370,7 +29336,25 @@ float Object::Get()
     return m_Field28;
 }
 
-// [TODO] 0x004D1DF0 func_004D1DF0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D1DF0 (0x004D1DF0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x24 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x24];
+    float m_Field24; // +0x24
+};
+
+bool Object::Set(float value)
+{
+    m_Field24 = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D1E00 (0x004D1E00, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -28590,7 +29574,25 @@ float Zero()
     return 0.0f;
 }
 
-// [TODO] 0x004D39C0 func_004D39C0 (12 B)
+// ============================================================================
+// [VERIFIED] func_004D39C0 (0x004D39C0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x1C of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x1C];
+    float m_Field1C; // +0x1C
+};
+
+bool Object::Set(float value)
+{
+    m_Field1C = value;
+    return true;
+}
+
 // ============================================================================
 // [VERIFIED] func_004D39D0 (0x004D39D0, 8 B)
 // By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly
@@ -50977,7 +51979,19 @@ int Object::Get()
 // [TODO] 0x00619A10 func_00619A10 (172 B)
 // [TODO] 0x00619AC0 func_00619AC0 (72 B)
 // [TODO] 0x00619B10 func_00619B10 (76 B)
-// [TODO] 0x00619B60 func_00619B60 (12 B)
+// ============================================================================
+// [VERIFIED] func_00619B60 (0x00619B60, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Passes 1 value on to func_0061A8C0 and lets it return to this function's caller (the call is a jump).
+extern int D_00832440[];
+extern "C" void func_0061A8C0(int);
+
+void Forward()
+{
+    func_0061A8C0(D_00832440[0]);
+}
+
 // [TODO] 0x00619B70 func_00619B70 (428 B)
 // [TODO] 0x00619D20 func_00619D20 (540 B)
 // [TODO] 0x00619F40 func_00619F40 (88 B)
@@ -64465,7 +65479,25 @@ int Number()
 // [TODO] 0x006E3AA0 func_006E3AA0 (68 B)
 // [TODO] 0x006E3AF0 func_006E3AF0 (92 B)
 // [TODO] 0x006E3B50 func_006E3B50 (128 B)
-// [TODO] 0x006E3BD0 func_006E3BD0 (12 B)
+// ============================================================================
+// [VERIFIED] func_006E3BD0 (0x006E3BD0, 12 B)
+// By: RRutherfordd (Founder) | Flags: -O3 -lang c++ -str readonly -Cpp_exceptions off | Build: mwcps2-3.0b52-030722
+// ============================================================================
+// Stores its argument as a float at +0x10 of its object and returns true.
+class Object
+{
+public:
+    bool Set(float value);
+    char m_pad00[0x10];
+    float m_Field10; // +0x10
+};
+
+bool Object::Set(float value)
+{
+    m_Field10 = value;
+    return true;
+}
+
 // [TODO] 0x006E3BE0 func_006E3BE0 (24 B)
 // [TODO] 0x006E3C00 func_006E3C00 (96 B)
 // [TODO] 0x006E3C60 func_006E3C60 (104 B)

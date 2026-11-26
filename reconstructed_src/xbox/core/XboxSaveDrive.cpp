@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/XboxSaveDrive.cpp (11 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/XboxSaveDrive.cpp (12 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11 of 21 functions matched (52.38%). NOT COMPLETE YET.
-// The 10 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 12 of 21 functions matched (57.14%). NOT COMPLETE YET.
+// The 9 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -200,6 +200,49 @@ int XboxSaveDrive::vfunc_02(int a1)
     return 4;
 }
 
+}
+
+// ============================================================================
+// [VERIFIED] core::XboxSaveDrive::vfunc_06 (0x002BF8A0, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Gives the space a new save of a given size needs on the memory unit, rounded to 0x4000 with room for the directory.
+// ============================================================================
+// bin: xb
+// va: 0x002BF8A0
+// what: Gives the space a new save of a given size needs on the memory unit, rounded to 0x4000 with room for the directory.
+// tool: Claude (from SPEC-016)
+
+const unsigned int BLOCK_DATA = 0x2000 - 20;     // a block less its signature
+
+extern "C" unsigned int __cdecl sub_00250E80(unsigned int value, unsigned int step);
+
+inline unsigned int SizeOnDisk(unsigned int size)
+{
+    return size + 4 + 20 * ((size + 4 + BLOCK_DATA - 1) / BLOCK_DATA);
+}
+
+struct SaveInfo
+{
+    int m_Field0; // +0x0
+};
+
+namespace core
+{
+    class XboxSaveDrive
+    {
+    public:
+        unsigned int vfunc_06(SaveInfo* info, unsigned int size);
+    };
+}
+
+unsigned int core::XboxSaveDrive::vfunc_06(SaveInfo* info, unsigned int size)
+{
+    unsigned int needed = sub_00250E80(SizeOnDisk(size), 0x4000) + 0x8000;
+    if (info->m_Field0 != 0)
+    {
+        needed += 0x4000;
+    }
+    return needed;
 }
 
 // ============================================================================
