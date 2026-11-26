@@ -191,7 +191,15 @@ def test_scoreboard_and_progress(site, browser):
             assert f"of the {v.get('stubs', 0) + q['stubs']:,} start-up and shutdown stubs" in line
     else:
         assert pg.is_hidden("#sb-stubs")
-    share = v["total"] / total * 100
+    count_share = share = v["total"] / total * 100
+    if q.get("bytes"):                                          # the headline is the share by size; both are shown
+        share = v["bytes"] / (v["bytes"] + q["bytes"]) * 100
+        fmt_share = lambda p: f"{p:.1f}%" if p >= 10 else f"{p:.2f}%"   # noqa: E731
+        assert pg.text_content("#sb-size-pct") == fmt_share(share)
+        assert pg.text_content("#sb-count-pct") == fmt_share(count_share)
+        assert abs(float(pg.get_attribute("#sb-bar-outer", "aria-valuenow")) - share) < 0.01
+    else:
+        assert pg.is_hidden("#sb-measures")
     assert pg.text_content("#claim") == f"The world is {share:.1f}% yours." if share >= 10 else \
         pg.text_content("#claim") == f"The world is {share:.2f}% yours."
     assert pg.text_content("#sb-pc") == f"{v['pc']:,}" and pg.text_content("#sb-xb") == f"{v['xb']:,}"
