@@ -70,6 +70,28 @@ def test_one_recorded_meanwhile_as_a_look_alike_is_a_success(tmp_path, monkeypat
     assert S.submit("http://x", "me", "1234", path) == (False, "couldn't claim it: Claimed by Bob.")
 
 
+def test_a_portal_of_another_copy_is_named_before_anything_is_sent(tmp_path, monkeypatch):
+    """A second copy of the project on the same computer, started by mistake, answers on the same port and
+    knows none of this folder's functions (with no game files it knows none at all)."""
+    path = tmp_path / "xb_00243FA0.cpp"
+    path.write_text(FILE, encoding="utf-8")
+    queue = tmp_path / "queue.json"
+    queue.write_text('[{"id": "xb_00243FA0", "bin": "xb"}, {"id": "xb_00100000"}, "junk"]', encoding="utf-8")
+    here = S.queued_here(queue)
+    assert here == {"xb_00243FA0", "xb_00100000"}
+    assert S.queued_here(tmp_path / "none.json") == set()                       # no queue built yet: nothing to say
+    answers = {"/api/task?id=xb_00243FA0": {"ok": False, "error": "Function not found."}, "/api/queue?limit=1": {"total": 0}}
+    monkeypatch.setattr(S, "call", lambda base, where, body=None: answers[where])
+    said = S.another_portal("http://x", [path], here, tmp_path)
+    assert "is not this folder's" in said and "xb_00243FA0" in said and "without the game files" in said
+    assert str(tmp_path / "START_PORTAL.bat") in said
+    answers["/api/queue?limit=1"] = {"total": 31000}                              # an older queue, not an empty one
+    assert "without the game files" not in S.another_portal("http://x", [path], here, tmp_path)
+    answers["/api/task?id=xb_00243FA0"] = {"ok": True, "task": {"status": "UNCLAIMED"}}
+    assert S.another_portal("http://x", [path], here, tmp_path) is None           # this folder's portal
+    assert S.another_portal("http://x", [path], set(), tmp_path) is None          # nothing to compare with
+
+
 def test_the_waiting_matches_are_well_formed():
     for path in sorted((Path(__file__).resolve().parents[2] / "reports" / "to_submit").glob("*.cpp")):
         fields, _code = S.read_proposal(path.read_text(encoding="utf-8"))

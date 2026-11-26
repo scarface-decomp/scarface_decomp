@@ -35,6 +35,7 @@ from typing import Dict, Optional, Tuple
 
 ROOT = Path(__file__).resolve().parents[2]
 FOLDER = ROOT / "reports" / "to_submit"
+QUEUE = ROOT / "reports" / "full_remaining_queue.json"
 HEADER = re.compile(r"^//\s*(bin|va|what|how|spec|tool)\s*:\s*(.*?)\s*$", re.I)
 
 
@@ -99,7 +100,9 @@ def submit(base: str, user: str, pin: str, path: Path) -> Tuple[bool, str]:
         return False, "no '// bin:' and '// va:' lines at the top"
     task = call(base, "/api/task?id=" + tid)
     if not task.get("task"):
-        return False, f"the portal doesn't know {tid}: {task.get('error', 'no such function')}"
+        return False, (f"the portal doesn't know {tid}: {task.get('error', 'no such function')} If it is a "
+                       "newly listed function, close the portal, run python portal/tools/queue_builder.py and "
+                       "start the portal again.")
     if task["task"].get("status") == "VERIFIED":
         return True, "already verified"
     claim = call(base, "/api/claim", {"user": user, "pin": pin, "id": tid})
@@ -129,6 +132,36 @@ def recorded_meanwhile(base: str, tid: str) -> bool:
     return task.get("status") == "VERIFIED"
 
 
+def queued_here(queue: Path = QUEUE) -> set:
+    """The ids of the functions in this folder's work queue (empty when it has not been built yet)."""
+    try:
+        tasks = json.loads(queue.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return set()
+    return {t["id"] for t in tasks if isinstance(t, dict) and t.get("id")} if isinstance(tasks, list) else set()
+
+
+def another_portal(base: str, files, here: set, root: Path = ROOT) -> Optional[str]:
+    """What to do when the portal that answers is not the one of this folder, else None. Two copies of the
+    project on one computer look the same in a browser, and a portal started before the work queue was
+    rebuilt keeps its old list: either one answers "Function not found." for every file. This asks about one
+    function this folder's work queue has; a portal that reads this folder's queue knows it."""
+    for path in files:
+        tid = task_id(read_proposal(path.read_text(encoding="utf-8"))[0])
+        if not tid or tid not in here:
+            continue
+        if call(base, "/api/task?id=" + tid).get("task"):
+            return None
+        total = call(base, "/api/queue?limit=1").get("total")
+        empty = " It has no functions at all: it runs from a copy of the project without the game files." if total == 0 else ""
+        return (f"The portal answering at {base} is not this folder's: it doesn't know {tid}, which this folder's "
+                f"work queue has.{empty}\n"
+                "It was started from another copy of the project, or before the work queue was last rebuilt.\n"
+                f"Close every portal window, then start the one in this folder: {root / 'START_PORTAL.bat'}\n"
+                "Nothing was sent; the files are still in " + str(files[0].parent))
+    return None
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--portal", default="http://127.0.0.1:8085", help="where your portal is running")
@@ -142,6 +175,10 @@ def main() -> int:
         call(args.portal, "/api/queue?limit=10")
     except OSError:
         print("The portal isn't answering at", args.portal, "- start it (START_PORTAL.bat) and try again.")
+        return 1
+    wrong = another_portal(args.portal, files, queued_here())
+    if wrong:
+        print(wrong)
         return 1
     user = input("Your handle: ").strip()
     pin = getpass.getpass("Your PIN (not shown): ")
