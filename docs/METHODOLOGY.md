@@ -106,6 +106,11 @@ call. `sf_binaries.settle_overlaps` decides the cases it can prove:
 Matched functions are never resized or dropped. On the three builds this re-measured 100 functions and
 removed 63 false starts; 135 overlaps remain that neither rule can decide.
 
+**Starts no call reaches.** `portal/tools/hidden_starts.py` reads the ones the program's own tables give
+(static initializers, atexit stubs, adjustors), the ones reached only by another function's closing jump,
+and the ones whose address is only handed on (`push offset f`, `mov [..], offset f`: a thread's entry
+function, a callback). The last kind added 128 starts to the retail Xbox build and 583 to the prototype.
+
 The queue (`portal/tools/queue_builder.py`, written to `reports/full_remaining_queue.json`) is rebuilt from the
 binaries, so a task's size is the real size of the original function. Virtual methods are named after
 their class and slot (`content::Stats::vfunc_03`); other functions are `sub_<address>`.
@@ -226,6 +231,25 @@ These were each confirmed by compiling variants and comparing against the game.
   emitted at all. Define the target out of line.
 * **Prefer real types to casts.** Field types decide instruction widths (`mov byte ptr` vs
   `mov dword ptr`); write the struct, not `*(int*)((char*)this + 0x14)`.
+* **A loop whose test stays at the top** (`test; je out; body; jmp top`) where `/O2` would normally turn
+  it round (test at the bottom): the condition is read through an inline helper that hands it back through
+  a pointer (`inline void IsRunning(const Thread* t, bool* out)`), inside `for (;;) { ...; if (!running)
+  break; ... }`. `while (t->m_Running)`, `volatile`, `goto` and an inline that returns the value all
+  compile to the turned-round loop. (0x283AF0)
+* **A member of a member, or a pointer to it?** `thread->m_FirstFiber.m_Owner = x` addresses the field
+  from the outer object (`[esi+10h]`) and lets the compiler see which stores cannot overlap; through
+  `Fiber* first = &thread->m_FirstFiber` every access goes through the pointer (`[edi+8]`) and a test of
+  a field it has just zeroed stays in. The same holds for `m_Hold[i].m_Count` against a
+  `HoldRecord* hold = &m_Hold[i]`: only the first gives `lea ecx,[eax+9]; shl ecx,4`. (0x283C90,
+  0x283F50, 0x2C1620)
+* **The same value in two registers** (`mov eax,[owner]; mov edx,eax`) in a function expanded with a
+  fixed argument: the expanded function passes that value on to an inline helper of its own
+  (`RemoveFiber(fiber->m_Owner, fiber)`). Written with a local instead, the standalone function is the
+  same bytes and the expanded copy is not. (0x283B10 inside 0x283D20)
+* **A constructor's base-class stores.** Two plain stores to one member with nothing between them lose
+  the first one. Where the original keeps both (a base class's table, then the class's own), write each
+  base's constructor as an inline helper on a small struct of its own and call it with a cast
+  (`ConstructSafeRefCount((SafeRefCountPart*)&m_Table0C)`). (0x2C1B00)
 
 ## 6. Re-verification
 

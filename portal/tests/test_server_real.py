@@ -372,6 +372,8 @@ def test_page_against_real_server(portal):
         # (the real server's content policy forbids evaluating strings, so wait on the elements themselves)
         sync_api.expect(pg.locator("#top-verified-value")).to_contain_text(f"{n} /", timeout=30000)
         sync_api.expect(pg.locator("#live-by-binary")).to_contain_text("Xbox")
+        # The page can't be typed into until it has finished starting: a name filled in before that is lost.
+        pg.wait_for_selector(".app-shell:not([inert])", timeout=60000)
         pg.fill("#contrib-name", ALICE["user"])
         pg.fill("#contrib-pin", ALICE["pin"])
         with pg.expect_response("**/api/login", timeout=60000) as info:

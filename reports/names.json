@@ -44701,6 +44701,41 @@
       "name": "crc32_little",
       "by": "the public zlib 1.2.1 source (SPEC-014 section 5.3)",
       "why": "The published zlib 1.2.1 source, compiled as C with the library's flags, gives this function's bytes for crc32_little."
+    },
+    "xb:0x002345F9": {
+      "name": "ResumeThread",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction",
+      "why": "Calls kernel export 224 (NtResumeThread) with the handle and returns the count it gives back. The two games' lists number this shape 124 and 125 of library 2 (SuspendThread and ResumeThread are the same code around different kernel calls; their copy that calls export 224 is 125)."
+    },
+    "xb:0x00235F56": {
+      "name": "WaitForSingleObject",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction",
+      "why": "Calls WaitForSingleObjectEx (0x235E40) with its two arguments and 0. Number 142 of library 2 in both games' lists, byte for byte the same function here (addresses apart), two after ReleaseSemaphore (140)."
+    },
+    "xb:0x00235F82": {
+      "name": "Sleep",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction",
+      "why": "Calls SleepEx (0x235F04) with its argument and 0. Number 144 of library 2 in both games' lists, byte for byte the same function here (addresses apart); WaitForSingleObject is 142 and ReleaseSemaphore 140."
+    },
+    "xb:0x00309449": {
+      "name": "CreateFiber",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction",
+      "why": "Takes a stack size, a start function and a parameter, and makes the stack with kernel export 169 (MmCreateKernelStack). Number 95 of library 2 in both games' lists, byte for byte the same function here (addresses apart), the first of four between SetUnhandledExceptionFilter (94) and CreateThread (100)."
+    },
+    "xb:0x003094D5": {
+      "name": "DeleteFiber",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction",
+      "why": "Frees a fiber's stack with kernel export 170 (MmDeleteKernelStack). Number 96 of library 2 in both games' lists, byte for byte the same function here (addresses apart), right after CreateFiber (95)."
+    },
+    "xb:0x003094E8": {
+      "name": "SwitchToFiber",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction",
+      "why": "Saves the running fiber's registers and stack and loads another's. The game's own fiber switch (0x283F00) calls it with a fiber's system fiber. Number 98 of library 2 in both games' lists, byte for byte the same function here (addresses apart), the last of the four before CreateThread (100)."
+    },
+    "xb:0x00309527": {
+      "name": "ConvertThreadToFiber",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction",
+      "why": "Stores its parameter in the running thread's own fiber record and returns that record. Number 97 of library 2 in both games' lists, byte for byte the same function here (addresses apart), between DeleteFiber (96) and SwitchToFiber (98)."
     }
   },
   "members": {

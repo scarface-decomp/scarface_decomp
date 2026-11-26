@@ -67,6 +67,11 @@ the work that needs neither: **writing descriptions** (below).
   touches it (`reports/fusionfix_leads_xb.json`): the name the fix calls it by, or that the fix hooks or
   patches it, with the fix's file and line. The same file lists six of the game's variables the fix names.
   They are leads to what something is for, not names to record.
+- A third `lead:` line says when the function is engine code that another of Radical's 2005 Xbox games has
+  too, byte for byte apart from addresses, and where it is there (`reports/sibling_twins.json`, from
+  `portal/tools/sibling_twins.py` on the founder's own copies of *Crash Tag Team Racing* and *The Incredible
+  Hulk: Ultimate Destruction*). Those games have no names either. The same file lists the Microsoft library
+  functions two of those programs number in their own `.XTLID` section, as found in Scarface.
 - `packet` prints up to three functions of the same class that are already matched, then up to three
   matched functions with the most similar instructions (score 0.6 to 1.0; 1.00 means the same
   instructions with other registers, offsets or addresses). Start from the nearest one and change what

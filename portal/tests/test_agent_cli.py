@@ -182,3 +182,19 @@ def test_packet_gives_a_lead_from_a_published_fix(monkeypatch, tmp_path):
     monkeypatch.setattr(A, "_FIX_LEADS", None)
     monkeypatch.setattr(A, "ROOT", tmp_path / "nothing here")
     assert A.fix_lead("xb", 0x00023EC0) == ""
+
+
+def test_packet_gives_a_lead_from_a_sibling_game(monkeypatch, tmp_path):
+    (tmp_path / "reports").mkdir()
+    (tmp_path / "reports" / "sibling_twins.json").write_text(json.dumps({"functions": {
+        "xb": [{"va": "0x002C70E0", "size": 5204, "in": {"crash": "0x00212340", "hulk": None}}],
+        "proto": [{"va": "0x00011D70", "size": 36, "in": {"crash": "0x000D9C70"}}]}}))
+    monkeypatch.setattr(A, "ROOT", tmp_path)
+    monkeypatch.setattr(A, "_SIBLING_LEADS", None)
+    lead = A.sibling_lead("xb", 0x002C70E0)
+    assert "Crash Tag Team Racing (at 0x00212340); The Incredible Hulk: Ultimate Destruction." in lead
+    assert A.sibling_lead("proto", 0x00011D70).count("at 0x000D9C70") == 1
+    assert A.sibling_lead("xb", 0x00011D70) == "" and A.sibling_lead("pc", 0x002C70E0) == ""
+    monkeypatch.setattr(A, "_SIBLING_LEADS", None)
+    monkeypatch.setattr(A, "ROOT", tmp_path / "nothing here")
+    assert A.sibling_lead("xb", 0x002C70E0) == ""
