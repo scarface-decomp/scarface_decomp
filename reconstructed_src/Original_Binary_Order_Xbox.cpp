@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11,760 of 22,362 functions matched (52.59%). NOT COMPLETE YET.
-// The 10,602 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 11,847 of 22,362 functions matched (52.98%). NOT COMPLETE YET.
+// The 10,515 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -232481,7 +232481,22 @@ void __cdecl sub_001EEA70(int a1, int a2, int a3)
 }
 
 // [TODO] 0x001EEA90 sub_001EEA90 (27 B)
-// [TODO] 0x001EEAB0 sub_001EEAB0 (9 B)
+// ============================================================================
+// [VERIFIED] sub_001EEAB0 (0x001EEAB0, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_000209E0 (0x000209E0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    void sub_001F3620();
+};
+
+void __cdecl sub_001EEAB0(Object* object)
+{
+    object->sub_001F3620();
+}
+
 // [TODO] 0x001EEAC0 sub_001EEAC0 (45 B)
 // [TODO] 0x001EEAF0 sub_001EEAF0 (75 B)
 // [TODO] 0x001EEB40 sub_001EEB40 (22 B)
@@ -262448,7 +262463,22 @@ int Class_00215EE0::sub_00215EE0()
 }
 
 // [TODO] 0x00215EF0 sub_00215EF0 (115 B)
-// [TODO] 0x00215F70 sub_00215F70 (9 B)
+// ============================================================================
+// [VERIFIED] sub_00215F70 (0x00215F70, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_000209E0 (0x000209E0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    void sub_00218FC0();
+};
+
+void __cdecl sub_00215F70(Object* object)
+{
+    object->sub_00218FC0();
+}
+
 // [TODO] 0x00215F80 sub_00215F80 (35 B)
 // [TODO] 0x00215FB0 sub_00215FB0 (90 B)
 // ============================================================================
@@ -274145,9 +274175,57 @@ void __cdecl sub_0022D8A0(void)
     DAT_0049200F = true;
 }
 
-// [TODO] 0x0022D8B0 sub_0022D8B0 (8 B)
-// [TODO] 0x0022D8C0 sub_0022D8C0 (8 B)
-// [TODO] 0x0022D8D0 sub_0022D8D0 (8 B)
+// ============================================================================
+// [VERIFIED] sub_0022D8B0 (0x0022D8B0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_0001E680 (0x0001E680), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0022D8B0 (0x0022D8B0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_00492014;
+
+void __cdecl sub_0022D8B0(void)
+{
+    DAT_00492014 = true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0022D8C0 (0x0022D8C0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_0001E680 (0x0001E680), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0022D8C0 (0x0022D8C0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_00492015;
+
+void __cdecl sub_0022D8C0(void)
+{
+    DAT_00492015 = true;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0022D8D0 (0x0022D8D0, 8 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_0001E680 (0x0001E680), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0022D8D0 (0x0022D8D0, 8 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" bool DAT_00492016;
+
+void __cdecl sub_0022D8D0(void)
+{
+    DAT_00492016 = true;
+}
+
 // [TODO] 0x0022D8E0 sub_0022D8E0 (46 B)
 // [TODO] 0x0022D910 sub_0022D910 (58 B)
 // [TODO] 0x0022D950 sub_0022D950 (35 B)
@@ -282233,7 +282311,22 @@ int Class_00240F80::sub_00240F80()
     return r_eax;
 }
 
-// [TODO] 0x00241130 sub_00241130 (9 B)
+// ============================================================================
+// [VERIFIED] sub_00241130 (0x00241130, 9 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_000209E0 (0x000209E0), which was matched first;
+// its addresses and names were swapped for this function's.
+struct Object
+{
+    void sub_00240FB0();
+};
+
+void __cdecl sub_00241130(Object* object)
+{
+    object->sub_00240FB0();
+}
+
 // [TODO] 0x00241140 sub_00241140 (113 B)
 // [TODO] 0x002411C0 sub_002411C0 (154 B)
 // [TODO] 0x00241260 sub_00241260 (178 B)
@@ -309178,8 +309271,48 @@ void Class_00283A90::sub_00283A90()
     sub_002A96F0();
 }
 
-// [TODO] 0x00283AA0 sub_00283AA0 (18 B)
-// [TODO] 0x00283AC0 sub_00283AC0 (18 B)
+// ============================================================================
+// [VERIFIED] sub_00283AA0 (0x00283AA0, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Passes a pointer on to another function, or returns zero straight away when the pointer is null.
+// ============================================================================
+// bin: xb
+// va: 0x00283AA0
+// what: Passes a pointer on to another function, or returns zero straight away when the pointer is null.
+// tool: Claude (from SPEC-018)
+
+int __cdecl sub_002A92E0(const void* text);
+
+int __cdecl sub_00283AA0(const void* text)
+{
+    if (text == 0)
+    {
+        return 0;
+    }
+    return sub_002A92E0(text);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00283AC0 (0x00283AC0, 18 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Passes a pointer on to another function, or returns zero straight away when the pointer is null.
+// ============================================================================
+// bin: xb
+// va: 0x00283AC0
+// what: Passes a pointer on to another function, or returns zero straight away when the pointer is null.
+// tool: Claude (from SPEC-018)
+
+int __cdecl sub_002A97B0(const void* text);
+
+int __cdecl sub_00283AC0(const void* text)
+{
+    if (text == 0)
+    {
+        return 0;
+    }
+    return sub_002A97B0(text);
+}
+
 // ============================================================================
 // [VERIFIED] sub_00283AE0 (0x00283AE0, 11 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -309197,8 +309330,130 @@ void __cdecl sub_00283AE0(int a1)
     sub_00235F82(a1);
 }
 
-// [TODO] 0x00283AF0 sub_00283AF0 (26 B)
-// [TODO] 0x00283B10 sub_00283B10 (76 B)
+// ============================================================================
+// [VERIFIED] sub_00283AF0 (0x00283AF0, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Waits for a thread to stop running, giving up the rest of its time slice each time round, then returns the thread's result.
+// ============================================================================
+// bin: xb
+// va: 0x00283AF0
+// what: Waits for a thread to stop running, giving up the rest of its time slice each time round, then returns the thread's result.
+// tool: Claude (from SPEC-018 section A.4.1)
+
+extern "C" void __stdcall sub_00235F82(unsigned int milliseconds);     // Sleep
+
+struct Thread
+{
+    char m_pad00[0x38];
+    bool m_Running;         // +0x38
+    char m_pad39[0x3];
+    int m_Result;           // +0x3C
+};
+
+// The library's own sleep (0x283AE0), expanded where it is used below.
+void __cdecl sub_00283AE0(unsigned int milliseconds)
+{
+    sub_00235F82(milliseconds);
+}
+
+// Whether the thread is still running, handed back through a pointer. This is what keeps the loop's test
+// at its top: with the member read directly the compiler turns the loop round.
+inline void IsRunning(const Thread* thread, bool* running)
+{
+    *running = thread->m_Running;
+}
+
+int __cdecl sub_00283AF0(Thread* thread)
+{
+    for (;;)
+    {
+        bool running;
+        IsRunning(thread, &running);
+        if (!running)
+        {
+            break;
+        }
+        sub_00283AE0(0);
+    }
+    return thread->m_Result;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00283B10 (0x00283B10, 76 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Takes a fiber out of its thread's list of fibers, and frees the system fiber unless it is a thread's own first fiber.
+// ============================================================================
+// bin: xb
+// va: 0x00283B10
+// what: Takes a fiber out of its thread's list of fibers, and frees the system fiber unless it is a thread's own first fiber.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+extern "C" Thread DAT_004BDCD0;                                 // the record of the thread that started the library
+extern "C" void __stdcall sub_003094D5(void* systemFiber);     // DeleteFiber
+
+// Takes a fiber out of a thread's list of fibers. Written as its own helper with the thread passed in:
+// that is what gives 0x283D20, where this is expanded with a fixed fiber, its two copies of the thread.
+inline void RemoveFiber(Thread* thread, Fiber* fiber)
+{
+    if (fiber->m_Previous == 0)
+    {
+        thread->m_FiberHead = fiber->m_Next;
+    }
+    else
+    {
+        fiber->m_Previous->m_Next = fiber->m_Next;
+    }
+    if (fiber->m_Next == 0)
+    {
+        thread->m_FiberTail = fiber->m_Previous;
+    }
+    else
+    {
+        fiber->m_Next->m_Previous = fiber->m_Previous;
+    }
+}
+
+void __cdecl sub_00283B10(Fiber* fiber)
+{
+    if (fiber != &DAT_004BDCD0.m_FirstFiber && fiber != &fiber->m_Owner->m_FirstFiber)
+    {
+        sub_003094D5(fiber->m_SystemFiber);
+    }
+    RemoveFiber(fiber->m_Owner, fiber);
+}
+
 // ============================================================================
 // [VERIFIED] sub_00283B60 (0x00283B60, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -309316,11 +309571,375 @@ void __cdecl sub_00283BD0(int a1)
     sub_00235DA2(*(int*)a1, 1, 0);
 }
 
-// [TODO] 0x00283BF0 sub_00283BF0 (78 B)
-// [TODO] 0x00283C40 sub_00283C40 (80 B)
-// [TODO] 0x00283C90 sub_00283C90 (133 B)
-// [TODO] 0x00283D20 sub_00283D20 (87 B)
-// [TODO] 0x00283D80 sub_00283D80 (36 B)
+// ============================================================================
+// [VERIFIED] sub_00283BF0 (0x00283BF0, 78 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Adds a thread's record to the end of the list of all threads, inside the list's lock.
+// ============================================================================
+// bin: xb
+// va: 0x00283BF0
+// what: Adds a thread's record to the end of the list of all threads, inside the list's lock.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+extern "C" int DAT_0039D28C;        // kernel import: RtlLeaveCriticalSection
+extern "C" int DAT_0039D290;        // kernel import: RtlEnterCriticalSection
+extern "C" Thread* DAT_004BDD1C;    // the last thread in the list of all threads
+extern "C" Thread* DAT_004BDD20;    // the first
+extern "C" char DAT_004BDD28[];     // the critical section that guards the list
+
+void __cdecl sub_00283BF0(Thread* thread)
+{
+    ((void (__stdcall*)(char*))DAT_0039D290)(DAT_004BDD28);
+    if (DAT_004BDD20 == 0)
+    {
+        DAT_004BDD20 = thread;
+        thread->m_Previous = 0;
+    }
+    else
+    {
+        DAT_004BDD1C->m_Next = thread;
+        thread->m_Previous = DAT_004BDD1C;
+    }
+    DAT_004BDD1C = thread;
+    thread->m_Next = 0;
+    ((void (__stdcall*)(char*))DAT_0039D28C)(DAT_004BDD28);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00283C40 (0x00283C40, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Takes a thread's record out of the list of all threads, inside the list's lock.
+// ============================================================================
+// bin: xb
+// va: 0x00283C40
+// what: Takes a thread's record out of the list of all threads, inside the list's lock.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+extern "C" int DAT_0039D28C;        // kernel import: RtlLeaveCriticalSection
+extern "C" int DAT_0039D290;        // kernel import: RtlEnterCriticalSection
+extern "C" Thread* DAT_004BDD1C;    // the last thread in the list of all threads
+extern "C" Thread* DAT_004BDD20;    // the first
+extern "C" char DAT_004BDD28[];     // the critical section that guards the list
+
+void __cdecl sub_00283C40(Thread* thread)
+{
+    ((void (__stdcall*)(char*))DAT_0039D290)(DAT_004BDD28);
+    if (thread->m_Previous == 0)
+    {
+        DAT_004BDD20 = thread->m_Next;
+    }
+    else
+    {
+        thread->m_Previous->m_Next = thread->m_Next;
+    }
+    if (thread->m_Next == 0)
+    {
+        DAT_004BDD1C = thread->m_Previous;
+    }
+    else
+    {
+        thread->m_Next->m_Previous = thread->m_Previous;
+    }
+    ((void (__stdcall*)(char*))DAT_0039D28C)(DAT_004BDD28);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00283C90 (0x00283C90, 133 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Fills in a thread record for the thread that calls it: its first fiber, its place in the list of all threads, normal priority.
+// ============================================================================
+// bin: xb
+// va: 0x00283C90
+// what: Fills in a thread record for the thread that calls it: its first fiber, its place in the list of all threads, normal priority.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+extern "C" int DAT_0045B0AC[5];     // the system priority for each of the library's five priorities
+extern "C" unsigned int __stdcall GetCurrentThreadId();
+extern "C" int __stdcall SetThreadPriority(void* handle, int priority);
+extern "C" void* __stdcall sub_00309527(void* parameter);       // ConvertThreadToFiber
+void __cdecl sub_00283BF0(Thread* thread);                      // adds it to the list of all threads
+
+// Adds a fiber to the end of its thread's list of fibers.
+inline void AppendFiber(Thread* thread, Fiber* fiber)
+{
+    if (thread->m_FiberHead == 0)
+    {
+        thread->m_FiberHead = fiber;
+        fiber->m_Previous = 0;
+    }
+    else
+    {
+        thread->m_FiberTail->m_Next = fiber;
+        fiber->m_Previous = thread->m_FiberTail;
+    }
+    thread->m_FiberTail = fiber;
+    fiber->m_Next = 0;
+}
+
+// Records the thread's priority (0 to 4) and gives the system thread the matching system priority.
+inline void SetPriority(Thread* thread, int priority)
+{
+    thread->m_Priority = priority;
+    SetThreadPriority(thread->m_Handle, DAT_0045B0AC[priority]);
+}
+
+void __cdecl sub_00283C90(Thread* thread)
+{
+    thread->m_FiberHead = 0;
+    thread->m_FiberTail = 0;
+    thread->m_Running = true;
+    thread->m_Id = GetCurrentThreadId();
+    thread->m_Handle = (void*)0xFFFFFFFE;
+    thread->m_FirstFiber.m_Field20 = 0;
+    thread->m_FirstFiber.m_Entry = 0;
+    thread->m_FirstFiber.m_Argument = 0;
+    thread->m_FirstFiber.m_SystemFiber = sub_00309527(0);
+    thread->m_FirstFiber.m_Owner = thread;
+    thread->m_FirstFiber.m_Field18 = 0;
+    thread->m_FirstFiber.m_Field1C = 0;
+    thread->m_CurrentFiber = &thread->m_FirstFiber;
+    AppendFiber(thread, &thread->m_FirstFiber);
+    sub_00283BF0(thread);
+    SetPriority(thread, 2);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00283D20 (0x00283D20, 87 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Shuts the thread library down: takes the starting thread's first fiber out of its list and the thread out of the list of all threads.
+// ============================================================================
+// bin: xb
+// va: 0x00283D20
+// what: Shuts the thread library down: takes the starting thread's first fiber out of its list and the thread out of the list of all threads.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+extern "C" Thread DAT_004BDCD0;                                 // the record of the thread that started the library
+extern "C" void __stdcall sub_003094D5(void* systemFiber);     // DeleteFiber
+void __cdecl sub_00283C40(Thread* thread);                      // takes it out of the list of all threads
+
+// Takes a fiber out of a thread's list of fibers. Written as its own helper with the thread passed in:
+// that is what gives 0x283D20, where this is expanded with a fixed fiber, its two copies of the thread.
+inline void RemoveFiber(Thread* thread, Fiber* fiber)
+{
+    if (fiber->m_Previous == 0)
+    {
+        thread->m_FiberHead = fiber->m_Next;
+    }
+    else
+    {
+        fiber->m_Previous->m_Next = fiber->m_Next;
+    }
+    if (fiber->m_Next == 0)
+    {
+        thread->m_FiberTail = fiber->m_Previous;
+    }
+    else
+    {
+        fiber->m_Next->m_Previous = fiber->m_Previous;
+    }
+}
+
+// Unlinks a fiber (0x283B10), expanded below; its test for freeing the system fiber folds away.
+void __cdecl sub_00283B10(Fiber* fiber)
+{
+    if (fiber != &DAT_004BDCD0.m_FirstFiber && fiber != &fiber->m_Owner->m_FirstFiber)
+    {
+        sub_003094D5(fiber->m_SystemFiber);
+    }
+    RemoveFiber(fiber->m_Owner, fiber);
+}
+
+void __cdecl sub_00283D20()
+{
+    sub_00283B10(&DAT_004BDCD0.m_FirstFiber);
+    sub_00283C40(&DAT_004BDCD0);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00283D80 (0x00283D80, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Starts the thread library: makes the lock for the list of all threads and sets up the record of the thread that calls it.
+// ============================================================================
+// bin: xb
+// va: 0x00283D80
+// what: Starts the thread library: makes the lock for the list of all threads and sets up the record of the thread that calls it.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+extern "C" int DAT_0039D358;        // kernel import: RtlInitializeCriticalSection
+extern "C" Thread DAT_004BDCD0;     // the record of the thread that started the library
+extern "C" bool DAT_004BDD24;       // the library has been started
+extern "C" char DAT_004BDD28[];     // the critical section that guards the list of all threads
+void __cdecl sub_00250EC0();
+void __cdecl sub_00283C90(Thread* thread);      // sets up a record for the calling thread
+
+void __cdecl sub_00283D80(void* unused)
+{
+    ((void (__stdcall*)(char*))DAT_0039D358)(DAT_004BDD28);
+    DAT_004BDD24 = true;
+    sub_00250EC0();
+    sub_00283C90(&DAT_004BDCD0);
+}
+
 // ============================================================================
 // [VERIFIED] sub_00283DB0 (0x00283DB0, 18 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -309387,7 +310006,60 @@ void __cdecl sub_00283DD0(int a1)
     sub_00233A9F(*(int*)(r_esi + 72));
 }
 
-// [TODO] 0x00283E70 sub_00283E70 (52 B)
+// ============================================================================
+// [VERIFIED] sub_00283E70 (0x00283E70, 52 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: What a new thread runs first: turns itself into a fiber, calls the thread's function, keeps its result and marks the thread as finished.
+// ============================================================================
+// bin: xb
+// va: 0x00283E70
+// what: What a new thread runs first: turns itself into a fiber, calls the thread's function, keeps its result and marks the thread as finished.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+extern "C" void* __stdcall sub_00309527(void* parameter);       // ConvertThreadToFiber
+
+unsigned int __stdcall sub_00283E70(Thread* thread)
+{
+    thread->m_FirstFiber.m_Field18 = 0;
+    thread->m_FirstFiber.m_SystemFiber = sub_00309527(0);
+    thread->m_Result = thread->m_FirstFiber.m_Entry(thread->m_FirstFiber.m_Argument);
+    thread->m_Running = false;
+    thread->m_FirstFiber.m_Field20 = 0;
+    return 0;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00283EB0 (0x00283EB0, 53 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -309468,8 +310140,162 @@ void __cdecl sub_00283F00(int a1)
     ((Object*)a1)->sub_003094E8(*(int*)(a1 + 20));
 }
 
-// [TODO] 0x00283F20 sub_00283F20 (42 B)
-// [TODO] 0x00283F50 sub_00283F50 (129 B)
+// ============================================================================
+// [VERIFIED] sub_00283F20 (0x00283F20, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: What a new fiber runs first: finds the calling thread's current fiber and calls that fiber's function with its argument.
+// ============================================================================
+// bin: xb
+// va: 0x00283F20
+// what: What a new fiber runs first: finds the calling thread's current fiber and calls that fiber's function with its argument.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+Thread* __cdecl sub_00283EB0();     // the calling thread's record
+
+// The calling thread's current fiber, or null when the thread has no record (0x283EF0), expanded below.
+Fiber* __cdecl sub_00283EF0()
+{
+    Thread* thread = sub_00283EB0();
+    if (thread == 0)
+    {
+        return 0;
+    }
+    return thread->m_CurrentFiber;
+}
+
+void __stdcall sub_00283F20(void* unused)
+{
+    Fiber* fiber = sub_00283EF0();
+    fiber->m_Field18 = 0;
+    fiber->m_Entry(fiber->m_Argument);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00283F50 (0x00283F50, 129 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Starts a new system thread that will run the given function: fills in its record, creates it suspended, sets its priority and lets it go.
+// ============================================================================
+// bin: xb
+// va: 0x00283F50
+// what: Starts a new system thread that will run the given function: fills in its record, creates it suspended, sets its priority and lets it go.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+extern "C" int DAT_0045B0AC[5];     // the system priority for each of the library's five priorities
+extern "C" void* __stdcall CreateThread(void* security, unsigned int stackSize, unsigned int (__stdcall* start)(Thread*), void* parameter, unsigned int flags, unsigned int* id);
+extern "C" int __stdcall SetThreadPriority(void* handle, int priority);
+extern "C" unsigned int __stdcall sub_002345F9(void* handle);  // ResumeThread
+extern "C" unsigned int __stdcall sub_00283E70(Thread* thread); // what the new thread runs first
+void __cdecl sub_00283BF0(Thread* thread);                      // adds it to the list of all threads
+
+// Adds a fiber to the end of its thread's list of fibers.
+inline void AppendFiber(Thread* thread, Fiber* fiber)
+{
+    if (thread->m_FiberHead == 0)
+    {
+        thread->m_FiberHead = fiber;
+        fiber->m_Previous = 0;
+    }
+    else
+    {
+        thread->m_FiberTail->m_Next = fiber;
+        fiber->m_Previous = thread->m_FiberTail;
+    }
+    thread->m_FiberTail = fiber;
+    fiber->m_Next = 0;
+}
+
+// Records the thread's priority (0 to 4) and gives the system thread the matching system priority.
+inline void SetPriority(Thread* thread, int priority)
+{
+    thread->m_Priority = priority;
+    SetThreadPriority(thread->m_Handle, DAT_0045B0AC[priority]);
+}
+
+void __cdecl sub_00283F50(Thread* thread, int (__cdecl* entry)(void*), void* argument, int priority, unsigned int stackSize)
+{
+    thread->m_FiberHead = 0;
+    thread->m_FiberTail = 0;
+    thread->m_Running = true;
+    thread->m_CurrentFiber = &thread->m_FirstFiber;
+    thread->m_FirstFiber.m_Field20 = 0;
+    thread->m_FirstFiber.m_Entry = entry;
+    thread->m_FirstFiber.m_Argument = argument;
+    thread->m_FirstFiber.m_Owner = thread;
+    thread->m_FirstFiber.m_SystemFiber = 0;
+    thread->m_FirstFiber.m_Field18 = 0;
+    thread->m_FirstFiber.m_Field1C = 0;
+    AppendFiber(thread, &thread->m_FirstFiber);
+    sub_00283BF0(thread);
+    thread->m_Handle = CreateThread(0, stackSize, sub_00283E70, thread, 4, &thread->m_Id);
+    thread->m_FirstFiber.m_Field1C = 0;
+    SetPriority(thread, priority);
+    sub_002345F9(thread->m_Handle);
+}
+
 // ============================================================================
 // [VERIFIED] sub_00283FE0 (0x00283FE0, 34 B)
 // By: lemiur | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -309489,7 +310315,83 @@ int __cdecl sub_00283FE0(int a1, int a2, int a3, __int64 a4)
     return sub_00283F50(a1, a2, a3, a4);
 }
 
-// [TODO] 0x00284010 sub_00284010 (91 B)
+// ============================================================================
+// [VERIFIED] sub_00284010 (0x00284010, 91 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Makes a new fiber on the thread that calls it: fills in its record, adds it to the thread's list and creates the system fiber.
+// ============================================================================
+// bin: xb
+// va: 0x00284010
+// what: Makes a new fiber on the thread that calls it: fills in its record, adds it to the thread's list and creates the system fiber.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+extern "C" void* __stdcall sub_00309449(unsigned int stackSize, void (__stdcall* start)(void*), void* parameter);     // CreateFiber
+extern "C" void __stdcall sub_00283F20(void* unused);          // what a new fiber runs first
+Thread* __cdecl sub_00283EB0();                                 // the calling thread's record
+
+// Adds a fiber to the end of its thread's list of fibers.
+inline void AppendFiber(Thread* thread, Fiber* fiber)
+{
+    if (thread->m_FiberHead == 0)
+    {
+        thread->m_FiberHead = fiber;
+        fiber->m_Previous = 0;
+    }
+    else
+    {
+        thread->m_FiberTail->m_Next = fiber;
+        fiber->m_Previous = thread->m_FiberTail;
+    }
+    thread->m_FiberTail = fiber;
+    fiber->m_Next = 0;
+}
+
+void __cdecl sub_00284010(Fiber* fiber, int (__cdecl* entry)(void*), void* argument, int a4, unsigned int stackSize, int a6)
+{
+    fiber->m_Field20 = 0;
+    fiber->m_Entry = entry;
+    fiber->m_Argument = argument;
+    Thread* owner = sub_00283EB0();
+    fiber->m_Owner = owner;
+    AppendFiber(owner, fiber);
+    void* systemFiber = sub_00309449(stackSize, sub_00283F20, fiber);
+    fiber->m_Field1C = 0;
+    fiber->m_Field18 = 0;
+    fiber->m_SystemFiber = systemFiber;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00284070 (0x00284070, 36 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -319082,7 +319984,23 @@ pddiDisplay* pddiDisplay::vfunc_03(unsigned int flags)
 
 }
 
-// [TODO] 0x0029A9B0 sub_0029A9B0 (7 B)
+// ============================================================================
+// [VERIFIED] sub_0029A9B0 (0x0029A9B0, 7 B)
+// By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_000C64B0 (Proto 0x000C64B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0029A9B0 (Proto 0x0029A9B0, 7 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_004BDC34;
+
+void __cdecl sub_0029A9B0(void)
+{
+    DAT_004BDC34 += 1;
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dDisplay::vfunc_08 (0x0029A9C0, 7 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -339312,10 +340230,523 @@ InstanceDrive* InstanceDrive::vfunc_03(int a1)
 // [TODO] 0x002AC200 sub_002AC200 (163 B)
 // [TODO] 0x002AC2B0 sub_002AC2B0 (146 B)
 // [TODO] 0x002AC350 sub_002AC350 (61 B)
-// [TODO] 0x002AC390 core::Drive::vfunc_00 (26 B)
-// [TODO] 0x002AC3B0 sub_002AC3B0 (45 B)
-// [TODO] 0x002AC3E0 sub_002AC3E0 (32 B)
-// [TODO] 0x002AC400 sub_002AC400 (36 B)
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_00 (0x002AC390, 26 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Takes one more reference to a drive, inside its lock.
+// ============================================================================
+// bin: xb
+// va: 0x002AC390
+// what: Takes one more reference to a drive, inside its lock.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+        void LockedIncrement();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void vfunc_00();
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+// core::SafeRefCount's locked increment, expanded into each class's own function.
+inline void core::SafeRefCount::LockedIncrement()
+{
+    Lock();
+    ++m_RefCount;
+    Unlock();
+}
+
+void core::Drive::vfunc_00()
+{
+    LockedIncrement();
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC3B0 (0x002AC3B0, 45 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Drops one reference inside the lock; when it was the last, the object is destroyed and its memory freed.
+// ============================================================================
+// bin: xb
+// va: 0x002AC3B0
+// what: Drops one reference inside the lock; when it was the last, the object is destroyed and its memory freed.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+void core::SafeRefCount::sub_002AC3B0()
+{
+    Lock();
+    --m_RefCount;
+    if (m_RefCount == 0)
+    {
+        m_RefCount = 0x5DC;
+        Unlock();
+        delete this;
+    }
+    else
+    {
+        Unlock();
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC3E0 (0x002AC3E0, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Returns a drive's last error, read inside its lock.
+// ============================================================================
+// bin: xb
+// va: 0x002AC3E0
+// what: Returns a drive's last error, read inside its lock.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        int sub_002AC3E0();
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+int core::Drive::sub_002AC3E0()
+{
+    Lock();
+    int error = m_LastError;
+    Unlock();
+    return error;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC400 (0x002AC400, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Sets a drive's last error, inside its lock.
+// ============================================================================
+// bin: xb
+// va: 0x002AC400
+// what: Sets a drive's last error, inside its lock.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC400(int error);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+void core::Drive::sub_002AC400(int error)
+{
+    Lock();
+    m_LastError = error;
+    Unlock();
+}
+
 // ============================================================================
 // [VERIFIED] sub_002AC430 (0x002AC430, 4 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -339339,17 +340770,1430 @@ void* Class_002AC430::sub_002AC430()
     return &m_Field7C;
 }
 
-// [TODO] 0x002AC440 sub_002AC440 (58 B)
-// [TODO] 0x002AC480 sub_002AC480 (55 B)
-// [TODO] 0x002AC4C0 sub_002AC4C0 (37 B)
-// [TODO] 0x002AC4F0 sub_002AC4F0 (40 B)
-// [TODO] 0x002AC520 sub_002AC520 (33 B)
-// [TODO] 0x002AC550 sub_002AC550 (29 B)
-// [TODO] 0x002AC570 sub_002AC570 (50 B)
-// [TODO] 0x002AC5B0 sub_002AC5B0 (31 B)
-// [TODO] 0x002AC5D0 sub_002AC5D0 (64 B)
-// [TODO] 0x002AC610 sub_002AC610 (84 B)
-// [TODO] 0x002AC670 sub_002AC670 (10 B)
+// ============================================================================
+// [VERIFIED] sub_002AC440 (0x002AC440, 58 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Adds a finished request to the end of the drive's list of requests whose owners are still to be told.
+// ============================================================================
+// bin: xb
+// va: 0x002AC440
+// what: Adds a finished request to the end of the drive's list of requests whose owners are still to be told.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC440(CompletionCallbackRequest* request);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+void core::Drive::sub_002AC440(CompletionCallbackRequest* request)
+{
+    Lock();
+    if (m_Head == 0)
+    {
+        m_Head = request;
+    }
+    else
+    {
+        m_Tail->m_Next = request;
+    }
+    request->m_Next = 0;
+    m_Tail = request;
+    Unlock();
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC480 (0x002AC480, 55 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Registers who is asked about this drive's errors: the handler, its user data and the thread that registered it.
+// ============================================================================
+// bin: xb
+// va: 0x002AC480
+// what: Registers who is asked about this drive's errors: the handler, its user data and the thread that registered it.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+        void LockedIncrement();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC480(ErrorHandler* handler, void* userData);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+void core::Drive::sub_002AC480(ErrorHandler* handler, void* userData)
+{
+    Lock();
+    m_HandlerThread = sub_00283EB0();
+    m_Handler = handler;
+    m_UserData = userData;
+    m_ErrorBehaviour = 2;
+    Unlock();
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC4C0 (0x002AC4C0, 37 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Removes the drive's error handler and goes back to the default handling of errors.
+// ============================================================================
+// bin: xb
+// va: 0x002AC4C0
+// what: Removes the drive's error handler and goes back to the default handling of errors.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+        void LockedIncrement();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC4C0(ErrorHandler* handler);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+void core::Drive::sub_002AC4C0(ErrorHandler* handler)
+{
+    Lock();
+    m_Handler = 0;
+    m_HandlerThread = 0;
+    m_ErrorBehaviour = 0;
+    Unlock();
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC4F0 (0x002AC4F0, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Sets the semaphore the drive signals when an error occurs, and switches it to wait for an answer on errors.
+// ============================================================================
+// bin: xb
+// va: 0x002AC4F0
+// what: Sets the semaphore the drive signals when an error occurs, and switches it to wait for an answer on errors.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC4F0(Semaphore* semaphore);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+void core::Drive::sub_002AC4F0(Semaphore* semaphore)
+{
+    Lock();
+    m_ErrorSemaphore = semaphore;
+    m_ErrorBehaviour = 2;
+    Unlock();
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC520 (0x002AC520, 33 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Sets what the drive does about errors, inside its lock.
+// ============================================================================
+// bin: xb
+// va: 0x002AC520
+// what: Sets what the drive does about errors, inside its lock.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC520(int behaviour);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+void core::Drive::sub_002AC520(int behaviour)
+{
+    Lock();
+    m_ErrorBehaviour = behaviour;
+    Unlock();
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC550 (0x002AC550, 29 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Returns what the drive does about errors, read inside its lock.
+// ============================================================================
+// bin: xb
+// va: 0x002AC550
+// what: Returns what the drive does about errors, read inside its lock.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        int sub_002AC550();
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+int core::Drive::sub_002AC550()
+{
+    Lock();
+    int behaviour = m_ErrorBehaviour;
+    Unlock();
+    return behaviour;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC570 (0x002AC570, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Leaves the error state and passes the answer (retry or not) on to the drive's worker thread.
+// ============================================================================
+// bin: xb
+// va: 0x002AC570
+// what: Leaves the error state and passes the answer (retry or not) on to the drive's worker thread.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC570(bool retry);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+namespace core
+{
+    class DriveThread
+    {
+    public:
+        void sub_002C1790(bool retry);
+    };
+}
+
+void core::Drive::sub_002AC570(bool retry)
+{
+    Lock();
+    m_InError = false;
+    m_Failed = 0;
+    Unlock();
+    m_Thread->sub_002C1790(retry);
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC5B0 (0x002AC5B0, 31 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Says whether the drive is in its error state, read inside its lock.
+// ============================================================================
+// bin: xb
+// va: 0x002AC5B0
+// what: Says whether the drive is in its error state, read inside its lock.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        bool sub_002AC5B0();
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+bool core::Drive::sub_002AC5B0()
+{
+    Lock();
+    bool inError = m_InError;
+    Unlock();
+    return inError;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC5D0 (0x002AC5D0, 64 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Puts the drive in its error state for a failed request and signals the error semaphore if one is set.
+// ============================================================================
+// bin: xb
+// va: 0x002AC5D0
+// what: Puts the drive in its error state for a failed request and signals the error semaphore if one is set.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC5D0(Request* request);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+void core::Drive::sub_002AC5D0(Request* request)
+{
+    Lock();
+    m_Failed = request;
+    m_InError = true;
+    if (m_ErrorSemaphore != 0)
+    {
+        Unlock();
+        sub_00283BD0(m_ErrorSemaphore);
+    }
+    else
+    {
+        Unlock();
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC610 (0x002AC610, 84 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: If the drive is in its error state, gives two values that describe the failed request and returns true.
+// ============================================================================
+// bin: xb
+// va: 0x002AC610
+// what: If the drive is in its error state, gives two values that describe the failed request and returns true.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+        void LockedIncrement();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        bool sub_002AC610(int* first, int* second);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+bool core::Drive::sub_002AC610(int* first, int* second)
+{
+    bool result;
+    Lock();
+    if (m_InError)
+    {
+        *first = m_Failed->vfunc_06();
+        *second = m_Failed->vfunc_05();
+        result = true;
+    }
+    else
+    {
+        result = false;
+    }
+    Unlock();
+    return result;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AC670 (0x002AC670, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Sets whether the drive reports when an error has cleared.
+// ============================================================================
+// bin: xb
+// va: 0x002AC670
+// what: Sets whether the drive reports when an error has cleared.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC670(bool report);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+void core::Drive::sub_002AC670(bool report)
+{
+    m_ReportClear = report;
+}
+
 // ============================================================================
 // [VERIFIED] sub_002AC680 (0x002AC680, 4 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -339455,7 +342299,139 @@ void Class_002AC6B0::sub_002AC6B0()
     m_FieldD4->sub_002C15F0();
 }
 
-// [TODO] 0x002AC6C0 sub_002AC6C0 (21 B)
+// ============================================================================
+// [VERIFIED] sub_002AC6C0 (0x002AC6C0, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Holds back one priority of the drive's worker queue.
+// ============================================================================
+// bin: xb
+// va: 0x002AC6C0
+// what: Holds back one priority of the drive's worker queue.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC6C0(int priority);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+namespace core
+{
+    class DriveThread
+    {
+    public:
+        int sub_002C1620(int priority, int unused);
+        void sub_002C1700(int priority, int unused);
+    };
+}
+
+void core::Drive::sub_002AC6C0(int priority)
+{
+    m_Thread->sub_002C1620(priority, 0);
+}
+
 // ============================================================================
 // [VERIFIED] sub_002AC6E0 (0x002AC6E0, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -339484,7 +342460,139 @@ void Class_002AC6E0::sub_002AC6E0()
     m_FieldD4->sub_002C1620();
 }
 
-// [TODO] 0x002AC6F0 sub_002AC6F0 (21 B)
+// ============================================================================
+// [VERIFIED] sub_002AC6F0 (0x002AC6F0, 21 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Ends a hold on one priority of the drive's worker queue.
+// ============================================================================
+// bin: xb
+// va: 0x002AC6F0
+// what: Ends a hold on one priority of the drive's worker queue.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void sub_002AC6F0(int priority);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+namespace core
+{
+    class DriveThread
+    {
+    public:
+        int sub_002C1620(int priority, int unused);
+        void sub_002C1700(int priority, int unused);
+    };
+}
+
+void core::Drive::sub_002AC6F0(int priority)
+{
+    m_Thread->sub_002C1700(priority, -1);
+}
+
 // ============================================================================
 // [VERIFIED] sub_002AC710 (0x002AC710, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -339885,9 +342993,401 @@ SafeRefCount* SafeRefCount::vfunc_02(int a1)
 
 }
 
-// [TODO] 0x002AC7E0 sub_002AC7E0 (127 B)
-// [TODO] 0x002AC860 core::Drive::vfunc_03 (88 B)
-// [TODO] 0x002AC8C0 core::Drive::vfunc_04 (259 B)
+// ============================================================================
+// [VERIFIED] sub_002AC7E0 (0x002AC7E0, 127 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: core::Drive's constructor: an empty list of libraries, no error handler, no pending requests, and 3 as its last error.
+// ============================================================================
+// bin: xb
+// va: 0x002AC7E0
+// what: core::Drive's constructor: an empty list of libraries, no error handler, no pending requests, and 3 as its last error.
+// tool: Claude (from SPEC-017 section 4.11)
+
+extern "C" char DAT_0039E22C[];     // core::IRefCount's table
+extern "C" char DAT_0039F08C[];     // core::BaseObject's table
+extern "C" char DAT_0039F094[];     // core::Object's table
+extern "C" char DAT_003DAC24[];     // core::SafeRefCount's table
+extern "C" char DAT_003DAC34[];     // core::Drive's table for the part at +0xC
+extern "C" char DAT_003DAC44[];     // core::Drive's table for the part at +0x4
+extern "C" char DAT_003DAC4C[];     // core::Drive's main table
+extern "C" void* DAT_0045894C;      // the allocator in use
+
+// The three base parts, whose constructors and destructors the compiler expands (SPEC-017 section 1).
+struct RefCountPart
+{
+    void* m_Table;      // +0x0
+};
+
+struct ObjectPart
+{
+    void* m_Table;      // +0x0
+    void* m_Allocator;  // +0x4
+};
+
+struct SafeRefCountPart
+{
+    void* m_Table;      // +0x0
+    int m_RefCount;     // +0x4
+};
+
+// The list of file libraries a drive keeps (0x40 bytes); its functions know what is inside.
+struct LibraryList
+{
+    void sub_002AD160();    // its constructor
+    void sub_002ACC30();    // its destructor
+    char m_pad00[0x40];
+};
+
+namespace core
+{
+    class Drive
+    {
+    public:
+        Drive* sub_002AC7E0();
+
+        void* m_Table00;            // +0x00
+        void* m_Table04;            // +0x04
+        void* m_Allocator;          // +0x08
+        void* m_Table0C;            // +0x0C
+        int m_RefCount;             // +0x10
+        LibraryList m_Libraries;    // +0x14
+        void* m_Head;               // +0x54
+        void* m_Tail;               // +0x58
+        int m_ErrorBehaviour;       // +0x5C
+        void* m_ErrorSemaphore;     // +0x60
+        void* m_HandlerThread;      // +0x64
+        void* m_Handler;            // +0x68
+        void* m_UserData;           // +0x6C
+        bool m_InError;             // +0x70
+        void* m_Failed;             // +0x74
+        bool m_ReportClear;         // +0x78
+        bool m_InHandler;           // +0x79
+        char m_Media[0x54];         // +0x7C
+        int m_LastError;            // +0xD0
+        void* m_Thread;             // +0xD4
+    };
+}
+
+void __cdecl sub_00250EB0();
+
+inline void ConstructRefCount(RefCountPart* part)
+{
+    part->m_Table = DAT_0039E22C;
+}
+
+inline void ConstructObject(ObjectPart* part)
+{
+    part->m_Table = DAT_0039F094;
+    part->m_Allocator = DAT_0045894C;
+}
+
+inline void ConstructSafeRefCount(SafeRefCountPart* part)
+{
+    part->m_Table = DAT_003DAC24;
+    part->m_RefCount = 1;
+}
+
+core::Drive* core::Drive::sub_002AC7E0()
+{
+    ConstructRefCount((RefCountPart*)&m_Table00);
+    ConstructObject((ObjectPart*)&m_Table04);
+    ConstructSafeRefCount((SafeRefCountPart*)&m_Table0C);
+    m_Table00 = DAT_003DAC4C;
+    m_Table04 = DAT_003DAC44;
+    m_Table0C = DAT_003DAC34;
+    m_Libraries.sub_002AD160();
+    m_Head = 0;
+    m_Tail = 0;
+    m_ErrorBehaviour = 0;
+    m_ErrorSemaphore = 0;
+    m_HandlerThread = 0;
+    m_Handler = 0;
+    m_UserData = 0;
+    m_InError = false;
+    m_Failed = 0;
+    m_ReportClear = true;
+    m_InHandler = false;
+    m_LastError = 3;
+    m_Thread = 0;
+    sub_00250EB0();
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_03 (0x002AC860, 88 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: core::Drive's destructor: destroys its list of libraries and its base parts, then frees the object if asked to.
+// ============================================================================
+// bin: xb
+// va: 0x002AC860
+// what: core::Drive's destructor: destroys its list of libraries and its base parts, then frees the object if asked to.
+// tool: Claude (from SPEC-017 section 4.12)
+
+extern "C" char DAT_0039E22C[];     // core::IRefCount's table
+extern "C" char DAT_0039F08C[];     // core::BaseObject's table
+extern "C" char DAT_0039F094[];     // core::Object's table
+extern "C" char DAT_003DAC24[];     // core::SafeRefCount's table
+extern "C" char DAT_003DAC34[];     // core::Drive's table for the part at +0xC
+extern "C" char DAT_003DAC44[];     // core::Drive's table for the part at +0x4
+extern "C" char DAT_003DAC4C[];     // core::Drive's main table
+extern "C" void* DAT_0045894C;      // the allocator in use
+
+// The three base parts, whose constructors and destructors the compiler expands (SPEC-017 section 1).
+struct RefCountPart
+{
+    void* m_Table;      // +0x0
+};
+
+struct ObjectPart
+{
+    void* m_Table;      // +0x0
+    void* m_Allocator;  // +0x4
+};
+
+struct SafeRefCountPart
+{
+    void* m_Table;      // +0x0
+    int m_RefCount;     // +0x4
+};
+
+// The list of file libraries a drive keeps (0x40 bytes); its functions know what is inside.
+struct LibraryList
+{
+    void sub_002AD160();    // its constructor
+    void sub_002ACC30();    // its destructor
+    char m_pad00[0x40];
+};
+
+namespace core
+{
+    class Drive
+    {
+    public:
+        Drive* vfunc_03(unsigned int flags);
+
+        void* m_Table00;            // +0x00
+        void* m_Table04;            // +0x04
+        void* m_Allocator;          // +0x08
+        void* m_Table0C;            // +0x0C
+        int m_RefCount;             // +0x10
+        LibraryList m_Libraries;    // +0x14
+        void* m_Head;               // +0x54
+        void* m_Tail;               // +0x58
+        int m_ErrorBehaviour;       // +0x5C
+        void* m_ErrorSemaphore;     // +0x60
+        void* m_HandlerThread;      // +0x64
+        void* m_Handler;            // +0x68
+        void* m_UserData;           // +0x6C
+        bool m_InError;             // +0x70
+        void* m_Failed;             // +0x74
+        bool m_ReportClear;         // +0x78
+        bool m_InHandler;           // +0x79
+        char m_Media[0x54];         // +0x7C
+        int m_LastError;            // +0xD0
+        void* m_Thread;             // +0xD4
+    };
+}
+
+void __cdecl sub_002444F0(void* allocator, void* memory);       // frees memory
+
+inline void DestroySafeRefCount(SafeRefCountPart* part)
+{
+    part->m_Table = DAT_003DAC24;
+}
+
+inline void DestroyObject(ObjectPart* part)
+{
+    DAT_0045894C = part->m_Allocator;
+    part->m_Table = DAT_0039F08C;
+}
+
+inline void DestroyRefCount(RefCountPart* part)
+{
+    part->m_Table = DAT_0039E22C;
+}
+
+core::Drive* core::Drive::vfunc_03(unsigned int flags)
+{
+    m_Table00 = DAT_003DAC4C;
+    m_Table04 = DAT_003DAC44;
+    m_Table0C = DAT_003DAC34;
+    m_Libraries.sub_002ACC30();
+    DestroySafeRefCount((SafeRefCountPart*)&m_Table0C);
+    DestroyObject((ObjectPart*)&m_Table04);
+    DestroyRefCount((RefCountPart*)&m_Table00);
+    if (flags & 1)
+    {
+        sub_002444F0(DAT_0045894C, this);
+    }
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] core::Drive::vfunc_04 (0x002AC8C0, 259 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Runs the finished requests that belong to the calling thread, then, if the drive is in error, asks the error handler what to do.
+// ============================================================================
+// bin: xb
+// va: 0x002AC8C0
+// what: Runs the finished requests that belong to the calling thread, then, if the drive is in error, asks the error handler what to do.
+// tool: Claude (from SPEC-017)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+struct Thread;
+
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+    class DriveThread;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // A finished request whose owner is still to be told, kept in a list until its thread asks.
+    class CompletionCallbackRequest
+    {
+    public:
+        virtual ~CompletionCallbackRequest();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void Finish();
+        bool sub_00239EC0(Thread* thread);      // whether this request belongs to that thread
+
+        CompletionCallbackRequest* m_Next;      // +0x04
+    };
+
+    // What the game registers to be asked about a drive's errors.
+    class ErrorHandler
+    {
+    public:
+        virtual bool OnError(int error, const char* driveName, int a, int b, void* userData);
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class Object
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual ~SafeRefCount();
+        void sub_002AC3B0();
+        void LockedIncrement();
+
+        int m_RefCount;     // +0x10
+    };
+
+    class Drive : public IRefCount, public Object, public SafeRefCount
+    {
+    public:
+        virtual void Service();
+        virtual const char* GetName();
+        void vfunc_04();
+        void sub_002AC570(bool retry);
+
+        char m_Libraries[0x40];             // +0x14  the list of file libraries
+        CompletionCallbackRequest* m_Head;  // +0x54  finished requests waiting for their thread
+        CompletionCallbackRequest* m_Tail;  // +0x58
+        int m_ErrorBehaviour;               // +0x5C  0, or 2 once a handler or a semaphore is set
+        Semaphore* m_ErrorSemaphore;        // +0x60
+        Thread* m_HandlerThread;            // +0x64
+        ErrorHandler* m_Handler;            // +0x68
+        void* m_UserData;                   // +0x6C
+        bool m_InError;                     // +0x70
+        Request* m_Failed;                  // +0x74  the request that failed
+        bool m_ReportClear;                 // +0x78
+        bool m_InHandler;                   // +0x79
+        char m_Media[0x54];                 // +0x7C  media information
+        int m_LastError;                    // +0xD0
+        DriveThread* m_Thread;              // +0xD4
+    };
+}
+
+void core::Drive::vfunc_04()
+{
+    Thread* thread = sub_00283EB0();
+    Lock();
+    CompletionCallbackRequest** walk = &m_Head;
+    CompletionCallbackRequest* lastKept = 0;
+    CompletionCallbackRequest* next;
+    while (*walk != 0)
+    {
+        if ((*walk)->sub_00239EC0(thread))
+        {
+            CompletionCallbackRequest* current = *walk;
+            *walk = current->m_Next;
+            Unlock();
+            current->Finish();
+            Lock();
+            delete current;
+        }
+        else
+        {
+            lastKept = *walk;
+            next = lastKept->m_Next;
+            walk = &next;
+        }
+    }
+    m_Tail = lastKept;
+    if (m_InError == true && m_Handler != 0)
+    {
+        if (!m_InHandler)
+        {
+            m_InHandler = true;
+            Unlock();
+            sub_002AC570(m_Handler->OnError(m_LastError, GetName(), m_Failed->vfunc_06(), m_Failed->vfunc_05(), m_UserData));
+            m_InHandler = false;
+        }
+        else
+        {
+            Unlock();
+        }
+    }
+    else
+    {
+        Unlock();
+    }
+}
+
 // [TODO] 0x002AC9D0 sub_002AC9D0 (99 B)
 // ============================================================================
 // [VERIFIED] core::CementLibrary::vfunc_00 (0x002ACA40, 11 B)
@@ -343913,7 +347413,175 @@ int core::XboxSaveDrive::vfunc_19(const char* name)
     return 1;
 }
 
-// [TODO] 0x002BFB50 sub_002BFB50 (410 B)
+// ============================================================================
+// [VERIFIED] sub_002BFB50 (0x002BFB50, 410 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: core::XboxSaveDrive's constructor: sets up the shared worker thread and memory-unit state on first use, and the drive's name and empty handle lists.
+// ============================================================================
+// bin: xb
+// va: 0x002BFB50
+// what: core::XboxSaveDrive's constructor: sets up the shared worker thread and memory-unit state on first use, and the drive's name and empty handle lists.
+// tool: Claude (from SPEC-016 section 14.2)
+
+extern "C" int __cdecl strcmp(const char* a, const char* b);
+extern "C" int __cdecl memcmp(const void* a, const void* b, unsigned int count);
+#pragma intrinsic(strcmp, memcmp)
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+extern "C" char DAT_003DB52C[];     // core::SignedReader's table
+extern "C" char DAT_003DB53C[];     // core::SignedWriter's table
+extern "C" char DAT_003DB54C[];     // core::XboxSaveDrive's table for the writer part at +0xDC
+extern "C" char DAT_003DB55C[];     // core::XboxSaveDrive's table for the reader part at +0xD8
+extern "C" char DAT_003DB56C[];     // core::XboxSaveDrive's table for the part at +0xC
+extern "C" char DAT_003DB57C[];     // core::XboxSaveDrive's table for the part at +0x4
+extern "C" char DAT_003DB584[];     // core::XboxSaveDrive's main table
+extern "C" char DAT_00395660[];     // the memory-unit device type
+extern "C" void* DAT_0045894C;      // the allocator in use
+extern "C" char DAT_004BDDF8[];     // room for the transfer buffer
+extern "C" char DAT_004BFE18[];     // the mutex the drives share with the worker thread
+extern "C" char* DAT_004BFE38;      // the transfer buffer
+extern "C" bool DAT_004BFE48;       // tested before the one-time set-up; nothing sets it
+
+extern "C" unsigned int __stdcall XGetDevices(void* type);
+char* __cdecl sub_00250E80(char* value, unsigned int step);         // rounds up to a multiple
+void __cdecl sub_00250EB0();
+void __cdecl sub_00283B60(void* mutex);                             // sets the mutex up
+void* __cdecl AllocateFromHeap(void* allocator, unsigned int size);
+
+// The memory units' state: which are present and which have changed (SPEC-016 section 1.2).
+class MemoryUnits
+{
+public:
+    void Init()
+    {
+        unsigned int present = XGetDevices(DAT_00395660);
+        m_Present = (unsigned char)((present & 0xF) | ((present >> 12) & 0xF0));
+        m_Changed = 0;
+    }
+    unsigned char m_Present; // +0x0
+    unsigned char m_Changed; // +0x1
+};
+
+extern "C" MemoryUnits DAT_004BDDF0;
+
+namespace core
+{
+    // The worker thread all drives share (0xCC bytes).
+    class DriveThread
+    {
+    public:
+        virtual void AddRef();
+        DriveThread* sub_002C1B00(void* mutex, void* allocator);    // its constructor
+        char m_pad04[0xC8];
+    };
+}
+
+extern "C" core::DriveThread* DAT_004BFE34;     // the one shared worker thread
+
+// The two interface parts (core::SignedReader at +0xD8, core::SignedWriter at +0xDC), whose constructors
+// the compiler expands before the class's own tables go in.
+struct InterfaceParts
+{
+    void* m_ReaderTable;    // +0x0
+    void* m_WriterTable;    // +0x4
+};
+
+inline void ConstructInterfaces(InterfaceParts* parts)
+{
+    parts->m_ReaderTable = DAT_003DB52C;
+    parts->m_WriterTable = DAT_003DB53C;
+}
+
+// One running search: the text the saves' names must start with, and the system's search handle.
+struct SearchEntry
+{
+    unsigned short m_Text[0x102];   // +0x000
+    void* m_Handle;                 // +0x204, 0xFFFFFFFF when unused
+};
+
+namespace core
+{
+    class XboxSaveDrive
+    {
+    public:
+        XboxSaveDrive* sub_002AC7E0();      // core::Drive's constructor
+        XboxSaveDrive* sub_002BFB50(const char* name, void* allocator);
+
+        void* m_Table00;            // +0x00
+        void* m_Table04;            // +0x04
+        void* m_Allocator;          // +0x08
+        void* m_Table0C;            // +0x0C
+        char m_pad10[0x7C];
+        char m_VolumeName[0x41];    // +0x8C
+        char m_padCD[0x7];
+        DriveThread* m_Thread;      // +0xD4
+        void* m_TableD8;            // +0xD8
+        void* m_TableDC;            // +0xDC
+        unsigned int m_Capabilities;    // +0xE0
+        unsigned int m_OpenFiles;   // +0xE4
+        char m_Name[0x11];          // +0xE8
+        bool m_Mounted;             // +0xF9
+        char m_DriveLetter;         // +0xFA
+        void* m_Unsized[4];         // +0xFC  files whose first block still needs its size
+        SearchEntry m_Pool[4];      // +0x10C
+    };
+}
+
+core::XboxSaveDrive* core::XboxSaveDrive::sub_002BFB50(const char* name, void* allocator)
+{
+    sub_002AC7E0();
+    ConstructInterfaces((InterfaceParts*)&m_TableD8);
+    m_Table00 = DAT_003DB584;
+    m_Table04 = DAT_003DB57C;
+    m_Table0C = DAT_003DB56C;
+    m_TableD8 = DAT_003DB55C;
+    m_TableDC = DAT_003DB54C;
+    m_OpenFiles = 0;
+    m_Mounted = false;
+    m_DriveLetter = 0;
+    sub_00250EB0();
+    if (!DAT_004BFE48)
+    {
+        DAT_004BDDF0.Init();
+        DAT_004BFE38 = sub_00250E80(DAT_004BDDF8, 0x20);
+    }
+    if (DAT_004BFE34 == 0)
+    {
+        sub_00283B60(DAT_004BFE18);
+        DAT_0045894C = allocator;
+        DriveThread* memory = (DriveThread*)AllocateFromHeap(allocator, sizeof(DriveThread));
+        DAT_004BFE34 = memory ? memory->sub_002C1B00(DAT_004BFE18, allocator) : 0;
+        m_Thread = DAT_004BFE34;
+    }
+    else
+    {
+        m_Thread = DAT_004BFE34;
+        m_Thread->AddRef();
+    }
+    if (strcmp(name, "U:") == 0)
+    {
+        m_Capabilities = 0xC3;
+        m_Mounted = true;
+        m_DriveLetter = 'U';
+        m_VolumeName[0] = 0;
+    }
+    else
+    {
+        m_Capabilities = 0xC7;
+    }
+    strncpy(m_Name, name, 0x10);
+    m_Name[0x10] = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        m_Unsized[i] = (void*)0xFFFFFFFF;
+    }
+    for (int j = 0; j < 4; j++)
+    {
+        m_Pool[j].m_Handle = (void*)0xFFFFFFFF;
+    }
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] core::XboxSaveDrive::vfunc_14 (0x002BFCF0, 31 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -345750,8 +349418,455 @@ int core::XboxSaveDrive::vfunc_19(const char* name)
     return 1;
 }
 
-// [TODO] 0x002C1180 core::XboxSaveDrive::vfunc_20 (378 B)
-// [TODO] 0x002C1300 core::XboxSaveDrive::vfunc_21 (220 B)
+// ============================================================================
+// [VERIFIED] core::XboxSaveDrive::vfunc_20 (0x002C1180, 378 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Starts a search for saves whose names begin with the given text and fills in the first one's directory entry.
+// ============================================================================
+// bin: xb
+// va: 0x002C1180
+// what: Starts a search for saves whose names begin with the given text and fills in the first one's directory entry.
+// tool: Claude (from SPEC-016 section 14.4)
+
+extern "C" unsigned int __stdcall sub_00234B47();       // GetLastError
+
+extern "C" bool __cdecl sub_002A95A0(const unsigned short* source, int* consumed, unsigned int* character, int c);
+extern "C" int __cdecl sub_002A9430(unsigned int character, char* destination, int room, int a, int* produced, int c);
+
+// 16-bit text to 8-bit text, one character at a time (SPEC-016 section 10.1). File-local: the compiler
+// passes its first two arguments in registers.
+static int sub_002BFA00(char* destination, const unsigned short* source, int a, int capacity, int c)
+{
+    if ((const void*)source == (const void*)destination)
+    {
+        return -5;
+    }
+    const unsigned short* in = source;
+    char* out = destination;
+    int written = 0;
+    while (*in != 0)
+    {
+        unsigned int character;
+        int consumed;
+        int produced;
+        if (!sub_002A95A0(in, &consumed, &character, c))
+        {
+            return -2;
+        }
+        int result = sub_002A9430(character, out, capacity - written - 1, a, &produced, c);
+        if (result != 0)
+        {
+            if (result == -1)
+            {
+                *out = 0;
+                return -1;
+            }
+            return result;
+        }
+        in = (const unsigned short*)((const char*)in + consumed);
+        out += produced;
+        written += produced;
+    }
+    *out = 0;
+    return 0;
+}
+
+int __cdecl sub_002C0480(char* destination, const unsigned short* source, int a, int capacity, int c)
+{
+    if (destination == 0)
+    {
+        return -3;
+    }
+    if (source == 0)
+    {
+        return -2;
+    }
+    return sub_002BFA00(destination, source, a, capacity, c);
+}
+extern "C" bool __cdecl sub_002A93A0(const char* source, int* consumed, unsigned int* character, int c);
+extern "C" int __cdecl sub_002A9610(unsigned int character, unsigned short* destination, int room, int a, int* produced, int c);
+
+// 8-bit text to 16-bit text, one character at a time (SPEC-016 section 10.2). File-local: the compiler
+// passes its first two arguments in registers.
+static int sub_002BFAA0(unsigned short* destination, const char* source, int a, int capacity, int c)
+{
+    if ((const void*)source == (const void*)destination)
+    {
+        return -5;
+    }
+    const char* in = source;
+    unsigned short* out = destination;
+    int written = 0;
+    while (*in != 0)
+    {
+        unsigned int character;
+        int consumed;
+        int produced;
+        if (!sub_002A93A0(in, &consumed, &character, c))
+        {
+            return -2;
+        }
+        int result = sub_002A9610(character, out, capacity - written - 2, a, &produced, c);
+        if (result != 0)
+        {
+            if (result == -1)
+            {
+                *out = 0;
+                return -1;
+            }
+            return result;
+        }
+        in += consumed;
+        out = (unsigned short*)((char*)out + produced);
+        written += produced;
+    }
+    *out = 0;
+    return 0;
+}
+// What the system's save-game search fills in (0x344 bytes); only the save's name is used here.
+struct SaveGameFindData
+{
+    char m_pad000[0x244];
+    unsigned short m_SaveName[0x80];    // +0x244
+};
+
+// One directory entry handed back to the caller.
+struct DirectoryEntry
+{
+    int m_Kind;             // +0x0: 2 = no more entries, 3 = a file
+    char m_Name[0x101];     // +0x4
+};
+
+// One running search: the text the saves' names must start with, and the system's search handle.
+struct SearchEntry
+{
+    unsigned short m_Text[0x102];   // +0x000
+    void* m_Handle;                 // +0x204, 0xFFFFFFFF when unused
+};
+
+extern "C" void* __stdcall sub_0030A39A(const char* drive, SaveGameFindData* found);      // XFindFirstSaveGame
+extern "C" void __stdcall sub_0030A4EB(void* search);                                      // closes a search
+void __cdecl sub_00283A90(unsigned short* destination, const unsigned short* source, int count);  // copies 16-bit text
+
+namespace core
+{
+    class XboxSaveDrive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual void vfunc_08();
+        virtual void vfunc_09();
+        virtual void vfunc_10();
+        virtual void vfunc_11();
+        virtual void vfunc_12();
+        virtual void vfunc_13();
+        virtual void vfunc_14();
+        virtual void vfunc_15();
+        virtual void vfunc_16();
+        virtual void vfunc_17();
+        virtual void vfunc_18();
+        virtual void vfunc_19();
+        virtual int vfunc_20(const char* text, DirectoryEntry* out, unsigned int* index, bool first);
+        virtual int vfunc_21(unsigned int* index, DirectoryEntry* out);
+        int sub_002BFE10(unsigned int code);
+        bool sub_002BFF10();
+        bool sub_002BF9C0(const unsigned short* prefix, const unsigned short* text);
+        int sub_002C06B0(DirectoryEntry* entry, SaveGameFindData* found, void* search, const unsigned short* prefix);
+
+        char m_pad04[0xCC];
+        int m_LastError;            // +0xD0
+        char m_padD4[0x26];
+        char m_DriveLetter;         // +0xFA
+        char m_padFB[0x11];
+        SearchEntry m_Pool[4];      // +0x10C
+    };
+}
+
+// Ends one running search, if it is running.
+inline void CloseSearch(SearchEntry* entry)
+{
+    if (entry->m_Handle != (void*)0xFFFFFFFF)
+    {
+        sub_0030A4EB(entry->m_Handle);
+        entry->m_Handle = (void*)0xFFFFFFFF;
+    }
+}
+
+// Turns one step of a search into a directory entry (0x2C06B0): 0 = filled in, 1 = failed, 2 = skip.
+int core::XboxSaveDrive::sub_002C06B0(DirectoryEntry* entry, SaveGameFindData* found, void* search,
+                                      const unsigned short* prefix)
+{
+    if (search == (void*)0xFFFFFFFF)
+    {
+        unsigned int code = sub_00234B47();
+        if (code == 18)
+        {
+            entry->m_Name[0] = 0;
+            entry->m_Kind = 2;
+        }
+        else
+        {
+            m_LastError = sub_002BFE10(code);
+            return 1;
+        }
+    }
+    else
+    {
+        if (sub_002BF9C0(found->m_SaveName, prefix))
+        {
+            sub_002C0480(entry->m_Name, found->m_SaveName, 0, 0x101, 0);
+            entry->m_Kind = 3;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+    m_LastError = 0;
+    return 0;
+}
+
+int core::XboxSaveDrive::vfunc_20(const char* text, DirectoryEntry* out, unsigned int* index, bool first)
+{
+    if (!sub_002BFF10())
+    {
+        return 0;
+    }
+    char drive[4];
+    unsigned short wideText[0x102];
+    SaveGameFindData found;
+    drive[0] = m_DriveLetter;
+    drive[1] = ':';
+    drive[2] = '\\';
+    drive[3] = 0;
+    if (text != 0)
+    {
+        sub_002BFAA0(wideText, text, 0, 0x202, 0);
+    }
+    unsigned int slot = 0xFFFFFFFF;
+    if (!first && m_Pool[*index].m_Handle != (void*)0xFFFFFFFF)
+    {
+        slot = *index;
+        if (m_Pool[slot].m_Handle != (void*)0xFFFFFFFF)
+        {
+            sub_0030A4EB(m_Pool[slot].m_Handle);
+            m_Pool[slot].m_Handle = (void*)0xFFFFFFFF;
+        }
+    }
+    else
+    {
+        for (unsigned int i = 0; i < 4; i++)
+        {
+            if (m_Pool[i].m_Handle == (void*)0xFFFFFFFF)
+            {
+                slot = i;
+                break;
+            }
+        }
+    }
+    m_Pool[slot].m_Handle = sub_0030A39A(drive, &found);
+    sub_00283A90(m_Pool[slot].m_Text, wideText, 0x202);
+    *index = slot;
+    int result = sub_002C06B0(out, &found, m_Pool[slot].m_Handle, m_Pool[slot].m_Text);
+    if (result == 0)
+    {
+        return 1;
+    }
+    if (result == 1)
+    {
+        m_Pool[slot].m_Handle = (void*)0xFFFFFFFF;
+        return 0;
+    }
+    return vfunc_21(index, out);
+}
+
+// ============================================================================
+// [VERIFIED] core::XboxSaveDrive::vfunc_21 (0x002C1300, 220 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Finds the next save in a running search and fills in its directory entry; at the end of the list the entry says so.
+// ============================================================================
+// bin: xb
+// va: 0x002C1300
+// what: Finds the next save in a running search and fills in its directory entry; at the end of the list the entry says so.
+// tool: Claude (from SPEC-016 section 14.3)
+
+extern "C" unsigned int __stdcall sub_00234B47();       // GetLastError
+
+extern "C" bool __cdecl sub_002A95A0(const unsigned short* source, int* consumed, unsigned int* character, int c);
+extern "C" int __cdecl sub_002A9430(unsigned int character, char* destination, int room, int a, int* produced, int c);
+
+// 16-bit text to 8-bit text, one character at a time (SPEC-016 section 10.1). File-local: the compiler
+// passes its first two arguments in registers.
+static int sub_002BFA00(char* destination, const unsigned short* source, int a, int capacity, int c)
+{
+    if ((const void*)source == (const void*)destination)
+    {
+        return -5;
+    }
+    const unsigned short* in = source;
+    char* out = destination;
+    int written = 0;
+    while (*in != 0)
+    {
+        unsigned int character;
+        int consumed;
+        int produced;
+        if (!sub_002A95A0(in, &consumed, &character, c))
+        {
+            return -2;
+        }
+        int result = sub_002A9430(character, out, capacity - written - 1, a, &produced, c);
+        if (result != 0)
+        {
+            if (result == -1)
+            {
+                *out = 0;
+                return -1;
+            }
+            return result;
+        }
+        in = (const unsigned short*)((const char*)in + consumed);
+        out += produced;
+        written += produced;
+    }
+    *out = 0;
+    return 0;
+}
+
+int __cdecl sub_002C0480(char* destination, const unsigned short* source, int a, int capacity, int c)
+{
+    if (destination == 0)
+    {
+        return -3;
+    }
+    if (source == 0)
+    {
+        return -2;
+    }
+    return sub_002BFA00(destination, source, a, capacity, c);
+}
+// What the system's save-game search fills in (0x344 bytes); only the save's name is used here.
+struct SaveGameFindData
+{
+    char m_pad000[0x244];
+    unsigned short m_SaveName[0x80];    // +0x244
+};
+
+// One directory entry handed back to the caller.
+struct DirectoryEntry
+{
+    int m_Kind;             // +0x0: 2 = no more entries, 3 = a file
+    char m_Name[0x101];     // +0x4
+};
+
+// One running search: the text the saves' names must start with, and the system's search handle.
+struct SearchEntry
+{
+    unsigned short m_Text[0x102];   // +0x000
+    void* m_Handle;                 // +0x204, 0xFFFFFFFF when unused
+};
+
+extern "C" int __stdcall sub_0030A4A4(void* search, SaveGameFindData* found);     // XFindNextSaveGame
+
+namespace core
+{
+    class XboxSaveDrive
+    {
+    public:
+        int sub_002BFE10(unsigned int code);
+        bool sub_002BFF10();
+        bool sub_002BF9C0(const unsigned short* prefix, const unsigned short* text);
+        int sub_002C06B0(DirectoryEntry* entry, SaveGameFindData* found, void* search, const unsigned short* prefix);
+        int vfunc_21(unsigned int* index, DirectoryEntry* out);
+
+        char m_pad00[0xD0];
+        int m_LastError;            // +0xD0
+        char m_padD4[0x38];
+        SearchEntry m_Pool[4];      // +0x10C
+    };
+}
+
+// Turns one step of a search into a directory entry (0x2C06B0): 0 = filled in, 1 = failed, 2 = skip.
+int core::XboxSaveDrive::sub_002C06B0(DirectoryEntry* entry, SaveGameFindData* found, void* search,
+                                      const unsigned short* prefix)
+{
+    if (search == (void*)0xFFFFFFFF)
+    {
+        unsigned int code = sub_00234B47();
+        if (code == 18)
+        {
+            entry->m_Name[0] = 0;
+            entry->m_Kind = 2;
+        }
+        else
+        {
+            m_LastError = sub_002BFE10(code);
+            return 1;
+        }
+    }
+    else
+    {
+        if (sub_002BF9C0(found->m_SaveName, prefix))
+        {
+            sub_002C0480(entry->m_Name, found->m_SaveName, 0, 0x101, 0);
+            entry->m_Kind = 3;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+    m_LastError = 0;
+    return 0;
+}
+
+int core::XboxSaveDrive::vfunc_21(unsigned int* index, DirectoryEntry* out)
+{
+    unsigned int slot = *index;
+    if (m_Pool[slot].m_Handle == (void*)0xFFFFFFFF)
+    {
+        m_LastError = 1;
+        return 0;
+    }
+    if (!sub_002BFF10())
+    {
+        return 0;
+    }
+    SaveGameFindData found;
+    for (;;)
+    {
+        int result;
+        if (sub_0030A4A4(m_Pool[slot].m_Handle, &found))
+        {
+            result = sub_002C06B0(out, &found, m_Pool[slot].m_Handle, m_Pool[slot].m_Text);
+        }
+        else
+        {
+            result = sub_002C06B0(out, &found, (void*)0xFFFFFFFF, m_Pool[slot].m_Text);
+        }
+        if (result == 0)
+        {
+            return 1;
+        }
+        if (result == 1)
+        {
+            return 0;
+        }
+        if (result != 2)
+        {
+            m_LastError = 0;
+            return 1;
+        }
+    }
+}
+
 // ============================================================================
 // [VERIFIED] sub_002C13E0 (0x002C13E0, 107 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -345935,13 +350050,841 @@ void DriveThread::vfunc_01()
 
 }
 
-// [TODO] 0x002C1480 sub_002C1480 (203 B)
-// [TODO] 0x002C1550 sub_002C1550 (154 B)
-// [TODO] 0x002C15F0 sub_002C15F0 (39 B)
-// [TODO] 0x002C1620 sub_002C1620 (124 B)
-// [TODO] 0x002C16A0 sub_002C16A0 (96 B)
-// [TODO] 0x002C1700 sub_002C1700 (43 B)
-// [TODO] 0x002C1730 sub_002C1730 (48 B)
+// ============================================================================
+// [VERIFIED] sub_002C1480 (0x002C1480, 203 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Puts a request in the drive thread's queue for its priority, at the front or the back, and wakes the worker unless that priority is held.
+// ============================================================================
+// bin: xb
+// va: 0x002C1480
+// what: Puts a request in the drive thread's queue for its priority, at the front or the back, and wakes the worker unless that priority is held.
+// tool: Claude (from SPEC-018)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BC0(Semaphore* semaphore);    // wait for it
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();                       // does the work: 0 error, 1 done, 2 more to do
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();                  // gets ready again after an error; same results as Do
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class RefCountPart
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class ObjectPart
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual void Safe02();
+        int m_RefCount;     // +0x10
+    };
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC  how many holds are on this priority
+        bool m_Woken;               // +0xE  the worker was woken for it while it was held
+    };
+
+    class DriveThread : public RefCountPart, public ObjectPart, public SafeRefCount
+    {
+    public:
+        void sub_002C1480(Request* request, int priority, bool atHead);
+
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68  one count for every queued request
+        Request* m_Head[3];         // +0x6C  the queues, one for each priority
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4  wake-ups the worker must ignore
+        Semaphore m_Answered;       // +0xB8  signalled when an error has been answered
+        bool m_Retry;               // +0xBC  the answer: try again
+        unsigned int m_Outstanding; // +0xC0  requests not finished yet
+        Request* m_Current;         // +0xC4  the request being worked on
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+void core::DriveThread::sub_002C1480(Request* request, int priority, bool atHead)
+{
+    Lock();
+    if (atHead)
+    {
+        if (m_Tail[priority] == 0)
+        {
+            m_Tail[priority] = request;
+        }
+        request->m_Next = m_Head[priority];
+        m_Head[priority] = request;
+    }
+    else
+    {
+        if (m_Head[priority] == 0)
+        {
+            m_Head[priority] = request;
+        }
+        else
+        {
+            m_Tail[priority]->m_Next = request;
+        }
+        request->m_Next = 0;
+        m_Tail[priority] = request;
+    }
+    ++m_Outstanding;
+    unsigned int holds = m_Hold[priority].m_Count;
+    bool signal = holds == 0;
+    if (holds > 0 && m_Hold[priority].m_Field4 > 0 && !m_Hold[priority].m_Woken)
+    {
+        m_Hold[priority].m_Field0 = 0;
+        signal = true;
+        m_Hold[priority].m_Woken = true;
+        ++m_Swallow;
+    }
+    Unlock();
+    if (signal)
+    {
+        sub_00283BD0(&m_Wake);
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C1550 (0x002C1550, 154 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Cancels requests: deletes every queued request of one priority that says the key is its own, and marks the one being worked on if it does too.
+// ============================================================================
+// bin: xb
+// va: 0x002C1550
+// what: Cancels requests: deletes every queued request of one priority that says the key is its own, and marks the one being worked on if it does too.
+// tool: Claude (from SPEC-018)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BC0(Semaphore* semaphore);    // wait for it
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();                       // does the work: 0 error, 1 done, 2 more to do
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();                  // gets ready again after an error; same results as Do
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class RefCountPart
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class ObjectPart
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual void Safe02();
+        int m_RefCount;     // +0x10
+    };
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC  how many holds are on this priority
+        bool m_Woken;               // +0xE  the worker was woken for it while it was held
+    };
+
+    class DriveThread : public RefCountPart, public ObjectPart, public SafeRefCount
+    {
+    public:
+        void sub_002C1550(int key, int priority);
+
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68  one count for every queued request
+        Request* m_Head[3];         // +0x6C  the queues, one for each priority
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4  wake-ups the worker must ignore
+        Semaphore m_Answered;       // +0xB8  signalled when an error has been answered
+        bool m_Retry;               // +0xBC  the answer: try again
+        unsigned int m_Outstanding; // +0xC0  requests not finished yet
+        Request* m_Current;         // +0xC4  the request being worked on
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+void core::DriveThread::sub_002C1550(int key, int priority)
+{
+    Lock();
+    Request** walk = &m_Head[priority];
+    Request* last = 0;
+    while (*walk != 0)
+    {
+        if ((*walk)->ShouldCancel(key))
+        {
+            Request* current = *walk;
+            *walk = current->m_Next;
+            delete current;
+            --m_Outstanding;
+            sub_00283BC0(&m_Wake);
+        }
+        else
+        {
+            last = *walk;
+            walk = &last->m_Next;
+        }
+    }
+    m_Tail[priority] = last;
+    if (m_Current != 0 && m_Current->ShouldCancel(key))
+    {
+        m_CurrentCancelled = true;
+    }
+    Unlock();
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C15F0 (0x002C15F0, 39 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Says whether the drive thread still has any requests that are not finished.
+// ============================================================================
+// bin: xb
+// va: 0x002C15F0
+// what: Says whether the drive thread still has any requests that are not finished.
+// tool: Claude (from SPEC-018)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BC0(Semaphore* semaphore);    // wait for it
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();                       // does the work: 0 error, 1 done, 2 more to do
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();                  // gets ready again after an error; same results as Do
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class RefCountPart
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class ObjectPart
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual void Safe02();
+        int m_RefCount;     // +0x10
+    };
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC  how many holds are on this priority
+        bool m_Woken;               // +0xE  the worker was woken for it while it was held
+    };
+
+    class DriveThread : public RefCountPart, public ObjectPart, public SafeRefCount
+    {
+    public:
+        bool sub_002C15F0();
+
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68  one count for every queued request
+        Request* m_Head[3];         // +0x6C  the queues, one for each priority
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4  wake-ups the worker must ignore
+        Semaphore m_Answered;       // +0xB8  signalled when an error has been answered
+        bool m_Retry;               // +0xBC  the answer: try again
+        unsigned int m_Outstanding; // +0xC0  requests not finished yet
+        Request* m_Current;         // +0xC4  the request being worked on
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+bool core::DriveThread::sub_002C15F0()
+{
+    Lock();
+    bool any = m_Outstanding != 0;
+    Unlock();
+    return any;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C1620 (0x002C1620, 124 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Holds back one priority of the drive thread's queue: takes back the wake-ups for what is queued there and counts the hold.
+// ============================================================================
+// bin: xb
+// va: 0x002C1620
+// what: Holds back one priority of the drive thread's queue: takes back the wake-ups for what is queued there and counts the hold.
+// tool: Claude (from SPEC-018)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BC0(Semaphore* semaphore);    // wait for it
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();                       // does the work: 0 error, 1 done, 2 more to do
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();                  // gets ready again after an error; same results as Do
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class RefCountPart
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class ObjectPart
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual void Safe02();
+        int m_RefCount;     // +0x10
+    };
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC  how many holds are on this priority
+        bool m_Woken;               // +0xE  the worker was woken for it while it was held
+    };
+
+    class DriveThread : public RefCountPart, public ObjectPart, public SafeRefCount
+    {
+    public:
+        int sub_002C1620(int priority, int unused);
+
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68  one count for every queued request
+        Request* m_Head[3];         // +0x6C  the queues, one for each priority
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4  wake-ups the worker must ignore
+        Semaphore m_Answered;       // +0xB8  signalled when an error has been answered
+        bool m_Retry;               // +0xBC  the answer: try again
+        unsigned int m_Outstanding; // +0xC0  requests not finished yet
+        Request* m_Current;         // +0xC4  the request being worked on
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+int core::DriveThread::sub_002C1620(int priority, int unused)
+{
+    Lock();
+    if (m_Hold[priority].m_Count == 0)
+    {
+        for (Request* request = m_Head[priority]; request != 0; request = request->m_Next)
+        {
+            sub_00283BC0(&m_Wake);
+        }
+        m_Hold[priority].m_Field4 = 0;
+        m_Hold[priority].m_Woken = false;
+        m_Hold[priority].m_Field8 = -1;
+    }
+    ++m_Hold[priority].m_Count;
+    Unlock();
+    return -1;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C16A0 (0x002C16A0, 96 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Ends one hold on a priority of the drive thread's queue; when it was the last, gives back a wake-up for each request queued there.
+// ============================================================================
+// bin: xb
+// va: 0x002C16A0
+// what: Ends one hold on a priority of the drive thread's queue; when it was the last, gives back a wake-up for each request queued there.
+// tool: Claude (from SPEC-018)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BC0(Semaphore* semaphore);    // wait for it
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();                       // does the work: 0 error, 1 done, 2 more to do
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();                  // gets ready again after an error; same results as Do
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class RefCountPart
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class ObjectPart
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual void Safe02();
+        int m_RefCount;     // +0x10
+    };
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC  how many holds are on this priority
+        bool m_Woken;               // +0xE  the worker was woken for it while it was held
+    };
+
+    class DriveThread : public RefCountPart, public ObjectPart, public SafeRefCount
+    {
+    public:
+        void sub_002C16A0(int priority, int unused);
+
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68  one count for every queued request
+        Request* m_Head[3];         // +0x6C  the queues, one for each priority
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4  wake-ups the worker must ignore
+        Semaphore m_Answered;       // +0xB8  signalled when an error has been answered
+        bool m_Retry;               // +0xBC  the answer: try again
+        unsigned int m_Outstanding; // +0xC0  requests not finished yet
+        Request* m_Current;         // +0xC4  the request being worked on
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+void core::DriveThread::sub_002C16A0(int priority, int unused)
+{
+    if (m_Hold[priority].m_Count == 1)
+    {
+        for (Request* request = m_Head[priority]; request != 0; request = request->m_Next)
+        {
+            sub_00283BD0(&m_Wake);
+        }
+        m_Hold[priority].m_Field4 = 0;
+        m_Hold[priority].m_Woken = false;
+        m_Hold[priority].m_Field8 = -1;
+    }
+    --m_Hold[priority].m_Count;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C1700 (0x002C1700, 43 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Ends a hold on one priority of the drive thread's queue, inside the lock.
+// ============================================================================
+// bin: xb
+// va: 0x002C1700
+// what: Ends a hold on one priority of the drive thread's queue, inside the lock.
+// tool: Claude (from SPEC-018)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BC0(Semaphore* semaphore);    // wait for it
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();                       // does the work: 0 error, 1 done, 2 more to do
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();                  // gets ready again after an error; same results as Do
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class RefCountPart
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class ObjectPart
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual void Safe02();
+        int m_RefCount;     // +0x10
+    };
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC  how many holds are on this priority
+        bool m_Woken;               // +0xE  the worker was woken for it while it was held
+    };
+
+    class DriveThread : public RefCountPart, public ObjectPart, public SafeRefCount
+    {
+    public:
+        void sub_002C16A0(int priority, int unused);
+        void sub_002C1700(int priority, int unused);
+
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68  one count for every queued request
+        Request* m_Head[3];         // +0x6C  the queues, one for each priority
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4  wake-ups the worker must ignore
+        Semaphore m_Answered;       // +0xB8  signalled when an error has been answered
+        bool m_Retry;               // +0xBC  the answer: try again
+        unsigned int m_Outstanding; // +0xC0  requests not finished yet
+        Request* m_Current;         // +0xC4  the request being worked on
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+void core::DriveThread::sub_002C1700(int priority, int unused)
+{
+    Lock();
+    sub_002C16A0(priority, unused);
+    Unlock();
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C1730 (0x002C1730, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Says whether one priority of the drive thread's queue is being held back.
+// ============================================================================
+// bin: xb
+// va: 0x002C1730
+// what: Says whether one priority of the drive thread's queue is being held back.
+// tool: Claude (from SPEC-018)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BC0(Semaphore* semaphore);    // wait for it
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();                       // does the work: 0 error, 1 done, 2 more to do
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();                  // gets ready again after an error; same results as Do
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class RefCountPart
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class ObjectPart
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual void Safe02();
+        int m_RefCount;     // +0x10
+    };
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC  how many holds are on this priority
+        bool m_Woken;               // +0xE  the worker was woken for it while it was held
+    };
+
+    class DriveThread : public RefCountPart, public ObjectPart, public SafeRefCount
+    {
+    public:
+        unsigned int sub_002C1730(int priority);
+
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68  one count for every queued request
+        Request* m_Head[3];         // +0x6C  the queues, one for each priority
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4  wake-ups the worker must ignore
+        Semaphore m_Answered;       // +0xB8  signalled when an error has been answered
+        bool m_Retry;               // +0xBC  the answer: try again
+        unsigned int m_Outstanding; // +0xC0  requests not finished yet
+        Request* m_Current;         // +0xC4  the request being worked on
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+unsigned int core::DriveThread::sub_002C1730(int priority)
+{
+    Lock();
+    unsigned int count = m_Hold[priority].m_Count;
+    Unlock();
+    return 0 < count;
+}
+
 // ============================================================================
 // [VERIFIED] sub_002C1760 (0x002C1760, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -345993,8 +350936,251 @@ void Class_002C1790::sub_002C1790(bool a1)
     sub_00283BD0((int)this + 184);
 }
 
-// [TODO] 0x002C17B0 sub_002C17B0 (152 B)
-// [TODO] 0x002C1850 sub_002C1850 (62 B)
+// ============================================================================
+// [VERIFIED] sub_002C17B0 (0x002C17B0, 152 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Takes the next request off the drive thread's queues, highest priority first and skipping held ones, and makes it the current request.
+// ============================================================================
+// bin: xb
+// va: 0x002C17B0
+// what: Takes the next request off the drive thread's queues, highest priority first and skipping held ones, and makes it the current request.
+// tool: Claude (from SPEC-018)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BC0(Semaphore* semaphore);    // wait for it
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();                       // does the work: 0 error, 1 done, 2 more to do
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();                  // gets ready again after an error; same results as Do
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class RefCountPart
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class ObjectPart
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual void Safe02();
+        int m_RefCount;     // +0x10
+    };
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC  how many holds are on this priority
+        bool m_Woken;               // +0xE  the worker was woken for it while it was held
+    };
+
+    class DriveThread : public RefCountPart, public ObjectPart, public SafeRefCount
+    {
+    public:
+        Request* sub_002C17B0(int* priority);
+
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68  one count for every queued request
+        Request* m_Head[3];         // +0x6C  the queues, one for each priority
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4  wake-ups the worker must ignore
+        Semaphore m_Answered;       // +0xB8  signalled when an error has been answered
+        bool m_Retry;               // +0xBC  the answer: try again
+        unsigned int m_Outstanding; // +0xC0  requests not finished yet
+        Request* m_Current;         // +0xC4  the request being worked on
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+core::Request* core::DriveThread::sub_002C17B0(int* priority)
+{
+    Request* result = 0;
+    Lock();
+    if (m_Swallow > 0)
+    {
+        --m_Swallow;
+        Unlock();
+        return 0;
+    }
+    for (unsigned int i = 0; i < 3; ++i)
+    {
+        if (!(m_Hold[i].m_Count > 0) && m_Head[i] != 0)
+        {
+            result = m_Head[i];
+            if (result == m_Tail[i])
+            {
+                m_Tail[i] = 0;
+            }
+            m_Head[i] = result->m_Next;
+            result->m_Next = 0;
+            if (priority != 0)
+            {
+                *priority = i;
+            }
+            break;
+        }
+    }
+    m_Current = result;
+    Unlock();
+    return result;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C1850 (0x002C1850, 62 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Forgets the request the drive thread was working on and deletes it.
+// ============================================================================
+// bin: xb
+// va: 0x002C1850
+// what: Forgets the request the drive thread was working on and deletes it.
+// tool: Claude (from SPEC-018)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BC0(Semaphore* semaphore);    // wait for it
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();                       // does the work: 0 error, 1 done, 2 more to do
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();                  // gets ready again after an error; same results as Do
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class RefCountPart
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class ObjectPart
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual void Safe02();
+        int m_RefCount;     // +0x10
+    };
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC  how many holds are on this priority
+        bool m_Woken;               // +0xE  the worker was woken for it while it was held
+    };
+
+    class DriveThread : public RefCountPart, public ObjectPart, public SafeRefCount
+    {
+    public:
+        void sub_002C1850();
+
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68  one count for every queued request
+        Request* m_Head[3];         // +0x6C  the queues, one for each priority
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4  wake-ups the worker must ignore
+        Semaphore m_Answered;       // +0xB8  signalled when an error has been answered
+        bool m_Retry;               // +0xBC  the answer: try again
+        unsigned int m_Outstanding; // +0xC0  requests not finished yet
+        Request* m_Current;         // +0xC4  the request being worked on
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+void core::DriveThread::sub_002C1850()
+{
+    Lock();
+    Request* request = m_Current;
+    m_CurrentCancelled = false;
+    m_Current = 0;
+    Unlock();
+    delete request;
+}
+
 // ============================================================================
 // [VERIFIED] core::DriveThread::vfunc_00 (0x002C1890, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -346051,8 +351237,414 @@ public:
 DriveThread::DriveThread() {}                  // building one is what makes the compiler write its tables and the thunk
 }
 
-// [TODO] 0x002C18B0 sub_002C18B0 (586 B)
-// [TODO] 0x002C1B00 sub_002C1B00 (218 B)
+// ============================================================================
+// [VERIFIED] sub_002C18B0 (0x002C18B0, 586 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: The drive thread's worker: waits for a request, runs it, and on an error asks the game what to do, then retries, re-queues or drops it.
+// ============================================================================
+// bin: xb
+// va: 0x002C18B0
+// what: The drive thread's worker: waits for a request, runs it, and on an error asks the game what to do, then retries, re-queues or drops it.
+// tool: Claude (from SPEC-018 section B.4.11)
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00283BC0(Semaphore* semaphore);    // wait for it
+void __cdecl sub_00283BD0(Semaphore* semaphore);    // signal it once
+
+namespace core
+{
+    class Drive;
+
+    // A piece of work queued for a drive.
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int Do();                       // does the work: 0 error, 1 done, 2 more to do
+        virtual bool ShouldCancel(int key);
+        virtual Drive* GetDrive();
+        virtual int Prepare();                  // gets ready again after an error; same results as Do
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+
+        Request* m_Next;    // +0x04
+    };
+
+    // The three base parts (SPEC-017 section 1).
+    class RefCountPart
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+    };
+
+    class ObjectPart
+    {
+    public:
+        virtual void Object00();
+        void* m_Allocator;  // +0x08
+    };
+
+    class SafeRefCount
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+        virtual void Safe02();
+        int m_RefCount;     // +0x10
+    };
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC  how many holds are on this priority
+        bool m_Woken;               // +0xE  the worker was woken for it while it was held
+    };
+
+    class DriveThread : public RefCountPart, public ObjectPart, public SafeRefCount
+    {
+    public:
+        void DropCurrent();
+        void sub_002C1480(Request* request, int priority, bool atHead);
+        void sub_002C1760(Drive* drive, Request* request);
+        Request* sub_002C17B0(int* priority);
+        void sub_002C1850();
+
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68  one count for every queued request
+        Request* m_Head[3];         // +0x6C  the queues, one for each priority
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4  wake-ups the worker must ignore
+        Semaphore m_Answered;       // +0xB8  signalled when an error has been answered
+        bool m_Retry;               // +0xBC  the answer: try again
+        unsigned int m_Outstanding; // +0xC0  requests not finished yet
+        Request* m_Current;         // +0xC4  the request being worked on
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+namespace core
+{
+    // The parts of a drive this function uses.
+    class Drive
+    {
+    public:
+        int sub_002AC3E0();                     // its last error
+        void sub_002AC400(int error);           // sets its last error
+        int sub_002AC550();                     // what to do about errors: 0, 1 or 2
+        void sub_002AC5D0(Request* request);    // tells the game about the error
+        bool sub_002AC680();
+    };
+}
+
+// Forgets the request being worked on and deletes it. An inline helper with the same statements as the
+// member at 0x2C1850: the compiler expands it at the first two places below and calls its own copy at the
+// third, and in the game that copy is the one function at 0x2C1850 (the linker keeps one of two identical
+// functions; the checker compares the copy's bytes with what is there).
+inline void core::DriveThread::DropCurrent()
+{
+    Lock();
+    Request* request = m_Current;
+    m_CurrentCancelled = false;
+    m_Current = 0;
+    Unlock();
+    delete request;
+}
+
+// Tells the game about a drive's error and waits until it has been answered (0x2C1760). Expanded at two
+// places below.
+void core::DriveThread::sub_002C1760(Drive* drive, Request* request)
+{
+    drive->sub_002AC5D0(request);
+    sub_00283BC0(&m_Answered);
+}
+
+// Whether the worker has been told to stop, handed back through a pointer: this keeps the loop's test in
+// its place (as in 0x283AF0).
+inline void IsStopped(const core::DriveThread* thread, bool* stop)
+{
+    *stop = thread->m_Stop;
+}
+
+int __cdecl sub_002C18B0(core::DriveThread* parent)
+{
+    int priority;
+    bool errorRetry = false;
+    for (;;)
+    {
+        sub_00283BC0(&parent->m_Wake);
+        bool stop;
+        IsStopped(parent, &stop);
+        if (stop)
+        {
+            return 0;
+        }
+        core::Request* request = parent->sub_002C17B0(&priority);
+        if (request == 0)
+        {
+            continue;
+        }
+        core::Drive* drive = request->GetDrive();
+        int status;
+        int error = drive->sub_002AC3E0();
+        if (error != 0 && error != 1)
+        {
+            status = request->Prepare();
+            if (status == 1)
+            {
+                status = request->Do();
+            }
+        }
+        else
+        {
+            status = request->Do();
+        }
+        if (errorRetry == true && drive->sub_002AC3E0() == 0 && drive->sub_002AC550() == 2 && drive->sub_002AC680() == true)
+        {
+            parent->sub_002C1760(drive, request);
+            errorRetry = false;
+        }
+        switch (status)
+        {
+        case 2:
+            if (parent->m_CurrentCancelled)
+            {
+                parent->DropCurrent();
+            }
+            else
+            {
+                parent->sub_002C1480(request, priority, true);
+            }
+            break;
+        case 1:
+            parent->DropCurrent();
+            break;
+        case 0:
+            switch (drive->sub_002AC550())
+            {
+            case 2:
+                if (parent->m_CurrentCancelled)
+                {
+                    parent->DropCurrent();
+                    break;
+                }
+                parent->sub_002C1760(drive, request);
+                // one clear for three ways out: no retry asked for, nothing to tell the game, and after
+                // the game has been told
+                if (parent->m_Retry)
+                {
+                    if (parent->m_CurrentCancelled)
+                    {
+                        if (drive->sub_002AC680() == true)
+                        {
+                            int saved = drive->sub_002AC3E0();
+                            drive->sub_002AC400(0);
+                            parent->sub_002C1760(drive, request);
+                            drive->sub_002AC400(saved);
+                        }
+                    }
+                    else
+                    {
+                        parent->sub_002C1480(request, priority, true);
+                        parent->m_Retry = false;
+                        errorRetry = true;
+                        break;
+                    }
+                }
+                parent->sub_002C1850();
+                break;
+            case 1:
+                if (parent->m_CurrentCancelled)
+                {
+                    parent->sub_002C1850();
+                }
+                else
+                {
+                    parent->sub_002C1480(request, priority, true);
+                }
+                break;
+            case 0:
+                {
+                    // The same six statements once more. The game has them expanded here; written as a
+                    // call to DropCurrent the compiler calls the copy instead, so they are written out.
+                    parent->Lock();
+                    core::Request* current = parent->m_Current;
+                    parent->m_CurrentCancelled = false;
+                    parent->m_Current = 0;
+                    parent->Unlock();
+                    delete current;
+                }
+                break;
+            }
+            break;
+        }
+        parent->Lock();
+        --parent->m_Outstanding;
+        parent->Unlock();
+    }
+}
+
+// ============================================================================
+// [VERIFIED] sub_002C1B00 (0x002C1B00, 218 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: core::DriveThread's constructor: empties its three queues and hold records, makes its two semaphores and starts the worker thread.
+// ============================================================================
+// bin: xb
+// va: 0x002C1B00
+// what: core::DriveThread's constructor: empties its three queues and hold records, makes its two semaphores and starts the worker thread.
+// tool: Claude (from SPEC-018 section B.4.9)
+
+extern "C" char DAT_0039E22C[];     // a base class's table
+extern "C" char DAT_0039F094[];     // a base class's table
+extern "C" char DAT_003DAC24[];     // core::SafeRefCount's table
+extern "C" char DAT_003DB5F0[];     // core::DriveThread's table for the part at +0xC
+extern "C" char DAT_003DB600[];     // core::DriveThread's table for the part at +0x4
+extern "C" char DAT_003DB608[];     // core::DriveThread's main table
+extern "C" void* DAT_0045894C;      // the allocator in use
+
+// A system semaphore's handle.
+struct Semaphore
+{
+    void* m_Handle; // +0x0
+};
+
+// A thread's record (0x4C bytes); SPEC-018 part A has its fields.
+struct Thread
+{
+    char m_pad00[0x4C];
+};
+
+void __cdecl sub_00250EB0();
+void __cdecl sub_00283B90(Semaphore* semaphore, int count);     // creates the semaphore
+int __cdecl sub_002C18B0(void* driveThread);                    // what the worker thread runs
+void __cdecl sub_00283FE0(Thread* thread, int (__cdecl* entry)(void*), void* argument, int priority, unsigned int stackSize, void* allocator);
+
+namespace core
+{
+    class Request;
+
+    // What is known about one priority while it is held back.
+    struct HoldRecord
+    {
+        unsigned int m_Field0;      // +0x0
+        unsigned int m_Field4;      // +0x4
+        int m_Field8;               // +0x8
+        unsigned short m_Count;     // +0xC
+        bool m_Woken;               // +0xE
+    };
+
+    class DriveThread
+    {
+    public:
+        DriveThread* sub_002C1B00(void* mutex, void* allocator);
+
+        void* m_Table00;            // +0x00
+        void* m_Table04;            // +0x04
+        void* m_Allocator;          // +0x08
+        void* m_Table0C;            // +0x0C
+        int m_RefCount;             // +0x10
+        void* m_Mutex;              // +0x14
+        Thread m_Thread;            // +0x18
+        bool m_Stop;                // +0x64
+        Semaphore m_Wake;           // +0x68
+        Request* m_Head[3];         // +0x6C
+        Request* m_Tail[3];         // +0x78
+        HoldRecord m_Hold[3];       // +0x84
+        unsigned int m_Swallow;     // +0xB4
+        Semaphore m_Answered;       // +0xB8
+        bool m_Retry;               // +0xBC
+        unsigned int m_Outstanding; // +0xC0
+        Request* m_Current;         // +0xC4
+        bool m_CurrentCancelled;    // +0xC8
+    };
+}
+
+// The three base parts, whose constructors the compiler expanded at the start (SPEC-017 section 4.11).
+struct RefCountPart
+{
+    void* m_Table;      // +0x0
+};
+
+struct AllocatedPart
+{
+    void* m_Table;      // +0x0
+    void* m_Allocator;  // +0x4
+};
+
+struct SafeRefCountPart
+{
+    void* m_Table;      // +0x0
+    int m_RefCount;     // +0x4
+};
+
+inline void ConstructRefCount(RefCountPart* part)
+{
+    part->m_Table = DAT_0039E22C;
+}
+
+inline void ConstructAllocated(AllocatedPart* part)
+{
+    part->m_Table = DAT_0039F094;
+    part->m_Allocator = DAT_0045894C;
+}
+
+inline void ConstructSafeRefCount(SafeRefCountPart* part)
+{
+    part->m_Table = DAT_003DAC24;
+    part->m_RefCount = 1;
+}
+
+core::DriveThread* core::DriveThread::sub_002C1B00(void* mutex, void* allocator)
+{
+    ConstructRefCount((RefCountPart*)&m_Table00);
+    ConstructAllocated((AllocatedPart*)&m_Table04);
+    ConstructSafeRefCount((SafeRefCountPart*)&m_Table0C);
+
+    m_Table00 = DAT_003DB608;
+    m_Table04 = DAT_003DB600;
+    m_Table0C = DAT_003DB5F0;
+    m_Mutex = mutex;
+    m_Stop = false;
+    m_Swallow = 0;
+    m_Retry = false;
+    m_Outstanding = 0;
+    m_Current = 0;
+    m_CurrentCancelled = false;
+    sub_00250EB0();
+    for (int i = 0; i < 3; ++i)
+    {
+        m_Head[i] = 0;
+        m_Tail[i] = 0;
+        m_Hold[i].m_Count = 0;
+        m_Hold[i].m_Field4 = 0;
+        m_Hold[i].m_Woken = false;
+        m_Hold[i].m_Field8 = -1;
+    }
+    sub_00283B90(&m_Wake, 0);
+    sub_00283B90(&m_Answered, 0);
+    sub_00283FE0(&m_Thread, sub_002C18B0, this, 4, 0x2000, allocator);
+    return this;
+}
+
 // ============================================================================
 // [VERIFIED] core::DriveThread::vfunc_03 (0x002C1BE0, 36 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -364459,7 +370051,23 @@ void Class_002E2950::sub_002E2950()
 }
 
 // [TODO] 0x002E2960 sub_002E2960 (25 B)
-// [TODO] 0x002E2980 sub_002E2980 (14 B)
+// ============================================================================
+// [VERIFIED] sub_002E2980 (0x002E2980, 14 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_001D38B0 (0x001D38B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_002E2980 (0x002E2980, 14 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" void __cdecl sub_002445C0(int);
+
+void __stdcall sub_002E2980(int a1)
+{
+    sub_002445C0(a1);
+}
+
 // [TODO] 0x002E2990 movie::PlayerBink::vfunc_07 (135 B)
 // [TODO] 0x002E2A20 sub_002E2A20 (74 B)
 // [TODO] 0x002E2A70 movie::PlayerBink::vfunc_11 (84 B)
@@ -415343,9 +420951,72 @@ int __cdecl sub_003225C0(void)
     return 0;
 }
 
-// [TODO] 0x00322600 sub_00322600 (10 B)
-// [TODO] 0x00322610 sub_00322610 (10 B)
-// [TODO] 0x00322620 sub_00322620 (10 B)
+// ============================================================================
+// [VERIFIED] sub_00322600 (0x00322600, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00322600 (0x00322600, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004716DC;
+
+void __cdecl sub_00322600(void)
+{
+    DAT_004716DC.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00322610 (0x00322610, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00322610 (0x00322610, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004716D0;
+
+void __cdecl sub_00322610(void)
+{
+    DAT_004716D0.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00322620 (0x00322620, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00322620 (0x00322620, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004716E8;
+
+void __cdecl sub_00322620(void)
+{
+    DAT_004716E8.sub_0023EA70();
+}
+
 // ============================================================================
 // [VERIFIED] sub_00322630 (0x00322630, 20 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -417064,29 +422735,512 @@ void __cdecl sub_003231A0(void)
     DAT_00487478.sub_002A9290();
 }
 
-// [TODO] 0x003231B0 sub_003231B0 (10 B)
-// [TODO] 0x003231C0 sub_003231C0 (10 B)
-// [TODO] 0x003231D0 sub_003231D0 (10 B)
-// [TODO] 0x003231E0 sub_003231E0 (10 B)
-// [TODO] 0x003231F0 sub_003231F0 (10 B)
-// [TODO] 0x00323200 sub_00323200 (10 B)
-// [TODO] 0x00323210 sub_00323210 (10 B)
-// [TODO] 0x00323220 sub_00323220 (10 B)
-// [TODO] 0x00323230 sub_00323230 (10 B)
-// [TODO] 0x00323240 sub_00323240 (10 B)
-// [TODO] 0x00323250 sub_00323250 (10 B)
-// [TODO] 0x00323260 sub_00323260 (10 B)
-// [TODO] 0x00323270 sub_00323270 (10 B)
-// [TODO] 0x00323280 sub_00323280 (10 B)
-// [TODO] 0x00323290 sub_00323290 (10 B)
-// [TODO] 0x003232A0 sub_003232A0 (10 B)
-// [TODO] 0x003232B0 sub_003232B0 (10 B)
-// [TODO] 0x003232C0 sub_003232C0 (10 B)
-// [TODO] 0x003232D0 sub_003232D0 (10 B)
-// [TODO] 0x003232E0 sub_003232E0 (10 B)
-// [TODO] 0x003232F0 sub_003232F0 (10 B)
-// [TODO] 0x00323300 sub_00323300 (10 B)
-// [TODO] 0x00323310 sub_00323310 (10 B)
+// ============================================================================
+// [VERIFIED] sub_003231B0 (0x003231B0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003231B0 (0x003231B0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_0048778C;
+
+void __cdecl sub_003231B0(void)
+{
+    DAT_0048778C.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003231C0 (0x003231C0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003231C0 (0x003231C0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004877A0;
+
+void __cdecl sub_003231C0(void)
+{
+    DAT_004877A0.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003231D0 (0x003231D0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003231D0 (0x003231D0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004877B4;
+
+void __cdecl sub_003231D0(void)
+{
+    DAT_004877B4.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003231E0 (0x003231E0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003231E0 (0x003231E0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004877C8;
+
+void __cdecl sub_003231E0(void)
+{
+    DAT_004877C8.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003231F0 (0x003231F0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003231F0 (0x003231F0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004877D4;
+
+void __cdecl sub_003231F0(void)
+{
+    DAT_004877D4.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323200 (0x00323200, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323200 (0x00323200, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004877E0;
+
+void __cdecl sub_00323200(void)
+{
+    DAT_004877E0.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323210 (0x00323210, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323210 (0x00323210, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004877EC;
+
+void __cdecl sub_00323210(void)
+{
+    DAT_004877EC.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323220 (0x00323220, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323220 (0x00323220, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004877F8;
+
+void __cdecl sub_00323220(void)
+{
+    DAT_004877F8.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323230 (0x00323230, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323230 (0x00323230, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_00487804;
+
+void __cdecl sub_00323230(void)
+{
+    DAT_00487804.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323240 (0x00323240, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323240 (0x00323240, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_00487810;
+
+void __cdecl sub_00323240(void)
+{
+    DAT_00487810.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323250 (0x00323250, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323250 (0x00323250, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_0048776C;
+
+void __cdecl sub_00323250(void)
+{
+    DAT_0048776C.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323260 (0x00323260, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323260 (0x00323260, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_00487778;
+
+void __cdecl sub_00323260(void)
+{
+    DAT_00487778.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323270 (0x00323270, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323270 (0x00323270, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004878F4;
+
+void __cdecl sub_00323270(void)
+{
+    DAT_004878F4.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323280 (0x00323280, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323280 (0x00323280, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004878D4;
+
+void __cdecl sub_00323280(void)
+{
+    DAT_004878D4.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323290 (0x00323290, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323290 (0x00323290, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004878E0;
+
+void __cdecl sub_00323290(void)
+{
+    DAT_004878E0.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003232A0 (0x003232A0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003232A0 (0x003232A0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_00487928;
+
+void __cdecl sub_003232A0(void)
+{
+    DAT_00487928.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003232B0 (0x003232B0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003232B0 (0x003232B0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_00487908;
+
+void __cdecl sub_003232B0(void)
+{
+    DAT_00487908.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003232C0 (0x003232C0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003232C0 (0x003232C0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_0048791C;
+
+void __cdecl sub_003232C0(void)
+{
+    DAT_0048791C.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003232D0 (0x003232D0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003232D0 (0x003232D0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_00487934;
+
+void __cdecl sub_003232D0(void)
+{
+    DAT_00487934.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003232E0 (0x003232E0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003232E0 (0x003232E0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004879A0;
+
+void __cdecl sub_003232E0(void)
+{
+    DAT_004879A0.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003232F0 (0x003232F0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003232F0 (0x003232F0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004879DC;
+
+void __cdecl sub_003232F0(void)
+{
+    DAT_004879DC.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323300 (0x00323300, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323300 (0x00323300, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004879C4;
+
+void __cdecl sub_00323300(void)
+{
+    DAT_004879C4.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00323310 (0x00323310, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00323310 (0x00323310, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_004879D0;
+
+void __cdecl sub_00323310(void)
+{
+    DAT_004879D0.sub_0023EA70();
+}
+
 // ============================================================================
 // [VERIFIED] sub_00323320 (0x00323320, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -421820,10 +427974,94 @@ void __cdecl sub_00325040(void)
     DAT_0048BF30.sub_002A9290();
 }
 
-// [TODO] 0x00325050 sub_00325050 (10 B)
-// [TODO] 0x00325060 sub_00325060 (10 B)
-// [TODO] 0x00325070 sub_00325070 (10 B)
-// [TODO] 0x00325080 sub_00325080 (10 B)
+// ============================================================================
+// [VERIFIED] sub_00325050 (0x00325050, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00325050 (0x00325050, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_0048BFB8;
+
+void __cdecl sub_00325050(void)
+{
+    DAT_0048BFB8.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00325060 (0x00325060, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00325060 (0x00325060, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_0048BFCC;
+
+void __cdecl sub_00325060(void)
+{
+    DAT_0048BFCC.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00325070 (0x00325070, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00325070 (0x00325070, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_0048BFA4;
+
+void __cdecl sub_00325070(void)
+{
+    DAT_0048BFA4.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_00325080 (0x00325080, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00325080 (0x00325080, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_0048BFE0;
+
+void __cdecl sub_00325080(void)
+{
+    DAT_0048BFE0.sub_0023EA70();
+}
+
 // ============================================================================
 // [VERIFIED] sub_00325090 (0x00325090, 50 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -431088,8 +437326,50 @@ void __cdecl sub_00329260(void)
     }
 }
 
-// [TODO] 0x00329290 sub_00329290 (10 B)
-// [TODO] 0x003292A0 sub_003292A0 (10 B)
+// ============================================================================
+// [VERIFIED] sub_00329290 (0x00329290, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00329290 (0x00329290, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_00492BEC;
+
+void __cdecl sub_00329290(void)
+{
+    DAT_00492BEC.sub_0023EA70();
+}
+
+// ============================================================================
+// [VERIFIED] sub_003292A0 (0x003292A0, 10 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00163FA0 (0x00163FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_003292A0 (0x003292A0, 10 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+struct Object
+{
+    void sub_0023EA70();
+};
+
+extern "C" Object DAT_00492BF8;
+
+void __cdecl sub_003292A0(void)
+{
+    DAT_00492BF8.sub_0023EA70();
+}
+
 // ============================================================================
 // [VERIFIED] sub_003292B0 (0x003292B0, 33 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

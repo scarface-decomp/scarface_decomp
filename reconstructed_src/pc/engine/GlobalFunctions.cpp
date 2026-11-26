@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (277 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, engine/GlobalFunctions.cpp (278 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 277 of 666 functions matched (41.59%). NOT COMPLETE YET.
-// The 389 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// PROGRESS: 278 of 666 functions matched (41.74%). NOT COMPLETE YET.
+// The 388 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -265,6 +265,77 @@ void __cdecl sub_006DF0F0(int a1)
     DAT_0085CDB8 = r_eax;
     *(int*)r_eax = 0;
     ((void (__stdcall*)(int))DAT_0072F098)((int)DAT_0085CDC4);
+}
+
+// ============================================================================
+// [VERIFIED] sub_006DF140 (0x006DF140, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_00283C40 (0x00283C40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006DF140
+// what: Takes a thread's record out of the list of all threads, inside the list's lock.
+// tool: Claude (from SPEC-018)
+
+struct Thread;
+
+// One fiber of a thread (0x24 bytes).
+struct Fiber
+{
+    int (__cdecl* m_Entry)(void* argument);     // +0x00
+    void* m_Argument;       // +0x04
+    Thread* m_Owner;        // +0x08
+    Fiber* m_Next;          // +0x0C
+    Fiber* m_Previous;      // +0x10
+    void* m_SystemFiber;    // +0x14
+    int m_Field18;          // +0x18
+    int m_Field1C;          // +0x1C
+    int m_Field20;          // +0x20
+};
+
+// A thread's record (0x4C bytes). Its first fiber is part of it.
+struct Thread
+{
+    Thread* m_Next;         // +0x00
+    Thread* m_Previous;     // +0x04
+    Fiber m_FirstFiber;     // +0x08
+    Fiber* m_CurrentFiber;  // +0x2C
+    Fiber* m_FiberHead;     // +0x30
+    Fiber* m_FiberTail;     // +0x34
+    bool m_Running;         // +0x38
+    int m_Result;           // +0x3C
+    int m_Priority;         // +0x40
+    unsigned int m_Id;      // +0x44
+    void* m_Handle;         // +0x48
+};
+
+extern "C" int DAT_0072F098;        // kernel import: RtlLeaveCriticalSection
+extern "C" int DAT_0072F094;        // kernel import: RtlEnterCriticalSection
+extern "C" Thread* DAT_0085CDB8;    // the last thread in the list of all threads
+extern "C" Thread* DAT_0085CDBC;    // the first
+extern "C" char DAT_0085CDC4[];     // the critical section that guards the list
+
+void __cdecl sub_006DF140(Thread* thread)
+{
+    ((void (__stdcall*)(char*))DAT_0072F094)(DAT_0085CDC4);
+    if (thread->m_Previous == 0)
+    {
+        DAT_0085CDBC = thread->m_Next;
+    }
+    else
+    {
+        thread->m_Previous->m_Next = thread->m_Next;
+    }
+    if (thread->m_Next == 0)
+    {
+        DAT_0085CDB8 = thread->m_Previous;
+    }
+    else
+    {
+        thread->m_Next->m_Previous = thread->m_Previous;
+    }
+    ((void (__stdcall*)(char*))DAT_0072F098)(DAT_0085CDC4);
 }
 
 // ============================================================================
