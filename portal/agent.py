@@ -361,6 +361,31 @@ def class_hint(b: str, va: int) -> str:
             f"{how.get(r[2], r[2])}. Check it against the code.")
 
 
+_FIX_LEADS = None
+
+
+def fix_lead(b: str, va: int) -> str:
+    """What reports/fusionfix_leads_xb.json says about an Xbox function ("" for none): the name a published
+    fix for the PC game gives it, or what the fix changes in it. A lead to check against the code."""
+    global _FIX_LEADS
+    if b != "xb":
+        return ""
+    if _FIX_LEADS is None:
+        try:
+            rows = json.loads((ROOT / "reports" / "fusionfix_leads_xb.json").read_text(encoding="utf-8")).get("functions", [])
+            _FIX_LEADS = {int(r["xb"], 16): r.get("hooks", []) for r in rows}
+        except (OSError, ValueError, KeyError, TypeError):
+            _FIX_LEADS = {}
+    said = []
+    for h in _FIX_LEADS.get(va, []):
+        where = f"{h.get('file', '?')} line {h.get('line', '?')}"
+        name = h.get("name") or ""
+        what = {"call": f"calls this function as `{name}`", "start": f"hooks this function's start with its own `{name}`",
+                "patch": "changes something inside this function" + (f" (`{name}`)" if name else "")}.get(h.get("kind"), "uses this function")
+        said.append(f"{what} ({where}" + (f": {h['note']}" if h.get("note") else "") + ")")
+    return ("ThirteenAG's Scarface Fusion Fix " + "; ".join(said) + ". Check it against the code.") if said else ""
+
+
 def cmd_packet(args) -> int:
     import decompme as DME
     from disasm_synth import disassemble, synthesize_cpp
@@ -389,6 +414,9 @@ def cmd_packet(args) -> int:
     for hint in codegen_hints(b, tb):
         print("hint: " + hint)
     lead = class_hint(b, va)
+    if lead:
+        print("lead: " + lead)
+    lead = fix_lead(b, va)
     if lead:
         print("lead: " + lead)
     print("\ntarget bytes:\n  " + " ".join(f"{x:02X}" for x in tb[:512]) + (" ..." if size > 512 else ""))

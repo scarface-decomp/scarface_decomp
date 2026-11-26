@@ -58,6 +58,12 @@ authors are credited in the commit history. Thank you.
   named in the game's own program, but it was ScarfaceHook and
   [ScarfaceEX](https://www.moddb.com/mods/scarfaceex), which call them, that showed they were there to
   be read ([NAMES.md](NAMES.md)).
+* [Scarface Fusion Fix](https://github.com/ThirteenAG/WidescreenFixesPack) by ThirteenAG (MIT), which fixes
+  the PC game's mouse, controller, menus and display. Where it hooks the game says what those places are
+  for: fifteen Xbox functions and six variables carry such a lead (`reports/fusionfix_leads_xb.json`),
+  found by looking for the same instructions in the Xbox game or through a function's PC twin. One lead,
+  `findObject`, lands on the function this project had already named `FindObjectByName`. No code was
+  copied, and the file holds none of the game's instructions.
 * For a second opinion on the scripts' names: Gangsta Team's
   [natives list](https://gangsta-team.github.io/website/#/documentation/game/natives) (public domain)
   and the word list of their [RCF explorer](https://gangsta-team.github.io/web-rcf-explorer/). The

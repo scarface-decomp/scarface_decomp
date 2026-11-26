@@ -1,0 +1,244 @@
+{
+ "what": "Places in the game that ThirteenAG's Scarface Fusion Fix (WidescreenFixesPack, MIT) hooks, reads or patches, carried over to the Xbox game: leads to what a function or a variable is for. The fix finds each place in the PC game by a run of instructions. Here the same run was looked for in default.xbe, or the PC function was followed to its Xbox twin (reports/pairing_xb_pc_study.json). kind: call = the fix calls this function under that name; start = it hooks the function's start; patch = it changes something inside the function. Only the fix's own names, files and lines are recorded: no instructions of the game are in this file. Leads, not names: check each against the code.",
+ "source": {
+  "repository": "https://github.com/ThirteenAG/WidescreenFixesPack",
+  "folder": "source/Scarface.FusionFix",
+  "commit": "d545cc29fc76b072590db0e6f91cb85932157eee",
+  "date": "2026-11-23",
+  "licence": "MIT"
+ },
+ "counts": {
+  "places": 77,
+  "in the Xbox game itself": 17,
+  "through a PC twin": 4,
+  "PC only": 53,
+  "not found": 3
+ },
+ "functions": [
+  {
+   "xb": "0x00023EC0",
+   "size": 16,
+   "hooks": [
+    {
+     "kind": "call",
+     "name": "findObject",
+     "file": "HUD.ixx",
+     "line": 336
+    }
+   ]
+  },
+  {
+   "xb": "0x0006E9B0",
+   "size": 679,
+   "hooks": [
+    {
+     "kind": "patch",
+     "name": "evaluator",
+     "file": "NativeMenu.ixx",
+     "line": 384
+    }
+   ]
+  },
+  {
+   "xb": "0x000702E0",
+   "size": 197,
+   "hooks": [
+    {
+     "kind": "call",
+     "name": "evaluateScript",
+     "file": "ControllerPrompts.ixx",
+     "line": 560,
+     "note": "0x5B6380, Con::evaluate call at +13."
+    }
+   ]
+  },
+  {
+   "xb": "0x000D4DF0",
+   "size": 1363,
+   "hooks": [
+    {
+     "kind": "patch",
+     "name": "player",
+     "file": "Input.ixx",
+     "line": 461
+    }
+   ]
+  },
+  {
+   "xb": "0x00154D10",
+   "size": 327,
+   "hooks": [
+    {
+     "kind": "patch",
+     "name": "recoilPattern",
+     "file": "Fixes.ixx",
+     "line": 49,
+     "note": "First pushed argument is MAX; the second call still supplies MIN."
+    }
+   ]
+  },
+  {
+   "xb": "0x00162570",
+   "size": 80,
+   "hooks": [
+    {
+     "kind": "patch",
+     "name": "",
+     "file": "Input.ixx",
+     "line": 389
+    }
+   ]
+  },
+  {
+   "xb": "0x0016C5A0",
+   "size": 281,
+   "hooks": [
+    {
+     "kind": "patch",
+     "name": "",
+     "file": "Input.ixx",
+     "line": 309,
+     "note": "walk key"
+    }
+   ]
+  },
+  {
+   "xb": "0x00177180",
+   "size": 135,
+   "hooks": [
+    {
+     "kind": "start",
+     "name": "UpdateRageBar",
+     "file": "FramerateVigilante.ixx",
+     "line": 88
+    }
+   ]
+  },
+  {
+   "xb": "0x00195830",
+   "size": 255,
+   "hooks": [
+    {
+     "kind": "call",
+     "name": "getElement",
+     "file": "HUD.ixx",
+     "line": 339
+    }
+   ]
+  },
+  {
+   "xb": "0x001B4940",
+   "size": 391,
+   "hooks": [
+    {
+     "kind": "patch",
+     "name": "",
+     "file": "Fixes.ixx",
+     "line": 44,
+     "pc": "0x005B76B0"
+    }
+   ]
+  },
+  {
+   "xb": "0x001C42C0",
+   "size": 572,
+   "hooks": [
+    {
+     "kind": "start",
+     "name": "Dialog",
+     "file": "Intro.ixx",
+     "line": 43,
+     "pc": "0x005DAAE0"
+    }
+   ]
+  },
+  {
+   "xb": "0x001ECBF0",
+   "size": 1608,
+   "hooks": [
+    {
+     "kind": "patch",
+     "name": "mortarPattern",
+     "file": "FramerateVigilante.ixx",
+     "line": 95,
+     "pc": "0x00607100"
+    }
+   ]
+  },
+  {
+   "xb": "0x0022C300",
+   "size": 23,
+   "hooks": [
+    {
+     "kind": "call",
+     "name": "PauseContext",
+     "file": "Intro.ixx",
+     "line": 40
+    }
+   ]
+  },
+  {
+   "xb": "0x002317D0",
+   "size": 1095,
+   "hooks": [
+    {
+     "kind": "patch",
+     "name": "",
+     "file": "Fixes.ixx",
+     "line": 36
+    }
+   ]
+  },
+  {
+   "xb": "0x0024E4A0",
+   "size": 6,
+   "hooks": [
+    {
+     "kind": "call",
+     "name": "nativeLanguage",
+     "file": "NativeMenu.ixx",
+     "line": 386,
+     "pc": "0x006DC100"
+    }
+   ]
+  }
+ ],
+ "variables": [
+  {
+   "xb": "0x0041A6B0",
+   "name": "frontendDraw",
+   "file": "HUD.ixx",
+   "line": 354
+  },
+  {
+   "xb": "0x0047451B",
+   "name": "bIsInvertX",
+   "file": "Input.ixx",
+   "line": 279
+  },
+  {
+   "xb": "0x0048A9D8",
+   "name": "MainCharacter",
+   "file": "ControllerPrompts.ixx",
+   "line": 539
+  },
+  {
+   "xb": "0x0048C23C",
+   "name": "hudManager",
+   "file": "HUD.ixx",
+   "line": 345
+  },
+  {
+   "xb": "0x00494014",
+   "name": "application",
+   "file": "HUD.ixx",
+   "line": 351
+  },
+  {
+   "xb": "0x004C0218",
+   "name": "hudDisplay",
+   "file": "HUD.ixx",
+   "line": 348
+  }
+ ]
+}
