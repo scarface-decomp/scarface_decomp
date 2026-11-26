@@ -1,6 +1,6 @@
 {
 "schema": "exam_regarg_v1",
-"what": "Examiner, default.xbe: functions that read EAX before writing it AND have a direct caller that loads EAX within 4 instructions before the call: arguments passed in EAX, which MSVC 7.1 only does for link-time code generation (/GL + /LTCG). Heuristic; false positives possible (functions called right after a value-returning call).",
+"what": "Examiner, default.xbe: functions that read EAX before writing it AND have a direct caller that loads EAX within 4 instructions before the call: arguments passed in EAX. Read at first as a sign of link-time code generation; that reading was withdrawn on 2026-11-25 (SPEC-016 section 11): the compiler does this at plain /O2 for a function only its own file can see (static, or a static template). So each entry is a lead that the function is file-local and has to be written in one file with its callers. Heuristic; false positives possible (functions called right after a value-returning call).",
 "functions": [
 {
 "va": "0x00013700",

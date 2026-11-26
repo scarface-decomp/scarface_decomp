@@ -20,6 +20,7 @@ portal/scripts/reverify_all.py, so every path applies the same rules:
 
 from __future__ import annotations
 
+import json
 import os
 import re
 import shutil
@@ -696,11 +697,35 @@ def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Op
     if n_c != n_t:
         notes.append(f"Compiled function is {n_c} bytes; the original is {n_t} bytes.")
     exact = n_c == n_t and matched == n_t and not mismatch
-    hard = find_hardcoded_addresses(code, set(reloc_slots), image) if image is not None else []
+    hard = (find_hardcoded_addresses(code, set(reloc_slots), image, reviewed_numbers(image, fn_va))
+            if image is not None else [])
     return CompareResult(exact, matched, n_t, n_c, details, checked, unverified, mismatch, notes, hard)
 
 
-def find_hardcoded_addresses(code: bytes, reloc_offsets: set, image) -> List[str]:
+NUMBERS_FILE = ROOT / "reports" / "numbers_not_addresses.json"
+
+
+def reviewed_numbers(image, fn_va: Optional[int]) -> set:
+    """The values reports/numbers_not_addresses.json lists for this function: plain numbers that happen to
+    fall inside the program's address range (Unicode's limit 0x10FFFF in the Xbox game's text code, say).
+    Each is listed for one function of one game file, with the reason, after someone looked at it."""
+    if fn_va is None or image is None or not getattr(image, "path", None):
+        return set()
+    try:
+        rows = json.loads(NUMBERS_FILE.read_text(encoding="utf-8")).get("numbers", [])
+    except (OSError, ValueError):
+        return set()
+    out = set()
+    for r in rows:
+        try:
+            if str(r["file"]).lower() == image.path.name.lower() and int(str(r["va"]), 16) == fn_va:
+                out.add(int(str(r["value"]), 16))
+        except (KeyError, TypeError, ValueError):
+            pass
+    return out
+
+
+def find_hardcoded_addresses(code: bytes, reloc_offsets: set, image, numbers: Optional[set] = None) -> List[str]:
     """
     Operands in the compiled code that hold a literal address inside the original image without a
     relocation, e.g. `*(int*)0x00419E48` or `return 0x0085AEF4;`. They can match bytes, but they are
@@ -725,6 +750,8 @@ def find_hardcoded_addresses(code: bytes, reloc_offsets: set, image) -> List[str
             val = None
             if op.type == X.X86_OP_IMM and op.size == 4:
                 val = op.imm & 0xFFFFFFFF
+                if numbers and val in numbers:
+                    continue                    # a number someone looked at, not an address (never memory at it)
             elif op.type == X.X86_OP_MEM and op.mem.base == 0 and op.mem.index == 0:
                 val = op.mem.disp & 0xFFFFFFFF
             if val is None or not (lo <= val < hi):

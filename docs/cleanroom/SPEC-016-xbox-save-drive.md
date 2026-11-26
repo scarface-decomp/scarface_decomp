@@ -1,4 +1,4 @@
-# SPEC-016: `core::XboxSaveDrive`, the Xbox save-file drive (parts 1, 2a and 2b)
+# SPEC-016: `core::XboxSaveDrive`, the Xbox save-file drive (parts 1 to 2c)
 
 **Examiner:** Claude (AI assistant) for RRutherrfordd, 2026-11-25.
 **Outside material read:** leaked source, read directly: the save-drive source file and header of the 2003
@@ -470,13 +470,152 @@ call, the claim stands.
 * 0x30A2CA is expected to be `XDeleteSaveGame`; confirm against your library names.
 * **Scarface-only:** the name is converted directly, with no path building, and may be null.
 
-### 10.8 0x2BFCF0: slot 14, a forward (32 bytes, open)
+### 10.8 0x2BFCF0: slot 14, a forward (32 bytes)
 
-Takes two stack arguments. It moves them up one place, puts `this` in the first place, adds 0xD8 to ECX
-(the signed-read interface) and jumps to 0x2CC160. So it is "call 0x2CC160 on the read interface with
-(this, a, b)" written as a tail call.
+Corrected in §11: it takes eight stack arguments, drops the third, puts `this` first, adds 0xD8 to ECX
+(the read interface) and jumps to 0x2CC160.
 
-## 11. Still to come (part 2c)
+## 11. Questions and answers, second round (2026-11-25)
 
-File initialisation (0x2C0210), 0x2C04C0 and 0x2C06B0, the slot-9 function (0x2C0900 to 0x2C09C0), the
-save-file open (0x2C09C0), the directory search (0x2C1180, 0x2C1300) and the constructor (0x2BFB50).
+All eight functions of §10 are verified, with 0x2C0900 and 0x2C06B0 written from the bytes ahead of
+this part. What the attempts established:
+
+* **Register arguments need no link-time code generation.** A `static` function compiled with plain
+  `/O2` gets its first parameter in ECX and its second in EAX, the rest on the stack, caller-cleaned
+  (0x2BFA00 and 0x2C0480 match that way). The examiner's claim of 24 November (SPEC-014 §5.5) is
+  withdrawn for every file-local function, and `reports/exam_regarg_xb.json` with it: no entry has
+  callers in two provably different files.
+* **0x2BFA00 / 0x2BFAA0** are one `static` function template over the two character types, or two
+  `static` copies; both forms match. The −1 exit is `*out = 0; return -1;` with the literal. 0x2BFAA0
+  needs the source walked through a local copy of the pointer.
+* **0x2C0F80 / 0x2C1020:** the class has real multiple inheritance: a front part of 0xD8 bytes, then
+  the two 4-byte interfaces. Each function overrides its interface's slot 0. 0x2C1020's size is
+  `size - 20 * ((size + 0x1FFF) / 0x2000)`.
+* **0x2C0EC0:** mount and write-back are two `if` statements. The search loop's form is free.
+* **0x2C10E0:** `if (name != 0)` is also what an always-expanded checked wrapper around 0x2BFAA0
+  leaves.
+* **0x2BFCF0 (correction to §10.8):** it takes **eight** stack arguments (file, name, unused,
+  position, destination, count, pointer to a done-count, memory space), drops the third, and tail-calls
+  0x2CC160 on the read interface with (this, file, name, position, destination, count, done, space).
+  0x2BFD10 (slot 15) is the same into 0x2CC250 with nine.
+* **0x2CC160 / 0x2CC250** are non-virtual members of the two interface classes, `core::SignedReader`
+  and `core::SignedWriter` (the names are in the run-time type information of tables 0x3DB52C and
+  0x3DB53C). They split a read or write into a first partial block, whole blocks and a remainder,
+  calling slot 0 for each; slots 1 and 2 give the block's data size and the header size.
+* **0x250E60** rounds down to a multiple; **0x250E80** rounds up.
+* **0x2C0900 (slot 9):** calls 0x2C04C0, then, unless the drive letter is `'U'`: if files are open and
+  the unit changed, sets both error fields (+0x7C and +0xD0) to 3 if the unit is present and 4 if not,
+  as an `if`/`else` with two stores each, and returns 0; if no files are open, clears the changed bit
+  (guarded). It returns whether the last error is 0. Is-present is expanded here.
+* **0x2C06B0:** member with four arguments (entry, find data, search handle, prefix); fills one
+  directory entry from a find result, using 0x2BF9C0 and the checked conversion of §10.3 expanded.
+* **0x2C0920** is not a function start.
+
+## 12. Part 2c: media information, file initialisation, and a neighbour that is another class
+
+### 12.1 More layout: the media-information block in the base part
+
+| Offset | Type | Role | Witness |
+| :--- | :--- | :--- | :--- |
+| +0x7C | 32-bit enum | media state. Scarface stores the drive's **error value** here (same numbers as +0xD0) | 0x2C057E, 0x2C05AA, 0x2C0623, 0x2C0639, 0x2C064D |
+| +0x80 | unsigned int | free space in bytes, 0xFFFFFFFF if it does not fit | 0x2C0658, 0x2C0668 |
+| +0x84 | unsigned int | free space in sectors | 0x2C069D |
+| +0x88 | unsigned int | sector size, default 0x200 | 0x2C04D5 |
+| +0x8C | char[0x41] | volume name | 0x2C05B7: cleared as 0x10 dwords and one byte |
+
+### 12.2 0x2C04C0: refresh the media information (496 bytes padded, open; not virtual)
+
+* **Signature:** member, no arguments, no result. Frame 0x5C.
+* **Locals:** a 16-bit name buffer of 0x20 characters; three 64-bit values; a 4-character drive string.
+* **Steps:**
+  1. Sector size = 0x200; free space = 0; free sectors = 0.
+  2. If the drive letter (+0xFA) is not `'U'`:
+     1. Volume name's first character = 0.
+     2. Work out port and slot (expanded, with the `'U'` name test giving −1, −1).
+     3. Refresh the memory-unit state (0x2BF6A0).
+     4. If has-changed(port, slot) (expanded, guarded): unmount (0x2BF930).
+     5. If is-present(port, slot) is false (expanded; negative arguments count as present): media
+        state = 4 and last error = 4; return.
+     6. If mount (§3) fails: media state = last error; return.
+     7. `code = translate(XMUNameFromDriveLetter(driveLetter, wideName, 0x20))`. If `code` is not 0:
+        media state = `code`; volume name's first character = 0; return. The last error is not written
+        on this path.
+     8. Clear the whole volume name (0x41 bytes), then convert `wideName` into it with the checked
+        conversion 0x2C0480(volumeName, wideName, 0, 0x41, 0). This is a real call (0x2C05CF).
+  3. Build the drive string: drive letter, `':'`, `'\\'`, zero.
+  4. `GetDiskFreeSpaceExA(drive, &freeToCaller, &total, &totalFree)`. If it returns 0: volume name's
+     first character = 0; `e = translate(GetLastError())`; media state = `e`; last error = `e`; return.
+  5. Media state = 0; last error = 0.
+  6. Free space = 0xFFFFFFFF if `freeToCaller`'s high half is not 0, otherwise its low half.
+  7. `s = XGetDiskSectorSizeA(drive)`; sector size = `s` if not 0, otherwise 0x200.
+  8. Free sectors = free space / sector size (unsigned).
+* **Where Scarface differs from 2003** (facts about Scarface): the media state holds the error value
+  directly, with no second enum; several paths write the last error as well; the volume name is fetched
+  as 16-bit text into a local and converted; "not present" is value 4.
+* **Codegen notes:**
+  * EDI is zeroed at entry and used as the constant 0 for the stores in steps 1 and 5; it is reloaded
+    with the slot in between and zeroed again at 0x2C05D7.
+  * In step 2.8 the clear (`rep stosd`, `stosb`) is interleaved with the pushes for the call.
+  * In step 6 the test is `high != 0` first, with the 0xFFFFFFFF store in the taken branch.
+  * Is-present and has-changed each leave `setne al; test al, al`: both are in-class inline functions
+    returning bool.
+
+### 12.3 0x2C0210: write a new save file's blocks (624 bytes padded, open; not virtual)
+
+* **Signature:** member, three arguments (handle, `unsigned int` size, `bool` valid-header), returns
+  bool. `ret 0xC`. Frame 0x1C: a 20-byte signature, the written count, a saved `this`.
+* **Steps:**
+  1. If write-back (§4) fails, return false.
+  2. Buffer state = 0. Clear the whole 0x2000-byte buffer.
+  3. `remaining = size`. If valid-header: store `size` as the buffer's first 32-bit value.
+  4. If `size > 0x2000` (unsigned): sign the first 0x1FEC bytes of the buffer and copy the 20-byte
+     signature to `buffer + 0x1FEC`. The signing is 0x2BF760's body expanded (begin; −1 fails;
+     update; end). On failure: record the translated `GetLastError()` and return false.
+  5. If `SetFilePointer(handle, 0, NULL, FILE_BEGIN)` is not 0: record the translated error; return
+     false.
+  6. `block = 0`. While `remaining > 0x2000`:
+     1. `WriteFile(handle, buffer, 0x2000, &written, NULL)`; on 0 fail.
+     2. If `block == 0` and valid-header: store 0 as the buffer's first 32-bit value, sign the first
+        0x1FEC bytes again (expanded) and copy the signature to `buffer + 0x1FEC`; a −1 from begin
+        fails.
+     3. `remaining -= 0x2000; block++`.
+  7. If `remaining > 0`:
+     1. Store 0 as the buffer's first 32-bit value.
+     2. Sign `remaining - 20` bytes with a **call** to 0x2BF760(buffer, remaining − 20, &signature); on
+        false fail.
+     3. Copy the signature to `buffer + remaining - 20`.
+     4. `WriteFile(handle, buffer, remaining, &written, NULL)`; on 0 fail.
+     5. `block++`.
+  8. Cached handle = handle; cached block = `block - 1`; buffer state = 1; return true.
+* **Failure exits:**
+  * Steps 4 and 5 have the error-recording member expanded, each with its own exit (0x2C02F3,
+    0x2C02D4).
+  * Every failure in steps 6 and 7 shares one exit at 0x2C045D, which **calls** 0x2C0030 with
+    `GetLastError()`.
+* **Codegen notes:**
+  * `remaining` is EBX; `block` is EBP inside the loop (EBP holds `this` before it, saved at
+    `[esp+0x10]`).
+  * The 4-byte stores are plain `mov dword` (a `memset`/`memcpy` of 4 bytes).
+  * The signature copies are five 32-bit moves each.
+  * The end is `inc ebp` then `dec ebp`: `block++` in 7.5 and `block - 1` in step 8, not folded.
+  * The media-state field +0x7C is not written here.
+
+### 12.4 0x2C13E0 is not this class: it is `core::DriveThread`'s destructor (107 bytes, open)
+
+* **Witness:** it stores the three tables 0x3DB608 (+0), 0x3DB600 (+4) and 0x3DB5F0 (+0xC), whose
+  run-time type information says `core::DriveThread`. Its only caller is 0x2C1BE3, inside that
+  class's slot-3 deleting destructor.
+* **Steps:**
+  1. Store the three tables.
+  2. Set the byte at +0x64 to 1.
+  3. Call, each with one pushed argument and one shared `add esp, 0x14` after the last:
+     0x283BD0(this + 0x68); 0x283AF0(this + 0x18); 0x283DD0(this + 0x18); 0x283BB0(this + 0x68);
+     0x283BB0(this + 0xB8).
+  4. The base destructors, expanded: store 0x3DAC24 (`core::SafeRefCount`) at +0xC; copy +8 into the
+     global 0x45894C (the current allocator); store 0x39F08C at +4 and 0x39E22C at +0.
+* 0x283BD0, 0x283DD0 and 0x283BB0 are verified already; 0x283AF0 (32 bytes) is open.
+
+## 13. Still to come (part 2d)
+
+The directory search (0x2C1180, 0x2C1300), the constructor (0x2BFB50) and the save-file open
+(0x2C09C0).

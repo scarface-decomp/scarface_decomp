@@ -1,0 +1,18 @@
+{
+ "schema": "scarface_numbers_v1",
+ "note": "Plain numbers in a function's code that fall inside the game file's own address range, so the checker would take them for hard-coded addresses (which never count as matched source). Each is listed for one function of one game file after someone looked at the original instructions and saw a number, with the reason. The checker lets that value through as an immediate operand of that function only; memory read or written at the value is still a hard-coded address.",
+ "numbers": [
+  {
+   "file": "default.xbe",
+   "va": "0x002A9610",
+   "value": "0x0010FFFF",
+   "why": "Unicode's last code point: `cmp eax, 0x10FFFF` twice in the function that writes a character as UTF-16, beside 0xFFFF, 0xD800 and 0xDFFF."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002A9430",
+   "value": "0x00200000",
+   "why": "The first value past what four UTF-8 bytes can hold: `cmp ecx, 0x200000` in the function that writes a character as UTF-8, after the same test against 0x80, 0x800 and 0x10000. (The address 0x00200000 happens to be a function's start.)"
+  }
+ ]
+}
