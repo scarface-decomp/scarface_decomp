@@ -46,6 +46,15 @@ I21. Strings: Scarface's engine wraps the C string routines (bounded copy 0x2A95
      has a bare C call. [H4; pending X1..X5 for the copy.]
 I22. Numbered library stubs: identity = shape + kernel export numbers + targets (yours, G4). A bare
      `jmp [cell]` or `mov eax,[cell]` stub is identified by the cell's export alone. [0x239C84, 0x30A65F.]
+I28. The compiled 2003 program is a control for compiler questions: same source + VC 7.0 shows what the
+     old compiler did. Where 2003 and your compile agree and Scarface differs, suspect the compiler build,
+     not the source. [K1: 0C 02 in 2003, in yours; 0C 10 in Scarface.]
+I29. Scarface-only engine code is recognisable as such: no counterpart in the 2003 request / drive files
+     (open-by-key, drive lock, hold / release, the cancelled flag, +0x74 failed request). Treat these as
+     bytes-first work; the examiner can add nothing from 2003. [K3; SPEC-017/018 differences.]
+I30. A non-virtual member reached only through a one-line virtual forwarder of another class
+     (`mov ecx,[esp+4]; call member; ret 4`) is the "Unlock(request)" style API. Write the forwarder as
+     `request->Member()`. [0x2AC070 -> 0x2AA4E0.]
 ```
 
 ## Added by the implementer
@@ -87,4 +96,16 @@ I26. Public C library code is matched by compiling the published file unchanged 
      libpng 1.2.8: 106 functions.]
 I27. A function that ends in a call that never returns has no `ret`; the measured size then includes one
      int3 of padding. [png_error 0x2C6800, png_chunk_error 0x2C68F0.]
+I31. A public library function the game's copy changed is matched by compiling the published file with the
+     function renamed away (`#define name name_as_published` before the include), then the altered
+     function after it, marked as altered. The rest of the file stays above it, so the functions it calls
+     are known to the compiler as in the game's file (I13). [png_handle_sPLT 0x2CA770: libpng 1.2.8's
+     `int data_length` is `png_uint_32` in the game.]
+I32. x87 loads follow the order local floats are declared in, not the order of the expression that uses
+     them: `float x = d.x; float z = d.z; ... sqrt(x * x + z * z)` loads x then z; the same expression
+     written on the members loads z first. [0x243CA0.]
+I33. A transpose that keeps the upper triangle in locals and writes the matrix back in row order gives
+     the game's mix of x87 and integer moves exactly. [0x2433E0.]
+I34. A null-pointer test that ends at the bottom of the function is `if (p != 0) { ...; return h; }
+     return h;` (both returns written), not an early `if (p == 0) return h;`. [0x243F40.]
 ```

@@ -64,6 +64,10 @@ executable, `.rdata` and `.data` included.
   name); the C library's underscore names (`_iob`, `_setjmp3`) found for the compiler's `__iob`,
   `__setjmp3`; and the flag masks a library writes as numbers listed in
   `reports/numbers_not_addresses.json` where they fall in the program's address range.
+* Where the game's copy of a public library differs from the published source, the proposal compiles the
+  published file with that function renamed out of the way (`#define png_handle_sPLT
+  png_handle_sPLT_as_published` before the include) and then the altered function, marked as altered.
+  libpng's `png_handle_sPLT` is the first case: one variable is unsigned in the game.
 * A function that ends in a call that never comes back has no `ret`, and the padding byte after it was
   measured as its last byte. The checker leaves that one `int3` out when the compiled function is one
   byte shorter and does not end in a return (libpng's `png_error`, `png_chunk_error`).
