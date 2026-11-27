@@ -66,7 +66,7 @@ import web_security as WS  # noqa: E402
 sys.path.insert(0, str(PORTAL_DIR / "scripts"))
 import extract_scripts as ES  # noqa: E402
 import registry_outputs as RO  # noqa: E402
-from registry_outputs import write_outputs  # noqa: E402
+from registry_outputs import replace_file, temporary_for, write_outputs  # noqa: E402
 from sf_binaries import BinaryImage  # noqa: E402
 import ps2_binary as PB  # noqa: E402
 import ps2_shapes as PSH  # noqa: E402
@@ -224,9 +224,9 @@ def read_json(path: Path, default):
 
 
 def write_json(path: Path, obj) -> None:
-    tmp = path.with_suffix(path.suffix + ".tmp")
+    tmp = temporary_for(path)
     tmp.write_text(json.dumps(obj, indent=2), encoding="utf-8")
-    os.replace(tmp, path)
+    replace_file(tmp, path)
 
 
 BINARY_PROBLEMS: Dict[str, str] = {}    # lane -> why its file in binaries/ is refused
