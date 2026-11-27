@@ -1,0 +1,125 @@
+{
+ "what": "What a bug report from a static recompilation of the PC game (x86 to ARM64) says about the game's streaming code, carried over to the Xbox game. The report (21 November 2026) traced a stall at the end of the opening credits drive to the original code's package request queue; see docs/GAME_BUGS.md. Its addresses are those of the PC game 1.00.2 (the recompilation was built from the copy without its copy protection, the same code at the same addresses). Each PC function was followed to its Xbox twin by the functions it calls, its size and its place in the file order, starting from the pairs in reports/pairing_xb_pc_study.json; `sure` means the callees agree, `probable` means the order and the callees that can be checked agree. Roles are the report's, in this project's words: leads, not names. No instructions of the game are in this file.",
+ "source": {
+  "what": "ROAD_TO_SOSA_STREAMING_BUG_REPORT (the Scarface ARM64 recompilation, a separate project shared with the founder)",
+  "date": "2026-11-21"
+ },
+ "functions": [
+  {
+   "xb": "0x00090C90",
+   "size": 387,
+   "pc": "0x004B5920",
+   "role": "Picks the stream trigger that is live for the camera and marks the packages of the old and the new selection through 0x4B8680 (old members 2, new 1, shared 1).",
+   "how_sure": "sure",
+   "evidence": "sizes 394/387; 13 of 13 mapped callees agree"
+  },
+  {
+   "xb": "0x00093AA0",
+   "size": 116,
+   "pc": "0x004B8680",
+   "role": "Marks a selection's members: 2 for members of the old selection, 1 for the incoming ones.",
+   "how_sure": "sure",
+   "evidence": "both call the same two functions (0x4B4AB0/0x90420, 0x4B4A60/0x903D0)"
+  },
+  {
+   "xb": "0x00093C70",
+   "size": 325,
+   "pc": "0x004B8850",
+   "role": "Applies a selection to its packages. Its old-only branch tests the package state against the mask 0x6FE; a package retiring (state 0x100) skips the release call and has its selection mark cleared, which leaves a request queued earlier by the camera in the retry queue (the bug, see docs/GAME_BUGS.md).",
+   "how_sure": "sure",
+   "evidence": "sizes 311/325; 6 of 6 mapped callees agree"
+  },
+  {
+   "xb": "0x00091FD0",
+   "size": 448,
+   "pc": "0x004B6980",
+   "role": "Releases a package; for a package that is still waiting it erases its entry from the retry queue (the call to 0x4B4F40 at 0x4B6AA5 on PC).",
+   "how_sure": "sure",
+   "evidence": "sizes 436/448; 5 of 6 mapped callees agree; the same state numbers"
+  },
+  {
+   "xb": "0x00091F60",
+   "size": 97,
+   "pc": "0x004B6920",
+   "role": "Asks the package's current owner about a request; for a retiring package it stores the request in the retry queue (0x4B4E80).",
+   "how_sure": "sure",
+   "evidence": "sizes 94/97; 2 of 2 mapped callees agree"
+  },
+  {
+   "xb": "0x00091140",
+   "size": 100,
+   "pc": "0x004B4E80",
+   "role": "Stores a package request in the retry queue (at 0x81D5E0 on PC): one node per package, holding the package and its context; a second request for the package only updates the node's context.",
+   "how_sure": "sure",
+   "evidence": "sizes 98/100; same callee; same place in the file order"
+  },
+  {
+   "xb": "0x00091210",
+   "size": 110,
+   "pc": "0x004B4F40",
+   "role": "Erases one package's entry from the retry queue.",
+   "how_sure": "probable",
+   "evidence": "next in the file order after the pair above; no calls on either side; sizes 85/110"
+  },
+  {
+   "xb": "0x00090F40",
+   "size": 422,
+   "pc": "0x004B5BD0",
+   "role": "Each pump: replays the queued requests of packages that are idle, frees the replayed nodes, then runs the main package dispatch sweep.",
+   "how_sure": "sure",
+   "evidence": "sizes 454/422; the callee sequences line up (0x91F60, operator delete, 0x92510, 0x91B40, 0x92EA0)"
+  },
+  {
+   "xb": "0x00092770",
+   "size": 236,
+   "pc": "0x004B7180",
+   "role": "Finishes a package's retirement and clears its slot (0x4B7B90).",
+   "how_sure": "probable",
+   "evidence": "both call the same two mapped functions (0x643F0, 0x93190); sizes 275/236"
+  },
+  {
+   "xb": "0x00093590",
+   "size": 58,
+   "pc": "0x004B7F70",
+   "role": "Picks a free streaming slot in a context: an enabled entry is free when it is empty or its package is idle (state 0x01); a ready package (0x40) keeps its entry.",
+   "how_sure": "sure",
+   "evidence": "sizes 58/58; the same constants"
+  },
+  {
+   "xb": "0x00091D30",
+   "size": 45,
+   "pc": "0x004B66E0",
+   "role": "Sets a bit in a package's attached-dependents bitmap (package offset +0x1E).",
+   "how_sure": "sure",
+   "evidence": "already paired by shape (reports/pairing_xb_pc_study.json)"
+  },
+  {
+   "xb": "0x00091D60",
+   "size": 47,
+   "pc": "0x004B6710",
+   "role": "Clears a bit in a package's attached-dependents bitmap.",
+   "how_sure": "sure",
+   "evidence": "already paired by shape"
+  },
+  {
+   "xb": "0x00093190",
+   "size": 16,
+   "pc": "0x004B7B90",
+   "role": "Clears a slot's occupant and context fields.",
+   "how_sure": "sure",
+   "evidence": "already paired by shape"
+  }
+ ],
+ "not_found": [
+  {
+   "pc": "0x004B7020",
+   "role": "Checks a package's owner and dependency before it asks for a slot.",
+   "why": "no Xbox function sits in its place in the file order; it may be built into a neighbour there"
+  },
+  {
+   "pc": "0x005DCD70",
+   "role": "Trailer Park's load-package callback.",
+   "why": "not looked for: it is outside the streaming file"
+  }
+ ]
+}
