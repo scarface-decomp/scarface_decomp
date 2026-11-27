@@ -22,6 +22,12 @@ no free slot (PC 0x4B7F70, Xbox 0x93590) and never starts loading. The credits d
 the teleport to the Secretary scene is never asked for and the loading screen stays. In the traced run
 the Drive-In asked 3,813 times over 64 seconds.
 
+**It is in the Xbox game too.** The Xbox function (0x93C70) has the same branch, instruction for
+instruction apart from addresses: an old member (mark 2) is released only when its state passes the same
+mask, 0x6FE (read from 0x3A42E0 on Xbox, 0x73BD10 on PC), and its mark is cleared either way. So the
+behaviour is in the game's source, not added by the PC port. Whether it ever shows on a console depends
+on timing that has not been measured.
+
 **The recompilation's fix** erases only that stale request, through the game's own erase (PC 0x4B4F40)
 and free, when the camera's old-only selection withdraws a package whose queued request came from the
 camera alone and nothing else depends on it. It passed 115 offline checks and two live runs. The report
