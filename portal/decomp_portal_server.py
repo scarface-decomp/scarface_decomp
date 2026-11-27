@@ -468,7 +468,8 @@ def progress() -> dict:
 
 
 def leaderboard() -> dict:
-    c = Counter((e.get("verified_by") or "Imported (unattributed)") for e in REGISTRY.get("entries", {}).values())
+    import contributors as people            # one name per person (reports/contributor_aliases.json)
+    c = people.count(REGISTRY.get("entries", {}).values(), unattributed="Imported (unattributed)")
     return dict(c.most_common())
 
 
@@ -2202,11 +2203,12 @@ def ai_call(cfg: dict) -> dict:
 # Git sync (maintainers only)
 # =========================================================================== #
 
-# docs/feed.xml and docs/functions.json are made from the registry too (registry_outputs.py): the website's feed
-# and its list of rebuilt functions, so they go up with every sync.
+# docs/feed.xml, docs/functions.json, docs/map.json and docs/badge.svg are made from the registry too
+# (registry_outputs.py): the website's feed, its list of rebuilt functions, its map of the code and the progress
+# badge, so they go up with every sync.
 GIT_PATHS = ["reconstructed_src", "reports/verified_registry.json", "reports/names.json", "reports/reverify_report.md",
              "reports/decomp_audit_log.json", "reports/progress.json", "README.md", "docs/feed.xml", "docs/functions.json",
-             "docs/sitemap.xml"]
+             "docs/sitemap.xml", "docs/map.json", "docs/badge.svg"]
 
 
 NOT_A_CLONE = ("This folder isn't connected to GitHub: it was downloaded as a ZIP, so it has no .git folder. "

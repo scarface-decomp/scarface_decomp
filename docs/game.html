@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scarface: The World Is Yours: play it, mod it, read about it | Scarface decomp</title>
+  <meta name="description" content="Everything for Scarface: The World Is Yours (2006) in one place: how to play it on a modern PC or an emulator, the community's fixes, mods and tools, the wikis, and what rebuilding the game's code has found." />
+  <meta name="theme-color" content="#0A0A0A" />
+  <meta property="og:title" content="Scarface: The World Is Yours: play it, mod it, read about it" />
+  <meta property="og:description" content="The fixes, mods, tools, emulators and wikis for the 2006 game, with what the fan-made rebuild of its code has found." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://scarface-decomp.pages.dev/game.html" />
+  <meta property="og:image" content="https://scarface-decomp.pages.dev/og.jpg" />
+  <link rel="canonical" href="https://scarface-decomp.pages.dev/game.html" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <style>
+    /* The main page's look (index.html): black, white and blood red. */
+    :root {
+      --black: #0A0A0A; --panel: #121212; --white: #F2EFEA; --grey: #A6A6A6; --line: #2A2A2A;
+      --red: #EA444D; --blood: #B5121B; --hot: #FF3B45;
+      --title: 'Marcellus', 'Friz Quadrata', 'Optima', Georgia, serif;
+      --head: 'Anton', 'Impact', 'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
+      --sans: 'Josefin Sans', 'Avant Garde', 'Century Gothic', 'Futura', 'Segoe UI', sans-serif;
+      --mono: ui-monospace, 'Cascadia Mono', Consolas, 'Liberation Mono', monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { background: var(--black); color: var(--white); font-family: var(--sans); font-size: 17px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    a { color: var(--red); text-underline-offset: 4px; }
+    a:hover { color: var(--hot); }
+    :focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+    code { font-family: var(--mono); font-size: 0.82em; background: var(--panel); border: 1px solid var(--line); padding: 1px 6px; border-radius: 4px; overflow-wrap: anywhere; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .topbar { position: sticky; top: 0; z-index: 10; background: rgba(10,10,10,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+    .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
+    .brand { font-family: var(--title); font-size: 1.02rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); text-decoration: none; white-space: nowrap; }
+    .nav { display: flex; gap: 8px; }
+    .nav a { color: var(--white); text-decoration: none; font-size: 0.9rem; border: 1px solid #3A3A3A; border-radius: 2px; padding: 6px 14px; white-space: nowrap; }
+    .nav a:hover { border-color: var(--white); color: var(--white); }
+    .nav a[aria-current="page"] { border-color: var(--blood); background: rgba(181,18,27,0.14); }
+    .hero { text-align: center; padding: 70px 0 30px; background: radial-gradient(ellipse at 50% 120%, rgba(181,18,27,0.32), transparent 62%); border-bottom: 1px solid var(--line); }
+    .hero .kicker { font-family: var(--title); color: var(--red); text-transform: uppercase; letter-spacing: 0.18em; font-size: 1rem; }
+    .hero h1 { font-family: var(--head); font-weight: 400; text-transform: uppercase; font-size: clamp(2.4rem, 7vw, 4.6rem); line-height: 1.02; letter-spacing: 0.01em; margin: 14px 0 16px; }
+    .hero h1 span { color: var(--red); }
+    .hero p { color: var(--grey); max-width: 42em; margin: 0 auto; }
+    .jump { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 28px auto 0; }
+    .jump a { color: var(--white); text-decoration: none; font-size: 0.88rem; border: 1px solid #3A3A3A; border-radius: 2px; padding: 7px 14px 5px; }
+    .jump a:hover { border-color: var(--white); }
+    section { padding: 64px 0 10px; }
+    h2 { font-family: var(--title); font-weight: 400; color: var(--red); text-transform: uppercase; letter-spacing: 0.14em; font-size: clamp(1.3rem, 3vw, 1.7rem); text-align: center; margin-bottom: 10px; }
+    .intro { color: var(--grey); max-width: 42em; margin: 0 auto 30px; text-align: center; }
+    .prose { max-width: 44rem; margin: 0 auto; }
+    .prose p + p { margin-top: 14px; }
+    .facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 30px auto 0; max-width: 880px; }
+    .facts div { border: 1px solid var(--line); background: var(--panel); padding: 12px 14px 10px; }
+    .facts b { display: block; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--grey); font-weight: 400; }
+    .facts span { font-size: 0.98rem; }
+    .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .card { border: 1px solid var(--line); border-left: 3px solid var(--blood); background: var(--panel); padding: 16px 20px 14px; }
+    .card h3 { font-size: 1.02rem; font-weight: 600; margin-bottom: 2px; }
+    .card h3 a { color: var(--white); text-decoration-color: var(--blood); }
+    .card h3 a:hover { color: var(--hot); }
+    .card .by { color: var(--grey); font-size: 0.84rem; margin-bottom: 8px; }
+    .card p { color: #D9D5CF; font-size: 0.93rem; }
+    .card .links { margin-top: 8px; font-size: 0.86rem; }
+    .card .links a { margin-right: 14px; }
+    .tip { max-width: 44rem; margin: 22px auto 0; border: 1px solid var(--line); background: #0E0E0E; padding: 14px 18px 12px; font-size: 0.93rem; color: #D9D5CF; }
+    .tip b { color: var(--white); }
+    .badge { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; max-width: 44rem; margin: 26px auto 0; }
+    .badge pre { flex: 1 1 320px; min-width: 0; font-family: var(--mono); font-size: 0.8rem; background: #050505; border: 1px solid var(--line); padding: 10px 14px; overflow-x: auto; }
+    .note { color: var(--grey); font-size: 0.86rem; text-align: center; max-width: 46em; margin: 30px auto 0; }
+    footer { margin-top: 70px; border-top: 3px solid var(--blood); }
+    footer .wrap { padding-top: 30px; padding-bottom: 44px; color: var(--grey); font-size: 0.86rem; text-align: center; }
+    footer a { margin: 0 6px; }
+    @media (max-width: 760px) {
+      .cards { grid-template-columns: minmax(0, 1fr); }
+      .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 18px; }
+      .brand { font-size: 0.88rem; letter-spacing: 0.1em; }
+      .nav a { padding: 5px 9px; font-size: 0.82rem; }
+      .nav a.opt { display: none; }
+    }
+    @media (max-width: 480px) {
+      /* the name on the left already leads home */
+      .nav a.home { display: none; }
+      section { padding-top: 50px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="./">Scarface Decomp</a>
+      <nav class="nav" aria-label="Site">
+        <a class="home" href="./">Main page</a>
+        <a href="game.html" aria-current="page">The game</a>
+        <a href="explore.html">Explore</a>
+        <a class="opt" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div class="wrap">
+        <div class="kicker">Scarface: The World Is Yours</div>
+        <h1>Everything for the game,<br /><span>in one place</span></h1>
+        <p>How to play it today, the fixes, mods and tools the community made, the wikis worth reading, and what rebuilding
+          the game's code has turned up. Every link goes to the people who made it.</p>
+        <nav class="jump" aria-label="On this page">
+          <a href="#about">The game</a>
+          <a href="#play">Play it today</a>
+          <a href="#mods">Mods and tools</a>
+          <a href="#read">Wikis and guides</a>
+          <a href="#found">What the rebuild found</a>
+          <a href="#community">Get involved</a>
+        </nav>
+      </div>
+    </div>
+
+    <section id="about" aria-labelledby="h-about">
+      <div class="wrap">
+        <h2 id="h-about">The game</h2>
+        <div class="prose">
+          <p>Radical Entertainment's open-world game picks up in the last scene of the 1983 film, but this time Tony Montana
+            survives the attack on his mansion. Stripped of everything, he works his way back up through Miami's drug trade:
+            territory, fronts, money to launder, gangs to wipe out, and Sosa at the end of it.</p>
+          <p>It came out in 2006 for the PlayStation 2, Xbox and PC, published by Vivendi Games under the Sierra name, and on the
+            Wii in 2007. An Xbox 360 version was started and dropped. In October 2025 EC Digital Entertainment brought the PC
+            version back, on Steam and the Epic Games Store.</p>
+        </div>
+        <div class="facts">
+          <div><b>Developer</b><span>Radical Entertainment</span></div>
+          <div><b>Released</b><span>2006 (Wii 2007)</span></div>
+          <div><b>Platforms</b><span>PS2, Xbox, PC, Wii</span></div>
+          <div><b>Re-release</b><span>PC, October 2025</span></div>
+        </div>
+        <p class="note" style="margin-top:14px">From <a href="https://en.wikipedia.org/wiki/Scarface:_The_World_Is_Yours" target="_blank" rel="noopener noreferrer">Wikipedia</a>
+          and <a href="https://www.gematsu.com/2025/10/scarface-the-world-is-yours-pc-re-release-announced" target="_blank" rel="noopener noreferrer">Gematsu</a> (the re-release).</p>
+      </div>
+    </section>
+
+    <section id="play" aria-labelledby="h-play">
+      <div class="wrap">
+        <h2 id="h-play">Play it today</h2>
+        <p class="intro">The 2006 PC release doesn't run well on today's computers out of the box. These fix that, and the emulators
+          run the console versions from your own discs.</p>
+        <div class="cards">
+          <article class="card">
+            <h3><a href="https://silentsblog.com/mods/scarface/" target="_blank" rel="noopener noreferrer">SilentPatch for Scarface</a></h3>
+            <div class="by">by Silent (CookiePLMonster) · PC</div>
+            <p>The fix to start with. It stops the graphics corruption the game shows on modern machines, makes it run noticeably
+              faster, and lists every resolution your screen supports. It also brings the ASI loader that mods such as ScarfaceHook need.</p>
+            <div class="links"><a href="https://github.com/CookiePLMonster/SilentPatchScarface" target="_blank" rel="noopener noreferrer">Source</a><a href="https://silentsblog.com/2020/03/29/silentpatch-scarface/" target="_blank" rel="noopener noreferrer">How he fixed it</a></div>
+          </article>
+          <article class="card">
+            <h3><a href="https://github.com/ThirteenAG/WidescreenFixesPack" target="_blank" rel="noopener noreferrer">Scarface Fusion Fix</a></h3>
+            <div class="by">by ThirteenAG · PC</div>
+            <p>Fixes the mouse look and the controller support, and lets you drive and shoot with the triggers like a modern game.
+              Part of his Widescreen Fixes Pack; look for the Scarface release.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://www.pcgamingwiki.com/wiki/Scarface:_The_World_Is_Yours" target="_blank" rel="noopener noreferrer">PCGamingWiki</a></h3>
+            <div class="by">community wiki · PC</div>
+            <p>The PC version's known problems and their fixes, kept up to date by the community. The first place to look when
+              something goes wrong.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://xemu.app" target="_blank" rel="noopener noreferrer">xemu</a></h3>
+            <div class="by">open-source original Xbox emulator · Windows, macOS, Linux</div>
+            <p>Runs the Xbox version, the one this project rebuilds first. It needs files from your own console and a copy of your
+              own disc; its site explains how to make them.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://wiki.pcsx2.net/Scarface:_The_World_Is_Yours" target="_blank" rel="noopener noreferrer">PCSX2</a></h3>
+            <div class="by">PlayStation 2 emulator · the game's page on its wiki</div>
+            <p>The PS2 version runs on PCSX2. The game's page on the PCSX2 wiki lists the settings people use and the known
+              problems, such as shadows that go missing.</p>
+          </article>
+          <article class="card">
+            <h3>The 2025 re-release</h3>
+            <div class="by">EC Digital Entertainment · Steam, Epic Games Store</div>
+            <p>The PC game is on sale again. Silent noted that the early Epic release seems to ship with SilentPatch already, so check
+              what yours includes before adding fixes on top.</p>
+            <div class="links"><a href="https://www.gematsu.com/2025/10/scarface-the-world-is-yours-pc-re-release-announced" target="_blank" rel="noopener noreferrer">The announcement</a></div>
+          </article>
+        </div>
+        <div class="tip"><b>Tip.</b> Keep the game at 60 frames a second or below: above that, its animations run too fast. (From
+          <a href="https://lutris.net/games/scarface-the-world-is-yours/" target="_blank" rel="noopener noreferrer">Lutris</a>.)</div>
+      </div>
+    </section>
+
+    <section id="mods" aria-labelledby="h-mods">
+      <div class="wrap">
+        <h2 id="h-mods">Mods and tools</h2>
+        <p class="intro">What the modding scene has built for the game. Get each one from its author's own page.</p>
+        <div class="cards">
+          <article class="card">
+            <h3><a href="https://www.nexusmods.com/scarfacetheworldisyours/mods/6" target="_blank" rel="noopener noreferrer">Scarface Remastered Project</a></h3>
+            <div class="by">by Neoxaero, with sulzbals, Talon and DomenicoPe · PC</div>
+            <p>The big one: keeps the PC game playable and looking its best. The community this project grew up beside.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://ermaccer.github.io/posts/scfhook" target="_blank" rel="noopener noreferrer">ScarfaceHook</a></h3>
+            <div class="by">by ermaccer · PC</div>
+            <p>An in-game menu with a long list of options for changing how the game plays: the camera, the time of day, spawning
+              cars and people, a teleporter. Needs SilentPatch's loader.</p>
+            <div class="links"><a href="https://github.com/ermaccer/scarfacehook" target="_blank" rel="noopener noreferrer">Source</a></div>
+          </article>
+          <article class="card">
+            <h3><a href="https://github.com/gangstateam" target="_blank" rel="noopener noreferrer">Gangsta Team</a></h3>
+            <div class="by">reverse engineering and modding · PC 1.00.2</div>
+            <p>GangstaPatch (an unofficial patch), GangstaMenu (a mod menu) and RCFRedirect, which lets the game load files from a
+              folder instead of its <code>.rcf</code> archives. Also a list of the game's script commands and an archive explorer
+              that runs in the browser.</p>
+            <div class="links"><a href="https://gangsta-team.github.io/website/#/documentation/game/natives" target="_blank" rel="noopener noreferrer">Script commands</a><a href="https://gangsta-team.github.io/web-rcf-explorer/" target="_blank" rel="noopener noreferrer">RCF explorer</a></div>
+          </article>
+          <article class="card">
+            <h3><a href="https://www.moddb.com/mods/scarfaceex" target="_blank" rel="noopener noreferrer">ScarfaceEX</a></h3>
+            <div class="by">on ModDB · PC</div>
+            <p>A mod built on the game's own script commands, credited to many people of the Scarface modding scene.</p>
+          </article>
+          <article class="card">
+            <h3>Models, archives and scripts</h3>
+            <div class="by">research tools from the community</div>
+            <p><a href="https://github.com/aap/scarface-p3d" target="_blank" rel="noopener noreferrer">scarface-p3d</a> by aap reads the game's
+              Pure3D models; the <a href="https://github.com/STWIY/ToolKit" target="_blank" rel="noopener noreferrer">STWIY ToolKit</a> works with
+              its <code>.rcf</code> archives; <a href="https://github.com/sulzbals/BrokenFace" target="_blank" rel="noopener noreferrer">Broken Face</a>
+              by sulzbals deals with its compiled scripts.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://www.nexusmods.com/scarfacetheworldisyours/mods/" target="_blank" rel="noopener noreferrer">All mods on Nexus Mods</a></h3>
+            <div class="by">the game's page on Nexus Mods</div>
+            <p>Graphics packs, mouse fixes, complete saves, debug-menu unlocks and more. A free account is needed to download.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="read" aria-labelledby="h-read">
+      <div class="wrap">
+        <h2 id="h-read">Wikis and guides</h2>
+        <p class="intro">Where to read up on the story, the missions, the guns and what was cut.</p>
+        <div class="cards">
+          <article class="card">
+            <h3><a href="https://scarface.fandom.com/wiki/Scarface_Wiki" target="_blank" rel="noopener noreferrer">Scarface Wiki</a></h3>
+            <div class="by">Fandom · the films and the games</div>
+            <p>Characters, places and story, written by fans. Anyone can edit it.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://strategywiki.org/wiki/Scarface:_The_World_Is_Yours" target="_blank" rel="noopener noreferrer">StrategyWiki</a></h3>
+            <div class="by">walkthrough and strategy guide</div>
+            <p>A free walkthrough of the game.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://tcrf.net/Scarface:_The_World_Is_Yours" target="_blank" rel="noopener noreferrer">The Cutting Room Floor</a></h3>
+            <div class="by">unused and cut content</div>
+            <p>What was left in the game's files but never used, and what changed before release.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://imfdb.org/wiki/Scarface:_The_World_is_Yours" target="_blank" rel="noopener noreferrer">IMFDB</a></h3>
+            <div class="by">Internet Movie Firearms Database</div>
+            <p>Every gun in the game, what it really is, and the ones that are out of place in 1983.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://www.mobygames.com/game/25362/scarface-the-world-is-yours/" target="_blank" rel="noopener noreferrer">MobyGames</a></h3>
+            <div class="by">credits, releases and specs</div>
+            <p>Who made the game, every release on every platform, and their technical details.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://en.wikipedia.org/wiki/Scarface:_The_World_Is_Yours" target="_blank" rel="noopener noreferrer">Wikipedia</a></h3>
+            <div class="by">the encyclopedia article</div>
+            <p>How the game was made, how it was received, and its versions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="found" aria-labelledby="h-found">
+      <div class="wrap">
+        <h2 id="h-found">What the rebuild found</h2>
+        <p class="intro">This project rewrites the game's code until it compiles to the very same program. Along the way it works out how
+          the game is put together, and all of it is open.</p>
+        <div class="cards">
+          <article class="card">
+            <h3><a href="explore.html">A map of the game's code</a></h3>
+            <div class="by">every function, rebuilt or not</div>
+            <p>The Xbox, PC, PS2 and prototype programs, function by function, searchable by name or by what a function does.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/GAME_BUGS.md" target="_blank" rel="noopener noreferrer">Bugs in the original game</a></h3>
+            <div class="by">traced to the code</div>
+            <p>Why the loading screen after the opening credits drive can stay up for good, and the code behind it, on PC and on Xbox.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md" target="_blank" rel="noopener noreferrer">The game's files, and Blender</a></h3>
+            <div class="by">archives, models, textures, sounds, videos, maps</div>
+            <p>How every kind of file is laid out. With your own copy, the project's tools turn the city, the characters, the guns
+              and the cars into scenes for <a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md#exporting-to-blender" target="_blank" rel="noopener noreferrer">Blender</a>.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/SCRIPTS.md" target="_blank" rel="noopener noreferrer">The game's scripts</a></h3>
+            <div class="by">the missions' own code, readable</div>
+            <p>All of the game's compiled scripts, and the prototype's, turned back into readable script that compiles to the
+              identical files.</p>
+          </article>
+          <article class="card">
+            <h3><a href="versions.html">What differs between the versions</a></h3>
+            <div class="by">Xbox, PC, PS2 and the April 2006 prototype</div>
+            <p>Every file one version has and the others don't, and the ones they have in another form. Names only.</p>
+          </article>
+          <article class="card">
+            <h3><a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/NAMES.md" target="_blank" rel="noopener noreferrer">Function names for Ghidra and IDA</a></h3>
+            <div class="by">for modders and researchers</div>
+            <p>Where every function starts and ends on all four versions, the names found so far, and scripts that load them into
+              your own project.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="community" aria-labelledby="h-community">
+      <div class="wrap">
+        <h2 id="h-community">Get involved</h2>
+        <p class="intro">The rebuild is done by fans, a function at a time, and anyone can help: some jobs don't even need a copy of the game.
+          <a href="./#help">How to start</a> · <a href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">the Discord</a> ·
+          <a href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a> ·
+          <a href="feed.xml">new matches as a feed</a></p>
+        <div class="badge">
+          <img src="badge.svg" alt="Scarface decomp progress badge" height="20" />
+          <pre id="badge-code">[![Scarface decomp](https://scarface-decomp.pages.dev/badge.svg)](https://scarface-decomp.pages.dev/)</pre>
+        </div>
+        <p class="note">Put the progress badge on your mod's page or README with the line above. It updates with every match.</p>
+        <p class="note">Every project on this page belongs to its authors and is listed with their names and their own links. Listing it
+          here is not an endorsement, and none of them is part of this project. Know of one that's missing? Say so in the Discord.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>Source code and tools only: no game files, assets, compiler or SDK files. Not affiliated with or endorsed by the game's
+        developer, publishers or rights holders.</p>
+      <p style="margin-top:10px"><a href="./">Main page</a><a href="explore.html">Explore</a><a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/CREDITS.md">Credits</a><a href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/LEGAL.md">Legal</a></p>
+    </div>
+  </footer>
+</body>
+</html>

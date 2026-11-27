@@ -165,11 +165,12 @@ def test_sitemap_lists_the_pages_and_every_function():
     doc = xml.dom.minidom.parseString(RO.sitemap_xml(reg))
     urls = doc.getElementsByTagName("url")
     locs = [u.getElementsByTagName("loc")[0].firstChild.data for u in urls]
-    assert locs == [RO.SITE, RO.SITE + "join.html", RO.SITE + "versions.html", RO.SITE + "function.html?f=pc%3A0x00000009"] + [
+    pages = [RO.SITE, RO.SITE + "join.html", RO.SITE + "game.html", RO.SITE + "explore.html", RO.SITE + "versions.html"]
+    assert locs == pages + [RO.SITE + "function.html?f=pc%3A0x00000009"] + [
         RO.SITE + f"function.html?f=xb%3A0x0000000{i}" for i in (1, 2, 3)]
     days = [[m.firstChild.data for m in u.getElementsByTagName("lastmod")] for u in urls]
-    assert days == [[], [], [], []] + [["2026-11-10"]] * 3                 # no date known: none claimed
-    assert RO.sitemap_xml({"entries": {}}).count("<url>") == 3
+    assert days == [[]] * (len(pages) + 1) + [["2026-11-10"]] * 3          # no date known: none claimed
+    assert RO.sitemap_xml({"entries": {}}).count("<url>") == len(pages)
 
 
 def test_the_repository_sitemap_is_current():

@@ -9,6 +9,14 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://scarface-decomp.pages.dev/game.html</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://scarface-decomp.pages.dev/explore.html</loc>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
     <loc>https://scarface-decomp.pages.dev/versions.html</loc>
     <changefreq>weekly</changefreq>
   </url>

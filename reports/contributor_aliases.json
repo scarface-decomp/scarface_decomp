@@ -1,0 +1,6 @@
+{
+  "about": "Other spellings of a contributor's handle -> the handle they use. The leaderboards (website and portal) add them up under one name; the registry keeps each match as recorded. Read by portal/tools/contributors.py.",
+  "aliases": {
+    "RRutherfordd (Founder)": "RRutherrfordd (Founder)"
+  }
+}
