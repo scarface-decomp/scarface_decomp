@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (6989 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (7003 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6,989 of 15,074 functions matched (46.36%). NOT COMPLETE YET.
-// The 8,085 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7,003 of 15,074 functions matched (46.46%). NOT COMPLETE YET.
+// The 8,071 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -125698,6 +125698,149 @@ void Class_00200460::sub_00200460(Target_00200460* target)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00200470 (0x00200470, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00242F60 (0x00242F60), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00200470
+// what: Sets the matrix's rotation part to a rotation about the x axis by the angle (radians); the rest is left alone.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationAboutX(float angle);
+    float m[4][4];
+};
+
+void Matrix::SetRotationAboutX(float angle)
+{
+    float s = (float)sin(angle);
+    float c = (float)cos(angle);
+    m[0][0] = 1.0f;
+    m[0][1] = 0.0f;
+    m[0][2] = 0.0f;
+    m[1][0] = 0.0f;
+    m[1][1] = c;
+    m[1][2] = s;
+    m[2][0] = 0.0f;
+    m[2][1] = -s;
+    m[2][2] = c;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002004B0 (0x002004B0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00242FA0 (0x00242FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002004B0
+// what: Sets the matrix's rotation part to a rotation about the y axis by the angle (radians); the rest is left alone.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationAboutY(float angle);
+    float m[4][4];
+};
+
+void Matrix::SetRotationAboutY(float angle)
+{
+    float s = (float)sin(angle);
+    float c = (float)cos(angle);
+    m[0][0] = c;
+    m[0][1] = 0.0f;
+    m[0][2] = -s;
+    m[1][0] = 0.0f;
+    m[1][1] = 1.0f;
+    m[1][2] = 0.0f;
+    m[2][0] = s;
+    m[2][1] = 0.0f;
+    m[2][2] = c;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002004F0 (0x002004F0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00242FE0 (0x00242FE0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002004F0
+// what: Sets the matrix's rotation part to a rotation about the z axis by the angle (radians); the rest is left alone.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationAboutZ(float angle);
+    float m[4][4];
+};
+
+void Matrix::SetRotationAboutZ(float angle)
+{
+    float s = (float)sin(angle);
+    float c = (float)cos(angle);
+    m[0][0] = c;
+    m[0][1] = s;
+    m[0][2] = 0.0f;
+    m[1][0] = -s;
+    m[1][1] = c;
+    m[1][2] = 0.0f;
+    m[2][0] = 0.0f;
+    m[2][1] = 0.0f;
+    m[2][2] = 1.0f;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00200680 (0x00200680, 24 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -125763,6 +125906,280 @@ int Class_002006A0::sub_002006A0(int a1, int a2, int a3)
     m_Field14 = a2;
     m_Field28 = a3;
     return a3;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002008F0 (0x002008F0, 111 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002433E0 (0x002433E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002008F0
+// what: Transposes the matrix: swaps each number above the diagonal with the one below it.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void sub_002008F0();
+    float m[4][4];
+};
+
+void Matrix::sub_002008F0()
+{
+    float t01 = m[0][1];
+    float t02 = m[0][2];
+    float t03 = m[0][3];
+    float t12 = m[1][2];
+    float t13 = m[1][3];
+    float t23 = m[2][3];
+    m[0][1] = m[1][0];
+    m[0][2] = m[2][0];
+    m[0][3] = m[3][0];
+    m[1][0] = t01;
+    m[1][2] = m[2][1];
+    m[1][3] = m[3][1];
+    m[2][0] = t02;
+    m[2][1] = t12;
+    m[2][3] = m[3][2];
+    m[3][0] = t03;
+    m[3][1] = t13;
+    m[3][2] = t23;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00200AE0 (0x00200AE0, 92 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002435D0 (0x002435D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00200AE0
+// what: Transforms a point by the matrix (rotation part and translation) into another vector.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void TransformPoint(const Vector3& in, Vector3& out) const;
+    float m[4][4];
+};
+
+void Matrix::TransformPoint(const Vector3& in, Vector3& out) const
+{
+    float x = in.x * m[0][0] + in.y * m[1][0] + in.z * m[2][0] + m[3][0];
+    float y = in.x * m[0][1] + in.y * m[1][1] + in.z * m[2][1] + m[3][1];
+    float z = in.x * m[0][2] + in.y * m[1][2] + in.z * m[2][2] + m[3][2];
+    out.x = x;
+    out.y = y;
+    out.z = z;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00200BE0 (0x00200BE0, 83 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00243740 (0x00243740), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00200BE0
+// what: Rotates a direction by the matrix's rotation part (no translation) into another vector.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void TransformDirection(const Vector3& in, Vector3& out) const;
+    float m[4][4];
+};
+
+void Matrix::TransformDirection(const Vector3& in, Vector3& out) const
+{
+    float x = in.x * m[0][0] + in.y * m[1][0] + in.z * m[2][0];
+    float y = in.x * m[0][1] + in.y * m[1][1] + in.z * m[2][1];
+    float z = in.x * m[0][2] + in.y * m[1][2] + in.z * m[2][2];
+    out.x = x;
+    out.y = y;
+    out.z = z;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00201140 (0x00201140, 85 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00243CA0 (0x00243CA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00201140
+// what: Sets the matrix's rotation part to a rotation about the y axis that turns the z axis toward the direction's x and z.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationAboutYToward(const Vector3& direction);
+    float m[4][4];
+};
+
+void Matrix::SetRotationAboutYToward(const Vector3& direction)
+{
+    float x = direction.x;
+    float z = direction.z;
+    float scale = 1.0f / (float)sqrt(x * x + z * z);
+    float s = scale * direction.x;
+    float c = scale * direction.z;
+    m[0][0] = c;
+    m[0][1] = 0.0f;
+    m[0][2] = -s;
+    m[1][0] = 0.0f;
+    m[1][1] = 1.0f;
+    m[1][2] = 0.0f;
+    m[2][0] = s;
+    m[2][1] = 0.0f;
+    m[2][2] = c;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002011A0 (0x002011A0, 87 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00243D00 (0x00243D00), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002011A0
+// what: Sets the matrix's rotation part to a rotation about the x axis built from the direction's y and z.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationAboutXToward(const Vector3& direction);
+    float m[4][4];
+};
+
+void Matrix::SetRotationAboutXToward(const Vector3& direction)
+{
+    float scale = 1.0f / (float)sqrt(direction.y * direction.y + direction.z * direction.z);
+    float s = scale * direction.y;
+    float c = scale * direction.z;
+    m[0][0] = 1.0f;
+    m[0][1] = 0.0f;
+    m[0][2] = 0.0f;
+    m[1][0] = 0.0f;
+    m[1][1] = c;
+    m[1][2] = -s;
+    m[2][0] = 0.0f;
+    m[2][1] = s;
+    m[2][2] = c;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002013E0 (0x002013E0, 92 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00243F40 (0x00243F40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002013E0
+// what: The 64-bit name key: h = h * 65599, each character + 0x20 if below 'a', XORed in; no text gives the starting value back.
+// tool: Claude (from the bytes; the 32-bit key at 0x243FA0 is the same idea)
+unsigned __int64 __cdecl sub_002013E0(const char* text, unsigned __int64 h)
+{
+    if (text != 0)
+    {
+        while (*text != 0)
+        {
+            h = h * 65599;
+            if (*text < 'a')
+            {
+                h ^= *text + 0x20;
+            }
+            else
+            {
+                h ^= *text;
+            }
+            text++;
+        }
+        return h;
+    }
+    return h;
 }
 
 // ============================================================================
@@ -125933,6 +126350,87 @@ void Class_00201610::sub_00201610()
 }
 
 // ============================================================================
+// [VERIFIED] sub_00201650 (0x00201650, 65 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002441B0 (0x002441B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00201650
+// what: Makes this vector the given vector scaled to length one.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+// A three-number vector.
+class Vector3
+{
+public:
+    void SetNormalised(const Vector3& v);
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+
+    float m[4][4];
+};
+
+void Vector3::SetNormalised(const Vector3& v)
+{
+    float scale = 1.0f / (float)sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+    x = scale * v.x;
+    y = scale * v.y;
+    z = scale * v.z;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002016A0 (0x002016A0, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00244200 (0x00244200), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002016A0
+// what: Transforms this vector by a matrix as a point (rotation part and translation).
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+    void Transform(const Matrix& matrix);
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void sub_00200AE0(const Vector3& in, Vector3& out) const;    // transforms a point (0x2435D0)
+    float m[4][4];
+};
+
+void Vector3::Transform(const Matrix& matrix)
+{
+    Vector3 result;
+    matrix.sub_00200AE0(*this, result);
+    *this = result;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002016D0 (0x002016D0, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -125959,6 +126457,47 @@ void Class_002016D0::sub_002016D0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002016F0 (0x002016F0, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00244200 (0x00244200), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002016F0
+// what: Transforms this vector by a matrix as a point (rotation part and translation).
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+    void Transform(const Matrix& matrix);
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void sub_00200BE0(const Vector3& in, Vector3& out) const;    // transforms a point (0x2435D0)
+    float m[4][4];
+};
+
+void Vector3::Transform(const Matrix& matrix)
+{
+    Vector3 result;
+    matrix.sub_00200BE0(*this, result);
+    *this = result;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00201720 (0x00201720, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -125982,6 +126521,98 @@ public:
 void Class_00201720::sub_00201720(int a1, int a2)
 {
     ((Object*)a2)->sub_00200BE0(a1, (int)this);
+}
+
+// ============================================================================
+// [VERIFIED] sub_00201740 (0x00201740, 114 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002442A0 (0x002442A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00201740
+// what: Says whether this vector equals another to within the tolerance in each of x, y and z.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+    bool sub_00201740(const Vector3& other, float tolerance) const;
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+
+    float m[4][4];
+};
+
+// A float's magnitude, by clearing its sign bit.
+__forceinline float Magnitude(float value)
+{
+    *(unsigned int*)&value &= 0x7FFFFFFF;
+    return value;
+}
+
+bool Vector3::sub_00201740(const Vector3& other, float tolerance) const
+{
+    return Magnitude(x - other.x) <= tolerance && Magnitude(y - other.y) <= tolerance && Magnitude(z - other.z) <= tolerance;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002017C0 (0x002017C0, 99 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00244320 (0x00244320), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002017C0
+// what: Says whether all three of the vector's numbers are nearer zero than a small fixed tolerance.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+    bool sub_002017C0() const;
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+
+    float m[4][4];
+};
+
+// A float's magnitude, by clearing its sign bit.
+__forceinline float Magnitude(float value)
+{
+    *(unsigned int*)&value &= 0x7FFFFFFF;
+    return value;
+}
+
+bool Vector3::sub_002017C0() const
+{
+    return Magnitude(x) < 0.00001f && Magnitude(y) < 0.00001f && Magnitude(z) < 0.00001f;
 }
 
 // ============================================================================

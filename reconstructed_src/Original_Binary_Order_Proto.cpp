@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11,395 of 21,836 functions matched (52.18%). NOT COMPLETE YET.
-// The 10,441 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 11,410 of 21,836 functions matched (52.25%). NOT COMPLETE YET.
+// The 10,426 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -259526,9 +259526,149 @@ void Class_00200460::sub_00200460(Target_00200460* target)
     target->sub_0023FF60(this);
 }
 
-// [TODO] 0x00200470 sub_00200470 (53 B)
-// [TODO] 0x002004B0 sub_002004B0 (53 B)
-// [TODO] 0x002004F0 sub_002004F0 (53 B)
+// ============================================================================
+// [VERIFIED] sub_00200470 (0x00200470, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00242F60 (0x00242F60), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00200470
+// what: Sets the matrix's rotation part to a rotation about the x axis by the angle (radians); the rest is left alone.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationAboutX(float angle);
+    float m[4][4];
+};
+
+void Matrix::SetRotationAboutX(float angle)
+{
+    float s = (float)sin(angle);
+    float c = (float)cos(angle);
+    m[0][0] = 1.0f;
+    m[0][1] = 0.0f;
+    m[0][2] = 0.0f;
+    m[1][0] = 0.0f;
+    m[1][1] = c;
+    m[1][2] = s;
+    m[2][0] = 0.0f;
+    m[2][1] = -s;
+    m[2][2] = c;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002004B0 (0x002004B0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00242FA0 (0x00242FA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002004B0
+// what: Sets the matrix's rotation part to a rotation about the y axis by the angle (radians); the rest is left alone.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationAboutY(float angle);
+    float m[4][4];
+};
+
+void Matrix::SetRotationAboutY(float angle)
+{
+    float s = (float)sin(angle);
+    float c = (float)cos(angle);
+    m[0][0] = c;
+    m[0][1] = 0.0f;
+    m[0][2] = -s;
+    m[1][0] = 0.0f;
+    m[1][1] = 1.0f;
+    m[1][2] = 0.0f;
+    m[2][0] = s;
+    m[2][1] = 0.0f;
+    m[2][2] = c;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002004F0 (0x002004F0, 53 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00242FE0 (0x00242FE0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002004F0
+// what: Sets the matrix's rotation part to a rotation about the z axis by the angle (radians); the rest is left alone.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationAboutZ(float angle);
+    float m[4][4];
+};
+
+void Matrix::SetRotationAboutZ(float angle)
+{
+    float s = (float)sin(angle);
+    float c = (float)cos(angle);
+    m[0][0] = c;
+    m[0][1] = s;
+    m[0][2] = 0.0f;
+    m[1][0] = -s;
+    m[1][1] = c;
+    m[1][2] = 0.0f;
+    m[2][0] = 0.0f;
+    m[2][1] = 0.0f;
+    m[2][2] = 1.0f;
+}
+
 // [TODO] 0x00200530 sub_00200530 (174 B)
 // [TODO] 0x002005E0 sub_002005E0 (153 B)
 // ============================================================================
@@ -259602,20 +259742,288 @@ int Class_002006A0::sub_002006A0(int a1, int a2, int a3)
 // [TODO] 0x002006D0 sub_002006D0 (41 B)
 // [TODO] 0x00200700 sub_00200700 (277 B)
 // [TODO] 0x00200820 sub_00200820 (195 B)
-// [TODO] 0x002008F0 sub_002008F0 (111 B)
+// ============================================================================
+// [VERIFIED] sub_002008F0 (0x002008F0, 111 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002433E0 (0x002433E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002008F0
+// what: Transposes the matrix: swaps each number above the diagonal with the one below it.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void sub_002008F0();
+    float m[4][4];
+};
+
+void Matrix::sub_002008F0()
+{
+    float t01 = m[0][1];
+    float t02 = m[0][2];
+    float t03 = m[0][3];
+    float t12 = m[1][2];
+    float t13 = m[1][3];
+    float t23 = m[2][3];
+    m[0][1] = m[1][0];
+    m[0][2] = m[2][0];
+    m[0][3] = m[3][0];
+    m[1][0] = t01;
+    m[1][2] = m[2][1];
+    m[1][3] = m[3][1];
+    m[2][0] = t02;
+    m[2][1] = t12;
+    m[2][3] = m[3][2];
+    m[3][0] = t03;
+    m[3][1] = t13;
+    m[3][2] = t23;
+}
+
 // [TODO] 0x00200960 sub_00200960 (123 B)
 // [TODO] 0x002009E0 sub_002009E0 (250 B)
-// [TODO] 0x00200AE0 sub_00200AE0 (92 B)
+// ============================================================================
+// [VERIFIED] sub_00200AE0 (0x00200AE0, 92 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002435D0 (0x002435D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00200AE0
+// what: Transforms a point by the matrix (rotation part and translation) into another vector.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void TransformPoint(const Vector3& in, Vector3& out) const;
+    float m[4][4];
+};
+
+void Matrix::TransformPoint(const Vector3& in, Vector3& out) const
+{
+    float x = in.x * m[0][0] + in.y * m[1][0] + in.z * m[2][0] + m[3][0];
+    float y = in.x * m[0][1] + in.y * m[1][1] + in.z * m[2][1] + m[3][1];
+    float z = in.x * m[0][2] + in.y * m[1][2] + in.z * m[2][2] + m[3][2];
+    out.x = x;
+    out.y = y;
+    out.z = z;
+}
+
 // [TODO] 0x00200B40 sub_00200B40 (147 B)
-// [TODO] 0x00200BE0 sub_00200BE0 (83 B)
+// ============================================================================
+// [VERIFIED] sub_00200BE0 (0x00200BE0, 83 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00243740 (0x00243740), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00200BE0
+// what: Rotates a direction by the matrix's rotation part (no translation) into another vector.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void TransformDirection(const Vector3& in, Vector3& out) const;
+    float m[4][4];
+};
+
+void Matrix::TransformDirection(const Vector3& in, Vector3& out) const
+{
+    float x = in.x * m[0][0] + in.y * m[1][0] + in.z * m[2][0];
+    float y = in.x * m[0][1] + in.y * m[1][1] + in.z * m[2][1];
+    float z = in.x * m[0][2] + in.y * m[1][2] + in.z * m[2][2];
+    out.x = x;
+    out.y = y;
+    out.z = z;
+}
+
 // [TODO] 0x00200C40 sub_00200C40 (517 B)
 // [TODO] 0x00200E50 sub_00200E50 (380 B)
 // [TODO] 0x00200FD0 sub_00200FD0 (116 B)
 // [TODO] 0x00201050 sub_00201050 (231 B)
-// [TODO] 0x00201140 sub_00201140 (85 B)
-// [TODO] 0x002011A0 sub_002011A0 (87 B)
+// ============================================================================
+// [VERIFIED] sub_00201140 (0x00201140, 85 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00243CA0 (0x00243CA0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00201140
+// what: Sets the matrix's rotation part to a rotation about the y axis that turns the z axis toward the direction's x and z.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationAboutYToward(const Vector3& direction);
+    float m[4][4];
+};
+
+void Matrix::SetRotationAboutYToward(const Vector3& direction)
+{
+    float x = direction.x;
+    float z = direction.z;
+    float scale = 1.0f / (float)sqrt(x * x + z * z);
+    float s = scale * direction.x;
+    float c = scale * direction.z;
+    m[0][0] = c;
+    m[0][1] = 0.0f;
+    m[0][2] = -s;
+    m[1][0] = 0.0f;
+    m[1][1] = 1.0f;
+    m[1][2] = 0.0f;
+    m[2][0] = s;
+    m[2][1] = 0.0f;
+    m[2][2] = c;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002011A0 (0x002011A0, 87 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00243D00 (0x00243D00), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002011A0
+// what: Sets the matrix's rotation part to a rotation about the x axis built from the direction's y and z.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationAboutXToward(const Vector3& direction);
+    float m[4][4];
+};
+
+void Matrix::SetRotationAboutXToward(const Vector3& direction)
+{
+    float scale = 1.0f / (float)sqrt(direction.y * direction.y + direction.z * direction.z);
+    float s = scale * direction.y;
+    float c = scale * direction.z;
+    m[0][0] = 1.0f;
+    m[0][1] = 0.0f;
+    m[0][2] = 0.0f;
+    m[1][0] = 0.0f;
+    m[1][1] = c;
+    m[1][2] = -s;
+    m[2][0] = 0.0f;
+    m[2][1] = s;
+    m[2][2] = c;
+}
+
 // [TODO] 0x00201200 sub_00201200 (473 B)
-// [TODO] 0x002013E0 sub_002013E0 (92 B)
+// ============================================================================
+// [VERIFIED] sub_002013E0 (0x002013E0, 92 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00243F40 (0x00243F40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002013E0
+// what: The 64-bit name key: h = h * 65599, each character + 0x20 if below 'a', XORed in; no text gives the starting value back.
+// tool: Claude (from the bytes; the 32-bit key at 0x243FA0 is the same idea)
+unsigned __int64 __cdecl sub_002013E0(const char* text, unsigned __int64 h)
+{
+    if (text != 0)
+    {
+        while (*text != 0)
+        {
+            h = h * 65599;
+            if (*text < 'a')
+            {
+                h ^= *text + 0x20;
+            }
+            else
+            {
+                h ^= *text;
+            }
+            text++;
+        }
+        return h;
+    }
+    return h;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00201440 (0x00201440, 75 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -259784,8 +260192,87 @@ void Class_00201610::sub_00201610()
     m_Field08 *= scale;
 }
 
-// [TODO] 0x00201650 sub_00201650 (65 B)
-// [TODO] 0x002016A0 sub_002016A0 (48 B)
+// ============================================================================
+// [VERIFIED] sub_00201650 (0x00201650, 65 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002441B0 (0x002441B0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00201650
+// what: Makes this vector the given vector scaled to length one.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+// A three-number vector.
+class Vector3
+{
+public:
+    void SetNormalised(const Vector3& v);
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+
+    float m[4][4];
+};
+
+void Vector3::SetNormalised(const Vector3& v)
+{
+    float scale = 1.0f / (float)sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+    x = scale * v.x;
+    y = scale * v.y;
+    z = scale * v.z;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002016A0 (0x002016A0, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00244200 (0x00244200), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002016A0
+// what: Transforms this vector by a matrix as a point (rotation part and translation).
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+    void Transform(const Matrix& matrix);
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void sub_00200AE0(const Vector3& in, Vector3& out) const;    // transforms a point (0x2435D0)
+    float m[4][4];
+};
+
+void Vector3::Transform(const Matrix& matrix)
+{
+    Vector3 result;
+    matrix.sub_00200AE0(*this, result);
+    *this = result;
+}
+
 // ============================================================================
 // [VERIFIED] sub_002016D0 (0x002016D0, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -259812,7 +260299,47 @@ void Class_002016D0::sub_002016D0(int a1, int a2)
     ((Object*)a2)->sub_00200AE0(a1, (int)this);
 }
 
-// [TODO] 0x002016F0 sub_002016F0 (48 B)
+// ============================================================================
+// [VERIFIED] sub_002016F0 (0x002016F0, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00244200 (0x00244200), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002016F0
+// what: Transforms this vector by a matrix as a point (rotation part and translation).
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+    void Transform(const Matrix& matrix);
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void sub_00200BE0(const Vector3& in, Vector3& out) const;    // transforms a point (0x2435D0)
+    float m[4][4];
+};
+
+void Vector3::Transform(const Matrix& matrix)
+{
+    Vector3 result;
+    matrix.sub_00200BE0(*this, result);
+    *this = result;
+}
+
 // ============================================================================
 // [VERIFIED] sub_00201720 (0x00201720, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -259839,8 +260366,98 @@ void Class_00201720::sub_00201720(int a1, int a2)
     ((Object*)a2)->sub_00200BE0(a1, (int)this);
 }
 
-// [TODO] 0x00201740 sub_00201740 (114 B)
-// [TODO] 0x002017C0 sub_002017C0 (99 B)
+// ============================================================================
+// [VERIFIED] sub_00201740 (0x00201740, 114 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002442A0 (0x002442A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x00201740
+// what: Says whether this vector equals another to within the tolerance in each of x, y and z.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+    bool sub_00201740(const Vector3& other, float tolerance) const;
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+
+    float m[4][4];
+};
+
+// A float's magnitude, by clearing its sign bit.
+__forceinline float Magnitude(float value)
+{
+    *(unsigned int*)&value &= 0x7FFFFFFF;
+    return value;
+}
+
+bool Vector3::sub_00201740(const Vector3& other, float tolerance) const
+{
+    return Magnitude(x - other.x) <= tolerance && Magnitude(y - other.y) <= tolerance && Magnitude(z - other.z) <= tolerance;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002017C0 (0x002017C0, 99 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_00244320 (0x00244320), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x002017C0
+// what: Says whether all three of the vector's numbers are nearer zero than a small fixed tolerance.
+// tool: Claude (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+    bool sub_002017C0() const;
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+
+    float m[4][4];
+};
+
+// A float's magnitude, by clearing its sign bit.
+__forceinline float Magnitude(float value)
+{
+    *(unsigned int*)&value &= 0x7FFFFFFF;
+    return value;
+}
+
+bool Vector3::sub_002017C0() const
+{
+    return Magnitude(x) < 0.00001f && Magnitude(y) < 0.00001f && Magnitude(z) < 0.00001f;
+}
+
 // [TODO] 0x00201830 sub_00201830 (88 B)
 // ============================================================================
 // [VERIFIED] sub_00201890 (0x00201890, 17 B)
@@ -309806,7 +310423,209 @@ void FileRequest::vfunc_05()
 }
 
 // [TODO] 0x0026C290 core::FileOpenRequest::vfunc_01 (533 B)
-// [TODO] 0x0026C4B0 core::FileOpenByKeyRequest::vfunc_01 (195 B)
+// ============================================================================
+// [VERIFIED] core::FileOpenByKeyRequest::vfunc_01 (0x0026C4B0, 195 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as core::FileOpenByKeyRequest::vfunc_01 (0x002A9C10), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026C4B0
+// what: Opens a file from a key object: the key fills the file's read cache, and the file takes the handle, size and transfer size from what the cache holds.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        class File* sub_000FC320();     // the file it holds
+        unsigned int sub_00084DA0();    // its size
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_002AC3E0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);                                     // hold a priority (SPEC-018 B.4.4)
+        void sub_002AC710(int a, int b);                                    // release it (B.4.6)
+        void sub_0026EB80(int error);                                       // set the drive's last error
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    // What an open-by-key request opens the file through (reference counted).
+    class FileKey
+    {
+    public:
+        bool sub_0026F7F0(int what, Cache* cache);     // fills the cache; false if it cannot
+    };
+
+    class FileOpenByKeyRequest : public FileRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        int m_What;             // +0x0C
+        FileKey* m_Key;         // +0x10
+    };
+
+}
+
+int core::FileOpenByKeyRequest::vfunc_01()
+{
+    Drive* drive = m_File->m_Drive;
+    if (m_Key->sub_0026F7F0(m_What, &m_File->m_Cache))
+    {
+        File* inner = m_File->m_Cache.sub_000FC320();
+        m_File->m_Handle = inner->m_Handle;
+        m_File->m_Size = m_File->m_Cache.sub_00084DA0();
+        m_File->m_Open = true;
+        m_File->m_TransferSize = inner->m_TransferSize;
+        return Finish(1, 0);
+    }
+    drive->sub_0026EB80(1);
+    return Finish(0, 1);
+}
+
 // ============================================================================
 // [VERIFIED] core::SaveGameOpenRequest::vfunc_01 (0x0026C580, 129 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4

@@ -1,6 +1,23 @@
+// ============================================================================
+// SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, core/FileOpenByKeyRequest.cpp (1 verified)
+// GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
+// PROGRESS: 1 of 2 functions matched (50.00%). NOT COMPLETE YET.
+// The 1 still to do are listed in their place in Original_Binary_Order_PC_1002.cpp as "// [TODO] address name (size)"
+// lines, so you can see what is missing and where; matched ones are the C++ itself.
+// Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
+// Blocks marked 'excerpt' are cut from the named source file and are built from that file;
+// every other block compiles on its own. The file as a whole is not one translation unit.
+// ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::FileOpenByKeyRequest::vfunc_01 (0x006E3A10, 195 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileOpenByKeyRequest::vfunc_01 (0x002A9C10), which was matched first;
+// its addresses and names were swapped for this function's.
 // bin: xb
-// va: 0x002AA4E0
-// what: Lets a drive-lock request go: under the handle's lock, releases the priority it holds if it holds one, marks it released, and deletes it if it held one.
+// va: 0x006E3A10
+// what: Opens a file from a key object: the key fills the file's read cache, and the file takes the handle, size and transfer size from what the cache holds.
 // tool: Claude (from SPEC-020)
 
 unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
@@ -17,8 +34,8 @@ namespace core
     public:
         bool sub_002BE6F0();    // whether it holds the file
         void sub_002BE710();    // closes it
-        class File* sub_002BE700();     // the file it holds
-        unsigned int sub_001DE0E0();    // its size
+        class File* sub_0051EBA0();     // the file it holds
+        unsigned int sub_006E9820();    // its size
         int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
                          unsigned int length, unsigned int* done, int how);     // reads through the cache
         int m_Words[0xB];
@@ -65,7 +82,7 @@ namespace core
         void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
         int sub_002AC6E0(int a, int b);                                     // hold a priority (SPEC-018 B.4.4)
         void sub_002AC710(int a, int b);                                    // release it (B.4.6)
-        void sub_002AC400(int error);                                       // set the drive's last error
+        void sub_006E60E0(int error);                                       // set the drive's last error
     };
 
     class IMutable
@@ -161,34 +178,37 @@ namespace core
         }
     };
 
-    class DriveLockRequest : public DriveRequest
+    // What an open-by-key request opens the file through (reference counted).
+    class FileKey
+    {
+    public:
+        bool sub_006E6D90(int what, Cache* cache);     // fills the cache; false if it cannot
+    };
+
+    class FileOpenByKeyRequest : public FileRequest
     {
     public:
         virtual int vfunc_01();
         virtual int vfunc_04();
-        void sub_002AA4E0();
-        int m_A;                // +0x0C
-        int m_B;                // +0x10
-        int m_Result;           // +0x14
-        int m_State;            // +0x18  1 holding, 2 released
+        int m_What;             // +0x0C
+        FileKey* m_Key;         // +0x10
     };
 
 }
 
-void core::DriveLockRequest::sub_002AA4E0()
+int core::FileOpenByKeyRequest::vfunc_01()
 {
-    Drive* drive = m_Drive->m_Drive;
-    bool held = false;
-    m_Drive->Lock();
-    if (m_State == 1)
+    Drive* drive = m_File->m_Drive;
+    if (m_Key->sub_006E6D90(m_What, &m_File->m_Cache))
     {
-        drive->sub_002AC710(m_A, m_Result);
-        held = true;
+        File* inner = m_File->m_Cache.sub_0051EBA0();
+        m_File->m_Handle = inner->m_Handle;
+        m_File->m_Size = m_File->m_Cache.sub_006E9820();
+        m_File->m_Open = true;
+        m_File->m_TransferSize = inner->m_TransferSize;
+        return Finish(1, 0);
     }
-    m_State = 2;
-    m_Drive->Unlock();
-    if (held)
-    {
-        delete this;
-    }
+    drive->sub_006E60E0(1);
+    return Finish(0, 1);
 }
+

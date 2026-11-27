@@ -1,5 +1,20 @@
+// ============================================================================
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, core/FileOpenByKeyRequest.cpp (1 verified)
+// GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
+// PROGRESS: COMPLETE. All 1 functions are matched.
+// Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
+// Blocks marked 'excerpt' are cut from the named source file and are built from that file;
+// every other block compiles on its own. The file as a whole is not one translation unit.
+// ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::FileOpenByKeyRequest::vfunc_01 (0x0026C4B0, 195 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as core::FileOpenByKeyRequest::vfunc_01 (0x002A9C10), which was matched first;
+// its addresses and names were swapped for this function's.
 // bin: xb
-// va: 0x002A9C10
+// va: 0x0026C4B0
 // what: Opens a file from a key object: the key fills the file's read cache, and the file takes the handle, size and transfer size from what the cache holds.
 // tool: Claude (from SPEC-020)
 
@@ -17,8 +32,8 @@ namespace core
     public:
         bool sub_002BE6F0();    // whether it holds the file
         void sub_002BE710();    // closes it
-        class File* sub_002BE700();     // the file it holds
-        unsigned int sub_001DE0E0();    // its size
+        class File* sub_000FC320();     // the file it holds
+        unsigned int sub_00084DA0();    // its size
         int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
                          unsigned int length, unsigned int* done, int how);     // reads through the cache
         int m_Words[0xB];
@@ -65,7 +80,7 @@ namespace core
         void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
         int sub_002AC6E0(int a, int b);                                     // hold a priority (SPEC-018 B.4.4)
         void sub_002AC710(int a, int b);                                    // release it (B.4.6)
-        void sub_002AC400(int error);                                       // set the drive's last error
+        void sub_0026EB80(int error);                                       // set the drive's last error
     };
 
     class IMutable
@@ -165,7 +180,7 @@ namespace core
     class FileKey
     {
     public:
-        bool sub_002AD0D0(int what, Cache* cache);     // fills the cache; false if it cannot
+        bool sub_0026F7F0(int what, Cache* cache);     // fills the cache; false if it cannot
     };
 
     class FileOpenByKeyRequest : public FileRequest
@@ -182,15 +197,16 @@ namespace core
 int core::FileOpenByKeyRequest::vfunc_01()
 {
     Drive* drive = m_File->m_Drive;
-    if (m_Key->sub_002AD0D0(m_What, &m_File->m_Cache))
+    if (m_Key->sub_0026F7F0(m_What, &m_File->m_Cache))
     {
-        File* inner = m_File->m_Cache.sub_002BE700();
+        File* inner = m_File->m_Cache.sub_000FC320();
         m_File->m_Handle = inner->m_Handle;
-        m_File->m_Size = m_File->m_Cache.sub_001DE0E0();
+        m_File->m_Size = m_File->m_Cache.sub_00084DA0();
         m_File->m_Open = true;
         m_File->m_TransferSize = inner->m_TransferSize;
         return Finish(1, 0);
     }
-    drive->sub_002AC400(1);
+    drive->sub_0026EB80(1);
     return Finish(0, 1);
 }
+

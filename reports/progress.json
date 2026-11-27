@@ -1,30 +1,30 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-27 00:16:08",
+  "updated_at": "2026-11-27 17:48:25",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
-    "pc": 808,
-    "xb": 12006,
-    "proto": 11395,
+    "pc": 810,
+    "xb": 12027,
+    "proto": 11410,
     "ps2": 3793,
-    "total": 12814,
-    "bytes": 511615,
+    "total": 12837,
+    "bytes": 514575,
     "ps2_bytes": 36032,
     "stubs": 2204
   },
   "readable": {
     "pc": 0,
-    "xb": 129,
-    "proto": 10,
+    "xb": 139,
+    "proto": 18,
     "ps2": 866,
-    "total": 129
+    "total": 139
   },
   "source": {
     "member_functions": {
-      "pc": 529,
-      "xb": 4446,
-      "proto": 4406,
-      "total": 4975
+      "pc": 530,
+      "xb": 4448,
+      "proto": 4407,
+      "total": 4978
     },
     "shared_class": {
       "pc": 159,
@@ -34,19 +34,19 @@
     },
     "named": {
       "pc": 1,
-      "xb": 2467,
+      "xb": 2468,
       "proto": 2265,
-      "total": 2468
+      "total": 2469
     }
   },
   "described": {
     "pc": 59,
-    "xb": 2926,
+    "xb": 2947,
     "proto": 1207,
     "ps2": 0,
-    "total": 2985,
+    "total": 3006,
     "how": {
-      "human": 679,
+      "human": 700,
       "read": 169,
       "bound": 0,
       "shape": 2106,
@@ -56,29 +56,29 @@
   "size_buckets": {
     "1-9 B": 2102,
     "10-19 B": 1830,
-    "20-39 B": 4581,
-    "40-79 B": 3270,
-    "80+ B": 1031
+    "20-39 B": 4582,
+    "40-79 B": 3279,
+    "80+ B": 1044
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 22485,
+    "RRutherrfordd (Founder)": 22523,
     "NoahBPeterson": 5409,
     "lemiur": 108
   },
   "unattributed": 0,
   "queue": {
-    "pc": 622,
-    "xb": 10356,
-    "proto": 10441,
+    "pc": 620,
+    "xb": 10335,
+    "proto": 10426,
     "ps2": 20504,
-    "total": 10978,
+    "total": 10955,
     "tiers": {
       "TIER_1_QUICK": 176,
-      "TIER_2_SMALL": 843,
-      "TIER_3_MEDIUM": 2347,
-      "TIER_4_LARGE": 7612
+      "TIER_2_SMALL": 842,
+      "TIER_3_MEDIUM": 2338,
+      "TIER_4_LARGE": 7599
     },
-    "bytes": 2608194,
+    "bytes": 2605234,
     "stubs": 105
   },
   "good_first": [

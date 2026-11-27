@@ -1,3 +1,17 @@
+// ============================================================================
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, core/FileOpenRequest.cpp (1 verified)
+// GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
+// PROGRESS: COMPLETE. All 1 functions are matched.
+// Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
+// Blocks marked 'excerpt' are cut from the named source file and are built from that file;
+// every other block compiles on its own. The file as a whole is not one translation unit.
+// ============================================================================
+
+// ============================================================================
+// [VERIFIED] core::FileOpenRequest::vfunc_01 (0x002A99D0, 561 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Opens a file: first inside the libraries searched before the drive, then on the drive itself, then inside the libraries searched after it.
+// ============================================================================
 // bin: xb
 // va: 0x002A99D0
 // what: Opens a file: first inside the libraries searched before the drive, then on the drive itself, then inside the libraries searched after it.
@@ -233,3 +247,4 @@ int core::FileOpenRequest::vfunc_01()
     libraries->sub_002ACD60();
     return Finish(status, drive->sub_002AC3E0());
 }
+
