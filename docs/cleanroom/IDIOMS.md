@@ -36,6 +36,16 @@ I11. `new T(args)` THROUGH A CLASS ALLOCATOR: `p = Alloc(sizeof T); r = p ? ctor
     Two emitted shapes from one source: D = the use duplicated in both arms (short functions), J = arms
     joined before the use (functions with a frame). [SPEC-019.]
 I12. DATA-ONLY STARTS: entry stubs are reached by `push imm32`; scan found 128. [yours, section 6.]
+I19. (pending J2) VA order inside an object = compile order, callees before callers; a lower-VA same-file
+     callee is "already compiled" for I13. [drive-thread file vs 2003 text order; save-drive file.]
+I20. Every core constructor level ends with a call to the module-name accessor 0x250EB0 (returns "core"),
+     result dropped. [0x2AA580, 0x2AA650, 0x2AC7E0, 0x2AB470, 0x2C1B00.] Other libraries will have their
+     own accessor: look for a `mov eax, imm; ret` called from constructors.
+I21. Strings: Scarface's engine wraps the C string routines (bounded copy 0x2A9520 with C-library
+     fallback in 0x2AB470; null-checked forwards 0x283AA0 / 0x283AC0). Expect a wrapper wherever 2003
+     has a bare C call. [H4; pending X1..X5 for the copy.]
+I22. Numbered library stubs: identity = shape + kernel export numbers + targets (yours, G4). A bare
+     `jmp [cell]` or `mov eax,[cell]` stub is identified by the cell's export alone. [0x239C84, 0x30A65F.]
 ```
 
 ## Added by the implementer
@@ -63,4 +73,18 @@ I17. REQUEST POSTING (I11's D and J) is one source: `T* m = (T*)Alloc(sizeof(T))
     : 0; drive->Queue(r, m_Priority, atHead);`. D comes out in functions without a frame, J in functions
     with one. No second form was needed. [28 functions of SPEC-019.]
 I18. `flags & 0x80` on a 32-bit return value compiles to `test al, al; jns`. [0x2AB340 and pattern S.]
+I23. An `inline` wrapper around an intrinsic string copy is NOT expanded in a large function; only
+     __forceinline expands it, and then the bytes equal the bare intrinsic. [0x2C09C0: 644 vs 1277.]
+I24. Each request base's Finish(status, error) is an inline member expanded at every exit; take the
+     status into a local before `return Finish(status, owner->LastError())` (arguments are evaluated
+     right to left). [21 work functions, 0x2A9D70..0x2AA430.]
+I25. A deleting destructor with an inline class `operator delete` through a global allocator: own table,
+     body, base table store, then `if (flags & 1) { lock; allocator->free(this); unlock; } return this;`;
+     the base table store is scheduled between the flag test and the branch. [0x2AAAB0, 0x2AAD90,
+     0x2AA8D0.]
+I26. Public C library code is matched by compiling the published file unchanged with `/TC` and the
+     library flags; a proposal is the include plus a `// verify:` line naming the function. [zlib 1.2.1,
+     libpng 1.2.8: 106 functions.]
+I27. A function that ends in a call that never returns has no `ret`; the measured size then includes one
+     int3 of padding. [png_error 0x2C6800, png_chunk_error 0x2C68F0.]
 ```

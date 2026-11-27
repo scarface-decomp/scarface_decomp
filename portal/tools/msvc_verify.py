@@ -385,6 +385,17 @@ def qualified_name(name: str) -> Optional[str]:
     return None
 
 
+def underscore_name(name: str) -> Optional[str]:
+    """The C name behind a symbol that starts with two underscores: the compiler puts one underscore in
+    front of every C name, so the C library's own underscore names come out with two (`__iob` is `_iob`,
+    `__setjmp3` is `_setjmp3`, `__ftol2` is `_ftol2`). None for anything else, and for the compiler's own
+    symbols that carry an `@` (`__real@...`) or are import cells (`__imp__...`)."""
+    if not name.startswith("__") or "@" in name or name.startswith("__imp_"):
+        return None
+    plain = name[1:]
+    return plain if _PLAIN.match(plain) else None
+
+
 def _split_scopes(qualified: str) -> List[str]:
     """'core::ConcreteClassRep<a::B>' -> ['core', 'ConcreteClassRep<a::B>'] (only top-level '::')."""
     parts, depth, cur, i = [], 0, "", 0
@@ -545,6 +556,11 @@ def same_code_there(coff: "CoffObject", sym, image, va: int) -> bool:
     return all(i in masked or there[i] == sec.data[i] for i in range(len(sec.data)))
 
 
+def ends_in_return(code: bytes) -> bool:
+    """Whether a function's bytes end in `ret` or `ret n`."""
+    return code[-1:] == b"\xC3" or (len(code) >= 3 and code[-3] == 0xC2)
+
+
 def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Optional[int] = None,
                      image=None, known_symbols: Optional[Dict[str, int]] = None,
                      known_names: Optional[Dict[str, int]] = None) -> CompareResult:
@@ -557,9 +573,16 @@ def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Op
     known_symbols = known_symbols or {}
     known_names = known_names or {}
     code = fn.code
+    notes: List[str] = []
+    if len(target) == len(code) + 1 and target[-1] == 0xCC and code and not ends_in_return(code):
+        # A function whose last call never comes back has no `ret`, and whoever measured the original
+        # then read the first padding byte after it (int3) as its last instruction. That byte is not
+        # the function's.
+        target = target[:-1]
+        notes.append("The original's last byte is padding (int3) after a function that ends without a return; "
+                     "it is not part of the function.")
     n_t, n_c = len(target), len(code)
     status = ["match"] * max(n_t, n_c)
-    notes: List[str] = []
     mismatch: List[str] = []
     checked = unverified = 0
     ext_seen: Dict[str, int] = {}
@@ -645,12 +668,12 @@ def compare_function(target: bytes, fn: ObjFunction, coff: CoffObject, fn_va: Op
                     else:
                         verdict, why = "bad", (f"+0x{off:X}: '{sym.name}' is 0x{known_symbols[sym.name]:08X}, but the "
                                                f"original uses 0x{sym_va_in_orig:08X} here")
-                elif qualified_name(sym.name) in known_names:
-                    want = known_names[qualified_name(sym.name)]
+                elif (qualified_name(sym.name) or underscore_name(sym.name)) in known_names:
+                    want = known_names[qualified_name(sym.name) or underscore_name(sym.name)]
                     if want == sym_va_in_orig:
                         verdict = "ok"
                     else:
-                        verdict, why = "bad", (f"+0x{off:X}: '{qualified_name(sym.name)}' is at 0x{want:08X}, but "
+                        verdict, why = "bad", (f"+0x{off:X}: '{qualified_name(sym.name) or underscore_name(sym.name)}' is at 0x{want:08X}, but "
                                                f"the original uses 0x{sym_va_in_orig:08X} here")
                 elif same_code_there(coff, sym, image, sym_va_in_orig):
                     verdict = "ok"          # a compiler-made or template function compiled here: same bytes there

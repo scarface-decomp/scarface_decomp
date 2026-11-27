@@ -57,7 +57,16 @@ executable, `.rdata` and `.data` included.
 * Public C libraries inside the engine (zlib, libpng) are matched from their published source, kept
   unchanged under `reconstructed_src/include/`, compiled as C: a submission may add `/TC` to the
   function's flags. zlib 1.2.1's whole decompression side matches this way with
-  `/TC /O2 /Ot /Oy /G6 /Gd /Zp4`.
+  `/TC /O2 /Ot /Oy /G6 /Gd /Zp4`, and so do 98 functions of libpng 1.2.8 in its default configuration
+  (no configuration macro set). A proposal is the include of the published file plus a `// verify:` line
+  whose `--match` names the function. Three things the checker needs for such code: the library's
+  functions and tables named in `reports/names.json` (a call into another file is checked through the
+  name); the C library's underscore names (`_iob`, `_setjmp3`) found for the compiler's `__iob`,
+  `__setjmp3`; and the flag masks a library writes as numbers listed in
+  `reports/numbers_not_addresses.json` where they fall in the program's address range.
+* A function that ends in a call that never comes back has no `ret`, and the padding byte after it was
+  measured as its last byte. The checker leaves that one `int3` out when the compiled function is one
+  byte shorter and does not end in a return (libpng's `png_error`, `png_chunk_error`).
 * Register arguments do not by themselves show link-time code generation: with `/O2` this compiler
   already passes arguments in registers to a `static` function whose address is never taken. zlib's
   `crc32` (0x002C6E60) and its static helper (0x002C6B80, arguments in EAX, ECX and EDX) match from an

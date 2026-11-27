@@ -13,6 +13,120 @@
    "va": "0x002A9430",
    "value": "0x00200000",
    "why": "The first value past what four UTF-8 bytes can hold: `cmp ecx, 0x200000` in the function that writes a character as UTF-8, after the same test against 0x80, 0x800 and 0x10000. (The address 0x00200000 happens to be a function's start.)"
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002B8600",
+   "value": "0x00100000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `or eax, 0x100000` in libpng 1.2.8's png_zalloc, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002B8BF0",
+   "value": "0x00020000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `mov edx, 0x20000` in libpng 1.2.8's png_create_read_struct_2, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002B8BF0",
+   "value": "0x000F4240",
+   "why": "1,000,000, the largest width and height libpng accepts by default (PNG_USER_WIDTH_MAX, PNG_USER_HEIGHT_MAX): `mov eax, 0xf4240` in libpng 1.2.8's png_create_read_struct_2, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002B91D0",
+   "value": "0x00400000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test dword ptr [esi + 0x6c], 0x400000` in libpng 1.2.8's png_read_row, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002B9B90",
+   "value": "0x00100000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test dword ptr [edx + 0x70], 0x100000` in libpng 1.2.8's png_read_transform_info, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002B9B90",
+   "value": "0x00400000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test dword ptr [edx + 0x6c], 0x400000` in libpng 1.2.8's png_read_transform_info, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002BD8A0",
+   "value": "0x00020000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test dword ptr [esi + 0x70], 0x20000` in libpng 1.2.8's png_do_read_transformations, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002BD8A0",
+   "value": "0x00080000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test dword ptr [esi + 0x70], 0x80000` in libpng 1.2.8's png_do_read_transformations, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002BD8A0",
+   "value": "0x00100000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test dword ptr [esi + 0x70], 0x100000` in libpng 1.2.8's png_do_read_transformations, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002BD8A0",
+   "value": "0x00200000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `cmp dword ptr [esi + 0x70], 0x200000` in libpng 1.2.8's png_do_read_transformations, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002BD8A0",
+   "value": "0x00400000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `and eax, 0x400000` and 1 more like it in libpng 1.2.8's png_do_read_transformations, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002BDE80",
+   "value": "0x00400000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test ebx, 0x400000` and 2 more like it in libpng 1.2.8's png_do_strip_filler, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002C6800",
+   "value": "0x00080000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test edx, 0x80000` and 1 more like it in libpng 1.2.8's png_error, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002C6800",
+   "value": "0x000C0000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test edx, 0xc0000` in libpng 1.2.8's png_error, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002C68A0",
+   "value": "0x000C0000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test ecx, 0xc0000` in libpng 1.2.8's png_warning, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002C6AC0",
+   "value": "0x00100000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test dword ptr [edi + 0x6c], 0x100000` in libpng 1.2.8's png_malloc, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002C9400",
+   "value": "0x00100000",
+   "why": "One of libpng's flag bits (the PNG_FLAG_ and transformation masks of png.h): `test ebx, 0x100000` in libpng 1.2.8's png_read_start_row, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002C9EA0",
+   "value": "0x00013880",
+   "why": "80,000, the limit libpng's chromaticity check uses for a white-point or primary coordinate: `cmp edi, 0x13880` and 7 more like it in libpng 1.2.8's png_handle_cHRM, which is the published source compiled unchanged."
+  },
+  {
+   "file": "default.xbe",
+   "va": "0x002C9EA0",
+   "value": "0x000186A0",
+   "why": "100,000, the scale of libpng's fixed-point numbers (the chromaticity check compares sums with it): `cmp edx, 0x186a0` and 3 more like it in libpng 1.2.8's png_handle_cHRM, which is the published source compiled unchanged."
   }
  ]
 }
