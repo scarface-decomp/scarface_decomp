@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (6982 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (6984 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6,982 of 15,074 functions matched (46.32%). NOT COMPLETE YET.
-// The 8,092 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6,984 of 15,074 functions matched (46.33%). NOT COMPLETE YET.
+// The 8,090 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -141058,6 +141058,261 @@ void __cdecl sub_0026DB20(void)
     ((Object*)DAT_0048E9B0)->vfunc_17((int)(&local_4), (int)(&local_8), (int)(&local_C));
     ((Object*)DAT_0048E9B0)->vfunc_01();
     DAT_0048E9B0 = 0;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0026DBD0 (0x0026DBD0, 247 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002AB470 (0x002AB470), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026DBD0
+// what: Constructs a file object for a saved game on a drive and queues the request that opens it.
+// tool: Claude (from SPEC-019)
+
+extern "C" char DAT_003B3E7C[];     // core::IMutable's table
+extern "C" char DAT_003B3E90[];     // core::File's table for the part at +4
+extern "C" char DAT_003B3E9C[];     // core::File's main table
+
+void* __cdecl sub_0026C140(unsigned int size);      // the request classes' allocator
+void __cdecl sub_0020DC30();
+int __cdecl sub_0023F090(char* to, const char* from, int size);     // copies a string; negative if it did not fit
+char* __cdecl sub_002C9710(char* to, const char* from, unsigned int size);
+
+// The object at +0x12C of a file (0x34 bytes); its own functions know what is inside.
+struct FilePart12C
+{
+    void sub_002816D0();    // its constructor
+    char m_pad00[0x34];
+};
+
+namespace core
+{
+    class Request;
+    class File;
+
+    // The real drive (SPEC-017): only what a file uses of it.
+    class Drive
+    {
+    public:
+        virtual void AddRef();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int GetCapabilities();
+        void sub_0026EE10(Request* request, int priority, bool atHead);     // queue a request on the drive's thread
+    };
+
+    class SaveGameOpenRequest
+    {
+    public:
+        SaveGameOpenRequest* sub_0026D0D0(File* file, int a4, bool a3, int a5, int a6);     // the constructor
+        char m_Data[0x1C];
+    };
+
+    // The lock part of a file (core::IMutable) as its own constructor sees it.
+    struct MutablePart
+    {
+        void* m_Table;      // +0x0
+    };
+
+    // An open file on a drive (0x168 bytes), with its tables written as members: this is its constructor.
+    class File
+    {
+    public:
+        File* sub_0026DBD0(Drive* drive, const char* name, bool a3, int a4, int a5, int a6, int priority);
+
+        void* m_Table00;        // +0x00
+        void* m_Table04;        // +0x04
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+        bool m_Open;            // +0x1C
+        bool m_Field1D;         // +0x1D
+        char m_Name[0x101];     // +0x1E
+        int m_Field120;         // +0x120
+        int m_Field124;         // +0x124
+        int m_Field128;         // +0x128
+        FilePart12C m_Field12C; // +0x12C
+        bool m_Field160;        // +0x160
+        int m_Field164;         // +0x164
+    };
+}
+
+// core::IMutable's constructor. Returning the part keeps its store: written without, the compiler sees that
+// the file's own table overwrites it and drops it.
+inline core::MutablePart* ConstructMutable(core::MutablePart* part)
+{
+    part->m_Table = DAT_003B3E7C;
+    return part;
+}
+
+core::File* core::File::sub_0026DBD0(Drive* drive, const char* name, bool a3, int a4, int a5, int a6, int priority)
+{
+    ConstructMutable((MutablePart*)&m_Table04);
+    m_Table00 = DAT_003B3E9C;
+    m_Table04 = DAT_003B3E90;
+    m_RefCount = 1;
+    m_Drive = drive;
+    m_Priority = priority;
+    m_LastError = 0;
+    m_Outstanding = 0;
+    m_Open = false;
+    m_Field1D = a3;
+    m_Field120 = 0;
+    m_Field124 = 0;
+    m_Field128 = 0;
+    m_Field12C.sub_002816D0();
+    m_Field160 = true;
+    m_Field164 = 0x800;
+    sub_0020DC30();
+    m_Drive->AddRef();
+    if (sub_0023F090(m_Name, name, 0x100) < 0)
+    {
+        sub_002C9710(m_Name, name, 0x100);
+        m_Name[0x100] = 0;
+    }
+    m_Drive->GetCapabilities();
+    SaveGameOpenRequest* memory = (SaveGameOpenRequest*)sub_0026C140(sizeof(SaveGameOpenRequest));
+    SaveGameOpenRequest* request = memory ? memory->sub_0026D0D0(this, a4, a3, a5, a6) : 0;
+    m_Drive->sub_0026EE10((Request*)request, m_Priority, false);
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0026DCD0 (0x0026DCD0, 242 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002AB570 (0x002AB570), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026DCD0
+// what: Constructs a file object on a drive and, if the last argument says so, queues the request that opens it.
+// tool: Claude (from SPEC-019)
+
+extern "C" char DAT_003B3E7C[];     // core::IMutable's table
+extern "C" char DAT_003B3E90[];     // core::File's table for the part at +4
+extern "C" char DAT_003B3E9C[];     // core::File's main table
+
+void* __cdecl sub_0026C140(unsigned int size);      // the request classes' allocator
+void __cdecl sub_0020DC30();
+int __cdecl sub_0023F090(char* to, const char* from, int size);     // copies a string; negative if it did not fit
+char* __cdecl sub_002C9710(char* to, const char* from, unsigned int size);
+
+// The object at +0x12C of a file (0x34 bytes); its own functions know what is inside.
+struct FilePart12C
+{
+    void sub_002816D0();    // its constructor
+    char m_pad00[0x34];
+};
+
+namespace core
+{
+    class Request;
+    class File;
+
+    // The real drive (SPEC-017): only what a file uses of it.
+    class Drive
+    {
+    public:
+        virtual void AddRef();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int GetCapabilities();
+        void sub_0026EE10(Request* request, int priority, bool atHead);     // queue a request on the drive's thread
+    };
+
+    class FileOpenRequest
+    {
+    public:
+        FileOpenRequest* sub_0026D070(File* file, int a4, bool a3);     // the constructor
+        char m_Data[0x14];
+    };
+
+    // The lock part of a file (core::IMutable) as its own constructor sees it.
+    struct MutablePart
+    {
+        void* m_Table;      // +0x0
+    };
+
+    // An open file on a drive (0x168 bytes), with its tables written as members: this is its constructor.
+    class File
+    {
+    public:
+        File* sub_0026DCD0(Drive* drive, const char* name, bool a3, int a4, int priority, int a6, int a7, int a8, bool queue);
+
+        void* m_Table00;        // +0x00
+        void* m_Table04;        // +0x04
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+        bool m_Open;            // +0x1C
+        bool m_Field1D;         // +0x1D
+        char m_Name[0x101];     // +0x1E
+        int m_Field120;         // +0x120
+        int m_Field124;         // +0x124
+        int m_Field128;         // +0x128
+        FilePart12C m_Field12C; // +0x12C
+        bool m_Field160;        // +0x160
+        int m_Field164;         // +0x164
+    };
+}
+
+// core::IMutable's constructor. Returning the part keeps its store: written without, the compiler sees that
+// the file's own table overwrites it and drops it.
+inline core::MutablePart* ConstructMutable(core::MutablePart* part)
+{
+    part->m_Table = DAT_003B3E7C;
+    return part;
+}
+
+core::File* core::File::sub_0026DCD0(Drive* drive, const char* name, bool a3, int a4, int priority, int a6, int a7, int a8, bool queue)
+{
+    ConstructMutable((MutablePart*)&m_Table04);
+    m_Table00 = DAT_003B3E9C;
+    m_Table04 = DAT_003B3E90;
+    m_RefCount = 1;
+    m_Drive = drive;
+    m_Priority = priority;
+    m_LastError = 0;
+    m_Outstanding = 0;
+    m_Open = false;
+    m_Field1D = a3;
+    m_Field120 = 0;
+    m_Field124 = 0;
+    m_Field128 = 0;
+    m_Field12C.sub_002816D0();
+    m_Field160 = false;
+    m_Field164 = 0x800;
+    sub_0020DC30();
+    m_Drive->AddRef();
+    if (sub_0023F090(m_Name, name, 0x100) < 0)
+    {
+        sub_002C9710(m_Name, name, 0x100);
+        m_Name[0x100] = 0;
+    }
+    m_Drive->GetCapabilities();
+    if (queue)
+    {
+        FileOpenRequest* memory = (FileOpenRequest*)sub_0026C140(sizeof(FileOpenRequest));
+        FileOpenRequest* request = memory ? memory->sub_0026D070(this, a4, a3) : 0;
+        m_Drive->sub_0026EE10((Request*)request, m_Priority, false);
+    }
+    return this;
 }
 
 // ============================================================================

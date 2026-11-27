@@ -1,14 +1,14 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-26 06:25:44",
+  "updated_at": "2026-11-26 21:12:23",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
-    "pc": 767,
-    "xb": 11847,
-    "proto": 11336,
+    "pc": 787,
+    "xb": 11877,
+    "proto": 11362,
     "ps2": 3793,
-    "total": 12614,
-    "bytes": 459934,
+    "total": 12664,
+    "bytes": 464422,
     "ps2_bytes": 36032,
     "stubs": 2204
   },
@@ -21,10 +21,10 @@
   },
   "source": {
     "member_functions": {
-      "pc": 488,
-      "xb": 4392,
-      "proto": 4354,
-      "total": 4880
+      "pc": 508,
+      "xb": 4420,
+      "proto": 4378,
+      "total": 4928
     },
     "shared_class": {
       "pc": 159,
@@ -41,12 +41,12 @@
   },
   "described": {
     "pc": 59,
-    "xb": 2772,
+    "xb": 2797,
     "proto": 1207,
     "ps2": 0,
-    "total": 2831,
+    "total": 2856,
     "how": {
-      "human": 525,
+      "human": 550,
       "read": 169,
       "bound": 0,
       "shape": 2106,
@@ -56,30 +56,30 @@
   "size_buckets": {
     "1-9 B": 2102,
     "10-19 B": 1830,
-    "20-39 B": 4571,
-    "40-79 B": 3192,
-    "80+ B": 919
+    "20-39 B": 4578,
+    "40-79 B": 3217,
+    "80+ B": 937
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 21189,
+    "RRutherrfordd (Founder)": 21265,
     "NoahBPeterson": 5409,
     "RRutherfordd (Founder)": 1037,
     "lemiur": 108
   },
   "unattributed": 0,
   "queue": {
-    "pc": 663,
-    "xb": 10515,
-    "proto": 10500,
+    "pc": 643,
+    "xb": 10485,
+    "proto": 10474,
     "ps2": 20504,
-    "total": 11178,
+    "total": 11128,
     "tiers": {
       "TIER_1_QUICK": 176,
-      "TIER_2_SMALL": 853,
-      "TIER_3_MEDIUM": 2425,
-      "TIER_4_LARGE": 7724
+      "TIER_2_SMALL": 846,
+      "TIER_3_MEDIUM": 2400,
+      "TIER_4_LARGE": 7706
     },
-    "bytes": 2659875,
+    "bytes": 2655387,
     "stubs": 105
   },
   "good_first": [
@@ -93,21 +93,21 @@
       "kind": "group"
     },
     {
-      "id": "xb_0022D8B0",
-      "bin": "xb",
-      "va": "0x0022D8B0",
-      "symbol": "sub_0022D8B0",
-      "size": 8,
-      "why": "matching it also matches its 5 look-alikes",
-      "kind": "group"
-    },
-    {
       "id": "xb_002FD289",
       "bin": "xb",
       "va": "0x002FD289",
       "symbol": "sub_002FD289",
       "size": 8,
       "why": "matching it also matches its 3 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002E0600",
+      "bin": "xb",
+      "va": "0x002E0600",
+      "symbol": "sub_002E0600",
+      "size": 9,
+      "why": "matching it also matches its 2 look-alikes",
       "kind": "group"
     },
     {
@@ -138,39 +138,39 @@
       "kind": "named"
     },
     {
-      "id": "xb_001EEAB0",
-      "bin": "xb",
-      "va": "0x001EEAB0",
-      "symbol": "sub_001EEAB0",
-      "size": 9,
-      "why": "matching it also matches its 5 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_002E0600",
-      "bin": "xb",
-      "va": "0x002E0600",
-      "symbol": "sub_002E0600",
-      "size": 9,
-      "why": "matching it also matches its 2 look-alikes",
-      "kind": "group"
-    },
-    {
-      "id": "xb_00322600",
-      "bin": "xb",
-      "va": "0x00322600",
-      "symbol": "sub_00322600",
-      "size": 10,
-      "why": "matching it also matches its 185 look-alikes",
-      "kind": "group"
-    },
-    {
       "id": "xb_0015C6C0",
       "bin": "xb",
       "va": "0x0015C6C0",
       "symbol": "sub_0015C6C0",
       "size": 10,
       "why": "matching it also matches its 3 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_002FE371",
+      "bin": "xb",
+      "va": "0x002FE371",
+      "symbol": "sub_002FE371",
+      "size": 10,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_00178210",
+      "bin": "xb",
+      "va": "0x00178210",
+      "symbol": "sub_00178210",
+      "size": 12,
+      "why": "matching it also matches its 2 look-alikes",
+      "kind": "group"
+    },
+    {
+      "id": "xb_00315AB0",
+      "bin": "xb",
+      "va": "0x00315AB0",
+      "symbol": "sub_00315AB0",
+      "size": 15,
+      "why": "matching it also matches its 9 look-alikes",
       "kind": "group"
     }
   ]
