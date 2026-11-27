@@ -310006,7 +310006,6 @@ void __cdecl sub_00283DD0(int a1)
     sub_00233A9F(*(int*)(r_esi + 72));
 }
 
-// [TODO] 0x00283E70 sub_00283E70 (52 B)
 // ============================================================================
 // [VERIFIED] sub_00283E70 (0x00283E70, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -319985,7 +319984,6 @@ pddiDisplay* pddiDisplay::vfunc_03(unsigned int flags)
 
 }
 
-// [TODO] 0x0029A9B0 sub_0029A9B0 (7 B)
 // ============================================================================
 // [VERIFIED] sub_0029A9B0 (0x0029A9B0, 7 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -420953,9 +420951,6 @@ int __cdecl sub_003225C0(void)
     return 0;
 }
 
-// [TODO] 0x00322600 sub_00322600 (10 B)
-// [TODO] 0x00322610 sub_00322610 (10 B)
-// [TODO] 0x00322620 sub_00322620 (10 B)
 // ============================================================================
 // [VERIFIED] sub_00322600 (0x00322600, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -422740,29 +422735,6 @@ void __cdecl sub_003231A0(void)
     DAT_00487478.sub_002A9290();
 }
 
-// [TODO] 0x003231B0 sub_003231B0 (10 B)
-// [TODO] 0x003231C0 sub_003231C0 (10 B)
-// [TODO] 0x003231D0 sub_003231D0 (10 B)
-// [TODO] 0x003231E0 sub_003231E0 (10 B)
-// [TODO] 0x003231F0 sub_003231F0 (10 B)
-// [TODO] 0x00323200 sub_00323200 (10 B)
-// [TODO] 0x00323210 sub_00323210 (10 B)
-// [TODO] 0x00323220 sub_00323220 (10 B)
-// [TODO] 0x00323230 sub_00323230 (10 B)
-// [TODO] 0x00323240 sub_00323240 (10 B)
-// [TODO] 0x00323250 sub_00323250 (10 B)
-// [TODO] 0x00323260 sub_00323260 (10 B)
-// [TODO] 0x00323270 sub_00323270 (10 B)
-// [TODO] 0x00323280 sub_00323280 (10 B)
-// [TODO] 0x00323290 sub_00323290 (10 B)
-// [TODO] 0x003232A0 sub_003232A0 (10 B)
-// [TODO] 0x003232B0 sub_003232B0 (10 B)
-// [TODO] 0x003232C0 sub_003232C0 (10 B)
-// [TODO] 0x003232D0 sub_003232D0 (10 B)
-// [TODO] 0x003232E0 sub_003232E0 (10 B)
-// [TODO] 0x003232F0 sub_003232F0 (10 B)
-// [TODO] 0x00323300 sub_00323300 (10 B)
-// [TODO] 0x00323310 sub_00323310 (10 B)
 // ============================================================================
 // [VERIFIED] sub_003231B0 (0x003231B0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -428002,10 +427974,6 @@ void __cdecl sub_00325040(void)
     DAT_0048BF30.sub_002A9290();
 }
 
-// [TODO] 0x00325050 sub_00325050 (10 B)
-// [TODO] 0x00325060 sub_00325060 (10 B)
-// [TODO] 0x00325070 sub_00325070 (10 B)
-// [TODO] 0x00325080 sub_00325080 (10 B)
 // ============================================================================
 // [VERIFIED] sub_00325050 (0x00325050, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -437358,8 +437326,6 @@ void __cdecl sub_00329260(void)
     }
 }
 
-// [TODO] 0x00329290 sub_00329290 (10 B)
-// [TODO] 0x003292A0 sub_003292A0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_00329290 (0x00329290, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
