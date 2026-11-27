@@ -1955,6 +1955,7 @@ void __cdecl sub_00016290(Target* target, const char* name)
 // [TODO] 0x000162C0 sub_000162C0 (1076 B)
 // [TODO] 0x00016700 sub_00016700 (119 B)
 // [TODO] 0x00016780 sub_00016780 (90 B)
+// [TODO] 0x000167E0 sub_000167E0 (37 B)
 // ============================================================================
 // [VERIFIED] sub_000167E0 (0x000167E0, 37 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -4287,6 +4288,7 @@ template <> void ConcreteClassRep<ActionMap>::vfunc_02()
 }
 
 // [TODO] 0x0001E900 sub_0001E900 (23 B)
+// [TODO] 0x0001E920 sub_0001E920 (21 B)
 // ============================================================================
 // [VERIFIED] sub_0001E920 (0x0001E920, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -6439,6 +6441,7 @@ float TimedFightTrack::vfunc_17()
     return m_Field18;
 }
 
+// [TODO] 0x00020660 sub_00020660 (16 B)
 // ============================================================================
 // [VERIFIED] sub_00020660 (0x00020660, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4 /arch:SSE
@@ -9777,6 +9780,7 @@ void __cdecl sub_00022FC0(int a1, int a2, int a3)
 
 // [TODO] 0x00022FD0 sub_00022FD0 (81 B)
 // [TODO] 0x00023030 sub_00023030 (84 B)
+// [TODO] 0x00023090 sub_00023090 (6 B)
 // ============================================================================
 // [VERIFIED] sub_00023090 (0x00023090, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -17772,6 +17776,7 @@ void Class_0002B6A0::sub_0002B6A0()
     vfunc_14();
 }
 
+// [TODO] 0x0002B6B0 sub_0002B6B0 (8 B)
 // ============================================================================
 // [VERIFIED] sub_0002B6B0 (0x0002B6B0, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -26070,6 +26075,8 @@ void* BMPHandler::vfunc_07()
 
 }
 
+// [TODO] 0x00045110 sub_00045110 (11 B)
+// [TODO] 0x00045120 sub_00045120 (11 B)
 // ============================================================================
 // [VERIFIED] sub_00045110 (0x00045110, 11 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -36257,6 +36264,7 @@ extern "C" const void* __cdecl sub_0005CDD0(void)
 
 // [TODO] 0x0005CE70 sub_0005CE70 (39 B)
 // [TODO] 0x0005CEA0 sub_0005CEA0 (430 B)
+// [TODO] 0x0005D050 sub_0005D050 (20 B)
 // ============================================================================
 // [VERIFIED] sub_0005D050 (0x0005D050, 20 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -39222,6 +39230,7 @@ L_1B:
 // [TODO] 0x00066950 sub_00066950 (21 B)
 // [TODO] 0x00066970 sub_00066970 (21 B)
 // [TODO] 0x00066990 sub_00066990 (21 B)
+// [TODO] 0x000669B0 sub_000669B0 (23 B)
 // ============================================================================
 // [VERIFIED] sub_000669B0 (0x000669B0, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -39922,6 +39931,15 @@ int Class_00068F30::sub_00068F30(int arg)
 // [TODO] 0x00068F50 sub_00068F50 (216 B)
 // [TODO] 0x00069030 sub_00069030 (254 B)
 // [TODO] 0x00069130 sub_00069130 (112 B)
+// [TODO] 0x000691B0 sub_000691B0 (43 B)
+// [TODO] 0x000691E0 sub_000691E0 (43 B)
+// [TODO] 0x00069210 sub_00069210 (34 B)
+// [TODO] 0x00069240 sub_00069240 (34 B)
+// [TODO] 0x00069270 sub_00069270 (33 B)
+// [TODO] 0x000692A0 sub_000692A0 (33 B)
+// [TODO] 0x000692D0 sub_000692D0 (20 B)
+// [TODO] 0x000692F0 sub_000692F0 (31 B)
+// [TODO] 0x00069310 sub_00069310 (31 B)
 // ============================================================================
 // [VERIFIED] sub_000691B0 (0x000691B0, 43 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -77186,6 +77204,7 @@ Class_000CB5F0* Class_000CB5F0::sub_000CB5F0()
     return this;
 }
 
+// [TODO] 0x000CB610 sub_000CB610 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000CB610 (0x000CB610, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -77587,6 +77606,7 @@ L_16:
     return r_eax;
 }
 
+// [TODO] 0x000CB7C0 sub_000CB7C0 (18 B)
 // ============================================================================
 // [VERIFIED] sub_000CB7C0 (0x000CB7C0, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -84989,6 +85009,7 @@ int Class_000D4EE0::sub_000D4EE0()
     return m_Field30;
 }
 
+// [TODO] 0x000D4EF0 sub_000D4EF0 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D4EF0 (0x000D4EF0, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -85034,6 +85055,7 @@ int Class_000D4F00::sub_000D4F00()
     return m_Field31;
 }
 
+// [TODO] 0x000D4F10 sub_000D4F10 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D4F10 (0x000D4F10, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -85079,6 +85101,7 @@ int Class_000D4F20::sub_000D4F20()
     return m_Field32;
 }
 
+// [TODO] 0x000D4F30 sub_000D4F30 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D4F30 (0x000D4F30, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -85127,6 +85150,7 @@ bool Class_000D4F40::sub_000D4F40()
     return m_Flag0;
 }
 
+// [TODO] 0x000D4F50 sub_000D4F50 (22 B)
 // ============================================================================
 // [VERIFIED] sub_000D4F50 (0x000D4F50, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -85423,6 +85447,7 @@ bool Class_000D52C0::sub_000D52C0()
     return m_Field2C;
 }
 
+// [TODO] 0x000D52D0 sub_000D52D0 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D52D0 (0x000D52D0, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -85624,6 +85649,7 @@ float Class_000D5380::sub_000D5380()
     return m_Field4C;
 }
 
+// [TODO] 0x000D5390 sub_000D5390 (16 B)
 // ============================================================================
 // [VERIFIED] sub_000D5390 (0x000D5390, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4 /arch:SSE
@@ -85931,6 +85957,7 @@ float Class_000D58D0::sub_000D58D0()
     return m_Field24;
 }
 
+// [TODO] 0x000D58E0 sub_000D58E0 (16 B)
 // ============================================================================
 // [VERIFIED] sub_000D58E0 (0x000D58E0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4 /arch:SSE
@@ -85993,6 +86020,7 @@ float MultiController::vfunc_13()
 
 }
 
+// [TODO] 0x000D5900 sub_000D5900 (16 B)
 // ============================================================================
 // [VERIFIED] sub_000D5900 (0x000D5900, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4 /arch:SSE
@@ -86866,6 +86894,8 @@ JointCollisionTrack* JointCollisionTrack::vfunc_03(int a1)
     return this;
 }
 
+// [TODO] 0x000D5F70 sub_000D5F70 (12 B)
+// [TODO] 0x000D5F80 sub_000D5F80 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D5F70 (0x000D5F70, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -87180,6 +87210,10 @@ DismemberTrack* DismemberTrack::vfunc_03(int a1)
 
 // [TODO] 0x000D6090 sub_000D6090 (39 B)
 // [TODO] 0x000D60C0 sub_000D60C0 (372 B)
+// [TODO] 0x000D6240 sub_000D6240 (12 B)
+// [TODO] 0x000D6250 sub_000D6250 (16 B)
+// [TODO] 0x000D6280 sub_000D6280 (16 B)
+// [TODO] 0x000D62B0 sub_000D62B0 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D6240 (0x000D6240, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -87297,6 +87331,13 @@ void* Class_000D62C0::sub_000D62C0()
     return &m_Field44;
 }
 
+// [TODO] 0x000D62D0 sub_000D62D0 (16 B)
+// [TODO] 0x000D62F0 sub_000D62F0 (12 B)
+// [TODO] 0x000D6300 sub_000D6300 (16 B)
+// [TODO] 0x000D6330 sub_000D6330 (12 B)
+// [TODO] 0x000D6340 sub_000D6340 (4 B)
+// [TODO] 0x000D6350 sub_000D6350 (16 B)
+// [TODO] 0x000D6380 sub_000D6380 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D62D0 (0x000D62D0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4 /arch:SSE
@@ -88236,6 +88277,7 @@ int LayeredAnimationTrack::vfunc_20(int a1)
     return 0;
 }
 
+// [TODO] 0x000D6F50 sub_000D6F50 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D6F50 (0x000D6F50, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -88313,6 +88355,7 @@ bool Class_000D6F80::sub_000D6F80()
     return m_Flag0;
 }
 
+// [TODO] 0x000D6F90 sub_000D6F90 (22 B)
 // ============================================================================
 // [VERIFIED] sub_000D6F90 (0x000D6F90, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -88520,6 +88563,8 @@ L_16:
     return r_eax;
 }
 
+// [TODO] 0x000D71D0 sub_000D71D0 (18 B)
+// [TODO] 0x000D71F0 sub_000D71F0 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D71D0 (0x000D71D0, 18 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -88714,6 +88759,7 @@ L_16:
 }
 
 // [TODO] 0x000D72E0 LocomotionTrack::vfunc_20 (50 B)
+// [TODO] 0x000D7320 sub_000D7320 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D7320 (0x000D7320, 12 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -88762,6 +88808,7 @@ bool Class_000D7330::sub_000D7330()
     return m_Flag0;
 }
 
+// [TODO] 0x000D7340 sub_000D7340 (22 B)
 // ============================================================================
 // [VERIFIED] sub_000D7340 (0x000D7340, 22 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -89041,6 +89088,7 @@ int ExecScriptFunctionTrack::vfunc_20(int a1)
     return 0;
 }
 
+// [TODO] 0x000D7590 sub_000D7590 (24 B)
 // ============================================================================
 // [VERIFIED] sub_000D7590 (0x000D7590, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -89226,6 +89274,7 @@ template <> float FightTree::FightActionController<fight::EnterExitScriptTrack>:
     return DAT_0037CD94;
 }
 
+// [TODO] 0x000D7650 sub_000D7650 (14 B)
 // ============================================================================
 // [VERIFIED] sub_000D7650 (0x000D7650, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -89455,6 +89504,8 @@ template <> float FightTree::FightActionController<fight::EnterExitScriptTrack>:
     return DAT_0037CE60;
 }
 
+// [TODO] 0x000D7710 sub_000D7710 (14 B)
+// [TODO] 0x000D7720 sub_000D7720 (12 B)
 // ============================================================================
 // [VERIFIED] sub_000D7710 (0x000D7710, 14 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -90035,6 +90086,7 @@ int TargetAnimationTrack::vfunc_20(int a1)
     return 0;
 }
 
+// [TODO] 0x000D7CC0 sub_000D7CC0 (16 B)
 // ============================================================================
 // [VERIFIED] sub_000D7CC0 (0x000D7CC0, 16 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4 /arch:SSE
@@ -94109,6 +94161,7 @@ Class_000DDEE0* Class_000DDEE0::sub_000DDEE0(int a1)
     return this;
 }
 
+// [TODO] 0x000DDF00 sub_000DDF00 (8 B)
 // ============================================================================
 // [VERIFIED] sub_000DDF00 (0x000DDF00, 8 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -102814,6 +102867,7 @@ CopManager* CopManager::vfunc_00(int a1)
 }
 
 // [TODO] 0x000F9920 CopManager::vfunc_02 (213 B)
+// [TODO] 0x000F9A00 sub_000F9A00 (32 B)
 // ============================================================================
 // [VERIFIED] sub_000F9A00 (0x000F9A00, 32 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -147666,6 +147720,7 @@ void __cdecl sub_00157670(void)
 
 // [TODO] 0x00157690 sub_00157690 (182 B)
 // [TODO] 0x00157750 sub_00157750 (264 B)
+// [TODO] 0x00157860 sub_00157860 (23 B)
 // ============================================================================
 // [VERIFIED] sub_00157860 (0x00157860, 23 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -159392,6 +159447,7 @@ int NISStatePropSpawnTrack::vfunc_20(int a1)
     return 0;
 }
 
+// [TODO] 0x00163610 sub_00163610 (27 B)
 // ============================================================================
 // [VERIFIED] sub_00163610 (0x00163610, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -160134,6 +160190,7 @@ int NISRenderableTrack::vfunc_20(int a1)
     return 0;
 }
 
+// [TODO] 0x00163900 sub_00163900 (27 B)
 // ============================================================================
 // [VERIFIED] sub_00163900 (0x00163900, 27 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -161282,6 +161339,7 @@ int NISResourceLoaderTrack::vfunc_20(int a1)
     return 0;
 }
 
+// [TODO] 0x00163D90 sub_00163D90 (24 B)
 // ============================================================================
 // [VERIFIED] sub_00163D90 (0x00163D90, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -162218,6 +162276,11 @@ int NISDriveWorldStreamerTrack::vfunc_20(int a1)
     return 0;
 }
 
+// [TODO] 0x00164100 sub_00164100 (26 B)
+// [TODO] 0x00164120 sub_00164120 (26 B)
+// [TODO] 0x00164140 sub_00164140 (35 B)
+// [TODO] 0x00164170 sub_00164170 (35 B)
+// [TODO] 0x001641A0 sub_001641A0 (26 B)
 // ============================================================================
 // [VERIFIED] sub_00164100 (0x00164100, 26 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -200899,6 +200962,7 @@ CubeVanSpawnObject* CubeVanSpawnObject::vfunc_01(int a1)
 }
 
 // [TODO] 0x001A5F50 CubeVanSpawnObject::vfunc_36 (343 B)
+// [TODO] 0x001A60B0 sub_001A60B0 (24 B)
 // ============================================================================
 // [VERIFIED] sub_001A60B0 (0x001A60B0, 24 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -205384,6 +205448,9 @@ ScatteredEnemyCharacterGeneratorSpawnObject* ScatteredEnemyCharacterGeneratorSpa
 
 // [TODO] 0x001AC190 ScatteredEnemyCharacterGeneratorSpawnObject::vfunc_36 (292 B)
 // [TODO] 0x001AC2C0 sub_001AC2C0 (468 B)
+// [TODO] 0x001AC4A0 sub_001AC4A0 (64 B)
+// [TODO] 0x001AC500 sub_001AC500 (18 B)
+// [TODO] 0x001AC520 sub_001AC520 (109 B)
 // ============================================================================
 // [VERIFIED] sub_001AC4A0 (0x001AC4A0, 64 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -283064,6 +283131,7 @@ void __cdecl sub_0023F3E0(int a1)
     sub_001F1640(*(int*)(r_esi + 72));
 }
 
+// [TODO] 0x0023F480 sub_0023F480 (52 B)
 // ============================================================================
 // [VERIFIED] sub_0023F480 (0x0023F480, 52 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -393842,6 +393910,9 @@ int __cdecl sub_002F0A00(void)
     return 0;
 }
 
+// [TODO] 0x002F0A40 sub_002F0A40 (10 B)
+// [TODO] 0x002F0A50 sub_002F0A50 (10 B)
+// [TODO] 0x002F0A60 sub_002F0A60 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F0A40 (0x002F0A40, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -395112,6 +395183,13 @@ void __cdecl sub_002F1240(void)
     DAT_00453758.sub_00291040();
 }
 
+// [TODO] 0x002F1250 sub_002F1250 (10 B)
+// [TODO] 0x002F1260 sub_002F1260 (10 B)
+// [TODO] 0x002F1270 sub_002F1270 (10 B)
+// [TODO] 0x002F1280 sub_002F1280 (10 B)
+// [TODO] 0x002F1290 sub_002F1290 (10 B)
+// [TODO] 0x002F12A0 sub_002F12A0 (10 B)
+// [TODO] 0x002F12B0 sub_002F12B0 (20 B)
 // ============================================================================
 // [VERIFIED] sub_002F1250 (0x002F1250, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -395281,6 +395359,16 @@ void __cdecl sub_002F12D0(void)
     } while (r_edi);
 }
 
+// [TODO] 0x002F1300 sub_002F1300 (10 B)
+// [TODO] 0x002F1310 sub_002F1310 (10 B)
+// [TODO] 0x002F1320 sub_002F1320 (10 B)
+// [TODO] 0x002F1330 sub_002F1330 (10 B)
+// [TODO] 0x002F1340 sub_002F1340 (10 B)
+// [TODO] 0x002F1350 sub_002F1350 (10 B)
+// [TODO] 0x002F1360 sub_002F1360 (10 B)
+// [TODO] 0x002F1370 sub_002F1370 (10 B)
+// [TODO] 0x002F1380 sub_002F1380 (10 B)
+// [TODO] 0x002F1390 sub_002F1390 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F1300 (0x002F1300, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -395823,6 +395911,30 @@ void __cdecl sub_002F15C0(void)
     DAT_00459B58.sub_001B7A10();
 }
 
+// [TODO] 0x002F15D0 sub_002F15D0 (10 B)
+// [TODO] 0x002F15E0 sub_002F15E0 (10 B)
+// [TODO] 0x002F15F0 sub_002F15F0 (10 B)
+// [TODO] 0x002F1600 sub_002F1600 (10 B)
+// [TODO] 0x002F1610 sub_002F1610 (10 B)
+// [TODO] 0x002F1620 sub_002F1620 (10 B)
+// [TODO] 0x002F1630 sub_002F1630 (10 B)
+// [TODO] 0x002F1640 sub_002F1640 (10 B)
+// [TODO] 0x002F1650 sub_002F1650 (10 B)
+// [TODO] 0x002F1660 sub_002F1660 (10 B)
+// [TODO] 0x002F1670 sub_002F1670 (10 B)
+// [TODO] 0x002F1680 sub_002F1680 (10 B)
+// [TODO] 0x002F1690 sub_002F1690 (10 B)
+// [TODO] 0x002F16A0 sub_002F16A0 (10 B)
+// [TODO] 0x002F16B0 sub_002F16B0 (10 B)
+// [TODO] 0x002F16C0 sub_002F16C0 (10 B)
+// [TODO] 0x002F16D0 sub_002F16D0 (10 B)
+// [TODO] 0x002F16E0 sub_002F16E0 (10 B)
+// [TODO] 0x002F16F0 sub_002F16F0 (10 B)
+// [TODO] 0x002F1700 sub_002F1700 (10 B)
+// [TODO] 0x002F1710 sub_002F1710 (10 B)
+// [TODO] 0x002F1720 sub_002F1720 (10 B)
+// [TODO] 0x002F1730 sub_002F1730 (10 B)
+// [TODO] 0x002F1740 sub_002F1740 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F15D0 (0x002F15D0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -396527,6 +396639,7 @@ void __cdecl sub_002F17C0(void)
     DAT_0045BAD8.sub_00105140();
 }
 
+// [TODO] 0x002F17D0 sub_002F17D0 (21 B)
 // ============================================================================
 // [VERIFIED] sub_002F17D0 (0x002F17D0, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -398707,6 +398820,7 @@ int __cdecl sub_002F2750(void)
     return 0;
 }
 
+// [TODO] 0x002F2790 sub_002F2790 (37 B)
 // ============================================================================
 // [VERIFIED] sub_002F2790 (0x002F2790, 37 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -398792,6 +398906,8 @@ void __cdecl sub_002F27C0(void)
     ((Object*)DAT_0045BFFC)->vfunc_01();
 }
 
+// [TODO] 0x002F2800 sub_002F2800 (21 B)
+// [TODO] 0x002F2820 sub_002F2820 (21 B)
 // ============================================================================
 // [VERIFIED] sub_002F2800 (0x002F2800, 21 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -401122,6 +401238,10 @@ void __cdecl sub_002F35B0(void)
     DAT_0045DDFC.sub_001B7A10();
 }
 
+// [TODO] 0x002F35C0 sub_002F35C0 (10 B)
+// [TODO] 0x002F35D0 sub_002F35D0 (10 B)
+// [TODO] 0x002F35E0 sub_002F35E0 (10 B)
+// [TODO] 0x002F35F0 sub_002F35F0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F35C0 (0x002F35C0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -406968,6 +407088,7 @@ int __cdecl sub_002F5F10(void)
     return 0;
 }
 
+// [TODO] 0x002F5F50 sub_002F5F50 (20 B)
 // ============================================================================
 // [VERIFIED] sub_002F5F50 (0x002F5F50, 20 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -410465,6 +410586,8 @@ void __cdecl sub_002F77F0(void)
     }
 }
 
+// [TODO] 0x002F7820 sub_002F7820 (10 B)
+// [TODO] 0x002F7830 sub_002F7830 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7820 (0x002F7820, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -410684,6 +410807,12 @@ void __cdecl sub_002F78D0(void)
     DAT_0042FC90 = (int)DAT_003B0A74;
 }
 
+// [TODO] 0x002F78E0 sub_002F78E0 (10 B)
+// [TODO] 0x002F78F0 sub_002F78F0 (10 B)
+// [TODO] 0x002F7900 sub_002F7900 (10 B)
+// [TODO] 0x002F7910 sub_002F7910 (10 B)
+// [TODO] 0x002F7920 sub_002F7920 (10 B)
+// [TODO] 0x002F7930 sub_002F7930 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F78E0 (0x002F78E0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -410845,6 +410974,7 @@ void __cdecl sub_002F7940(void)
     DAT_00490B78.sub_001B7A10();
 }
 
+// [TODO] 0x002F7960 sub_002F7960 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7960 (0x002F7960, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -410955,6 +411085,7 @@ void __cdecl sub_002F79A0(void)
     DAT_00490BC4.sub_001B7A10();
 }
 
+// [TODO] 0x002F79B0 sub_002F79B0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F79B0 (0x002F79B0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -411047,6 +411178,8 @@ void __cdecl sub_002F79E0(void)
     DAT_0043444C = (int)DAT_003834C4;
 }
 
+// [TODO] 0x002F79F0 sub_002F79F0 (10 B)
+// [TODO] 0x002F7A00 sub_002F7A00 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F79F0 (0x002F79F0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -411113,6 +411246,8 @@ void __cdecl sub_002F7A10(void)
     DAT_00490C74.sub_00291040();
 }
 
+// [TODO] 0x002F7A20 sub_002F7A20 (10 B)
+// [TODO] 0x002F7A30 sub_002F7A30 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7A20 (0x002F7A20, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -411171,6 +411306,9 @@ void __cdecl sub_002F7A40(void)
 {
 }
 
+// [TODO] 0x002F7A50 sub_002F7A50 (10 B)
+// [TODO] 0x002F7A60 sub_002F7A60 (10 B)
+// [TODO] 0x002F7A70 sub_002F7A70 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7A50 (0x002F7A50, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -411251,6 +411389,7 @@ void __cdecl sub_002F7A80(void)
 {
 }
 
+// [TODO] 0x002F7A90 sub_002F7A90 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7A90 (0x002F7A90, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -411295,6 +411434,7 @@ void __cdecl sub_002F7AA0(void)
     DAT_00490D70.sub_00291040();
 }
 
+// [TODO] 0x002F7AB0 sub_002F7AB0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7AB0 (0x002F7AB0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -411331,6 +411471,18 @@ void __cdecl sub_002F7AC0(void)
 {
 }
 
+// [TODO] 0x002F7AD0 sub_002F7AD0 (10 B)
+// [TODO] 0x002F7AE0 sub_002F7AE0 (10 B)
+// [TODO] 0x002F7AF0 sub_002F7AF0 (10 B)
+// [TODO] 0x002F7B00 sub_002F7B00 (10 B)
+// [TODO] 0x002F7B10 sub_002F7B10 (10 B)
+// [TODO] 0x002F7B20 sub_002F7B20 (10 B)
+// [TODO] 0x002F7B30 sub_002F7B30 (10 B)
+// [TODO] 0x002F7B40 sub_002F7B40 (10 B)
+// [TODO] 0x002F7B50 sub_002F7B50 (10 B)
+// [TODO] 0x002F7B60 sub_002F7B60 (10 B)
+// [TODO] 0x002F7B70 sub_002F7B70 (10 B)
+// [TODO] 0x002F7B80 sub_002F7B80 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7AD0 (0x002F7AD0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -411617,6 +411769,14 @@ void __cdecl sub_002F7B90(void)
     DAT_00490E84.sub_001B7A10();
 }
 
+// [TODO] 0x002F7BA0 sub_002F7BA0 (10 B)
+// [TODO] 0x002F7BB0 sub_002F7BB0 (10 B)
+// [TODO] 0x002F7BC0 sub_002F7BC0 (10 B)
+// [TODO] 0x002F7BD0 sub_002F7BD0 (10 B)
+// [TODO] 0x002F7BE0 sub_002F7BE0 (10 B)
+// [TODO] 0x002F7BF0 sub_002F7BF0 (10 B)
+// [TODO] 0x002F7C00 sub_002F7C00 (10 B)
+// [TODO] 0x002F7C10 sub_002F7C10 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7BA0 (0x002F7BA0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -411815,6 +411975,14 @@ void __cdecl sub_002F7C20(void)
     DAT_00490F94.sub_00291040();
 }
 
+// [TODO] 0x002F7C30 sub_002F7C30 (10 B)
+// [TODO] 0x002F7C40 sub_002F7C40 (10 B)
+// [TODO] 0x002F7C50 sub_002F7C50 (10 B)
+// [TODO] 0x002F7C60 sub_002F7C60 (10 B)
+// [TODO] 0x002F7C70 sub_002F7C70 (10 B)
+// [TODO] 0x002F7C80 sub_002F7C80 (10 B)
+// [TODO] 0x002F7C90 sub_002F7C90 (10 B)
+// [TODO] 0x002F7CA0 sub_002F7CA0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7C30 (0x002F7C30, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -412013,6 +412181,8 @@ void __cdecl sub_002F7CB0(void)
     DAT_00491050.sub_00291040();
 }
 
+// [TODO] 0x002F7CC0 sub_002F7CC0 (10 B)
+// [TODO] 0x002F7CD0 sub_002F7CD0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7CC0 (0x002F7CC0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -412079,6 +412249,14 @@ void __cdecl sub_002F7CE0(void)
     DAT_00491090.sub_00291040();
 }
 
+// [TODO] 0x002F7CF0 sub_002F7CF0 (10 B)
+// [TODO] 0x002F7D00 sub_002F7D00 (10 B)
+// [TODO] 0x002F7D10 sub_002F7D10 (10 B)
+// [TODO] 0x002F7D20 sub_002F7D20 (10 B)
+// [TODO] 0x002F7D30 sub_002F7D30 (10 B)
+// [TODO] 0x002F7D40 sub_002F7D40 (10 B)
+// [TODO] 0x002F7D50 sub_002F7D50 (10 B)
+// [TODO] 0x002F7D60 sub_002F7D60 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7CF0 (0x002F7CF0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -412277,6 +412455,45 @@ void __cdecl sub_002F7D70(void)
     DAT_00491174.sub_00291040();
 }
 
+// [TODO] 0x002F7D80 sub_002F7D80 (10 B)
+// [TODO] 0x002F7D90 sub_002F7D90 (10 B)
+// [TODO] 0x002F7DA0 sub_002F7DA0 (10 B)
+// [TODO] 0x002F7DB0 sub_002F7DB0 (10 B)
+// [TODO] 0x002F7DC0 sub_002F7DC0 (10 B)
+// [TODO] 0x002F7DD0 sub_002F7DD0 (10 B)
+// [TODO] 0x002F7DE0 sub_002F7DE0 (10 B)
+// [TODO] 0x002F7DF0 sub_002F7DF0 (10 B)
+// [TODO] 0x002F7E00 sub_002F7E00 (10 B)
+// [TODO] 0x002F7E10 sub_002F7E10 (10 B)
+// [TODO] 0x002F7E20 sub_002F7E20 (10 B)
+// [TODO] 0x002F7E30 sub_002F7E30 (10 B)
+// [TODO] 0x002F7E40 sub_002F7E40 (10 B)
+// [TODO] 0x002F7E50 sub_002F7E50 (10 B)
+// [TODO] 0x002F7E60 sub_002F7E60 (10 B)
+// [TODO] 0x002F7E70 sub_002F7E70 (10 B)
+// [TODO] 0x002F7E80 sub_002F7E80 (10 B)
+// [TODO] 0x002F7E90 sub_002F7E90 (10 B)
+// [TODO] 0x002F7EA0 sub_002F7EA0 (10 B)
+// [TODO] 0x002F7EB0 sub_002F7EB0 (10 B)
+// [TODO] 0x002F7EC0 sub_002F7EC0 (10 B)
+// [TODO] 0x002F7ED0 sub_002F7ED0 (10 B)
+// [TODO] 0x002F7EE0 sub_002F7EE0 (10 B)
+// [TODO] 0x002F7EF0 sub_002F7EF0 (10 B)
+// [TODO] 0x002F7F00 sub_002F7F00 (10 B)
+// [TODO] 0x002F7F10 sub_002F7F10 (10 B)
+// [TODO] 0x002F7F20 sub_002F7F20 (10 B)
+// [TODO] 0x002F7F30 sub_002F7F30 (10 B)
+// [TODO] 0x002F7F40 sub_002F7F40 (10 B)
+// [TODO] 0x002F7F50 sub_002F7F50 (10 B)
+// [TODO] 0x002F7F60 sub_002F7F60 (10 B)
+// [TODO] 0x002F7F70 sub_002F7F70 (10 B)
+// [TODO] 0x002F7F80 sub_002F7F80 (10 B)
+// [TODO] 0x002F7F90 sub_002F7F90 (10 B)
+// [TODO] 0x002F7FA0 sub_002F7FA0 (10 B)
+// [TODO] 0x002F7FB0 sub_002F7FB0 (10 B)
+// [TODO] 0x002F7FC0 sub_002F7FC0 (10 B)
+// [TODO] 0x002F7FD0 sub_002F7FD0 (10 B)
+// [TODO] 0x002F7FE0 sub_002F7FE0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F7D80 (0x002F7D80, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -413157,6 +413374,9 @@ void __cdecl sub_002F7FF0(void)
     DAT_004914D0.sub_001B7A10();
 }
 
+// [TODO] 0x002F8000 sub_002F8000 (10 B)
+// [TODO] 0x002F8010 sub_002F8010 (10 B)
+// [TODO] 0x002F8020 sub_002F8020 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F8000 (0x002F8000, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -413319,6 +413539,13 @@ void __cdecl sub_002F8060(void)
     DAT_00436E18 = (int)DAT_003BB3D8;
 }
 
+// [TODO] 0x002F8070 sub_002F8070 (10 B)
+// [TODO] 0x002F8080 sub_002F8080 (10 B)
+// [TODO] 0x002F8090 sub_002F8090 (10 B)
+// [TODO] 0x002F80A0 sub_002F80A0 (10 B)
+// [TODO] 0x002F80B0 sub_002F80B0 (10 B)
+// [TODO] 0x002F80C0 sub_002F80C0 (10 B)
+// [TODO] 0x002F80D0 sub_002F80D0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F8070 (0x002F8070, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
@@ -413495,6 +413722,7 @@ void __cdecl sub_002F80E0(void)
     DAT_0049159C.sub_001B7A10();
 }
 
+// [TODO] 0x002F80F0 sub_002F80F0 (10 B)
 // ============================================================================
 // [VERIFIED] sub_002F80F0 (0x002F80F0, 10 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4

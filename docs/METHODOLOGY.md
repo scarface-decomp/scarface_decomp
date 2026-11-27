@@ -251,6 +251,18 @@ These were each confirmed by compiling variants and comparing against the game.
   base's constructor as an inline helper on a small struct of its own and call it with a cast
   (`ConstructSafeRefCount((SafeRefCountPart*)&m_Table0C)`). (0x2C1B00)
 
+* **A function defined earlier in the same file is known to the compiler.** If it writes no memory, a
+  call to it does not make the compiler reload what it read through pointers before the call; declared
+  only, the same call does, and one reload can change which register every later value gets. When a
+  function is close but its registers are swapped, define the small functions it calls in the same file.
+  (0x2C09C0 with 0x2BF730: 447 to 1,070 of 1,279 bytes)
+* **Stores are not always in source order.** A store of an argument that was just loaded into a scratch
+  register can come out ahead of earlier stores of constants. Write a constructor's members in their
+  declared order before trying anything else. (0x2AB470)
+
+The idioms of this game's own source (how its authors wrote flag getters, constructors, request
+posting and failure exits) are kept as a numbered list in [cleanroom/IDIOMS.md](cleanroom/IDIOMS.md).
+
 ## 6. Re-verification
 
 `portal/scripts/reverify_all.py` compiles every claim in `reconstructed_src/` (hand-written files and the
