@@ -73,4 +73,18 @@ I17. REQUEST POSTING (I11's D and J) is one source: `T* m = (T*)Alloc(sizeof(T))
     : 0; drive->Queue(r, m_Priority, atHead);`. D comes out in functions without a frame, J in functions
     with one. No second form was needed. [28 functions of SPEC-019.]
 I18. `flags & 0x80` on a 32-bit return value compiles to `test al, al; jns`. [0x2AB340 and pattern S.]
+I23. An `inline` wrapper around an intrinsic string copy is NOT expanded in a large function; only
+     __forceinline expands it, and then the bytes equal the bare intrinsic. [0x2C09C0: 644 vs 1277.]
+I24. Each request base's Finish(status, error) is an inline member expanded at every exit; take the
+     status into a local before `return Finish(status, owner->LastError())` (arguments are evaluated
+     right to left). [21 work functions, 0x2A9D70..0x2AA430.]
+I25. A deleting destructor with an inline class `operator delete` through a global allocator: own table,
+     body, base table store, then `if (flags & 1) { lock; allocator->free(this); unlock; } return this;`;
+     the base table store is scheduled between the flag test and the branch. [0x2AAAB0, 0x2AAD90,
+     0x2AA8D0.]
+I26. Public C library code is matched by compiling the published file unchanged with `/TC` and the
+     library flags; a proposal is the include plus a `// verify:` line naming the function. [zlib 1.2.1,
+     libpng 1.2.8: 106 functions.]
+I27. A function that ends in a call that never returns has no `ret`; the measured size then includes one
+     int3 of padding. [png_error 0x2C6800, png_chunk_error 0x2C68F0.]
 ```

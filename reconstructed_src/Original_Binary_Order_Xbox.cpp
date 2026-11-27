@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11,877 of 22,362 functions matched (53.11%). NOT COMPLETE YET.
-// The 10,485 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 11,877 of 22,367 functions matched (53.10%). NOT COMPLETE YET.
+// The 10,490 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -276755,6 +276755,7 @@ int __stdcall sub_0023469A(int a1)
     return t1;
 }
 
+// [TODO] 0x00235F82 sub_00235F82 (14 B)
 // ============================================================================
 // [VERIFIED] sub_002363A4 (0x002363A4, 10 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -376986,6 +376987,10 @@ void __cdecl sub_003088F6(void)
     sub_002FF47E(10);
 }
 
+// [TODO] 0x00309449 sub_00309449 (140 B)
+// [TODO] 0x003094D5 sub_003094D5 (19 B)
+// [TODO] 0x003094E8 sub_003094E8 (63 B)
+// [TODO] 0x00309527 sub_00309527 (54 B)
 // ============================================================================
 // [VERIFIED] sub_0030A65F (0x0030A65F, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

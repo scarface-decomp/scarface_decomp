@@ -35727,6 +35727,11 @@
       "by": "Xbox SDK 5849 library code, named in The Godfather prototype's linker map",
       "why": "The same 45 bytes as _XPhysicalAllocEx@20 (xapilib) in that build, addresses apart, and found only once in this program."
     },
+    "xb:0x00239C84": {
+      "name": "XPhysicalFree",
+      "by": "Xbox SDK 5849 library code: what it does, and its number in the library lists (.XTLID) of Crash Tag Team Racing and Hulk: Ultimate Destruction; identified by the clean-room examiner from this game's bytes and the public Xbox API (round of 2026-11-27)",
+      "why": "One instruction: a jump through the import cell at 0x39D2BC, which stands for kernel export 171 (MmFreeContiguousMemory). XMemFreeDefault (0x2395E3) calls it for physical memory. Number 103 of library 1 in the sibling games' lists, attached by shape and export number."
+    },
     "xb:0x0023E1F0": {
       "name": "fight::ConditionParameterlessFactoryTemplate<fight::AndCondition>::~ConditionParameterlessFactoryTemplate",
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
@@ -36212,6 +36217,271 @@
       "by": "the matched code's own shape (portal/scripts/names_from_shapes.py)",
       "why": "Deleting destructor: it ends `if (a1 & 1) sub_00027600(this); return this;` (sub_00027600 is called that way by 498 matched functions), and it is the only function of pure3d::pddiStack<pure3d::pddiStencilState> that does."
     },
+    "xb:0x002B8580": {
+      "name": "png_sig_cmp",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (png.c), compiled as C with the library's flags, gives this function's bytes for png_sig_cmp."
+    },
+    "xb:0x002B8600": {
+      "name": "png_zalloc",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (png.c), compiled as C with the library's flags, gives this function's bytes for png_zalloc."
+    },
+    "xb:0x002B8650": {
+      "name": "png_zfree",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's call this address where the published source calls png_zfree."
+    },
+    "xb:0x002B8660": {
+      "name": "png_reset_crc",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's call this address where the published source calls png_reset_crc."
+    },
+    "xb:0x002B8680": {
+      "name": "png_calculate_crc",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (png.c), compiled as C with the library's flags, gives this function's bytes for png_calculate_crc."
+    },
+    "xb:0x002B86D0": {
+      "name": "png_free_data",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (png.c), compiled as C with the library's flags, gives this function's bytes for png_free_data."
+    },
+    "xb:0x002B8A90": {
+      "name": "png_info_destroy",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (png.c), compiled as C with the library's flags, gives this function's bytes for png_info_destroy."
+    },
+    "xb:0x002B8B00": {
+      "name": "png_handle_as_unknown",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (png.c), compiled as C with the library's flags, gives this function's bytes for png_handle_as_unknown."
+    },
+    "xb:0x002B8B50": {
+      "name": "png_init_mmx_flags",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's call this address where the published source calls png_init_mmx_flags."
+    },
+    "xb:0x002B8B70": {
+      "name": "png_create_info_struct",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (png.c), compiled as C with the library's flags, gives this function's bytes for png_create_info_struct."
+    },
+    "xb:0x002B8BB0": {
+      "name": "png_destroy_info_struct",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (png.c), compiled as C with the library's flags, gives this function's bytes for png_destroy_info_struct."
+    },
+    "xb:0x002B8BF0": {
+      "name": "png_create_read_struct_2",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngread.c), compiled as C with the library's flags, gives this function's bytes for png_create_read_struct_2."
+    },
+    "xb:0x002B8E10": {
+      "name": "png_read_info",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngread.c), compiled as C with the library's flags, gives this function's bytes for png_read_info."
+    },
+    "xb:0x002B9180": {
+      "name": "png_read_update_info",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngread.c), compiled as C with the library's flags, gives this function's bytes for png_read_update_info."
+    },
+    "xb:0x002B91D0": {
+      "name": "png_read_row",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngread.c), compiled as C with the library's flags, gives this function's bytes for png_read_row."
+    },
+    "xb:0x002B9670": {
+      "name": "png_read_destroy",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngread.c), compiled as C with the library's flags, gives this function's bytes for png_read_destroy."
+    },
+    "xb:0x002B9900": {
+      "name": "png_destroy_read_struct",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngread.c), compiled as C with the library's flags, gives this function's bytes for png_destroy_read_struct."
+    },
+    "xb:0x002B9B90": {
+      "name": "png_read_transform_info",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_read_transform_info."
+    },
+    "xb:0x002B9D20": {
+      "name": "png_do_unpack",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_unpack."
+    },
+    "xb:0x002B9E50": {
+      "name": "png_do_unshift",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_unshift."
+    },
+    "xb:0x002BA020": {
+      "name": "png_do_chop",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_chop."
+    },
+    "xb:0x002BA070": {
+      "name": "png_do_read_swap_alpha",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_read_swap_alpha."
+    },
+    "xb:0x002BA180": {
+      "name": "png_do_read_invert_alpha",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_read_invert_alpha."
+    },
+    "xb:0x002BA260": {
+      "name": "png_do_read_filler",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_read_filler."
+    },
+    "xb:0x002BA4F0": {
+      "name": "png_do_gray_to_rgb",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_gray_to_rgb."
+    },
+    "xb:0x002BA650": {
+      "name": "png_do_rgb_to_gray",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_rgb_to_gray."
+    },
+    "xb:0x002BACF0": {
+      "name": "png_do_background",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_background."
+    },
+    "xb:0x002BBCA0": {
+      "name": "png_do_gamma",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_gamma."
+    },
+    "xb:0x002BC030": {
+      "name": "png_do_expand_palette",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_expand_palette."
+    },
+    "xb:0x002BC250": {
+      "name": "png_do_expand",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_expand."
+    },
+    "xb:0x002BC5E0": {
+      "name": "png_do_dither",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_dither."
+    },
+    "xb:0x002BC740": {
+      "name": "png_build_gamma_table",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_build_gamma_table."
+    },
+    "xb:0x002BCD90": {
+      "name": "png_do_read_intrapixel",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_read_intrapixel."
+    },
+    "xb:0x002BCE60": {
+      "name": "png_init_read_transformations",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_init_read_transformations."
+    },
+    "xb:0x002BD8A0": {
+      "name": "png_do_read_transformations",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this function's bytes for png_do_read_transformations."
+    },
+    "xb:0x002BDD10": {
+      "name": "png_set_filler",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngtrans.c), compiled as C with the library's flags, gives this function's bytes for png_set_filler."
+    },
+    "xb:0x002BDD70": {
+      "name": "png_do_invert",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngtrans.c), compiled as C with the library's flags, gives this function's bytes for png_do_invert."
+    },
+    "xb:0x002BDDF0": {
+      "name": "png_do_swap",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngtrans.c), compiled as C with the library's flags, gives this function's bytes for png_do_swap."
+    },
+    "xb:0x002BDE30": {
+      "name": "png_do_packswap",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngtrans.c), compiled as C with the library's flags, gives this function's bytes for png_do_packswap."
+    },
+    "xb:0x002BDE80": {
+      "name": "png_do_strip_filler",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngtrans.c), compiled as C with the library's flags, gives this function's bytes for png_do_strip_filler."
+    },
+    "xb:0x002BE0B0": {
+      "name": "png_do_bgr",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngtrans.c), compiled as C with the library's flags, gives this function's bytes for png_do_bgr."
+    },
+    "xb:0x002BE180": {
+      "name": "png_read_data",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrio.c), compiled as C with the library's flags, gives this function's bytes for png_read_data."
+    },
+    "xb:0x002BE1E0": {
+      "name": "png_set_read_fn",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrio.c), compiled as C with the library's flags, gives this function's bytes for png_set_read_fn."
+    },
+    "xb:0x002C6510": {
+      "name": "png_format_buffer",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngerror.c), compiled as C with the library's flags, gives this function's bytes for png_format_buffer."
+    },
+    "xb:0x002C65A0": {
+      "name": "png_default_error",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's call this address where the published source calls png_default_error."
+    },
+    "xb:0x002C66C0": {
+      "name": "png_default_warning",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngerror.c), compiled as C with the library's flags, gives this function's bytes for png_default_warning."
+    },
+    "xb:0x002C67E0": {
+      "name": "png_set_error_fn",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's call this address where the published source calls png_set_error_fn."
+    },
+    "xb:0x002C6800": {
+      "name": "png_error",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngerror.c), compiled as C with the library's flags, gives this function's bytes for png_error."
+    },
+    "xb:0x002C68A0": {
+      "name": "png_warning",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngerror.c), compiled as C with the library's flags, gives this function's bytes for png_warning."
+    },
+    "xb:0x002C68F0": {
+      "name": "png_chunk_error",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngerror.c), compiled as C with the library's flags, gives this function's bytes for png_chunk_error."
+    },
+    "xb:0x002C6920": {
+      "name": "png_chunk_warning",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngerror.c), compiled as C with the library's flags, gives this function's bytes for png_chunk_warning."
+    },
+    "xb:0x002C6950": {
+      "name": "png_create_struct_2",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngmem.c), compiled as C with the library's flags, gives this function's bytes for png_create_struct_2."
+    },
+    "xb:0x002C69D0": {
+      "name": "png_destroy_struct_2",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngmem.c), compiled as C with the library's flags, gives this function's bytes for png_destroy_struct_2."
+    },
     "xb:0x002C6A20": {
       "name": "png_memcpy_check",
       "by": "symcov: [XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
@@ -36221,6 +36491,26 @@
       "name": "png_memset_check",
       "by": "symcov: [XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
       "why": "The same 49 bytes as png_memset_check in that build (the symcov report compares code with the addresses masked), and the report names no other function for this code; the code around it is libpng (the program holds its version string)."
+    },
+    "xb:0x002C6A90": {
+      "name": "png_set_mem_fn",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's call this address where the published source calls png_set_mem_fn."
+    },
+    "xb:0x002C6AC0": {
+      "name": "png_malloc",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngmem.c), compiled as C with the library's flags, gives this function's bytes for png_malloc."
+    },
+    "xb:0x002C6B20": {
+      "name": "png_free",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngmem.c), compiled as C with the library's flags, gives this function's bytes for png_free."
+    },
+    "xb:0x002C6B50": {
+      "name": "png_malloc_warn",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's call this address where the published source calls png_malloc_warn."
     },
     "xb:0x002C6FC0": {
       "name": "updatewindow",
@@ -36232,10 +36522,265 @@
       "by": "symcov: [XBOX] Starcraft Ghosts [2004-05-08] (MAP+PDB)/Ghost.xbe",
       "why": "The same 35 bytes as png_get_uint_32 in that build (the symcov report compares code with the addresses masked), and the report names no other function for this code; the code around it is libpng (the program holds its version string)."
     },
+    "xb:0x002C85C0": {
+      "name": "png_crc_read",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_crc_read."
+    },
+    "xb:0x002C85F0": {
+      "name": "png_crc_error",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_crc_error."
+    },
+    "xb:0x002C8670": {
+      "name": "png_decompress_chunk",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_decompress_chunk."
+    },
+    "xb:0x002C8A40": {
+      "name": "png_check_chunk_name",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_check_chunk_name."
+    },
+    "xb:0x002C8AA0": {
+      "name": "png_combine_row",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_combine_row."
+    },
+    "xb:0x002C8DC0": {
+      "name": "png_do_read_interlace",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_do_read_interlace."
+    },
+    "xb:0x002C9220": {
+      "name": "png_read_filter_row",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_read_filter_row."
+    },
+    "xb:0x002C9400": {
+      "name": "png_read_start_row",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_read_start_row."
+    },
+    "xb:0x002C96C0": {
+      "name": "png_get_uint_31",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's call this address where the published source calls png_get_uint_31."
+    },
+    "xb:0x002C9710": {
+      "name": "png_crc_finish",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_crc_finish."
+    },
+    "xb:0x002C97E0": {
+      "name": "png_handle_IHDR",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_IHDR."
+    },
+    "xb:0x002C99B0": {
+      "name": "png_handle_PLTE",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_PLTE."
+    },
+    "xb:0x002C9B50": {
+      "name": "png_handle_IEND",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_IEND."
+    },
+    "xb:0x002C9BA0": {
+      "name": "png_handle_gAMA",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_gAMA."
+    },
+    "xb:0x002C9D20": {
+      "name": "png_handle_sBIT",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_sBIT."
+    },
+    "xb:0x002C9EA0": {
+      "name": "png_handle_cHRM",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_cHRM."
+    },
+    "xb:0x002CA3C0": {
+      "name": "png_handle_sRGB",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_sRGB."
+    },
+    "xb:0x002CA5B0": {
+      "name": "png_handle_iCCP",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_iCCP."
+    },
+    "xb:0x002CA770": {
+      "name": "png_handle_sPLT",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's call this address where the published source calls png_handle_sPLT."
+    },
+    "xb:0x002CA9C0": {
+      "name": "png_handle_tRNS",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_tRNS."
+    },
+    "xb:0x002CAC20": {
+      "name": "png_handle_bKGD",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_bKGD."
+    },
+    "xb:0x002CAE40": {
+      "name": "png_handle_hIST",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_hIST."
+    },
+    "xb:0x002CAFB0": {
+      "name": "png_handle_pHYs",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_pHYs."
+    },
+    "xb:0x002CB0D0": {
+      "name": "png_handle_oFFs",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_oFFs."
+    },
+    "xb:0x002CB1F0": {
+      "name": "png_handle_pCAL",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_pCAL."
+    },
+    "xb:0x002CB4B0": {
+      "name": "png_handle_sCAL",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_sCAL."
+    },
+    "xb:0x002CB670": {
+      "name": "png_handle_tIME",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_tIME."
+    },
+    "xb:0x002CB770": {
+      "name": "png_handle_tEXt",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_tEXt."
+    },
+    "xb:0x002CB8A0": {
+      "name": "png_handle_zTXt",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_zTXt."
+    },
+    "xb:0x002CBA00": {
+      "name": "png_handle_unknown",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_handle_unknown."
+    },
+    "xb:0x002CBB60": {
+      "name": "png_read_finish_row",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrutil.c), compiled as C with the library's flags, gives this function's bytes for png_read_finish_row."
+    },
     "xb:0x002CCCB0": {
       "name": "adler32",
       "by": "symcov: [XBOX] Tiger Woods PGA Tour 06 (Beta) [2005-07-12] (PDB)/default.xbe",
       "why": "The same 297 bytes as adler32 in that build (the symcov report compares code with the addresses masked), and the report names no other function for this code; the code around it is zlib 1.2.1 (the program holds its inflate copyright string)."
+    },
+    "xb:0x002CCDE0": {
+      "name": "png_set_bKGD",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_bKGD."
+    },
+    "xb:0x002CCE10": {
+      "name": "png_set_cHRM",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_cHRM."
+    },
+    "xb:0x002CD0D0": {
+      "name": "png_set_cHRM_fixed",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_cHRM_fixed."
+    },
+    "xb:0x002CD300": {
+      "name": "png_set_gAMA",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_gAMA."
+    },
+    "xb:0x002CD390": {
+      "name": "png_set_gAMA_fixed",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_gAMA_fixed."
+    },
+    "xb:0x002CD410": {
+      "name": "png_set_hIST",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_hIST."
+    },
+    "xb:0x002CD4D0": {
+      "name": "png_set_IHDR",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_IHDR."
+    },
+    "xb:0x002CD700": {
+      "name": "png_set_oFFs",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_oFFs."
+    },
+    "xb:0x002CD740": {
+      "name": "png_set_pCAL",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_pCAL."
+    },
+    "xb:0x002CD910": {
+      "name": "png_set_sCAL",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_sCAL."
+    },
+    "xb:0x002CD950": {
+      "name": "png_set_pHYs",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_pHYs."
+    },
+    "xb:0x002CD990": {
+      "name": "png_set_PLTE",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_PLTE."
+    },
+    "xb:0x002CDA30": {
+      "name": "png_set_sBIT",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_sBIT."
+    },
+    "xb:0x002CDA60": {
+      "name": "png_set_sRGB_gAMA_and_cHRM",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_sRGB_gAMA_and_cHRM."
+    },
+    "xb:0x002CDB40": {
+      "name": "png_set_iCCP",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_iCCP."
+    },
+    "xb:0x002CDC70": {
+      "name": "png_set_text_2",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_text_2."
+    },
+    "xb:0x002CDEB0": {
+      "name": "png_set_tIME",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's call this address where the published source calls png_set_tIME."
+    },
+    "xb:0x002CDEF0": {
+      "name": "png_set_tRNS",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_tRNS."
+    },
+    "xb:0x002CDFA0": {
+      "name": "png_set_sPLT",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_sPLT."
+    },
+    "xb:0x002CE120": {
+      "name": "png_set_unknown_chunks",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngset.c), compiled as C with the library's flags, gives this function's bytes for png_set_unknown_chunks."
     },
     "xb:0x002CF0D0": {
       "name": "om::Entity::AddRef",
@@ -45185,6 +45730,151 @@
     }
   },
   "data": {
+    "xb:0x002BE1A0": {
+      "name": "png_default_read_data",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "Its address is what png_set_read_fn (0x2BDD70) stores as the read function when it is given none, where the published libpng 1.2.8 source uses png_default_read_data. The address is taken, never called, so no function start is listed for it yet."
+    },
+    "xb:0x003DAF38": {
+      "name": "png_libpng_ver",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_libpng_ver."
+    },
+    "xb:0x003DAF54": {
+      "name": "png_IHDR",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_IHDR."
+    },
+    "xb:0x003DAF5C": {
+      "name": "png_IDAT",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_IDAT."
+    },
+    "xb:0x003DAF64": {
+      "name": "png_IEND",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_IEND."
+    },
+    "xb:0x003DAF6C": {
+      "name": "png_PLTE",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_PLTE."
+    },
+    "xb:0x003DAF74": {
+      "name": "png_bKGD",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_bKGD."
+    },
+    "xb:0x003DAF7C": {
+      "name": "png_cHRM",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_cHRM."
+    },
+    "xb:0x003DAF84": {
+      "name": "png_gAMA",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_gAMA."
+    },
+    "xb:0x003DAF8C": {
+      "name": "png_hIST",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_hIST."
+    },
+    "xb:0x003DAF94": {
+      "name": "png_iCCP",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_iCCP."
+    },
+    "xb:0x003DAFA4": {
+      "name": "png_oFFs",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_oFFs."
+    },
+    "xb:0x003DAFAC": {
+      "name": "png_pCAL",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_pCAL."
+    },
+    "xb:0x003DAFB4": {
+      "name": "png_sCAL",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_sCAL."
+    },
+    "xb:0x003DAFBC": {
+      "name": "png_pHYs",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_pHYs."
+    },
+    "xb:0x003DAFC4": {
+      "name": "png_sBIT",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_sBIT."
+    },
+    "xb:0x003DAFCC": {
+      "name": "png_sPLT",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_sPLT."
+    },
+    "xb:0x003DAFD4": {
+      "name": "png_sRGB",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_sRGB."
+    },
+    "xb:0x003DAFDC": {
+      "name": "png_tEXt",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_tEXt."
+    },
+    "xb:0x003DAFE4": {
+      "name": "png_tIME",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_tIME."
+    },
+    "xb:0x003DAFEC": {
+      "name": "png_tRNS",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_tRNS."
+    },
+    "xb:0x003DAFF4": {
+      "name": "png_zTXt",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_zTXt."
+    },
+    "xb:0x003DAFFC": {
+      "name": "png_pass_start",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_pass_start."
+    },
+    "xb:0x003DB018": {
+      "name": "png_pass_inc",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_pass_inc."
+    },
+    "xb:0x003DB034": {
+      "name": "png_pass_ystart",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_pass_ystart."
+    },
+    "xb:0x003DB050": {
+      "name": "png_pass_yinc",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_pass_yinc."
+    },
+    "xb:0x003DB06C": {
+      "name": "png_pass_mask",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_pass_mask."
+    },
+    "xb:0x003DB088": {
+      "name": "png_pass_dsp_mask",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_pass_dsp_mask."
+    },
+    "xb:0x003DBBF8": {
+      "name": "png_digit",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_digit."
+    },
     "xb:0x0041F0F4": {
       "name": "g_classRepTableNeedsClearing",
       "type": "bool",
@@ -45196,6 +45886,31 @@
       "type": "char[8][16]",
       "by": "Read from the code (Claude (AI), for RRutherrfordd), with the examiner's notes",
       "why": "KeyToStxString (0x000766D0) writes each key as stx + 8 letters into the next of these eight buffers, pre-filled with \"stx34567890\"."
+    },
+    "xb:0x00460B84": {
+      "name": "png_gamma_shift",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses png_gamma_shift."
+    },
+    "xb:0x00460BA8": {
+      "name": "onebppswaptable",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses onebppswaptable."
+    },
+    "xb:0x00460CA8": {
+      "name": "twobppswaptable",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses twobppswaptable."
+    },
+    "xb:0x00460DA8": {
+      "name": "fourbppswaptable",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses fourbppswaptable."
+    },
+    "xb:0x00465480": {
+      "name": "_iob",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "libpng 1.2.8 functions whose compiled bytes equal the game's read this address where the published source uses _iob."
     },
     "xb:0x00473FC4": {
       "name": "g_simFieldDictionaryEntryPool",

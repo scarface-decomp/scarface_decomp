@@ -23,6 +23,12 @@ authors are credited in the commit history. Thank you.
   its decompression side. The published source files are in `reconstructed_src/include/zlib-1.2.1/`,
   unchanged, with the library's README and licence text; the game's zlib functions are matched by
   compiling them as C (SPEC-014 §5.3).
+* [libpng](http://www.libpng.org/pub/png/libpng.html) 1.2.8 by Glenn Randers-Pehrson and the PNG
+  Development Group (earlier versions by Andreas Dilger and by Guy Eric Schalnat, Group 42), under the
+  libpng licence: the game reads its PNG pictures with it. Ten published source files and the two headers
+  are in `reconstructed_src/include/libpng-1.2.8/`, unchanged, with the library's README and LICENSE; 98
+  of the game's functions are matched by compiling them as C, and the functions' and tables' names in
+  `reports/names.json` are the library's own (SPEC-014 §5).
 * The Unicode Consortium's public reference conversion between UTF-8, UTF-16 and UTF-32 (`ConvertUTF.c`):
   the game's text conversion (0x002A9310 to 0x002A96E2 on Xbox) follows it, in a version without the
   later check on 0xED, and with a fallback character added. Knowing the algorithm made the game's five

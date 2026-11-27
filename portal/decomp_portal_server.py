@@ -809,7 +809,7 @@ def ps2_starter(t: dict) -> str:
     return "\n".join(lines)
 
 
-_NAMES_CACHE: list = [None, {}]
+_NAMES_CACHE: list = [None, {}, {}]
 
 
 def community_names() -> dict:
@@ -820,8 +820,9 @@ def community_names() -> dict:
     except OSError:
         return {}
     if _NAMES_CACHE[0] != mtime:
-        names = NAMES.load(path).get("names", {})
-        _NAMES_CACHE[:] = [mtime, names if isinstance(names, dict) else {}]
+        whole = NAMES.load(path)
+        names, data = whole.get("names", {}), whole.get("data", {})
+        _NAMES_CACHE[:] = [mtime, names if isinstance(names, dict) else {}, data if isinstance(data, dict) else {}]
         _KNOWN_NAMES.clear()
     return _NAMES_CACHE[1]
 
@@ -862,7 +863,7 @@ def known_names(version: str) -> Dict[str, int]:
     """The names code for this version may call a function by, each with its address (reports/names.json)."""
     names = community_names()
     if version not in _KNOWN_NAMES:
-        _KNOWN_NAMES[version] = NAMES.addresses({"names": names}, version)
+        _KNOWN_NAMES[version] = NAMES.addresses({"names": names, "data": _NAMES_CACHE[2]}, version)
     return _KNOWN_NAMES[version]
 
 
