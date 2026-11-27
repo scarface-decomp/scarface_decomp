@@ -36302,6 +36302,61 @@
       "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
       "why": "The published libpng 1.2.8 source (pngread.c), compiled as C with the library's flags, gives this function's bytes for png_destroy_read_struct."
     },
+    "xb:0x002B99C0": {
+      "name": "png_get_valid",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngget.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_get_valid."
+    },
+    "xb:0x002B99E0": {
+      "name": "png_get_rowbytes",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngget.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_get_rowbytes."
+    },
+    "xb:0x002B9A00": {
+      "name": "png_get_image_width",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngget.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_get_image_width."
+    },
+    "xb:0x002B9A20": {
+      "name": "png_get_image_height",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngget.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_get_image_height."
+    },
+    "xb:0x002B9A40": {
+      "name": "png_get_bit_depth",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngget.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_get_bit_depth."
+    },
+    "xb:0x002B9A60": {
+      "name": "png_get_color_type",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngget.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_get_color_type."
+    },
+    "xb:0x002B9A80": {
+      "name": "png_get_interlace_type",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngget.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_get_interlace_type."
+    },
+    "xb:0x002B9AA0": {
+      "name": "png_get_PLTE",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngget.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_get_PLTE."
+    },
+    "xb:0x002B9AE0": {
+      "name": "png_get_tRNS",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngget.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_get_tRNS."
+    },
+    "xb:0x002B9B60": {
+      "name": "png_set_strip_16",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_set_strip_16."
+    },
+    "xb:0x002B9B70": {
+      "name": "png_set_strip_alpha",
+      "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
+      "why": "The published libpng 1.2.8 source (pngrtran.c), compiled as C with the library's flags, gives this already-matched function's bytes for png_set_strip_alpha."
+    },
     "xb:0x002B9B90": {
       "name": "png_read_transform_info",
       "by": "the public libpng 1.2.8 source (SPEC-014 section 5)",
