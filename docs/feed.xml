@@ -5,8 +5,50 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-26T06:23:24Z</updated>
+  <updated>2026-11-26T06:25:44Z</updated>
   <author><name>Scarface decomp contributors</name></author>
+  <entry>
+    <title>sub_006E8120 (PC, 43 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E8120"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E8120</id>
+    <updated>2026-11-26T06:25:44Z</updated>
+    <summary>0x006E8120 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>core::XboxSaveDrive::vfunc_21 (Xbox prototype, 220 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00284F20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00284F20</id>
+    <updated>2026-11-26T06:25:24Z</updated>
+    <summary>0x00284F20 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>core::XboxSaveDrive::vfunc_20 (Xbox prototype, 378 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00284DA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00284DA0</id>
+    <updated>2026-11-26T06:25:04Z</updated>
+    <summary>0x00284DA0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>core::Drive::vfunc_04 (Xbox prototype, 259 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026EFD0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026EFD0</id>
+    <updated>2026-11-26T06:24:44Z</updated>
+    <summary>0x0026EFD0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>core::Drive::vfunc_03 (Xbox prototype, 88 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026EF70"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026EF70</id>
+    <updated>2026-11-26T06:24:24Z</updated>
+    <summary>0x0026EF70 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_0026EEF0 (Xbox prototype, 127 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026EEF0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026EEF0</id>
+    <updated>2026-11-26T06:24:04Z</updated>
+    <summary>0x0026EEF0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
   <entry>
     <title>sub_002C1B00 (Xbox, 218 bytes) by RRutherrfordd (Founder)</title>
     <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C1B00"/>
@@ -314,47 +356,5 @@
     <id>tag:scarface-decomp.pages.dev,2026:proto:0x002F17D0</id>
     <updated>2026-11-26T06:10:44Z</updated>
     <summary>0x002F17D0 in the Xbox prototype version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>core::Drive::vfunc_04 (Xbox, 259 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AC8C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AC8C0</id>
-    <updated>2026-11-26T06:10:04Z</updated>
-    <summary>Runs the finished requests that belong to the calling thread, then, if the drive is in error, asks the error handler what to do. 0x002AC8C0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002A0A10 (Xbox prototype, 4 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002A0A10"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002A0A10</id>
-    <updated>2026-11-26T06:10:04Z</updated>
-    <summary>0x002A0A10 in the Xbox prototype version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_0028ED30 (Xbox prototype, 19 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0028ED30"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0028ED30</id>
-    <updated>2026-11-26T06:09:44Z</updated>
-    <summary>0x0028ED30 in the Xbox prototype version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>core::Drive::vfunc_03 (Xbox, 88 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AC860"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AC860</id>
-    <updated>2026-11-26T06:09:24Z</updated>
-    <summary>core::Drive's destructor: destroys its list of libraries and its base parts, then frees the object if asked to. 0x002AC860 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002633A0 (Xbox prototype, 13 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002633A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002633A0</id>
-    <updated>2026-11-26T06:09:03Z</updated>
-    <summary>0x002633A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002AC7E0 (Xbox, 127 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AC7E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AC7E0</id>
-    <updated>2026-11-26T06:08:24Z</updated>
-    <summary>core::Drive's constructor: an empty list of libraries, no error handler, no pending requests, and 3 as its last error. 0x002AC7E0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

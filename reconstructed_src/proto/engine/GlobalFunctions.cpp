@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (6981 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (6982 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6,981 of 15,074 functions matched (46.31%). NOT COMPLETE YET.
-// The 8,093 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6,982 of 15,074 functions matched (46.32%). NOT COMPLETE YET.
+// The 8,092 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -142878,6 +142878,127 @@ public:
 void Class_0026EE50::sub_0026EE50()
 {
     ((Object*)(int)this + 20)->sub_0026F3D0();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0026EEF0 (0x0026EEF0, 127 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002AC7E0 (0x002AC7E0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026EEF0
+// what: core::Drive's constructor: an empty list of libraries, no error handler, no pending requests, and 3 as its last error.
+// tool: Claude (from SPEC-017 section 4.11)
+
+extern "C" char DAT_0037D85C[];     // core::IRefCount's table
+extern "C" char DAT_0039F08C[];     // core::BaseObject's table
+extern "C" char DAT_0037E6EC[];     // core::Object's table
+extern "C" char DAT_003B4028[];     // core::SafeRefCount's table
+extern "C" char DAT_003B4038[];     // core::Drive's table for the part at +0xC
+extern "C" char DAT_003B4048[];     // core::Drive's table for the part at +0x4
+extern "C" char DAT_003B4054[];     // core::Drive's main table
+extern "C" void* DAT_00429338;      // the allocator in use
+
+// The three base parts, whose constructors and destructors the compiler expands (SPEC-017 section 1).
+struct RefCountPart
+{
+    void* m_Table;      // +0x0
+};
+
+struct ObjectPart
+{
+    void* m_Table;      // +0x0
+    void* m_Allocator;  // +0x4
+};
+
+struct SafeRefCountPart
+{
+    void* m_Table;      // +0x0
+    int m_RefCount;     // +0x4
+};
+
+// The list of file libraries a drive keeps (0x40 bytes); its functions know what is inside.
+struct LibraryList
+{
+    void sub_0026F880();    // its constructor
+    void sub_002ACC30();    // its destructor
+    char m_pad00[0x40];
+};
+
+namespace core
+{
+    class Drive
+    {
+    public:
+        Drive* sub_0026EEF0();
+
+        void* m_Table00;            // +0x00
+        void* m_Table04;            // +0x04
+        void* m_Allocator;          // +0x08
+        void* m_Table0C;            // +0x0C
+        int m_RefCount;             // +0x10
+        LibraryList m_Libraries;    // +0x14
+        void* m_Head;               // +0x54
+        void* m_Tail;               // +0x58
+        int m_ErrorBehaviour;       // +0x5C
+        void* m_ErrorSemaphore;     // +0x60
+        void* m_HandlerThread;      // +0x64
+        void* m_Handler;            // +0x68
+        void* m_UserData;           // +0x6C
+        bool m_InError;             // +0x70
+        void* m_Failed;             // +0x74
+        bool m_ReportClear;         // +0x78
+        bool m_InHandler;           // +0x79
+        char m_Media[0x54];         // +0x7C
+        int m_LastError;            // +0xD0
+        void* m_Thread;             // +0xD4
+    };
+}
+
+void __cdecl sub_0020DC30();
+
+inline void ConstructRefCount(RefCountPart* part)
+{
+    part->m_Table = DAT_0037D85C;
+}
+
+inline void ConstructObject(ObjectPart* part)
+{
+    part->m_Table = DAT_0037E6EC;
+    part->m_Allocator = DAT_00429338;
+}
+
+inline void ConstructSafeRefCount(SafeRefCountPart* part)
+{
+    part->m_Table = DAT_003B4028;
+    part->m_RefCount = 1;
+}
+
+core::Drive* core::Drive::sub_0026EEF0()
+{
+    ConstructRefCount((RefCountPart*)&m_Table00);
+    ConstructObject((ObjectPart*)&m_Table04);
+    ConstructSafeRefCount((SafeRefCountPart*)&m_Table0C);
+    m_Table00 = DAT_003B4054;
+    m_Table04 = DAT_003B4048;
+    m_Table0C = DAT_003B4038;
+    m_Libraries.sub_0026F880();
+    m_Head = 0;
+    m_Tail = 0;
+    m_ErrorBehaviour = 0;
+    m_ErrorSemaphore = 0;
+    m_HandlerThread = 0;
+    m_Handler = 0;
+    m_UserData = 0;
+    m_InError = false;
+    m_Failed = 0;
+    m_ReportClear = true;
+    m_InHandler = false;
+    m_LastError = 3;
+    m_Thread = 0;
+    sub_0020DC30();
+    return this;
 }
 
 // ============================================================================

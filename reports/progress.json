@@ -1,14 +1,14 @@
 {
   "schema": "scarface_progress_v1",
-  "updated_at": "2026-11-26 06:23:24",
+  "updated_at": "2026-11-26 06:25:44",
   "compiler": "Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86",
   "verified": {
-    "pc": 766,
+    "pc": 767,
     "xb": 11847,
-    "proto": 11331,
+    "proto": 11336,
     "ps2": 3793,
-    "total": 12613,
-    "bytes": 459891,
+    "total": 12614,
+    "bytes": 459934,
     "ps2_bytes": 36032,
     "stubs": 2204
   },
@@ -23,7 +23,7 @@
     "member_functions": {
       "pc": 488,
       "xb": 4392,
-      "proto": 4350,
+      "proto": 4354,
       "total": 4880
     },
     "shared_class": {
@@ -57,29 +57,29 @@
     "1-9 B": 2102,
     "10-19 B": 1830,
     "20-39 B": 4571,
-    "40-79 B": 3191,
+    "40-79 B": 3192,
     "80+ B": 919
   },
   "contributors": {
-    "RRutherrfordd (Founder)": 21183,
+    "RRutherrfordd (Founder)": 21189,
     "NoahBPeterson": 5409,
     "RRutherfordd (Founder)": 1037,
     "lemiur": 108
   },
   "unattributed": 0,
   "queue": {
-    "pc": 664,
+    "pc": 663,
     "xb": 10515,
-    "proto": 10505,
+    "proto": 10500,
     "ps2": 20504,
-    "total": 11179,
+    "total": 11178,
     "tiers": {
       "TIER_1_QUICK": 176,
       "TIER_2_SMALL": 853,
-      "TIER_3_MEDIUM": 2426,
+      "TIER_3_MEDIUM": 2425,
       "TIER_4_LARGE": 7724
     },
-    "bytes": 2659918,
+    "bytes": 2659875,
     "stubs": 105
   },
   "good_first": [
