@@ -72,6 +72,8 @@ the work that needs neither: **writing descriptions** (below).
   `portal/tools/sibling_twins.py` on the founder's own copies of *Crash Tag Team Racing* and *The Incredible
   Hulk: Ultimate Destruction*). Those games have no names either. The same file lists the Microsoft library
   functions two of those programs number in their own `.XTLID` section, as found in Scarface.
+- A fourth `lead:` line says what a bug report on the game's streaming code says the function's PC twin
+  does (`reports/recomp_leads_xb.json`, explained in `docs/GAME_BUGS.md`). Leads, not names.
 - `packet` prints up to three functions of the same class that are already matched, then up to three
   matched functions with the most similar instructions (score 0.6 to 1.0; 1.00 means the same
   instructions with other registers, offsets or addresses). Start from the nearest one and change what
