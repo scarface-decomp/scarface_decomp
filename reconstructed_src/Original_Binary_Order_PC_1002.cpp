@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 790 of 1,430 functions matched (55.24%). NOT COMPLETE YET.
-// The 640 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 808 of 1,430 functions matched (56.50%). NOT COMPLETE YET.
+// The 622 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -2511,7 +2511,181 @@ int FileRequest::vfunc_02(int a1)
 
 }
 
-// [TODO] 0x006E3780 core::FileRequest::vfunc_04 (63 B)
+// ============================================================================
+// [VERIFIED] core::FileRequest::vfunc_04 (0x006E3780, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileRequest::vfunc_04 (0x002A9980), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3780
+// what: After an error: refreshes the drive's media information and records the drive's error on the file.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_006E60C0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        virtual int vfunc_04();
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+}
+
+int core::FileRequest::vfunc_04()
+{
+    Drive* drive = m_File->m_Drive;
+    int status = drive->vfunc_09();
+    return Finish(status, drive->sub_006E60C0());
+}
+
 // ============================================================================
 // [VERIFIED] core::FileRequest::vfunc_05 (0x006E37C0, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2578,8 +2752,378 @@ void FileRequest::vfunc_05()
 // [TODO] 0x006E37D0 core::FileOpenRequest::vfunc_01 (561 B)
 // [TODO] 0x006E3A10 core::FileOpenByKeyRequest::vfunc_01 (195 B)
 // [TODO] 0x006E3AE0 core::SaveGameOpenRequest::vfunc_01 (127 B)
-// [TODO] 0x006E3B60 core::FileCloseRequest::vfunc_01 (110 B)
-// [TODO] 0x006E3BD0 core::FileCommitRequest::vfunc_01 (75 B)
+// ============================================================================
+// [VERIFIED] core::FileCloseRequest::vfunc_01 (0x006E3B60, 110 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileCloseRequest::vfunc_01 (0x002A9D70), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3B60
+// what: Closes the file: through its read cache if the cache holds it, else on the drive; marks it closed.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_004C1030();    // whether it holds the file
+        void sub_006E7070();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_002AC3E0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class FileCloseRequest : public FileRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+
+    };
+
+}
+
+int core::FileCloseRequest::vfunc_01()
+{
+    Drive* drive = m_File->m_Drive;
+    if (!m_File->m_Cache.sub_004C1030())
+    {
+        drive->vfunc_12(m_File->m_Handle, m_File->m_Name);
+    }
+    else
+    {
+        m_File->m_Cache.sub_006E7070();
+    }
+    m_File->m_Open = false;
+    return Finish(1, 0);
+}
+
+// ============================================================================
+// [VERIFIED] core::FileCommitRequest::vfunc_01 (0x006E3BD0, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileCommitRequest::vfunc_01 (0x002A9DE0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3BD0
+// what: Commits the file's data on the drive and records the drive's error on the file.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_006E60C0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class FileCommitRequest : public FileRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+
+    };
+
+}
+
+int core::FileCommitRequest::vfunc_01()
+{
+    Drive* drive = m_File->m_Drive;
+    int status = drive->vfunc_13(m_File->m_Handle, m_File->m_Name);
+    return Finish(status, drive->sub_006E60C0());
+}
+
 // ============================================================================
 // [VERIFIED] fight::ParamString<UpperBodyAnimStateCondition>::vfunc_01 (0x006E3C20, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2606,8 +3150,421 @@ template <> int fight::ParamString<UpperBodyAnimStateCondition>::vfunc_01()
     return 3;
 }
 
-// [TODO] 0x006E3C30 core::FileReadRequest::vfunc_01 (266 B)
-// [TODO] 0x006E3D40 core::FileWriteRequest::vfunc_01 (144 B)
+// ============================================================================
+// [VERIFIED] core::FileReadRequest::vfunc_01 (0x006E3C30, 266 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileReadRequest::vfunc_01 (0x002A9E30), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3C30
+// what: Reads up to the request's length at the file's position, through the read cache if it holds the file; moves the position.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_006DEBB0(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_004C1030();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_006E7410(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_006E60C0();                                                 // the drive's last error
+        MediaInfo* sub_006E6110();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class FileReadRequest : public FileRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        void* m_Buffer;         // +0x0C
+        unsigned int m_Length;  // +0x10
+        int m_How;              // +0x14
+    };
+
+}
+
+int core::FileReadRequest::vfunc_01()
+{
+    unsigned int read;
+    unsigned int size = m_File->m_Size;
+    unsigned int length = m_Length;
+    Drive* drive = m_File->m_Drive;
+    if (m_File->m_Position >= size)
+    {
+        length = 0;
+    }
+    unsigned int limit = sub_006DEBB0(size, drive->sub_006E6110()->m_Words[3]);
+    if (m_File->m_Position + length > limit)
+    {
+        length = limit - m_File->m_Position;
+    }
+    int status;
+    if (length > 0)
+    {
+        if (m_File->m_Cache.sub_004C1030())
+        {
+            status = m_File->m_Cache.sub_006E7410(drive, m_File->m_Handle, m_File->m_Name, m_File->m_Base,
+                                                  m_File->m_Position, m_Buffer, length, &read, m_How);
+        }
+        else
+        {
+            status = drive->vfunc_14(m_File->m_Handle, m_File->m_Name, m_File->m_Base, m_File->m_Position, m_Buffer,
+                                     length, &read, m_How);
+        }
+        if (status == 1)
+        {
+            m_File->m_Position += read;
+        }
+    }
+    else
+    {
+        status = 1;
+    }
+    return Finish(status, drive->sub_006E60C0());
+}
+
+// ============================================================================
+// [VERIFIED] core::FileWriteRequest::vfunc_01 (0x006E3D40, 144 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileWriteRequest::vfunc_01 (0x002A9F40), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3D40
+// what: Writes the request's bytes at the file's position on the drive and moves the position past them.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_006E60C0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class FileWriteRequest : public FileRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        void* m_Buffer;         // +0x0C
+        unsigned int m_Length;  // +0x10
+        int m_How;              // +0x14
+    };
+
+}
+
+int core::FileWriteRequest::vfunc_01()
+{
+    unsigned int written;
+    Drive* drive = m_File->m_Drive;
+    int status;
+    if (m_Length > 0)
+    {
+        status = drive->vfunc_15(m_File->m_Handle, m_File->m_Name, m_File->m_Base, m_File->m_Position, m_Buffer,
+                                 m_Length, &written, &m_File->m_Size, m_How);
+        if (status == 1)
+        {
+            m_File->m_Position += written;
+        }
+    }
+    else
+    {
+        status = 1;
+    }
+    return Finish(status, drive->sub_006E60C0());
+}
+
 // ============================================================================
 // [VERIFIED] fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01 (0x006E3DD0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2635,8 +3592,368 @@ template <> int fight::ParamEnumConstList<DirectionalGetHitCondition>::vfunc_01(
     return 5;
 }
 
-// [TODO] 0x006E3DE0 core::FileSetPositionRequest::vfunc_01 (55 B)
-// [TODO] 0x006E3E20 core::FileGetPositionRequest::vfunc_01 (56 B)
+// ============================================================================
+// [VERIFIED] core::FileSetPositionRequest::vfunc_01 (0x006E3DE0, 55 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileSetPositionRequest::vfunc_01 (0x002A9FD0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3DE0
+// what: Sets the file's position to the one the request carries.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_002AC3E0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class FileSetPositionRequest : public FileRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        unsigned int m_Position;    // +0x0C
+    };
+
+}
+
+int core::FileSetPositionRequest::vfunc_01()
+{
+    m_File->m_Position = m_Position;
+    return Finish(1, 0);
+}
+
+// ============================================================================
+// [VERIFIED] core::FileGetPositionRequest::vfunc_01 (0x006E3E20, 56 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileGetPositionRequest::vfunc_01 (0x002AA010), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3E20
+// what: Hands the file's position back where the request points.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_002AC3E0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class FileGetPositionRequest : public FileRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        unsigned int* m_Out;    // +0x0C
+    };
+
+}
+
+int core::FileGetPositionRequest::vfunc_01()
+{
+    *m_Out = m_File->m_Position;
+    return Finish(1, 0);
+}
+
 // ============================================================================
 // [VERIFIED] core::FileGetPositionRequest::vfunc_06 (0x006E3E60, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2669,7 +3986,187 @@ int FileGetPositionRequest::vfunc_06()
 
 }
 
-// [TODO] 0x006E3E70 core::FileGetSizeRequest::vfunc_01 (56 B)
+// ============================================================================
+// [VERIFIED] core::FileGetSizeRequest::vfunc_01 (0x006E3E70, 56 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileGetSizeRequest::vfunc_01 (0x002AA060), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3E70
+// what: Hands the file's size back where the request points.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_002AC3E0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class FileGetSizeRequest : public FileRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        unsigned int* m_Out;    // +0x0C
+    };
+
+}
+
+int core::FileGetSizeRequest::vfunc_01()
+{
+    *m_Out = m_File->m_Size;
+    return Finish(1, 0);
+}
+
 // ============================================================================
 // [VERIFIED] DealerSpawnObject::vfunc_45 (0x006E3EB0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2737,7 +4234,187 @@ int DealerSpawnObject::vfunc_45()
     return 8;
 }
 
-// [TODO] 0x006E3EC0 core::FileCancelRequest::vfunc_01 (59 B)
+// ============================================================================
+// [VERIFIED] core::FileCancelRequest::vfunc_01 (0x006E3EC0, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::FileCancelRequest::vfunc_01 (0x002AA0A0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3EC0
+// what: Cancels every request still waiting for this file on the drive.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_002AC3E0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_006E6380(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class FileCancelRequest : public FileRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+
+    };
+
+}
+
+int core::FileCancelRequest::vfunc_01()
+{
+    m_File->m_Drive->sub_006E6380(m_File, m_File->m_Priority);
+    return Finish(1, 0);
+}
+
 // ============================================================================
 // [VERIFIED] fight::ParamBranch<ExitConditionTrack>::vfunc_01 (0x006E3F00, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2795,7 +4472,181 @@ int FileRequest::vfunc_03()
 
 }
 
-// [TODO] 0x006E3F20 core::DriveRequest::vfunc_04 (63 B)
+// ============================================================================
+// [VERIFIED] core::DriveRequest::vfunc_04 (0x006E3F20, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveRequest::vfunc_04 (0x002AA110), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3F20
+// what: After an error: refreshes the drive's media information and records the drive's error on the handle.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_006E60C0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        virtual int vfunc_04();
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+}
+
+int core::DriveRequest::vfunc_04()
+{
+    Drive* drive = m_Drive->m_Drive;
+    int status = drive->vfunc_09();
+    return Finish(status, drive->sub_006E60C0());
+}
+
 // ============================================================================
 // [VERIFIED] core::DriveOpenRequest::vfunc_06 (0x006E3F60, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2828,7 +4679,189 @@ int DriveOpenRequest::vfunc_06()
 
 }
 
-// [TODO] 0x006E3F70 core::DriveMediaRequest::vfunc_01 (78 B)
+// ============================================================================
+// [VERIFIED] core::DriveMediaRequest::vfunc_01 (0x006E3F70, 78 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveMediaRequest::vfunc_01 (0x002AA160), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3F70
+// what: Refreshes the drive's media information and copies it where the request points.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_002AC3E0();                                                 // the drive's last error
+        MediaInfo* sub_006E6110();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class DriveMediaRequest : public DriveRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        MediaInfo* m_Out;       // +0x0C
+    };
+
+}
+
+int core::DriveMediaRequest::vfunc_01()
+{
+    Drive* drive = m_Drive->m_Drive;
+    drive->vfunc_09();
+    *m_Out = *drive->sub_006E6110();
+    return Finish(1, 0);
+}
+
 // ============================================================================
 // [VERIFIED] core::DriveMediaRequest::vfunc_06 (0x006E3FC0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2861,7 +4894,188 @@ int DriveMediaRequest::vfunc_06()
 
 }
 
-// [TODO] 0x006E3FD0 core::DriveFormatRequest::vfunc_01 (63 B)
+// ============================================================================
+// [VERIFIED] core::DriveFormatRequest::vfunc_01 (0x006E3FD0, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveFormatRequest::vfunc_01 (0x002AA1C0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E3FD0
+// what: Formats the drive and records the drive's error on the handle.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_006E60C0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class DriveFormatRequest : public DriveRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+
+    };
+
+}
+
+int core::DriveFormatRequest::vfunc_01()
+{
+    Drive* drive = m_Drive->m_Drive;
+    int status = drive->vfunc_16();
+    return Finish(status, drive->sub_006E60C0());
+}
+
 // ============================================================================
 // [VERIFIED] GlanceAtOvertakingPed::vfunc_10 (0x006E4010, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2894,7 +5108,188 @@ int GlanceAtOvertakingPed::vfunc_10()
     return 13;
 }
 
-// [TODO] 0x006E4020 core::DriveCreateDirectoryRequest::vfunc_01 (68 B)
+// ============================================================================
+// [VERIFIED] core::DriveCreateDirectoryRequest::vfunc_01 (0x006E4020, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveCreateDirectoryRequest::vfunc_01 (0x002AA200), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E4020
+// what: Creates the directory the request names on the drive and records the drive's error.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_006E60C0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class DriveCreateDirectoryRequest : public DriveRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        char m_Name[0x14];      // +0x0C
+    };
+
+}
+
+int core::DriveCreateDirectoryRequest::vfunc_01()
+{
+    Drive* drive = m_Drive->m_Drive;
+    int status = drive->vfunc_17(m_Name);
+    return Finish(status, drive->sub_006E60C0());
+}
+
 // ============================================================================
 // [VERIFIED] core::DriveCreateDirectoryRequest::vfunc_06 (0x006E4070, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -2927,7 +5322,188 @@ int DriveCreateDirectoryRequest::vfunc_06()
 
 }
 
-// [TODO] 0x006E4080 core::DriveDestroyDirectoryRequest::vfunc_01 (68 B)
+// ============================================================================
+// [VERIFIED] core::DriveDestroyDirectoryRequest::vfunc_01 (0x006E4080, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveDestroyDirectoryRequest::vfunc_01 (0x002AA260), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E4080
+// what: Removes the directory the request names on the drive and records the drive's error.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_006E60C0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class DriveDestroyDirectoryRequest : public DriveRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        char m_Name[0x14];      // +0x0C
+    };
+
+}
+
+int core::DriveDestroyDirectoryRequest::vfunc_01()
+{
+    Drive* drive = m_Drive->m_Drive;
+    int status = drive->vfunc_18(m_Name);
+    return Finish(status, drive->sub_006E60C0());
+}
+
 // ============================================================================
 // [VERIFIED] core::DriveDestroyDirectoryRequest::vfunc_06 (0x006E40D0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -3028,7 +5604,188 @@ int GangSpawnObject::vfunc_45()
     return 16;
 }
 
-// [TODO] 0x006E4160 core::DriveFindNextRequest::vfunc_01 (72 B)
+// ============================================================================
+// [VERIFIED] core::DriveFindNextRequest::vfunc_01 (0x006E4160, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveFindNextRequest::vfunc_01 (0x002AA330), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E4160
+// what: Reads the next entry of the handle's directory search.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_006E60C0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class DriveFindNextRequest : public DriveRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        int m_What;             // +0x0C
+    };
+
+}
+
+int core::DriveFindNextRequest::vfunc_01()
+{
+    Drive* drive = m_Drive->m_Drive;
+    int status = drive->vfunc_21(&m_Drive->m_Search, m_What);
+    return Finish(status, drive->sub_006E60C0());
+}
+
 // ============================================================================
 // [VERIFIED] core::DriveFindNextRequest::vfunc_06 (0x006E41B0, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -3061,7 +5818,189 @@ int DriveFindNextRequest::vfunc_06()
 
 }
 
-// [TODO] 0x006E41C0 core::DriveFindCloseRequest::vfunc_01 (64 B)
+// ============================================================================
+// [VERIFIED] core::DriveFindCloseRequest::vfunc_01 (0x006E41C0, 64 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveFindCloseRequest::vfunc_01 (0x002AA380), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E41C0
+// what: Ends the handle's directory search on the drive.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_002AC3E0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class DriveFindCloseRequest : public DriveRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+
+    };
+
+}
+
+int core::DriveFindCloseRequest::vfunc_01()
+{
+    Drive* drive = m_Drive->m_Drive;
+    m_Drive->m_FindOpen = false;
+    drive->vfunc_22(&m_Drive->m_Search);
+    return Finish(1, 0);
+}
+
 // ============================================================================
 // [VERIFIED] core::DriveFindCloseRequest::vfunc_06 (0x006E4200, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -3094,7 +6033,188 @@ int DriveFindCloseRequest::vfunc_06()
 
 }
 
-// [TODO] 0x006E4210 core::DriveFileDestroyRequest::vfunc_01 (68 B)
+// ============================================================================
+// [VERIFIED] core::DriveFileDestroyRequest::vfunc_01 (0x006E4210, 68 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveFileDestroyRequest::vfunc_01 (0x002AA3D0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E4210
+// what: Deletes the file the request names on the drive and records the drive's error.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_006E60C0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_002AC6A0(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class DriveFileDestroyRequest : public DriveRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+        char m_Name[0x14];      // +0x0C
+    };
+
+}
+
+int core::DriveFileDestroyRequest::vfunc_01()
+{
+    Drive* drive = m_Drive->m_Drive;
+    int status = drive->vfunc_19(m_Name);
+    return Finish(status, drive->sub_006E60C0());
+}
+
 // ============================================================================
 // [VERIFIED] pure3d::d3dContext::vfunc_22 (0x006E4260, 4 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -3174,7 +6294,187 @@ int DriveFileDestroyRequest::vfunc_06()
 
 }
 
-// [TODO] 0x006E4280 core::DriveCancelRequest::vfunc_01 (59 B)
+// ============================================================================
+// [VERIFIED] core::DriveCancelRequest::vfunc_01 (0x006E4280, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::DriveCancelRequest::vfunc_01 (0x002AA430), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E4280
+// what: Cancels every request still waiting for this drive handle on the drive.
+// tool: Claude (from SPEC-020)
+
+unsigned int __cdecl sub_00250E80(unsigned int size, unsigned int unit);
+
+namespace core
+{
+    class Request;
+    class File;
+    class Drive;
+
+    // The file's read cache (0x2C bytes, SPEC-020 H4).
+    class Cache
+    {
+    public:
+        bool sub_002BE6F0();    // whether it holds the file
+        void sub_002BE710();    // closes it
+        int sub_002BEAC0(Drive* drive, void* handle, const char* name, int base, unsigned int position, void* buffer,
+                         unsigned int length, unsigned int* done, int how);     // reads through the cache
+        int m_Words[0xB];
+    };
+
+    // The media description a drive keeps (0x54 bytes); only its size matters here.
+    struct MediaInfo
+    {
+        unsigned int m_Words[0x15];
+    };
+
+    // The real drive (SPEC-016, SPEC-017): the slots its requests call.
+    class Drive
+    {
+    public:
+        virtual void vfunc_00();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int vfunc_08();
+        virtual int vfunc_09();                                             // refresh the media information
+        virtual void vfunc_10();
+        virtual int vfunc_11(const char* name, int mode, bool write, void* picture, unsigned int maxSize,
+                             void** handle, unsigned int* size);                    // open a saved game
+        virtual int vfunc_12(void* handle, const char* name);               // close a file
+        virtual int vfunc_13(void* handle, const char* name);               // commit a file
+        virtual int vfunc_14(void* handle, const char* name, int base, unsigned int position, void* buffer,
+                             unsigned int length, unsigned int* done, int how);             // read
+        virtual int vfunc_15(void* handle, const char* name, int base, unsigned int position, const void* buffer,
+                             unsigned int length, unsigned int* done, unsigned int* size, int how);  // write
+        virtual int vfunc_16();                                             // format
+        virtual int vfunc_17(const char* name);                             // create a directory
+        virtual int vfunc_18(const char* name);                             // destroy a directory
+        virtual int vfunc_19(const char* name);                             // destroy a file
+        virtual int vfunc_20(const char* name, int what, void** search, bool first);    // find first
+        virtual int vfunc_21(void** search, int what);                      // find next
+        virtual void vfunc_22(void** search);                               // find close
+        int sub_002AC3E0();                                                 // the drive's last error
+        MediaInfo* sub_002AC430();                                          // its media information
+        void sub_006E6380(void* owner, int priority);                       // cancel an owner's requests
+        int sub_002AC6E0(int a, int b);
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // An open file (SPEC-019 section 3).
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18  requests not finished yet
+        bool m_Open;            // +0x1C
+        bool m_Write;           // +0x1D
+        char m_Name[0x102];     // +0x1E
+        int m_Base;             // +0x120
+        unsigned int m_Position;    // +0x124
+        unsigned int m_Size;        // +0x128
+        Cache m_Cache;          // +0x12C
+        int m_Field158;         // +0x158
+        void* m_Handle;         // +0x15C  the drive's handle for the file
+        bool m_SaveGame;        // +0x160
+        int m_TransferSize;     // +0x164
+    };
+
+    // One user's handle on a drive (SPEC-019 section 2).
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        void* m_Search;         // +0x1C  the drive's handle for the open directory search
+        bool m_FindOpen;        // +0x20
+    };
+
+    // Work queued on a drive's thread (SPEC-020).
+    class Request
+    {
+    public:
+        virtual ~Request();
+        virtual int vfunc_01();                 // do the work: 0 error, 1 done, 2 more to do
+        virtual bool vfunc_02(void* key);
+        virtual Drive* vfunc_03();
+        virtual int vfunc_04();                 // prepare again after an error
+        virtual int vfunc_05();
+        virtual int vfunc_06();
+        Request* m_Next;        // +0x04
+    };
+
+    // A request on an open file.
+    class FileRequest : public Request
+    {
+    public:
+        File* m_File;           // +0x08
+        // Records the error on the file under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_File->Lock();
+            m_File->m_LastError = error;
+            m_File->Unlock();
+            return status;
+        }
+    };
+
+    // A request on a drive handle.
+    class DriveRequest : public Request
+    {
+    public:
+        InstanceDrive* m_Drive; // +0x08
+        // Records the error on the drive handle under its lock and hands the status back.
+        int Finish(int status, int error)
+        {
+            m_Drive->Lock();
+            m_Drive->m_LastError = error;
+            m_Drive->Unlock();
+            return status;
+        }
+    };
+
+    class DriveCancelRequest : public DriveRequest
+    {
+    public:
+        virtual int vfunc_01();
+        virtual int vfunc_04();
+
+    };
+
+}
+
+int core::DriveCancelRequest::vfunc_01()
+{
+    m_Drive->m_Drive->sub_006E6380(m_Drive, m_Drive->m_Priority);
+    return Finish(1, 0);
+}
+
 // ============================================================================
 // [VERIFIED] core::DriveCancelRequest::vfunc_06 (0x006E42C0, 6 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

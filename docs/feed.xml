@@ -5,356 +5,356 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-26T21:14:00Z</updated>
+  <updated>2026-11-27T00:16:08Z</updated>
   <author><name>Scarface decomp contributors</name></author>
   <entry>
-    <title>core::InstanceDrive::vfunc_36 (Xbox prototype, 193 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E620"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E620</id>
-    <updated>2026-11-26T21:14:00Z</updated>
-    <summary>0x0026E620 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CE120 (Xbox, 381 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CE120"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CE120</id>
+    <updated>2026-11-27T00:16:08Z</updated>
+    <summary>Stores chunks libpng does not know in the image's info structure (libpng png_set_unknown_chunks). 0x002CE120 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_36 (PC, 193 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5CA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5CA0</id>
-    <updated>2026-11-26T21:13:59Z</updated>
-    <summary>0x006E5CA0 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002CDFA0 (Xbox, 381 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDFA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDFA0</id>
+    <updated>2026-11-27T00:15:46Z</updated>
+    <summary>Stores suggested palettes in the image's info structure (libpng png_set_sPLT). 0x002CDFA0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_34 (Xbox prototype, 203 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E510"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E510</id>
-    <updated>2026-11-26T21:13:37Z</updated>
-    <summary>0x0026E510 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CDEF0 (Xbox, 169 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDEF0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDEF0</id>
+    <updated>2026-11-27T00:15:24Z</updated>
+    <summary>Stores the transparency data in the image's info structure (libpng png_set_tRNS). 0x002CDEF0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_34 (PC, 203 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5B90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5B90</id>
-    <updated>2026-11-26T21:13:36Z</updated>
-    <summary>0x006E5B90 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002CDC70 (Xbox, 561 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDC70"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDC70</id>
+    <updated>2026-11-27T00:15:03Z</updated>
+    <summary>Stores text comments in the image's info structure (libpng png_set_text_2). 0x002CDC70 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_24 (Xbox prototype, 63 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E450"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E450</id>
-    <updated>2026-11-26T21:13:35Z</updated>
-    <summary>0x0026E450 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CDB40 (Xbox, 297 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDB40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDB40</id>
+    <updated>2026-11-27T00:14:42Z</updated>
+    <summary>Stores the embedded colour profile in the image's info structure (libpng png_set_iCCP). 0x002CDB40 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_24 (PC, 63 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5AD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5AD0</id>
-    <updated>2026-11-26T21:13:35Z</updated>
-    <summary>0x006E5AD0 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002CDA60 (Xbox, 220 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDA60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDA60</id>
+    <updated>2026-11-27T00:14:21Z</updated>
+    <summary>Stores the sRGB intent with the gamma and chromaticities that go with it in the image's info structure (libpng png_set_sRGB_gAMA_and_cHRM). 0x002CDA60 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_22 (Xbox prototype, 36 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E3F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E3F0</id>
-    <updated>2026-11-26T21:13:08Z</updated>
-    <summary>0x0026E3F0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CDA30 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDA30"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDA30</id>
+    <updated>2026-11-27T00:13:58Z</updated>
+    <summary>Stores the significant bits per channel in the image's info structure (libpng png_set_sBIT). 0x002CDA30 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_36 (Xbox, 193 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002ABEC0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002ABEC0</id>
-    <updated>2026-11-26T21:12:23Z</updated>
-    <summary>Opens a saved game: splits the name, allocates a file object and constructs it, which queues the open. 0x002ABEC0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002CD990 (Xbox, 152 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD990"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD990</id>
+    <updated>2026-11-27T00:13:37Z</updated>
+    <summary>Stores the palette in the image's info structure (libpng png_set_PLTE). 0x002CD990 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_20 (Xbox prototype, 72 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E3A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E3A0</id>
-    <updated>2026-11-26T21:12:23Z</updated>
-    <summary>0x0026E3A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CD950 (Xbox, 50 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD950"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD950</id>
+    <updated>2026-11-27T00:13:16Z</updated>
+    <summary>Stores the pixel size (resolution) in the image's info structure (libpng png_set_pHYs). 0x002CD950 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_20 (PC, 72 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5A20"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5A20</id>
-    <updated>2026-11-26T21:12:23Z</updated>
-    <summary>0x006E5A20 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002CD910 (Xbox, 59 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD910"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD910</id>
+    <updated>2026-11-27T00:12:55Z</updated>
+    <summary>Stores the physical scale in the image's info structure (libpng png_set_sCAL). 0x002CD910 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_11 (Xbox prototype, 138 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E1A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E1A0</id>
-    <updated>2026-11-26T21:12:00Z</updated>
-    <summary>0x0026E1A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CD740 (Xbox, 455 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD740"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD740</id>
+    <updated>2026-11-27T00:12:34Z</updated>
+    <summary>Stores the pixel calibration in the image's info structure (libpng png_set_pCAL). 0x002CD740 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_34 (Xbox, 203 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002ABDB0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002ABDB0</id>
-    <updated>2026-11-26T21:11:37Z</updated>
-    <summary>Opens a file: splits the name, allocates a file object and constructs it, which queues the open request. 0x002ABDB0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002CD700 (Xbox, 50 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD700"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD700</id>
+    <updated>2026-11-27T00:12:12Z</updated>
+    <summary>Stores the image offset in the image's info structure (libpng png_set_oFFs). 0x002CD700 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_11 (PC, 138 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5820"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5820</id>
-    <updated>2026-11-26T21:11:36Z</updated>
-    <summary>0x006E5820 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002CD4D0 (Xbox, 553 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD4D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD4D0</id>
+    <updated>2026-11-27T00:11:51Z</updated>
+    <summary>Stores the image header (size, bit depth, colour type, interlace) in the image's info structure (libpng png_set_IHDR). 0x002CD4D0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_09 (Xbox prototype, 146 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E0B0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E0B0</id>
-    <updated>2026-11-26T21:11:13Z</updated>
-    <summary>0x0026E0B0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CD410 (Xbox, 188 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD410"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD410</id>
+    <updated>2026-11-27T00:11:30Z</updated>
+    <summary>Stores the palette histogram in the image's info structure (libpng png_set_hIST). 0x002CD410 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_24 (Xbox, 63 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002ABCF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002ABCF0</id>
-    <updated>2026-11-26T21:10:49Z</updated>
-    <summary>Under the lock, returns the real drive's last error if it is in its error state, else this handle's own. 0x002ABCF0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002CD390 (Xbox, 123 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD390"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD390</id>
+    <updated>2026-11-27T00:11:09Z</updated>
+    <summary>Stores the gamma value, as a fixed-point number in the image's info structure (libpng png_set_gAMA_fixed). 0x002CD390 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_09 (PC, 146 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5730"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5730</id>
-    <updated>2026-11-26T21:10:49Z</updated>
-    <summary>0x006E5730 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002CD300 (Xbox, 132 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD300"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD300</id>
+    <updated>2026-11-27T00:10:47Z</updated>
+    <summary>Stores the gamma value in the image's info structure (libpng png_set_gAMA). 0x002CD300 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_08 (Xbox prototype, 135 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E020"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E020</id>
-    <updated>2026-11-26T21:10:25Z</updated>
-    <summary>0x0026E020 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CD0D0 (Xbox, 560 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD0D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD0D0</id>
+    <updated>2026-11-27T00:10:22Z</updated>
+    <summary>Stores the chromaticities, as fixed-point numbers in the image's info structure (libpng png_set_cHRM_fixed). 0x002CD0D0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_22 (Xbox, 36 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002ABC90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002ABC90</id>
-    <updated>2026-11-26T21:10:00Z</updated>
-    <summary>Under the lock, says whether this handle has no requests outstanding. 0x002ABC90 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002CCE10 (Xbox, 695 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CCE10"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CCE10</id>
+    <updated>2026-11-27T00:10:01Z</updated>
+    <summary>Stores the chromaticities (white point and primaries) in the image's info structure (libpng png_set_cHRM). 0x002CCE10 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_07 (Xbox prototype, 135 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026DF90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026DF90</id>
-    <updated>2026-11-26T21:10:00Z</updated>
-    <summary>0x0026DF90 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CCDE0 (Xbox, 48 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CCDE0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CCDE0</id>
+    <updated>2026-11-27T00:09:40Z</updated>
+    <summary>Stores the background colour in the image's info structure (libpng png_set_bKGD). 0x002CCDE0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_08 (PC, 135 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E56A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E56A0</id>
-    <updated>2026-11-26T21:10:00Z</updated>
-    <summary>0x006E56A0 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002CBB60 (Xbox, 762 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CBB60"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CBB60</id>
+    <updated>2026-11-27T00:09:19Z</updated>
+    <summary>Moves to the next row or interlace pass; after the last row it reads to the end of the image data (libpng png_read_finish_row). 0x002CBB60 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_07 (PC, 135 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5610"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5610</id>
-    <updated>2026-11-26T21:10:00Z</updated>
-    <summary>0x006E5610 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002CBA00 (Xbox, 341 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CBA00"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CBA00</id>
+    <updated>2026-11-27T00:08:58Z</updated>
+    <summary>Reads a chunk libpng does not know: keeps it or passes it to the user's function, or skips it (libpng png_handle_unknown). 0x002CBA00 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_20 (Xbox, 72 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002ABC40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002ABC40</id>
-    <updated>2026-11-26T21:09:28Z</updated>
-    <summary>Queues a request that signals an event once everything queued before it on the drive is done. 0x002ABC40 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002CB8A0 (Xbox, 349 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CB8A0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CB8A0</id>
+    <updated>2026-11-27T00:08:37Z</updated>
+    <summary>Reads a PNG file's zTXt chunk, a compressed text comment, checks it and stores it (libpng png_handle_zTXt). 0x002CB8A0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_01 (Xbox prototype, 127 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026DE50"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026DE50</id>
-    <updated>2026-11-26T21:09:05Z</updated>
-    <summary>0x0026DE50 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CB770 (Xbox, 292 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CB770"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CB770</id>
+    <updated>2026-11-27T00:08:16Z</updated>
+    <summary>Reads a PNG file's tEXt chunk, a text comment, checks it and stores it (libpng png_handle_tEXt). 0x002CB770 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_11 (Xbox, 138 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002ABA40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002ABA40</id>
-    <updated>2026-11-26T21:08:11Z</updated>
-    <summary>Splits the name and queues a request that deletes that file on the real drive. 0x002ABA40 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002CB670 (Xbox, 252 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CB670"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CB670</id>
+    <updated>2026-11-27T00:07:55Z</updated>
+    <summary>Reads a PNG file's tIME chunk, the last-modified time, checks it and stores it (libpng png_handle_tIME). 0x002CB670 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_00 (Xbox prototype, 30 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026DE30"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026DE30</id>
-    <updated>2026-11-26T21:08:11Z</updated>
-    <summary>0x0026DE30 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CB4B0 (Xbox, 441 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CB4B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CB4B0</id>
+    <updated>2026-11-27T00:07:33Z</updated>
+    <summary>Reads a PNG file's sCAL chunk, the physical scale, checks it and stores it (libpng png_handle_sCAL). 0x002CB4B0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_0026DCD0 (Xbox prototype, 242 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026DCD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026DCD0</id>
-    <updated>2026-11-26T21:07:49Z</updated>
-    <summary>0x0026DCD0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CB1F0 (Xbox, 693 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CB1F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CB1F0</id>
+    <updated>2026-11-27T00:07:12Z</updated>
+    <summary>Reads a PNG file's pCAL chunk, the pixel calibration, checks it and stores it (libpng png_handle_pCAL). 0x002CB1F0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_09 (Xbox, 146 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB950"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB950</id>
-    <updated>2026-11-26T21:07:27Z</updated>
-    <summary>Splits the name and queues a find-first request (a directory search) on the real drive. 0x002AB950 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002CB0D0 (Xbox, 287 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CB0D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CB0D0</id>
+    <updated>2026-11-27T00:06:50Z</updated>
+    <summary>Reads a PNG file's oFFs chunk, the image offset, checks it and stores it (libpng png_handle_oFFs). 0x002CB0D0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_0026DBD0 (Xbox prototype, 247 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026DBD0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026DBD0</id>
-    <updated>2026-11-26T21:07:05Z</updated>
-    <summary>0x0026DBD0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CAFB0 (Xbox, 286 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CAFB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CAFB0</id>
+    <updated>2026-11-27T00:06:29Z</updated>
+    <summary>Reads a PNG file's pHYs chunk, the pixel size (resolution), checks it and stores it (libpng png_handle_pHYs). 0x002CAFB0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_25 (Xbox prototype, 24 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026DA90"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026DA90</id>
-    <updated>2026-11-26T21:06:43Z</updated>
-    <summary>0x0026DA90 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CAE40 (Xbox, 367 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CAE40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CAE40</id>
+    <updated>2026-11-27T00:06:09Z</updated>
+    <summary>Reads a PNG file's hIST chunk, the palette histogram, checks it and stores it (libpng png_handle_hIST). 0x002CAE40 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_08 (Xbox, 135 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB8C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB8C0</id>
-    <updated>2026-11-26T21:06:21Z</updated>
-    <summary>Splits the name and queues a destroy-directory request for it on the real drive. 0x002AB8C0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002CAC20 (Xbox, 536 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CAC20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CAC20</id>
+    <updated>2026-11-27T00:05:48Z</updated>
+    <summary>Reads a PNG file's bKGD chunk, the background colour, checks it and stores it (libpng png_handle_bKGD). 0x002CAC20 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_25 (PC, 24 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5160"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5160</id>
-    <updated>2026-11-26T21:06:21Z</updated>
-    <summary>0x006E5160 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002CA9C0 (Xbox, 602 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CA9C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CA9C0</id>
+    <updated>2026-11-27T00:05:27Z</updated>
+    <summary>Reads a PNG file's tRNS chunk, the transparency data, checks it and stores it (libpng png_handle_tRNS). 0x002CA9C0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_23 (Xbox prototype, 29 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026DA60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026DA60</id>
-    <updated>2026-11-26T21:05:59Z</updated>
-    <summary>0x0026DA60 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002CA5B0 (Xbox, 433 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CA5B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CA5B0</id>
+    <updated>2026-11-27T00:05:06Z</updated>
+    <summary>Reads a PNG file's iCCP chunk, the embedded colour profile, checks it and stores it (libpng png_handle_iCCP). 0x002CA5B0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_23 (PC, 29 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5140"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5140</id>
-    <updated>2026-11-26T21:05:58Z</updated>
-    <summary>0x006E5140 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002CA3C0 (Xbox, 496 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CA3C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CA3C0</id>
+    <updated>2026-11-27T00:04:45Z</updated>
+    <summary>Reads a PNG file's sRGB chunk, the sRGB rendering intent, checks it and stores it (libpng png_handle_sRGB). 0x002CA3C0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_07 (Xbox, 135 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB830"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB830</id>
-    <updated>2026-11-26T21:05:29Z</updated>
-    <summary>Splits the name and queues a create-directory request for it on the real drive. 0x002AB830 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002C9EA0 (Xbox, 1301 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C9EA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C9EA0</id>
+    <updated>2026-11-27T00:04:24Z</updated>
+    <summary>Reads a PNG file's cHRM chunk, the chromaticities (white point and primaries), checks it and stores it (libpng png_handle_cHRM). 0x002C9EA0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_21 (Xbox prototype, 36 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026DA00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026DA00</id>
-    <updated>2026-11-26T21:05:04Z</updated>
-    <summary>0x0026DA00 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002C9D20 (Xbox, 374 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C9D20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C9D20</id>
+    <updated>2026-11-27T00:04:03Z</updated>
+    <summary>Reads a PNG file's sBIT chunk, the significant bits per channel, checks it and stores it (libpng png_handle_sBIT). 0x002C9D20 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_20 (Xbox prototype, 85 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E340"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E340</id>
-    <updated>2026-11-26T21:04:42Z</updated>
-    <summary>0x0026E340 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002C9BA0 (Xbox, 372 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C9BA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C9BA0</id>
+    <updated>2026-11-27T00:03:42Z</updated>
+    <summary>Reads a PNG file's gAMA chunk, the gamma value, checks it and stores it (libpng png_handle_gAMA). 0x002C9BA0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_20 (Xbox, 85 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002ABBE0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002ABBE0</id>
-    <updated>2026-11-26T21:04:13Z</updated>
-    <summary>0x002ABBE0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002C9B50 (Xbox, 75 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C9B50"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C9B50</id>
+    <updated>2026-11-27T00:03:21Z</updated>
+    <summary>Reads a PNG file's IEND chunk, the end marker, checks it and stores it (libpng png_handle_IEND). 0x002C9B50 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_01 (Xbox, 127 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB6F0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB6F0</id>
-    <updated>2026-11-26T21:04:13Z</updated>
-    <summary>Drops a reference under the lock; at zero it queues a find-close request if a search is open, else destroys itself. 0x002AB6F0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002C99B0 (Xbox, 411 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C99B0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C99B0</id>
+    <updated>2026-11-27T00:03:01Z</updated>
+    <summary>Reads a PNG file's PLTE chunk, the palette, checks it and stores it (libpng png_handle_PLTE). 0x002C99B0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_19 (Xbox prototype, 85 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026D9A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026D9A0</id>
-    <updated>2026-11-26T21:04:13Z</updated>
-    <summary>0x0026D9A0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002C97E0 (Xbox, 452 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C97E0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C97E0</id>
+    <updated>2026-11-27T00:02:40Z</updated>
+    <summary>Reads a PNG file's IHDR chunk, the image header (size, bit depth, colour type, interlace), checks it and stores it (libpng png_handle_IHDR). 0x002C97E0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_20 (PC, 85 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E59C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E59C0</id>
-    <updated>2026-11-26T21:04:13Z</updated>
-    <summary>0x006E59C0 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002C9710 (Xbox, 198 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C9710"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C9710</id>
+    <updated>2026-11-27T00:02:16Z</updated>
+    <summary>Skips the rest of a chunk and checks its CRC, warning or failing as the chunk's kind requires (libpng png_crc_finish). 0x002C9710 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_00 (Xbox, 30 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB6D0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB6D0</id>
-    <updated>2026-11-26T21:03:47Z</updated>
-    <summary>Adds a reference under the object's lock. 0x002AB6D0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002C9400 (Xbox, 691 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C9400"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C9400</id>
+    <updated>2026-11-27T00:01:55Z</updated>
+    <summary>Sets up row reading: interlace pass sizes, the largest pixel depth needed, and the row buffers (libpng png_read_start_row). 0x002C9400 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_19 (PC, 85 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5080"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5080</id>
-    <updated>2026-11-26T21:03:47Z</updated>
-    <summary>0x006E5080 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002C9220 (Xbox, 468 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C9220"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C9220</id>
+    <updated>2026-11-27T00:01:30Z</updated>
+    <summary>Undoes a row's filter (sub, up, average or Paeth) using the previous row (libpng png_read_filter_row). 0x002C9220 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_002AB570 (Xbox, 242 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB570"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB570</id>
-    <updated>2026-11-26T21:03:24Z</updated>
-    <summary>Constructs a file object on a drive and, if the last argument says so, queues the request that opens it. 0x002AB570 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002C8DC0 (Xbox, 1106 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C8DC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C8DC0</id>
+    <updated>2026-11-27T00:01:05Z</updated>
+    <summary>Spreads the pixels of an interlaced pass across the full row width (libpng png_do_read_interlace). 0x002C8DC0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_19 (Xbox prototype, 61 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E300"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E300</id>
-    <updated>2026-11-26T21:03:02Z</updated>
-    <summary>0x0026E300 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002C8AA0 (Xbox, 785 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C8AA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C8AA0</id>
+    <updated>2026-11-27T00:00:43Z</updated>
+    <summary>Copies the pixels of the row just read into the caller's row, all of them or those the mask selects (libpng png_combine_row). 0x002C8AA0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_18 (Xbox prototype, 61 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026D960"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026D960</id>
-    <updated>2026-11-26T21:03:02Z</updated>
-    <summary>0x0026D960 in the Xbox prototype version, matched byte for byte with its original.</summary>
+    <title>sub_002C8A40 (Xbox, 93 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C8A40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C8A40</id>
+    <updated>2026-11-27T00:00:23Z</updated>
+    <summary>Checks that a chunk's four name bytes are letters; anything else is a fatal error (libpng png_check_chunk_name). 0x002C8A40 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_19 (Xbox, 61 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002ABBA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002ABBA0</id>
-    <updated>2026-11-26T21:03:01Z</updated>
-    <summary>0x002ABBA0 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002C8670 (Xbox, 968 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C8670"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C8670</id>
+    <updated>2026-11-27T00:00:02Z</updated>
+    <summary>Inflates the compressed part of a chunk into newly allocated memory (libpng png_decompress_chunk). 0x002C8670 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>sub_002AB470 (Xbox, 247 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB470"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB470</id>
-    <updated>2026-11-26T21:02:39Z</updated>
-    <summary>Constructs a file object for a saved game on a drive and queues the request that opens it. 0x002AB470 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002C85F0 (Xbox, 124 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C85F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C85F0</id>
+    <updated>2026-11-26T23:59:40Z</updated>
+    <summary>Reads the chunk's stored CRC and compares it with the one computed; nonzero means they differ (libpng png_crc_error). 0x002C85F0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::InstanceDrive::vfunc_19 (PC, 61 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5980"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5980</id>
-    <updated>2026-11-26T21:02:39Z</updated>
-    <summary>0x006E5980 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002C85C0 (Xbox, 38 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C85C0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C85C0</id>
+    <updated>2026-11-26T23:59:20Z</updated>
+    <summary>Reads chunk data and adds it to the running CRC (libpng png_crc_read). 0x002C85C0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_18 (PC, 61 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5040"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5040</id>
-    <updated>2026-11-26T21:02:39Z</updated>
-    <summary>0x006E5040 in the PC version, matched byte for byte with its original.</summary>
+    <title>sub_002C6B20 (Xbox, 44 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C6B20"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C6B20</id>
+    <updated>2026-11-26T23:58:59Z</updated>
+    <summary>Frees memory through the user's free function or the default one; null is ignored (libpng png_free). 0x002C6B20 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
   <entry>
-    <title>core::File::vfunc_25 (Xbox, 24 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB340"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB340</id>
-    <updated>2026-11-26T21:02:13Z</updated>
-    <summary>Returns the file's name, or null on a drive whose names are used whole. 0x002AB340 in the Xbox version, matched byte for byte with its original.</summary>
+    <title>sub_002C6AC0 (Xbox, 83 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002C6AC0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002C6AC0</id>
+    <updated>2026-11-26T23:58:38Z</updated>
+    <summary>Allocates memory through the user's allocator or the default one; running out is a fatal error (libpng png_malloc). 0x002C6AC0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (6984 verified)
+// SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, engine/GlobalFunctions.cpp (6989 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 6,984 of 15,074 functions matched (46.33%). NOT COMPLETE YET.
-// The 8,090 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
+// PROGRESS: 6,989 of 15,074 functions matched (46.36%). NOT COMPLETE YET.
+// The 8,085 still to do are listed in their place in Original_Binary_Order_Proto.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -140287,6 +140287,342 @@ Class_0026CDD0* Class_0026CDD0::sub_0026CDD0(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0026CE60 (0x0026CE60, 119 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002AA650 (0x002AA650), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026CE60
+// what: Constructs a request that calls back once the file's earlier requests are done; counts it on the file.
+// tool: Claude (from SPEC-020)
+
+extern "C" char DAT_003B3AF0[];     // core::Request's table
+extern "C" char DAT_003DA750[];     // core::FileRequest's
+extern "C" char DAT_003DA790[];     // core::DriveRequest's
+extern "C" char DAT_003B3BB8[];     // core::CompletionCallbackRequest's
+extern "C" char DAT_003B3B30[];     // core::FileCompletionRequest's
+extern "C" char DAT_003DA72C[];     // core::DriveCompletionRequest's
+extern "C" char DAT_003DA770[];     // core::FileOpenByKeyRequest's
+extern "C" char DAT_003DA9B4[];     // core::DriveFindFirstRequest's
+extern "C" char DAT_004BDD44[];     // the lock around the request allocator
+
+const char* __cdecl sub_0020DC30();             // the library's name ("core"); every constructor level calls it
+void __cdecl sub_00283B80(void* lock);          // take a lock
+void __cdecl sub_00283B70(void* lock);          // let it go
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+// The allocator requests come from.
+class Allocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(void* memory);    // give memory back
+};
+extern "C" Allocator* DAT_004BDD60;
+
+namespace core
+{
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The two owners a request counts itself on (SPEC-019): only what the requests use.
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+    };
+
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+    };
+
+    // What a completion request calls back; counted like the owners.
+    class Callback : public IRefCount
+    {
+    };
+
+    // A request with its table written as a member: these are its constructors and destructors.
+    class FileCompletionRequest
+    {
+    public:
+        FileCompletionRequest* sub_0026CE60(void* thread, File* owner, Callback* callback, int userData);
+        void* m_Table;          // +0x00
+        void* m_Next;           // +0x04
+        void* m_Thread;         // +0x08
+        File* m_Owner;       // +0x0C
+        Callback* m_Callback;   // +0x10
+        int m_UserData;         // +0x14
+    };
+}
+
+core::FileCompletionRequest* core::FileCompletionRequest::sub_0026CE60(void* thread, File* owner, Callback* callback, int userData)
+{
+    m_Table = DAT_003B3AF0;
+    m_Next = 0;
+    sub_0020DC30();
+    m_Table = DAT_003B3BB8;
+    m_Thread = thread;
+    sub_0020DC30();
+    m_Table = DAT_003B3B30;
+    m_Owner = owner;
+    m_Callback = callback;
+    m_UserData = userData;
+    sub_0020DC30();
+    m_Callback->AddRef();
+    m_Owner->Lock();
+    m_Owner->m_Outstanding++;
+    m_Owner->Unlock();
+    m_Owner->AddRef();
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0026CF40 (0x0026CF40, 119 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002AA730 (0x002AA730), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026CF40
+// what: Constructs a request that calls back once the drive handle's earlier requests are done; counts it on the drive handle.
+// tool: Claude (from SPEC-020)
+
+extern "C" char DAT_003B3AF0[];     // core::Request's table
+extern "C" char DAT_003DA750[];     // core::FileRequest's
+extern "C" char DAT_003DA790[];     // core::DriveRequest's
+extern "C" char DAT_003B3BB8[];     // core::CompletionCallbackRequest's
+extern "C" char DAT_003DA708[];     // core::FileCompletionRequest's
+extern "C" char DAT_003B3B54[];     // core::DriveCompletionRequest's
+extern "C" char DAT_003DA770[];     // core::FileOpenByKeyRequest's
+extern "C" char DAT_003DA9B4[];     // core::DriveFindFirstRequest's
+extern "C" char DAT_004BDD44[];     // the lock around the request allocator
+
+const char* __cdecl sub_0020DC30();             // the library's name ("core"); every constructor level calls it
+void __cdecl sub_00283B80(void* lock);          // take a lock
+void __cdecl sub_00283B70(void* lock);          // let it go
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+// The allocator requests come from.
+class Allocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(void* memory);    // give memory back
+};
+extern "C" Allocator* DAT_004BDD60;
+
+namespace core
+{
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The two owners a request counts itself on (SPEC-019): only what the requests use.
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+    };
+
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+    };
+
+    // What a completion request calls back; counted like the owners.
+    class Callback : public IRefCount
+    {
+    };
+
+    // A request with its table written as a member: these are its constructors and destructors.
+    class DriveCompletionRequest
+    {
+    public:
+        DriveCompletionRequest* sub_0026CF40(void* thread, InstanceDrive* owner, Callback* callback, int userData);
+        void* m_Table;          // +0x00
+        void* m_Next;           // +0x04
+        void* m_Thread;         // +0x08
+        InstanceDrive* m_Owner;       // +0x0C
+        Callback* m_Callback;   // +0x10
+        int m_UserData;         // +0x14
+    };
+}
+
+core::DriveCompletionRequest* core::DriveCompletionRequest::sub_0026CF40(void* thread, InstanceDrive* owner, Callback* callback, int userData)
+{
+    m_Table = DAT_003B3AF0;
+    m_Next = 0;
+    sub_0020DC30();
+    m_Table = DAT_003B3BB8;
+    m_Thread = thread;
+    sub_0020DC30();
+    m_Table = DAT_003B3B54;
+    m_Owner = owner;
+    m_Callback = callback;
+    m_UserData = userData;
+    sub_0020DC30();
+    m_Callback->AddRef();
+    m_Owner->Lock();
+    m_Owner->m_Outstanding++;
+    m_Owner->Unlock();
+    m_Owner->AddRef();
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0026D020 (0x0026D020, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002AA810 (0x002AA810), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026D020
+// what: Constructs the base of every request on a file: counts the request on its owner and adds a reference to it.
+// tool: Claude (from SPEC-020)
+
+extern "C" char DAT_003B3AF0[];     // core::Request's table
+extern "C" char DAT_003B3B78[];     // core::FileRequest's
+extern "C" char DAT_003DA790[];     // core::DriveRequest's
+extern "C" char DAT_003DA7B0[];     // core::CompletionCallbackRequest's
+extern "C" char DAT_003DA708[];     // core::FileCompletionRequest's
+extern "C" char DAT_003DA72C[];     // core::DriveCompletionRequest's
+extern "C" char DAT_003DA770[];     // core::FileOpenByKeyRequest's
+extern "C" char DAT_003DA9B4[];     // core::DriveFindFirstRequest's
+extern "C" char DAT_004BDD44[];     // the lock around the request allocator
+
+const char* __cdecl sub_0020DC30();             // the library's name ("core"); every constructor level calls it
+void __cdecl sub_00283B80(void* lock);          // take a lock
+void __cdecl sub_00283B70(void* lock);          // let it go
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+// The allocator requests come from.
+class Allocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(void* memory);    // give memory back
+};
+extern "C" Allocator* DAT_004BDD60;
+
+namespace core
+{
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The two owners a request counts itself on (SPEC-019): only what the requests use.
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+    };
+
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+    };
+
+    // What a completion request calls back; counted like the owners.
+    class Callback : public IRefCount
+    {
+    };
+
+    // A request with its table written as a member: these are its constructors and destructors.
+    class FileRequest
+    {
+    public:
+        FileRequest* sub_0026D020(File* owner);
+        void* m_Table;          // +0x00
+        void* m_Next;           // +0x04
+        File* m_Owner;       // +0x08
+    };
+}
+
+core::FileRequest* core::FileRequest::sub_0026D020(File* owner)
+{
+    m_Table = DAT_003B3AF0;
+    m_Next = 0;
+    sub_0020DC30();
+    m_Table = DAT_003B3B78;
+    m_Owner = owner;
+    sub_0020DC30();
+    m_Owner->Lock();
+    m_Owner->m_Outstanding++;
+    m_Owner->Unlock();
+    m_Owner->AddRef();
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0026D070 (0x0026D070, 44 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -140675,6 +141011,112 @@ Class_0026D2D0* Class_0026D2D0::sub_0026D2D0(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_0026D2F0 (0x0026D2F0, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002AAB70 (0x002AAB70), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026D2F0
+// what: Constructs the base of every request on a drive handle: counts the request on its owner and adds a reference to it.
+// tool: Claude (from SPEC-020)
+
+extern "C" char DAT_003B3AF0[];     // core::Request's table
+extern "C" char DAT_003DA750[];     // core::FileRequest's
+extern "C" char DAT_003B3B98[];     // core::DriveRequest's
+extern "C" char DAT_003DA7B0[];     // core::CompletionCallbackRequest's
+extern "C" char DAT_003DA708[];     // core::FileCompletionRequest's
+extern "C" char DAT_003DA72C[];     // core::DriveCompletionRequest's
+extern "C" char DAT_003DA770[];     // core::FileOpenByKeyRequest's
+extern "C" char DAT_003DA9B4[];     // core::DriveFindFirstRequest's
+extern "C" char DAT_004BDD44[];     // the lock around the request allocator
+
+const char* __cdecl sub_0020DC30();             // the library's name ("core"); every constructor level calls it
+void __cdecl sub_00283B80(void* lock);          // take a lock
+void __cdecl sub_00283B70(void* lock);          // let it go
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+// The allocator requests come from.
+class Allocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(void* memory);    // give memory back
+};
+extern "C" Allocator* DAT_004BDD60;
+
+namespace core
+{
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The two owners a request counts itself on (SPEC-019): only what the requests use.
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+    };
+
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+    };
+
+    // What a completion request calls back; counted like the owners.
+    class Callback : public IRefCount
+    {
+    };
+
+    // A request with its table written as a member: these are its constructors and destructors.
+    class DriveRequest
+    {
+    public:
+        DriveRequest* sub_0026D2F0(InstanceDrive* owner);
+        void* m_Table;          // +0x00
+        void* m_Next;           // +0x04
+        InstanceDrive* m_Owner;       // +0x08
+    };
+}
+
+core::DriveRequest* core::DriveRequest::sub_0026D2F0(InstanceDrive* owner)
+{
+    m_Table = DAT_003B3AF0;
+    m_Next = 0;
+    sub_0020DC30();
+    m_Table = DAT_003B3B98;
+    m_Owner = owner;
+    sub_0020DC30();
+    m_Owner->Lock();
+    m_Owner->m_Outstanding++;
+    m_Owner->Unlock();
+    m_Owner->AddRef();
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_0026D340 (0x0026D340, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -140837,6 +141279,111 @@ Class_0026D460* Class_0026D460::sub_0026D460(int a1, int a2)
     sub_0020DC30();
     sub_002C9710((int)(&m_Field0C), a2, 16);
     m_Field1C = false;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_0026D4A0 (0x0026D4A0, 69 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as sub_002AACB0 (0x002AACB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026D4A0
+// what: Constructs a find-first request: the drive-request base, the search's argument and a copy of the name, cut to 256 characters.
+// tool: Claude (from SPEC-020)
+
+extern "C" char DAT_003DA6C8[];     // core::Request's table
+extern "C" char DAT_003DA750[];     // core::FileRequest's
+extern "C" char DAT_003DA790[];     // core::DriveRequest's
+extern "C" char DAT_003DA7B0[];     // core::CompletionCallbackRequest's
+extern "C" char DAT_003DA708[];     // core::FileCompletionRequest's
+extern "C" char DAT_003DA72C[];     // core::DriveCompletionRequest's
+extern "C" char DAT_003DA770[];     // core::FileOpenByKeyRequest's
+extern "C" char DAT_003B3DDC[];     // core::DriveFindFirstRequest's
+extern "C" char DAT_004BDD44[];     // the lock around the request allocator
+
+const char* __cdecl sub_0020DC30();             // the library's name ("core"); every constructor level calls it
+void __cdecl sub_00283B80(void* lock);          // take a lock
+void __cdecl sub_00283B70(void* lock);          // let it go
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+// The allocator requests come from.
+class Allocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(void* memory);    // give memory back
+};
+extern "C" Allocator* DAT_004BDD60;
+
+namespace core
+{
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The two owners a request counts itself on (SPEC-019): only what the requests use.
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+    };
+
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+    };
+
+    // What a completion request calls back; counted like the owners.
+    class Callback : public IRefCount
+    {
+    };
+
+    // A request with its table written as a member: these are its constructors and destructors.
+    class DriveFindFirstRequest
+    {
+    public:
+        DriveFindFirstRequest* sub_0026D4A0(InstanceDrive* drive, const char* name, int what);
+        void sub_0026D2F0(InstanceDrive* drive);
+        void* m_Table;          // +0x00
+        void* m_Next;           // +0x04
+        InstanceDrive* m_Owner; // +0x08
+        char m_Name[0x101];     // +0x0C
+        int m_What;             // +0x110
+    };
+}
+
+core::DriveFindFirstRequest* core::DriveFindFirstRequest::sub_0026D4A0(InstanceDrive* drive, const char* name, int what)
+{
+    sub_0026D2F0(drive);
+    m_Table = DAT_003B3DDC;
+    m_What = what;
+    sub_0020DC30();
+    strncpy(m_Name, name, 0x100);
+    m_Name[0x100] = 0;
     return this;
 }
 

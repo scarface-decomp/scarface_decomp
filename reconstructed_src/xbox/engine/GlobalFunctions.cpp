@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (7457 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (7560 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,457 of 15,605 functions matched (47.79%). NOT COMPLETE YET.
-// The 8,148 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7,560 of 15,600 functions matched (48.46%). NOT COMPLETE YET.
+// The 8,040 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -157128,6 +157128,339 @@ Class_002AA580* Class_002AA580::sub_002AA580(int a1, int a2)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002AA650 (0x002AA650, 119 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Constructs a request that calls back once the file's earlier requests are done; counts it on the file.
+// ============================================================================
+// bin: xb
+// va: 0x002AA650
+// what: Constructs a request that calls back once the file's earlier requests are done; counts it on the file.
+// tool: Claude (from SPEC-020)
+
+extern "C" char DAT_003DA6C8[];     // core::Request's table
+extern "C" char DAT_003DA750[];     // core::FileRequest's
+extern "C" char DAT_003DA790[];     // core::DriveRequest's
+extern "C" char DAT_003DA7B0[];     // core::CompletionCallbackRequest's
+extern "C" char DAT_003DA708[];     // core::FileCompletionRequest's
+extern "C" char DAT_003DA72C[];     // core::DriveCompletionRequest's
+extern "C" char DAT_003DA770[];     // core::FileOpenByKeyRequest's
+extern "C" char DAT_003DA9B4[];     // core::DriveFindFirstRequest's
+extern "C" char DAT_004BDD44[];     // the lock around the request allocator
+
+const char* __cdecl sub_00250EB0();             // the library's name ("core"); every constructor level calls it
+void __cdecl sub_00283B80(void* lock);          // take a lock
+void __cdecl sub_00283B70(void* lock);          // let it go
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+// The allocator requests come from.
+class Allocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(void* memory);    // give memory back
+};
+extern "C" Allocator* DAT_004BDD60;
+
+namespace core
+{
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The two owners a request counts itself on (SPEC-019): only what the requests use.
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+    };
+
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+    };
+
+    // What a completion request calls back; counted like the owners.
+    class Callback : public IRefCount
+    {
+    };
+
+    // A request with its table written as a member: these are its constructors and destructors.
+    class FileCompletionRequest
+    {
+    public:
+        FileCompletionRequest* sub_002AA650(void* thread, File* owner, Callback* callback, int userData);
+        void* m_Table;          // +0x00
+        void* m_Next;           // +0x04
+        void* m_Thread;         // +0x08
+        File* m_Owner;       // +0x0C
+        Callback* m_Callback;   // +0x10
+        int m_UserData;         // +0x14
+    };
+}
+
+core::FileCompletionRequest* core::FileCompletionRequest::sub_002AA650(void* thread, File* owner, Callback* callback, int userData)
+{
+    m_Table = DAT_003DA6C8;
+    m_Next = 0;
+    sub_00250EB0();
+    m_Table = DAT_003DA7B0;
+    m_Thread = thread;
+    sub_00250EB0();
+    m_Table = DAT_003DA708;
+    m_Owner = owner;
+    m_Callback = callback;
+    m_UserData = userData;
+    sub_00250EB0();
+    m_Callback->AddRef();
+    m_Owner->Lock();
+    m_Owner->m_Outstanding++;
+    m_Owner->Unlock();
+    m_Owner->AddRef();
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AA730 (0x002AA730, 119 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Constructs a request that calls back once the drive handle's earlier requests are done; counts it on the drive handle.
+// ============================================================================
+// bin: xb
+// va: 0x002AA730
+// what: Constructs a request that calls back once the drive handle's earlier requests are done; counts it on the drive handle.
+// tool: Claude (from SPEC-020)
+
+extern "C" char DAT_003DA6C8[];     // core::Request's table
+extern "C" char DAT_003DA750[];     // core::FileRequest's
+extern "C" char DAT_003DA790[];     // core::DriveRequest's
+extern "C" char DAT_003DA7B0[];     // core::CompletionCallbackRequest's
+extern "C" char DAT_003DA708[];     // core::FileCompletionRequest's
+extern "C" char DAT_003DA72C[];     // core::DriveCompletionRequest's
+extern "C" char DAT_003DA770[];     // core::FileOpenByKeyRequest's
+extern "C" char DAT_003DA9B4[];     // core::DriveFindFirstRequest's
+extern "C" char DAT_004BDD44[];     // the lock around the request allocator
+
+const char* __cdecl sub_00250EB0();             // the library's name ("core"); every constructor level calls it
+void __cdecl sub_00283B80(void* lock);          // take a lock
+void __cdecl sub_00283B70(void* lock);          // let it go
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+// The allocator requests come from.
+class Allocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(void* memory);    // give memory back
+};
+extern "C" Allocator* DAT_004BDD60;
+
+namespace core
+{
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The two owners a request counts itself on (SPEC-019): only what the requests use.
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+    };
+
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+    };
+
+    // What a completion request calls back; counted like the owners.
+    class Callback : public IRefCount
+    {
+    };
+
+    // A request with its table written as a member: these are its constructors and destructors.
+    class DriveCompletionRequest
+    {
+    public:
+        DriveCompletionRequest* sub_002AA730(void* thread, InstanceDrive* owner, Callback* callback, int userData);
+        void* m_Table;          // +0x00
+        void* m_Next;           // +0x04
+        void* m_Thread;         // +0x08
+        InstanceDrive* m_Owner;       // +0x0C
+        Callback* m_Callback;   // +0x10
+        int m_UserData;         // +0x14
+    };
+}
+
+core::DriveCompletionRequest* core::DriveCompletionRequest::sub_002AA730(void* thread, InstanceDrive* owner, Callback* callback, int userData)
+{
+    m_Table = DAT_003DA6C8;
+    m_Next = 0;
+    sub_00250EB0();
+    m_Table = DAT_003DA7B0;
+    m_Thread = thread;
+    sub_00250EB0();
+    m_Table = DAT_003DA72C;
+    m_Owner = owner;
+    m_Callback = callback;
+    m_UserData = userData;
+    sub_00250EB0();
+    m_Callback->AddRef();
+    m_Owner->Lock();
+    m_Owner->m_Outstanding++;
+    m_Owner->Unlock();
+    m_Owner->AddRef();
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AA810 (0x002AA810, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Constructs the base of every request on a file: counts the request on its owner and adds a reference to it.
+// ============================================================================
+// bin: xb
+// va: 0x002AA810
+// what: Constructs the base of every request on a file: counts the request on its owner and adds a reference to it.
+// tool: Claude (from SPEC-020)
+
+extern "C" char DAT_003DA6C8[];     // core::Request's table
+extern "C" char DAT_003DA750[];     // core::FileRequest's
+extern "C" char DAT_003DA790[];     // core::DriveRequest's
+extern "C" char DAT_003DA7B0[];     // core::CompletionCallbackRequest's
+extern "C" char DAT_003DA708[];     // core::FileCompletionRequest's
+extern "C" char DAT_003DA72C[];     // core::DriveCompletionRequest's
+extern "C" char DAT_003DA770[];     // core::FileOpenByKeyRequest's
+extern "C" char DAT_003DA9B4[];     // core::DriveFindFirstRequest's
+extern "C" char DAT_004BDD44[];     // the lock around the request allocator
+
+const char* __cdecl sub_00250EB0();             // the library's name ("core"); every constructor level calls it
+void __cdecl sub_00283B80(void* lock);          // take a lock
+void __cdecl sub_00283B70(void* lock);          // let it go
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+// The allocator requests come from.
+class Allocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(void* memory);    // give memory back
+};
+extern "C" Allocator* DAT_004BDD60;
+
+namespace core
+{
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The two owners a request counts itself on (SPEC-019): only what the requests use.
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+    };
+
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+    };
+
+    // What a completion request calls back; counted like the owners.
+    class Callback : public IRefCount
+    {
+    };
+
+    // A request with its table written as a member: these are its constructors and destructors.
+    class FileRequest
+    {
+    public:
+        FileRequest* sub_002AA810(File* owner);
+        void* m_Table;          // +0x00
+        void* m_Next;           // +0x04
+        File* m_Owner;       // +0x08
+    };
+}
+
+core::FileRequest* core::FileRequest::sub_002AA810(File* owner)
+{
+    m_Table = DAT_003DA6C8;
+    m_Next = 0;
+    sub_00250EB0();
+    m_Table = DAT_003DA750;
+    m_Owner = owner;
+    sub_00250EB0();
+    m_Owner->Lock();
+    m_Owner->m_Outstanding++;
+    m_Owner->Unlock();
+    m_Owner->AddRef();
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002AA860 (0x002AA860, 44 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -157520,6 +157853,111 @@ Class_002AAB50* Class_002AAB50::sub_002AAB50(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002AAB70 (0x002AAB70, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Constructs the base of every request on a drive handle: counts the request on its owner and adds a reference to it.
+// ============================================================================
+// bin: xb
+// va: 0x002AAB70
+// what: Constructs the base of every request on a drive handle: counts the request on its owner and adds a reference to it.
+// tool: Claude (from SPEC-020)
+
+extern "C" char DAT_003DA6C8[];     // core::Request's table
+extern "C" char DAT_003DA750[];     // core::FileRequest's
+extern "C" char DAT_003DA790[];     // core::DriveRequest's
+extern "C" char DAT_003DA7B0[];     // core::CompletionCallbackRequest's
+extern "C" char DAT_003DA708[];     // core::FileCompletionRequest's
+extern "C" char DAT_003DA72C[];     // core::DriveCompletionRequest's
+extern "C" char DAT_003DA770[];     // core::FileOpenByKeyRequest's
+extern "C" char DAT_003DA9B4[];     // core::DriveFindFirstRequest's
+extern "C" char DAT_004BDD44[];     // the lock around the request allocator
+
+const char* __cdecl sub_00250EB0();             // the library's name ("core"); every constructor level calls it
+void __cdecl sub_00283B80(void* lock);          // take a lock
+void __cdecl sub_00283B70(void* lock);          // let it go
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+// The allocator requests come from.
+class Allocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(void* memory);    // give memory back
+};
+extern "C" Allocator* DAT_004BDD60;
+
+namespace core
+{
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The two owners a request counts itself on (SPEC-019): only what the requests use.
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+    };
+
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+    };
+
+    // What a completion request calls back; counted like the owners.
+    class Callback : public IRefCount
+    {
+    };
+
+    // A request with its table written as a member: these are its constructors and destructors.
+    class DriveRequest
+    {
+    public:
+        DriveRequest* sub_002AAB70(InstanceDrive* owner);
+        void* m_Table;          // +0x00
+        void* m_Next;           // +0x04
+        InstanceDrive* m_Owner;       // +0x08
+    };
+}
+
+core::DriveRequest* core::DriveRequest::sub_002AAB70(InstanceDrive* owner)
+{
+    m_Table = DAT_003DA6C8;
+    m_Next = 0;
+    sub_00250EB0();
+    m_Table = DAT_003DA790;
+    m_Owner = owner;
+    sub_00250EB0();
+    m_Owner->Lock();
+    m_Owner->m_Outstanding++;
+    m_Owner->Unlock();
+    m_Owner->AddRef();
+    return this;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002AABC0 (0x002AABC0, 30 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -157680,6 +158118,110 @@ Class_002AAC70* Class_002AAC70::sub_002AAC70(int a1, int a2)
     sub_00250EB0();
     sub_002FC450((int)(&m_Field0C), a2, 16);
     m_Field1C = false;
+    return this;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002AACB0 (0x002AACB0, 69 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Constructs a find-first request: the drive-request base, the search's argument and a copy of the name, cut to 256 characters.
+// ============================================================================
+// bin: xb
+// va: 0x002AACB0
+// what: Constructs a find-first request: the drive-request base, the search's argument and a copy of the name, cut to 256 characters.
+// tool: Claude (from SPEC-020)
+
+extern "C" char DAT_003DA6C8[];     // core::Request's table
+extern "C" char DAT_003DA750[];     // core::FileRequest's
+extern "C" char DAT_003DA790[];     // core::DriveRequest's
+extern "C" char DAT_003DA7B0[];     // core::CompletionCallbackRequest's
+extern "C" char DAT_003DA708[];     // core::FileCompletionRequest's
+extern "C" char DAT_003DA72C[];     // core::DriveCompletionRequest's
+extern "C" char DAT_003DA770[];     // core::FileOpenByKeyRequest's
+extern "C" char DAT_003DA9B4[];     // core::DriveFindFirstRequest's
+extern "C" char DAT_004BDD44[];     // the lock around the request allocator
+
+const char* __cdecl sub_00250EB0();             // the library's name ("core"); every constructor level calls it
+void __cdecl sub_00283B80(void* lock);          // take a lock
+void __cdecl sub_00283B70(void* lock);          // let it go
+extern "C" char* __cdecl strncpy(char* to, const char* from, unsigned int count);
+
+// The allocator requests come from.
+class Allocator
+{
+public:
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+    virtual void vfunc_02();
+    virtual void vfunc_03();
+    virtual void vfunc_04();
+    virtual void vfunc_05(void* memory);    // give memory back
+};
+extern "C" Allocator* DAT_004BDD60;
+
+namespace core
+{
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The two owners a request counts itself on (SPEC-019): only what the requests use.
+    class File : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_LastError;        // +0x14
+        int m_Outstanding;      // +0x18
+    };
+
+    class InstanceDrive : public IRefCount, public IMutable
+    {
+    public:
+        int m_RefCount;         // +0x08
+        void* m_Drive;          // +0x0C
+        int m_Priority;         // +0x10
+        int m_Outstanding;      // +0x14
+    };
+
+    // What a completion request calls back; counted like the owners.
+    class Callback : public IRefCount
+    {
+    };
+
+    // A request with its table written as a member: these are its constructors and destructors.
+    class DriveFindFirstRequest
+    {
+    public:
+        DriveFindFirstRequest* sub_002AACB0(InstanceDrive* drive, const char* name, int what);
+        void sub_002AAB70(InstanceDrive* drive);
+        void* m_Table;          // +0x00
+        void* m_Next;           // +0x04
+        InstanceDrive* m_Owner; // +0x08
+        char m_Name[0x101];     // +0x0C
+        int m_What;             // +0x110
+    };
+}
+
+core::DriveFindFirstRequest* core::DriveFindFirstRequest::sub_002AACB0(InstanceDrive* drive, const char* name, int what)
+{
+    sub_002AAB70(drive);
+    m_Table = DAT_003DA9B4;
+    m_What = what;
+    sub_00250EB0();
+    strncpy(m_Name, name, 0x100);
+    m_Name[0x100] = 0;
     return this;
 }
 
@@ -161576,6 +162118,32 @@ void Class_002B7A20::sub_002B7A20(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002B8580 (0x002B8580, 123 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Compares bytes with the 8-byte PNG signature; zero means they match (libpng png_sig_cmp).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B8580.cpp --va 0x002B8580 --bin xb --match '_png_sig_cmp' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B8580
+// what: Compares bytes with the 8-byte PNG signature; zero means they match (libpng png_sig_cmp).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/png.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B8600 (0x002B8600, 79 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: The allocation function libpng gives zlib: allocates items times size bytes and clears them (libpng png_zalloc).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B8600.cpp --va 0x002B8600 --bin xb --match '_png_zalloc' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B8600
+// what: The allocation function libpng gives zlib: allocates items times size bytes and clears them (libpng png_zalloc).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/png.c"
+
+// ============================================================================
 // [VERIFIED] sub_002B8650 (0x002B8650, 5 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -161616,6 +162184,45 @@ void __cdecl sub_002B8660(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002B8680 (0x002B8680, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Adds a block of bytes to the running CRC of the chunk being read, unless the chunk's CRC is to be ignored (libpng png_calculate_crc).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B8680.cpp --va 0x002B8680 --bin xb --match '_png_calculate_crc' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B8680
+// what: Adds a block of bytes to the running CRC of the chunk being read, unless the chunk's CRC is to be ignored (libpng png_calculate_crc).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/png.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B86D0 (0x002B86D0, 951 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Frees the parts of an info structure the mask names (text, palette, profile, rows and so on) (libpng png_free_data).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B86D0.cpp --va 0x002B86D0 --bin xb --match '_png_free_data' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B86D0
+// what: Frees the parts of an info structure the mask names (text, palette, profile, rows and so on) (libpng png_free_data).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/png.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B8A90 (0x002B8A90, 85 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Frees everything an info structure owns and resets the structure (libpng png_info_destroy).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B8A90.cpp --va 0x002B8A90 --bin xb --match '_png_info_destroy' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B8A90
+// what: Frees everything an info structure owns and resets the structure (libpng png_info_destroy).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/png.c"
+
+// ============================================================================
 // [VERIFIED] sub_002B8AF0 (0x002B8AF0, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -161629,6 +162236,19 @@ int __cdecl sub_002B8AF0(int a1)
 {
     return *(int*)(a1 + 84);
 }
+
+// ============================================================================
+// [VERIFIED] sub_002B8B00 (0x002B8B00, 77 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Says how a chunk name is to be treated according to the list of chunks the user asked to keep (libpng png_handle_as_unknown).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B8B00.cpp --va 0x002B8B00 --bin xb --match '_png_handle_as_unknown' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B8B00
+// what: Says how a chunk name is to be treated according to the list of chunks the user asked to keep (libpng png_handle_as_unknown).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/png.c"
 
 // ============================================================================
 // [VERIFIED] sub_002B8B50 (0x002B8B50, 25 B)
@@ -161647,6 +162267,110 @@ int __cdecl sub_002B8B50(int a1)
     *(bool*)(a1 + 576) = false;
     return a1;
 }
+
+// ============================================================================
+// [VERIFIED] sub_002B8B70 (0x002B8B70, 55 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Allocates and clears the info structure that holds what is known about an image (libpng png_create_info_struct).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B8B70.cpp --va 0x002B8B70 --bin xb --match '_png_create_info_struct' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B8B70
+// what: Allocates and clears the info structure that holds what is known about an image (libpng png_create_info_struct).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/png.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B8BB0 (0x002B8BB0, 61 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Frees an info structure and everything it owns, and clears the caller's pointer (libpng png_destroy_info_struct).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B8BB0.cpp --va 0x002B8BB0 --bin xb --match '_png_destroy_info_struct' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B8BB0
+// what: Frees an info structure and everything it owns, and clears the caller's pointer (libpng png_destroy_info_struct).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/png.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B8BF0 (0x002B8BF0, 532 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Creates the structure for reading a PNG: sets handlers, checks the library version, sets up zlib (libpng png_create_read_struct_2).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B8BF0.cpp --va 0x002B8BF0 --bin xb --match '_png_create_read_struct_2' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B8BF0
+// what: Creates the structure for reading a PNG: sets handlers, checks the library version, sets up zlib (libpng png_create_read_struct_2).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngread.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B8E10 (0x002B8E10, 868 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads the signature and every chunk before the image data, handing each to its reader (libpng png_read_info).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B8E10.cpp --va 0x002B8E10 --bin xb --match '_png_read_info' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B8E10
+// what: Reads the signature and every chunk before the image data, handing each to its reader (libpng png_read_info).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngread.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B9180 (0x002B9180, 66 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Starts row reading if needed and updates the info structure for the transformations asked for (libpng png_read_update_info).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B9180.cpp --va 0x002B9180 --bin xb --match '_png_read_update_info' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B9180
+// what: Starts row reading if needed and updates the info structure for the transformations asked for (libpng png_read_update_info).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngread.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B91D0 (0x002B91D0, 1172 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads and decodes one row of the image: inflates it, undoes the filter, applies the transformations (libpng png_read_row).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B91D0.cpp --va 0x002B91D0 --bin xb --match '_png_read_row' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B91D0
+// what: Reads and decodes one row of the image: inflates it, undoes the filter, applies the transformations (libpng png_read_row).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngread.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B9670 (0x002B9670, 654 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Frees everything the read structure owns (buffers, tables, zlib state) and resets it, keeping its handlers (libpng png_read_destroy).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B9670.cpp --va 0x002B9670 --bin xb --match '_png_read_destroy' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B9670
+// what: Frees everything the read structure owns (buffers, tables, zlib state) and resets it, keeping its handlers (libpng png_read_destroy).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngread.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B9900 (0x002B9900, 183 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Frees the read structure and both info structures, and clears the caller's pointers (libpng png_destroy_read_struct).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B9900.cpp --va 0x002B9900 --bin xb --match '_png_destroy_read_struct' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B9900
+// what: Frees the read structure and both info structures, and clears the caller's pointers (libpng png_destroy_read_struct).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngread.c"
 
 // ============================================================================
 // [VERIFIED] sub_002B99C0 (0x002B99C0, 27 B)
@@ -161916,6 +162640,240 @@ int __cdecl sub_002B9B80(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002B9B90 (0x002B9B90, 399 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Updates the info structure's colour type, bit depth and row size for the transformations asked for (libpng png_read_transform_info).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B9B90.cpp --va 0x002B9B90 --bin xb --match '_png_read_transform_info' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B9B90
+// what: Updates the info structure's colour type, bit depth and row size for the transformations asked for (libpng png_read_transform_info).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B9D20 (0x002B9D20, 290 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: expands 1-, 2- and 4-bit pixels to one byte each (libpng png_do_unpack).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B9D20.cpp --va 0x002B9D20 --bin xb --match '_png_do_unpack' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B9D20
+// what: Row transformation: expands 1-, 2- and 4-bit pixels to one byte each (libpng png_do_unpack).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002B9E50 (0x002B9E50, 455 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: shifts samples back down to their significant bits (libpng png_do_unshift).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002B9E50.cpp --va 0x002B9E50 --bin xb --match '_png_do_unshift' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002B9E50
+// what: Row transformation: shifts samples back down to their significant bits (libpng png_do_unshift).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BA020 (0x002BA020, 70 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: reduces 16-bit samples to 8 bits (libpng png_do_chop).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BA020.cpp --va 0x002BA020 --bin xb --match '_png_do_chop' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BA020
+// what: Row transformation: reduces 16-bit samples to 8 bits (libpng png_do_chop).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BA070 (0x002BA070, 265 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: moves alpha from after the colour to before it (libpng png_do_read_swap_alpha).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BA070.cpp --va 0x002BA070 --bin xb --match '_png_do_read_swap_alpha' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BA070
+// what: Row transformation: moves alpha from after the colour to before it (libpng png_do_read_swap_alpha).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BA180 (0x002BA180, 212 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: inverts the alpha channel (libpng png_do_read_invert_alpha).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BA180.cpp --va 0x002BA180 --bin xb --match '_png_do_read_invert_alpha' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BA180
+// what: Row transformation: inverts the alpha channel (libpng png_do_read_invert_alpha).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BA260 (0x002BA260, 654 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: adds a filler byte to each pixel, before or after the colour (libpng png_do_read_filler).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BA260.cpp --va 0x002BA260 --bin xb --match '_png_do_read_filler' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BA260
+// what: Row transformation: adds a filler byte to each pixel, before or after the colour (libpng png_do_read_filler).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BA4F0 (0x002BA4F0, 343 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: expands grey pixels to RGB, keeping alpha (libpng png_do_gray_to_rgb).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BA4F0.cpp --va 0x002BA4F0 --bin xb --match '_png_do_gray_to_rgb' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BA4F0
+// what: Row transformation: expands grey pixels to RGB, keeping alpha (libpng png_do_gray_to_rgb).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BA650 (0x002BA650, 1685 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: converts RGB pixels to grey by the weighted sum; returns whether any were not grey (libpng png_do_rgb_to_gray).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BA650.cpp --va 0x002BA650 --bin xb --match '_png_do_rgb_to_gray' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BA650
+// what: Row transformation: converts RGB pixels to grey by the weighted sum; returns whether any were not grey (libpng png_do_rgb_to_gray).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BACF0 (0x002BACF0, 4012 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: replaces transparency with the background colour, with gamma correction (libpng png_do_background).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BACF0.cpp --va 0x002BACF0 --bin xb --match '_png_do_background' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BACF0
+// what: Row transformation: replaces transparency with the background colour, with gamma correction (libpng png_do_background).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BBCA0 (0x002BBCA0, 900 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: gamma-corrects the samples through the lookup tables (libpng png_do_gamma).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BBCA0.cpp --va 0x002BBCA0 --bin xb --match '_png_do_gamma' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BBCA0
+// what: Row transformation: gamma-corrects the samples through the lookup tables (libpng png_do_gamma).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BC030 (0x002BC030, 539 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: expands palette indices to RGB or RGBA pixels (libpng png_do_expand_palette).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BC030.cpp --va 0x002BC030 --bin xb --match '_png_do_expand_palette' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BC030
+// what: Row transformation: expands palette indices to RGB or RGBA pixels (libpng png_do_expand_palette).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BC250 (0x002BC250, 911 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: expands grey to 8 bits and turns a transparent colour into an alpha channel (libpng png_do_expand).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BC250.cpp --va 0x002BC250 --bin xb --match '_png_do_expand' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BC250
+// what: Row transformation: expands grey to 8 bits and turns a transparent colour into an alpha channel (libpng png_do_expand).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BC5E0 (0x002BC5E0, 338 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: reduces RGB pixels to palette indices by the dither lookup tables (libpng png_do_dither).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BC5E0.cpp --va 0x002BC5E0 --bin xb --match '_png_do_dither' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BC5E0
+// what: Row transformation: reduces RGB pixels to palette indices by the dither lookup tables (libpng png_do_dither).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BC740 (0x002BC740, 1615 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Builds the lookup tables for gamma correction, for 8-bit and for 16-bit samples (libpng png_build_gamma_table).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BC740.cpp --va 0x002BC740 --bin xb --match '_png_build_gamma_table' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BC740
+// what: Builds the lookup tables for gamma correction, for 8-bit and for 16-bit samples (libpng png_build_gamma_table).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BCD90 (0x002BCD90, 199 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: undoes MNG's intrapixel differencing (adds green back to red and blue) (libpng png_do_read_intrapixel).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BCD90.cpp --va 0x002BCD90 --bin xb --match '_png_do_read_intrapixel' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BCD90
+// what: Row transformation: undoes MNG's intrapixel differencing (adds green back to red and blue) (libpng png_do_read_intrapixel).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BCE60 (0x002BCE60, 2624 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Prepares the transformations before the first row: background, gamma tables, palette changes (libpng png_init_read_transformations).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BCE60.cpp --va 0x002BCE60 --bin xb --match '_png_init_read_transformations' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BCE60
+// what: Prepares the transformations before the first row: background, gamma tables, palette changes (libpng png_init_read_transformations).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BD8A0 (0x002BD8A0, 1116 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Applies to the row just read every transformation that was asked for, in libpng's fixed order (libpng png_do_read_transformations).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BD8A0.cpp --va 0x002BD8A0 --bin xb --match '_png_do_read_transformations' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BD8A0
+// what: Applies to the row just read every transformation that was asked for, in libpng's fixed order (libpng png_do_read_transformations).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrtran.c"
+
+// ============================================================================
 // [VERIFIED] sub_002BDD00 (0x002BDD00, 9 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -161930,6 +162888,110 @@ int __cdecl sub_002BDD00(int a1)
     *(int*)(a1 + 112) |= 1;
     return a1;
 }
+
+// ============================================================================
+// [VERIFIED] sub_002BDD10 (0x002BDD10, 90 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Asks for a filler byte to be added to each pixel on reading, before or after the colour (libpng png_set_filler).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BDD10.cpp --va 0x002BDD10 --bin xb --match '_png_set_filler' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BDD10
+// what: Asks for a filler byte to be added to each pixel on reading, before or after the colour (libpng png_set_filler).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngtrans.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BDD70 (0x002BDD70, 125 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: inverts grey samples (libpng png_do_invert).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BDD70.cpp --va 0x002BDD70 --bin xb --match '_png_do_invert' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BDD70
+// what: Row transformation: inverts grey samples (libpng png_do_invert).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngtrans.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BDDF0 (0x002BDDF0, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: swaps the two bytes of each 16-bit sample (libpng png_do_swap).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BDDF0.cpp --va 0x002BDDF0 --bin xb --match '_png_do_swap' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BDDF0
+// what: Row transformation: swaps the two bytes of each 16-bit sample (libpng png_do_swap).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngtrans.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BDE30 (0x002BDE30, 79 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: reverses the order of the pixels packed in each byte (libpng png_do_packswap).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BDE30.cpp --va 0x002BDE30 --bin xb --match '_png_do_packswap' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BDE30
+// what: Row transformation: reverses the order of the pixels packed in each byte (libpng png_do_packswap).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngtrans.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BDE80 (0x002BDE80, 547 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: removes the filler or alpha byte from each pixel (libpng png_do_strip_filler).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BDE80.cpp --va 0x002BDE80 --bin xb --match '_png_do_strip_filler' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BDE80
+// what: Row transformation: removes the filler or alpha byte from each pixel (libpng png_do_strip_filler).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngtrans.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BE0B0 (0x002BE0B0, 195 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Row transformation: swaps red and blue (libpng png_do_bgr).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BE0B0.cpp --va 0x002BE0B0 --bin xb --match '_png_do_bgr' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BE0B0
+// what: Row transformation: swaps red and blue (libpng png_do_bgr).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngtrans.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BE180 (0x002BE180, 32 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads bytes of the file through the read function the user set; none set is a fatal error (libpng png_read_data).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BE180.cpp --va 0x002BE180 --bin xb --match '_png_read_data' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BE180
+// what: Reads bytes of the file through the read function the user set; none set is a fatal error (libpng png_read_data).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrio.c"
+
+// ============================================================================
+// [VERIFIED] sub_002BE1E0 (0x002BE1E0, 83 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Sets the function and the pointer libpng reads the file with (libpng png_set_read_fn).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002BE1E0.cpp --va 0x002BE1E0 --bin xb --match '_png_set_read_fn' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002BE1E0
+// what: Sets the function and the pointer libpng reads the file with (libpng png_set_read_fn).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrio.c"
 
 // ============================================================================
 // [VERIFIED] sub_002BE680 (0x002BE680, 28 B)
@@ -166010,6 +167072,32 @@ Class_002C6110* Class_002C6110::sub_002C6110(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002C6510 (0x002C6510, 142 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Builds a message that starts with the current chunk's name, with unprintable bytes shown in hex (libpng png_format_buffer).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C6510.cpp --va 0x002C6510 --bin xb --match '_png_format_buffer' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C6510
+// what: Builds a message that starts with the current chunk's name, with unprintable bytes shown in hex (libpng png_format_buffer).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngerror.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C66C0 (0x002C66C0, 276 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: The default warning handler: prints the message, with the error number if there is one (libpng png_default_warning).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C66C0.cpp --va 0x002C66C0 --bin xb --match '_png_default_warning' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C66C0
+// what: The default warning handler: prints the message, with the error number if there is one (libpng png_default_warning).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngerror.c"
+
+// ============================================================================
 // [VERIFIED] sub_002C67E0 (0x002C67E0, 26 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -166026,6 +167114,84 @@ int __cdecl sub_002C67E0(int a1, int a2, int a3, int a4)
     *(int*)(a1 + 68) = a4;
     return a1;
 }
+
+// ============================================================================
+// [VERIFIED] sub_002C6800 (0x002C6800, 156 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reports a fatal error through the user's handler; if that returns, the default handler takes over (libpng png_error).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C6800.cpp --va 0x002C6800 --bin xb --match '_png_error' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C6800
+// what: Reports a fatal error through the user's handler; if that returns, the default handler takes over (libpng png_error).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngerror.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C68A0 (0x002C68A0, 80 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reports a warning through the user's handler, or the default one (libpng png_warning).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C68A0.cpp --va 0x002C68A0 --bin xb --match '_png_warning' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C68A0
+// what: Reports a warning through the user's handler, or the default one (libpng png_warning).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngerror.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C68F0 (0x002C68F0, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reports a fatal error with the current chunk's name put in front of the message (libpng png_chunk_error).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C68F0.cpp --va 0x002C68F0 --bin xb --match '_png_chunk_error' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C68F0
+// what: Reports a fatal error with the current chunk's name put in front of the message (libpng png_chunk_error).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngerror.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C6920 (0x002C6920, 41 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reports a warning with the current chunk's name put in front of the message (libpng png_chunk_warning).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C6920.cpp --va 0x002C6920 --bin xb --match '_png_chunk_warning' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C6920
+// what: Reports a warning with the current chunk's name put in front of the message (libpng png_chunk_warning).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngerror.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C6950 (0x002C6950, 125 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Allocates and clears a png or info structure by type, through the user's allocator if one is given (libpng png_create_struct_2).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C6950.cpp --va 0x002C6950 --bin xb --match '_png_create_struct_2' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C6950
+// what: Allocates and clears a png or info structure by type, through the user's allocator if one is given (libpng png_create_struct_2).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngmem.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C69D0 (0x002C69D0, 72 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Frees a png or info structure, through the user's free function if one is given (libpng png_destroy_struct_2).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C69D0.cpp --va 0x002C69D0 --bin xb --match '_png_destroy_struct_2' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C69D0
+// what: Frees a png or info structure, through the user's free function if one is given (libpng png_destroy_struct_2).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngmem.c"
 
 // ============================================================================
 // [VERIFIED] sub_002C6A20 (0x002C6A20, 35 B)
@@ -166116,6 +167282,32 @@ int __cdecl sub_002C6A90(int a1, int a2, int a3, int a4)
     *(int*)(a1 + 588) = a4;
     return a1;
 }
+
+// ============================================================================
+// [VERIFIED] sub_002C6AC0 (0x002C6AC0, 83 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Allocates memory through the user's allocator or the default one; running out is a fatal error (libpng png_malloc).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C6AC0.cpp --va 0x002C6AC0 --bin xb --match '_png_malloc' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C6AC0
+// what: Allocates memory through the user's allocator or the default one; running out is a fatal error (libpng png_malloc).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngmem.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C6B20 (0x002C6B20, 44 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Frees memory through the user's free function or the default one; null is ignored (libpng png_free).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C6B20.cpp --va 0x002C6B20 --bin xb --match '_png_free' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C6B20
+// what: Frees memory through the user's free function or the default one; null is ignored (libpng png_free).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngmem.c"
 
 // ============================================================================
 // [VERIFIED] sub_002C6B50 (0x002C6B50, 39 B)
@@ -166306,6 +167498,110 @@ int __cdecl sub_002C8590(int a1)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002C85C0 (0x002C85C0, 38 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads chunk data and adds it to the running CRC (libpng png_crc_read).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C85C0.cpp --va 0x002C85C0 --bin xb --match '_png_crc_read' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C85C0
+// what: Reads chunk data and adds it to the running CRC (libpng png_crc_read).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C85F0 (0x002C85F0, 124 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads the chunk's stored CRC and compares it with the one computed; nonzero means they differ (libpng png_crc_error).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C85F0.cpp --va 0x002C85F0 --bin xb --match '_png_crc_error' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C85F0
+// what: Reads the chunk's stored CRC and compares it with the one computed; nonzero means they differ (libpng png_crc_error).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C8670 (0x002C8670, 968 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Inflates the compressed part of a chunk into newly allocated memory (libpng png_decompress_chunk).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C8670.cpp --va 0x002C8670 --bin xb --match '_png_decompress_chunk' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C8670
+// what: Inflates the compressed part of a chunk into newly allocated memory (libpng png_decompress_chunk).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C8A40 (0x002C8A40, 93 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Checks that a chunk's four name bytes are letters; anything else is a fatal error (libpng png_check_chunk_name).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C8A40.cpp --va 0x002C8A40 --bin xb --match '_png_check_chunk_name' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C8A40
+// what: Checks that a chunk's four name bytes are letters; anything else is a fatal error (libpng png_check_chunk_name).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C8AA0 (0x002C8AA0, 785 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Copies the pixels of the row just read into the caller's row, all of them or those the mask selects (libpng png_combine_row).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C8AA0.cpp --va 0x002C8AA0 --bin xb --match '_png_combine_row' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C8AA0
+// what: Copies the pixels of the row just read into the caller's row, all of them or those the mask selects (libpng png_combine_row).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C8DC0 (0x002C8DC0, 1106 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Spreads the pixels of an interlaced pass across the full row width (libpng png_do_read_interlace).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C8DC0.cpp --va 0x002C8DC0 --bin xb --match '_png_do_read_interlace' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C8DC0
+// what: Spreads the pixels of an interlaced pass across the full row width (libpng png_do_read_interlace).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C9220 (0x002C9220, 468 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Undoes a row's filter (sub, up, average or Paeth) using the previous row (libpng png_read_filter_row).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C9220.cpp --va 0x002C9220 --bin xb --match '_png_read_filter_row' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C9220
+// what: Undoes a row's filter (sub, up, average or Paeth) using the previous row (libpng png_read_filter_row).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C9400 (0x002C9400, 691 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Sets up row reading: interlace pass sizes, the largest pixel depth needed, and the row buffers (libpng png_read_start_row).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C9400.cpp --va 0x002C9400 --bin xb --match '_png_read_start_row' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C9400
+// what: Sets up row reading: interlace pass sizes, the largest pixel depth needed, and the row buffers (libpng png_read_start_row).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
 // [VERIFIED] sub_002C96C0 (0x002C96C0, 65 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -166338,6 +167634,279 @@ int __cdecl sub_002C96C0(int a1, int a2)
     }
     return r_esi;
 }
+
+// ============================================================================
+// [VERIFIED] sub_002C9710 (0x002C9710, 198 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Skips the rest of a chunk and checks its CRC, warning or failing as the chunk's kind requires (libpng png_crc_finish).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C9710.cpp --va 0x002C9710 --bin xb --match '_png_crc_finish' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C9710
+// what: Skips the rest of a chunk and checks its CRC, warning or failing as the chunk's kind requires (libpng png_crc_finish).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C97E0 (0x002C97E0, 452 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's IHDR chunk, the image header (size, bit depth, colour type, interlace), checks it and stores it (libpng png_handle_IHDR).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C97E0.cpp --va 0x002C97E0 --bin xb --match '_png_handle_IHDR' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C97E0
+// what: Reads a PNG file's IHDR chunk, the image header (size, bit depth, colour type, interlace), checks it and stores it (libpng png_handle_IHDR).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C99B0 (0x002C99B0, 411 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's PLTE chunk, the palette, checks it and stores it (libpng png_handle_PLTE).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C99B0.cpp --va 0x002C99B0 --bin xb --match '_png_handle_PLTE' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C99B0
+// what: Reads a PNG file's PLTE chunk, the palette, checks it and stores it (libpng png_handle_PLTE).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C9B50 (0x002C9B50, 75 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's IEND chunk, the end marker, checks it and stores it (libpng png_handle_IEND).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C9B50.cpp --va 0x002C9B50 --bin xb --match '_png_handle_IEND' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C9B50
+// what: Reads a PNG file's IEND chunk, the end marker, checks it and stores it (libpng png_handle_IEND).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C9BA0 (0x002C9BA0, 372 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's gAMA chunk, the gamma value, checks it and stores it (libpng png_handle_gAMA).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C9BA0.cpp --va 0x002C9BA0 --bin xb --match '_png_handle_gAMA' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C9BA0
+// what: Reads a PNG file's gAMA chunk, the gamma value, checks it and stores it (libpng png_handle_gAMA).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C9D20 (0x002C9D20, 374 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's sBIT chunk, the significant bits per channel, checks it and stores it (libpng png_handle_sBIT).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C9D20.cpp --va 0x002C9D20 --bin xb --match '_png_handle_sBIT' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C9D20
+// what: Reads a PNG file's sBIT chunk, the significant bits per channel, checks it and stores it (libpng png_handle_sBIT).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002C9EA0 (0x002C9EA0, 1301 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's cHRM chunk, the chromaticities (white point and primaries), checks it and stores it (libpng png_handle_cHRM).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002C9EA0.cpp --va 0x002C9EA0 --bin xb --match '_png_handle_cHRM' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002C9EA0
+// what: Reads a PNG file's cHRM chunk, the chromaticities (white point and primaries), checks it and stores it (libpng png_handle_cHRM).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CA3C0 (0x002CA3C0, 496 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's sRGB chunk, the sRGB rendering intent, checks it and stores it (libpng png_handle_sRGB).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CA3C0.cpp --va 0x002CA3C0 --bin xb --match '_png_handle_sRGB' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CA3C0
+// what: Reads a PNG file's sRGB chunk, the sRGB rendering intent, checks it and stores it (libpng png_handle_sRGB).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CA5B0 (0x002CA5B0, 433 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's iCCP chunk, the embedded colour profile, checks it and stores it (libpng png_handle_iCCP).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CA5B0.cpp --va 0x002CA5B0 --bin xb --match '_png_handle_iCCP' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CA5B0
+// what: Reads a PNG file's iCCP chunk, the embedded colour profile, checks it and stores it (libpng png_handle_iCCP).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CA9C0 (0x002CA9C0, 602 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's tRNS chunk, the transparency data, checks it and stores it (libpng png_handle_tRNS).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CA9C0.cpp --va 0x002CA9C0 --bin xb --match '_png_handle_tRNS' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CA9C0
+// what: Reads a PNG file's tRNS chunk, the transparency data, checks it and stores it (libpng png_handle_tRNS).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CAC20 (0x002CAC20, 536 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's bKGD chunk, the background colour, checks it and stores it (libpng png_handle_bKGD).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CAC20.cpp --va 0x002CAC20 --bin xb --match '_png_handle_bKGD' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CAC20
+// what: Reads a PNG file's bKGD chunk, the background colour, checks it and stores it (libpng png_handle_bKGD).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CAE40 (0x002CAE40, 367 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's hIST chunk, the palette histogram, checks it and stores it (libpng png_handle_hIST).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CAE40.cpp --va 0x002CAE40 --bin xb --match '_png_handle_hIST' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CAE40
+// what: Reads a PNG file's hIST chunk, the palette histogram, checks it and stores it (libpng png_handle_hIST).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CAFB0 (0x002CAFB0, 286 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's pHYs chunk, the pixel size (resolution), checks it and stores it (libpng png_handle_pHYs).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CAFB0.cpp --va 0x002CAFB0 --bin xb --match '_png_handle_pHYs' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CAFB0
+// what: Reads a PNG file's pHYs chunk, the pixel size (resolution), checks it and stores it (libpng png_handle_pHYs).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CB0D0 (0x002CB0D0, 287 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's oFFs chunk, the image offset, checks it and stores it (libpng png_handle_oFFs).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CB0D0.cpp --va 0x002CB0D0 --bin xb --match '_png_handle_oFFs' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CB0D0
+// what: Reads a PNG file's oFFs chunk, the image offset, checks it and stores it (libpng png_handle_oFFs).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CB1F0 (0x002CB1F0, 693 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's pCAL chunk, the pixel calibration, checks it and stores it (libpng png_handle_pCAL).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CB1F0.cpp --va 0x002CB1F0 --bin xb --match '_png_handle_pCAL' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CB1F0
+// what: Reads a PNG file's pCAL chunk, the pixel calibration, checks it and stores it (libpng png_handle_pCAL).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CB4B0 (0x002CB4B0, 441 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's sCAL chunk, the physical scale, checks it and stores it (libpng png_handle_sCAL).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CB4B0.cpp --va 0x002CB4B0 --bin xb --match '_png_handle_sCAL' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CB4B0
+// what: Reads a PNG file's sCAL chunk, the physical scale, checks it and stores it (libpng png_handle_sCAL).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CB670 (0x002CB670, 252 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's tIME chunk, the last-modified time, checks it and stores it (libpng png_handle_tIME).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CB670.cpp --va 0x002CB670 --bin xb --match '_png_handle_tIME' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CB670
+// what: Reads a PNG file's tIME chunk, the last-modified time, checks it and stores it (libpng png_handle_tIME).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CB770 (0x002CB770, 292 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's tEXt chunk, a text comment, checks it and stores it (libpng png_handle_tEXt).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CB770.cpp --va 0x002CB770 --bin xb --match '_png_handle_tEXt' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CB770
+// what: Reads a PNG file's tEXt chunk, a text comment, checks it and stores it (libpng png_handle_tEXt).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CB8A0 (0x002CB8A0, 349 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a PNG file's zTXt chunk, a compressed text comment, checks it and stores it (libpng png_handle_zTXt).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CB8A0.cpp --va 0x002CB8A0 --bin xb --match '_png_handle_zTXt' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CB8A0
+// what: Reads a PNG file's zTXt chunk, a compressed text comment, checks it and stores it (libpng png_handle_zTXt).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CBA00 (0x002CBA00, 341 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Reads a chunk libpng does not know: keeps it or passes it to the user's function, or skips it (libpng png_handle_unknown).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CBA00.cpp --va 0x002CBA00 --bin xb --match '_png_handle_unknown' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CBA00
+// what: Reads a chunk libpng does not know: keeps it or passes it to the user's function, or skips it (libpng png_handle_unknown).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CBB60 (0x002CBB60, 762 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Moves to the next row or interlace pass; after the last row it reads to the end of the image data (libpng png_read_finish_row).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CBB60.cpp --va 0x002CBB60 --bin xb --match '_png_read_finish_row' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CBB60
+// what: Moves to the next row or interlace pass; after the last row it reads to the end of the image data (libpng png_read_finish_row).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngrutil.c"
 
 // ============================================================================
 // [VERIFIED] sub_002CC090 (0x002CC090, 1 B)
@@ -166650,6 +168219,214 @@ extern "C" uLong ZEXPORT adler32(uLong adler, const Bytef *buf, uInt len)
 }
 
 // ============================================================================
+// [VERIFIED] sub_002CCDE0 (0x002CCDE0, 48 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the background colour in the image's info structure (libpng png_set_bKGD).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CCDE0.cpp --va 0x002CCDE0 --bin xb --match '_png_set_bKGD' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CCDE0
+// what: Stores the background colour in the image's info structure (libpng png_set_bKGD).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CCE10 (0x002CCE10, 695 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the chromaticities (white point and primaries) in the image's info structure (libpng png_set_cHRM).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CCE10.cpp --va 0x002CCE10 --bin xb --match '_png_set_cHRM' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CCE10
+// what: Stores the chromaticities (white point and primaries) in the image's info structure (libpng png_set_cHRM).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CD0D0 (0x002CD0D0, 560 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the chromaticities, as fixed-point numbers in the image's info structure (libpng png_set_cHRM_fixed).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CD0D0.cpp --va 0x002CD0D0 --bin xb --match '_png_set_cHRM_fixed' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CD0D0
+// what: Stores the chromaticities, as fixed-point numbers in the image's info structure (libpng png_set_cHRM_fixed).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CD300 (0x002CD300, 132 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the gamma value in the image's info structure (libpng png_set_gAMA).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CD300.cpp --va 0x002CD300 --bin xb --match '_png_set_gAMA' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CD300
+// what: Stores the gamma value in the image's info structure (libpng png_set_gAMA).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CD390 (0x002CD390, 123 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the gamma value, as a fixed-point number in the image's info structure (libpng png_set_gAMA_fixed).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CD390.cpp --va 0x002CD390 --bin xb --match '_png_set_gAMA_fixed' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CD390
+// what: Stores the gamma value, as a fixed-point number in the image's info structure (libpng png_set_gAMA_fixed).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CD410 (0x002CD410, 188 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the palette histogram in the image's info structure (libpng png_set_hIST).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CD410.cpp --va 0x002CD410 --bin xb --match '_png_set_hIST' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CD410
+// what: Stores the palette histogram in the image's info structure (libpng png_set_hIST).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CD4D0 (0x002CD4D0, 553 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the image header (size, bit depth, colour type, interlace) in the image's info structure (libpng png_set_IHDR).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CD4D0.cpp --va 0x002CD4D0 --bin xb --match '_png_set_IHDR' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CD4D0
+// what: Stores the image header (size, bit depth, colour type, interlace) in the image's info structure (libpng png_set_IHDR).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CD700 (0x002CD700, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the image offset in the image's info structure (libpng png_set_oFFs).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CD700.cpp --va 0x002CD700 --bin xb --match '_png_set_oFFs' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CD700
+// what: Stores the image offset in the image's info structure (libpng png_set_oFFs).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CD740 (0x002CD740, 455 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the pixel calibration in the image's info structure (libpng png_set_pCAL).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CD740.cpp --va 0x002CD740 --bin xb --match '_png_set_pCAL' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CD740
+// what: Stores the pixel calibration in the image's info structure (libpng png_set_pCAL).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CD910 (0x002CD910, 59 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the physical scale in the image's info structure (libpng png_set_sCAL).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CD910.cpp --va 0x002CD910 --bin xb --match '_png_set_sCAL' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CD910
+// what: Stores the physical scale in the image's info structure (libpng png_set_sCAL).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CD950 (0x002CD950, 50 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the pixel size (resolution) in the image's info structure (libpng png_set_pHYs).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CD950.cpp --va 0x002CD950 --bin xb --match '_png_set_pHYs' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CD950
+// what: Stores the pixel size (resolution) in the image's info structure (libpng png_set_pHYs).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CD990 (0x002CD990, 152 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the palette in the image's info structure (libpng png_set_PLTE).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CD990.cpp --va 0x002CD990 --bin xb --match '_png_set_PLTE' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CD990
+// what: Stores the palette in the image's info structure (libpng png_set_PLTE).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CDA30 (0x002CDA30, 40 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the significant bits per channel in the image's info structure (libpng png_set_sBIT).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CDA30.cpp --va 0x002CDA30 --bin xb --match '_png_set_sBIT' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CDA30
+// what: Stores the significant bits per channel in the image's info structure (libpng png_set_sBIT).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CDA60 (0x002CDA60, 220 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the sRGB intent with the gamma and chromaticities that go with it in the image's info structure (libpng png_set_sRGB_gAMA_and_cHRM).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CDA60.cpp --va 0x002CDA60 --bin xb --match '_png_set_sRGB_gAMA_and_cHRM' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CDA60
+// what: Stores the sRGB intent with the gamma and chromaticities that go with it in the image's info structure (libpng png_set_sRGB_gAMA_and_cHRM).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CDB40 (0x002CDB40, 297 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the embedded colour profile in the image's info structure (libpng png_set_iCCP).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CDB40.cpp --va 0x002CDB40 --bin xb --match '_png_set_iCCP' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CDB40
+// what: Stores the embedded colour profile in the image's info structure (libpng png_set_iCCP).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CDC70 (0x002CDC70, 561 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores text comments in the image's info structure (libpng png_set_text_2).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CDC70.cpp --va 0x002CDC70 --bin xb --match '_png_set_text_2' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CDC70
+// what: Stores text comments in the image's info structure (libpng png_set_text_2).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
 // [VERIFIED] sub_002CDEB0 (0x002CDEB0, 49 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -166677,6 +168454,45 @@ void __cdecl sub_002CDEB0(int a1, int a2, int a3)
 L_30:
     ;
 }
+
+// ============================================================================
+// [VERIFIED] sub_002CDEF0 (0x002CDEF0, 169 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores the transparency data in the image's info structure (libpng png_set_tRNS).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CDEF0.cpp --va 0x002CDEF0 --bin xb --match '_png_set_tRNS' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CDEF0
+// what: Stores the transparency data in the image's info structure (libpng png_set_tRNS).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CDFA0 (0x002CDFA0, 381 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores suggested palettes in the image's info structure (libpng png_set_sPLT).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CDFA0.cpp --va 0x002CDFA0 --bin xb --match '_png_set_sPLT' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CDFA0
+// what: Stores suggested palettes in the image's info structure (libpng png_set_sPLT).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
+
+// ============================================================================
+// [VERIFIED] sub_002CE120 (0x002CE120, 381 B)
+// By: RRutherrfordd (Founder) | Flags: /TC /O2 /Ot /Oy /G6 /Gd /Zp4
+// What it does: Stores chunks libpng does not know in the image's info structure (libpng png_set_unknown_chunks).
+// ============================================================================
+// verify: python portal/verify.py reports/to_submit/xb_002CE120.cpp --va 0x002CE120 --bin xb --match '_png_set_unknown_chunks' --flags "/TC /O2 /Ot /Oy /G6 /Gd /Zp4"
+// bin: xb
+// va: 0x002CE120
+// what: Stores chunks libpng does not know in the image's info structure (libpng png_set_unknown_chunks).
+// tool: Claude Fable 5.2 (the public libpng 1.2.8 source, unchanged; SPEC-014 section 5)
+// libpng 1.2.8, Copyright (c) 1998-2004 Glenn Randers-Pehrson and others. The file is the published one.
+#include "libpng-1.2.8/pngset.c"
 
 // ============================================================================
 // [VERIFIED] sub_002CE2A0 (0x002CE2A0, 5 B)
