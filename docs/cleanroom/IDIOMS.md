@@ -36,6 +36,16 @@ I11. `new T(args)` THROUGH A CLASS ALLOCATOR: `p = Alloc(sizeof T); r = p ? ctor
     Two emitted shapes from one source: D = the use duplicated in both arms (short functions), J = arms
     joined before the use (functions with a frame). [SPEC-019.]
 I12. DATA-ONLY STARTS: entry stubs are reached by `push imm32`; scan found 128. [yours, section 6.]
+I19. (pending J2) VA order inside an object = compile order, callees before callers; a lower-VA same-file
+     callee is "already compiled" for I13. [drive-thread file vs 2003 text order; save-drive file.]
+I20. Every core constructor level ends with a call to the module-name accessor 0x250EB0 (returns "core"),
+     result dropped. [0x2AA580, 0x2AA650, 0x2AC7E0, 0x2AB470, 0x2C1B00.] Other libraries will have their
+     own accessor: look for a `mov eax, imm; ret` called from constructors.
+I21. Strings: Scarface's engine wraps the C string routines (bounded copy 0x2A9520 with C-library
+     fallback in 0x2AB470; null-checked forwards 0x283AA0 / 0x283AC0). Expect a wrapper wherever 2003
+     has a bare C call. [H4; pending X1..X5 for the copy.]
+I22. Numbered library stubs: identity = shape + kernel export numbers + targets (yours, G4). A bare
+     `jmp [cell]` or `mov eax,[cell]` stub is identified by the cell's export alone. [0x239C84, 0x30A65F.]
 ```
 
 ## Added by the implementer
