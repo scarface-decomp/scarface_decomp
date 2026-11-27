@@ -5,8 +5,57 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-26T21:12:23Z</updated>
+  <updated>2026-11-26T21:14:00Z</updated>
   <author><name>Scarface decomp contributors</name></author>
+  <entry>
+    <title>core::InstanceDrive::vfunc_36 (Xbox prototype, 193 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E620"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E620</id>
+    <updated>2026-11-26T21:14:00Z</updated>
+    <summary>0x0026E620 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>core::InstanceDrive::vfunc_36 (PC, 193 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5CA0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5CA0</id>
+    <updated>2026-11-26T21:13:59Z</updated>
+    <summary>0x006E5CA0 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>core::InstanceDrive::vfunc_34 (Xbox prototype, 203 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E510"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E510</id>
+    <updated>2026-11-26T21:13:37Z</updated>
+    <summary>0x0026E510 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>core::InstanceDrive::vfunc_34 (PC, 203 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5B90"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5B90</id>
+    <updated>2026-11-26T21:13:36Z</updated>
+    <summary>0x006E5B90 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>core::InstanceDrive::vfunc_24 (Xbox prototype, 63 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E450"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E450</id>
+    <updated>2026-11-26T21:13:35Z</updated>
+    <summary>0x0026E450 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>core::InstanceDrive::vfunc_24 (PC, 63 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5AD0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5AD0</id>
+    <updated>2026-11-26T21:13:35Z</updated>
+    <summary>0x006E5AD0 in the PC version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>core::InstanceDrive::vfunc_22 (Xbox prototype, 36 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026E3F0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026E3F0</id>
+    <updated>2026-11-26T21:13:08Z</updated>
+    <summary>0x0026E3F0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
   <entry>
     <title>core::InstanceDrive::vfunc_36 (Xbox, 193 bytes) by RRutherrfordd (Founder)</title>
     <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002ABEC0"/>
@@ -307,54 +356,5 @@
     <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB340</id>
     <updated>2026-11-26T21:02:13Z</updated>
     <summary>Returns the file's name, or null on a drive whose names are used whole. 0x002AB340 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>core::InstanceDrive::vfunc_05 (Xbox, 69 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB7A0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB7A0</id>
-    <updated>2026-11-26T21:01:52Z</updated>
-    <summary>0x002AB7A0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>core::InstanceDrive::vfunc_05 (Xbox prototype, 69 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026DF00"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026DF00</id>
-    <updated>2026-11-26T21:01:52Z</updated>
-    <summary>0x0026DF00 in the Xbox prototype version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>core::InstanceDrive::vfunc_05 (PC, 69 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E5580"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E5580</id>
-    <updated>2026-11-26T21:01:51Z</updated>
-    <summary>0x006E5580 in the PC version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>core::File::vfunc_23 (Xbox, 29 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB320"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB320</id>
-    <updated>2026-11-26T21:01:30Z</updated>
-    <summary>Returns this file's last error, read under the lock. 0x002AB320 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>core::File::vfunc_07 (Xbox prototype, 69 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x0026D7E0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:proto:0x0026D7E0</id>
-    <updated>2026-11-26T21:01:10Z</updated>
-    <summary>0x0026D7E0 in the Xbox prototype version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>core::File::vfunc_07 (PC, 69 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E4EC0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:pc:0x006E4EC0</id>
-    <updated>2026-11-26T21:01:09Z</updated>
-    <summary>0x006E4EC0 in the PC version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>core::File::vfunc_21 (Xbox, 36 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002AB2C0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002AB2C0</id>
-    <updated>2026-11-26T21:00:43Z</updated>
-    <summary>Under the lock, says whether this file has no requests outstanding. 0x002AB2C0 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>
