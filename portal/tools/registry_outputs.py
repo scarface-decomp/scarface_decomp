@@ -13,8 +13,9 @@ With the function list (the portal's queue), the address-order files hold every 
 matched ones as their C++, the rest as one "// [TODO]" line each in their place, under a header that says
 how complete the file is. Without it (no game files here), they hold the matched functions only.
 
-Also docs/feed.xml (the newest matches), docs/sitemap.xml (for search engines) and docs/functions.json (the website's list of rebuilt functions:
-no code, which stays on GitHub; see site_functions).
+Also docs/feed.xml (the newest matches), docs/sitemap.xml (for search engines), docs/functions.json (the website's list of rebuilt functions:
+no code, which stays on GitHub; see site_functions), docs/map.json (every function, rebuilt or not, for the website's map
+of the code; see site_map) and docs/badge.svg (the progress badge).
 
 These files are generated. Every block compiles on its own (that is how it was verified), so a
 whole file is NOT one translation unit. Edit the registry (via the portal or
@@ -284,10 +285,8 @@ def progress_summary(registry: dict, queue: Optional[list], previous: Optional[d
     for e in entries:
         by["ps2" if ps2_overlay.is_ps2(e["bin"]) else e["bin"]] += 1         # the PS2 overlays count as the PS2
     stamps = [e.get("verified_at") or e.get("reverified_at") or "" for e in entries]
-    contributors = defaultdict(int)
-    for e in entries:
-        if e.get("verified_by"):
-            contributors[e["verified_by"]] += 1
+    import contributors as people            # one name per person (reports/contributor_aliases.json)
+    contributors = people.count(entries)
     out = {
         "schema": "scarface_progress_v1",
         "updated_at": max(stamps) if stamps else (registry.get("reset") or {}).get("at", ""),
@@ -407,6 +406,8 @@ def sitemap_xml(registry: dict) -> str:
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
            "  <url>", f"    <loc>{SITE}</loc>", "    <changefreq>daily</changefreq>", "  </url>",
            "  <url>", f"    <loc>{SITE}join.html</loc>", "    <changefreq>weekly</changefreq>", "  </url>",
+           "  <url>", f"    <loc>{SITE}game.html</loc>", "    <changefreq>weekly</changefreq>", "  </url>",
+           "  <url>", f"    <loc>{SITE}explore.html</loc>", "    <changefreq>daily</changefreq>", "  </url>",
            "  <url>", f"    <loc>{SITE}versions.html</loc>", "    <changefreq>weekly</changefreq>", "  </url>"]
     for key, e in sorted(registry.get("entries", {}).items()):
         day = str(e.get("verified_at") or e.get("reverified_at") or "")[:10]
@@ -499,6 +500,122 @@ def site_functions_json(registry: dict, places: Optional[Dict[str, tuple]] = Non
 def write_site_functions(registry: dict, docs_dir: Path, places: Optional[Dict[str, tuple]] = None) -> bool:
     path = docs_dir / "functions.json"
     text = site_functions_json(registry, places)
+    if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
+        return False
+    _write(path, text)
+    return True
+
+
+MAP_BINS = ("xb", "pc", "proto", "ps2")       # the four programs the Explore page draws
+_MAP_PLACEHOLDER = re.compile(r"^(?:sub|FUN|func)_0*([0-9A-Fa-f]+)$")
+
+
+def site_map(registry: dict, known: Dict[str, Dict[int, dict]], names: Optional[dict] = None) -> dict:
+    """Every function of each program, matched or not, in address order, for the website's Explore page
+    (docs/explore.html): its map of the program and its search. Compact: per program the first address,
+    then for each function its distance from the one before, its size and whether it is matched; names
+    only where they are more than the address (sub_00123450 is rebuilt from the address on the page),
+    and the one-line descriptions of matched functions."""
+    entries = registry.get("entries", {})
+    out = {}
+    for b in MAP_BINS:
+        fns = {va: (str(t.get("symbol") or ""), int(t.get("size") or 0)) for va, t in (known.get(b) or {}).items()}
+        done = {}
+        for k, e in entries.items():
+            if e.get("bin") == b:
+                va = int(e["va"], 16)
+                done[va] = e
+                fns[va] = (str(e.get("symbol") or ""), int(e.get("size") or 0))
+        if not fns:
+            continue
+        vas = sorted(fns)
+        deltas, sizes, state, nm, what, also = [], [], [], {}, {}, {}
+        prev = vas[0]
+        for i, va in enumerate(vas):
+            sym, size = fns[va]
+            deltas.append(va - prev)
+            prev = va
+            sizes.append(size)
+            state.append("1" if va in done else "0")
+            m = _MAP_PLACEHOLDER.match(sym)
+            if sym and not (m and int(m.group(1), 16) == va):
+                nm[str(i)] = sym
+            if va in done and done[va].get("what"):
+                what[str(i)] = str(done[va]["what"])
+            better = ((names or {}).get(f"{b}:0x{va:08X}") or {}).get("name")
+            if better and better != sym:
+                also[str(i)] = better
+        out[b] = {"label": BIN_INFO[b][2], "start": vas[0], "d": deltas, "s": sizes, "m": "".join(state),
+                  "names": nm, "better": also, "what": what}
+    stamps = [e.get("verified_at") or "" for e in entries.values()]
+    return {"schema": "scarface_site_map_v1",
+            "about": "Every function of each program, matched (m=1) or still open (m=0), in address order, for the "
+                     "website's Explore page. Address i = start + d[0] + ... + d[i]; s[i] is its size in bytes; "
+                     "names[i] where the name is more than the address; better[i] a name from reports/names.json; "
+                     "what[i] what a matched function does. Generated by portal/tools/registry_outputs.py.",
+            "updated_at": max(stamps) if stamps else "", "bins": out}
+
+
+def write_site_map(registry: dict, docs_dir: Path, known: Dict[str, Dict[int, dict]]) -> bool:
+    import json
+    if not any(known.get(b) for b in MAP_BINS):
+        return False                       # no function list here: keep the map that is committed
+    names = None
+    try:
+        names = json.loads((docs_dir.parent / "reports" / "names.json").read_text(encoding="utf-8")).get("names")
+    except (OSError, ValueError, AttributeError):
+        pass
+    data = site_map(registry, known, names if isinstance(names, dict) else None)
+    path = docs_dir / "map.json"
+    try:
+        old = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        old = None
+    if old is not None:
+        # a computer with only some of the game files keeps the committed map of the others
+        for b, v in (old.get("bins") or {}).items():
+            if b not in data["bins"] and b in MAP_BINS:
+                data["bins"][b] = v
+    text = json.dumps(data, ensure_ascii=False, separators=(",", ":")) + "\n"
+    if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
+        return False
+    _write(path, text)
+    return True
+
+
+def badge_svg(progress: dict) -> str:
+    """A progress badge for the README and for anyone linking the project, in the flat style shields.io made
+    common (drawn here, so the site needs no outside service)."""
+    v = progress.get("verified") or {}
+    q = progress.get("queue") or {}
+    done_b, open_b = int(v.get("bytes") or 0), int(q.get("bytes") or 0)
+    pct = 100.0 * done_b / (done_b + open_b) if done_b + open_b else 0.0
+    left, right = "Scarface decomp", f"{pct:.1f}% of the code"
+    # widths from an average character width of the 11px sans-serif the badge uses
+    lw, rw = 12 + int(len(left) * 6.4), 12 + int(len(right) * 6.4)
+    w = lw + rw
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="20" role="img" '
+            f'aria-label="{left}: {right}"><title>{left}: {right}</title>'
+            f'<linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/>'
+            f'<stop offset="1" stop-opacity=".1"/></linearGradient>'
+            f'<clipPath id="r"><rect width="{w}" height="20" rx="3" fill="#fff"/></clipPath>'
+            f'<g clip-path="url(#r)"><rect width="{lw}" height="20" fill="#0A0A0A"/>'
+            f'<rect x="{lw}" width="{rw}" height="20" fill="#B5121B"/><rect width="{w}" height="20" fill="url(#s)"/></g>'
+            f'<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">'
+            f'<text x="{lw / 2:.1f}" y="15" fill="#010101" fill-opacity=".3">{left}</text>'
+            f'<text x="{lw / 2:.1f}" y="14">{left}</text>'
+            f'<text x="{lw + rw / 2:.1f}" y="15" fill="#010101" fill-opacity=".3">{right}</text>'
+            f'<text x="{lw + rw / 2:.1f}" y="14">{right}</text></g></svg>\n')
+
+
+def write_badge(docs_dir: Path) -> bool:
+    import json
+    try:
+        progress = json.loads((docs_dir.parent / "reports" / "progress.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return False
+    text = badge_svg(progress)
+    path = docs_dir / "badge.svg"
     if path.exists() and path.read_text(encoding="utf-8").replace("\r\n", "\n") == text:
         return False
     _write(path, text)
@@ -662,6 +779,10 @@ def write_outputs(registry: dict, recon_dir: Path, queue: Optional[list] = None,
         written.append("../docs/functions.json")
     if write_sitemap(registry, recon_dir.parent / "docs"):
         written.append("../docs/sitemap.xml")
+    if write_site_map(registry, recon_dir.parent / "docs", known):
+        written.append("../docs/map.json")
+    if write_badge(recon_dir.parent / "docs"):
+        written.append("../docs/badge.svg")
     return written
 
 

@@ -4,8 +4,11 @@
 ![Compiler](https://img.shields.io/badge/compiler-MSVC%207.1%20(13.10.3052%20or%203077)-5C2D91?style=flat-square)
 ![Target](https://img.shields.io/badge/target-Xbox%20%2B%20PC%201.00.2%20%2B%20PS2-c90016?style=flat-square)
 [![Discord](https://img.shields.io/badge/Discord-join%20us-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/azvrtGBvau)
+[![Progress](https://scarface-decomp.pages.dev/badge.svg)](https://scarface-decomp.pages.dev/explore.html)
 
 **Website and live progress: [scarface-decomp.pages.dev](https://scarface-decomp.pages.dev)** ·
+**Map of the code: [Explore](https://scarface-decomp.pages.dev/explore.html)** ·
+**Playing and modding the game: [The game](https://scarface-decomp.pages.dev/game.html)** ·
 **Questions and help: [Discord](https://discord.gg/azvrtGBvau)**
 
 A matching decompilation of **Scarface: The World Is Yours** (Radical Entertainment, 2006): C++ source

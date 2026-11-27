@@ -20,8 +20,8 @@ A person can start you with one sentence: **"Read AGENTS.md in this repository a
    addresses. Calls and globals are written `sub_XXXXXXXX` / `DAT_XXXXXXXX` (that name is how the address
    is checked), or by a name `reports/names.json` gives that address.
 4. **Don't edit what is generated.** Not `reports/verified_registry.json`, `reports/progress.json`,
-   `reconstructed_src/`, `docs/functions.json`, `docs/feed.xml`, `docs/sitemap.xml`. Only the portal
-   writes those.
+   `reconstructed_src/`, `docs/functions.json`, `docs/map.json`, `docs/badge.svg`, `docs/feed.xml`,
+   `docs/sitemap.xml`. Only the portal writes those.
 5. **No credentials.** Don't read `portal/private/` or any token file. Don't ask for, type or store the
    person's handle PIN or API keys. Recording a match is the person's step, not yours.
 6. **Don't commit, push or open pull requests** unless the person asks you to.

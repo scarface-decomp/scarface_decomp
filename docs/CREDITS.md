@@ -41,6 +41,20 @@ authors are credited in the commit history. Thank you.
   the [Halo 2 decompilation](https://github.com/kirklandsig/halo2-decompiled) (Xbox, MSVC 7.1) and
   [LEGO Island](https://github.com/isledecomp/isle) with its [reccmp](https://github.com/isledecomp/reccmp)
   tools (MSVC 4.2). No code was taken from them.
+* [objdiff](https://github.com/encounter/objdiff) and [decomp.dev](https://github.com/encounter/decomp.dev) by Luke
+  Street (encounter): the website's map of the code (`explore.html`) follows their progress maps, and its progress
+  badge (`badge.svg`) the badges decomp.dev makes for projects, in the flat style of
+  [Shields.io](https://shields.io). The code that draws them is the project's own (`docs/js/explore.js`,
+  `portal/tools/registry_outputs.py`).
+* The website's page for players and modders (`game.html`) links to the people who made each fix, mod, tool, emulator
+  and wiki it lists: SilentPatch, Scarface Fusion Fix, PCGamingWiki, [xemu](https://xemu.app),
+  [PCSX2](https://wiki.pcsx2.net/Scarface:_The_World_Is_Yours), the Scarface Remastered Project, ScarfaceHook,
+  Gangsta Team, ScarfaceEX, scarface-p3d, the STWIY ToolKit, Broken Face, Nexus Mods, the
+  [Scarface Wiki](https://scarface.fandom.com/wiki/Scarface_Wiki), [StrategyWiki](https://strategywiki.org/wiki/Scarface:_The_World_Is_Yours),
+  [The Cutting Room Floor](https://tcrf.net/Scarface:_The_World_Is_Yours),
+  [IMFDB](https://imfdb.org/wiki/Scarface:_The_World_is_Yours), [MobyGames](https://www.mobygames.com/game/25362/scarface-the-world-is-yours/),
+  Wikipedia and [Lutris](https://lutris.net/games/scarface-the-world-is-yours/) (the 60 frames a second tip).
+  Only links and a line on each, in the site's own words.
 * [decomp.me](https://decomp.me), which hosts the same compiler (`msvc7.1`) for working on functions in
   the browser.
 * For the script and archive formats: the [STWIY ToolKit](https://github.com/STWIY/ToolKit) (layout of

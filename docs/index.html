@@ -257,8 +257,8 @@
     footer .wrap { padding-top: 38px; padding-bottom: 54px; color: var(--grey); font-size: 0.86rem; display: grid; gap: 14px; text-align: center; }
     footer .links { margin-top: 0; }
 
-    .topbar .wrap { max-width: 1360px; }
-    @media (max-width: 1320px) {
+    .topbar .wrap { max-width: 1560px; }
+    @media (max-width: 1580px) {
       /* the contents move to their own scrolling row under the name */
       html { scroll-padding-top: 118px; }
       .topbar .wrap { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "brand gh" "toc toc"; height: auto; gap: 6px 16px; padding-top: 10px; }
@@ -284,6 +284,14 @@
       .facts { gap: 10px 30px; }
       .brand { letter-spacing: 0.12em; font-size: 0.95rem; }
       a.gh { padding: 6px 11px; }
+    }
+    /* narrow screens keep the pages and the Discord in the bar; decomp.me and GitHub are linked further down */
+    @media (max-width: 760px) {
+      a.gh.x-dme { display: none; }
+    }
+    @media (max-width: 600px) {
+      a.gh.x-gh { display: none; }
+      .ext { gap: 6px; }
     }
     @media (max-width: 520px) {
       .brand .brand-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -314,9 +322,11 @@
         <a href="#reference"><span class="n" aria-hidden="true">05</span>Reference</a>
       </nav>
       <div class="ext">
+        <a class="gh" href="game.html" title="Play it, mod it, read about it: everything for the game">The game</a>
+        <a class="gh" href="explore.html" title="A map of every function, rebuilt or not, and a search">Explore</a>
         <a class="gh" href="https://discord.gg/azvrtGBvau" target="_blank" rel="noopener noreferrer">Discord</a>
-        <a class="gh" href="https://decomp.me/preset/266" target="_blank" rel="noopener noreferrer" title="Everyone's Scarface scratches on decomp.me">decomp.me</a>
-        <a class="gh" data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="gh x-dme" href="https://decomp.me/preset/266" target="_blank" rel="noopener noreferrer" title="Everyone's Scarface scratches on decomp.me">decomp.me</a>
+        <a class="gh x-gh" data-repo-link="" href="https://github.com/scarface-decomp/scarface_decomp" target="_blank" rel="noopener noreferrer">GitHub</a>
       </div>
     </div>
   </header>
@@ -682,6 +692,12 @@
         <p class="intro">What the project has worked out about the game so far. Useful for modding and research as much as for
           rebuilding the code.</p>
         <ul class="rules refs">
+          <li><b><a href="explore.html">A map of the game's code</a></b>
+            Every function of the Xbox, PC, PS2 and prototype programs in the order the program has them, rebuilt or still to
+            do. Search them by name, address or what they do, or get a small one to start on.</li>
+          <li><b><a href="game.html">Play it, mod it, read about it</a></b>
+            The fixes that make the PC game run today, the emulators for the console versions, the community's mods and
+            tools, and the wikis, each linked to the people who made it.</li>
           <li><b><a data-repo-link="/blob/main/docs/FORMATS.md" href="https://github.com/scarface-decomp/scarface_decomp/blob/main/docs/FORMATS.md" target="_blank" rel="noopener noreferrer">The game's file formats</a></b>
             How the archives (<code>.rcf</code>), models and textures (Pure3D), sounds (<code>.rsd</code>), videos and scripts are
             laid out on each version, and which of the project's tools read them.</li>
