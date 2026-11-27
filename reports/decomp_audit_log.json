@@ -1,5 +1,21 @@
 [
   {
+    "time": "2026-11-26 21:14:22",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of core::InstanceDrive::vfunc_36",
+    "va": "0x002ABEC0",
+    "bytes": "same code, own addresses"
+  },
+  {
+    "time": "2026-11-26 21:13:59",
+    "user": "RRutherrfordd (Founder)",
+    "action": "VERIFIED",
+    "symbol": "2 look-alike(s) of core::InstanceDrive::vfunc_34",
+    "va": "0x002ABDB0",
+    "bytes": "same code, own addresses"
+  },
+  {
     "time": "2026-11-26 21:13:35",
     "user": "RRutherrfordd (Founder)",
     "action": "VERIFIED",
@@ -1981,22 +1997,6 @@
     "action": "VERIFIED",
     "symbol": "1 look-alike(s) of sub_0001EF60",
     "va": "0x0001EF60",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-25 20:54:28",
-    "user": "NoahBPeterson",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_001B5D80",
-    "va": "Proto 0x001B5D80",
-    "bytes": "same code, own addresses"
-  },
-  {
-    "time": "2026-11-25 20:54:09",
-    "user": "RRutherrfordd (Founder)",
-    "action": "VERIFIED",
-    "symbol": "1 look-alike(s) of sub_0018C690",
-    "va": "0x0018C690",
     "bytes": "same code, own addresses"
   }
 ]

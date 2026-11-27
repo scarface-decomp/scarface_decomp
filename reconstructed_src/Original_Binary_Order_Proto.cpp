@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — April 2006 prototype game.xbe, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 11,362 of 21,836 functions matched (52.03%). NOT COMPLETE YET.
-// The 10,474 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 11,366 of 21,836 functions matched (52.05%). NOT COMPLETE YET.
+// The 10,470 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -314809,7 +314809,95 @@ void core::File::vfunc_20(int a)
     m_Drive->sub_0026EE10((Request*)request, m_Priority, false);
 }
 
-// [TODO] 0x0026E3F0 core::InstanceDrive::vfunc_22 (36 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_22 (0x0026E3F0, 36 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_22 (0x002ABC90), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026E3F0
+// what: Under the lock, says whether this handle has no requests outstanding.
+// tool: Claude (from SPEC-019)
+
+struct Thread;
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void* __cdecl sub_002A9880(unsigned int size);      // the request classes' allocator
+void* __cdecl sub_002AAEA0(unsigned int size);      // core::File's allocator
+// Splits a path into its parts: the directory, the extension and two pointers into the name.
+void __cdecl sub_00251220(const char* name, char* directory, char* extension, const char** tail, const char** full);
+
+namespace core
+{
+    class Request;
+    class File;
+    class InstanceDrive;
+
+    // The reference-counted start of every drive and file interface.
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // The lock every drive and file object has as its second part.
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The real drive (SPEC-017): only what these classes use of it.
+    class Drive
+    {
+    public:
+        virtual void AddRef();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int GetCapabilities();     // slot 8; bit 7: names are used whole, with their directory
+        void sub_002AC690(Request* request, int priority, bool atHead);     // queue a request on the drive's thread
+        bool sub_002AC5B0();    // whether the drive is in its error state
+        int sub_002AC3E0();     // the drive's last error
+    };
+
+    class IDrive : public IRefCount
+    {
+    };
+
+    // One user's handle on a drive: it turns each call into a request queued on the real drive.
+    class InstanceDrive : public IDrive, public IMutable
+    {
+    public:
+        virtual void vfunc_02();
+        virtual void Destroy(int flags);    // slot 3
+        bool vfunc_22();
+
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C  the real drive
+        int m_Priority;         // +0x10  the priority its requests are queued with
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        int m_Field1C;          // +0x1C
+        bool m_FindOpen;        // +0x20  a directory search is open
+    };
+
+}
+
+bool core::InstanceDrive::vfunc_22()
+{
+    Lock();
+    bool idle = m_Outstanding == 0;
+    Unlock();
+    return idle;
+}
+
 // ============================================================================
 // [VERIFIED] core::InstanceDrive::vfunc_23 (0x0026E420, 47 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -314874,7 +314962,103 @@ void InstanceDrive::vfunc_23()
 
 }
 
-// [TODO] 0x0026E450 core::InstanceDrive::vfunc_24 (63 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_24 (0x0026E450, 63 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_24 (0x002ABCF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026E450
+// what: Under the lock, returns the real drive's last error if it is in its error state, else this handle's own.
+// tool: Claude (from SPEC-019)
+
+struct Thread;
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void* __cdecl sub_002A9880(unsigned int size);      // the request classes' allocator
+void* __cdecl sub_002AAEA0(unsigned int size);      // core::File's allocator
+// Splits a path into its parts: the directory, the extension and two pointers into the name.
+void __cdecl sub_00251220(const char* name, char* directory, char* extension, const char** tail, const char** full);
+
+namespace core
+{
+    class Request;
+    class File;
+    class InstanceDrive;
+
+    // The reference-counted start of every drive and file interface.
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // The lock every drive and file object has as its second part.
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The real drive (SPEC-017): only what these classes use of it.
+    class Drive
+    {
+    public:
+        virtual void AddRef();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int GetCapabilities();     // slot 8; bit 7: names are used whole, with their directory
+        void sub_002AC690(Request* request, int priority, bool atHead);     // queue a request on the drive's thread
+        bool sub_0026ED30();    // whether the drive is in its error state
+        int sub_0026EB60();     // the drive's last error
+    };
+
+    class IDrive : public IRefCount
+    {
+    };
+
+    // One user's handle on a drive: it turns each call into a request queued on the real drive.
+    class InstanceDrive : public IDrive, public IMutable
+    {
+    public:
+        virtual void vfunc_02();
+        virtual void Destroy(int flags);    // slot 3
+        int vfunc_24();
+
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C  the real drive
+        int m_Priority;         // +0x10  the priority its requests are queued with
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        int m_Field1C;          // +0x1C
+        bool m_FindOpen;        // +0x20  a directory search is open
+    };
+
+}
+
+int core::InstanceDrive::vfunc_24()
+{
+    int error;
+    Lock();
+    if (m_Drive->sub_0026ED30())
+    {
+        error = m_Drive->sub_0026EB60();
+    }
+    else
+    {
+        error = m_LastError;
+    }
+    Unlock();
+    return error;
+}
+
 // ============================================================================
 // [VERIFIED] core::InstanceDrive::vfunc_25 (0x0026E490, 8 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -315363,7 +315547,111 @@ void InstanceDrive::vfunc_33()
 
 }
 
-// [TODO] 0x0026E510 core::InstanceDrive::vfunc_34 (203 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_34 (0x0026E510, 203 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_34 (0x002ABDB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026E510
+// what: Opens a file: splits the name, allocates a file object and constructs it, which queues the open request.
+// tool: Claude (from SPEC-019)
+
+struct Thread;
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void* __cdecl sub_002A9880(unsigned int size);      // the request classes' allocator
+void* __cdecl sub_0026D5E0(unsigned int size);      // core::File's allocator
+// Splits a path into its parts: the directory, the extension and two pointers into the name.
+void __cdecl sub_0020DDB0(const char* name, char* directory, char* extension, const char** tail, const char** full);
+
+namespace core
+{
+    class Request;
+    class File;
+    class InstanceDrive;
+
+    // The reference-counted start of every drive and file interface.
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // The lock every drive and file object has as its second part.
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The real drive (SPEC-017): only what these classes use of it.
+    class Drive
+    {
+    public:
+        virtual void AddRef();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int GetCapabilities();     // slot 8; bit 7: names are used whole, with their directory
+        void sub_002AC690(Request* request, int priority, bool atHead);     // queue a request on the drive's thread
+        bool sub_002AC5B0();    // whether the drive is in its error state
+        int sub_002AC3E0();     // the drive's last error
+    };
+
+    class File
+    {
+    public:
+        File* sub_0026DCD0(Drive* drive, const char* name, bool a3, int a4, int a5, int a6, int a7, int a8, bool queue);
+        File* sub_002AB470(Drive* drive, const char* name, bool a3, int a4, int a5, int a6, int a7);
+        char m_Data[0x168];
+    };
+
+    class IDrive : public IRefCount
+    {
+    };
+
+    // One user's handle on a drive: it turns each call into a request queued on the real drive.
+    class InstanceDrive : public IDrive, public IMutable
+    {
+    public:
+        virtual void vfunc_02();
+        virtual void Destroy(int flags);    // slot 3
+        void vfunc_34(File** out, const char* name, bool a3, int a4, int a5, int a6, int a7, int a8);
+
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C  the real drive
+        int m_Priority;         // +0x10  the priority its requests are queued with
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        int m_Field1C;          // +0x1C
+        bool m_FindOpen;        // +0x20  a directory search is open
+    };
+
+}
+
+void core::InstanceDrive::vfunc_34(File** out, const char* name, bool a3, int a4, int a5, int a6, int a7, int a8)
+{
+    const char* full = 0;
+    const char* tail = 0;
+    char extension[0x14];
+    char directory[0x104];
+    sub_0020DDB0(name, directory, extension, &tail, &full);
+    const char* path = tail;
+    if (m_Drive->GetCapabilities() & 0x80)
+    {
+        path = full;
+    }
+    File* memory = (File*)sub_0026D5E0(sizeof(File));
+    *out = memory ? memory->sub_0026DCD0(m_Drive, path, a3, a4, a5, a6, a7, a8, true) : 0;
+}
+
 // ============================================================================
 // [VERIFIED] core::InstanceDrive::vfunc_35 (0x0026E5E0, 64 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -315455,7 +315743,111 @@ void InstanceDrive::vfunc_35(int a1, int a2, int a3, int a4, int a5, int a6, int
 
 }
 
-// [TODO] 0x0026E620 core::InstanceDrive::vfunc_36 (193 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_36 (0x0026E620, 193 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_36 (0x002ABEC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x0026E620
+// what: Opens a saved game: splits the name, allocates a file object and constructs it, which queues the open.
+// tool: Claude (from SPEC-019)
+
+struct Thread;
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void* __cdecl sub_002A9880(unsigned int size);      // the request classes' allocator
+void* __cdecl sub_0026D5E0(unsigned int size);      // core::File's allocator
+// Splits a path into its parts: the directory, the extension and two pointers into the name.
+void __cdecl sub_0020DDB0(const char* name, char* directory, char* extension, const char** tail, const char** full);
+
+namespace core
+{
+    class Request;
+    class File;
+    class InstanceDrive;
+
+    // The reference-counted start of every drive and file interface.
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // The lock every drive and file object has as its second part.
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The real drive (SPEC-017): only what these classes use of it.
+    class Drive
+    {
+    public:
+        virtual void AddRef();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int GetCapabilities();     // slot 8; bit 7: names are used whole, with their directory
+        void sub_002AC690(Request* request, int priority, bool atHead);     // queue a request on the drive's thread
+        bool sub_002AC5B0();    // whether the drive is in its error state
+        int sub_002AC3E0();     // the drive's last error
+    };
+
+    class File
+    {
+    public:
+        File* sub_002AB570(Drive* drive, const char* name, bool a3, int a4, int a5, int a6, int a7, int a8, bool queue);
+        File* sub_0026DBD0(Drive* drive, const char* name, bool a3, int a4, int a5, int a6, int a7);
+        char m_Data[0x168];
+    };
+
+    class IDrive : public IRefCount
+    {
+    };
+
+    // One user's handle on a drive: it turns each call into a request queued on the real drive.
+    class InstanceDrive : public IDrive, public IMutable
+    {
+    public:
+        virtual void vfunc_02();
+        virtual void Destroy(int flags);    // slot 3
+        void vfunc_36(File** out, const char* name, bool a3, int a4, int a5, int a6, int a7);
+
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C  the real drive
+        int m_Priority;         // +0x10  the priority its requests are queued with
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        int m_Field1C;          // +0x1C
+        bool m_FindOpen;        // +0x20  a directory search is open
+    };
+
+}
+
+void core::InstanceDrive::vfunc_36(File** out, const char* name, bool a3, int a4, int a5, int a6, int a7)
+{
+    const char* full = 0;
+    const char* tail = 0;
+    char extension[0x14];
+    char directory[0x104];
+    sub_0020DDB0(name, directory, extension, &tail, &full);
+    const char* path = tail;
+    if (m_Drive->GetCapabilities() & 0x80)
+    {
+        path = full;
+    }
+    File* memory = (File*)sub_0026D5E0(sizeof(File));
+    *out = memory ? memory->sub_0026DBD0(m_Drive, path, a3, a4, a5, a6, a7) : 0;
+}
+
 // ============================================================================
 // [VERIFIED] core::InstanceDrive::vfunc_37 (0x0026E6F0, 59 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4

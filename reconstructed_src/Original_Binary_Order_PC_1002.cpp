@@ -1,8 +1,8 @@
 // ============================================================================
 // SCARFACE: THE WORLD IS YOURS — Retail PC Scarface.exe v1.00.2, every function in address order
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 788 of 1,430 functions matched (55.10%). NOT COMPLETE YET.
-// The 642 still to do are listed in their place below as "// [TODO] address name (size)"
+// PROGRESS: 790 of 1,430 functions matched (55.24%). NOT COMPLETE YET.
+// The 640 still to do are listed in their place below as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -8329,7 +8329,111 @@ void InstanceDrive::vfunc_33()
 
 }
 
-// [TODO] 0x006E5B90 core::InstanceDrive::vfunc_34 (203 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_34 (0x006E5B90, 203 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_34 (0x002ABDB0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E5B90
+// what: Opens a file: splits the name, allocates a file object and constructs it, which queues the open request.
+// tool: Claude (from SPEC-019)
+
+struct Thread;
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void* __cdecl sub_002A9880(unsigned int size);      // the request classes' allocator
+void* __cdecl sub_006E4CC0(unsigned int size);      // core::File's allocator
+// Splits a path into its parts: the directory, the extension and two pointers into the name.
+void __cdecl sub_006DCB40(const char* name, char* directory, char* extension, const char** tail, const char** full);
+
+namespace core
+{
+    class Request;
+    class File;
+    class InstanceDrive;
+
+    // The reference-counted start of every drive and file interface.
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // The lock every drive and file object has as its second part.
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The real drive (SPEC-017): only what these classes use of it.
+    class Drive
+    {
+    public:
+        virtual void AddRef();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int GetCapabilities();     // slot 8; bit 7: names are used whole, with their directory
+        void sub_002AC690(Request* request, int priority, bool atHead);     // queue a request on the drive's thread
+        bool sub_002AC5B0();    // whether the drive is in its error state
+        int sub_002AC3E0();     // the drive's last error
+    };
+
+    class File
+    {
+    public:
+        File* sub_006E5350(Drive* drive, const char* name, bool a3, int a4, int a5, int a6, int a7, int a8, bool queue);
+        File* sub_002AB470(Drive* drive, const char* name, bool a3, int a4, int a5, int a6, int a7);
+        char m_Data[0x168];
+    };
+
+    class IDrive : public IRefCount
+    {
+    };
+
+    // One user's handle on a drive: it turns each call into a request queued on the real drive.
+    class InstanceDrive : public IDrive, public IMutable
+    {
+    public:
+        virtual void vfunc_02();
+        virtual void Destroy(int flags);    // slot 3
+        void vfunc_34(File** out, const char* name, bool a3, int a4, int a5, int a6, int a7, int a8);
+
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C  the real drive
+        int m_Priority;         // +0x10  the priority its requests are queued with
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        int m_Field1C;          // +0x1C
+        bool m_FindOpen;        // +0x20  a directory search is open
+    };
+
+}
+
+void core::InstanceDrive::vfunc_34(File** out, const char* name, bool a3, int a4, int a5, int a6, int a7, int a8)
+{
+    const char* full = 0;
+    const char* tail = 0;
+    char extension[0x14];
+    char directory[0x104];
+    sub_006DCB40(name, directory, extension, &tail, &full);
+    const char* path = tail;
+    if (m_Drive->GetCapabilities() & 0x80)
+    {
+        path = full;
+    }
+    File* memory = (File*)sub_006E4CC0(sizeof(File));
+    *out = memory ? memory->sub_006E5350(m_Drive, path, a3, a4, a5, a6, a7, a8, true) : 0;
+}
+
 // ============================================================================
 // [VERIFIED] core::InstanceDrive::vfunc_35 (0x006E5C60, 64 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -8423,7 +8527,111 @@ void InstanceDrive::vfunc_35(int a1, int a2, int a3, int a4, int a5, int a6, int
 
 }
 
-// [TODO] 0x006E5CA0 core::InstanceDrive::vfunc_36 (193 B)
+// ============================================================================
+// [VERIFIED] core::InstanceDrive::vfunc_36 (0x006E5CA0, 193 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as core::InstanceDrive::vfunc_36 (0x002ABEC0), which was matched first;
+// its addresses and names were swapped for this function's.
+// bin: xb
+// va: 0x006E5CA0
+// what: Opens a saved game: splits the name, allocates a file object and constructs it, which queues the open.
+// tool: Claude (from SPEC-019)
+
+struct Thread;
+Thread* __cdecl sub_00283EB0();                     // the calling thread's record
+void* __cdecl sub_002A9880(unsigned int size);      // the request classes' allocator
+void* __cdecl sub_006E4CC0(unsigned int size);      // core::File's allocator
+// Splits a path into its parts: the directory, the extension and two pointers into the name.
+void __cdecl sub_006DCB40(const char* name, char* directory, char* extension, const char** tail, const char** full);
+
+namespace core
+{
+    class Request;
+    class File;
+    class InstanceDrive;
+
+    // The reference-counted start of every drive and file interface.
+    class IRefCount
+    {
+    public:
+        virtual void AddRef();
+        virtual void Release();
+    };
+
+    // The lock every drive and file object has as its second part.
+    class IMutable
+    {
+    public:
+        virtual void Lock();
+        virtual void Unlock();
+    };
+
+    // The real drive (SPEC-017): only what these classes use of it.
+    class Drive
+    {
+    public:
+        virtual void AddRef();
+        virtual void vfunc_01();
+        virtual void vfunc_02();
+        virtual void vfunc_03();
+        virtual void vfunc_04();
+        virtual void vfunc_05();
+        virtual void vfunc_06();
+        virtual void vfunc_07();
+        virtual unsigned int GetCapabilities();     // slot 8; bit 7: names are used whole, with their directory
+        void sub_002AC690(Request* request, int priority, bool atHead);     // queue a request on the drive's thread
+        bool sub_002AC5B0();    // whether the drive is in its error state
+        int sub_002AC3E0();     // the drive's last error
+    };
+
+    class File
+    {
+    public:
+        File* sub_002AB570(Drive* drive, const char* name, bool a3, int a4, int a5, int a6, int a7, int a8, bool queue);
+        File* sub_006E5250(Drive* drive, const char* name, bool a3, int a4, int a5, int a6, int a7);
+        char m_Data[0x168];
+    };
+
+    class IDrive : public IRefCount
+    {
+    };
+
+    // One user's handle on a drive: it turns each call into a request queued on the real drive.
+    class InstanceDrive : public IDrive, public IMutable
+    {
+    public:
+        virtual void vfunc_02();
+        virtual void Destroy(int flags);    // slot 3
+        void vfunc_36(File** out, const char* name, bool a3, int a4, int a5, int a6, int a7);
+
+        int m_RefCount;         // +0x08
+        Drive* m_Drive;         // +0x0C  the real drive
+        int m_Priority;         // +0x10  the priority its requests are queued with
+        int m_Outstanding;      // +0x14
+        int m_LastError;        // +0x18
+        int m_Field1C;          // +0x1C
+        bool m_FindOpen;        // +0x20  a directory search is open
+    };
+
+}
+
+void core::InstanceDrive::vfunc_36(File** out, const char* name, bool a3, int a4, int a5, int a6, int a7)
+{
+    const char* full = 0;
+    const char* tail = 0;
+    char extension[0x14];
+    char directory[0x104];
+    sub_006DCB40(name, directory, extension, &tail, &full);
+    const char* path = tail;
+    if (m_Drive->GetCapabilities() & 0x80)
+    {
+        path = full;
+    }
+    File* memory = (File*)sub_006E4CC0(sizeof(File));
+    *out = memory ? memory->sub_006E5250(m_Drive, path, a3, a4, a5, a6, a7) : 0;
+}
+
 // ============================================================================
 // [VERIFIED] core::InstanceDrive::vfunc_37 (0x006E5D70, 59 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
@@ -31473,4 +31681,78 @@ void* d3dVertexFadeShader::vfunc_19()
 // [VERIFIED] sub_00709FE2 (0x00709FE2, 6 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
-// Same machine code as sub_00012130 (0x00012130
+// Same machine code as sub_00012130 (0x00012130), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_00709FE2 (0x00709FE2, 6 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+extern "C" int DAT_0072F308;
+
+class Class_00709FE2
+{
+public:
+    void sub_00709FE2();
+};
+
+void Class_00709FE2::sub_00709FE2()
+{
+    ((void (__cdecl*)(void))DAT_0072F308)();
+}
+
+// ============================================================================
+// [VERIFIED] sub_0072C940 (0x0072C940, 1 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006DEDF0 (PC 0x006DEDF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0072C940 (PC 0x0072C940, 1 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+void __cdecl sub_0072C940(void)
+{
+}
+
+// ============================================================================
+// [VERIFIED] sub_0072CC00 (0x0072CC00, 1 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006DEDF0 (PC 0x006DEDF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0072CC00 (PC 0x0072CC00, 1 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+void __cdecl sub_0072CC00(void)
+{
+}
+
+// ============================================================================
+// [VERIFIED] sub_0072CC10 (0x0072CC10, 1 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006DEDF0 (PC 0x006DEDF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0072CC10 (PC 0x0072CC10, 1 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+void __cdecl sub_0072CC10(void)
+{
+}
+
+// ============================================================================
+// [VERIFIED] sub_0072CD30 (0x0072CD30, 1 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
+// ============================================================================
+// Same machine code as sub_006DEDF0 (PC 0x006DEDF0), which was matched first;
+// its addresses and names were swapped for this function's.
+// sub_0072CD30 (PC 0x0072CD30, 1 bytes)
+// Starter code written from the disassembly. Names and types are guesses; rename and
+// retype them as you work it out. Calls and globals already use their real addresses.
+
+void __cdecl sub_0072CD30(void)
+{
+}
+
