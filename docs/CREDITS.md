@@ -64,6 +64,10 @@ authors are credited in the commit history. Thank you.
   named in the game's own program, but it was ScarfaceHook and
   [ScarfaceEX](https://www.moddb.com/mods/scarfaceex), which call them, that showed they were there to
   be read ([NAMES.md](NAMES.md)).
+* A static recompilation of the PC game to ARM64, shared with the founder: its bug report of
+  21 November 2026 traced a stall after the opening credits drive to the game's own streaming code
+  ([GAME_BUGS.md](GAME_BUGS.md)). What it says the functions do is carried to thirteen Xbox functions as
+  leads (`reports/recomp_leads_xb.json`). No code was copied.
 * [Scarface Fusion Fix](https://github.com/ThirteenAG/WidescreenFixesPack) by ThirteenAG (MIT), which fixes
   the PC game's mouse, controller, menus and display. Where it hooks the game says what those places are
   for: fifteen Xbox functions and six variables carry such a lead (`reports/fusionfix_leads_xb.json`),

@@ -198,3 +198,18 @@ def test_packet_gives_a_lead_from_a_sibling_game(monkeypatch, tmp_path):
     monkeypatch.setattr(A, "_SIBLING_LEADS", None)
     monkeypatch.setattr(A, "ROOT", tmp_path / "nothing here")
     assert A.sibling_lead("xb", 0x002C70E0) == ""
+
+
+def test_packet_gives_a_lead_from_the_streaming_bug_report(monkeypatch, tmp_path):
+    (tmp_path / "reports").mkdir()
+    (tmp_path / "reports" / "recomp_leads_xb.json").write_text(json.dumps({"functions": [
+        {"xb": "0x00093590", "size": 58, "pc": "0x004B7F70", "role": "Picks a free streaming slot.",
+         "how_sure": "sure", "evidence": "sizes 58/58"}]}))
+    monkeypatch.setattr(A, "ROOT", tmp_path)
+    monkeypatch.setattr(A, "_RECOMP_LEADS", None)
+    lead = A.recomp_lead("xb", 0x93590)
+    assert "0x004B7F70, sure" in lead and "Picks a free streaming slot." in lead and "GAME_BUGS.md" in lead
+    assert A.recomp_lead("xb", 0x93591) == "" and A.recomp_lead("pc", 0x93590) == ""
+    monkeypatch.setattr(A, "_RECOMP_LEADS", None)
+    monkeypatch.setattr(A, "ROOT", tmp_path / "nothing here")
+    assert A.recomp_lead("xb", 0x93590) == ""

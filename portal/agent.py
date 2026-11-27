@@ -409,6 +409,28 @@ def sibling_lead(b: str, va: int) -> str:
             + "; ".join(where) + ". None of them has names, but a spec from older engine source may fit.")
 
 
+_RECOMP_LEADS = None
+
+
+def recomp_lead(b: str, va: int) -> str:
+    """What reports/recomp_leads_xb.json says about an Xbox function ("" for none): the role a bug report
+    from a recompilation of the PC game gives its PC twin. A lead to check against the code."""
+    global _RECOMP_LEADS
+    if b != "xb":
+        return ""
+    if _RECOMP_LEADS is None:
+        try:
+            rows = json.loads((ROOT / "reports" / "recomp_leads_xb.json").read_text(encoding="utf-8")).get("functions", [])
+            _RECOMP_LEADS = {int(r["xb"], 16): r for r in rows}
+        except (OSError, ValueError, KeyError, TypeError):
+            _RECOMP_LEADS = {}
+    r = _RECOMP_LEADS.get(va)
+    if not r:
+        return ""
+    return (f"its PC twin ({r['pc']}, {r['how_sure']}) is described by a bug report on the game's streaming code "
+            f"(docs/GAME_BUGS.md): {r['role']} Check it against the code.")
+
+
 def cmd_packet(args) -> int:
     import decompme as DME
     from disasm_synth import disassemble, synthesize_cpp
@@ -443,6 +465,9 @@ def cmd_packet(args) -> int:
     if lead:
         print("lead: " + lead)
     lead = sibling_lead(b, va)
+    if lead:
+        print("lead: " + lead)
+    lead = recomp_lead(b, va)
     if lead:
         print("lead: " + lead)
     print("\ntarget bytes:\n  " + " ".join(f"{x:02X}" for x in tb[:512]) + (" ..." if size > 512 else ""))
