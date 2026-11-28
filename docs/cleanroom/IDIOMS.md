@@ -55,6 +55,18 @@ I29. Scarface-only engine code is recognisable as such: no counterpart in the 20
 I30. A non-virtual member reached only through a one-line virtual forwarder of another class
      (`mov ecx,[esp+4]; call member; ret 4`) is the "Unlock(request)" style API. Write the forwarder as
      `request->Member()`. [0x2AC070 -> 0x2AA4E0.]
+I35. A loop that writes through `this` while reading reference arguments keeps its accumulator in memory
+     (possible alias); the same loop into a local Matrix promotes it and the `= 0` start folds. Scarface's
+     math routines build results in a local and copy (`*this = t`, rep movsd) where 2003 wrote directly.
+     [0x243B30, 0x2439B0, 0x243D60.]
+I36. Scarface's math expands 2003's one-line forwarders (quaternion -> matrix conversion, transpose,
+     projection reset inside the inverses). Write the 2003 call and let /Ob2 expand it; write the body by
+     hand only if the call stays. [0x243310, 0x243450.]
+I37. A library's VA run is the library's object list in link order, not one subject: the "math run" holds the
+     matrix file, a hash file, the memory manager, then the vector file. Split runs at object boundaries
+     before ordering work. [0x242F60..0x245C3C.]
+I38. In 2003-derived code, Scarface often adds one statement at the top of a registration routine (call
+     the matching unregister first) and drops early "already done" returns. [0x2446A0, 0x244390.]
 ```
 
 ## Added by the implementer
@@ -108,4 +120,14 @@ I33. A transpose that keeps the upper triangle in locals and writes the matrix b
      the game's mix of x87 and integer moves exactly. [0x2433E0.]
 I34. A null-pointer test that ends at the bottom of the function is `if (p != 0) { ...; return h; }
      return h;` (both returns written), not an early `if (p == 0) return h;`. [0x243F40.]
+I39. A sum of products the compiler reorders as one expression keeps its written order when built step by
+     step into a local: `float s = p0; s += p1; s += p2; s += p3; t.m[i][j] = s;`. Neither 2003's `= 0`
+     then `+=` over k nor any of the 120 orders and groupings of the single expression does this. [0x243B30;
+     the same form is not enough for 0x2439B0, see the round file.]
+I40. A loop over a global array of structs that the game addresses as `[ecx + table + field]` with
+     `cmp ecx, size; jb` is an `unsigned int` index; an `int` index gives a moving pointer and `jl`.
+     [0x244390.]
+I41. A same-file callee defined earlier also tells the caller which registers it leaves alone: after
+     `call` the game goes on using ecx and edx. Put the callee first in the same file. (Extends I13.)
+     [0x2447D0 after 0x244750.]
 ```
