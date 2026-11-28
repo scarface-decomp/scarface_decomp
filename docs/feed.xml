@@ -5,8 +5,106 @@
   <link href="https://scarface-decomp.pages.dev/feed.xml" rel="self"/>
   <link href="https://scarface-decomp.pages.dev/"/>
   <id>tag:scarface-decomp.pages.dev,2026:matches</id>
-  <updated>2026-11-27T17:48:25Z</updated>
+  <updated>2026-11-27T18:50:40Z</updated>
   <author><name>Scarface decomp contributors</name></author>
+  <entry>
+    <title>sub_00201C30 (Xbox prototype, 42 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00201C30"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00201C30</id>
+    <updated>2026-11-27T18:50:40Z</updated>
+    <summary>0x00201C30 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_002447D0 (Xbox, 42 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002447D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002447D0</id>
+    <updated>2026-11-27T18:50:19Z</updated>
+    <summary>Works out the offset in terms of the three axes (turned round on the axes the flags pick), then adds the point. 0x002447D0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00201BB0 (Xbox prototype, 117 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00201BB0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00201BB0</id>
+    <updated>2026-11-27T18:49:57Z</updated>
+    <summary>0x00201BB0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00244750 (Xbox, 117 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00244750"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00244750</id>
+    <updated>2026-11-27T18:49:36Z</updated>
+    <summary>Turns the offset round on the axes the flags pick (4: all three, 2: the second, 1: the third), then writes it in terms of the three axes. 0x00244750 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00244630 (Xbox, 102 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00244630"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00244630</id>
+    <updated>2026-11-27T18:49:14Z</updated>
+    <summary>Takes a heap id out of the tree of heaps, lets go of its allocator and gives it the default allocator again. 0x00244630 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00244390 (Xbox, 88 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00244390"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00244390</id>
+    <updated>2026-11-27T18:48:53Z</updated>
+    <summary>Sets up the memory system: creates the default allocator and gives it to every heap id, then sets up the memory spaces. 0x00244390 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00200FD0 (Xbox prototype, 116 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00200FD0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00200FD0</id>
+    <updated>2026-11-27T18:48:31Z</updated>
+    <summary>0x00200FD0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00243B30 (Xbox, 116 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00243B30"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00243B30</id>
+    <updated>2026-11-27T18:48:10Z</updated>
+    <summary>Sets the matrix to the product of two matrices (computed into a copy, so either may be this one). 0x00243B30 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00200B40 (Xbox prototype, 147 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00200B40"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00200B40</id>
+    <updated>2026-11-27T18:47:48Z</updated>
+    <summary>0x00200B40 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00243630 (Xbox, 147 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00243630"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00243630</id>
+    <updated>2026-11-27T18:47:27Z</updated>
+    <summary>Multiplies a four-number vector by the matrix and writes the result. 0x00243630 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_002005E0 (Xbox prototype, 153 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x002005E0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x002005E0</id>
+    <updated>2026-11-27T18:47:06Z</updated>
+    <summary>0x002005E0 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_002430D0 (Xbox, 153 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002430D0"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002430D0</id>
+    <updated>2026-11-27T18:46:44Z</updated>
+    <summary>Sets the rotation part of the matrix from three angles, about x, y and z (the other of the two orders it has). 0x002430D0 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00200530 (Xbox prototype, 174 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=proto%3A0x00200530"/>
+    <id>tag:scarface-decomp.pages.dev,2026:proto:0x00200530</id>
+    <updated>2026-11-27T18:46:22Z</updated>
+    <summary>0x00200530 in the Xbox prototype version, matched byte for byte with its original.</summary>
+  </entry>
+  <entry>
+    <title>sub_00243020 (Xbox, 174 bytes) by RRutherrfordd (Founder)</title>
+    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00243020"/>
+    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00243020</id>
+    <updated>2026-11-27T18:46:01Z</updated>
+    <summary>Sets the rotation part of the matrix from three angles, about x, y and z (one of the two orders it has). 0x00243020 in the Xbox version, matched byte for byte with its original.</summary>
+  </entry>
   <entry>
     <title>sub_006E4330 (PC, 77 bytes) by RRutherrfordd (Founder)</title>
     <link href="https://scarface-decomp.pages.dev/function.html?f=pc%3A0x006E4330"/>
@@ -258,103 +356,5 @@
     <id>tag:scarface-decomp.pages.dev,2026:xb:0x00242FE0</id>
     <updated>2026-11-27T17:36:24Z</updated>
     <summary>Sets the matrix's rotation part to a rotation about the z axis by the angle (radians); the rest is left alone. 0x00242FE0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00242FA0 (Xbox, 53 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00242FA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00242FA0</id>
-    <updated>2026-11-27T17:36:02Z</updated>
-    <summary>Sets the matrix's rotation part to a rotation about the y axis by the angle (radians); the rest is left alone. 0x00242FA0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_00242F60 (Xbox, 53 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x00242F60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x00242F60</id>
-    <updated>2026-11-27T17:35:35Z</updated>
-    <summary>Sets the matrix's rotation part to a rotation about the x axis by the angle (radians); the rest is left alone. 0x00242F60 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CE120 (Xbox, 381 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CE120"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CE120</id>
-    <updated>2026-11-27T00:16:08Z</updated>
-    <summary>Stores chunks libpng does not know in the image's info structure (libpng png_set_unknown_chunks). 0x002CE120 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CDFA0 (Xbox, 381 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDFA0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDFA0</id>
-    <updated>2026-11-27T00:15:46Z</updated>
-    <summary>Stores suggested palettes in the image's info structure (libpng png_set_sPLT). 0x002CDFA0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CDEF0 (Xbox, 169 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDEF0"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDEF0</id>
-    <updated>2026-11-27T00:15:24Z</updated>
-    <summary>Stores the transparency data in the image's info structure (libpng png_set_tRNS). 0x002CDEF0 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CDC70 (Xbox, 561 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDC70"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDC70</id>
-    <updated>2026-11-27T00:15:03Z</updated>
-    <summary>Stores text comments in the image's info structure (libpng png_set_text_2). 0x002CDC70 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CDB40 (Xbox, 297 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDB40"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDB40</id>
-    <updated>2026-11-27T00:14:42Z</updated>
-    <summary>Stores the embedded colour profile in the image's info structure (libpng png_set_iCCP). 0x002CDB40 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CDA60 (Xbox, 220 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDA60"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDA60</id>
-    <updated>2026-11-27T00:14:21Z</updated>
-    <summary>Stores the sRGB intent with the gamma and chromaticities that go with it in the image's info structure (libpng png_set_sRGB_gAMA_and_cHRM). 0x002CDA60 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CDA30 (Xbox, 40 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CDA30"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CDA30</id>
-    <updated>2026-11-27T00:13:58Z</updated>
-    <summary>Stores the significant bits per channel in the image's info structure (libpng png_set_sBIT). 0x002CDA30 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CD990 (Xbox, 152 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD990"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD990</id>
-    <updated>2026-11-27T00:13:37Z</updated>
-    <summary>Stores the palette in the image's info structure (libpng png_set_PLTE). 0x002CD990 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CD950 (Xbox, 50 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD950"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD950</id>
-    <updated>2026-11-27T00:13:16Z</updated>
-    <summary>Stores the pixel size (resolution) in the image's info structure (libpng png_set_pHYs). 0x002CD950 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CD910 (Xbox, 59 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD910"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD910</id>
-    <updated>2026-11-27T00:12:55Z</updated>
-    <summary>Stores the physical scale in the image's info structure (libpng png_set_sCAL). 0x002CD910 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CD740 (Xbox, 455 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD740"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD740</id>
-    <updated>2026-11-27T00:12:34Z</updated>
-    <summary>Stores the pixel calibration in the image's info structure (libpng png_set_pCAL). 0x002CD740 in the Xbox version, matched byte for byte with its original.</summary>
-  </entry>
-  <entry>
-    <title>sub_002CD700 (Xbox, 50 bytes) by RRutherrfordd (Founder)</title>
-    <link href="https://scarface-decomp.pages.dev/function.html?f=xb%3A0x002CD700"/>
-    <id>tag:scarface-decomp.pages.dev,2026:xb:0x002CD700</id>
-    <updated>2026-11-27T00:12:12Z</updated>
-    <summary>Stores the image offset in the image's info structure (libpng png_set_oFFs). 0x002CD700 in the Xbox version, matched byte for byte with its original.</summary>
   </entry>
 </feed>

@@ -1,8 +1,8 @@
 // ============================================================================
-// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (7579 verified)
+// SCARFACE: THE WORLD IS YOURS — Retail Xbox default.xbe, engine/GlobalFunctions.cpp (7587 verified)
 // GENERATED from reports/verified_registry.json by portal/tools/registry_outputs.py. Do not edit.
-// PROGRESS: 7,579 of 15,600 functions matched (48.58%). NOT COMPLETE YET.
-// The 8,021 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
+// PROGRESS: 7,587 of 15,600 functions matched (48.63%). NOT COMPLETE YET.
+// The 8,013 still to do are listed in their place in Original_Binary_Order_Xbox.cpp as "// [TODO] address name (size)"
 // lines, so you can see what is missing and where; matched ones are the C++ itself.
 // Every [VERIFIED] block compiled byte-for-byte with Microsoft (R) 32-bit C/C++ Optimizing Compiler Version 13.10.3052 for 80x86.
 // Blocks marked 'excerpt' are cut from the named source file and are built from that file;
@@ -142099,6 +142099,118 @@ void Matrix::SetRotationAboutZ(float angle)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00243020 (0x00243020, 174 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Sets the rotation part of the matrix from three angles, about x, y and z (one of the two orders it has).
+// ============================================================================
+// bin: xb
+// va: 0x00243020
+// what: Sets the rotation part of the matrix from three angles, about x, y and z (one of the two orders it has).
+// tool: Claude Opus 5.5 (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationFromAngles(float x, float y, float z);
+    float m[4][4];
+};
+
+void Matrix::SetRotationFromAngles(float x, float y, float z)
+{
+    float sx = (float)sin(x);
+    float cx = (float)cos(x);
+    float sy = (float)sin(y);
+    float cy = (float)cos(y);
+    float sz = (float)sin(z);
+    float cz = (float)cos(z);
+    float cxcz = cx * cz;
+    float sxsz = sx * sz;
+    float sxcz = sx * cz;
+    float cxsz = cx * sz;
+    m[0][0] = cy * cz;
+    m[0][1] = cy * sz;
+    m[0][2] = -sy;
+    m[1][0] = sxcz * sy - cxsz;
+    m[1][1] = sxsz * sy + cxcz;
+    m[1][2] = sx * cy;
+    m[2][0] = cxcz * sy + sxsz;
+    m[2][1] = cxsz * sy - sxcz;
+    m[2][2] = cx * cy;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002430D0 (0x002430D0, 153 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Sets the rotation part of the matrix from three angles, about x, y and z (the other of the two orders it has).
+// ============================================================================
+// bin: xb
+// va: 0x002430D0
+// what: Sets the rotation part of the matrix from three angles, about x, y and z (the other of the two orders it has).
+// tool: Claude Opus 5.5 (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetRotationFromAnglesOtherOrder(float x, float y, float z);
+    float m[4][4];
+};
+
+void Matrix::SetRotationFromAnglesOtherOrder(float x, float y, float z)
+{
+    float sx = (float)sin(x);
+    float cx = (float)cos(x);
+    float sy = (float)sin(y);
+    float cy = (float)cos(y);
+    float sz = (float)sin(z);
+    float cz = (float)cos(z);
+    float sysz = sy * sz;
+    float sycz = sy * cz;
+    float cysz = cy * sz;
+    float cycz = cy * cz;
+    m[0][0] = sysz * sx + cycz;
+    m[0][1] = cx * sz;
+    m[0][2] = cysz * sx - sycz;
+    m[1][0] = sycz * sx - cysz;
+    m[1][1] = cx * cz;
+    m[1][2] = cycz * sx + sysz;
+    m[2][0] = cx * sy;
+    m[2][1] = -sx;
+    m[2][2] = cx * cy;
+}
+
+// ============================================================================
 // [VERIFIED] sub_00243170 (0x00243170, 24 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -142311,6 +142423,42 @@ void Matrix::TransformPoint(const Vector3& in, Vector3& out) const
 }
 
 // ============================================================================
+// [VERIFIED] sub_00243630 (0x00243630, 147 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Multiplies a four-number vector by the matrix and writes the result.
+// ============================================================================
+// bin: xb
+// va: 0x00243630
+// what: Multiplies a four-number vector by the matrix and writes the result.
+// tool: Claude Opus 5.5 (from the bytes, with the examiner's roles)
+
+// A four-number vector.
+struct Vector4
+{
+    float x, y, z, w;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void Transform(const Vector4& v, Vector4* out) const;
+    float m[4][4];
+};
+
+void Matrix::Transform(const Vector4& v, Vector4* out) const
+{
+    float x = v.x * m[0][0] + v.y * m[1][0] + v.z * m[2][0] + v.w * m[3][0];
+    float y = v.x * m[0][1] + v.y * m[1][1] + v.z * m[2][1] + v.w * m[3][1];
+    float z = v.x * m[0][2] + v.y * m[1][2] + v.z * m[2][2] + v.w * m[3][2];
+    float w = v.x * m[0][3] + v.y * m[1][3] + v.z * m[2][3] + v.w * m[3][3];
+    out->x = x;
+    out->y = y;
+    out->z = z;
+    out->w = w;
+}
+
+// ============================================================================
 // [VERIFIED] sub_002436D0 (0x002436D0, 108 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
 // What it does: Transforms a four-number vector's x, y and z by the matrix as a point (w taken as one) and copies w.
@@ -142404,6 +142552,58 @@ void Matrix::TransformDirection(const Vector3& in, Vector3& out) const
     out.x = x;
     out.y = y;
     out.z = z;
+}
+
+// ============================================================================
+// [VERIFIED] sub_00243B30 (0x00243B30, 116 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Sets the matrix to the product of two matrices (computed into a copy, so either may be this one).
+// ============================================================================
+// bin: xb
+// va: 0x00243B30
+// what: Sets the matrix to the product of two matrices (computed into a copy, so either may be this one).
+// tool: Claude Opus 5.5 (from the bytes)
+
+extern "C" double __cdecl sin(double x);
+extern "C" double __cdecl cos(double x);
+extern "C" double __cdecl sqrt(double x);
+#pragma intrinsic(sin, cos, sqrt)
+
+class Matrix;
+
+// A three-number vector.
+class Vector3
+{
+public:
+
+    float x, y, z;
+};
+
+// A 4x4 matrix stored by rows; row 3 is the translation.
+class Matrix
+{
+public:
+    void SetProduct(const Matrix& a, const Matrix& b);
+    float m[4][4];
+};
+
+void Matrix::SetProduct(const Matrix& a, const Matrix& b)
+{
+    Matrix t;
+    int i = 4;
+    while (i--)
+    {
+        int j = 4;
+        while (j--)
+        {
+            float s = a.m[i][0] * b.m[0][j];
+            s += a.m[i][1] * b.m[1][j];
+            s += a.m[i][2] * b.m[2][j];
+            s += a.m[i][3] * b.m[3][j];
+            t.m[i][j] = s;
+        }
+    }
+    *this = t;
 }
 
 // ============================================================================
@@ -142956,6 +143156,57 @@ bool Vector3::sub_00244320() const
 }
 
 // ============================================================================
+// [VERIFIED] sub_00244390 (0x00244390, 88 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Sets up the memory system: creates the default allocator and gives it to every heap id, then sets up the memory spaces.
+// ============================================================================
+// bin: xb
+// va: 0x00244390
+// what: Sets up the memory system: creates the default allocator and gives it to every heap id, then sets up the memory spaces.
+// tool: Claude Opus 5.5 (from the bytes, with the examiner's roles)
+
+// A heap allocator: the memory system calls it through its table.
+struct Allocator
+{
+    virtual void vfunc_00();
+};
+
+// One heap id's place in the tree of heaps.
+struct HeapNode
+{
+    Allocator* allocator;
+    HeapNode* firstChild;
+    HeapNode* nextSibling;
+    HeapNode* parent;
+};
+
+extern "C" bool DAT_00493B50;              // set once the memory system is set up
+extern "C" Allocator* DAT_00493328;        // the default allocator
+extern "C" HeapNode DAT_00493B40;          // the tree's root
+extern "C" HeapNode g_heapTable[0x81];     // one node per heap id
+extern "C" Allocator* __cdecl sub_0028D110(void);
+extern "C" void __cdecl sub_002A9290(void);
+
+void __cdecl sub_00244390(void)
+{
+    DAT_00493B50 = true;
+    Allocator* standard = sub_0028D110();
+    DAT_00493328 = standard;
+    DAT_00493B40.allocator = standard;
+    DAT_00493B40.firstChild = 0;
+    DAT_00493B40.nextSibling = 0;
+    DAT_00493B40.parent = 0;
+    for (unsigned int i = 0; i < 0x81; i++)
+    {
+        g_heapTable[i].firstChild = 0;
+        g_heapTable[i].parent = 0;
+        g_heapTable[i].nextSibling = 0;
+        g_heapTable[i].allocator = standard;
+    }
+    sub_002A9290();
+}
+
+// ============================================================================
 // [VERIFIED] sub_002443F0 (0x002443F0, 17 B)
 // By: NoahBPeterson | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -143350,6 +143601,59 @@ void __cdecl sub_002445E0(void* p)
 }
 
 // ============================================================================
+// [VERIFIED] sub_00244630 (0x00244630, 102 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Takes a heap id out of the tree of heaps, lets go of its allocator and gives it the default allocator again.
+// ============================================================================
+// bin: xb
+// va: 0x00244630
+// what: Takes a heap id out of the tree of heaps, lets go of its allocator and gives it the default allocator again.
+// tool: Claude Opus 5.5 (from the bytes, with the examiner's roles)
+
+// A heap allocator: the memory system calls it through its table.
+struct Allocator
+{
+    virtual void vfunc_00();
+    virtual void vfunc_01();
+};
+
+// One heap id's place in the tree of heaps.
+struct HeapNode
+{
+    Allocator* allocator;
+    HeapNode* firstChild;
+    HeapNode* nextSibling;
+    HeapNode* parent;
+};
+
+extern "C" HeapNode DAT_00493B40;          // the tree's root; its allocator is the default one
+extern "C" HeapNode g_heapTable[0x81];     // one node per heap id
+
+void __cdecl sub_00244630(int id)
+{
+    HeapNode* node = &g_heapTable[id];
+    HeapNode* parent = node->parent;
+    HeapNode* previous = 0;
+    for (HeapNode* child = parent->firstChild; child; child = child->nextSibling)
+    {
+        if (child == node)
+        {
+            if (previous)
+                previous->nextSibling = node->nextSibling;
+            else
+                parent->firstChild = node->nextSibling;
+            node->allocator->vfunc_01();
+            node->allocator = DAT_00493B40.allocator;
+            node->firstChild = 0;
+            node->parent = 0;
+            node->nextSibling = 0;
+            return;
+        }
+        previous = child;
+    }
+}
+
+// ============================================================================
 // [VERIFIED] sub_00244710 (0x00244710, 55 B)
 // By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /EHsc /Zp4
 // ============================================================================
@@ -143382,6 +143686,118 @@ void Class_00244710::sub_00244710(int a1)
     ((Object*)a1)->sub_00243740((int)(&m_Field0C), (int)(&m_Field0C));
     ((Object*)a1)->sub_00243740((int)(&m_Field18), (int)(&m_Field18));
     ((Object*)a1)->sub_00243740((int)(&m_Field24), (int)(&m_Field24));
+}
+
+// ============================================================================
+// [VERIFIED] sub_00244750 (0x00244750, 117 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Turns the offset round on the axes the flags pick (4: all three, 2: the second, 1: the third), then writes it in terms of the three axes.
+// ============================================================================
+// bin: xb
+// va: 0x00244750
+// what: Turns the offset round on the axes the flags pick (4: all three, 2: the second, 1: the third), then writes it in terms of the three axes.
+// tool: Claude Opus 5.5 (from the bytes)
+
+// A three-number vector.
+struct Vector3
+{
+    float x, y, z;
+};
+
+// Three axes with a point and an offset; which class this is part of is not known yet.
+class Class_00244750
+{
+public:
+    void sub_00244750(Vector3* out, unsigned char flags) const;
+    void sub_002447D0(Vector3* out, unsigned char flags) const;
+
+    Vector3 origin;         // +0x00
+    Vector3 axis[3];        // +0x0C, +0x18, +0x24
+    Vector3 offset;         // +0x30
+};
+
+void Class_00244750::sub_00244750(Vector3* out, unsigned char flags) const
+{
+    float x = offset.x;
+    float y, z;
+    if (flags & 4)
+    {
+        x = -x;
+        y = -offset.y;
+        z = -offset.z;
+    }
+    else
+    {
+        y = offset.y;
+        z = offset.z;
+    }
+    if (flags & 2)
+        y = -y;
+    if (flags & 1)
+        z = -z;
+    out->x = x * axis[0].x + y * axis[1].x + z * axis[2].x;
+    out->y = x * axis[0].y + y * axis[1].y + z * axis[2].y;
+    out->z = x * axis[0].z + y * axis[1].z + z * axis[2].z;
+}
+
+// ============================================================================
+// [VERIFIED] sub_002447D0 (0x002447D0, 42 B)
+// By: RRutherrfordd (Founder) | Flags: /O2 /Ot /Oy /G6 /Gd /GR /Zp4
+// What it does: Works out the offset in terms of the three axes (turned round on the axes the flags pick), then adds the point.
+// ============================================================================
+// bin: xb
+// va: 0x002447D0
+// what: Works out the offset in terms of the three axes (turned round on the axes the flags pick), then adds the point.
+// tool: Claude Opus 5.5 (from the bytes)
+
+// A three-number vector.
+struct Vector3
+{
+    float x, y, z;
+};
+
+// Three axes with a point and an offset; which class this is part of is not known yet.
+class Class_00244750
+{
+public:
+    void sub_00244750(Vector3* out, unsigned char flags) const;
+    void sub_002447D0(Vector3* out, unsigned char flags) const;
+
+    Vector3 origin;         // +0x00
+    Vector3 axis[3];        // +0x0C, +0x18, +0x24
+    Vector3 offset;         // +0x30
+};
+
+void Class_00244750::sub_00244750(Vector3* out, unsigned char flags) const
+{
+    float x = offset.x;
+    float y, z;
+    if (flags & 4)
+    {
+        x = -x;
+        y = -offset.y;
+        z = -offset.z;
+    }
+    else
+    {
+        y = offset.y;
+        z = offset.z;
+    }
+    if (flags & 2)
+        y = -y;
+    if (flags & 1)
+        z = -z;
+    out->x = x * axis[0].x + y * axis[1].x + z * axis[2].x;
+    out->y = x * axis[0].y + y * axis[1].y + z * axis[2].y;
+    out->z = x * axis[0].z + y * axis[1].z + z * axis[2].z;
+}
+
+void Class_00244750::sub_002447D0(Vector3* out, unsigned char flags) const
+{
+    sub_00244750(out, flags);
+    out->x += origin.x;
+    out->y += origin.y;
+    out->z += origin.z;
 }
 
 // ============================================================================
